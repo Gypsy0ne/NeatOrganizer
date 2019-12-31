@@ -13,8 +13,8 @@
     android:title="@string/activity_home_bottom_navigation_menu_tasks"
     android:icon="@drawable/ic_tasks_black_24dp"
     app:showAsAction="ifRoom"/>
-<item android:id="@+id/timer"
-    android:title="@string/activity_home_bottom_navigation_menu_timer"
-    android:icon="@drawable/ic_timer_black_24dp"
-    app:showAsAction="ifRoom"/>
+<!--<item android:id="@+id/timer"-->
+<!--    android:title="@string/activity_home_bottom_navigation_menu_timer"-->
+<!--    android:icon="@drawable/ic_timer_black_24dp"-->
+<!--    app:showAsAction="ifRoom"/>-->
 </menu>

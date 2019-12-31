@@ -1,0 +1,35 @@
+package one.gypsy.neatorganizer.screens.people.view
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
+import one.gypsy.neatorganizer.screens.people.vm.PeopleViewModel
+
+class PeopleFragment : Fragment() {
+
+    private val peopleViewModel: PeopleViewModel by lazy {
+        ViewModelProviders.of(this)[PeopleViewModel::class.java]
+    }
+
+    private lateinit var fragmentBinding: FragmentPeopleBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        fragmentBinding= DataBindingUtil.inflate(inflater, R.layout.fragment_people, container, false)
+        return fragmentBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fragmentBinding.viewModel = peopleViewModel
+        fragmentBinding.lifecycleOwner = this
+    }
+}

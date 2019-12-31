@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/tasks"
-        android:name="one.gypsy.neatorganizer.screens.TasksFragment"
+        android:name="one.gypsy.neatorganizer.screens.tasks.TasksFragment"
         android:label="TasksFragment" />
     <fragment
         android:id="@+id/timer"
@@ -13,10 +13,10 @@
         android:label="TimerFragment" />
     <fragment
         android:id="@+id/people"
-        android:name="one.gypsy.neatorganizer.screens.PeopleFragment"
+        android:name="one.gypsy.neatorganizer.screens.people.view.PeopleFragment"
         android:label="PeopleFragment" />
     <fragment
         android:id="@+id/routines"
-        android:name="one.gypsy.neatorganizer.screens.RoutinesFragment"
+        android:name="one.gypsy.neatorganizer.screens.routines.RoutinesFragment"
         android:label="RoutinesFragment" />
 </navigation>
