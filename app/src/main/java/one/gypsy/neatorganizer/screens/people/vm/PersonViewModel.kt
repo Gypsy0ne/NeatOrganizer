@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.screens.people.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import one.gypsy.neatorganizer.model.Person
+import one.gypsy.neatorganizer.domain.Person
 
 class PersonViewModel: ViewModel() {
 

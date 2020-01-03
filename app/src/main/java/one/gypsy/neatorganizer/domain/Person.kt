@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.model
+package one.gypsy.neatorganizer.domain
 
 import android.graphics.Bitmap
 import java.util.*
