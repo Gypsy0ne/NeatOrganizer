@@ -7,11 +7,11 @@ import one.gypsy.neatorganizer.screens.people.view.PeopleAdapter
 
 @BindingAdapter("linearAdapter")
 fun setLinearAdapter(recyclerView: RecyclerView, sizeFixed: Boolean) {
-    recyclerView.apply {
-        layoutManager = LinearLayoutManager(recyclerView.context)
-        setHasFixedSize(sizeFixed)
-        adapter = PeopleAdapter()
-    }
+//    recyclerView.apply {
+//        layoutManager = LinearLayoutManager(recyclerView.context)
+//        setHasFixedSize(sizeFixed)
+//        adapter = PeopleAdapter()
+//    }
 }
 
 @BindingAdapter("adapterData")

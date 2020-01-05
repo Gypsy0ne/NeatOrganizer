@@ -12,12 +12,16 @@ import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
 import one.gypsy.neatorganizer.screens.people.vm.PeopleViewModel
+import androidx.lifecycle.ViewModelProvider
+import javax.inject.Inject
 
 class PeopleFragment : Fragment() {
 
-    private val peopleViewModel: PeopleViewModel by lazy {
-        ViewModelProviders.of(this)[PeopleViewModel::class.java]
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    lateinit var peopleViewModel: PeopleViewModel
+
 
     private lateinit var fragmentBinding: FragmentPeopleBinding
     override fun onCreateView(
@@ -29,6 +33,10 @@ class PeopleFragment : Fragment() {
         return fragmentBinding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        peopleViewModel = ViewModelProviders.of(this, viewModelFactory)[PeopleViewModel::class.java]
+    }
     override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)

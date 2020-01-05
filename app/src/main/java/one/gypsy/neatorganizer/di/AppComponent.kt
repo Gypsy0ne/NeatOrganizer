@@ -7,7 +7,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import one.gypsy.neatorganizer.OrganizerApplication
 import javax.inject.Singleton
 
-@Component(modules = [ActivityModule::class, DataModule::class, FragmentModule::class, DataSourceModule::class, RepositoryModule::class, UseCaseModule::class, AndroidSupportInjectionModule::class])
+@Component(modules = [ActivityModule::class, DataModule::class, FragmentModule::class, DataSourceModule::class, RepositoryModule::class, UseCaseModule::class, ViewModelModule::class, AndroidSupportInjectionModule::class])
 @Singleton
 interface AppComponent {
 

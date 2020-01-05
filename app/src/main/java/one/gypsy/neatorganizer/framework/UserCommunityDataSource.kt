@@ -19,14 +19,14 @@ class UserCommunityDataSource(@JvmField @Inject var personDao: PersonDao) : Peop
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getAll(): LiveData<List<Person>> = MutableLiveData<List<Person>>().apply {
-        value = personDao.getAllPeople().value?.map {
+    override suspend fun getAll(): LiveData<List<Person>> = MutableLiveData<List<Person>>().also { liveDataList ->
+        liveDataList.postValue(personDao.getAllPeople().value?.map {
             Person(
                 it.name,
                 it.lastInteraction,
                 it.dateOfBirth
             )
-        }
+        })
     }
 
 }
