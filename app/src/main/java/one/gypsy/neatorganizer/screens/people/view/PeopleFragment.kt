@@ -13,6 +13,8 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
 import one.gypsy.neatorganizer.screens.people.vm.PeopleViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_people.*
 import javax.inject.Inject
 
 class PeopleFragment : Fragment() {
@@ -46,5 +48,14 @@ class PeopleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = peopleViewModel
         fragmentBinding.lifecycleOwner = this
+        setUpRecyclerView()
+    }
+
+    private fun setUpRecyclerView() {
+        recycler_view_fragment_people.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = PeopleAdapter()
+        }
     }
 }

@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.domain.Person
 import one.gypsy.neatorganizer.screens.people.vm.PersonViewModel
 
 //TODO implement bind/unbind mechanism
-class PeopleAdapter() : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<Person> {
+class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<Person>> {
 
     private var people = mutableListOf<Person>()
 

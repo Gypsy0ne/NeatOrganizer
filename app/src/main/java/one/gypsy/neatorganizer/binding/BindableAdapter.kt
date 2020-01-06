@@ -1,5 +1,5 @@
 package one.gypsy.neatorganizer.binding
 
 interface BindableAdapter<T> {
-    fun setData(dataCollection: List<T>)
+    fun setData(dataCollection: T)
 }

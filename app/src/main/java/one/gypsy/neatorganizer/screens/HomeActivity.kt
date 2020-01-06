@@ -2,6 +2,8 @@ package one.gypsy.neatorganizer.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -27,6 +29,22 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
         AndroidInjection.inject(this)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_home_app_bar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.person_add -> {
+                findNavController(R.id.fragment_activity_home_nav_container).navigate(R.id.addPersonDialogFragment)
+                true
+            }
+            else -> {
+                true
+            }
+        }
+    }
     override fun onStart() {
         super.onStart()
         setUpBottomNavigation()

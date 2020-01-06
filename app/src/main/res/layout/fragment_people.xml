@@ -11,14 +11,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button_fragment_people_add_person"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:onClick="@{() -> viewModel.addPerson()}"
+        android:text="click me"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_fragment_people"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_person"
+        app:adapterData="@{viewModel.people}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button_fragment_people_add_person"
+        tools:listitem="@layout/item_person" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
