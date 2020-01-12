@@ -26,6 +26,7 @@ class PeopleFragment : Fragment() {
 
 
     private lateinit var fragmentBinding: FragmentPeopleBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

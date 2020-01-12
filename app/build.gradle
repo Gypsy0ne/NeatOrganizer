@@ -88,10 +88,6 @@ dependencies {
     //rxpermissions
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 
-    //circular image view
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
-
-
     //Navigation Controller
     def nav_version = "2.1.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

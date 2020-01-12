@@ -21,6 +21,6 @@
         android:label="RoutinesFragment" />
     <dialog
         android:id="@+id/addPersonDialogFragment"
-        android:name="one.gypsy.neatorganizer.screens.people.AddPersonDialogFragment"
+        android:name="one.gypsy.neatorganizer.screens.people.view.AddPersonDialogFragment"
         android:label="AddPersonDialogFragment" />
 </navigation>
