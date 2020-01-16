@@ -11,6 +11,7 @@ import one.gypsy.neatorganizer.interactors.AddPerson
 import one.gypsy.neatorganizer.interactors.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
+import one.gypsy.neatorganizer.utils.default
 import java.util.*
 import javax.inject.Inject
 
@@ -24,14 +25,7 @@ class AddPersonViewModel @Inject constructor(var addPersonUseCase: AddPerson, va
 
     var personName = MutableLiveData<String>()
 
-//    sealed class SelectingState {
-//        object Selected: SelectingState()
-//
-//    }
-//    sealed class AddingState {
-//        object Adding: AddingState()
-//        object Success: AddingState()
-//    }
+    var finishedAdding = MutableLiveData<Boolean>()
 
     fun startSelectThumbnailPhotoAction() {
         selectThumbnailPhoto.postValue(selectThumbnailPhotoActionRequestCode)
@@ -43,7 +37,6 @@ class AddPersonViewModel @Inject constructor(var addPersonUseCase: AddPerson, va
         }
     }
 
-    //TODO change thread where database is accessed in usecase
     fun addPerson() {
         addPersonUseCase.invoke(viewModelScope, AddPerson.Params(Person(personName.value ?: "", 0, Date()))) {
             it.either(::onAdditionFailure, ::onAdditionSuccess)
@@ -51,7 +44,7 @@ class AddPersonViewModel @Inject constructor(var addPersonUseCase: AddPerson, va
     }
 
     private fun onAdditionSuccess(any: Any) {
-
+        finishedAdding.postValue(true)
     }
     private fun onAdditionFailure(failure: Failure) {
 

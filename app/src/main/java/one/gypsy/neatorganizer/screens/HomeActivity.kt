@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -35,16 +36,10 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.person_add -> {
-                findNavController(R.id.fragment_activity_home_nav_container).navigate(R.id.addPersonDialogFragment)
-                true
-            }
-            else -> {
-                true
-            }
-        }
+        val navigation = findNavController(R.id.fragment_activity_home_nav_container)
+        return item.onNavDestinationSelected(navigation) || super.onOptionsItemSelected(item)
     }
+
     override fun onStart() {
         super.onStart()
         setUpBottomNavigation()

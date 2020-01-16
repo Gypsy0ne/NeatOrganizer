@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -59,7 +60,6 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
     override fun onStart() {
         super.onStart()
         setUpObservers()
-    setUpThumbnailSlot()
     }
 
 
@@ -67,6 +67,11 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
     private fun setUpObservers() {
         viewModel.selectThumbnailPhoto.observe(this, Observer {
             openPhotoPicker(it)
+        })
+
+        viewModel.finishedAdding.observe(this, Observer { finished ->
+            if(finished)
+                findNavController().popBackStack()
         })
     }
 
@@ -78,9 +83,6 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
         startActivityForResult(getImageIntent, requestCode)
     }
 
-    private fun setUpThumbnailSlot() {
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -1,5 +1,7 @@
 package one.gypsy.neatorganizer.interactors
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.PeopleRepository
 import one.gypsy.neatorganizer.domain.Person
 import one.gypsy.neatorganizer.utils.BaseUseCase
@@ -11,7 +13,9 @@ import javax.inject.Inject
 class AddPerson @Inject constructor(var peopleRepository: PeopleRepository): BaseUseCase<Unit, AddPerson.Params>() {
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
-            Either.Right(peopleRepository.addPerson(params.person))
+            withContext(Dispatchers.IO){
+                Either.Right(peopleRepository.addPerson(params.person))
+            }
         } catch (exp: Exception) {
             Either.Left(AddPersonFailure(exp))
         }
