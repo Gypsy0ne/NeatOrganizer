@@ -8,19 +8,23 @@
         android:name="one.gypsy.neatorganizer.screens.tasks.TasksFragment"
         android:label="TasksFragment" />
     <fragment
-        android:id="@+id/timer"
-        android:name="one.gypsy.neatorganizer.screens.TimerFragment"
-        android:label="TimerFragment" />
-    <fragment
         android:id="@+id/people"
         android:name="one.gypsy.neatorganizer.screens.people.view.PeopleFragment"
-        android:label="PeopleFragment" />
+        android:label="PeopleFragment" >
+        <action
+            android:id="@+id/action_people_to_personFragment"
+            app:destination="@id/personFragment" />
+    </fragment>
     <fragment
         android:id="@+id/routines"
         android:name="one.gypsy.neatorganizer.screens.routines.RoutinesFragment"
         android:label="RoutinesFragment" />
     <dialog
-        android:id="@+id/addPersonDialogFragment"
-        android:name="one.gypsy.neatorganizer.screens.AddPersonDialogFragment"
+        android:id="@+id/person_add"
+        android:name="one.gypsy.neatorganizer.screens.people.view.AddPersonDialogFragment"
         android:label="AddPersonDialogFragment" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="one.gypsy.neatorganizer.screens.people.view.PersonFragment"
+        android:label="PersonFragment" />
 </navigation>

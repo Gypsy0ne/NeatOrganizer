@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="one.gypsy.neatorganizer.screens.people.vm.AddPersonViewModel" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        app:imageBitmap="@{viewModel.selectedThumbnail}"
+        android:background="@drawable/dialog_fragment_add_person_thumbnail_background"
+        app:placeholder="@{@drawable/ic_add_a_photo_black_24dp}"
+        android:onClick="@{() -> viewModel.startSelectThumbnailPhotoAction()}"
+        android:id="@+id/image_view_dialog_fragment_add_person_thumbnail"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_text_dialog_fragment_add_person_name"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Name"
+        android:text="@={viewModel.personName}"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
+        app:layout_constraintTop_toTopOf="@+id/image_view_dialog_fragment_add_person_thumbnail" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="#E6585858"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail" />
+
+    <DatePicker
+        android:id="@+id/date_picker_dialog_fragment_add_person"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="8dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.addPerson()}"
+        android:text="@string/add_person_dialog_fragment_confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

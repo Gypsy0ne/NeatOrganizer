@@ -10,7 +10,7 @@ import one.gypsy.neatorganizer.database.entity.PersonEntity
 import one.gypsy.neatorganizer.domain.Person
 import javax.inject.Inject
 
-class UserCommunityDataSource(@JvmField @Inject var personDao: PersonDao) : PeopleDataSource {
+class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) : PeopleDataSource {
 
 
     override suspend fun add(person: Person) = personDao.insert(PersonEntity(person.name, person.lastInteraction, person.dateOfBirth))

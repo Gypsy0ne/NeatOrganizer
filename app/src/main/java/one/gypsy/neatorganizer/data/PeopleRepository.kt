@@ -4,7 +4,7 @@ import one.gypsy.neatorganizer.domain.Person
 import javax.inject.Inject
 
 
-class PeopleRepository(@JvmField @Inject var dataSource: PeopleDataSource) {
+class PeopleRepository @Inject constructor(var dataSource: PeopleDataSource) {
 
     suspend fun addPerson(person: Person) = dataSource.add(person)
 

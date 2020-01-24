@@ -1,18 +1,18 @@
-package one.gypsy.neatorganizer.screens
+package one.gypsy.neatorganizer.screens.people.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import androidx.fragment.app.Fragment
 import one.gypsy.neatorganizer.R
 
-class AddPersonDialogFragment :BottomSheetDialogFragment() {
+class PersonFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_routines, container, false)
+        return inflater.inflate(R.layout.fragment_person, container, false)
     }
 }
