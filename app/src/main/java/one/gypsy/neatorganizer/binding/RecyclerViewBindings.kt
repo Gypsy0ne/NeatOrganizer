@@ -9,7 +9,6 @@ import one.gypsy.neatorganizer.screens.people.view.PeopleAdapter
 
 @BindingAdapter("adapterData")
 fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T) {
-    Log.i("BINDING", dataCollection.toString())
     if(recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
         (recyclerView.adapter as BindableAdapter<T>).setData(dataCollection)
     }
