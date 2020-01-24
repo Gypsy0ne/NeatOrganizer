@@ -65,11 +65,11 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
 
 
     private fun setUpObservers() {
-        viewModel.selectThumbnailPhoto.observe(this, Observer {
+        viewModel.selectThumbnailPhoto.observe(viewLifecycleOwner, Observer {
             openPhotoPicker(it)
         })
 
-        viewModel.finishedAdding.observe(this, Observer { finished ->
+        viewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->
             if(finished)
                 findNavController().popBackStack()
         })
