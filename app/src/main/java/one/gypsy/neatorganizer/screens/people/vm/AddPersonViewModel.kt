@@ -38,7 +38,7 @@ class AddPersonViewModel @Inject constructor(var addPersonUseCase: AddPerson, va
     }
 
     fun addPerson() {
-        addPersonUseCase.invoke(viewModelScope, AddPerson.Params(Person(personName.value ?: "", 0, Date()))) {
+        addPersonUseCase.invoke(viewModelScope, AddPerson.Params(Person(0,personName.value ?: "", 0, Date()))) {
             it.either(::onAdditionFailure, ::onAdditionSuccess)
         }
     }

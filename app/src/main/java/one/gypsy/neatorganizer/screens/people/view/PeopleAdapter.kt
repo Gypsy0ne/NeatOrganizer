@@ -1,10 +1,12 @@
 package one.gypsy.neatorganizer.screens.people.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
@@ -41,9 +43,24 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
 
         private val personViewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(itemView.hashCode().toString(), PersonViewModel::class.java)
 
+        private fun navigateToPersonHistory(
+            person: Person,
+            view: View
+        ) {
+            val direction =
+                PeopleFragmentDirections.actionPeopleToPersonHistoryFragment(
+                    person.id
+                )
+            view.findNavController().navigate(direction)
+        }
+
         fun bind(personData: Person) {
             personViewModel.bind(personData)
             binding.viewModel = personViewModel
+            binding.setClickListener {
+                navigateToPersonHistory(personData, it)
+            }
+
             binding.executePendingBindings()
         }
     }

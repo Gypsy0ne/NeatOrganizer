@@ -7,6 +7,7 @@ import one.gypsy.neatorganizer.data.PeopleRepository
 import one.gypsy.neatorganizer.interactors.AddPerson
 import one.gypsy.neatorganizer.interactors.GetAllPeople
 import one.gypsy.neatorganizer.interactors.GetImageBitmap
+import one.gypsy.neatorganizer.interactors.GetPersonHistory
 
 @Module
 class UseCaseModule {
@@ -24,5 +25,11 @@ class UseCaseModule {
     @Provides
     fun provideGetImageBitmapUseCase(fileRepository: FileRepository): GetImageBitmap {
         return GetImageBitmap(fileRepository)
+    }
+
+    //TODO inject personHistoryRepository here
+    @Provides
+    fun provideGetPersonHistory(peopleRepository: PeopleRepository): GetPersonHistory {
+        return GetPersonHistory(peopleRepository)
     }
 }

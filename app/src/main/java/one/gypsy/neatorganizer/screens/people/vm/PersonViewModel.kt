@@ -6,9 +6,9 @@ import one.gypsy.neatorganizer.domain.Person
 
 class PersonViewModel: ViewModel() {
 
-    val name = MutableLiveData<String>()
+    val person = MutableLiveData<Person>()
 
-    fun bind(person: Person) {
-        name.value = person.name
+    fun bind(personItem: Person) {
+        person.value = personItem
     }
 }

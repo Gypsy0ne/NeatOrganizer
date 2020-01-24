@@ -23,6 +23,15 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // work-runtime-ktx 2.1.0 and above now requires Java 8
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -68,6 +77,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.24"
     kapt "com.google.dagger:dagger-compiler:2.24"
     kapt "com.google.dagger:dagger-android-processor:2.24"
+    //Dagger 2 Assisted Injection
+    compileOnly 'com.squareup.inject:assisted-inject-annotations-dagger2:0.3.3'
+    kapt 'com.squareup.inject:assisted-inject-processor-dagger2:0.3.3'
 
     implementation 'androidx.room:room-runtime:2.2.3'
     kapt 'androidx.room:room-compiler:2.2.3' // use kapt for Kotlin

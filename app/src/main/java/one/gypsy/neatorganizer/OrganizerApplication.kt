@@ -1,9 +1,12 @@
 package one.gypsy.neatorganizer
 
+import android.app.Activity
 import android.app.Application
+import androidx.fragment.app.Fragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import one.gypsy.neatorganizer.di.AppComponent
 import one.gypsy.neatorganizer.di.DaggerAppComponent
 import javax.inject.Inject
 
@@ -14,8 +17,14 @@ class OrganizerApplication: Application(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
+    val component: AppComponent by lazy {
+        DaggerAppComponent.builder().application(this).build()
+    }
+
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent.builder().application(this).build().inject(this)
+        component.inject(this)
     }
 }
+
+val Fragment.injector get() = (this.activity?.application as OrganizerApplication).component

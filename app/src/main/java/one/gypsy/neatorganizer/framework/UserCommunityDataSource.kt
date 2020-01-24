@@ -8,6 +8,7 @@ import one.gypsy.neatorganizer.data.PeopleDataSource
 import one.gypsy.neatorganizer.database.dao.PersonDao
 import one.gypsy.neatorganizer.database.entity.PersonEntity
 import one.gypsy.neatorganizer.domain.Person
+import one.gypsy.neatorganizer.domain.PersonHistory
 import javax.inject.Inject
 
 class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) : PeopleDataSource {
@@ -22,7 +23,7 @@ class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) : Pe
 
     override suspend fun getAll(): LiveData<List<Person>> = Transformations.map(personDao.getAllPeople()){
         it.map { personEntity ->
-            Person(
+            Person(personEntity.id,
             personEntity.name,
             personEntity.lastInteraction,
             personEntity.dateOfBirth

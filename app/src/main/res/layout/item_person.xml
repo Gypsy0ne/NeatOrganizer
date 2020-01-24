@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
             name="viewModel"
             type="one.gypsy.neatorganizer.screens.people.vm.PersonViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:onClick="@{clickListener}"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/image_view_item_person"
+            android:id="@+id/image_view_item_person_avatar"
             android:layout_width="64dp"
             android:layout_height="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -20,12 +24,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/text_view_item_person_name"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            android:text="@{viewModel.name}"
+            android:text="@{viewModel.person.name}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_view_item_person"
+            app:layout_constraintStart_toEndOf="@+id/image_view_item_person_avatar"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Username" />
 

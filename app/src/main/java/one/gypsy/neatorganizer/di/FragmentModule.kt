@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import one.gypsy.neatorganizer.screens.people.view.AddPersonDialogFragment
 import one.gypsy.neatorganizer.screens.people.view.PeopleFragment
+import one.gypsy.neatorganizer.screens.people.view.PersonHistoryFragment
 
 @Module
 abstract class FragmentModule {
@@ -13,4 +14,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddPersonPeopleFragment(): AddPersonDialogFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePersonHistoryFragment(): PersonHistoryFragment
 }
