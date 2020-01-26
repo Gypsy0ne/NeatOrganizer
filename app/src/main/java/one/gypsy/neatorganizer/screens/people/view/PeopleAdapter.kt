@@ -41,8 +41,6 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
 
     inner class PersonViewHolder(private val binding: ItemPersonBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val personViewModel = ViewModelProviders.of(itemView.context as FragmentActivity).get(itemView.hashCode().toString(), PersonViewModel::class.java)
-
         private fun navigateToPersonHistory(
             person: Person,
             view: View
@@ -55,13 +53,14 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
         }
 
         fun bind(personData: Person) {
-            personViewModel.bind(personData)
-            binding.viewModel = personViewModel
-            binding.setClickListener {
-                navigateToPersonHistory(personData, it)
+            val personViewModel= PersonViewModel().apply { bind(personData) }
+            binding.apply {
+                viewModel = personViewModel
+                setClickListener {
+                    navigateToPersonHistory(personData, it)
+                }
+                executePendingBindings()
             }
-
-            binding.executePendingBindings()
         }
     }
 }
