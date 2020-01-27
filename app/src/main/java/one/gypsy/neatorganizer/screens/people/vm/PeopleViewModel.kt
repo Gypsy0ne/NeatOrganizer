@@ -21,7 +21,7 @@ import javax.inject.Inject
 //TODO introduce proper usecase approach
 class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople) : ViewModel() {
 
-    var people: LiveData<List<Person>> = MutableLiveData<List<Person>>().default(emptyList())
+    var people: LiveData<List<Person>> = MutableLiveData<List<Person>>()
 
     init {
         GlobalScope.launch {  people = getAllPeopleUseCase.invoke() }
