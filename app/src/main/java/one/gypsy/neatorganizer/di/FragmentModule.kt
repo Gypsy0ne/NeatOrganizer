@@ -2,9 +2,9 @@ package one.gypsy.neatorganizer.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import one.gypsy.neatorganizer.screens.people.view.AddPersonDialogFragment
-import one.gypsy.neatorganizer.screens.people.view.PeopleFragment
-import one.gypsy.neatorganizer.screens.people.view.PersonHistoryFragment
+import one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment
+import one.gypsy.neatorganizer.presentation.people.view.PeopleFragment
+import one.gypsy.neatorganizer.presentation.people.view.PersonHistoryFragment
 
 @Module
 abstract class FragmentModule {

@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.screens.routines
+package one.gypsy.neatorganizer.presentation.routines
 
 import android.os.Bundle
 import android.view.LayoutInflater

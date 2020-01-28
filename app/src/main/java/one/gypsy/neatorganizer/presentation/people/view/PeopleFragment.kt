@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.screens.people.view
+package one.gypsy.neatorganizer.presentation.people.view
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
-import one.gypsy.neatorganizer.screens.people.vm.PeopleViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_people.*

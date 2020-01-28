@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import one.gypsy.neatorganizer.screens.people.vm.AddPersonViewModel
-import one.gypsy.neatorganizer.screens.people.vm.PeopleViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 
 @Suppress("unused")
 @Module

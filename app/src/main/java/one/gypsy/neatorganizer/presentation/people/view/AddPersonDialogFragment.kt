@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.screens.people.view
+package one.gypsy.neatorganizer.presentation.people.view
 
 import android.app.Activity
 import android.content.Context
@@ -12,14 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.dialog_fragment_add_person.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddPersonBinding
-import one.gypsy.neatorganizer.screens.people.vm.AddPersonViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
 import one.gypsy.neatorganizer.utils.showToast
 import javax.inject.Inject
 class AddPersonDialogFragment: BottomSheetDialogFragment() {
