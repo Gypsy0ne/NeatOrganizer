@@ -29,7 +29,7 @@ class UseCaseModule {
 
     //TODO inject personHistoryRepository here
     @Provides
-    fun provideGetPersonHistory(peopleRepository: PeopleRepository): GetPersonHistory {
+    fun provideGetPersonProfile(peopleRepository: PeopleRepository): GetPersonHistory {
         return GetPersonHistory(peopleRepository)
     }
 }

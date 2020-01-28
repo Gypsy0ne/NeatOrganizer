@@ -12,7 +12,7 @@
         android:name="one.gypsy.neatorganizer.presentation.people.view.PeopleFragment"
         android:label="PeopleFragment" >
         <action
-            android:id="@+id/action_people_to_personHistoryFragment"
+            android:id="@+id/action_people_to_personProfileFragment"
             app:destination="@id/personHistoryFragment">
         </action>
     </fragment>
@@ -26,7 +26,7 @@
         android:label="AddPersonDialogFragment" />
     <fragment
         android:id="@+id/personHistoryFragment"
-        android:name="one.gypsy.neatorganizer.presentation.people.view.PersonHistoryFragment"
+        android:name="one.gypsy.neatorganizer.presentation.people.view.PersonProfileFragment"
         android:label="PersonHistoryFragment">
         <argument
             android:name="personId"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="corners_radius_item_person_background">16dp</dimen>
+    <dimen name="width_item_person_avatar_image">64dp</dimen>
+    <dimen name="height_item_person_avatar_image">64dp</dimen>
+    <dimen name="max_text_size_item_person_date_of_birth_text">16sp</dimen>
+    <dimen name="min_text_size_item_person_date_of_birth_text">12sp</dimen>
+    <dimen name="max_text_size_item_person_name_text">24sp</dimen>
+    <dimen name="min_text_size_item_person_name_text">18sp</dimen>
+</resources>

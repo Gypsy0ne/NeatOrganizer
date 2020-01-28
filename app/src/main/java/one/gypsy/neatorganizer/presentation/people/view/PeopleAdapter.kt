@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.presentation.people.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,7 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
             view: View
         ) {
             val direction =
-                PeopleFragmentDirections.actionPeopleToPersonHistoryFragment(
+                PeopleFragmentDirections.actionPeopleToPersonProfileFragment(
                     person.id
                 )
             view.findNavController().navigate(direction)
