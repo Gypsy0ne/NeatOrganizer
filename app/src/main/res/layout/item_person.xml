@@ -8,7 +8,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="viewModel"
-            type="one.gypsy.neatorganizer.screens.people.vm.PersonViewModel" />
+            type="one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

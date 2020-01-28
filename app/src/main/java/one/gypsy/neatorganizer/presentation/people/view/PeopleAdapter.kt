@@ -1,18 +1,16 @@
-package one.gypsy.neatorganizer.screens.people.view
+package one.gypsy.neatorganizer.presentation.people.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemPersonBinding
 import one.gypsy.neatorganizer.domain.Person
-import one.gypsy.neatorganizer.screens.people.vm.PersonViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel
 
 //TODO implement bind/unbind mechanism
 class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<Person>> {

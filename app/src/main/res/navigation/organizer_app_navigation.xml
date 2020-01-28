@@ -5,11 +5,11 @@
 
     <fragment
         android:id="@+id/tasks"
-        android:name="one.gypsy.neatorganizer.screens.tasks.TasksFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.TasksFragment"
         android:label="TasksFragment" />
     <fragment
         android:id="@+id/people"
-        android:name="one.gypsy.neatorganizer.screens.people.view.PeopleFragment"
+        android:name="one.gypsy.neatorganizer.presentation.people.view.PeopleFragment"
         android:label="PeopleFragment" >
         <action
             android:id="@+id/action_people_to_personHistoryFragment"
@@ -18,15 +18,15 @@
     </fragment>
     <fragment
         android:id="@+id/routines"
-        android:name="one.gypsy.neatorganizer.screens.routines.RoutinesFragment"
+        android:name="one.gypsy.neatorganizer.presentation.routines.RoutinesFragment"
         android:label="RoutinesFragment" />
     <dialog
         android:id="@+id/person_add"
-        android:name="one.gypsy.neatorganizer.screens.people.view.AddPersonDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment"
         android:label="AddPersonDialogFragment" />
     <fragment
         android:id="@+id/personHistoryFragment"
-        android:name="one.gypsy.neatorganizer.screens.people.view.PersonHistoryFragment"
+        android:name="one.gypsy.neatorganizer.presentation.people.view.PersonHistoryFragment"
         android:label="PersonHistoryFragment">
         <argument
             android:name="personId"

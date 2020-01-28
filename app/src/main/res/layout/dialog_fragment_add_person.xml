@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="one.gypsy.neatorganizer.screens.people.vm.AddPersonViewModel" />
+            type="one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel" />
     </data>
 
 

@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.screens.people.vm
+package one.gypsy.neatorganizer.presentation.people.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
