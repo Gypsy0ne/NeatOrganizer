@@ -13,27 +13,53 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:onClick="@{clickListener}"
+        lastInteractionBackground="@{viewModel.person.lastInteraction}"
+        android:layout_margin="2dp"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/image_view_item_person_avatar"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
             imageBitmap="@{viewModel.person.photoThumbnail}"
             placeholder="@{@drawable/ic_person_black_24dp}"
+            android:layout_width="@dimen/width_item_person_avatar_image"
+            android:layout_height="@dimen/height_item_person_avatar_image"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_item_person_date_of_birth"
+            style="@style/PersonItemTextView"
+            dateText="@{viewModel.person.dateOfBirth}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:autoSizeMaxTextSize="@dimen/max_text_size_item_person_date_of_birth_text"
+            app:autoSizeMinTextSize="@dimen/min_text_size_item_person_date_of_birth_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_item_person_name"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            style="@style/PersonItemTextView"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
             android:text="@{viewModel.person.name}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:autoSizeMaxTextSize="@dimen/max_text_size_item_person_name_text"
+            app:autoSizeMinTextSize="@dimen/min_text_size_item_person_name_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_item_person_date_of_birth"
             app:layout_constraintStart_toEndOf="@+id/image_view_item_person_avatar"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Username" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

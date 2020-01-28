@@ -10,27 +10,27 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.databinding.FragmentPersonHistoryBinding
+import one.gypsy.neatorganizer.databinding.FragmentPersonProfileBinding
 import one.gypsy.neatorganizer.injector
 
-class PersonHistoryFragment: Fragment() {
+class PersonProfileFragment: Fragment() {
 
-    private val args: PersonHistoryFragmentArgs by navArgs()
+    private val args: PersonProfileFragmentArgs by navArgs()
 
     private val personHistoryViewModel by lazy {
-        injector.personHistoryViewModelFactory.create(
+        injector.personProfileViewModelFactory.create(
             args.personId
         )
     }
 
-    private lateinit var fragmentBinding: FragmentPersonHistoryBinding
+    private lateinit var fragmentBinding: FragmentPersonProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentBinding= DataBindingUtil.inflate(inflater, R.layout.fragment_person_history, container, false)
+        fragmentBinding= DataBindingUtil.inflate(inflater, R.layout.fragment_person_profile, container, false)
         return fragmentBinding.root
     }
 

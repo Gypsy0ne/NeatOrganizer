@@ -15,6 +15,7 @@
         android:id="@+id/recycler_view_fragment_people"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:overScrollMode="never"
         app:adapterData="@{viewModel.people}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
