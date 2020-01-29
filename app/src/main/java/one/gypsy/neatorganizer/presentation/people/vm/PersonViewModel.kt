@@ -3,13 +3,16 @@ package one.gypsy.neatorganizer.presentation.people.vm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import one.gypsy.neatorganizer.domain.Person
-
+import one.gypsy.neatorganizer.domain.dto.Person
 class PersonViewModel: ViewModel() {
 
-    val person: LiveData<Person> = MutableLiveData<Person>()
+    private val _person = MutableLiveData<Person>()
+
+    val person: LiveData<Person>
+        get() = _person
+        
 
     fun bind(personItem: Person) {
-        (person as MutableLiveData).value = personItem
+        _person.value = personItem
     }
 }

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPersonProfileBinding
-import one.gypsy.neatorganizer.injector
+import one.gypsy.neatorganizer.presentation.injector
 
 class PersonProfileFragment: Fragment() {
 
