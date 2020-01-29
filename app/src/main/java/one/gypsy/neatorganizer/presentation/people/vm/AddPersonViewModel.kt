@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
 import java.util.*
 import javax.inject.Inject
-
+//TODO Change the way of exposing LiveData https://gist.github.com/humblehacker/0eb6458b1df6cf3049e031f36f0615f5
 class AddPersonViewModel @Inject constructor(var addPersonUseCase: AddPerson, var getImageBitmapUseCase: GetImageBitmap): ViewModel() {
 
     private val selectThumbnailPhotoActionRequestCode = 112
