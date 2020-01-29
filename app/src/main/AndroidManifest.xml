@@ -3,7 +3,7 @@
     package="one.gypsy.neatorganizer">
 
     <application
-        android:name=".OrganizerApplication"
+        android:name=".presentation.OrganizerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

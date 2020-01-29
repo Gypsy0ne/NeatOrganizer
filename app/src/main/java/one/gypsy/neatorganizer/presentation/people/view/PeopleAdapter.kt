@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.presentation.people.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemPersonBinding
-import one.gypsy.neatorganizer.domain.Person
+import one.gypsy.neatorganizer.domain.dto.Person
 import one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel
 
 //TODO implement bind/unbind mechanism
