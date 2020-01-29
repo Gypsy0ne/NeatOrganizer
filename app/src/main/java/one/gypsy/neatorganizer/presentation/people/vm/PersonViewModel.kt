@@ -7,9 +7,13 @@ import one.gypsy.neatorganizer.domain.Person
 //TODO Change the way of exposing LiveData https://gist.github.com/humblehacker/0eb6458b1df6cf3049e031f36f0615f5
 class PersonViewModel: ViewModel() {
 
-    val person: LiveData<Person> = MutableLiveData<Person>()
+    private val _person = MutableLiveData<Person>()
+
+    val person: LiveData<Person>
+        get() = _person
+        
 
     fun bind(personItem: Person) {
-        (person as MutableLiveData).value = personItem
+        _person.value = personItem
     }
 }
