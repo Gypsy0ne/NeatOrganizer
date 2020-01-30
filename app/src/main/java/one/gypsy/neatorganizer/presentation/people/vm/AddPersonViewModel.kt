@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.polyak.iconswitch.IconSwitch
 import one.gypsy.neatorganizer.domain.dto.Person
 import one.gypsy.neatorganizer.domain.interactors.AddPerson
 import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
@@ -50,6 +51,10 @@ class AddPersonViewModel @Inject constructor(
     val birthYear: LiveData<Int>
         get() = _birthYear
 
+    private val _sex = MutableLiveData<Person.Sex>().default(Person.Sex.MALE)
+    val sex: LiveData<Person.Sex>
+        get() = _sex
+
     fun startSelectThumbnailPhotoAction() {
         _selectThumbnailPhoto.postValue(selectThumbnailPhotoActionRequestCode)
     }
@@ -66,6 +71,7 @@ class AddPersonViewModel @Inject constructor(
                 Person(
                     0,
                     personName.value ?: "",
+                    sex.value ?: Person.Sex.MALE,
                     selectedThumbnail.value,
                     0,
                     getBirthDateFromFields()
@@ -92,6 +98,13 @@ class AddPersonViewModel @Inject constructor(
 
     private fun onSelectionSuccess(bitmap: Bitmap) {
         _selectedThumbnail.value = bitmap
+    }
+
+    fun onSexChanged(sex: IconSwitch.Checked) {
+        _sex.postValue(when(sex) {
+            IconSwitch.Checked.LEFT -> Person.Sex.MALE
+            else -> Person.Sex.FEMALE
+        })
     }
 
 

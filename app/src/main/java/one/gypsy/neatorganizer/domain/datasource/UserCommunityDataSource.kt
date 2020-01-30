@@ -17,7 +17,7 @@ class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) :
 
 
     override suspend fun add(person: Person) =
-        personDao.insert(PersonEntity(person.name, convertBitmapToByteArray(person.photoThumbnail), person.lastInteraction, person.dateOfBirth))
+        personDao.insert(PersonEntity(person.name, person.sex.name, convertBitmapToByteArray(person.photoThumbnail), person.lastInteraction, person.dateOfBirth))
 
 
     override suspend fun remove(person: Person) {
@@ -30,6 +30,7 @@ class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) :
                 Person(
                     personEntity.id,
                     personEntity.name,
+                    Person.Sex.valueOf(personEntity.sex),
                     parseByteArrayToBitmap(personEntity.avatar),
                     personEntity.lastInteraction,
                     personEntity.dateOfBirth
