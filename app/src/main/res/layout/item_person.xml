@@ -6,6 +6,7 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+        <import type="one.gypsy.neatorganizer.domain.dto.Person.Sex"/>
         <variable
             name="viewModel"
             type="one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel" />
@@ -20,7 +21,7 @@
         <ImageView
             android:id="@+id/image_view_item_person_avatar"
             imageBitmap="@{viewModel.person.photoThumbnail}"
-            placeholder="@{@drawable/ic_person_black_24dp}"
+            placeholder="@{viewModel.person.sex == Sex.MALE ? @drawable/ic_user_male_black_24dp : @drawable/ic_user_female_black_24dp}"
             android:layout_width="@dimen/width_item_person_avatar_image"
             android:layout_height="@dimen/height_item_person_avatar_image"
             android:layout_marginStart="4dp"

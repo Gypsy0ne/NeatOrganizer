@@ -8,6 +8,7 @@ import java.util.*
 //TODO make data class out of it to work with diffutil
 @Entity(tableName = "people")
 class PersonEntity(val name: String,
+                   val sex: String,
                         @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
                         val avatar: ByteArray? = null,
                         val lastInteraction: Int,
