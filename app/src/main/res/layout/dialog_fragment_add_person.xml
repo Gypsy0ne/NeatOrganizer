@@ -62,10 +62,10 @@
         app:layout_constraintTop_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail" />
 
     <DatePicker
-        android:day="@{viewModel.birthDay}"
-        android:month="@{viewModel.birthMonth}"
-        android:onDateChanged="@{(datePicker, year, month, day) -> viewModel.onBirthDateChanged(day, month, year)}"
-        android:year="@{viewModel.birthYear}"
+        android:day="@{1}"
+        android:month="@{0}"
+        android:onDateChanged="@{(datePicker, year, month, day) -> viewModel.onBirthDateChanged(year, month, day)}"
+        android:year="@{2000}"
         android:id="@+id/date_picker_dialog_fragment_add_person"
         android:layout_width="0dp"
         android:layout_height="128dp"

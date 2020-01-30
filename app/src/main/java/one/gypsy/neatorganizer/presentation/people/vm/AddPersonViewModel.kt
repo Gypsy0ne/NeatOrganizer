@@ -11,6 +11,8 @@ import one.gypsy.neatorganizer.domain.interactors.AddPerson
 import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
+import one.gypsy.neatorganizer.utils.default
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -36,15 +38,15 @@ class AddPersonViewModel @Inject constructor(
     val finishedAdding: LiveData<Boolean>
         get() = _finishedAdding
 
-    private val _birthDay = MutableLiveData<Int>()
+    private val _birthDay = MutableLiveData<Int>().default(1)
     val birthDay: LiveData<Int>
         get() = _birthDay
 
-    private val _birthMonth = MutableLiveData<Int>()
+    private val _birthMonth = MutableLiveData<Int>().default(0)
     val birthMonth: LiveData<Int>
         get() = _birthMonth
 
-    private val _birthYear = MutableLiveData<Int>()
+    private val _birthYear = MutableLiveData<Int>().default(2000)
     val birthYear: LiveData<Int>
         get() = _birthYear
 
@@ -66,13 +68,15 @@ class AddPersonViewModel @Inject constructor(
                     personName.value ?: "",
                     selectedThumbnail.value,
                     0,
-                    Date()
+                    getBirthDateFromFields()
                 )
             )
         ) {
             it.either(::onAdditionFailure, ::onAdditionSuccess)
         }
     }
+
+    private fun getBirthDateFromFields() = GregorianCalendar(birthYear.value ?: 2000, birthMonth.value ?: 0, birthDay.value ?: 0).time
 
     private fun onAdditionSuccess(unit: Unit) {
         _finishedAdding.postValue(true)
@@ -92,8 +96,8 @@ class AddPersonViewModel @Inject constructor(
 
 
     fun onBirthDateChanged(year: Int, month: Int, dayOfMonth: Int) {
-        _birthYear.postValue(year)
-        _birthMonth.postValue(month)
-        _birthDay.postValue(dayOfMonth)
+        _birthYear.value = year
+        _birthMonth.value = month
+        _birthDay.value = dayOfMonth
     }
 }
