@@ -1,148 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel" />
     </data>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/image_view_dialog_fragment_add_person_thumbnail"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:elevation="4dp"
-        android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
-        android:onClick="@{() -> viewModel.startSelectThumbnailPhotoAction()}"
-        app:imageBitmap="@{viewModel.selectedThumbnail}"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:placeholder="@{@drawable/ic_add_a_photo_light_gray_24dp}" />
+        <ImageView
+            android:id="@+id/image_view_dialog_fragment_add_person_thumbnail"
+            android:layout_width="@dimen/width_dialog_fragment_add_person_thumbnail_slot"
+            android:layout_height="@dimen/height_dialog_fragment_add_person_thumbnail_slot"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+            android:elevation="4dp"
+            android:onClick="@{() -> viewModel.startSelectThumbnailPhotoAction()}"
+            app:imageBitmap="@{viewModel.selectedThumbnail}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholder="@{@drawable/ic_add_a_photo_light_gray_24dp}" />
 
-    <com.polyak.iconswitch.IconSwitch
-        android:id="@+id/icon_switch_dialog_fragment_add_person_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="4dp"
-        checkedChangeListener="@{(checked) -> viewModel.onSexChanged(checked)}"
-        app:isw_icon_left="@drawable/ic_male_black"
-        app:isw_icon_right="@drawable/ic_female_black"
-        app:isw_thumb_color_left="@color/male_blue"
-        app:isw_thumb_color_right="@color/female_pink"
-        app:isw_inactive_tint_icon_left="@color/male_blue"
-        app:isw_inactive_tint_icon_right="@color/female_pink"
-        app:isw_active_tint_icon_left="@color/white"
-        app:isw_active_tint_icon_right="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.polyak.iconswitch.IconSwitch
+            android:id="@+id/icon_switch_dialog_fragment_add_person_sex"
+            checkedChangeListener="@{(checked) -> viewModel.onSexChanged(checked)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="4dp"
+            app:isw_active_tint_icon_left="@color/white"
+            app:isw_active_tint_icon_right="@color/white"
+            app:isw_icon_left="@drawable/ic_male_black"
+            app:isw_icon_right="@drawable/ic_female_black"
+            app:isw_inactive_tint_icon_left="@color/male_blue"
+            app:isw_inactive_tint_icon_right="@color/female_pink"
+            app:isw_thumb_color_left="@color/male_blue"
+            app:isw_thumb_color_right="@color/female_pink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_text_dialog_fragment_add_person_name"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Name"
-        android:maxLines="1"
-        android:maxLength="48"
-        android:textCursorDrawable="@drawable/dialog_fragment_add_person_cursor"
-        android:textColor="@color/white"
-        android:drawablePadding="4dp"
-        android:paddingStart="8dp"
-        android:layout_marginTop="16dp"
-        android:drawableStart="@drawable/ic_person_white_24dp"
-        android:background="@drawable/dialog_fragment_add_person_edit_text_background"
-        android:text="@={viewModel.personName}"
-        app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/icon_switch_dialog_fragment_add_person_sex" />
+        <EditText
+            android:id="@+id/edit_text_dialog_fragment_add_person_name"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_dialog_fragment_add_person_name_text"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/dialog_fragment_add_person_edit_text_background"
+            android:drawableStart="@drawable/ic_person_white_24dp"
+            android:drawablePadding="4dp"
+            android:hint="Name"
+            android:maxLength="48"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:text="@={viewModel.personName}"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/dialog_fragment_add_person_cursor"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/icon_switch_dialog_fragment_add_person_sex" />
 
-    <View
-        android:id="@+id/view_dialog_fragment_add_person_separator"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#E68F8F8F"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail" />
+        <View
+            android:id="@+id/view_dialog_fragment_add_person_separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#E68F8F8F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail" />
 
-    <DatePicker
-        android:id="@+id/date_picker_dialog_fragment_add_person"
-        android:layout_width="wrap_content"
-        android:layout_height="144dp"
-        android:layout_marginBottom="16dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:day="@{1}"
-        android:month="@{0}"
-        android:onDateChanged="@{(datePicker, year, month, day) -> viewModel.onBirthDateChanged(year, month, day)}"
-        android:year="@{2000}"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <DatePicker
+            android:id="@+id/date_picker_dialog_fragment_add_person"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_dialog_fragment_add_person_date_picker"
+            android:layout_marginBottom="16dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:day="@{1}"
+            android:month="@{0}"
+            android:onDateChanged="@{(datePicker, year, month, day) -> viewModel.onBirthDateChanged(year, month, day)}"
+            android:year="@{2000}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_dialog_fragment_add_person_date_of_birth" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.addPerson()}"
-        android:text="@string/add_person_dialog_fragment_confirm"
-        android:drawableStart="@drawable/ic_check_white_24dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="48dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:textColor="@color/white"
-        app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="12sp"
-        app:autoSizeMaxTextSize="16sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
-        app:layout_constraintTop_toBottomOf="@id/date_picker_dialog_fragment_add_person"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/button_dialog_fragment_add_person_confirmation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+            android:drawableStart="@drawable/ic_check_white_24dp"
+            android:onClick="@{() -> viewModel.addPerson()}"
+            android:paddingStart="40dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="48dp"
+            android:paddingBottom="8dp"
+            android:text="@string/add_person_dialog_fragment_confirm"
+            android:textColor="@color/white"
+            app:autoSizeMaxTextSize="@dimen/max_text_size_item_dialog_add_person_confirm_text"
+            app:autoSizeMinTextSize="@dimen/min_text_size_dialog_add_person_confirm_text"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_picker_dialog_fragment_add_person" />
 
-    <ImageView
-        android:id="@+id/image_view_dialog_fragment_add_person_date_of_birth"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_cake_black_24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_dialog_fragment_add_person_separator" />
+        <ImageView
+            android:id="@+id/image_view_dialog_fragment_add_person_date_of_birth"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_cake_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_dialog_fragment_add_person_separator" />
 
-    <TextView
-        android:id="@+id/text_view_dialog_fragment_add_person_date_of_birth"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:autoSizeTextType="uniform"
-        app:autoSizeMaxTextSize="18sp"
-        app:autoSizeMinTextSize="14sp"
-        android:gravity="bottom"
-        android:layout_marginStart="4dp"
-        android:text="Date of birth"
-        app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
-        app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
-        app:layout_constraintTop_toTopOf="@+id/image_view_dialog_fragment_add_person_date_of_birth" />
+        <TextView
+            android:id="@+id/text_view_dialog_fragment_add_person_date_of_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:gravity="bottom"
+            android:text="Date of birth"
+            app:autoSizeMaxTextSize="@dimen/max_text_size_dialog_add_person_date_title"
+            app:autoSizeMinTextSize="@dimen/min_text_size_dialog_add_person_date_title"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
+            app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
+            app:layout_constraintTop_toTopOf="@+id/image_view_dialog_fragment_add_person_date_of_birth" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
