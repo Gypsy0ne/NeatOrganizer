@@ -13,9 +13,6 @@ import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
 import java.util.*
 import javax.inject.Inject
-import android.widget.DatePicker
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import java.time.LocalDate
 
 
 class AddPersonViewModel @Inject constructor(
@@ -94,6 +91,9 @@ class AddPersonViewModel @Inject constructor(
     }
 
 
-    fun onBirthDateChanged(year: Int, monthOfYear: Int, dayOfMonth: Int) {
+    fun onBirthDateChanged(year: Int, month: Int, dayOfMonth: Int) {
+        _birthYear.postValue(year)
+        _birthMonth.postValue(month)
+        _birthDay.postValue(dayOfMonth)
     }
 }
