@@ -7,12 +7,14 @@
     <dimen name="min_text_size_item_person_date_of_birth_text">12sp</dimen>
     <dimen name="max_text_size_item_person_name_text">22sp</dimen>
     <dimen name="min_text_size_item_person_name_text">16sp</dimen>
+    <dimen name="max_text_size_item_person_name_description">18sp</dimen>
+    <dimen name="min_text_size_item_person_name_description">12sp</dimen>
     <dimen name="width_dialog_fragment_add_person_thumbnail_slot">96dp</dimen>
     <dimen name="height_dialog_fragment_add_person_thumbnail_slot">96dp</dimen>
-    <dimen name="height_dialog_fragment_add_person_name_text">40dp</dimen>
+    <dimen name="height_dialog_fragment_add_person_form_text">40dp</dimen>
     <dimen name="height_dialog_fragment_add_person_date_picker">144dp</dimen>
-    <dimen name="min_text_size_dialog_add_person_confirm_text">12sp</dimen>
-    <dimen name="max_text_size_item_dialog_add_person_confirm_text">16sp</dimen>
+    <dimen name="min_text_size_dialog_add_person_confirm_text">14sp</dimen>
+    <dimen name="max_text_size_dialog_add_person_confirm_text">20sp</dimen>
     <dimen name="max_text_size_dialog_add_person_date_title">18sp</dimen>
     <dimen name="min_text_size_dialog_add_person_date_title">14sp</dimen>
     <dimen name="height_activity_home_bottom_navigation">56dp</dimen>

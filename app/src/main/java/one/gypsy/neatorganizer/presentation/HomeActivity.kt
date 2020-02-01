@@ -25,8 +25,13 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setSupportActionBar(toolbar_activity_home)
+        setUpActionBar()
         AndroidInjection.inject(this)
+    }
+
+    private fun setUpActionBar() {
+        setSupportActionBar(toolbar_activity_home)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

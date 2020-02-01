@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00C4FF</color>
+    <color name="colorPrimary">#FEE187</color>
     <color name="colorPrimaryDark">#1565C0</color>
     <color name="colorAccent">#D81B60</color>
 
@@ -10,4 +10,16 @@
     <color name="female_pink">#EC407A</color>
     <color name="male_blue">#42A5F5</color>
 
+
+    <color name="blue">#76A5EE</color>
+    <color name="light_blue">#B7D2FE</color>
+    <color name="yellow">#FEE187</color>
+    <color name="dark_yellow">#EBBB41</color>
+    <color name="light_yellow">#FFEFC2</color>
+    <color name="light_pink">#FEBAD6</color>
+    <color name="pink">#EC8299</color>
+    <color name="light_green">#DAEBBE</color>
+    <color name="green">#A6E5CA</color>
+    <color name="gray">#6F777E</color>
+    <color name="light_gray">#B2B8BB</color>
 </resources>
