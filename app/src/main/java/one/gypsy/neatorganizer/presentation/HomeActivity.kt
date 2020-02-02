@@ -25,14 +25,16 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setSupportActionBar(toolbar_activity_home)
+        setUpActionBar()
         AndroidInjection.inject(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_home_app_bar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+    private fun setUpActionBar() {
+        setSupportActionBar(toolbar_activity_home)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navigation = findNavController(R.id.fragment_activity_home_nav_container)

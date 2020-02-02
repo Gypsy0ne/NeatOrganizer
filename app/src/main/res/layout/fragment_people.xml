@@ -16,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:overScrollMode="never"
+        android:layout_marginBottom="4dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         app:adapterData="@{viewModel.people}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

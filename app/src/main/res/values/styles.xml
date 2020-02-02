@@ -4,16 +4,18 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowLightStatusBar">true</item>
+
         <item name="android:statusBarColor">@color/white</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
     <style name="AppModalStyle"
@@ -22,9 +24,27 @@
     </style>
     
     <style name="PersonItemTextView">
-        <item name="android:textColor">@color/white</item>
         <item name="android:lines">1</item>
-        <item name="android:fontFamily">@font/montserrat</item>
         <item name="autoSizeTextType">uniform</item>
     </style>
+<!--Add person dialog fragment-->
+    <style name="DialogAddPersonFormEditText">
+        <item name="android:textCursorDrawable">@drawable/dialog_fragment_add_person_cursor</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">textLongMessage</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:background">@drawable/dialog_fragment_add_person_edit_text_background</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/height_dialog_fragment_add_person_form_text</item>
+    </style>
+
+    <style name="DialogAddPersonFormEmailEditText" parent="DialogAddPersonFormEditText">
+        <item name="android:inputType">textEmailAddress</item>
+    </style>
+    <style name="DialogAddPersonFormPhoneEditText" parent="DialogAddPersonFormEditText">
+        <item name="android:inputType">phone</item>
+    </style>
+    <!--End of Add person dialog fragment-->
+
 </resources>

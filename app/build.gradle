@@ -17,7 +17,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "one.gypsy.neatorganizer"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -114,5 +114,7 @@ dependencies {
 
     //Custom switch
     implementation 'com.polyak:icon-switch:1.0.0'
+
+    implementation 'com.mikhaellopez:lazydatepicker:1.0.5'
 
 }

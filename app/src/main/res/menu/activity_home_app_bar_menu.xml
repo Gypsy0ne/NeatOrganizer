@@ -4,16 +4,16 @@
 <item android:id="@+id/person_add"
     android:orderInCategory="98"
     android:title="@string/activity_home_bottom_navigation_menu_people"
-    android:icon="@drawable/ic_person_add_black_24dp"
+    android:icon="@drawable/ic_person_add_white_24dp"
     app:showAsAction="ifRoom"/>
     <item android:id="@+id/routine_add"
         android:orderInCategory="99"
         android:title="@string/activity_home_bottom_navigation_menu_people"
-        android:icon="@drawable/ic_routines_black_24dp"
+        android:icon="@drawable/ic_routines_white_24dp"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/task_add"
         android:orderInCategory="100"
         android:title="@string/activity_home_bottom_navigation_menu_people"
-        android:icon="@drawable/ic_task_add_black_24dp"
+        android:icon="@drawable/ic_task_add_white_24dp"
         app:showAsAction="ifRoom"/>
 </menu>
