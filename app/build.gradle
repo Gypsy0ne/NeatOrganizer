@@ -115,4 +115,6 @@ dependencies {
     //Custom switch
     implementation 'com.polyak:icon-switch:1.0.0'
 
+    implementation 'com.mikhaellopez:lazydatepicker:1.0.5'
+
 }

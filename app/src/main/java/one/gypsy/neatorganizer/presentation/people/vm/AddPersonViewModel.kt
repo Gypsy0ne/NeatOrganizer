@@ -39,17 +39,21 @@ class AddPersonViewModel @Inject constructor(
     val finishedAdding: LiveData<Boolean>
         get() = _finishedAdding
 
-    private val _birthDay = MutableLiveData<Int>().default(1)
-    val birthDay: LiveData<Int>
-        get() = _birthDay
+        private val _birthDate = MutableLiveData<Date>().default(Date())
+    val birthDate: LiveData<Date>
+        get() = _birthDate
 
-    private val _birthMonth = MutableLiveData<Int>().default(0)
-    val birthMonth: LiveData<Int>
-        get() = _birthMonth
-
-    private val _birthYear = MutableLiveData<Int>().default(2000)
-    val birthYear: LiveData<Int>
-        get() = _birthYear
+//    private val _birthDay = MutableLiveData<Int>().default(1)
+//    val birthDay: LiveData<Int>
+//        get() = _birthDay
+//
+//    private val _birthMonth = MutableLiveData<Int>().default(0)
+//    val birthMonth: LiveData<Int>
+//        get() = _birthMonth
+//
+//    private val _birthYear = MutableLiveData<Int>().default(2000)
+//    val birthYear: LiveData<Int>
+//        get() = _birthYear
 
     private val _sex = MutableLiveData<Person.Sex>().default(Person.Sex.MALE)
     val sex: LiveData<Person.Sex>
@@ -74,7 +78,7 @@ class AddPersonViewModel @Inject constructor(
                     sex.value ?: Person.Sex.MALE,
                     selectedThumbnail.value,
                     0,
-                    getBirthDateFromFields()
+                    birthDate.value ?: Date()
                 )
             )
         ) {
@@ -82,7 +86,7 @@ class AddPersonViewModel @Inject constructor(
         }
     }
 
-    private fun getBirthDateFromFields() = GregorianCalendar(birthYear.value ?: 2000, birthMonth.value ?: 0, birthDay.value ?: 0).time
+//    private fun getBirthDateFromFields() = GregorianCalendar(birthYear.value ?: 2000, birthMonth.value ?: 0, birthDay.value ?: 0).time
 
     private fun onAdditionSuccess(unit: Unit) {
         _finishedAdding.postValue(true)
@@ -108,9 +112,13 @@ class AddPersonViewModel @Inject constructor(
     }
 
 
-    fun onBirthDateChanged(year: Int, month: Int, dayOfMonth: Int) {
-        _birthYear.value = year
-        _birthMonth.value = month
-        _birthDay.value = dayOfMonth
+//    fun onBirthDateChanged(year: Int, month: Int, dayOfMonth: Int) {
+//        _birthYear.value = year
+//        _birthMonth.value = month
+//        _birthDay.value = dayOfMonth
+//    }
+//
+    fun onBirthDateChanged(newDate: Date) {
+        _birthDate.postValue(newDate)
     }
 }

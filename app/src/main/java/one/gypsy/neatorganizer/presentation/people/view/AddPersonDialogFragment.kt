@@ -2,12 +2,16 @@ package one.gypsy.neatorganizer.presentation.people.view
 
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +23,8 @@ import one.gypsy.neatorganizer.databinding.DialogFragmentAddPersonBinding
 import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
 import one.gypsy.neatorganizer.utils.showToast
 import javax.inject.Inject
+
+
 class AddPersonDialogFragment: BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -58,7 +64,6 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
         super.onStart()
         setUpObservers()
     }
-
 
 
     private fun setUpObservers() {
