@@ -5,12 +5,15 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter(value = ["imageBitmap", "placeholder"], requireAll = false)
 fun setImage(view: ImageView, imageBitmap: Bitmap?, placeholder: Drawable) {
     Glide.with(view.context)
         .load(imageBitmap ?: placeholder)
-        .apply(RequestOptions.circleCropTransform())
+        .transform(CenterCrop(), RoundedCorners(24))
         .into(view)
 }
