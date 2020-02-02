@@ -34,10 +34,7 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_home_app_bar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navigation = findNavController(R.id.fragment_activity_home_nav_container)

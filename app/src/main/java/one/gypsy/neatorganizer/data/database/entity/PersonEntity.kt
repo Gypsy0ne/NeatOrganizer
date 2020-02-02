@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-//TODO make data class out of it to work with diffutil
 @Entity(tableName = "people")
 class PersonEntity(val name: String,
                    val sex: String,

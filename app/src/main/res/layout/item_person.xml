@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="clickListener"
-            type="android.view.View.OnClickListener"/>
-        <import type="one.gypsy.neatorganizer.domain.dto.Person.Sex"/>
+            type="android.view.View.OnClickListener" />
+
+        <import type="one.gypsy.neatorganizer.domain.dto.Person.Sex" />
+
         <variable
             name="viewModel"
             type="one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        lastInteractionBackground="@{viewModel.person.lastInteraction}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="2dp"
         android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/item_person_white_background"
+        android:elevation="4dp"
         android:onClick="@{clickListener}">
 
         <ImageView
             android:id="@+id/image_view_item_person_avatar"
             imageBitmap="@{viewModel.person.photoThumbnail}"
+            lastInteractionBackground="@{viewModel.person.lastInteraction}"
             placeholder="@{viewModel.person.sex == Sex.MALE ? @drawable/ic_user_male_gray_24dp : @drawable/ic_user_female_gray_24dp}"
             android:layout_width="@dimen/width_item_person_avatar_image"
             android:layout_height="@dimen/height_item_person_avatar_image"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,13 +42,13 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view_item_person_date_of_birth"
             style="@style/PersonItemTextView"
-            android:textColor="@color/gray"
-android:fontFamily="@font/roboto"
             dateText="@{viewModel.person.dateOfBirth}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
             app:autoSizeMaxTextSize="@dimen/max_text_size_item_person_date_of_birth_text"
             app:autoSizeMinTextSize="@dimen/min_text_size_item_person_date_of_birth_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,9 +61,9 @@ android:fontFamily="@font/roboto"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/gray"
             android:fontFamily="@font/roboto_medium"
             android:text="@{viewModel.person.name}"
+            android:textColor="@color/gray"
             app:autoSizeMaxTextSize="@dimen/max_text_size_item_person_name_text"
             app:autoSizeMinTextSize="@dimen/min_text_size_item_person_name_text"
             app:layout_constraintBottom_toTopOf="@+id/text_view_item_person_description"
@@ -74,12 +78,12 @@ android:fontFamily="@font/roboto"
             style="@style/PersonItemTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:textColor="@color/gray"
-
             android:layout_marginStart="8dp"
+
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="Sample description goes in here"
+            android:textColor="@color/gray"
             app:autoSizeMaxTextSize="@dimen/max_text_size_item_person_name_text"
             app:autoSizeMinTextSize="@dimen/min_text_size_item_person_name_text"
             app:layout_constraintBottom_toBottomOf="parent"

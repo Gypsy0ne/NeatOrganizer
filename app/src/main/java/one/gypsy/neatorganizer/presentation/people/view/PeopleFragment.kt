@@ -2,9 +2,7 @@ package one.gypsy.neatorganizer.presentation.people.view
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -15,9 +13,10 @@ import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_people.*
+import one.gypsy.neatorganizer.presentation.SectionFragment
 import javax.inject.Inject
 
-class PeopleFragment : Fragment() {
+class PeopleFragment : SectionFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,6 +39,8 @@ class PeopleFragment : Fragment() {
         super.onCreate(savedInstanceState)
         peopleViewModel = ViewModelProviders.of(this, viewModelFactory)[PeopleViewModel::class.java]
     }
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)
