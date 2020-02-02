@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_search"
+        android:title="@string/activity_home_bottom_navigation_menu_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:orderInCategory="96"
+        app:showAsAction="always"/>
 <item android:id="@+id/person_add"
     android:orderInCategory="98"
     android:title="@string/activity_home_bottom_navigation_menu_people"

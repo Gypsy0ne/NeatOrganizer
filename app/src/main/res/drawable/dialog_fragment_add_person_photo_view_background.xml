@@ -4,14 +4,15 @@
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <solid android:color="@color/gray" />
-            <corners android:radius="64dp" />
+            <corners android:radius="16dp" />
         </shape>
     </item>
 
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
 <solid android:color="@color/light_gray"/>
-            <corners android:radius="64dp" />
+            <stroke android:width="0.2dp" android:color="@color/gray" />
+            <corners android:radius="16dp" />
         </shape>
     </item>
 </ripple>
