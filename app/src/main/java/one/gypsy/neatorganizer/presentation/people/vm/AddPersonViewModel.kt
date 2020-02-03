@@ -13,7 +13,6 @@ import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
 import one.gypsy.neatorganizer.utils.default
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -39,21 +38,10 @@ class AddPersonViewModel @Inject constructor(
     val finishedAdding: LiveData<Boolean>
         get() = _finishedAdding
 
-        private val _birthDate = MutableLiveData<Date>().default(Date())
+    private val _birthDate = MutableLiveData<Date>().default(Date())
     val birthDate: LiveData<Date>
         get() = _birthDate
 
-//    private val _birthDay = MutableLiveData<Int>().default(1)
-//    val birthDay: LiveData<Int>
-//        get() = _birthDay
-//
-//    private val _birthMonth = MutableLiveData<Int>().default(0)
-//    val birthMonth: LiveData<Int>
-//        get() = _birthMonth
-//
-//    private val _birthYear = MutableLiveData<Int>().default(2000)
-//    val birthYear: LiveData<Int>
-//        get() = _birthYear
 
     private val _sex = MutableLiveData<Person.Sex>().default(Person.Sex.MALE)
     val sex: LiveData<Person.Sex>
@@ -105,19 +93,14 @@ class AddPersonViewModel @Inject constructor(
     }
 
     fun onSexChanged(sex: IconSwitch.Checked) {
-        _sex.postValue(when(sex) {
-            IconSwitch.Checked.LEFT -> Person.Sex.MALE
-            else -> Person.Sex.FEMALE
-        })
+        _sex.postValue(
+            when (sex) {
+                IconSwitch.Checked.LEFT -> Person.Sex.MALE
+                else -> Person.Sex.FEMALE
+            }
+        )
     }
 
-
-//    fun onBirthDateChanged(year: Int, month: Int, dayOfMonth: Int) {
-//        _birthYear.value = year
-//        _birthMonth.value = month
-//        _birthDay.value = dayOfMonth
-//    }
-//
     fun onBirthDateChanged(newDate: Date) {
         _birthDate.postValue(newDate)
     }
