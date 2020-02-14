@@ -7,14 +7,13 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
 import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_people.*
 import javax.inject.Inject
 
 
@@ -35,7 +34,7 @@ class PeopleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentBinding= DataBindingUtil.inflate(inflater, R.layout.fragment_people, container, false)
+        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_people, container, false)
         return fragmentBinding.root
     }
 
@@ -79,12 +78,11 @@ class PeopleFragment : Fragment() {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
-//TODO extract these lines to binding adapter
-    private fun setUpRecyclerView() {
-        recycler_view_fragment_people.apply {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = PeopleAdapter()
-        }
+    private fun setUpRecyclerView() = fragmentBinding.apply {
+        val peopleAdapter = PeopleAdapter(requireContext())
+        fragmentBinding.peopleAdapter = peopleAdapter
+        layoutManager = LinearLayoutManager(context)
+        itemTouchHelperCallback = SwipeToUpdateInteractionCallback(peopleAdapter)
+        executePendingBindings()
     }
 }

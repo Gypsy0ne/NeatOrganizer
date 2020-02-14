@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.presentation.people.view
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel
 
 //TODO implement bind/unbind mechanism
-class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
+class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
 
     private var people = mutableListOf<PersonEntry>()
 
@@ -35,6 +36,10 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         holder.bind(people[position])
+    }
+
+    fun addInteractionEntry(itemPosition: Int) {
+
     }
 
     inner class PersonViewHolder(private val binding: ItemPersonBinding) : RecyclerView.ViewHolder(binding.root) {
