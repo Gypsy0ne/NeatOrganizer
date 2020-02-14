@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.people.view
+package one.gypsy.neatorganizer.presentation.profile
 
 import android.content.Context
 import android.os.Bundle
@@ -12,8 +12,6 @@ import one.gypsy.neatorganizer.databinding.FragmentPersonProfileBinding
 import one.gypsy.neatorganizer.presentation.injector
 import android.content.Intent
 import android.net.Uri
-
-
 
 
 class PersonProfileFragment: Fragment() {
