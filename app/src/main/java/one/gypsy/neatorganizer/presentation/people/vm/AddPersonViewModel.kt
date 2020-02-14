@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.polyak.iconswitch.IconSwitch
 import one.gypsy.neatorganizer.domain.dto.Person
+import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.domain.interactors.AddPerson
 import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
@@ -60,7 +61,7 @@ class AddPersonViewModel @Inject constructor(
     fun addPerson() {
         addPersonUseCase.invoke(
             viewModelScope, AddPerson.Params(
-                Person(
+                PersonEntry(
                     0,
                     personName.value ?: "",
                     sex.value ?: Person.Sex.MALE,

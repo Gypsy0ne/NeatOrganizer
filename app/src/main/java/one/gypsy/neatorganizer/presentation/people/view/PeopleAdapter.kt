@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemPersonBinding
-import one.gypsy.neatorganizer.domain.dto.Person
+import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel
 
 //TODO implement bind/unbind mechanism
-class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<Person>> {
+class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
 
-    private var people = mutableListOf<Person>()
+    private var people = mutableListOf<PersonEntry>()
 
     //TODO adjust this method to work with diff util and search widget
-    override fun setData(dataCollection: List<Person>) {
+    override fun setData(dataCollection: List<PersonEntry>) {
         people.clear()
         people.addAll(dataCollection)
         notifyDataSetChanged()
@@ -40,22 +40,22 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
     inner class PersonViewHolder(private val binding: ItemPersonBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private fun navigateToPersonHistory(
-            person: Person,
+            personEntry: PersonEntry,
             view: View
         ) {
             val direction =
                 PeopleFragmentDirections.actionPeopleToPersonProfileFragment(
-                    person.id
+                    personEntry.id
                 )
             view.findNavController().navigate(direction)
         }
 
-        fun bind(personData: Person) {
-            val personViewModel= PersonViewModel().apply { bind(personData) }
+        fun bind(personEntryData: PersonEntry) {
+            val personViewModel= PersonViewModel().apply { bind(personEntryData) }
             binding.apply {
                 viewModel = personViewModel
                 setClickListener {
-                    navigateToPersonHistory(personData, it)
+                    navigateToPersonHistory(personEntryData, it)
                 }
                 executePendingBindings()
             }

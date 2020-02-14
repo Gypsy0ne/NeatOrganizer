@@ -26,7 +26,7 @@
         android:label="AddPersonDialogFragment" />
     <fragment
         android:id="@+id/personHistoryFragment"
-        android:name="one.gypsy.neatorganizer.presentation.people.view.PersonProfileFragment"
+        android:name="one.gypsy.neatorganizer.presentation.profile.PersonProfileFragment"
         android:label="PersonHistoryFragment">
         <argument
             android:name="personId"

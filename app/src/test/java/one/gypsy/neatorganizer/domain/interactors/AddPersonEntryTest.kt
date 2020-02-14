@@ -1,21 +1,18 @@
 package one.gypsy.neatorganizer.domain.interactors
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import one.gypsy.neatorganizer.TestCoroutineRule
 import one.gypsy.neatorganizer.data.repositories.PeopleRepository
-import one.gypsy.neatorganizer.domain.dto.Person
+import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.mock
 import one.gypsy.neatorganizer.whenever
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
-import java.util.*
 
-class AddPersonTest {
+class AddPersonEntryTest {
 
     @Rule
     @JvmField
@@ -29,7 +26,7 @@ class AddPersonTest {
 
 
     private val peopleRepository: PeopleRepository = mock<PeopleRepository>()
-    private var person: Person = mock<Person>()
+    private var personEntry: PersonEntry = mock<PersonEntry>()
     private val personParams: AddPerson.Params = mock<AddPerson.Params>()
 
     val addPersonUseCase by lazy { AddPerson(peopleRepository) }
@@ -42,7 +39,7 @@ class AddPersonTest {
     @Test
     fun testAddPersonUseCaseCompletion() {
         testScope.runBlockingTest {
-            whenever(peopleRepository.addPerson(person)).thenReturn(Unit)
+            whenever(peopleRepository.addPerson(personEntry)).thenReturn(Unit)
         }
         addPersonUseCase(testScope, personParams) {
             assert(it.isRight)
