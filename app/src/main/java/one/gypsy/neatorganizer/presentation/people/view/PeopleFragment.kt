@@ -79,7 +79,7 @@ class PeopleFragment : Fragment() {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
-
+//TODO extract these lines to binding adapter
     private fun setUpRecyclerView() {
         recycler_view_fragment_people.apply {
             layoutManager = LinearLayoutManager(context)

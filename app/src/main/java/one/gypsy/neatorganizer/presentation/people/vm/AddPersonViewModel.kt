@@ -74,8 +74,6 @@ class AddPersonViewModel @Inject constructor(
         }
     }
 
-//    private fun getBirthDateFromFields() = GregorianCalendar(birthYear.value ?: 2000, birthMonth.value ?: 0, birthDay.value ?: 0).time
-
     private fun onAdditionSuccess(unit: Unit) {
         _finishedAdding.postValue(true)
     }
