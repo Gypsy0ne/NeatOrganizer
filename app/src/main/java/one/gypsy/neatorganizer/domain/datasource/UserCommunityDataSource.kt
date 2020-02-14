@@ -38,6 +38,7 @@ class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) :
         Transformations.map(personDao.getAllPeople()) {
             it.map { personEntity ->
                 PersonEntry(
+                    personEntity.id,
                     personEntity.name,
                     Person.Sex.valueOf(personEntity.sex),
                     parseByteArrayToBitmap(personEntity.avatar),
