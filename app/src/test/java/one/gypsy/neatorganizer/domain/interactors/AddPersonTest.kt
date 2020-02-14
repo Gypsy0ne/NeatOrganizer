@@ -49,21 +49,21 @@ class AddPersonTest {
         }
     }
 
-    @Test
-    fun testAddPersonUseCaseResult() {
-        testScope.runBlockingTest {
-            peopleRepository.getAllPeople().observeForever {
-                it.first()
-            }
-//            whenever(peopleRepository.getAllPeople()).then()
-            whenever(peopleRepository.addPerson(person))
-        }
-
-//        val expectedPerson = Person(0, "", Person.Sex.MALE, null, 0, Date())
-//
-//
-//        addPersonUseCase(testScope, personParams) {
-//            assert(it.isRight)
+//    @Test
+//    fun testAddPersonUseCaseResult() {
+//        testScope.runBlockingTest {
+//            peopleRepository.getAllPeople().observeForever {
+//                it.first()
+//            }
+////            whenever(peopleRepository.getAllPeople()).then()
+//            whenever(peopleRepository.addPerson(person))
 //        }
-    }
+//
+////        val expectedPerson = Person(0, "", Person.Sex.MALE, null, 0, Date())
+////
+////
+////        addPersonUseCase(testScope, personParams) {
+////            assert(it.isRight)
+////        }
+//    }
 }
