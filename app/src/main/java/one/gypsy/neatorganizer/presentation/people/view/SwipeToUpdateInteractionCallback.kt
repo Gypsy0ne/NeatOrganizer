@@ -12,7 +12,7 @@ class SwipeToUpdateInteractionCallback(var adapter: PeopleAdapter) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
 
-    private val updateIcon = adapter.context.getDrawable(R.drawable.ic_update_white_32dp)
+    private val updateIcon = adapter.context.getDrawable(R.drawable.ic_update_white_24dp)
     private val background: ColorDrawable =
         ColorDrawable(adapter.context.getColor(R.color.male_blue))
 

@@ -11,7 +11,7 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemPersonBinding
 import one.gypsy.neatorganizer.domain.dto.PersonEntry
-import one.gypsy.neatorganizer.presentation.people.vm.PersonViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
 
 //TODO implement bind/unbind mechanism
 class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
@@ -56,11 +56,14 @@ class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.P
         }
 
         fun bind(personEntryData: PersonEntry) {
-            val personViewModel= PersonViewModel().apply { bind(personEntryData) }
+            val personViewModel= PersonEntryViewModel().apply { bind(personEntryData) }
             binding.apply {
                 viewModel = personViewModel
-                setClickListener {
+                profileRedirectClickListener = View.OnClickListener {
                     navigateToPersonHistory(personEntryData, it)
+                }
+                interactionUpdateClickListener = View.OnClickListener {
+                    this.swipeLayoutItemPersonRoot.resetStatus()
                 }
                 executePendingBindings()
             }

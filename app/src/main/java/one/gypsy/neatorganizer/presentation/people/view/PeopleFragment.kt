@@ -82,7 +82,6 @@ class PeopleFragment : Fragment() {
         val peopleAdapter = PeopleAdapter(requireContext())
         fragmentBinding.peopleAdapter = peopleAdapter
         layoutManager = LinearLayoutManager(context)
-        itemTouchHelperCallback = SwipeToUpdateInteractionCallback(peopleAdapter)
         executePendingBindings()
     }
 }
