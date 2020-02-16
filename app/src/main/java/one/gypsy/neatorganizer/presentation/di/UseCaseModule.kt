@@ -3,11 +3,9 @@ package one.gypsy.neatorganizer.presentation.di
 import dagger.Module
 import dagger.Provides
 import one.gypsy.neatorganizer.data.repositories.FileRepository
+import one.gypsy.neatorganizer.data.repositories.InteractionRepository
 import one.gypsy.neatorganizer.data.repositories.PeopleRepository
-import one.gypsy.neatorganizer.domain.interactors.AddPerson
-import one.gypsy.neatorganizer.domain.interactors.GetAllPeople
-import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
-import one.gypsy.neatorganizer.domain.interactors.GetPersonHistory
+import one.gypsy.neatorganizer.domain.interactors.*
 
 @Module
 class UseCaseModule {
@@ -25,6 +23,11 @@ class UseCaseModule {
     @Provides
     fun provideGetImageBitmapUseCase(fileRepository: FileRepository): GetImageBitmap {
         return GetImageBitmap(fileRepository)
+    }
+
+    @Provides
+    fun provideAddInteractionEntryUseCase(interactionRepository: InteractionRepository): AddInteractionEntry {
+        return AddInteractionEntry(interactionRepository)
     }
 
     //TODO inject personHistoryRepository here

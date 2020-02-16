@@ -63,7 +63,6 @@ class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) :
     private fun parseByteArrayToBitmap(data: ByteArray?): Bitmap? =
         if (data != null) BitmapFactory.decodeByteArray(data, 0, data.size) else null
 
-    //TODO run compressing function from worker thread
     private suspend fun convertBitmapToByteArray(bitmap: Bitmap?): ByteArray? =
         withContext(Dispatchers.Default) {
             ByteArrayOutputStream().let {

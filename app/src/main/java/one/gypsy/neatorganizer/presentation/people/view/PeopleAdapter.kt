@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
@@ -56,6 +59,7 @@ class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.P
         }
 
         fun bind(personEntryData: PersonEntry) {
+            //TODO to init VM with provider factory is needed
             val personViewModel= PersonEntryViewModel().apply { bind(personEntryData) }
             binding.apply {
                 viewModel = personViewModel
@@ -63,6 +67,7 @@ class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.P
                     navigateToPersonHistory(personEntryData, it)
                 }
                 interactionUpdateClickListener = View.OnClickListener {
+                    personViewModel.onUpdateInteractionClick()
                     this.swipeLayoutItemPersonRoot.resetStatus()
                 }
                 executePendingBindings()
