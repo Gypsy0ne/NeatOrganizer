@@ -5,10 +5,10 @@
     <dimen name="height_item_person_avatar_image">64dp</dimen>
     <dimen name="max_text_size_item_person_date_of_birth_text">16sp</dimen>
     <dimen name="min_text_size_item_person_date_of_birth_text">12sp</dimen>
-    <dimen name="max_text_size_item_person_name_text">22sp</dimen>
-    <dimen name="min_text_size_item_person_name_text">16sp</dimen>
-    <dimen name="max_text_size_item_person_name_description">18sp</dimen>
-    <dimen name="min_text_size_item_person_name_description">12sp</dimen>
+    <dimen name="max_text_size_item_person_name">22sp</dimen>
+    <dimen name="min_text_size_item_person_name">16sp</dimen>
+    <dimen name="max_text_size_item_person_description">18sp</dimen>
+    <dimen name="min_text_size_item_person_description">12sp</dimen>
     <dimen name="width_dialog_fragment_add_person_thumbnail_slot">80dp</dimen>
     <dimen name="height_dialog_fragment_add_person_thumbnail_slot">80dp</dimen>
     <dimen name="height_dialog_fragment_add_person_form_text">40dp</dimen>
@@ -23,6 +23,7 @@
     <dimen name="lazy_date_picker_height_focus" tools:override="true">2.5dp</dimen>
     <dimen name="lazy_date_picker_width_margin" tools:override="true">1dp</dimen>
     <dimen name="lazy_date_picker_width_space" tools:override="true">6dp</dimen>
+    <dimen name="height_item_person_text_view">24dp</dimen>
     <!--End of Lazy date picker dimens-->
 
 </resources>

@@ -36,10 +36,10 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
 
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navigation = findNavController(R.id.fragment_activity_home_nav_container)
-        return item.onNavDestinationSelected(navigation) || super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val navigation = findNavController(R.id.fragment_activity_home_nav_container)
+//        return item.onNavDestinationSelected(navigation) || super.onOptionsItemSelected(item)
+//    }
 
     override fun onStart() {
         super.onStart()

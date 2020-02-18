@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_search"
-        android:title="@string/activity_home_bottom_navigation_menu_search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        android:orderInCategory="96"
-        app:showAsAction="always"/>
-<item android:id="@+id/person_add"
+<item android:id="@+id/add_entry"
     android:orderInCategory="98"
     android:title="@string/activity_home_bottom_navigation_menu_people"
-    android:icon="@drawable/ic_person_add_white_24dp"
+    android:icon="@drawable/ic_add_white_32dp"
     app:showAsAction="ifRoom"/>
-    <item android:id="@+id/routine_add"
-        android:orderInCategory="99"
-        android:title="@string/activity_home_bottom_navigation_menu_people"
-        android:icon="@drawable/ic_routines_white_24dp"
-        app:showAsAction="ifRoom"/>
-    <item android:id="@+id/task_add"
-        android:orderInCategory="100"
-        android:title="@string/activity_home_bottom_navigation_menu_people"
-        android:icon="@drawable/ic_task_add_white_24dp"
-        app:showAsAction="ifRoom"/>
 </menu>

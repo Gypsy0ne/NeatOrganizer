@@ -39,6 +39,7 @@
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="@+id/view_fragment_person_profile_info_background"
             app:layout_constraintTop_toBottomOf="@+id/view_fragment_person_profile_info_background" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_fragment_person_profile_interaction_history"
             android:layout_width="0dp"

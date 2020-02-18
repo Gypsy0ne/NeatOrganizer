@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.presentation.SectionFragment
 
-class TasksFragment : Fragment() {
+class TasksFragment : SectionFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
