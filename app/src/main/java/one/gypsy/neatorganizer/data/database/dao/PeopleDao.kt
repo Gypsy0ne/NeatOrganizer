@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.data.database.entity.PersonEntity
 import one.gypsy.neatorganizer.data.database.entity.PersonWithInteractionHistory
 
 @Dao
-interface PersonDao: BaseDao<PersonEntity> {
+interface PeopleDao: BaseDao<PersonEntity> {
 
     @Query("SELECT * FROM people")
     fun getAllPeople(): LiveData<List<PersonEntity>>

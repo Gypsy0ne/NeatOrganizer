@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import one.gypsy.neatorganizer.data.database.OrganizerDatabase
 import one.gypsy.neatorganizer.data.database.dao.InteractionDao
-import one.gypsy.neatorganizer.data.database.dao.PersonDao
+import one.gypsy.neatorganizer.data.database.dao.PeopleDao
 import javax.inject.Singleton
 
 @Module
@@ -18,7 +18,7 @@ class DataModule {
     }
 
     @Provides
-    fun providePeopleRepository(organizerDatabase: OrganizerDatabase): PersonDao {
+    fun providePeopleRepository(organizerDatabase: OrganizerDatabase): PeopleDao {
         return organizerDatabase.personDao()
     }
 
