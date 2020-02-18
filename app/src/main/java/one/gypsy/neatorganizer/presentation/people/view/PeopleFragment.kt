@@ -79,7 +79,7 @@ class PeopleFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
-        val peopleAdapter = PeopleAdapter(requireContext())
+        val peopleAdapter = PeopleAdapter()
         fragmentBinding.peopleAdapter = peopleAdapter
         layoutManager = LinearLayoutManager(context)
         executePendingBindings()

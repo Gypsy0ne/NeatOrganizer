@@ -10,11 +10,9 @@ import one.gypsy.neatorganizer.domain.interactors.AddInteractionEntry
 import java.util.*
 import javax.inject.Inject
 
-class PersonEntryViewModel @Inject constructor(
+class PersonEntryViewModel /*@Inject constructor(
     var addInteractionEntryUseCase: AddInteractionEntry
-) : ViewModel() {
-
-
+) */: ViewModel() {
     private val _person = MutableLiveData<PersonEntry>()
     val person: LiveData<PersonEntry>
         get() = _person
@@ -26,18 +24,18 @@ class PersonEntryViewModel @Inject constructor(
     fun bind(personEntryItem: PersonEntry) {
         _person.value = personEntryItem
     }
-
-    fun onUpdateInteractionClick() {
-        val personId = person.value?.id
-        if (personId != null) {
-            addInteractionEntryUseCase.invoke(
-                viewModelScope, AddInteractionEntry.Params(
-                    InteractionEntry(personId, Date())
-                )
-            ) {
-
-            }
-        }
-    }
+//TODO UseCase injection is needed, ViewModel is created manually in adapter so no injection is performed
+//    fun onUpdateInteractionClick() {
+//        val personId = person.value?.id
+//        if (personId != null) {
+//            addInteractionEntryUseCase.invoke(
+//                viewModelScope, AddInteractionEntry.Params(
+//                    InteractionEntry(personId, Date())
+//                )
+//            ) {
+//
+//            }
+//        }
+//    }
 
 }

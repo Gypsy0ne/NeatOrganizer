@@ -6,20 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemPersonBinding
 import one.gypsy.neatorganizer.domain.dto.PersonEntry
+import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
+import javax.inject.Inject
 
 //TODO implement bind/unbind mechanism
-class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
+class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
 
     private var people = mutableListOf<PersonEntry>()
+
 
     //TODO adjust this method to work with diff util and search widget
     override fun setData(dataCollection: List<PersonEntry>) {
@@ -60,6 +65,7 @@ class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.P
 
         fun bind(personEntryData: PersonEntry) {
             //TODO to init VM with provider factory is needed
+//            val personViewModel= ViewModelProviders.of(context as FragmentActivity, viewModelFactory)[PersonEntryViewModel::class.java]
             val personViewModel= PersonEntryViewModel().apply { bind(personEntryData) }
             binding.apply {
                 viewModel = personViewModel
@@ -67,7 +73,7 @@ class PeopleAdapter(val context: Context) : RecyclerView.Adapter<PeopleAdapter.P
                     navigateToPersonHistory(personEntryData, it)
                 }
                 interactionUpdateClickListener = View.OnClickListener {
-                    personViewModel.onUpdateInteractionClick()
+//                    personViewModel.onUpdateInteractionClick()
                     this.swipeLayoutItemPersonRoot.resetStatus()
                 }
                 executePendingBindings()
