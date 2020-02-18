@@ -2,24 +2,26 @@ package one.gypsy.neatorganizer.presentation.people.view
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
-import android.widget.ImageView
-import androidx.appcompat.widget.SearchView
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
+import one.gypsy.neatorganizer.presentation.SectionFragment
 import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import javax.inject.Inject
 
 
 //TODO https://stackoverflow.com/questions/30398247/how-to-filter-a-recyclerview-with-a-searchview
 //https://wrdlbrnft.github.io/SortedListAdapter/
-class PeopleFragment : Fragment() {
+class PeopleFragment : SectionFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -34,13 +36,13 @@ class PeopleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_people, container, false)
+        fragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_people, container, false)
         return fragmentBinding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         peopleViewModel = ViewModelProviders.of(this, viewModelFactory)[PeopleViewModel::class.java]
     }
 
@@ -57,26 +59,11 @@ class PeopleFragment : Fragment() {
         setUpRecyclerView()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        setUpSearchViewIcons(menu)
-        super.onPrepareOptionsMenu(menu)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController().navigate(R.id.person_add)
+        return true
     }
 
-    private fun setUpSearchViewIcons(menu: Menu) {
-        val searchViewMenuItem = menu.findItem(R.id.action_search)
-        val searchView = searchViewMenuItem.actionView as SearchView
-        val searchImgId = R.id.search_button
-        val closeImgId = R.id.search_close_btn
-        val searchImage = searchView.findViewById(searchImgId) as ImageView
-        val closeImage = searchView.findViewById(closeImgId) as ImageView
-        searchImage.setImageResource(R.drawable.ic_search_white_24dp)
-        closeImage.setImageResource(R.drawable.ic_close_white_24dp)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.activity_home_app_bar_menu, menu)
-        return super.onCreateOptionsMenu(menu, inflater)
-    }
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         val peopleAdapter = PeopleAdapter()

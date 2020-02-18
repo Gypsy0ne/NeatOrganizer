@@ -22,10 +22,10 @@ abstract class ViewModelModule {
     @ViewModelKey(AddPersonViewModel::class)
     abstract fun bindAddPersonViewModel(viewModel: AddPersonViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(PersonEntryViewModel::class)
-    abstract fun bindPersonEntryViewModel(viewModel: PersonEntryViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(PersonEntryViewModel::class)
+//    abstract fun bindPersonEntryViewModel(viewModel: PersonEntryViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
