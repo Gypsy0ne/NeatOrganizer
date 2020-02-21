@@ -10,12 +10,13 @@ import one.gypsy.neatorganizer.utils.Failure
 import java.lang.Exception
 import javax.inject.Inject
 
-class AddInteractionEntry @Inject constructor(val interactionRepository: InteractionRepository): BaseUseCase<Unit, AddInteractionEntry.Params>() {
+class AddInteractionEntry @Inject constructor(val interactionRepository: InteractionRepository): BaseUseCase<Long, AddInteractionEntry.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, Unit> {
+    override suspend fun run(params: Params): Either<Failure, Long> {
         return try {
             withContext(Dispatchers.IO){
-                Either.Right(interactionRepository.addInteractionEntry(params.interactionEntry))
+                interactionRepository.addInteractionEntry(params.interactionEntry)
+                Either.Right(params.interactionEntry.profileId)
             }
         } catch (exp: Exception) {
             Either.Left(AddInteractionEntryFailure(exp))
