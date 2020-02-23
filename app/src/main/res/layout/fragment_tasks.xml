@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+    <variable
+        name="viewModel"
+        type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel" />
+
+    <variable
+        name="tasksAdapter"
+        type="io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter" />
+
+    <variable
+        name="layoutManager"
+        type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="tasks"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_fragment_people"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:overScrollMode="never"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

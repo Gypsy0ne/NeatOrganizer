@@ -5,8 +5,8 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import one.gypsy.neatorganizer.data.database.OrganizerDatabase
-import one.gypsy.neatorganizer.data.database.dao.InteractionDao
-import one.gypsy.neatorganizer.data.database.dao.PeopleDao
+import one.gypsy.neatorganizer.data.database.dao.people.InteractionsDao
+import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
 import javax.inject.Singleton
 
 @Module
@@ -23,7 +23,7 @@ class DataModule {
     }
 
     @Provides
-    fun provideInteractionRepository(organizerDatabase: OrganizerDatabase): InteractionDao {
+    fun provideInteractionRepository(organizerDatabase: OrganizerDatabase): InteractionsDao {
         return organizerDatabase.interactionDao()
     }
 }

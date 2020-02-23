@@ -1,12 +1,10 @@
 package one.gypsy.neatorganizer.binding
 
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.CollectionUIState
-import one.gypsy.neatorganizer.utils.UIState
 
 @BindingAdapter("adapterData")
 fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
@@ -32,8 +30,18 @@ fun setAdapter(
 
 @BindingAdapter("itemInteractionState")
 fun setItemInteractionState(recyclerView: RecyclerView, state: CollectionUIState?) {
-    when(state) {
-        is CollectionUIState.ItemEditionSuccess -> { recyclerView.findViewHolderForAdapterPosition(state.itemPosition)?.itemView?.startAnimation(AnimationUtils.loadAnimation(recyclerView.context, R.anim.item_enlarge))}
-        is CollectionUIState.ItemEditionFailure -> { recyclerView.findViewHolderForAdapterPosition(state.itemPosition)?.itemView?.startAnimation(AnimationUtils.loadAnimation(recyclerView.context, R.anim.item_shake))}
+    if (state != null) {
+        recyclerView.findViewHolderForAdapterPosition(state.itemPosition)?.itemView?.startAnimation(
+            when (state) {
+                is CollectionUIState.ItemEditionSuccess -> {
+                    AnimationUtils.loadAnimation(recyclerView.context, R.anim.item_enlarge)
+                }
+                is CollectionUIState.ItemEditionFailure -> {
+                    AnimationUtils.loadAnimation(recyclerView.context, R.anim.item_enlarge)
+                }
+            }
+        )
     }
 }
+
+

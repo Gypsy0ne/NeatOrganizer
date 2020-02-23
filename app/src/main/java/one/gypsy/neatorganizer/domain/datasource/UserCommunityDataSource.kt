@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.data.database.dao.PeopleDao
-import one.gypsy.neatorganizer.data.database.entity.PersonEntity
+import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
+import one.gypsy.neatorganizer.data.database.entity.people.PersonEntity
 import one.gypsy.neatorganizer.domain.dto.Person
 import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.domain.dto.PersonProfile

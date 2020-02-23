@@ -127,6 +127,5 @@ dependencies {
 
     //RV swipeable view
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
-    //Ultiamte recycler view
-    implementation 'com.marshalchen.ultimaterecyclerview:library:0.9.0'
+    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.1.0'
 }

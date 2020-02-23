@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.data.database.entity
+package one.gypsy.neatorganizer.data.database.entity.people
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

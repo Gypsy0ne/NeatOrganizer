@@ -1,7 +1,6 @@
 package one.gypsy.neatorganizer.domain.datasource
 
 import androidx.lifecycle.LiveData
-import one.gypsy.neatorganizer.data.database.entity.PersonEntity
 import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.domain.dto.PersonProfile
 

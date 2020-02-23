@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.datasource
 
-import one.gypsy.neatorganizer.data.database.dao.SingleTaskDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import javax.inject.Inject
 
-class UserSingleTasksDataSource @Inject constructor(var singleTaskDao: SingleTaskDao): SingleTasksDataSource {
+class UserSingleTasksDataSource @Inject constructor(var singleTasksDao: SingleTasksDao): SingleTasksDataSource {
 }
