@@ -2,4 +2,4 @@ package one.gypsy.neatorganizer.domain.dto
 
 import androidx.room.PrimaryKey
 
-class SingleTaskGroup(val name: String, var id: Long, val tasks: List<SingleTaskEntry>)
+data class SingleTaskGroup(val name: String, var id: Long = 0, val tasks: List<SingleTaskEntry>? = null)

@@ -5,7 +5,7 @@ import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.domain.dto.PersonProfile
 
 interface PeopleDataSource {
-    suspend fun add(personEntry: PersonEntry)
+    suspend fun add(personEntry: PersonEntry): Long
 
     suspend fun remove(personEntry: PersonEntry)
 

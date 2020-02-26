@@ -2,12 +2,8 @@ package one.gypsy.neatorganizer.presentation.di
 
 import dagger.Module
 import dagger.Provides
-import one.gypsy.neatorganizer.data.repositories.FileRepository
-import one.gypsy.neatorganizer.data.repositories.InteractionRepository
-import one.gypsy.neatorganizer.data.repositories.PeopleRepository
-import one.gypsy.neatorganizer.domain.datasource.DeviceFileDataSource
-import one.gypsy.neatorganizer.domain.datasource.UserCommunityDataSource
-import one.gypsy.neatorganizer.domain.datasource.UserInteractionDataSource
+import one.gypsy.neatorganizer.data.repositories.*
+import one.gypsy.neatorganizer.domain.datasource.*
 
 @Module
 class RepositoryModule {
@@ -25,5 +21,15 @@ class RepositoryModule {
     @Provides
     fun provideFileRepository(dataSource: DeviceFileDataSource): FileRepository {
         return FileRepository(dataSource)
+    }
+
+    @Provides
+    fun provideSingleTaskGroupsRepository(dataSource: UserSingleTaskGroupsDataSource): SingleTaskGroupsRepository{
+        return SingleTaskGroupsRepository(dataSource)
+    }
+
+    @Provides
+    fun provideSingleTasksRepository(dataSource: SingleTasksDataSource): SingleTasksRepository {
+        return SingleTasksRepository(dataSource)
     }
 }

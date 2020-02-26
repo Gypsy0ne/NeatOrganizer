@@ -8,7 +8,8 @@ import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class GetImageBitmap @Inject constructor(var fileRepository: FileRepository): BaseUseCase<Bitmap, GetImageBitmap.Params>() {
+class GetImageBitmap @Inject constructor(var fileRepository: FileRepository) :
+    BaseUseCase<Bitmap, GetImageBitmap.Params>() {
     override suspend fun run(params: Params): Either<Failure, Bitmap> {
         return try {
             Either.Right(fileRepository.getImageBitmapFromUri(params.imageUri))
@@ -16,7 +17,8 @@ class GetImageBitmap @Inject constructor(var fileRepository: FileRepository): Ba
             Either.Left(GetImageBitmapFailure(exp))
         }
     }
-data class Params(val imageUri: Uri)
-    data class GetImageBitmapFailure(val error: Exception): Failure.FeatureFailure(error)
+
+    data class Params(val imageUri: Uri)
+    data class GetImageBitmapFailure(val error: Exception) : Failure.FeatureFailure(error)
 
 }

@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.Provides
 import one.gypsy.neatorganizer.data.database.dao.people.InteractionsDao
 import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
-import one.gypsy.neatorganizer.domain.datasource.DeviceFileDataSource
-import one.gypsy.neatorganizer.domain.datasource.UserCommunityDataSource
-import one.gypsy.neatorganizer.domain.datasource.UserInteractionDataSource
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
+import one.gypsy.neatorganizer.domain.datasource.*
 
 @Module
 class DataSourceModule {
@@ -25,5 +25,15 @@ class DataSourceModule {
     @Provides
     fun provideUserInteractionDataSource(interactionsDao: InteractionsDao): UserInteractionDataSource {
         return UserInteractionDataSource(interactionsDao)
+    }
+
+    @Provides
+    fun provideUserSingleTaskGroupsDataSource(singleTaskGroupsDao: SingleTaskGroupsDao): UserSingleTaskGroupsDataSource{
+        return UserSingleTaskGroupsDataSource(singleTaskGroupsDao)
+    }
+
+    @Provides
+    fun provideUserSingleTasksDataSource(singleTasksDao: SingleTasksDao): UserSingleTasksDataSource {
+        return UserSingleTasksDataSource(singleTasksDao)
     }
 }

@@ -75,7 +75,7 @@ class AddPersonViewModel @Inject constructor(
         }
     }
 
-    private fun onAdditionSuccess(unit: Unit) {
+    private fun onAdditionSuccess(unit: Long) {
         _finishedAdding.postValue(true)
     }
 
