@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.domain.interactors.AddSingleTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class AddTaskGroupViewModel @Inject constructor(var addSingleTaskGroupUseCase: AddSingleTaskGroup): ViewModel() {
+class AddSingleTaskGroupViewModel @Inject constructor(var addSingleTaskGroupUseCase: AddSingleTaskGroup): ViewModel() {
 
     val taskGroupTitle = MutableLiveData<String>()
 

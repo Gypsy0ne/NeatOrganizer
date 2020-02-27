@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel" />
+            type="one.gypsy.neatorganizer.presentation.tasks.vm.AddSingleTaskGroupViewModel" />
     </data>
 
 
@@ -23,7 +23,7 @@
             android:drawableStart="@drawable/ic_group_add_white_24dp"
             android:hint="Task group title"
             android:maxLength="48"
-            android:text="@{viewModel.taskGroupTitle}"
+            android:text="@={viewModel.taskGroupTitle}"
             android:paddingStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

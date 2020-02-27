@@ -11,30 +11,30 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.databinding.DialogFragmentAddTaskGroupBinding
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel
+import one.gypsy.neatorganizer.databinding.DialogFragmentAddSingleTaskGroupBinding
+import one.gypsy.neatorganizer.presentation.tasks.vm.AddSingleTaskGroupViewModel
 import javax.inject.Inject
 
-class AddTaskGroupDialogFragment: BottomSheetDialogFragment() {
+class AddSingleTaskGroupDialogFragment: BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var viewModel: AddTaskGroupViewModel
+    lateinit var viewModel: AddSingleTaskGroupViewModel
 
-    lateinit var fragmentBinding: DialogFragmentAddTaskGroupBinding
+    lateinit var fragmentBinding: DialogFragmentAddSingleTaskGroupBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_fragment_add_task, container, false)
+        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_fragment_add_single_task_group, container, false)
         return  fragmentBinding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[AddTaskGroupViewModel::class.java]
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[AddSingleTaskGroupViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {

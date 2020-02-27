@@ -6,7 +6,7 @@ import one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment
 import one.gypsy.neatorganizer.presentation.people.view.PeopleFragment
 import one.gypsy.neatorganizer.presentation.profile.PersonProfileFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddTaskDialogFragment
-import one.gypsy.neatorganizer.presentation.tasks.view.AddTaskGroupDialogFragment
+import one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment
 
 @Module
@@ -25,7 +25,7 @@ abstract class FragmentModule {
     abstract fun contributeAddTaskFragment(): AddTaskDialogFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeAddTaskGroupFragment(): AddTaskGroupDialogFragment
+    abstract fun contributeAddTaskGroupFragment(): AddSingleTaskGroupDialogFragment
 
     @ContributesAndroidInjector
     abstract fun contributeTasksFragment(): TasksFragment

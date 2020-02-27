@@ -32,7 +32,7 @@
 
     <dialog
         android:id="@+id/task_group_add"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddTaskGroupDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
         android:label="AddTaskGroupDialogFragment" />
 
     <fragment
