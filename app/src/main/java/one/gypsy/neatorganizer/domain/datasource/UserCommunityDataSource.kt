@@ -36,17 +36,20 @@ class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
 
     override suspend fun getAllPeopleEntries(): LiveData<List<PersonEntry>> =
         Transformations.map(peopleDao.getAllPeople()) {
-            it.map { personEntity ->
-                PersonEntry(
-                    personEntity.id,
-                    personEntity.name,
-                    Person.Sex.valueOf(personEntity.sex),
-                    parseByteArrayToBitmap(personEntity.avatar),
-                    personEntity.lastInteraction,
-                    personEntity.dateOfBirth
-                )
-            }
+            mapPersonEntitiesToEntries(it)
         }
+
+    private fun mapPersonEntitiesToEntries(personEntities: List<PersonEntity>) = personEntities.map { personEntity ->
+            PersonEntry(
+                personEntity.id,
+                personEntity.name,
+                Person.Sex.valueOf(personEntity.sex),
+                parseByteArrayToBitmap(personEntity.avatar),
+                personEntity.lastInteraction,
+                personEntity.dateOfBirth
+            )
+        }
+
 
     override suspend fun getPersonProfileById(personId: Long): LiveData<PersonProfile> =
         Transformations.map(peopleDao.getPersonById(personId)) {

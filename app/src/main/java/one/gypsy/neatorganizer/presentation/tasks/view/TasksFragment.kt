@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import one.gypsy.neatorganizer.R
@@ -54,6 +55,7 @@ class TasksFragment : SectionFragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = tasksViewModel
         fragmentBinding.lifecycleOwner = this
+        setUpRecyclerView()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -63,7 +65,8 @@ class TasksFragment : SectionFragment() {
 
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
-
+        linearLayoutManager = LinearLayoutManager(context)
+        tasksAdapter = SectionedRecyclerViewAdapter()
         executePendingBindings()
     }
 

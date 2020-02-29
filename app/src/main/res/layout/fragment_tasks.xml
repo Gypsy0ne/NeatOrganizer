@@ -10,7 +10,7 @@
         type="io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter" />
 
     <variable
-        name="layoutManager"
+        name="linearLayoutManager"
         type="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </data>
@@ -25,7 +25,8 @@
         android:layout_marginBottom="4dp"
         android:layoutAnimation="@anim/layout_animation_fall_down"
         android:overScrollMode="never"
-
+        adapter="@{tasksAdapter}"
+        layoutManager="@{linearLayoutManager}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

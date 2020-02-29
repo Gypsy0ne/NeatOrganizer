@@ -5,11 +5,19 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.utils.EmptyViewHolder
+import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.domain.dto.SingleTaskEntry
 
-class TasksSection() :
-    Section(SectionParameters.builder().itemResourceId(0).headerResourceId(0).build()) {
-    var tasks: List<SingleTaskEntry> = listOf()
+//TODO add item adding and removing
+class SingleTaskGroupSection() : Section(SectionParameters.builder().itemResourceId(R.layout.item_single_task).headerResourceId(R.layout.item_single_task_group).build()), BindableAdapter<List<SingleTaskEntry>> {
+    var tasks = mutableListOf<SingleTaskEntry>()
+
+
+    override fun setData(dataCollection: List<SingleTaskEntry>) {
+        tasks.clear()
+        tasks.addAll(dataCollection)
+    }
 
     override fun getContentItemsTotal(): Int {
         return tasks.size
@@ -37,4 +45,6 @@ class TasksSection() :
 
         }
     }
+
+
 }

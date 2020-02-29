@@ -10,4 +10,6 @@ class SingleTaskGroupsRepository @Inject constructor(var dataSource: SingleTaskG
 
     suspend fun addSingleTaskGroup(singleTaskGroup: SingleTaskGroup) = dataSource.add(singleTaskGroup)
 
+    suspend fun getAllSingleTaskGroups() = dataSource.getAllSingleTaskGroups()
+
 }
