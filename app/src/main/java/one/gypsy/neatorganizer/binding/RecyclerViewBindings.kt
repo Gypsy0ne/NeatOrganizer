@@ -3,6 +3,7 @@ package one.gypsy.neatorganizer.binding
 import android.view.animation.AnimationUtils
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.CollectionUIState
 
@@ -11,6 +12,10 @@ fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
     if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
         (recyclerView.adapter as BindableAdapter<T>).setData(dataCollection)
     }
+}
+@BindingAdapter("sectionedAdapterData")
+fun <T, C> setSectionedAdapterData(recyclerView: RecyclerView, sectionsData: ) {
+
 }
 
 @BindingAdapter(value = ["adapter", "layoutManager"], requireAll = false)

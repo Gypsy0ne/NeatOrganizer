@@ -10,6 +10,7 @@ import javax.inject.Inject
 class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks) :
     ViewModel() {
 
+    //Operations on nested fields will have to registered manually inside the list and database with use cases
     private val _groupsWithSingleTasks = MediatorLiveData<List<SingleTaskGroup>>()
     val groupsWithSingleTasks: LiveData<List<SingleTaskGroup>>
         get() = _groupsWithSingleTasks

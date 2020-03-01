@@ -37,10 +37,19 @@ class SingleTaskGroupSection() : Section(SectionParameters.builder().itemResourc
     }
 
     override fun getHeaderViewHolder(view: View?): RecyclerView.ViewHolder {
-        return EmptyViewHolder(view)
-    }
+        return if (view != null) {
+            TaskGroupViewHolder(view)
+        } else {
+            EmptyViewHolder(view)
+        }    }
 
     inner class SingleTaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind() {
+
+        }
+    }
+
+    inner class TaskGroupViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind() {
 
         }
