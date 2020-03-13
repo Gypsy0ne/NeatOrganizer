@@ -13,10 +13,10 @@ fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
         (recyclerView.adapter as BindableAdapter<T>).setData(dataCollection)
     }
 }
-@BindingAdapter("sectionedAdapterData")
-fun <T, C> setSectionedAdapterData(recyclerView: RecyclerView, sectionsData: ) {
-
-}
+//@BindingAdapter("sectionedAdapterData")
+//fun <T, C> setSectionedAdapterData(recyclerView: RecyclerView, sectionsData: ) {
+//
+//}
 
 @BindingAdapter(value = ["adapter", "layoutManager"], requireAll = false)
 fun setAdapter(
