@@ -13,11 +13,17 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.utils.hide
+import one.gypsy.neatorganizer.utils.show
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
+
+    val navController by lazy {
+        findNavController(R.id.fragment_activity_home_nav_container)
+    }
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
@@ -26,12 +32,22 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setUpActionBar()
+        setUpNavigationListener()
         AndroidInjection.inject(this)
     }
 
     private fun setUpActionBar() {
         setSupportActionBar(toolbar_activity_home)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun setUpNavigationListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                 R.id.person_profile_fragment -> bottom_navigation_view_activity_home.hide()
+                else -> bottom_navigation_view_activity_home.show()
+            }
+        }
     }
 
 

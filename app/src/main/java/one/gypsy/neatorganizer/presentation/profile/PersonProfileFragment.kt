@@ -12,6 +12,7 @@ import one.gypsy.neatorganizer.databinding.FragmentPersonProfileBinding
 import one.gypsy.neatorganizer.presentation.injector
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 
 
 class PersonProfileFragment: Fragment() {
@@ -67,6 +68,10 @@ class PersonProfileFragment: Fragment() {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "emailaddress@emailaddress.com"))
         startActivity(Intent.createChooser(intent, "Send Email"))
         return true
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="corners_radius_person_profile_data_background">16dp</dimen>
     <dimen name="corners_radius_item_person_background">16dp</dimen>
     <dimen name="width_item_person_avatar_image">64dp</dimen>
     <dimen name="height_item_person_avatar_image">64dp</dimen>
@@ -25,5 +26,6 @@
     <dimen name="lazy_date_picker_width_space" tools:override="true">6dp</dimen>
     <dimen name="height_item_person_text_view">24dp</dimen>
     <!--End of Lazy date picker dimens-->
+
 
 </resources>
