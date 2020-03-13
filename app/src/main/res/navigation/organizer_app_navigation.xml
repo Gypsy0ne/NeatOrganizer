@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/tasks"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.TasksFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment"
         android:label="TasksFragment" />
     <fragment
         android:id="@+id/people"
@@ -24,6 +24,17 @@
         android:id="@+id/person_add"
         android:name="one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment"
         android:label="AddPersonDialogFragment" />
+
+    <dialog
+        android:id="@+id/task_add"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddTaskDialogFragment"
+        android:label="AddTaskDialogFragment" />
+
+    <dialog
+        android:id="@+id/task_group_add"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
+        android:label="AddTaskGroupDialogFragment" />
+
     <fragment
         android:id="@+id/personHistoryFragment"
         android:name="one.gypsy.neatorganizer.presentation.profile.PersonProfileFragment"

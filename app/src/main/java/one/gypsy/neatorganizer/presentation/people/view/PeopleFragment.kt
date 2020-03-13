@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_people.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
@@ -23,13 +24,23 @@ import javax.inject.Inject
 //https://wrdlbrnft.github.io/SortedListAdapter/
 class PeopleFragment : SectionFragment() {
 
+    interface PeopleInteractionListener {
+        fun onPersonEntryUpdated(personId: Long)
+    }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+
     lateinit var peopleViewModel: PeopleViewModel
 
-
     private lateinit var fragmentBinding: FragmentPeopleBinding
+
+    private val peopleInteractionListener = object : PeopleInteractionListener {
+        override fun onPersonEntryUpdated(personId: Long) {
+            peopleViewModel.updatePersonInteraction(personId)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +68,7 @@ class PeopleFragment : SectionFragment() {
         fragmentBinding.viewModel = peopleViewModel
         fragmentBinding.lifecycleOwner = this
         setUpRecyclerView()
+//        recycler_view_fragment_people.findViewHolderForAdapterPosition()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -66,9 +78,12 @@ class PeopleFragment : SectionFragment() {
 
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
-        val peopleAdapter = PeopleAdapter()
-        fragmentBinding.peopleAdapter = peopleAdapter
+        peopleAdapter = createPeopleAdapter()
         layoutManager = LinearLayoutManager(context)
         executePendingBindings()
+    }
+
+    private fun createPeopleAdapter() = PeopleAdapter().apply {
+        itemInteractionListener = peopleInteractionListener
     }
 }

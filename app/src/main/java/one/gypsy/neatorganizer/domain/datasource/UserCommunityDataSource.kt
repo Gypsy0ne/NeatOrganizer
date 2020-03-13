@@ -6,20 +6,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.data.database.dao.PersonDao
-import one.gypsy.neatorganizer.data.database.entity.PersonEntity
+import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
+import one.gypsy.neatorganizer.data.database.entity.people.PersonEntity
 import one.gypsy.neatorganizer.domain.dto.Person
 import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.domain.dto.PersonProfile
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) :
+class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
     PeopleDataSource {
 
 
     override suspend fun add(personEntry: PersonEntry) =
-        personDao.insert(
+        peopleDao.insert(
             PersonEntity(
                 personEntry.name,
                 personEntry.sex.name,
@@ -35,21 +35,24 @@ class UserCommunityDataSource @Inject constructor(var personDao: PersonDao) :
     }
 
     override suspend fun getAllPeopleEntries(): LiveData<List<PersonEntry>> =
-        Transformations.map(personDao.getAllPeople()) {
-            it.map { personEntity ->
-                PersonEntry(
-                    personEntity.id,
-                    personEntity.name,
-                    Person.Sex.valueOf(personEntity.sex),
-                    parseByteArrayToBitmap(personEntity.avatar),
-                    personEntity.lastInteraction,
-                    personEntity.dateOfBirth
-                )
-            }
+        Transformations.map(peopleDao.getAllPeople()) {
+            mapPersonEntitiesToEntries(it)
         }
 
+    private fun mapPersonEntitiesToEntries(personEntities: List<PersonEntity>) = personEntities.map { personEntity ->
+            PersonEntry(
+                personEntity.id,
+                personEntity.name,
+                Person.Sex.valueOf(personEntity.sex),
+                parseByteArrayToBitmap(personEntity.avatar),
+                personEntity.lastInteraction,
+                personEntity.dateOfBirth
+            )
+        }
+
+
     override suspend fun getPersonProfileById(personId: Long): LiveData<PersonProfile> =
-        Transformations.map(personDao.getPersonById(personId)) {
+        Transformations.map(peopleDao.getPersonById(personId)) {
             PersonProfile(
                 it.name,
                 Person.Sex.valueOf(it.sex),

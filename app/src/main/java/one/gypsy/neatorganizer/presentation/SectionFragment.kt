@@ -36,5 +36,4 @@ abstract class SectionFragment: Fragment() {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
-
 }

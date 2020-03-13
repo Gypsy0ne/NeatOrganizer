@@ -73,7 +73,7 @@ class PersonProfileFragment: Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        AndroidSupportInjection.inject(this)
+//        AndroidSupportInjection.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

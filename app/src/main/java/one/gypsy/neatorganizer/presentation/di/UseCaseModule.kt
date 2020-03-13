@@ -5,6 +5,7 @@ import dagger.Provides
 import one.gypsy.neatorganizer.data.repositories.FileRepository
 import one.gypsy.neatorganizer.data.repositories.InteractionRepository
 import one.gypsy.neatorganizer.data.repositories.PeopleRepository
+import one.gypsy.neatorganizer.data.repositories.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.domain.interactors.*
 
 @Module
@@ -35,4 +36,10 @@ class UseCaseModule {
     fun provideGetPersonProfile(peopleRepository: PeopleRepository): GetPersonHistory {
         return GetPersonHistory(peopleRepository)
     }
+
+    @Provides
+    fun provideAddSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): AddSingleTaskGroup {
+        return AddSingleTaskGroup(singleTaskGroupsRepository)
+    }
+
 }

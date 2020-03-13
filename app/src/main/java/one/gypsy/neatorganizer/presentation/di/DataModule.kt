@@ -5,8 +5,10 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import one.gypsy.neatorganizer.data.database.OrganizerDatabase
-import one.gypsy.neatorganizer.data.database.dao.InteractionDao
-import one.gypsy.neatorganizer.data.database.dao.PersonDao
+import one.gypsy.neatorganizer.data.database.dao.people.InteractionsDao
+import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import javax.inject.Singleton
 
 @Module
@@ -14,16 +16,26 @@ class DataModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): OrganizerDatabase {
-        return Room.databaseBuilder(application, OrganizerDatabase::class.java, "NeatOrganizer69.db").build()
+        return Room.databaseBuilder(application, OrganizerDatabase::class.java, "NeatOrganizer68.db").build()
     }
 
     @Provides
-    fun providePeopleRepository(organizerDatabase: OrganizerDatabase): PersonDao {
+    fun providePeopleRepository(organizerDatabase: OrganizerDatabase): PeopleDao {
         return organizerDatabase.personDao()
     }
 
     @Provides
-    fun provideInteractionRepository(organizerDatabase: OrganizerDatabase): InteractionDao {
+    fun provideInteractionRepository(organizerDatabase: OrganizerDatabase): InteractionsDao {
         return organizerDatabase.interactionDao()
+    }
+
+    @Provides
+    fun provideSingleTaskGroupsRepository(organizerDatabase: OrganizerDatabase): SingleTaskGroupsDao {
+        return organizerDatabase.singleTaskGroupsDao()
+    }
+
+    @Provides
+    fun provideSingleTasksRepository(organizerDatabase: OrganizerDatabase): SingleTasksDao {
+        return organizerDatabase.singleTasksDao()
     }
 }

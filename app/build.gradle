@@ -126,5 +126,6 @@ dependencies {
     implementation 'com.mikhaellopez:lazydatepicker:1.0.5'
 
     //RV swipeable view
-    compile 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
+    implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
+    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.1.0'
 }

@@ -10,8 +10,8 @@ import one.gypsy.neatorganizer.utils.Failure
 import java.lang.Exception
 import javax.inject.Inject
 
-class AddPerson @Inject constructor(var peopleRepository: PeopleRepository): BaseUseCase<Unit, AddPerson.Params>() {
-    override suspend fun run(params: Params): Either<Failure, Unit> {
+class AddPerson @Inject constructor(var peopleRepository: PeopleRepository): BaseUseCase<Long, AddPerson.Params>() {
+    override suspend fun run(params: Params): Either<Failure, Long> {
         return try {
             withContext(Dispatchers.IO){
                 Either.Right(peopleRepository.addPerson(params.personEntry))

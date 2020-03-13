@@ -3,18 +3,18 @@ package one.gypsy.neatorganizer.presentation.di
 import android.app.Application
 import dagger.Module
 import dagger.Provides
-import one.gypsy.neatorganizer.data.database.dao.InteractionDao
-import one.gypsy.neatorganizer.data.database.dao.PersonDao
-import one.gypsy.neatorganizer.domain.datasource.DeviceFileDataSource
-import one.gypsy.neatorganizer.domain.datasource.UserCommunityDataSource
-import one.gypsy.neatorganizer.domain.datasource.UserInteractionDataSource
+import one.gypsy.neatorganizer.data.database.dao.people.InteractionsDao
+import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
+import one.gypsy.neatorganizer.domain.datasource.*
 
 @Module
 class DataSourceModule {
 
     @Provides
-    fun provideUserCommunityDataSource(personDao: PersonDao): UserCommunityDataSource {
-        return UserCommunityDataSource(personDao)
+    fun provideUserCommunityDataSource(peopleDao: PeopleDao): UserCommunityDataSource {
+        return UserCommunityDataSource(peopleDao)
     }
 
     @Provides
@@ -23,7 +23,17 @@ class DataSourceModule {
     }
 
     @Provides
-    fun provideUserInteractionDataSource(interactionDao: InteractionDao): UserInteractionDataSource {
-        return UserInteractionDataSource(interactionDao)
+    fun provideUserInteractionDataSource(interactionsDao: InteractionsDao): UserInteractionDataSource {
+        return UserInteractionDataSource(interactionsDao)
+    }
+
+    @Provides
+    fun provideUserSingleTaskGroupsDataSource(singleTaskGroupsDao: SingleTaskGroupsDao): UserSingleTaskGroupsDataSource{
+        return UserSingleTaskGroupsDataSource(singleTaskGroupsDao)
+    }
+
+    @Provides
+    fun provideUserSingleTasksDataSource(singleTasksDao: SingleTasksDao): UserSingleTasksDataSource {
+        return UserSingleTasksDataSource(singleTasksDao)
     }
 }
