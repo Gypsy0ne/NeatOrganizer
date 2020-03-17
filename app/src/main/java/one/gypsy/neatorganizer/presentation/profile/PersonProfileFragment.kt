@@ -70,17 +70,6 @@ class PersonProfileFragment: Fragment() {
         return true
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        AndroidSupportInjection.inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = personHistoryViewModel
