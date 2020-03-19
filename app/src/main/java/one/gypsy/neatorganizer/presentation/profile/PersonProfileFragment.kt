@@ -13,6 +13,8 @@ import one.gypsy.neatorganizer.presentation.injector
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.fragment_person_profile.*
 
 
 class PersonProfileFragment: Fragment() {
@@ -74,6 +76,19 @@ class PersonProfileFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = personHistoryViewModel
         fragmentBinding.lifecycleOwner = this
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setUpInteractionRecyclerView()
+    }
+
+    private fun setUpInteractionRecyclerView() {
+        fragmentBinding.apply {
+            layoutManager = GridLayoutManager(context, 4)
+            interactionEntriesAdapter = InteractionEntriesAdapter()
+            executePendingBindings()
+        }
     }
 
 }

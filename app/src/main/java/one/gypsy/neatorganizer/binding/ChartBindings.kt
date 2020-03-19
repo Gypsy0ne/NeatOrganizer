@@ -4,10 +4,11 @@ import androidx.databinding.BindingAdapter
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.ValueFormatter
+import one.gypsy.neatorganizer.domain.dto.InteractionEntry
 import one.gypsy.neatorganizer.utils.AxisDateFormatter
 
 @BindingAdapter("interactionChartData")
-fun bindInteractionLineChart(lineChart: LineChart, data: IntArray) {
+fun bindInteractionLineChart(lineChart: LineChart, interactionData: List<InteractionEntry>) {
     lineChart.apply {
         this.setPinchZoom(false)
         this.setDrawGridBackground(false)
@@ -17,5 +18,11 @@ fun bindInteractionLineChart(lineChart: LineChart, data: IntArray) {
         this.position = XAxis.XAxisPosition.BOTTOM
         this.labelCount = 2
         this.valueFormatter = AxisDateFormatter()
+    }
+}
+
+fun formatInteractionEntriesToChartEntries(interactionEntries: List<InteractionEntry>) {
+    val values = interactionEntries.map { it ->
+
     }
 }

@@ -131,4 +131,7 @@ dependencies {
 
     //Chart view
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //rating view
+    implementation 'com.github.sujithkanna:smileyrating:1.6.8'
 }

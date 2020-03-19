@@ -18,5 +18,8 @@ interface PeopleDao:
     fun getPersonById(personId: Long): LiveData<PersonEntity>
 
     @Query("SELECT * FROM people")
-    fun getAllPeopleWithInteractionHsitory(): LiveData<List<PersonWithInteractionHistory>>
+    fun getAllPeopleWithInteractionHistory(): LiveData<List<PersonWithInteractionHistory>>
+
+    @Query("SELECT * FROM people WHERE id=:personId")
+    fun getPersonProfileById(personId: Long): LiveData<PersonWithInteractionHistory>
 }

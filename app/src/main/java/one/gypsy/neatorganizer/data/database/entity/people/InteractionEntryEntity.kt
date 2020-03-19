@@ -7,4 +7,5 @@ import java.util.*
 @Entity(tableName = "interactions")
 data class InteractionEntryEntity(val personProfileId: Long,
                                   val creationDate: Date,
+                                  val rating: Int,
                                   @PrimaryKey(autoGenerate = true) val id: Long = 0)

@@ -50,7 +50,8 @@ class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople,
 
     fun updatePersonInteraction(personId: Long) {
         addInteractionEntryUseCase.invoke(viewModelScope, AddInteractionEntry.Params(
-            InteractionEntry(personId, Date())
+            //TODO add rating dialog here
+            InteractionEntry(personId, Date(), 1)
         )) {
             it.either(::onAddInteractionFailure, ::onAddInteractionSuccess)
         }

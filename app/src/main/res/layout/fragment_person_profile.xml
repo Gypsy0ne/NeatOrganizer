@@ -6,6 +6,13 @@
     <data>
 
         <import type="one.gypsy.neatorganizer.domain.dto.Person.Sex" />
+        <variable
+            name="interactionEntriesAdapter"
+            type="one.gypsy.neatorganizer.presentation.profile.InteractionEntriesAdapter" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.GridLayoutManager" />
 
         <variable
             name="viewModel"
@@ -90,8 +97,12 @@
             android:id="@+id/recycler_view_fragment_person_profile_interaction_history"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:padding="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            layoutManager="@{layoutManager}"
+            adapter="@{interactionEntriesAdapter}"
+            adapterData="@{viewModel.profile.interactionHistory}"
             android:background="@drawable/person_profile_data_background"
             android:elevation="4dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline_fragment_person_profile_chart_separator"

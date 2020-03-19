@@ -9,7 +9,8 @@ class UserInteractionDataSource @Inject constructor(val interactionsDao: Interac
     override suspend fun add(interactionEntry: InteractionEntry) = interactionsDao.insert(
         InteractionEntryEntity(
             interactionEntry.profileId,
-            interactionEntry.interactionDate
+            interactionEntry.interactionDate,
+            interactionEntry.rating
         )
     )
 }
