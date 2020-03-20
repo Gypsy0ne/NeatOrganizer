@@ -24,9 +24,9 @@ import javax.inject.Inject
 //https://wrdlbrnft.github.io/SortedListAdapter/
 class PeopleFragment : SectionFragment() {
 
-    interface PeopleInteractionListener {
-        fun onPersonEntryUpdated(personId: Long)
-    }
+//    interface PeopleInteractionListener {
+//        fun onPersonEntryUpdateTriggered(personId: Long)
+//    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -36,11 +36,11 @@ class PeopleFragment : SectionFragment() {
 
     private lateinit var fragmentBinding: FragmentPeopleBinding
 
-    private val peopleInteractionListener = object : PeopleInteractionListener {
-        override fun onPersonEntryUpdated(personId: Long) {
-            peopleViewModel.updatePersonInteraction(personId)
-        }
-    }
+//    private val peopleInteractionListener = object : PeopleInteractionListener {
+//        override fun onPersonEntryUpdateTriggered(personId: Long) {
+////            peopleViewModel.updatePersonInteraction(personId)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +68,6 @@ class PeopleFragment : SectionFragment() {
         fragmentBinding.viewModel = peopleViewModel
         fragmentBinding.lifecycleOwner = this
         setUpRecyclerView()
-//        recycler_view_fragment_people.findViewHolderForAdapterPosition()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -78,12 +77,9 @@ class PeopleFragment : SectionFragment() {
 
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
-        peopleAdapter = createPeopleAdapter()
+        peopleAdapter = PeopleAdapter()
         layoutManager = LinearLayoutManager(context)
         executePendingBindings()
     }
 
-    private fun createPeopleAdapter() = PeopleAdapter().apply {
-        itemInteractionListener = peopleInteractionListener
-    }
 }

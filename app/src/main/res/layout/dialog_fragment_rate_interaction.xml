@@ -1,0 +1,52 @@
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="one.gypsy.neatorganizer.presentation.people.vm.RateInteractionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/rating_dialog_fragment_rate_interaction"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_dialog_fragment_rate_interaction_confirmation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+            android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
+            android:fontFamily="@font/roboto_black"
+            android:maxLines="1"
+            android:paddingStart="40dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="48dp"
+            android:paddingBottom="8dp"
+            android:text="@string/add_person_dialog_fragment_confirm"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:textColor="@color/dark_yellow"
+            app:autoSizeMaxTextSize="@dimen/max_text_size_dialog_add_person_confirm_text"
+            app:autoSizeMinTextSize="@dimen/min_text_size_dialog_add_person_confirm_text"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rating_dialog_fragment_rate_interaction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</layout>
