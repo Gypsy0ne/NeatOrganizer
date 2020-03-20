@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
@@ -42,5 +43,16 @@ class RateInteractionDialogFragment: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = viewModel
         fragmentBinding.lifecycleOwner = this
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setUpObservers()
+    }
+
+    private fun setUpObservers() {
+        viewModel.interactionUpdateStatus.observe(viewLifecycleOwner, Observer {
+            dismiss()
+        })
     }
 }
