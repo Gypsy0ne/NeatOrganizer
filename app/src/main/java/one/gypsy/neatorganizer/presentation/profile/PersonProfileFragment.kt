@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_person_profile.*
 import one.gypsy.neatorganizer.R
@@ -86,6 +85,7 @@ class PersonProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         setUpInteractionRecyclerView()
+//        setUpInteractionChart()
     }
 
     private fun setUpInteractionRecyclerView() {
@@ -95,44 +95,12 @@ class PersonProfileFragment : Fragment() {
             executePendingBindings()
         }
     }
+//
+//    private fun setUpInteractionChart() {
+//        configureChart()
+//        configureChartXAxis()
+//        configureChartYAxis()
+//    }
 
-    private fun setUpInteractionChart() {
-        configureChart()
-        configureChartXAxis()
-        configureChartYAxis()
-    }
 
-    private fun configureChartYAxis() {
-        line_chart_fragment_person_profile_interaction_chart.xAxis.apply {
-            val availableValues = resources.getStringArray(R.array.interaction_rating_levels)
-            textColor = ColorTemplate.getHoloBlue()
-            setDrawGridLines(true)
-            isGranularityEnabled = true
-            axisMinimum = 0f
-            axisMaximum = availableValues.size.toFloat()
-            yOffset = -9f
-            valueFormatter = AxisInteractionFormatter(availableValues)
-        }
-    }
-
-    private fun configureChartXAxis() {
-        line_chart_fragment_person_profile_interaction_chart.xAxis.apply {
-            position = XAxis.XAxisPosition.TOP_INSIDE
-            textSize = 10f
-            textColor = Color.rgb(255, 192, 56)
-            textColor = Color.WHITE
-            setDrawAxisLine(false)
-            setDrawGridLines(true)
-            granularity = 1f // one hour
-            valueFormatter = AxisDateFormatter()
-        }
-    }
-
-    private fun configureChart() {
-        line_chart_fragment_person_profile_interaction_chart.apply {
-            setDrawGridBackground(false)
-            setBackgroundColor(Color.WHITE)
-            setViewPortOffsets(0f, 0f, 0f, 0f)
-        }
-    }
 }
