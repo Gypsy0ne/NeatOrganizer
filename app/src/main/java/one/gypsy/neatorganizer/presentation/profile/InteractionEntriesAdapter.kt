@@ -22,8 +22,11 @@ class InteractionEntriesAdapter : RecyclerView.Adapter<InteractionEntriesAdapter
 
     //TODO adjust this method to work with diff util and search widget
     override fun setData(dataCollection: List<InteractionEntry>) {
-        entries.clear()
-        entries.addAll(dataCollection)
+        entries.apply {
+            clear()
+            addAll(dataCollection)
+            reverse()
+        }
         notifyDataSetChanged()
     }
 

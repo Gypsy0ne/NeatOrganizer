@@ -12,12 +12,13 @@ import one.gypsy.neatorganizer.presentation.profile.vm.PersonProfileViewModel
 import one.gypsy.neatorganizer.utils.CollectionUIState
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.UIState
+import one.gypsy.neatorganizer.utils.default
 import java.util.*
 import javax.inject.Inject
 
 class RateInteractionViewModel @AssistedInject constructor(var addInteractionEntryUseCase: AddInteractionEntry, @Assisted val personId: Long): ViewModel() {
 
-    private val _rating = MutableLiveData<Int>()
+    private val _rating = MutableLiveData<Int>().default(3)
     val rating: LiveData<Int>
         get() = _rating
 
@@ -37,9 +38,10 @@ class RateInteractionViewModel @AssistedInject constructor(var addInteractionEnt
             _interactionUpdateStatus.postValue(UIState.Success)
     }
 
+    // default rating is 3 because there is an issue with setting default value on view creation
     fun submitInteractionEntry() {
         addInteractionEntryUseCase.invoke(viewModelScope, AddInteractionEntry.Params(
-            InteractionEntry(personId, Date(), _rating.value ?: 0)
+            InteractionEntry(personId, Date(), _rating.value ?: 3)
         )) {
             it.either(::onAddInteractionFailure, ::onAddInteractionSuccess)
         }

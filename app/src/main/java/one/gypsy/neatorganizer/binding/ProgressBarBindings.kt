@@ -5,9 +5,9 @@ import com.hsalf.smilerating.BaseRating
 import com.hsalf.smilerating.SmileRating
 
 @BindingAdapter("ratingChangeListener")
-fun bindRatingBar(ratingBar: SmileRating, listener: SmileRating.OnRatingSelectedListener) {
+fun setRatingBarListener(ratingBar: SmileRating, listener: SmileRating.OnRatingSelectedListener) {
     ratingBar.apply {
-        setSelectedSmile(BaseRating.OKAY, false)
         setOnRatingSelectedListener(listener)
+        setSelectedSmile(BaseRating.OKAY, false)
     }
 }

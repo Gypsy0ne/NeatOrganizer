@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.hsalf.smilerating.BaseRating
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.dialog_fragment_rate_interaction.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentRateInteractionBinding
 import one.gypsy.neatorganizer.presentation.injector
