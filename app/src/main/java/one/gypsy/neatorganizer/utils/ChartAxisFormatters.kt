@@ -8,3 +8,9 @@ class AxisDateFormatter: ValueFormatter() {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         return dateFormat.format(value)    }
 }
+
+class AxisInteractionFormatter(private val availableValues: Array<String>) : ValueFormatter() {
+    override fun getFormattedValue(value: Float): String {
+        return  availableValues[value.toInt() - 1]
+    }
+}

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hsalf.smilerating.SmileRating
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.InteractionEntry
@@ -28,6 +29,7 @@ class RateInteractionViewModel @AssistedInject constructor(var addInteractionEnt
 
     fun onRatingChanged(level: Int, reselected: Boolean) {
         _rating.postValue(level)
+
     }
 
     private fun onAddInteractionFailure(failure: Failure) {
