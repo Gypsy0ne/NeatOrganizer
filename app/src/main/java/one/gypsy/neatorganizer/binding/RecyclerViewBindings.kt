@@ -5,13 +5,28 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
+import one.gypsy.neatorganizer.presentation.tasks.view.SingleTaskGroupSection
 import one.gypsy.neatorganizer.utils.CollectionUIState
+import one.gypsy.neatorganizer.utils.wrappers.CollapseListener
+import one.gypsy.neatorganizer.utils.wrappers.CollapsibleSection
 
 @BindingAdapter("adapterData")
 fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
     if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
         (recyclerView.adapter as BindableAdapter<T>).setData(dataCollection)
     }
+}
+
+@BindingAdapter("sectionedTaskGroupsAdapterData", "collapseListener")
+fun setSectionedTaskGroupsAdapterData(recyclerView: RecyclerView, dataCollection: List<SingleTaskGroup>?, collapseListener: CollapseListener) {
+    dataCollection?.forEach {
+        (recyclerView.adapter as? SectionedRecyclerViewAdapter)?.addSection(SingleTaskGroupSection().apply {
+                items.addAll(it.tasks ?: emptyList())
+            this.collapseListener = collapseListener
+        })
+    }
+    (recyclerView.adapter as? SectionedRecyclerViewAdapter)?.notifyDataSetChanged()
 }
 //@BindingAdapter("sectionedAdapterData")
 //fun <T, C> setSectionedAdapterData(recyclerView: RecyclerView, sectionsData: ) {

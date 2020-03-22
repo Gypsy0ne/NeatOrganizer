@@ -12,16 +12,26 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
+import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_tasks.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
-import one.gypsy.neatorganizer.presentation.di.ViewModelFactory
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
+import one.gypsy.neatorganizer.utils.extensions.collapseSection
+import one.gypsy.neatorganizer.utils.wrappers.CollapseListener
 import javax.inject.Inject
 
 class TasksFragment : SectionFragment() {
 
+    val collapseListener = object : CollapseListener {
+        override fun onCollapse(section: Section) {
+            (recycler_view_fragment_tasks.adapter as SectionedRecyclerViewAdapter).also {
+                it.collapseSection(section)
+            }
+        }
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -63,19 +73,20 @@ class TasksFragment : SectionFragment() {
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = SectionedRecyclerViewAdapter().apply {
-            addSection(SingleTaskGroupSection())
-        }
+        tasksAdapter = SectionedRecyclerViewAdapter()
+        this.collapseListener =  this@TasksFragment.collapseListener
         executePendingBindings()
     }
 
-    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {
-        //TODO
-    }
-
+//    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {
+//        //TODO
+//    }
 
 
 }

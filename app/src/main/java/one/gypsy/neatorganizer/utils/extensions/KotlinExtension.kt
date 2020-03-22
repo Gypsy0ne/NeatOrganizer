@@ -1,10 +1,12 @@
-package one.gypsy.neatorganizer.utils
+package one.gypsy.neatorganizer.utils.extensions
 
 import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import io.github.luizgrp.sectionedrecyclerviewadapter.Section
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 

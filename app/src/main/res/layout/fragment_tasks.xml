@@ -10,6 +10,10 @@
         type="io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter" />
 
     <variable
+        name="collapseListener"
+        type="one.gypsy.neatorganizer.utils.wrappers.CollapseListener" />
+
+    <variable
         name="linearLayoutManager"
         type="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -19,13 +23,16 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_fragment_people"
+        android:id="@+id/recycler_view_fragment_tasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="4dp"
         android:layoutAnimation="@anim/layout_animation_fall_down"
         android:overScrollMode="never"
         adapter="@{tasksAdapter}"
+
+        sectionedTaskGroupsAdapterData="@{viewModel.groupsWithSingleTasks}"
+        collapseListener="@{collapseListener}"
         layoutManager="@{linearLayoutManager}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

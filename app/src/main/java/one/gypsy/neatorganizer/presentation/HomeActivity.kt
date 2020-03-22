@@ -2,10 +2,7 @@ package one.gypsy.neatorganizer.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.navigation.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -13,8 +10,8 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.utils.hide
-import one.gypsy.neatorganizer.utils.show
+import one.gypsy.neatorganizer.utils.extensions.hide
+import one.gypsy.neatorganizer.utils.extensions.show
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), HasAndroidInjector {

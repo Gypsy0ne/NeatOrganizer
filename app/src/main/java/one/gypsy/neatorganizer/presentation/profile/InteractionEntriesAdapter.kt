@@ -1,18 +1,13 @@
 package one.gypsy.neatorganizer.presentation.profile
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemInteractionBinding
-import one.gypsy.neatorganizer.databinding.ItemPersonBinding
 import one.gypsy.neatorganizer.domain.dto.InteractionEntry
-import one.gypsy.neatorganizer.domain.dto.PersonEntry
-import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
 import one.gypsy.neatorganizer.presentation.profile.vm.InteractionEntryViewModel
 
 //TODO implement bind/unbind mechanism

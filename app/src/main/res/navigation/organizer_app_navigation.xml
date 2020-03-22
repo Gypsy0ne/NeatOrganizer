@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/organizer_app_navigation"
-    app:startDestination="@id/people">
+    app:startDestination="@id/tasks">
 
     <fragment
         android:id="@+id/tasks"
