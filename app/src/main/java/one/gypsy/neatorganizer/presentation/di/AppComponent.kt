@@ -7,6 +7,7 @@ import dagger.Component
 import dagger.Module
 import dagger.android.support.AndroidSupportInjectionModule
 import one.gypsy.neatorganizer.presentation.OrganizerApplication
+import one.gypsy.neatorganizer.presentation.people.vm.RateInteractionViewModel
 import one.gypsy.neatorganizer.presentation.profile.vm.PersonProfileViewModel
 import javax.inject.Singleton
 
@@ -25,6 +26,7 @@ interface AppComponent {
     fun inject(organizerApp: OrganizerApplication)
 
     val personProfileViewModelFactory: PersonProfileViewModel.Factory
+    val rateInteractionViewModelFactory: RateInteractionViewModel.Factory
 
 }
 @AssistedModule

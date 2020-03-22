@@ -30,7 +30,6 @@ fun setAdapter(
         setHasFixedSize(true)
         setItemViewCacheSize(resources.getInteger(R.integer.default_recycler_view_cache_size))
     }
-
 }
 
 @BindingAdapter("itemInteractionState")

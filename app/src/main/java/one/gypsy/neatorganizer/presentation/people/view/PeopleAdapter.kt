@@ -17,7 +17,7 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
 
     private var people = mutableListOf<PersonEntry>()
 
-    var itemInteractionListener: PeopleFragment.PeopleInteractionListener? = null
+//    var itemInteractionListener: PeopleFragment.PeopleInteractionListener? = null
 
 
     //TODO adjust this method to work with diff util and search widget
@@ -42,14 +42,22 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
 
     inner class PersonViewHolder(private val binding: ItemPersonBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private fun navigateToPersonHistory(
-            personEntry: PersonEntry,
+        private fun navigateToPersonProfile(
+            personId: Long,
             view: View
         ) {
             val direction =
                 PeopleFragmentDirections.actionPeopleToPersonProfileFragment(
-                    personEntry.id
+                    personId
                 )
+            view.findNavController().navigate(direction)
+        }
+
+        private fun navigateToRateInteraction(
+            personId: Long,
+            view: View
+        ) {
+            val direction = PeopleFragmentDirections.actionPeopleToRateInteractionDialogFragment(personId)
             view.findNavController().navigate(direction)
         }
 
@@ -59,10 +67,10 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
             binding.apply {
                 viewModel = personViewModel
                 profileRedirectClickListener = View.OnClickListener {
-                    navigateToPersonHistory(personEntryData, it)
+                    navigateToPersonProfile(personEntryData.id, it)
                 }
                 interactionUpdateClickListener = View.OnClickListener {
-                    itemInteractionListener?.onPersonEntryUpdated(personEntryData.id)
+                    navigateToRateInteraction(personEntryData.id, it)
                     this.swipeLayoutItemPersonRoot.resetStatus()
                 }
                 executePendingBindings()

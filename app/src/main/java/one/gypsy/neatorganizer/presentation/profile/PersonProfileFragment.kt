@@ -1,20 +1,25 @@
 package one.gypsy.neatorganizer.presentation.profile
 
-import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import dagger.android.support.AndroidSupportInjection
+import androidx.recyclerview.widget.GridLayoutManager
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.android.synthetic.main.fragment_person_profile.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPersonProfileBinding
 import one.gypsy.neatorganizer.presentation.injector
-import android.content.Intent
-import android.net.Uri
+import one.gypsy.neatorganizer.utils.AxisDateFormatter
+import one.gypsy.neatorganizer.utils.AxisInteractionFormatter
 
 
-class PersonProfileFragment: Fragment() {
+class PersonProfileFragment : Fragment() {
 
     private val args: PersonProfileFragmentArgs by navArgs()
 
@@ -31,7 +36,8 @@ class PersonProfileFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_person_profile, container, false)
+        fragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_person_profile, container, false)
         return fragmentBinding.root
     }
 
@@ -46,7 +52,7 @@ class PersonProfileFragment: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.call_person -> {
                 startCallIntent()
             }
@@ -64,16 +70,10 @@ class PersonProfileFragment: Fragment() {
     }
 
     private fun startSendEmailIntent(): Boolean {
-        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "emailaddress@emailaddress.com"))
+        val intent =
+            Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "emailaddress@emailaddress.com"))
         startActivity(Intent.createChooser(intent, "Send Email"))
         return true
-    }
-
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        AndroidSupportInjection.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,5 +81,26 @@ class PersonProfileFragment: Fragment() {
         fragmentBinding.viewModel = personHistoryViewModel
         fragmentBinding.lifecycleOwner = this
     }
+
+    override fun onStart() {
+        super.onStart()
+        setUpInteractionRecyclerView()
+//        setUpInteractionChart()
+    }
+
+    private fun setUpInteractionRecyclerView() {
+        fragmentBinding.apply {
+            layoutManager = GridLayoutManager(context, 4)
+            interactionEntriesAdapter = InteractionEntriesAdapter()
+            executePendingBindings()
+        }
+    }
+//
+//    private fun setUpInteractionChart() {
+//        configureChart()
+//        configureChartXAxis()
+//        configureChartYAxis()
+//    }
+
 
 }

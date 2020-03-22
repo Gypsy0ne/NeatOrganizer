@@ -11,15 +11,11 @@ import java.util.*
 import javax.inject.Inject
 //TODO https://stackoverflow.com/questions/44270577/android-lifecycle-library-viewmodel-using-dagger-2
 //TODO check if interaction status updates when interaction entry is added
-class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople, var addInteractionEntryUseCase: AddInteractionEntry) : ViewModel() {
+class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople) : ViewModel() {
 
     private val _people = MediatorLiveData<List<PersonEntry>>()
     val people: LiveData<List<PersonEntry>>
         get() = _people
-
-    private val _interactionUpdateStatus = MutableLiveData<CollectionUIState>()
-    val interactionUpdateStatus: LiveData<CollectionUIState>
-        get() = _interactionUpdateStatus
 
     init {
         getAllPeopleUseCase.invoke(viewModelScope, Unit) {
@@ -37,24 +33,7 @@ class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople,
         }
     }
 
-    private fun onAddInteractionFailure(failure: Failure) {
-        //TODO handle failure
-    }
 
-    private fun onAddInteractionSuccess(interactedProfileId: Long) {
-        val itemPosition = _people.value?.indexOfFirst { it.id == interactedProfileId }
-        if(itemPosition != null) {
-            _interactionUpdateStatus.postValue(CollectionUIState.ItemEditionSuccess(itemPosition))
-        }
-    }
-
-    fun updatePersonInteraction(personId: Long) {
-        addInteractionEntryUseCase.invoke(viewModelScope, AddInteractionEntry.Params(
-            InteractionEntry(personId, Date())
-        )) {
-            it.either(::onAddInteractionFailure, ::onAddInteractionSuccess)
-        }
-    }
 
 
 }

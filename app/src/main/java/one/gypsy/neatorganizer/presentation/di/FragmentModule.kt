@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment
 import one.gypsy.neatorganizer.presentation.people.view.PeopleFragment
+import one.gypsy.neatorganizer.presentation.people.view.RateInteractionDialogFragment
 import one.gypsy.neatorganizer.presentation.profile.PersonProfileFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddTaskDialogFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment
@@ -26,6 +27,9 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddTaskGroupFragment(): AddSingleTaskGroupDialogFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeRateInteractionFragment(): RateInteractionDialogFragment
 
     @ContributesAndroidInjector
     abstract fun contributeTasksFragment(): TasksFragment

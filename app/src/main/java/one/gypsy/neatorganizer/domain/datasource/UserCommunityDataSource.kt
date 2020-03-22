@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
 import one.gypsy.neatorganizer.data.database.entity.people.PersonEntity
+import one.gypsy.neatorganizer.domain.dto.InteractionEntry
 import one.gypsy.neatorganizer.domain.dto.Person
 import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.domain.dto.PersonProfile
@@ -52,14 +53,14 @@ class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
 
 
     override suspend fun getPersonProfileById(personId: Long): LiveData<PersonProfile> =
-        Transformations.map(peopleDao.getPersonById(personId)) {
+        Transformations.map(peopleDao.getPersonProfileById(personId)) {
             PersonProfile(
-                it.name,
-                Person.Sex.valueOf(it.sex),
-                parseByteArrayToBitmap(it.avatar),
-                it.lastInteraction,
-                it.dateOfBirth,
-                listOf()
+                it.person.name,
+                Person.Sex.valueOf(it.person.sex),
+                parseByteArrayToBitmap(it.person.avatar),
+                it.person.lastInteraction,
+                it.person.dateOfBirth,
+                it.interactionHistory.map { it -> InteractionEntry(it.personProfileId, it.creationDate, it.rating) }
             )
         }
 

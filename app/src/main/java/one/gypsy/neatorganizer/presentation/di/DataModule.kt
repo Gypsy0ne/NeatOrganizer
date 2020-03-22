@@ -16,7 +16,7 @@ class DataModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): OrganizerDatabase {
-        return Room.databaseBuilder(application, OrganizerDatabase::class.java, "NeatOrganizer68.db").build()
+        return Room.databaseBuilder(application, OrganizerDatabase::class.java, "NeatOrganizer67.db").build()
     }
 
     @Provides
