@@ -3,13 +3,15 @@ package one.gypsy.neatorganizer.binding
 import android.view.animation.AnimationUtils
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
+import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.GroupAdapter
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.domain.dto.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.presentation.tasks.view.SingleTaskGroupSection
+import one.gypsy.neatorganizer.presentation.tasks.view.SingleTaskGroupItem
+import one.gypsy.neatorganizer.presentation.tasks.view.SingleTaskItem
+import one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment
 import one.gypsy.neatorganizer.utils.CollectionUIState
-import one.gypsy.neatorganizer.utils.wrappers.CollapseListener
-import one.gypsy.neatorganizer.utils.wrappers.CollapsibleSection
 
 @BindingAdapter("adapterData")
 fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
@@ -18,20 +20,60 @@ fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
     }
 }
 
-@BindingAdapter("sectionedTaskGroupsAdapterData", "collapseListener")
-fun setSectionedTaskGroupsAdapterData(recyclerView: RecyclerView, dataCollection: List<SingleTaskGroup>?, collapseListener: CollapseListener) {
-    dataCollection?.forEach {
-        (recyclerView.adapter as? SectionedRecyclerViewAdapter)?.addSection(SingleTaskGroupSection().apply {
-                items.addAll(it.tasks ?: emptyList())
-            this.collapseListener = collapseListener
-        })
+@BindingAdapter(
+    value = ["tasksAdapterData", "headerInteractionListener", "itemInteractionListener"],
+    requireAll = false
+)
+fun setTasksAdapterData(
+    recyclerView: RecyclerView,
+    dataCollection: List<SingleTaskGroup>?,
+    headerInteractionListener: TasksFragment.TaskGroupInteractionListener?,
+    itemInteractionListener: TasksFragment.SingleTaskInteractionListener?
+) {
+    dataCollection?.forEach { singleTaskGroup ->
+        (recyclerView.adapter as GroupAdapter).add(
+            createExpandableTaskGroup(
+                singleTaskGroup,
+                headerInteractionListener,
+                itemInteractionListener
+            )
+        )
     }
-    (recyclerView.adapter as? SectionedRecyclerViewAdapter)?.notifyDataSetChanged()
 }
-//@BindingAdapter("sectionedAdapterData")
-//fun <T, C> setSectionedAdapterData(recyclerView: RecyclerView, sectionsData: ) {
-//
-//}
+
+private fun createExpandableTaskGroup(
+    singleTaskGroup: SingleTaskGroup,
+    headerInteractionListener: TasksFragment.TaskGroupInteractionListener?,
+    itemInteractionListener: TasksFragment.SingleTaskInteractionListener?
+): ExpandableGroup {
+    return ExpandableGroup(
+        createConfiguredTaskGroup(
+            singleTaskGroup,
+            headerInteractionListener
+        )
+    ).apply {
+        singleTaskGroup.tasks?.forEach {
+            this.add(createConfiguredTaskItem(it, itemInteractionListener))
+        }
+    }
+}
+
+private fun createConfiguredTaskGroup(
+    taskGroup: SingleTaskGroup,
+    headerInteractionListener: TasksFragment.TaskGroupInteractionListener?
+) =
+    SingleTaskGroupItem(taskGroup).apply {
+        interactionListener = headerInteractionListener
+    }
+
+private fun createConfiguredTaskItem(
+    taskItem: SingleTaskEntry,
+    itemInteractionListener: TasksFragment.SingleTaskInteractionListener?
+) =
+    SingleTaskItem(taskItem).apply {
+        interactionListener = itemInteractionListener
+    }
+
 
 @BindingAdapter(value = ["adapter", "layoutManager"], requireAll = false)
 fun setAdapter(

@@ -11,27 +11,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
 import dagger.android.support.AndroidSupportInjection
-import io.github.luizgrp.sectionedrecyclerviewadapter.Section
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
-import one.gypsy.neatorganizer.utils.extensions.collapseSection
-import one.gypsy.neatorganizer.utils.wrappers.CollapseListener
 import javax.inject.Inject
 
 class TasksFragment : SectionFragment() {
-
-    val collapseListener = object : CollapseListener {
-        override fun onCollapse(section: Section) {
-            (recycler_view_fragment_tasks.adapter as SectionedRecyclerViewAdapter).also {
-                it.collapseSection(section)
-            }
-        }
-    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -39,7 +30,6 @@ class TasksFragment : SectionFragment() {
     lateinit var tasksViewModel: TasksViewModel
 
     private lateinit var fragmentBinding: FragmentTasksBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,9 +69,10 @@ class TasksFragment : SectionFragment() {
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = SectionedRecyclerViewAdapter()
-        this.collapseListener =  this@TasksFragment.collapseListener
+        tasksAdapter = GroupAdapter<GroupieViewHolder>()
         executePendingBindings()
+        entryInteractionListener = taskEntryCallback
+        headerInteractionListener = taskGroupHeaderCallback
     }
 
 //    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {

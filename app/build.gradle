@@ -14,6 +14,10 @@ android {
         enabled = true
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
         testOptions {
             unitTests.returnDefaultValues = true
         }
@@ -127,7 +131,11 @@ dependencies {
 
     //RV swipeable view
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
-    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.1.0'
+
+    //Groupie
+    implementation "com.xwray:groupie:2.7.0"
+    implementation "com.xwray:groupie-databinding:2.7.0"
+    implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"
 
     //Chart view
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

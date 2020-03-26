@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import io.github.luizgrp.sectionedrecyclerviewadapter.Section
 import one.gypsy.neatorganizer.presentation.di.AppComponent
 import one.gypsy.neatorganizer.presentation.di.DaggerAppComponent
 import javax.inject.Inject

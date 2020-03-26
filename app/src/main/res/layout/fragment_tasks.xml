@@ -6,16 +6,20 @@
         type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel" />
 
     <variable
-        name="tasksAdapter"
-        type="io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter" />
-
-    <variable
-        name="collapseListener"
-        type="one.gypsy.neatorganizer.utils.wrappers.CollapseListener" />
-
-    <variable
         name="linearLayoutManager"
         type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <variable
+        name="headerInteractionListener"
+        type="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment.TaskGroupInteractionListener" />
+
+    <variable
+        name="entryInteractionListener"
+        type="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment.SingleTaskInteractionListener" />
+
+    <variable
+        name="tasksAdapter"
+        type="com.xwray.groupie.GroupAdapter" />
 
 </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,11 +33,12 @@
         android:layout_marginBottom="4dp"
         android:layoutAnimation="@anim/layout_animation_fall_down"
         android:overScrollMode="never"
-        adapter="@{tasksAdapter}"
 
-        sectionedTaskGroupsAdapterData="@{viewModel.groupsWithSingleTasks}"
-        collapseListener="@{collapseListener}"
         layoutManager="@{linearLayoutManager}"
+        adapter="@{tasksAdapter}"
+        tasksAdapterData="@{viewModel.groupsWithSingleTasks}"
+        headerInteractionListener="@{headerInteractionListener}"
+        itemInteractionListener="@{entryInteractionListener}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
