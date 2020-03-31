@@ -132,11 +132,6 @@ dependencies {
     //RV swipeable view
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
 
-    //Groupie
-    implementation "com.xwray:groupie:2.7.0"
-    implementation "com.xwray:groupie-databinding:2.7.0"
-    implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"
-
     //Chart view
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 

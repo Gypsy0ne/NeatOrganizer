@@ -11,9 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import one.gypsy.neatorganizer.R
@@ -69,10 +66,8 @@ class TasksFragment : SectionFragment() {
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = GroupAdapter<GroupieViewHolder>()
+        tasksAdapter = GroupedTasksAdapter()
         executePendingBindings()
-        entryInteractionListener = taskEntryCallback
-        headerInteractionListener = taskGroupHeaderCallback
     }
 
 //    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {

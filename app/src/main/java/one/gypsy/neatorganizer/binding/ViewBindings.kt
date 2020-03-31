@@ -1,9 +1,13 @@
 package one.gypsy.neatorganizer.binding
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.view.View
+import androidx.core.animation.addListener
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
-import java.util.*
+import one.gypsy.neatorganizer.utils.CollectionUIState
 
 @BindingAdapter("lastInteractionBackground")
 fun setInteractionBasedBackground(view: View, lastInteractionInDays: Int) {
@@ -13,4 +17,22 @@ fun setInteractionBasedBackground(view: View, lastInteractionInDays: Int) {
         else -> R.drawable.item_person_red_warning_background
     }
     view.background = view.context.getDrawable(backgroundResource)
+}
+
+
+@BindingAdapter("expanded")
+fun animateVisibilityChanges(view: View, expanded: Boolean) {
+    if(expanded) {
+        //TODO add open animation
+        val heightChange = ObjectAnimator.ofFloat(view, "y", view.y,
+            0f).apply {
+            duration = 400
+        }
+        heightChange.addListener(onEnd = {
+            view.visibility = View.GONE
+        })
+        AnimatorSet().play(heightChange)
+    } else {
+        //TODO add collapse animation
+    }
 }
