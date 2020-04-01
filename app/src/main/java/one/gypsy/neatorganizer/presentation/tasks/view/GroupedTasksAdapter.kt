@@ -1,87 +1,84 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.binding.Bindable
 import one.gypsy.neatorganizer.binding.BindableAdapter
-import one.gypsy.neatorganizer.databinding.ItemTaskGroupBinding
-import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.presentation.tasks.vm.SingleTaskGroupViewModel
+import one.gypsy.neatorganizer.domain.dto.Task
+import one.gypsy.neatorganizer.utils.LifecycleAware
 
-class GroupedTasksAdapter() : RecyclerView.Adapter<GroupedTasksAdapter.GroupedTasksViewHolder>(),
-    BindableAdapter<List<SingleTaskGroup>> {
+class GroupedTasksAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    BindableAdapter<List<TaskListItem>> {
 
-    var groupedTasks = mutableListOf<SingleTaskGroup>()
-
-
-    override fun setData(dataCollection: List<SingleTaskGroup>) {
+    private val tasks = mutableListOf<TaskListItem>()
+    override fun setData(dataCollection: List<TaskListItem>) {
         //TODO add diff util here
-        groupedTasks.clear()
-        groupedTasks.addAll(dataCollection)
+        tasks.clear()
+        tasks.addAll(dataCollection)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupedTasksViewHolder {
-        val taskGroupDataBinding = DataBindingUtil.inflate<ItemTaskGroupBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.item_task_group,
-            parent,
-            false
-        )
-        return GroupedTasksViewHolder(taskGroupDataBinding)
-    }
-
-    override fun onViewAttachedToWindow(holder: GroupedTasksViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        holder.markAttach()
-    }
-
-    override fun onViewDetachedFromWindow(holder: GroupedTasksViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        holder.markDetach()
-    }
-
-    override fun getItemCount(): Int {
-        return groupedTasks.size
-    }
-
-    override fun onBindViewHolder(holder: GroupedTasksViewHolder, position: Int) {
-        holder.bind(groupedTasks[position])
-    }
-
-    inner class GroupedTasksViewHolder(private val itemBinding: ItemTaskGroupBinding) :
-        RecyclerView.ViewHolder(itemBinding.root), LifecycleOwner {
-        private val lifecycleRegistry = LifecycleRegistry(this)
-
-        init {
-            lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
-        }
-
-        fun markAttach() {
-            lifecycleRegistry.currentState = Lifecycle.State.STARTED
-        }
-
-        fun markDetach() {
-            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
-        }
-
-        override fun getLifecycle(): Lifecycle {
-            return lifecycleRegistry
-        }
-
-        fun bind(data: SingleTaskGroup) {
-            itemBinding.apply {
-                viewModel = SingleTaskGroupViewModel(data)
-                lifecycleOwner = this@GroupedTasksViewHolder
-                executePendingBindings()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TaskViewType.GROUP.value -> {
+                TaskGroupViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.item_task_group,
+                        parent,
+                        false
+                    )
+                )
+            }
+            else -> {
+                TaskViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.item_grouped_task,
+                        parent,
+                        false
+                    )
+                )
             }
         }
     }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        (holder as? LifecycleAware)?.markAttach()
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        (holder as? LifecycleAware)?.markDetach()
+    }
+
+    override fun getItemCount(): Int {
+        return tasks.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (tasks[position].grouping) {
+            TaskViewType.GROUP.value
+        } else {
+            TaskViewType.ENTRY.value
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(tasks[position].grouping) {
+            (holder as TaskGroupViewHolder).bind(tasks[position])
+        } else {
+            (holder as TaskViewHolder).bind(tasks[position])
+        }
+    }
+
+    enum class TaskViewType(val value: Int) {
+        GROUP(0),
+        ENTRY(1)
+    }
+
 }

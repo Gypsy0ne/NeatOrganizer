@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.dto
 
-interface Task {
-    val id: Long
-    val description: String
-    var done: Boolean
+abstract class Task {
+    abstract val id: Long
+    abstract val name: String
+    abstract var done: Boolean
 }
