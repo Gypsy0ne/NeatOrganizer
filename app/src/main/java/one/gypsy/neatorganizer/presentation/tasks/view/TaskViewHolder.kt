@@ -1,20 +1,18 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
+import android.view.View
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
-import one.gypsy.neatorganizer.databinding.ItemGroupedTaskBinding
-import one.gypsy.neatorganizer.binding.Bindable
+import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.utils.LifecycleAware
 
-class TaskViewHolder(val itemBinding: ItemGroupedTaskBinding) : RecyclerView.ViewHolder(itemBinding.root), LifecycleAware {
-    override val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
-
-    init {
-        lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
+abstract class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LifecycleAware {
+    fun onAppear() {
+        lifecycleRegistry.currentState = Lifecycle.State.CREATED
     }
 
-    fun bind(data: TaskListItem) {
+    fun onDisappear() {
+        lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
     }
+     abstract fun bind(data: TaskListItem)
 }

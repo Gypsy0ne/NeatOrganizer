@@ -2,83 +2,64 @@ package one.gypsy.neatorganizer.presentation.tasks.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.binding.Bindable
-import one.gypsy.neatorganizer.binding.BindableAdapter
-import one.gypsy.neatorganizer.domain.dto.Task
-import one.gypsy.neatorganizer.utils.LifecycleAware
+import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
-class GroupedTasksAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-    BindableAdapter<List<TaskListItem>> {
+class GroupedTasksAdapter() : ListAdapter<TaskListItem, TaskViewHolder>(DiffCallback()) {
 
-    private val tasks = mutableListOf<TaskListItem>()
-    override fun setData(dataCollection: List<TaskListItem>) {
-        //TODO add diff util here
-        tasks.clear()
-        tasks.addAll(dataCollection)
-        notifyDataSetChanged()
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder =
+        TaskViewType.values().first { it.resId == viewType }.getHolder(parent)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            TaskViewType.GROUP.value -> {
-                TaskGroupViewHolder(
-                    DataBindingUtil.inflate(
-                        LayoutInflater.from(parent.context),
-                        R.layout.item_task_group,
-                        parent,
-                        false
-                    )
-                )
-            }
-            else -> {
-                TaskViewHolder(
-                    DataBindingUtil.inflate(
-                        LayoutInflater.from(parent.context),
-                        R.layout.item_grouped_task,
-                        parent,
-                        false
-                    )
-                )
-            }
-        }
-    }
-
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        (holder as? LifecycleAware)?.markAttach()
-    }
-
-    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        (holder as? LifecycleAware)?.markDetach()
-    }
-
-    override fun getItemCount(): Int {
-        return tasks.size
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (tasks[position].grouping) {
-            TaskViewType.GROUP.value
-        } else {
-            TaskViewType.ENTRY.value
+        return getItem(position).getViewHolderType()
+    }
+
+    class DiffCallback : DiffUtil.ItemCallback<TaskListItem>() {
+
+        override fun areItemsTheSame(oldItem: TaskListItem, newItem: TaskListItem): Boolean {
+            return oldItem == newItem
         }
-    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(tasks[position].grouping) {
-            (holder as TaskGroupViewHolder).bind(tasks[position])
-        } else {
-            (holder as TaskViewHolder).bind(tasks[position])
+        override fun areContentsTheSame(oldItem: TaskListItem, newItem: TaskListItem): Boolean {
+            return oldItem == newItem
         }
-    }
 
-    enum class TaskViewType(val value: Int) {
-        GROUP(0),
-        ENTRY(1)
     }
-
 }
+
+enum class TaskViewType(@LayoutRes val resId: Int) {
+    HEADER(R.layout.item_task_header),
+    SUB_ITEM(R.layout.item_task)
+}
+
+fun TaskListItem.getViewHolderType(): Int = when (this) {
+    is TaskListItem.TaskListHeader -> TaskViewType.HEADER.resId
+    is TaskListItem.TaskListSubItem -> TaskViewType.SUB_ITEM.resId
+}
+
+fun TaskViewType.getHolder(parent: ViewGroup) = when (this) {
+    TaskViewType.HEADER -> TaskHeaderViewHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), resId,
+            parent,
+            false
+        )
+    )
+    TaskViewType.SUB_ITEM -> TaskSubItemViewHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            resId,
+            parent,
+            false
+        )
+    )
+}
+
