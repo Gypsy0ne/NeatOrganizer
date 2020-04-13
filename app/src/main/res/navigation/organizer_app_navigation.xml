@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/tasks"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment"
-        android:label="TasksFragment" />
+        android:label="TasksFragment" >
+        <action
+            android:id="@+id/action_tasks_to_addSingleTaskDialogFragment"
+            app:destination="@id/addSingleTaskDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/people"
         android:name="one.gypsy.neatorganizer.presentation.people.view.PeopleFragment"
@@ -30,11 +34,6 @@
 
 
     <dialog
-        android:id="@+id/task_add"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddTaskDialogFragment"
-        android:label="AddTaskDialogFragment" />
-
-    <dialog
         android:id="@+id/task_group_add"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
         android:label="AddTaskGroupDialogFragment" />
@@ -53,6 +52,15 @@
         android:label="RateInteractionDialogFragment">
         <argument
             android:name="personId"
+            app:argType="long" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/addSingleTaskDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
+        android:label="AddSingleTaskDialogFragment">
+        <argument
+            android:name="groupId"
             app:argType="long" />
     </dialog>
 </navigation>

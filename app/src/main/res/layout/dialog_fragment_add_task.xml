@@ -20,7 +20,7 @@
             android:layout_height="0dp" />
 
         <Button
-            android:id="@+id/button_dialog_fragment_add_person_confirmation"
+            android:id="@+id/button_dialog_fragment_add_task_confirmation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
@@ -31,6 +31,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="48dp"
             android:paddingBottom="8dp"
+            android:onClick="@{() -> viewModel.addTask()}"
             android:text="@string/add_person_dialog_fragment_confirm"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"

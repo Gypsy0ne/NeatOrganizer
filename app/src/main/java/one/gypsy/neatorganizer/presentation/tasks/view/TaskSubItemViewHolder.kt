@@ -1,23 +1,23 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleRegistry
 import one.gypsy.neatorganizer.databinding.ItemTaskBinding
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
-class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding) : TaskViewHolder(itemBinding.root) {
+class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener: ClickListener) :
+    TaskViewHolder(itemBinding.root) {
 
-    override val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
 
-    init {
-        lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
-    }
-
-    override fun getLifecycle(): Lifecycle {
-        return lifecycleRegistry
+    interface ClickListener {
+        fun onViewClick(headerItem: TaskListItem.TaskListSubItem)
     }
 
     override fun bind(data: TaskListItem) {
+        with(data as TaskListItem.TaskListSubItem) {
+            itemBinding.apply {
+                this.done = this@with.done
+                this.name = this@with.name
+            }
+        }
     }
 
 }

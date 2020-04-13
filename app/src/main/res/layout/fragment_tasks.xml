@@ -4,7 +4,6 @@
     <variable
         name="viewModel"
         type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel" />
-
     <variable
         name="linearLayoutManager"
         type="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -28,7 +27,7 @@
         hasFixedSize="@{false}"
         layoutManager="@{linearLayoutManager}"
         adapter="@{tasksAdapter}"
-        adapterData="@{viewModel.tasks}"
+        adapterData="@{viewModel.listedTasks}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

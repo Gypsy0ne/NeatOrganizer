@@ -2,17 +2,24 @@ package one.gypsy.neatorganizer.binding
 
 import android.view.animation.AnimationUtils
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.CollectionUIState
 
 @BindingAdapter("adapterData")
-fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
+fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: List<T>?) {
     if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
-        (recyclerView.adapter as BindableAdapter<T>).setData(dataCollection)
+        (recyclerView.adapter as BindableAdapter<T>).bindData(dataCollection)
     }
 }
 
+@BindingAdapter("tasks")
+fun <T> setTasks(recyclerView: RecyclerView, dataCollection: List<T>?) {
+    if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
+        (recyclerView.adapter as BindableAdapter<T>).bindData(dataCollection)
+    }
+}
 
 @BindingAdapter(value = ["adapter", "layoutManager", "hasFixedSize"], requireAll = false)
 fun setAdapter(

@@ -13,15 +13,14 @@ import one.gypsy.neatorganizer.domain.dto.PersonEntry
 import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
 
 //TODO implement bind/unbind mechanism
-class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<List<PersonEntry>> {
+class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), BindableAdapter<PersonEntry> {
 
     private var people = mutableListOf<PersonEntry>()
 
 //    var itemInteractionListener: PeopleFragment.PeopleInteractionListener? = null
 
-
     //TODO adjust this method to work with diff util and search widget
-    override fun setData(dataCollection: List<PersonEntry>) {
+    override fun bindData(dataCollection: List<PersonEntry>) {
         people.clear()
         people.addAll(dataCollection)
         notifyDataSetChanged()
@@ -77,4 +76,6 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.PersonViewHolder>(), Bi
             }
         }
     }
+
+
 }

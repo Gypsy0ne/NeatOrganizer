@@ -11,12 +11,12 @@ import one.gypsy.neatorganizer.domain.dto.InteractionEntry
 import one.gypsy.neatorganizer.presentation.profile.vm.InteractionEntryViewModel
 
 //TODO implement bind/unbind mechanism
-class InteractionEntriesAdapter : RecyclerView.Adapter<InteractionEntriesAdapter.InteractionEntryViewHolder>(), BindableAdapter<List<InteractionEntry>> {
+class InteractionEntriesAdapter : RecyclerView.Adapter<InteractionEntriesAdapter.InteractionEntryViewHolder>(), BindableAdapter<InteractionEntry> {
 
     private var entries = mutableListOf<InteractionEntry>()
 
     //TODO adjust this method to work with diff util and search widget
-    override fun setData(dataCollection: List<InteractionEntry>) {
+    override fun bindData(dataCollection: List<InteractionEntry>) {
         entries.apply {
             clear()
             addAll(dataCollection)

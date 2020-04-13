@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_tasks.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
+import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 import javax.inject.Inject
 
@@ -27,6 +27,23 @@ class TasksFragment : SectionFragment() {
     lateinit var tasksViewModel: TasksViewModel
 
     private lateinit var fragmentBinding: FragmentTasksBinding
+
+    val headerClickListener by lazy {
+        object: TaskHeaderViewHolder.ClickListener {
+            override fun onExpanderClick(taskItem: TaskListItem.TaskListHeader) {
+                tasksViewModel.onExpanderClicked(taskItem)
+            }
+        }
+    }
+
+    val subItemClickListener by lazy {
+        object: TaskSubItemViewHolder.ClickListener {
+            override fun onViewClick(headerItem: TaskListItem.TaskListSubItem) {
+                tasksViewModel
+            }
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +83,7 @@ class TasksFragment : SectionFragment() {
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = GroupedTasksAdapter()
+        tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
         executePendingBindings()
     }
 

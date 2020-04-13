@@ -8,15 +8,16 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+
 android {
 
     dataBinding {
         enabled = true
     }
 
-    androidExtensions {
-        experimental = true
-    }
+//    androidExtensions {
+//        experimental = true
+//    }
 
         testOptions {
             unitTests.returnDefaultValues = true
