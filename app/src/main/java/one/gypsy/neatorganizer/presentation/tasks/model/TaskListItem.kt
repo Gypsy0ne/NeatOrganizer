@@ -27,16 +27,19 @@ sealed class TaskListItem(
     }
 }
 
-fun TaskListItem.toHeader() =
+fun TaskListItem.toHeader(subItemsCount: Int, expanded: Boolean) =
     TaskListItem.TaskListHeader(
         id,
         name,
-        visible
+        visible,
+        subItemsCount = subItemsCount,
+        expanded = expanded
     )
 
-fun TaskListItem.toSubItem() =
+fun TaskListItem.toSubItem(done: Boolean) =
     TaskListItem.TaskListSubItem(
         id,
         name,
-        visible
+        visible,
+        done = done
     )

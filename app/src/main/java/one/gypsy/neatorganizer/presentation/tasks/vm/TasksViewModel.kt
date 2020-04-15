@@ -1,11 +1,11 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
-import one.gypsy.neatorganizer.domain.dto.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.AddTask
 import one.gypsy.neatorganizer.domain.interactors.GetAllGroupsWithSingleTasks
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
+import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListHeader
+import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListSubItem
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
@@ -46,23 +46,10 @@ class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase:
         val taskListItems = mutableListOf<TaskListItem>()
         taskGroups.sortedByDescending { it.id }.forEach { taskGroup ->
             taskListItems.add(
-                TaskListItem.TaskListHeader(
-                    taskGroup.id,
-                    taskGroup.name,
-                    true,
-                    taskGroup.id,
-                    taskGroup.tasks?.size ?: 0
-                )
+                taskGroup.toTaskListHeader()
             )
-            taskListItems.addAll(taskGroup.tasks?.sortedByDescending { it.id }?.map { taskEntry ->
-                TaskListItem.TaskListSubItem(
-                    taskEntry.id,
-                    taskEntry.name,
-                    false,
-                    taskGroup.id,
-                    taskEntry.done
-
-                )
+            taskListItems.addAll(taskGroup.tasks?.sortedBy { it.id }?.map { taskEntry ->
+                taskEntry.toTaskListSubItem()
             } ?: emptyList())
         }
         return taskListItems
