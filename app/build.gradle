@@ -8,11 +8,16 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+
 android {
 
     dataBinding {
         enabled = true
     }
+
+//    androidExtensions {
+//        experimental = true
+//    }
 
         testOptions {
             unitTests.returnDefaultValues = true
@@ -127,7 +132,6 @@ dependencies {
 
     //RV swipeable view
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
-    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:3.1.0'
 
     //Chart view
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

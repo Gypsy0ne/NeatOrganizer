@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.domain.interactors.AddPerson
 import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
-import one.gypsy.neatorganizer.utils.default
+import one.gypsy.neatorganizer.utils.extensions.default
 import java.util.*
 import javax.inject.Inject
 

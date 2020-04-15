@@ -25,6 +25,7 @@
     <dimen name="lazy_date_picker_width_margin" tools:override="true">1dp</dimen>
     <dimen name="lazy_date_picker_width_space" tools:override="true">6dp</dimen>
     <dimen name="height_item_person_text_view">24dp</dimen>
+    <dimen name="height_item_grouped_task_container">48dp</dimen>
     <!--End of Lazy date picker dimens-->
 
 

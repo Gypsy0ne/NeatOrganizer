@@ -2,35 +2,41 @@ package one.gypsy.neatorganizer.binding
 
 import android.view.animation.AnimationUtils
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.CollectionUIState
 
 @BindingAdapter("adapterData")
-fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: T?) {
+fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: List<T>?) {
     if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
-        (recyclerView.adapter as BindableAdapter<T>).setData(dataCollection)
+        (recyclerView.adapter as BindableAdapter<T>).bindData(dataCollection)
     }
 }
-//@BindingAdapter("sectionedAdapterData")
-//fun <T, C> setSectionedAdapterData(recyclerView: RecyclerView, sectionsData: ) {
-//
-//}
 
-@BindingAdapter(value = ["adapter", "layoutManager"], requireAll = false)
+@BindingAdapter("tasks")
+fun <T> setTasks(recyclerView: RecyclerView, dataCollection: List<T>?) {
+    if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
+        (recyclerView.adapter as BindableAdapter<T>).bindData(dataCollection)
+    }
+}
+
+@BindingAdapter(value = ["adapter", "layoutManager", "hasFixedSize"], requireAll = false)
 fun setAdapter(
     recyclerView: RecyclerView,
     rvAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
-    rvLayoutManager: RecyclerView.LayoutManager
+    rvLayoutManager: RecyclerView.LayoutManager,
+    fixedSize: Boolean
 ) {
     recyclerView.apply {
         adapter = rvAdapter
         layoutManager = rvLayoutManager
-        setHasFixedSize(true)
+        setHasFixedSize(fixedSize)
         setItemViewCacheSize(resources.getInteger(R.integer.default_recycler_view_cache_size))
     }
 }
+
+
 
 @BindingAdapter("itemInteractionState")
 fun setItemInteractionState(recyclerView: RecyclerView, state: CollectionUIState?) {
@@ -47,5 +53,6 @@ fun setItemInteractionState(recyclerView: RecyclerView, state: CollectionUIState
         )
     }
 }
+
 
 

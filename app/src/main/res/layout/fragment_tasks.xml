@@ -4,14 +4,13 @@
     <variable
         name="viewModel"
         type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel" />
-
-    <variable
-        name="tasksAdapter"
-        type="io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter" />
-
     <variable
         name="linearLayoutManager"
         type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <variable
+        name="tasksAdapter"
+        type="one.gypsy.neatorganizer.presentation.tasks.view.GroupedTasksAdapter" />
 
 </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,14 +18,16 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_fragment_people"
+        android:id="@+id/recycler_view_fragment_tasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="4dp"
         android:layoutAnimation="@anim/layout_animation_fall_down"
         android:overScrollMode="never"
-        adapter="@{tasksAdapter}"
+        hasFixedSize="@{false}"
         layoutManager="@{linearLayoutManager}"
+        adapter="@{tasksAdapter}"
+        adapterData="@{viewModel.listedTasks}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

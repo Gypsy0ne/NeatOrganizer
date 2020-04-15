@@ -4,18 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hsalf.smilerating.SmileRating
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.InteractionEntry
 import one.gypsy.neatorganizer.domain.interactors.AddInteractionEntry
-import one.gypsy.neatorganizer.presentation.profile.vm.PersonProfileViewModel
-import one.gypsy.neatorganizer.utils.CollectionUIState
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.UIState
-import one.gypsy.neatorganizer.utils.default
+import one.gypsy.neatorganizer.utils.extensions.default
 import java.util.*
-import javax.inject.Inject
 
 class RateInteractionViewModel @AssistedInject constructor(var addInteractionEntryUseCase: AddInteractionEntry, @Assisted val personId: Long): ViewModel() {
 

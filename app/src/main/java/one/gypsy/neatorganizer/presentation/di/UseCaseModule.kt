@@ -2,10 +2,7 @@ package one.gypsy.neatorganizer.presentation.di
 
 import dagger.Module
 import dagger.Provides
-import one.gypsy.neatorganizer.data.repositories.FileRepository
-import one.gypsy.neatorganizer.data.repositories.InteractionRepository
-import one.gypsy.neatorganizer.data.repositories.PeopleRepository
-import one.gypsy.neatorganizer.data.repositories.SingleTaskGroupsRepository
+import one.gypsy.neatorganizer.data.repositories.*
 import one.gypsy.neatorganizer.domain.interactors.*
 
 @Module
@@ -38,8 +35,14 @@ class UseCaseModule {
     }
 
     @Provides
-    fun provideAddSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): AddSingleTaskGroup {
-        return AddSingleTaskGroup(singleTaskGroupsRepository)
+    fun provideAddSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): AddTaskGroup {
+        return AddTaskGroup(singleTaskGroupsRepository)
     }
+
+    @Provides
+    fun provideAddSingleTask(singleTasksRepository: SingleTasksRepository): AddTask {
+        return AddTask(singleTasksRepository)
+    }
+
 
 }

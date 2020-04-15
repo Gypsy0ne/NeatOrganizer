@@ -29,7 +29,7 @@ class RepositoryModule {
     }
 
     @Provides
-    fun provideSingleTasksRepository(dataSource: SingleTasksDataSource): SingleTasksRepository {
+    fun provideSingleTasksRepository(dataSource: UserSingleTasksDataSource): SingleTasksRepository {
         return SingleTasksRepository(dataSource)
     }
 }

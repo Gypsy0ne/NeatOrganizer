@@ -12,16 +12,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
-import one.gypsy.neatorganizer.presentation.di.ViewModelFactory
+import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 import javax.inject.Inject
 
 class TasksFragment : SectionFragment() {
-
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -30,6 +28,22 @@ class TasksFragment : SectionFragment() {
 
     private lateinit var fragmentBinding: FragmentTasksBinding
 
+    val headerClickListener by lazy {
+        object: TaskHeaderViewHolder.ClickListener {
+            override fun onExpanderClick(taskItem: TaskListItem.TaskListHeader) {
+                tasksViewModel.onExpanderClicked(taskItem)
+            }
+        }
+    }
+
+    val subItemClickListener by lazy {
+        object: TaskSubItemViewHolder.ClickListener {
+            override fun onViewClick(headerItem: TaskListItem.TaskListSubItem) {
+                tasksViewModel
+            }
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,19 +77,19 @@ class TasksFragment : SectionFragment() {
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = SectionedRecyclerViewAdapter().apply {
-            addSection(SingleTaskGroupSection())
-        }
+        tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
         executePendingBindings()
     }
 
-    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {
-        //TODO
-    }
-
+//    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {
+//        //TODO
+//    }
 
 
 }
