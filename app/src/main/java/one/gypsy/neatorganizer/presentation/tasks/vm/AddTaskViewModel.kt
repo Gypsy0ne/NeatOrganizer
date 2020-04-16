@@ -18,7 +18,13 @@ class AddTaskViewModel @AssistedInject constructor(
     fun addTask() {
         addTaskUseCase.invoke(
             viewModelScope,
-            AddTask.Params(SingleTaskEntry(groupId, taskTitle.value ?: "", false))
+            AddTask.Params(
+                SingleTaskEntry(
+                    groupId = groupId,
+                    name = taskTitle.value ?: "",
+                    done = false
+                )
+            )
         ) {
             it.either(::onAddTaskFailure, ::onAddTaskSuccess)
         }
