@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
@@ -51,5 +53,17 @@ class AddSingleTaskGroupDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = viewModel
         fragmentBinding.lifecycleOwner = this
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setUpObservers()
+    }
+
+    private fun setUpObservers() {
+        viewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->
+            if (finished)
+                findNavController().popBackStack()
+        })
     }
 }

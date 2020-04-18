@@ -33,6 +33,10 @@ class TasksFragment : SectionFragment() {
             override fun onExpanderClick(taskItem: TaskListItem.TaskListHeader) {
                 tasksViewModel.onExpanderClicked(taskItem)
             }
+
+            override fun onEditionSubmitClick(taskItem: TaskListItem.TaskListHeader) {
+                tasksViewModel.onEditionSubmit(taskItem)
+            }
         }
     }
 

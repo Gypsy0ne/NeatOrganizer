@@ -4,6 +4,9 @@ import dagger.Module
 import dagger.Provides
 import one.gypsy.neatorganizer.data.repositories.*
 import one.gypsy.neatorganizer.domain.interactors.*
+import one.gypsy.neatorganizer.domain.interactors.task.AddTask
+import one.gypsy.neatorganizer.domain.interactors.task.AddTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
 
 @Module
 class UseCaseModule {
@@ -36,12 +39,23 @@ class UseCaseModule {
 
     @Provides
     fun provideAddSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): AddTaskGroup {
-        return AddTaskGroup(singleTaskGroupsRepository)
+        return AddTaskGroup(
+            singleTaskGroupsRepository
+        )
     }
 
     @Provides
     fun provideAddSingleTask(singleTasksRepository: SingleTasksRepository): AddTask {
-        return AddTask(singleTasksRepository)
+        return AddTask(
+            singleTasksRepository
+        )
+    }
+
+    @Provides
+    fun provideUpdateSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): UpdateTaskGroup {
+        return UpdateTaskGroup(
+            singleTaskGroupsRepository
+        )
     }
 
 

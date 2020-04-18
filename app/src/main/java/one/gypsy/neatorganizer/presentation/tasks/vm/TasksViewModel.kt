@@ -3,12 +3,13 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.GetAllGroupsWithSingleTasks
+import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks) :
+class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks, var updateSingleTaskGroupUseCase: UpdateTaskGroup) :
     ViewModel() {
 
     val taskListMapper = TaskListMapper()
@@ -56,11 +57,35 @@ class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase:
     }
 
     fun onExpanderClicked(headerItem: TaskListItem.TaskListHeader) {
-        _listedTasks.postValue(_listedTasks.value?.onEach {
+        _listedTasks.postValue(_listedTasks.value?.map {
             if (it is TaskListItem.TaskListSubItem && it.groupId == headerItem.groupId) {
-                it.visible = headerItem.expanded
+                it.copy(visible = headerItem.expanded)
+            } else {
+                it
             }
         })
     }
 
+    fun onEditionSubmit(headerItem: TaskListItem.TaskListHeader) {
+        val updatedTaskGroup = allTasks.value?.find { it.id == headerItem.id }?.copy(name = headerItem.name)
+        if (updatedTaskGroup != null) {
+            updateSingleTaskGroupUseCase.invoke(viewModelScope, UpdateTaskGroup.Params(updatedTaskGroup)) {
+                it.either(
+                    ::onUpdateSingleTaskGroupFailure,
+                    ::onUpdateSingleTaskGroupSuccess
+                )
+            }
+        } else {
+            // TODO handle case
+        }
+    }
+
+    private fun onUpdateSingleTaskGroupSuccess(unit: Unit) {
+
+    }
+
+
+    private fun onUpdateSingleTaskGroupFailure(failure: Failure) {
+
+    }
 }

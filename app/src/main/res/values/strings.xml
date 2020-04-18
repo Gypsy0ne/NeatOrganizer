@@ -8,6 +8,7 @@
     <string name="add_person_dialog_fragment_image_pick_error">Error while loading the image</string>
     <string name="add_person_dialog_fragment_confirm">Submit</string>
     <string name="item_person_interaction_update">update</string>
+    <string name="add_person_dialog_fragment_next">next</string>
     <string-array name="interaction_rating_levels">
         <item>Terrible</item>
         <item>Bad</item>

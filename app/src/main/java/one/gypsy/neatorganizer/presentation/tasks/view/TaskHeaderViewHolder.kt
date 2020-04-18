@@ -4,8 +4,6 @@ package one.gypsy.neatorganizer.presentation.tasks.view
 import android.view.View
 import androidx.navigation.findNavController
 import one.gypsy.neatorganizer.databinding.ItemTaskHeaderBinding
-import one.gypsy.neatorganizer.generated.callback.OnClickListener
-import one.gypsy.neatorganizer.presentation.people.view.PeopleFragmentDirections
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
 class TaskHeaderViewHolder(
@@ -13,20 +11,24 @@ class TaskHeaderViewHolder(
     val itemClickListener: ClickListener
 ) : TaskViewHolder(itemBinding.root) {
 
+    lateinit var holderData: TaskListItem.TaskListHeader
+
     interface ClickListener {
         fun onExpanderClick(taskItem: TaskListItem.TaskListHeader)
+        fun onEditionSubmitClick(taskItem: TaskListItem.TaskListHeader)
     }
 
-
     override fun bind(data: TaskListItem) {
+        require(data is TaskListItem.TaskListHeader)
+        holderData = data
+
+        setUpAddListener()
+        setUpEditListener()
+        setUpEditionSubmitListener()
+        setUpExpanderListener()
+
         itemBinding.apply {
-            this.headerItem = data as TaskListItem.TaskListHeader
-            this.expanderClickListener = View.OnClickListener {
-                data.expanded = !data.expanded
-                itemClickListener.onExpanderClick(data) }
-            this.addClickListener = View.OnClickListener {
-                navigateToAddTask(data.groupId, this.root)
-            }
+            headerItem = holderData
             executePendingBindings()
         }
     }
@@ -39,6 +41,50 @@ class TaskHeaderViewHolder(
         view.findNavController().navigate(direction)
     }
 
+    private fun setEditable(editable: Boolean) {
+        itemBinding.editTextItemTaskHeaderName.apply {
+            isFocusable = editable
+            isFocusableInTouchMode = editable
+            isEnabled = editable
+            isClickable = editable
+        }
+        if (editable) {
+            itemBinding.editTextItemTaskHeaderName.requestFocus()
+        } else {
+            itemBinding.editTextItemTaskHeaderName.clearFocus()
+        }
+    }
+
+    private fun setUpExpanderListener() {
+        itemBinding.setExpanderClickListener {
+            holderData = holderData.copy(expanded = !holderData.expanded)
+            itemClickListener.onExpanderClick(holderData)
+        }
+    }
+
+    private fun setUpAddListener() {
+        itemBinding.setAddClickListener {
+            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
+            navigateToAddTask(holderData.groupId, itemBinding.root)
+        }
+    }
+
+    private fun setUpEditListener() {
+        itemBinding.setEditClickListener {
+            holderData = holderData.copy(edited = !holderData.edited)
+            setEditable(holderData.edited)
+            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
+        }
+    }
+
+    private fun setUpEditionSubmitListener() {
+        itemBinding.setEditionSubmitClickListener {
+            holderData = holderData.copy(
+                name = itemBinding.editTextItemTaskHeaderName.text.toString()
+            )
+            itemClickListener.onEditionSubmitClick(holderData)
+        }
+    }
 
 
 }

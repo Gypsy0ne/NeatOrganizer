@@ -34,23 +34,39 @@
         <item name="android:layout_width">wrap_content</item>
     </style>
 <!--Add person dialog fragment-->
-    <style name="DialogAddPersonFormEditText">
+    <style name="DialogFormEditText">
         <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:maxLines">1</item>
         <item name="android:inputType">textLongMessage</item>
         <item name="android:drawablePadding">4dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
         <item name="android:background">@drawable/dialog_fragment_add_person_edit_text_background</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/height_dialog_fragment_add_person_form_text</item>
     </style>
 
-    <style name="DialogAddPersonFormEmailEditText" parent="DialogAddPersonFormEditText">
+    <style name="DialogAddPersonFormEmailEditText" parent="DialogFormEditText">
         <item name="android:inputType">textEmailAddress</item>
     </style>
-    <style name="DialogAddPersonFormPhoneEditText" parent="DialogAddPersonFormEditText">
+    <style name="DialogAddPersonFormPhoneEditText" parent="DialogFormEditText">
         <item name="android:inputType">phone</item>
     </style>
     <!--End of Add person dialog fragment-->
+
+    <style name="DialogFormButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:paddingEnd">@dimen/padding_end_dialog_fragment_button</item>
+        <item name="android:paddingStart">@dimen/padding_start_dialog_fragment_button</item>
+        <item name="android:paddingTop">@dimen/padding_top_dialog_fragment_button</item>
+        <item name="android:paddingBottom">@dimen/padding_bottom_dialog_fragment_button</item>
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMaxTextSize">@dimen/max_text_size_dialog_add_person_confirm_text</item>
+        <item name="autoSizeMinTextSize">@dimen/min_text_size_dialog_add_person_confirm_text</item>
+        <item name="fontFamily">@font/roboto_black</item>
+      </style>
 
 </resources>

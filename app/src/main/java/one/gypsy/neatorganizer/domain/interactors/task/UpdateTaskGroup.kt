@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.domain.interactors
+package one.gypsy.neatorganizer.domain.interactors.task
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -9,15 +9,19 @@ import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class AddTaskGroup @Inject constructor(var singleTaskGroupsRepository: SingleTaskGroupsRepository): BaseUseCase<Long, AddTaskGroup.Params>() {
+class UpdateTaskGroup @Inject constructor(var singleTaskGroupsRepository: SingleTaskGroupsRepository): BaseUseCase<Unit, UpdateTaskGroup.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, Long> {
-       return try {
+    override suspend fun run(params: Params): Either<Failure, Unit> {
+        return try {
             withContext(Dispatchers.IO) {
-                Either.Right(singleTaskGroupsRepository.addSingleTaskGroup(params.singleTaskGroup))
+                Either.Right(singleTaskGroupsRepository.updateSingleTaskGroup(params.singleTaskGroup))
             }
         } catch(exp: Exception) {
-            Either.Left(AddSingleTaskGroupFailure(exp))
+            Either.Left(
+                AddSingleTaskGroupFailure(
+                    exp
+                )
+            )
         }
     }
 

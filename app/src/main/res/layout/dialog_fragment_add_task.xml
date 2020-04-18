@@ -15,39 +15,47 @@
         android:layout_height="wrap_content">
 
         <EditText
+            style="@style/DialogFormEditText"
             android:id="@+id/edit_text_dialog_fragment_add_task_content"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:text="@={viewModel.taskTitle}"
+            android:drawableStart="@drawable/ic_group_add_white_24dp"
+            android:hint="Task title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_dialog_fragment_add_task_confirmation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
-            android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
-            android:fontFamily="@font/roboto_black"
-            android:maxLines="1"
-            android:paddingStart="40dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="48dp"
-            android:paddingBottom="8dp"
-            android:onClick="@{() -> viewModel.addTask()}"
-            android:text="@string/add_person_dialog_fragment_confirm"
+            android:id="@+id/button_dialog_fragment_add_task_submit"
+            style="@style/DialogFormButton"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+            android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
+            android:onClick="@{() -> viewModel.addTask()}"
+            android:text="@string/add_person_dialog_fragment_confirm"
             android:textColor="@color/dark_yellow"
-            app:autoSizeMaxTextSize="@dimen/max_text_size_dialog_add_person_confirm_text"
-            app:autoSizeMinTextSize="@dimen/min_text_size_dialog_add_person_confirm_text"
-            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_dialog_fragment_add_task_next"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
 
+        <Button
+            android:id="@+id/button_dialog_fragment_add_task_next"
+            style="@style/DialogFormButton"
+            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+            android:drawableStart="@drawable/ic_add_dark_yellow_24dp"
+            android:onClick="@{() -> viewModel.addNextTask()}"
+            android:text="@string/add_person_dialog_fragment_next"
+            android:textColor="@color/dark_yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_dialog_fragment_add_task_submit"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     
 </layout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -20,9 +19,9 @@
             android:layout_width="@dimen/width_dialog_fragment_add_person_thumbnail_slot"
             android:layout_height="@dimen/height_dialog_fragment_add_person_thumbnail_slot"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/dialog_fragment_add_person_photo_view_background"
             android:elevation="4dp"
-            android:layout_marginEnd="16dp"
             android:onClick="@{() -> viewModel.startSelectThumbnailPhotoAction()}"
             app:imageBitmap="@{viewModel.selectedThumbnail}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,14 +50,13 @@
 
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_name"
-            style="@style/DialogAddPersonFormEditText"
-            android:layout_marginTop="16dp"
+            style="@style/DialogFormEditText"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_person_white_24dp"
             android:hint="Name"
             android:maxLength="48"
-            android:paddingStart="8dp"
             android:text="@={viewModel.personName}"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
             app:layout_constraintEnd_toStartOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
@@ -67,14 +65,13 @@
 
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_description"
-            style="@style/DialogAddPersonFormEditText"
+            style="@style/DialogFormEditText"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_description_white_24dp"
             android:hint="Description"
             android:maxLength="64"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:paddingStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_person_name" />
@@ -83,12 +80,11 @@
             android:id="@+id/edit_text_dialog_fragment_add_person_phone_number"
             style="@style/DialogAddPersonFormPhoneEditText"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_phone_white_24dp"
             android:hint="Phone number"
             android:maxLength="64"
-            android:paddingStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_person_description" />
@@ -97,26 +93,25 @@
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_email"
             style="@style/DialogAddPersonFormEmailEditText"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_email_white_24dp"
             android:hint="Email"
             android:maxLength="64"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:paddingStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_person_phone_number" />
 
         <com.mikhaellopez.lazydatepicker.LazyDatePicker
             android:id="@+id/date_picker_dialog_fragment_add_person"
+            dateChangeListener="@{(date) -> viewModel.onBirthDateChanged(date)}"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
-            dateChangeListener="@{(date) -> viewModel.onBirthDateChanged(date)}"
 
-        app:layout_constraintBottom_toBottomOf="@+id/icon_switch_dialog_fragment_add_person_sex"
+            app:layout_constraintBottom_toBottomOf="@+id/icon_switch_dialog_fragment_add_person_sex"
             app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
             app:layout_constraintTop_toTopOf="@+id/icon_switch_dialog_fragment_add_person_sex"
             app:ldp_date_format="dd-mm-yyyy"
@@ -124,27 +119,18 @@
             app:ldp_text_color="@color/gray" />
 
 
-
         <Button
             android:id="@+id/button_dialog_fragment_add_person_confirmation"
+            style="@style/DialogFormButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
-            android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
-            android:fontFamily="@font/roboto_black"
-            android:maxLines="1"
-            android:onClick="@{() -> viewModel.addPerson()}"
-            android:paddingStart="40dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="48dp"
-            android:paddingBottom="8dp"
-            android:text="@string/add_person_dialog_fragment_confirm"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+            android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
+            android:onClick="@{() -> viewModel.addPerson()}"
+            android:text="@string/add_person_dialog_fragment_confirm"
             android:textColor="@color/dark_yellow"
-            app:autoSizeMaxTextSize="@dimen/max_text_size_dialog_add_person_confirm_text"
-            app:autoSizeMinTextSize="@dimen/min_text_size_dialog_add_person_confirm_text"
-            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -155,12 +141,11 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
-android:layout_marginBottom="8dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/ic_cake_gray_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/date_picker_dialog_fragment_add_person"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/date_picker_dialog_fragment_add_person" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,25 +1,34 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.AddTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.task.AddTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTaskGroup): ViewModel() {
+class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTaskGroup) :
+    ViewModel() {
 
     val taskGroupTitle = MutableLiveData<String>()
 
+    private val _finishedAdding = MutableLiveData<Boolean>()
+    val finishedAdding: LiveData<Boolean>
+        get() = _finishedAdding
+
     fun addTaskGroup() {
-        addTaskGroupUseCase.invoke(viewModelScope, AddTaskGroup.Params(SingleTaskGroup(taskGroupTitle.value ?: ""))) {
+        addTaskGroupUseCase.invoke(
+            viewModelScope,
+            AddTaskGroup.Params(SingleTaskGroup(taskGroupTitle.value ?: ""))
+        ) {
             it.either(::onAddSingleTaskGroupFailure, ::onAddSingleTaskGroupSuccess)
         }
     }
 
     fun onAddSingleTaskGroupSuccess(newTaskGroupId: Long) {
-
+        _finishedAdding.postValue(true)
     }
 
     fun onAddSingleTaskGroupFailure(failure: Failure) {

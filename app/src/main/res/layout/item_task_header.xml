@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="headerItem"
             type="one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem.TaskListHeader" />
@@ -14,49 +16,117 @@
         <variable
             name="addClickListener"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="editClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="editionSubmitClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relative_layout_item_task_header_container"
+    <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
+        android:id="@+id/swipe_layout_item_task_header_root"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/colorPrimary"
-        android:clickable="true"
-        android:onClick="@{expanderClickListener}">
+        app:contentView="@+id/relative_layout_item_task_header_container"
+        app:leftMenuView="@+id/button_item_task_header_remove"
+        app:rightMenuView="@id/linear_layout_item_task_header_right_menu">
 
-        <TextView
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relative_layout_item_task_header_container"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:text="@{headerItem.name}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_view_item_task_header_edit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/blue"
+            android:clickable="true"
+            android:onClick="@{expanderClickListener}">
 
-        <ImageView
-            android:id="@+id/image_view_item_task_header_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_edit_white_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/edit_text_item_task_header_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:clickable="@{headerItem.edited}"
+                android:enabled="@{headerItem.edited}"
+                android:focusable="@{headerItem.edited}"
+                android:focusableInTouchMode="@{headerItem.edited}"
+                android:gravity="center_vertical|start"
+                android:text="@{headerItem.name}"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_item_task_header_submit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/image_view_item_task_header_add"
+            <ImageButton
+                android:id="@+id/button_item_task_header_submit"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:drawablePadding="0dp"
+                android:onClick="@{editionSubmitClickListener}"
+                android:paddingTop="10dp"
+                android:paddingBottom="4dp"
+                android:src="@drawable/ic_check_dark_yellow_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/button_item_task_header_remove"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:onClick="@{addClickListener}"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_add_white_32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_view_item_task_header_edit"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/item_person_swipe_update_background"
+            android:drawableTop="@drawable/ic_delete_white_24dp"
+            android:drawablePadding="0dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="4dp"
+            android:text="Delete"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_item_task_header_right_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_item_task_header_add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:drawableTop="@drawable/ic_add_white_32dp"
+                android:drawablePadding="0dp"
+                android:onClick="@{addClickListener}"
+                android:paddingTop="10dp"
+                android:paddingBottom="4dp"
+                android:text="Add"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/button_item_task_header_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:drawableTop="@drawable/ic_edit_white_24dp"
+                android:drawablePadding="0dp"
+                android:onClick="@{editClickListener}"
+                android:paddingTop="10dp"
+                android:paddingBottom="4dp"
+                android:text="Edit"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 </layout>
