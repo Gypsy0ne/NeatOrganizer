@@ -3,27 +3,30 @@ package one.gypsy.neatorganizer.presentation.tasks.model
 sealed class TaskListItem(
     open val id: Long,
     open val name: String,
-    open var visible: Boolean,
-    open val groupId: Long
+    open val visible: Boolean,
+    open val groupId: Long,
+    open val edited: Boolean
 
 ) {
     data class TaskListHeader(
         override val id: Long,
         override val name: String,
-        override var visible: Boolean,
+        override val visible: Boolean,
         override val groupId: Long = id,
+        override val edited: Boolean = false,
         val subItemsCount: Int = 0,
-        var expanded: Boolean = false
-    ) : TaskListItem(id, name, visible, id) {
+        val expanded: Boolean = false
+    ) : TaskListItem(id, name, visible, id, edited) {
     }
 
     data class TaskListSubItem(
         override val id: Long,
         override val name: String,
-        override var visible: Boolean,
+        override val visible: Boolean,
         override val groupId: Long = 0,
-        var done: Boolean = false
-    ) : TaskListItem(id, name, visible, groupId) {
+        override val edited: Boolean = false,
+        val done: Boolean = false
+    ) : TaskListItem(id, name, visible, groupId, edited) {
     }
 }
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.AddTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.task.AddTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 

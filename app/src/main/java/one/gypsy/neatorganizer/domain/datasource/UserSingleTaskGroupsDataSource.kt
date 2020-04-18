@@ -20,6 +20,8 @@ class UserSingleTaskGroupsDataSource @Inject constructor(val singleTaskGroupsDao
             mapTaskGroupsEntitiesToEntries(taskGroups)
         }
 
+    override suspend fun update(singleTaskGroup: SingleTaskGroup) =
+        singleTaskGroupsDao.update(SingleTaskGroupEntity(singleTaskGroup.name, singleTaskGroup.id))
 
     private fun mapTaskGroupsEntitiesToEntries(taskGroupEntities: List<GroupWithSingleTasks>) =
         taskGroupEntities.map {

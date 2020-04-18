@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.interactors.AddTask
+import one.gypsy.neatorganizer.domain.interactors.task.AddTask
 import one.gypsy.neatorganizer.utils.Failure
 
 class AddTaskViewModel @AssistedInject constructor(
