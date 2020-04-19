@@ -3,13 +3,18 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.GetAllGroupsWithSingleTasks
+import one.gypsy.neatorganizer.domain.interactors.task.UpdateTask
 import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks, var updateSingleTaskGroupUseCase: UpdateTaskGroup) :
+class TasksViewModel @Inject constructor(
+    var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks,
+    var updateSingleTaskGroupUseCase: UpdateTaskGroup,
+    var updateSingleTaskUseCase: UpdateTask
+) :
     ViewModel() {
 
     val taskListMapper = TaskListMapper()
@@ -25,7 +30,6 @@ class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase:
                 )
             }
         }
-
     val listedTasks: LiveData<List<TaskListItem>> = Transformations.map(_listedTasks) { tasks ->
         tasks.filter { it.visible }
     }
@@ -51,7 +55,6 @@ class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase:
         }
     }
 
-
     private fun onGetAllGroupsWithSingleTasksFailure(failure: Failure) {
 
     }
@@ -67,9 +70,13 @@ class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase:
     }
 
     fun onEditionSubmit(headerItem: TaskListItem.TaskListHeader) {
-        val updatedTaskGroup = allTasks.value?.find { it.id == headerItem.id }?.copy(name = headerItem.name)
+        val updatedTaskGroup =
+            allTasks.value?.find { it.id == headerItem.id }?.copy(name = headerItem.name)
         if (updatedTaskGroup != null) {
-            updateSingleTaskGroupUseCase.invoke(viewModelScope, UpdateTaskGroup.Params(updatedTaskGroup)) {
+            updateSingleTaskGroupUseCase.invoke(
+                viewModelScope,
+                UpdateTaskGroup.Params(updatedTaskGroup)
+            ) {
                 it.either(
                     ::onUpdateSingleTaskGroupFailure,
                     ::onUpdateSingleTaskGroupSuccess
@@ -86,6 +93,34 @@ class TasksViewModel @Inject constructor(var getAllGroupsWithSingleTasksUseCase:
 
 
     private fun onUpdateSingleTaskGroupFailure(failure: Failure) {
+
+    }
+
+    fun onEditionSubmit(subItem: TaskListItem.TaskListSubItem) {
+        val updatedTask =
+            allTasks.value?.find { it.id == subItem.groupId }
+                ?.tasks?.find { it.id == subItem.id }
+                ?.copy(name = subItem.name)
+        if (updatedTask != null) {
+            updateSingleTaskUseCase.invoke(
+                viewModelScope,
+                UpdateTask.Params(updatedTask)
+            ) {
+                it.either(
+                    ::onUpdateSingleTaskFailure,
+                    ::onUpdateSingleTaskSuccess
+                )
+            }
+        } else {
+            // TODO handle case
+        }
+    }
+
+    private fun onUpdateSingleTaskSuccess(unit: Unit) {
+
+    }
+
+    private fun onUpdateSingleTaskFailure(failure: Failure) {
 
     }
 }

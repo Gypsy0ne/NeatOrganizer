@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "routine_tasks")
 data class RoutineTaskEntity(
-    override val description: String,
+    override val name: String,
     override val done: Boolean,
     @PrimaryKey(autoGenerate = true) override var id: Long = 0
 ) : Task()

@@ -6,6 +6,7 @@ import one.gypsy.neatorganizer.data.repositories.*
 import one.gypsy.neatorganizer.domain.interactors.*
 import one.gypsy.neatorganizer.domain.interactors.task.AddTask
 import one.gypsy.neatorganizer.domain.interactors.task.AddTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.task.UpdateTask
 import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
 
 @Module
@@ -55,6 +56,14 @@ class UseCaseModule {
     fun provideUpdateSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): UpdateTaskGroup {
         return UpdateTaskGroup(
             singleTaskGroupsRepository
+        )
+    }
+
+
+    @Provides
+    fun provideUpdateSingleTask(singleTasksRepository: SingleTasksRepository): UpdateTask {
+        return UpdateTask(
+            singleTasksRepository
         )
     }
 

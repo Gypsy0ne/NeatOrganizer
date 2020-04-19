@@ -32,7 +32,7 @@ class UserSingleTaskGroupsDataSource @Inject constructor(val singleTaskGroupsDao
 
     private fun mapTaskEntityToEntries(taskEntities: List<SingleTaskEntity>) =
         taskEntities.map {
-            SingleTaskEntry(it.id, it.description, it.done, it.groupId)
+            SingleTaskEntry(it.id, it.name, it.done, it.groupId)
 
         }
 }

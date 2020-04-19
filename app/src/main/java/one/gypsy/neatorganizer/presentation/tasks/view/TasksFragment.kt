@@ -30,20 +30,24 @@ class TasksFragment : SectionFragment() {
 
     val headerClickListener by lazy {
         object: TaskHeaderViewHolder.ClickListener {
-            override fun onExpanderClick(taskItem: TaskListItem.TaskListHeader) {
-                tasksViewModel.onExpanderClicked(taskItem)
+            override fun onExpanderClick(headerItem: TaskListItem.TaskListHeader) {
+                tasksViewModel.onExpanderClicked(headerItem)
             }
 
-            override fun onEditionSubmitClick(taskItem: TaskListItem.TaskListHeader) {
-                tasksViewModel.onEditionSubmit(taskItem)
+            override fun onEditionSubmitClick(headerItem: TaskListItem.TaskListHeader) {
+                tasksViewModel.onEditionSubmit(headerItem)
             }
         }
     }
 
     val subItemClickListener by lazy {
         object: TaskSubItemViewHolder.ClickListener {
-            override fun onViewClick(headerItem: TaskListItem.TaskListSubItem) {
+            override fun onDoneClick(subItem: TaskListItem.TaskListSubItem) {
                 tasksViewModel
+            }
+
+            override fun onEditionSubmitClick(subItem: TaskListItem.TaskListSubItem) {
+                tasksViewModel.onEditionSubmit(subItem)
             }
 
         }
@@ -81,19 +85,9 @@ class TasksFragment : SectionFragment() {
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
         tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
         executePendingBindings()
     }
-
-//    private fun createTasksAdapter() = SectionedRecyclerViewAdapter().apply {
-//        //TODO
-//    }
-
-
 }

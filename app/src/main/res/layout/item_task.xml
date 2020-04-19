@@ -1,30 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="name"
-            type="String" />
+            name="taskSubItem"
+            type="one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem.TaskListSubItem" />
 
         <variable
-            name="done"
-            type="Boolean" />
+            name="editClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="editionSubmitClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="removeClickListener"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
+        android:id="@+id/swipe_layout_item_task_root"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_item_grouped_task_container"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:background="@color/home_blue"
-        android:elevation="12dp">
+        android:layout_height="64dp"
+        app:contentView="@+id/constraint_layout_item_task_container"
+        app:leftMenuView="@+id/button_item_task_remove"
+        app:rightMenuView="@+id/button_item_task_edit">
 
-        <TextView
-            android:id="@+id/text_view_item_task_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_task_container"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/height_item_grouped_task_container"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/home_blue"
+            android:elevation="12dp">
+
+            <EditText
+                android:id="@+id/edit_text_item_task_name"
+                strokeThrough="@{taskSubItem.done}"
+                android:clickable="@{taskSubItem.edited}"
+                android:enabled="@{taskSubItem.edited}"
+                android:focusable="@{taskSubItem.edited}"
+                android:focusableInTouchMode="@{taskSubItem.edited}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@{taskSubItem.name}" />
+
+            <ImageButton
+                android:id="@+id/button_item_task_submit"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:drawablePadding="0dp"
+                android:onClick="@{editionSubmitClickListener}"
+                android:paddingTop="10dp"
+                android:paddingBottom="4dp"
+                android:src="@drawable/ic_check_dark_yellow_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/button_item_task_remove"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            strokeThrough="@{done}"
-            android:text="@{name}"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/item_person_swipe_update_background"
+            android:drawableTop="@drawable/ic_delete_white_24dp"
+            android:drawablePadding="0dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="4dp"
+            android:text="Delete"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_item_task_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/item_person_swipe_update_background"
+            android:drawableTop="@drawable/ic_edit_white_24dp"
+            android:drawablePadding="0dp"
+            android:onClick="@{editClickListener}"
+            android:paddingTop="10dp"
+            android:paddingBottom="4dp"
+            android:text="Edit"
+            android:textColor="@color/white" />
+    </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 </layout>

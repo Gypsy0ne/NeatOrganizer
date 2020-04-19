@@ -22,6 +22,10 @@
             type="android.view.View.OnClickListener" />
 
         <variable
+            name="removeClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="editionSubmitClickListener"
             type="android.view.View.OnClickListener" />
     </data>
@@ -32,7 +36,7 @@
         android:layout_height="64dp"
         app:contentView="@+id/relative_layout_item_task_header_container"
         app:leftMenuView="@+id/button_item_task_header_remove"
-        app:rightMenuView="@id/linear_layout_item_task_header_right_menu">
+        app:rightMenuView="@+id/linear_layout_item_task_header_right_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relative_layout_item_task_header_container"
@@ -88,6 +92,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="4dp"
             android:text="Delete"
+            android:onClick="@{removeClickListener}"
             android:textColor="@color/white" />
 
         <LinearLayout

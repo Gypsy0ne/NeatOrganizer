@@ -6,7 +6,8 @@ import one.gypsy.neatorganizer.data.database.entity.Task
 
 @Entity(tableName = "single_tasks")
 data class SingleTaskEntity(
+    @PrimaryKey(autoGenerate = true) override var id: Long = 0,
     val groupId: Long,
-    override val description: String,
-    override val done: Boolean,
-    @PrimaryKey(autoGenerate = true) override var id: Long = 0) : Task()
+    override val name: String,
+    override val done: Boolean
+    ) : Task()
