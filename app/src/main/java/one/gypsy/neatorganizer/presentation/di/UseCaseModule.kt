@@ -71,4 +71,12 @@ class UseCaseModule {
     }
 
 
+    @Provides
+    fun provideRemoveSingleTask(singleTasksRepository: SingleTasksRepository): RemoveTask {
+        return RemoveTask(
+            singleTasksRepository
+        )
+    }
+
+
 }

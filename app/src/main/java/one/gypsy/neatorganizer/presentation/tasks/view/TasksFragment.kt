@@ -54,6 +54,10 @@ class TasksFragment : SectionFragment() {
                 tasksViewModel.onEditionSubmit(subItem)
             }
 
+            override fun onRemoveClick(subItem: TaskListItem.TaskListSubItem) {
+                tasksViewModel.onRemove(subItem)
+            }
+
         }
     }
 

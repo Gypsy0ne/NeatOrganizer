@@ -9,8 +9,9 @@ class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener:
     private lateinit var holderData: TaskListItem.TaskListSubItem
 
     interface ClickListener {
-        fun onDoneClick(headerItem: TaskListItem.TaskListSubItem)
-        fun onEditionSubmitClick(headerItem: TaskListItem.TaskListSubItem)
+        fun onDoneClick(subItem: TaskListItem.TaskListSubItem)
+        fun onEditionSubmitClick(subItem: TaskListItem.TaskListSubItem)
+        fun onRemoveClick(subItem: TaskListItem.TaskListSubItem)
     }
 
     override fun bind(data: TaskListItem) {
@@ -19,6 +20,7 @@ class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener:
 
         setUpEditListener()
         setUpEditionSubmitListener()
+        setUpRemoveListener()
 
         itemBinding.apply {
             taskSubItem = holderData
@@ -55,6 +57,13 @@ class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener:
                 name = itemBinding.editTextItemTaskName.text.toString()
             )
             clickListener.onEditionSubmitClick(holderData)
+        }
+    }
+
+    private fun setUpRemoveListener() {
+        itemBinding.setRemoveClickListener {
+            itemBinding.swipeLayoutItemTaskRoot.resetStatus()
+            clickListener.onRemoveClick(holderData)
         }
     }
 }

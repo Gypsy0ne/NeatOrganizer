@@ -24,4 +24,13 @@ class UserSingleTasksDataSource @Inject constructor(var singleTasksDao: SingleTa
             done = singleTaskEntry.done
         )
     )
+
+    override suspend fun remove(singleTaskEntry: SingleTaskEntry) = singleTasksDao.delete(
+        SingleTaskEntity(
+            id = singleTaskEntry.id,
+            groupId = singleTaskEntry.groupId,
+            name = singleTaskEntry.name,
+            done = singleTaskEntry.done
+        )
+    )
 }

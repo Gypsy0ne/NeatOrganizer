@@ -7,5 +7,5 @@ import javax.inject.Inject
 class SingleTasksRepository @Inject constructor(var dataSource: SingleTasksDataSource) {
     suspend fun addSingleTask(singleTask: SingleTaskEntry) = dataSource.add(singleTask)
     suspend fun updateSingleTask(singleTask: SingleTaskEntry) = dataSource.update(singleTask)
-
+    suspend fun removeSingleTask(singleTask: SingleTaskEntry) = dataSource.remove(singleTask)
 }

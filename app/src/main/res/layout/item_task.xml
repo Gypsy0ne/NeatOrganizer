@@ -78,6 +78,7 @@
             android:drawablePadding="0dp"
             android:paddingTop="10dp"
             android:paddingBottom="4dp"
+            android:onClick="@{removeClickListener}"
             android:text="Delete"
             android:textColor="@color/white" />
 
