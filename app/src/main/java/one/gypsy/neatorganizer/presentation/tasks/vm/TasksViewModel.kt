@@ -3,6 +3,7 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.GetAllGroupsWithSingleTasks
+import one.gypsy.neatorganizer.domain.interactors.task.RemoveTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.task.UpdateTask
 import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
@@ -13,7 +14,8 @@ import javax.inject.Inject
 class TasksViewModel @Inject constructor(
     var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks,
     var updateSingleTaskGroupUseCase: UpdateTaskGroup,
-    var updateSingleTaskUseCase: UpdateTask
+    var updateSingleTaskUseCase: UpdateTask,
+    var removeSingleTaskGroupUseCase: RemoveTaskGroup
 ) :
     ViewModel() {
 
@@ -59,7 +61,7 @@ class TasksViewModel @Inject constructor(
 
     }
 
-    fun onExpanderClicked(headerItem: TaskListItem.TaskListHeader) {
+    fun onExpand(headerItem: TaskListItem.TaskListHeader) {
         _listedTasks.postValue(_listedTasks.value?.map {
             if (it is TaskListItem.TaskListSubItem && it.groupId == headerItem.groupId) {
                 it.copy(visible = headerItem.expanded)
@@ -123,4 +125,32 @@ class TasksViewModel @Inject constructor(
     private fun onUpdateSingleTaskFailure(failure: Failure) {
 
     }
+
+    fun onRemove(headerItem: TaskListItem.TaskListHeader) {
+        val removedGroup =
+            allTasks.value?.find { it.id == headerItem.groupId }
+        if (removedGroup != null) {
+            removeSingleTaskGroupUseCase.invoke(
+                viewModelScope,
+                RemoveTaskGroup.Params(removedGroup)
+            ) {
+                it.either(
+                    ::onUpdateSingleTaskFailure,
+                    ::onUpdateSingleTaskSuccess
+                )
+            }
+        } else {
+            // TODO handle case
+        }
+    }
+
+    private fun onRemoveSingleTaskGroupSuccess(unit: Unit) {
+
+    }
+
+    private fun onRemoveSingleTaskGroupFailure(failure: Failure) {
+
+    }
+
+
 }

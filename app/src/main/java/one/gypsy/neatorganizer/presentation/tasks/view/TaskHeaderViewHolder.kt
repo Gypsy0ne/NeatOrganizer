@@ -14,8 +14,9 @@ class TaskHeaderViewHolder(
     lateinit var holderData: TaskListItem.TaskListHeader
 
     interface ClickListener {
-        fun onExpanderClick(taskItem: TaskListItem.TaskListHeader)
-        fun onEditionSubmitClick(taskItem: TaskListItem.TaskListHeader)
+        fun onExpanderClick(headerItem: TaskListItem.TaskListHeader)
+        fun onEditionSubmitClick(headerItem: TaskListItem.TaskListHeader)
+        fun onRemoveClick(headerItem: TaskListItem.TaskListHeader)
     }
 
     override fun bind(data: TaskListItem) {
@@ -26,6 +27,7 @@ class TaskHeaderViewHolder(
         setUpEditListener()
         setUpEditionSubmitListener()
         setUpExpanderListener()
+        setUpRemoveListener()
 
         itemBinding.apply {
             headerItem = holderData
@@ -83,6 +85,13 @@ class TaskHeaderViewHolder(
                 name = itemBinding.editTextItemTaskHeaderName.text.toString()
             )
             itemClickListener.onEditionSubmitClick(holderData)
+        }
+    }
+
+    private fun setUpRemoveListener() {
+        itemBinding.setRemoveClickListener {
+            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
+            itemClickListener.onRemoveClick(holderData)
         }
     }
 

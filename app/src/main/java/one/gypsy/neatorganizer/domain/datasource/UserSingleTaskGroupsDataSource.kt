@@ -13,7 +13,15 @@ import javax.inject.Inject
 class UserSingleTaskGroupsDataSource @Inject constructor(val singleTaskGroupsDao: SingleTaskGroupsDao) :
     SingleTaskGroupsDataSource {
     override suspend fun add(singleTaskGroup: SingleTaskGroup) =
-        singleTaskGroupsDao.insert(SingleTaskGroupEntity(singleTaskGroup.name))
+        singleTaskGroupsDao.insert(SingleTaskGroupEntity(name = singleTaskGroup.name))
+
+    override suspend fun remove(singleTaskGroup: SingleTaskGroup) =
+        singleTaskGroupsDao.delete(
+            SingleTaskGroupEntity(
+                id = singleTaskGroup.id,
+                name = singleTaskGroup.name
+            )
+        )
 
     override suspend fun getAllSingleTaskGroups(): LiveData<List<SingleTaskGroup>> =
         Transformations.map(singleTaskGroupsDao.getAllGroupsWithSingleTasks()) { taskGroups ->
@@ -32,7 +40,11 @@ class UserSingleTaskGroupsDataSource @Inject constructor(val singleTaskGroupsDao
 
     private fun mapTaskEntityToEntries(taskEntities: List<SingleTaskEntity>) =
         taskEntities.map {
-            SingleTaskEntry(it.id, it.name, it.done, it.groupId)
-
+            SingleTaskEntry(
+                id = it.id,
+                name = it.name,
+                done = it.done,
+                groupId = it.groupId
+            )
         }
 }

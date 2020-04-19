@@ -31,11 +31,15 @@ class TasksFragment : SectionFragment() {
     val headerClickListener by lazy {
         object: TaskHeaderViewHolder.ClickListener {
             override fun onExpanderClick(headerItem: TaskListItem.TaskListHeader) {
-                tasksViewModel.onExpanderClicked(headerItem)
+                tasksViewModel.onExpand(headerItem)
             }
 
             override fun onEditionSubmitClick(headerItem: TaskListItem.TaskListHeader) {
                 tasksViewModel.onEditionSubmit(headerItem)
+            }
+
+            override fun onRemoveClick(headerItem: TaskListItem.TaskListHeader) {
+                tasksViewModel.onRemove(headerItem)
             }
         }
     }
