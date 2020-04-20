@@ -128,6 +128,34 @@ class TasksViewModel @Inject constructor(
 
     }
 
+    fun onTaskDone(subItem: TaskListItem.TaskListSubItem) {
+        val updatedTask =
+            allTasks.value?.find { it.id == subItem.groupId }
+                ?.tasks?.find { it.id == subItem.id }
+                ?.copy(done = subItem.done)
+        if (updatedTask != null) {
+            updateSingleTaskUseCase.invoke(
+                viewModelScope,
+                UpdateTask.Params(updatedTask)
+            ) {
+                it.either(
+                    ::onSingleTaskStatusUpdateFailure,
+                    ::onSingleTaskStatusUpdateSuccess
+                )
+            }
+        } else {
+            // TODO handle case
+        }
+    }
+
+    private fun onSingleTaskStatusUpdateSuccess(unit: Unit) {
+
+    }
+
+    private fun onSingleTaskStatusUpdateFailure(failure: Failure) {
+
+    }
+
     fun onRemove(headerItem: TaskListItem.TaskListHeader) {
         val removedGroup =
             allTasks.value?.find { it.id == headerItem.groupId }

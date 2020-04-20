@@ -20,6 +20,10 @@
             name="removeClickListener"
             type="android.view.View.OnClickListener" />
 
+        <variable
+            name="doneClickListener"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
@@ -28,7 +32,7 @@
         android:layout_height="64dp"
         app:contentView="@+id/constraint_layout_item_task_container"
         app:leftMenuView="@+id/button_item_task_remove"
-        app:rightMenuView="@+id/button_item_task_edit">
+        app:rightMenuView="@+id/linear_layout_item_task_right_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_task_container"
@@ -42,7 +46,8 @@
             <EditText
                 android:id="@+id/edit_text_item_task_name"
                 strokeThrough="@{taskSubItem.done}"
-                android:clickable="@{taskSubItem.edited}"
+                android:onClick="@{doneClickListener}"
+                android:clickable="@{true}"
                 android:enabled="@{taskSubItem.edited}"
                 android:focusable="@{taskSubItem.edited}"
                 android:focusableInTouchMode="@{taskSubItem.edited}"
@@ -82,20 +87,45 @@
             android:text="Delete"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/button_item_task_edit"
+
+        <LinearLayout
+            android:id="@+id/linear_layout_item_task_right_menu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/item_person_swipe_update_background"
-            android:drawableTop="@drawable/ic_edit_white_24dp"
-            android:drawablePadding="0dp"
-            android:onClick="@{editClickListener}"
-            android:paddingTop="10dp"
-            android:paddingBottom="4dp"
-            android:text="Edit"
-            android:textColor="@color/white" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_item_task_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:drawableTop="@drawable/ic_edit_white_24dp"
+                android:drawablePadding="0dp"
+                android:onClick="@{editClickListener}"
+                android:paddingTop="10dp"
+                android:paddingBottom="4dp"
+                android:text="Edit"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/button_item_task_check"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:drawableTop="@drawable/ic_check_dark_yellow_24dp"
+                android:drawablePadding="0dp"
+                android:onClick="@{doneClickListener}"
+                android:paddingTop="10dp"
+                android:paddingBottom="4dp"
+                android:text="Check"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 </layout>

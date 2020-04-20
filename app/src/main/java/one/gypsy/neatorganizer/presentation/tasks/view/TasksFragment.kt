@@ -47,7 +47,7 @@ class TasksFragment : SectionFragment() {
     val subItemClickListener by lazy {
         object: TaskSubItemViewHolder.ClickListener {
             override fun onDoneClick(subItem: TaskListItem.TaskListSubItem) {
-                tasksViewModel
+                tasksViewModel.onTaskDone(subItem)
             }
 
             override fun onEditionSubmitClick(subItem: TaskListItem.TaskListSubItem) {

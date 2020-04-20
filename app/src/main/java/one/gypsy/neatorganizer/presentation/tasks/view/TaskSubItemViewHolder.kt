@@ -21,6 +21,7 @@ class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener:
         setUpEditListener()
         setUpEditionSubmitListener()
         setUpRemoveListener()
+        setUpDoneListener()
 
         itemBinding.apply {
             taskSubItem = holderData
@@ -64,6 +65,16 @@ class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener:
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskRoot.resetStatus()
             clickListener.onRemoveClick(holderData)
+        }
+    }
+
+    private fun setUpDoneListener() {
+        itemBinding.setDoneClickListener {
+            holderData = holderData.copy(
+                done = !holderData.done
+            )
+            itemBinding.swipeLayoutItemTaskRoot.resetStatus()
+            clickListener.onDoneClick(holderData)
         }
     }
 }
