@@ -46,8 +46,7 @@
             <EditText
                 android:id="@+id/edit_text_item_task_name"
                 strokeThrough="@{taskSubItem.done}"
-                android:onClick="@{doneClickListener}"
-                android:clickable="@{true}"
+                android:clickable="@{taskSubItem.edited}"
                 android:enabled="@{taskSubItem.edited}"
                 android:focusable="@{taskSubItem.edited}"
                 android:focusableInTouchMode="@{taskSubItem.edited}"

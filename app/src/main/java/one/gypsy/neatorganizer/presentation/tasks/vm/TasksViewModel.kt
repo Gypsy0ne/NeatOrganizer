@@ -65,7 +65,7 @@ class TasksViewModel @Inject constructor(
 
     fun onExpand(headerItem: TaskListItem.TaskListHeader) {
         _listedTasks.postValue(_listedTasks.value?.map {
-            if (it is TaskListItem.TaskListSubItem && it.groupId == headerItem.groupId) {
+            if (it is TaskListItem.TaskListSubItem && it.groupId == headerItem.id) {
                 it.copy(visible = headerItem.expanded)
             } else {
                 it
@@ -158,7 +158,7 @@ class TasksViewModel @Inject constructor(
 
     fun onRemove(headerItem: TaskListItem.TaskListHeader) {
         val removedGroup =
-            allTasks.value?.find { it.id == headerItem.groupId }
+            allTasks.value?.find { it.id == headerItem.id }
         if (removedGroup != null) {
             removeSingleTaskGroupUseCase.invoke(
                 viewModelScope,

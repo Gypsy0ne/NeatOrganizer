@@ -67,7 +67,7 @@ class TaskHeaderViewHolder(
     private fun setUpAddListener() {
         itemBinding.setAddClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            navigateToAddTask(holderData.groupId, itemBinding.root)
+            navigateToAddTask(holderData.id, itemBinding.root)
         }
     }
 
@@ -94,6 +94,5 @@ class TaskHeaderViewHolder(
             itemClickListener.onRemoveClick(holderData)
         }
     }
-
 
 }

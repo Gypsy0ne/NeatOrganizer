@@ -21,7 +21,7 @@ class GroupedTasksAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder =
         TaskViewType.values().first { it.resId == viewType }
-            .getHolder(parent, headerClickListener, subItemClickListener)
+            .getHolder(LayoutInflater.from(parent.context), parent, headerClickListener, subItemClickListener)
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -34,7 +34,7 @@ class GroupedTasksAdapter(
     class DiffCallback : DiffUtil.ItemCallback<TaskListItem>() {
 
         override fun areItemsTheSame(oldItem: TaskListItem, newItem: TaskListItem): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id && oldItem::class == newItem::class
         }
 
         override fun areContentsTheSame(oldItem: TaskListItem, newItem: TaskListItem): Boolean {
@@ -54,18 +54,19 @@ fun TaskListItem.getViewHolderType(): Int = when (this) {
 }
 
 fun TaskViewType.getHolder(
+    inflater: LayoutInflater,
     parent: ViewGroup,
     headerClickListener: TaskHeaderViewHolder.ClickListener,
     subItemClickListener: TaskSubItemViewHolder.ClickListener
 ) = when (this) {
     TaskViewType.HEADER -> TaskHeaderViewHolder(
         DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context), resId, parent, false
+            inflater, resId, parent, false
         ), headerClickListener
     )
     TaskViewType.SUB_ITEM -> TaskSubItemViewHolder(
         DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
+            inflater,
             resId,
             parent,
             false
