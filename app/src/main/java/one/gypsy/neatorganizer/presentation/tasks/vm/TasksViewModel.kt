@@ -9,6 +9,7 @@ import one.gypsy.neatorganizer.domain.interactors.task.UpdateTask
 import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
+import one.gypsy.neatorganizer.presentation.tasks.model.changeVisibility
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
@@ -26,12 +27,7 @@ class TasksViewModel @Inject constructor(
     private val _listedTasks =
         MediatorLiveData<List<TaskListItem>>().apply {
             addSource(allTasks) { taskGroups ->
-                postValue(
-                    taskListMapper.flattenTaskGroupsToList(
-                        taskGroups,
-                        getExpandedItemsIds() ?: emptyList()
-                    )
-                )
+                postValue(mapToVisibleListItems(taskGroups))
             }
         }
     val listedTasks: LiveData<List<TaskListItem>> = Transformations.map(_listedTasks) { tasks ->
@@ -39,13 +35,19 @@ class TasksViewModel @Inject constructor(
     }
 
     init {
-        _listedTasks
         getAllGroupsWithSingleTasksUseCase.invoke(viewModelScope, Unit) {
             it.either(
                 ::onGetAllGroupsWithSingleTasksFailure,
                 ::onGetAllGroupsWithSingleTasksSuccess
             )
         }
+    }
+
+    private fun mapToVisibleListItems(taskGroups: List<SingleTaskGroup>): List<TaskListItem> {
+        return taskListMapper.flattenTaskGroupsToList(
+            taskGroups,
+            getExpandedItemsIds() ?: emptyList()
+        )
     }
 
     private fun getExpandedItemsIds(): List<Long>? =
@@ -63,31 +65,58 @@ class TasksViewModel @Inject constructor(
 
     }
 
+    private fun findTask(taskId: Long, taskGroupId: Long) =
+        findTaskGroup(taskGroupId)
+            ?.tasks?.find { it.id == taskId }
+
+    private fun findTaskGroup(groupId: Long) =
+        allTasks.value?.find { it.id == groupId }
+
+
     fun onExpand(headerItem: TaskListItem.TaskListHeader) {
         _listedTasks.postValue(_listedTasks.value?.map {
-            if (it is TaskListItem.TaskListSubItem && it.groupId == headerItem.id) {
-                it.copy(visible = headerItem.expanded)
-            } else {
-                it
-            }
+            mapTaskListItem(it, headerItem)
         })
     }
 
+    private fun mapTaskListItem(
+        mappedItem: TaskListItem,
+        headerItem: TaskListItem.TaskListHeader
+    ): TaskListItem {
+        return when {
+            isHeader(mappedItem, headerItem) -> {
+                headerItem
+            }
+            isSubItem(mappedItem, headerItem) -> {
+                mappedItem.changeVisibility(headerItem.expanded)
+            }
+            else -> {
+                mappedItem
+            }
+        }
+    }
+
+    private fun isSubItem(
+        it: TaskListItem,
+        headerItem: TaskListItem.TaskListHeader
+    ) = it is TaskListItem.TaskListSubItem && it.groupId == headerItem.id
+
+    private fun isHeader(
+        it: TaskListItem,
+        headerItem: TaskListItem.TaskListHeader
+    ) = it is TaskListItem.TaskListHeader && it.id == headerItem.id
+
     fun onEditionSubmit(headerItem: TaskListItem.TaskListHeader) {
-        val updatedTaskGroup =
-            allTasks.value?.find { it.id == headerItem.id }?.copy(name = headerItem.name)
-        if (updatedTaskGroup != null) {
+        findTaskGroup(headerItem.id)?.also {
             updateSingleTaskGroupUseCase.invoke(
                 viewModelScope,
-                UpdateTaskGroup.Params(updatedTaskGroup)
-            ) {
-                it.either(
+                UpdateTaskGroup.Params(it.copy(name = headerItem.name))
+            ) { result ->
+                result.either(
                     ::onUpdateSingleTaskGroupFailure,
                     ::onUpdateSingleTaskGroupSuccess
                 )
             }
-        } else {
-            // TODO handle case
         }
     }
 
@@ -101,22 +130,16 @@ class TasksViewModel @Inject constructor(
     }
 
     fun onEditionSubmit(subItem: TaskListItem.TaskListSubItem) {
-        val updatedTask =
-            allTasks.value?.find { it.id == subItem.groupId }
-                ?.tasks?.find { it.id == subItem.id }
-                ?.copy(name = subItem.name)
-        if (updatedTask != null) {
+        findTask(subItem.id, subItem.groupId)?.also {
             updateSingleTaskUseCase.invoke(
                 viewModelScope,
-                UpdateTask.Params(updatedTask)
-            ) {
-                it.either(
+                UpdateTask.Params(it.copy(name = subItem.name))
+            ) { result ->
+                result.either(
                     ::onUpdateSingleTaskFailure,
                     ::onUpdateSingleTaskSuccess
                 )
             }
-        } else {
-            // TODO handle case
         }
     }
 
@@ -129,22 +152,16 @@ class TasksViewModel @Inject constructor(
     }
 
     fun onTaskDone(subItem: TaskListItem.TaskListSubItem) {
-        val updatedTask =
-            allTasks.value?.find { it.id == subItem.groupId }
-                ?.tasks?.find { it.id == subItem.id }
-                ?.copy(done = subItem.done)
-        if (updatedTask != null) {
+        findTask(subItem.id, subItem.groupId)?.also {
             updateSingleTaskUseCase.invoke(
                 viewModelScope,
-                UpdateTask.Params(updatedTask)
-            ) {
-                it.either(
+                UpdateTask.Params(it.copy(done = subItem.done))
+            ) { result ->
+                result.either(
                     ::onSingleTaskStatusUpdateFailure,
                     ::onSingleTaskStatusUpdateSuccess
                 )
             }
-        } else {
-            // TODO handle case
         }
     }
 
@@ -157,20 +174,16 @@ class TasksViewModel @Inject constructor(
     }
 
     fun onRemove(headerItem: TaskListItem.TaskListHeader) {
-        val removedGroup =
-            allTasks.value?.find { it.id == headerItem.id }
-        if (removedGroup != null) {
+        findTaskGroup(headerItem.id)?.also {
             removeSingleTaskGroupUseCase.invoke(
                 viewModelScope,
-                RemoveTaskGroup.Params(removedGroup)
-            ) {
-                it.either(
+                RemoveTaskGroup.Params(it)
+            ) { result ->
+                result.either(
                     ::onUpdateSingleTaskFailure,
                     ::onUpdateSingleTaskSuccess
                 )
             }
-        } else {
-            // TODO handle case
         }
     }
 
@@ -183,21 +196,16 @@ class TasksViewModel @Inject constructor(
     }
 
     fun onRemove(subItem: TaskListItem.TaskListSubItem) {
-        val removedTask = allTasks.value
-            ?.find { it.id == subItem.groupId }
-            ?.tasks?.find { it.id == subItem.id }
-        if (removedTask != null) {
+        findTask(subItem.id, subItem.groupId)?.also {
             removeSingleTaskUseCase.invoke(
                 viewModelScope,
-                RemoveTask.Params(removedTask)
-            ) {
-                it.either(
+                RemoveTask.Params(it)
+            ) { result ->
+                result.either(
                     ::onUpdateSingleTaskFailure,
                     ::onUpdateSingleTaskSuccess
                 )
             }
-        } else {
-            // TODO handle case
         }
     }
 
@@ -208,6 +216,4 @@ class TasksViewModel @Inject constructor(
     private fun onRemoveSingleTaskFailure(failure: Failure) {
 
     }
-
-
 }
