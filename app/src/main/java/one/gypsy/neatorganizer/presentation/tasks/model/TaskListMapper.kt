@@ -22,10 +22,10 @@ class TaskListMapper {
 
     private fun mapTaskEntriesOntoSubItems(
         taskGroup: SingleTaskGroup,
-        expanded: Boolean
+        visible: Boolean
     ): List<TaskListItem> {
         return taskGroup.tasks?.sortedByDescending { it.id }?.map { taskEntry ->
-            taskEntry.toTaskListSubItem(expanded)
+            taskEntry.toTaskListSubItem(visible)
         } ?: emptyList()
     }
 }
