@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
         onUpdate = ForeignKey.CASCADE
     )]
 )
-class RoutineScheduleEntity(
+data class RoutineScheduleEntity(
     val monday: Boolean,
     val tuesday: Boolean,
     val wednesday: Boolean,

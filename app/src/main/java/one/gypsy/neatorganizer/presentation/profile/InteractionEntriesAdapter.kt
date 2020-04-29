@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemInteractionBinding
-import one.gypsy.neatorganizer.domain.dto.InteractionEntry
+import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
 import one.gypsy.neatorganizer.presentation.profile.vm.InteractionEntryViewModel
 
 //TODO implement bind/unbind mechanism

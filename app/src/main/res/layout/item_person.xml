@@ -13,7 +13,7 @@
             name="interactionUpdateClickListener"
             type="android.view.View.OnClickListener" />
 
-        <import type="one.gypsy.neatorganizer.domain.dto.Person.Sex" />
+        <import type="one.gypsy.neatorganizer.domain.dto.people.Person" />
 
         <variable
             name="viewModel"

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.task.AddTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
@@ -21,7 +21,11 @@ class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTask
     fun addTaskGroup() {
         addTaskGroupUseCase.invoke(
             viewModelScope,
-            AddTaskGroup.Params(SingleTaskGroup(taskGroupTitle.value ?: ""))
+            AddTaskGroup.Params(
+                SingleTaskGroup(
+                    taskGroupTitle.value ?: ""
+                )
+            )
         ) {
             it.either(::onAddSingleTaskGroupFailure, ::onAddSingleTaskGroupSuccess)
         }

@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.polyak.iconswitch.IconSwitch
-import one.gypsy.neatorganizer.domain.dto.Person
-import one.gypsy.neatorganizer.domain.dto.PersonEntry
-import one.gypsy.neatorganizer.domain.interactors.AddPerson
-import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
+import one.gypsy.neatorganizer.domain.dto.people.Person
+import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
+import one.gypsy.neatorganizer.domain.interactors.people.AddPerson
+import one.gypsy.neatorganizer.domain.interactors.people.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
 import one.gypsy.neatorganizer.utils.extensions.default
@@ -44,7 +44,9 @@ class AddPersonViewModel @Inject constructor(
         get() = _birthDate
 
 
-    private val _sex = MutableLiveData<Person.Sex>().default(Person.Sex.MALE)
+    private val _sex = MutableLiveData<Person.Sex>().default(
+        Person.Sex.MALE
+    )
     val sex: LiveData<Person.Sex>
         get() = _sex
 
