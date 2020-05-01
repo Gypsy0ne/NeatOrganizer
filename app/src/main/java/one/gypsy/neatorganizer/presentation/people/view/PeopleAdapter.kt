@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.databinding.ItemPersonBinding
-import one.gypsy.neatorganizer.domain.dto.PersonEntry
+import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
 import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
 
 //TODO implement bind/unbind mechanism

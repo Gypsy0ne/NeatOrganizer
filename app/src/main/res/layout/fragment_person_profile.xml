@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="one.gypsy.neatorganizer.domain.dto.Person.Sex" />
+        <import type="one.gypsy.neatorganizer.domain.dto.people.Person" />
         <variable
             name="interactionEntriesAdapter"
             type="one.gypsy.neatorganizer.presentation.profile.InteractionEntriesAdapter" />

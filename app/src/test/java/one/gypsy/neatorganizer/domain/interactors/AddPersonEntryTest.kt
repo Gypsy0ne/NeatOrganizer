@@ -4,8 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import one.gypsy.neatorganizer.TestCoroutineRule
-import one.gypsy.neatorganizer.data.repositories.PeopleRepository
-import one.gypsy.neatorganizer.domain.dto.PersonEntry
+import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
+import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
+import one.gypsy.neatorganizer.domain.interactors.people.AddPerson
 import one.gypsy.neatorganizer.mock
 import one.gypsy.neatorganizer.whenever
 import org.junit.After
@@ -29,7 +30,11 @@ class AddPersonEntryTest {
     private var personEntry: PersonEntry = mock<PersonEntry>()
     private val personParams: AddPerson.Params = mock<AddPerson.Params>()
 
-    val addPersonUseCase by lazy { AddPerson(peopleRepository) }
+    val addPersonUseCase by lazy {
+        AddPerson(
+            peopleRepository
+        )
+    }
 
     @After
     fun cleanUp() {

@@ -1,12 +1,8 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
-import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.GetAllGroupsWithSingleTasks
-import one.gypsy.neatorganizer.domain.interactors.task.RemoveTask
-import one.gypsy.neatorganizer.domain.interactors.task.RemoveTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.task.UpdateTask
-import one.gypsy.neatorganizer.domain.interactors.task.UpdateTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.tasks.*
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.changeVisibility

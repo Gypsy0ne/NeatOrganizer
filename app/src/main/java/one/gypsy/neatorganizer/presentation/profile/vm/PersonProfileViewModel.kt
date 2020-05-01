@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import one.gypsy.neatorganizer.domain.dto.PersonProfile
-import one.gypsy.neatorganizer.domain.interactors.GetPersonProfile
+import one.gypsy.neatorganizer.domain.dto.people.PersonProfile
+import one.gypsy.neatorganizer.domain.interactors.people.GetPersonProfile
 import one.gypsy.neatorganizer.utils.Failure
 
 class PersonProfileViewModel @AssistedInject constructor(var getPersonProfileUseCase: GetPersonProfile, @Assisted val personId: Long): ViewModel() {

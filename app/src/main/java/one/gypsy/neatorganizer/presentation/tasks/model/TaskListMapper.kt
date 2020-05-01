@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.presentation.tasks.model
 
-import one.gypsy.neatorganizer.domain.dto.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 
 class TaskListMapper {
 

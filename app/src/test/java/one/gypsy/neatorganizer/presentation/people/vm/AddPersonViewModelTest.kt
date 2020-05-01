@@ -2,18 +2,19 @@ package one.gypsy.neatorganizer.presentation.people.vm
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.polyak.iconswitch.IconSwitch
-import one.gypsy.neatorganizer.*
-import one.gypsy.neatorganizer.domain.dto.Person
-import one.gypsy.neatorganizer.domain.interactors.AddPerson
-import one.gypsy.neatorganizer.domain.interactors.GetImageBitmap
+import one.gypsy.neatorganizer.InstantExecutorExtension
+import one.gypsy.neatorganizer.TestCoroutineRule
+import one.gypsy.neatorganizer.domain.dto.people.Person
+import one.gypsy.neatorganizer.domain.interactors.people.AddPerson
+import one.gypsy.neatorganizer.domain.interactors.people.GetImageBitmap
+import one.gypsy.neatorganizer.mock
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.reset
 import java.util.*
-import one.gypsy.neatorganizer.domain.dto.PersonEntry
 
 
 @ExtendWith(InstantExecutorExtension::class)

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import one.gypsy.neatorganizer.domain.dto.InteractionEntry
-import one.gypsy.neatorganizer.domain.interactors.AddInteractionEntry
+import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
+import one.gypsy.neatorganizer.domain.interactors.people.AddInteractionEntry
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.UIState
 import one.gypsy.neatorganizer.utils.extensions.default
@@ -39,7 +39,11 @@ class RateInteractionViewModel @AssistedInject constructor(var addInteractionEnt
     // default rating is 3 because there is an issue with setting default value on view creation
     fun submitInteractionEntry() {
         addInteractionEntryUseCase.invoke(viewModelScope, AddInteractionEntry.Params(
-            InteractionEntry(personId, Date(), _rating.value ?: 3)
+            InteractionEntry(
+                personId,
+                Date(),
+                _rating.value ?: 3
+            )
         )) {
             it.either(::onAddInteractionFailure, ::onAddInteractionSuccess)
         }

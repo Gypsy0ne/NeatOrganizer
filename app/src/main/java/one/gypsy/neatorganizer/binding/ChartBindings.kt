@@ -1,9 +1,6 @@
 package one.gypsy.neatorganizer.binding
 
-import android.content.res.Resources
 import android.graphics.Color
-import android.util.TimeUtils
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -14,10 +11,9 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.domain.dto.InteractionEntry
+import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
 import one.gypsy.neatorganizer.utils.AxisDateFormatter
 import one.gypsy.neatorganizer.utils.AxisInteractionFormatter
-import java.util.concurrent.TimeUnit
 
 @BindingAdapter("interactionChartData")
 fun bindInteractionLineChart(lineChart: LineChart, interactionData: List<InteractionEntry>?) {

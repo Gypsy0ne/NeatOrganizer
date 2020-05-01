@@ -1,14 +1,14 @@
 package one.gypsy.neatorganizer.presentation.people.vm
 
-import androidx.lifecycle.*
-import one.gypsy.neatorganizer.domain.dto.InteractionEntry
-import one.gypsy.neatorganizer.domain.dto.PersonEntry
-import one.gypsy.neatorganizer.domain.interactors.AddInteractionEntry
-import one.gypsy.neatorganizer.domain.interactors.GetAllPeople
-import one.gypsy.neatorganizer.utils.CollectionUIState
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
+import one.gypsy.neatorganizer.domain.interactors.people.GetAllPeople
 import one.gypsy.neatorganizer.utils.Failure
-import java.util.*
 import javax.inject.Inject
+
 //TODO https://stackoverflow.com/questions/44270577/android-lifecycle-library-viewmodel-using-dagger-2
 //TODO check if interaction status updates when interaction entry is added
 class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople) : ViewModel() {
