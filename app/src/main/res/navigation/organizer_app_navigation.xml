@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/routines"
-        android:name="one.gypsy.neatorganizer.presentation.routines.RoutinesFragment"
+        android:name="one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment"
         android:label="RoutinesFragment" />
     <dialog
         android:id="@+id/person_add"

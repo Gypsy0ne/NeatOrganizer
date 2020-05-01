@@ -18,7 +18,6 @@ import javax.inject.Inject
 class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
     PeopleDataSource {
 
-
     override suspend fun add(personEntry: PersonEntry) =
         peopleDao.insert(
             PersonEntity(
@@ -29,7 +28,6 @@ class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
                 personEntry.dateOfBirth
             )
         )
-
 
     override suspend fun remove(personEntry: PersonEntry) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -51,7 +49,6 @@ class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
         )
         }
 
-
     override suspend fun getPersonProfileById(personId: Long): LiveData<PersonProfile> =
         Transformations.map(peopleDao.getPersonProfileById(personId)) {
             PersonProfile(
@@ -62,9 +59,9 @@ class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
                 it.person.dateOfBirth,
                 it.interactionHistory.map { it ->
                     InteractionEntry(
-                        it.personProfileId,
-                        it.creationDate,
-                        it.rating
+                        profileId = it.personProfileId,
+                        interactionDate = it.creationDate,
+                        rating = it.rating
                     )
                 }
             )

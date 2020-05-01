@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.data.database.entity.routines
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import one.gypsy.neatorganizer.data.database.entity.Task
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 
 @Entity(
     tableName = "routine_tasks",
@@ -16,8 +16,17 @@ import one.gypsy.neatorganizer.data.database.entity.Task
     )]
 )
 data class RoutineTaskEntity(
-    override val name: String,
-    override val done: Boolean,
+    val name: String,
+    val done: Boolean,
     val routineId: Long,
-    @PrimaryKey(autoGenerate = true) override var id: Long = 0
-) : Task()
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
+)
+
+fun RoutineTaskEntity.toRoutineTaskEntry() =
+    RoutineTaskEntry(
+        id = this.id,
+        routineId = this.routineId,
+        name = this.name,
+        done = this.done
+    )
+

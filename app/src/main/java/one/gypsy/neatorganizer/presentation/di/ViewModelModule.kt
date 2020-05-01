@@ -8,7 +8,6 @@ import dagger.multibindings.IntoMap
 import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
 import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 
 @Suppress("unused")
@@ -33,16 +32,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddTaskGroupViewModel::class)
     abstract fun bindAddTaskGroupViewModel(viewModel: AddTaskGroupViewModel): ViewModel
-
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(RateInteractionViewModel::class)
-//    abstract fun bindRateInteractionViewModelViewModel(viewModel: RateInteractionViewModel): ViewModel
-
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(PersonEntryViewModel::class)
-//    abstract fun bindPersonEntryViewModel(viewModel: PersonEntryViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

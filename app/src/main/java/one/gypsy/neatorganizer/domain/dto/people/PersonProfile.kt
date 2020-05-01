@@ -10,5 +10,4 @@ data class PersonProfile(
     override val lastInteraction: Int,
     override val dateOfBirth: Date,
     val interactionHistory: List<InteractionEntry>
-) :
-    Person
+) : Person

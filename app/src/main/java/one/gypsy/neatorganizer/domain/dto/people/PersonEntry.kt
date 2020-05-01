@@ -3,7 +3,6 @@ package one.gypsy.neatorganizer.domain.dto.people
 import android.graphics.Bitmap
 import java.util.*
 
-
 data class PersonEntry(
     val id: Long = 0,
     override val name: String,
@@ -11,5 +10,4 @@ data class PersonEntry(
     override val photoThumbnail: Bitmap?,
     override val lastInteraction: Int,
     override val dateOfBirth: Date
-) :
-    Person
+) : Person

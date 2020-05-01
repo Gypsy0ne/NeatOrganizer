@@ -31,6 +31,7 @@ interface AppComponent {
     val addTaskViewModelFactory: AddTaskViewModel.Factory
 
 }
+
 @AssistedModule
 @Module(includes = [AssistedInject_AssistedInjectModule::class])
 interface AssistedInjectModule

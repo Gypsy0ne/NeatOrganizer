@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
-import one.gypsy.neatorganizer.data.database.entity.Task
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 
 @Entity(
     tableName = "single_tasks",
@@ -17,8 +17,16 @@ import one.gypsy.neatorganizer.data.database.entity.Task
     )]
 )
 data class SingleTaskEntity(
-    @PrimaryKey(autoGenerate = true) override var id: Long = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val groupId: Long,
-    override val name: String,
-    override val done: Boolean
-) : Task()
+    val name: String,
+    val done: Boolean
+)
+
+fun SingleTaskEntity.toSingleTaskEntry() =
+    SingleTaskEntry(
+        id = this.id,
+        name = this.name,
+        done = this.done,
+        groupId = this.groupId
+    )
