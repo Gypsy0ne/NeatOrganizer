@@ -1,6 +1,17 @@
 package one.gypsy.neatorganizer.data.repositories.routines
 
 import one.gypsy.neatorganizer.domain.datasource.routines.RoutineTasksDataSource
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import javax.inject.Inject
 
-class RoutineTasksRepository @Inject constructor(var dataSource: RoutineTasksDataSource)
+class RoutineTasksRepository @Inject constructor(var dataSource: RoutineTasksDataSource) {
+
+    suspend fun addRoutineTask(routineTaskEntry: RoutineTaskEntry) =
+        dataSource.add(routineTaskEntry)
+
+    suspend fun updateRoutineTask(routineTaskEntry: RoutineTaskEntry) =
+        dataSource.update(routineTaskEntry)
+
+    suspend fun removeRoutineTask(routineTaskEntry: RoutineTaskEntry) =
+        dataSource.remove(routineTaskEntry)
+}

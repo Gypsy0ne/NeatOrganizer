@@ -10,7 +10,8 @@ import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class GetAllGroupsWithSingleTasks @Inject constructor(var dataSource: SingleTaskGroupsRepository): BaseUseCase<LiveData<List<SingleTaskGroup>>, Unit>() {
+class GetAllSingleTaskGroups @Inject constructor(var dataSource: SingleTaskGroupsRepository) :
+    BaseUseCase<LiveData<List<SingleTaskGroup>>, Unit>() {
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<SingleTaskGroup>>> {
         return try {
             withContext(Dispatchers.IO) {
@@ -25,5 +26,5 @@ class GetAllGroupsWithSingleTasks @Inject constructor(var dataSource: SingleTask
         }
     }
 
-    data class GetAllSingleTaskGroupsFailure(val error: Exception): Failure.FeatureFailure()
+    data class GetAllSingleTaskGroupsFailure(val error: Exception) : Failure.FeatureFailure()
 }

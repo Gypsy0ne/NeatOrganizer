@@ -23,7 +23,7 @@ class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTask
             viewModelScope,
             AddTaskGroup.Params(
                 SingleTaskGroup(
-                    taskGroupTitle.value ?: ""
+                    taskGroupTitle.value.orEmpty()
                 )
             )
         ) {

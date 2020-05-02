@@ -7,11 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.AddTask
+import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
 import one.gypsy.neatorganizer.utils.Failure
 
 class AddTaskViewModel @AssistedInject constructor(
-    var addTaskUseCase: AddTask,
+    var addSingleTaskUseCase: AddSingleTask,
     @Assisted val groupId: Long
 ) : ViewModel() {
     val taskTitle = MutableLiveData<String>()
@@ -21,12 +21,12 @@ class AddTaskViewModel @AssistedInject constructor(
         get() = _finishedAdding
 
     fun addTask() {
-        addTaskUseCase.invoke(
+        addSingleTaskUseCase.invoke(
             viewModelScope,
-            AddTask.Params(
+            AddSingleTask.Params(
                 SingleTaskEntry(
                     groupId = groupId,
-                    name = taskTitle.value ?: "",
+                    name = taskTitle.value.orEmpty(),
                     done = false
                 )
             )
@@ -36,12 +36,12 @@ class AddTaskViewModel @AssistedInject constructor(
     }
 
     fun addNextTask() {
-        addTaskUseCase.invoke(
+        addSingleTaskUseCase.invoke(
             viewModelScope,
-            AddTask.Params(
+            AddSingleTask.Params(
                 SingleTaskEntry(
                     groupId = groupId,
-                    name = taskTitle.value ?: "",
+                    name = taskTitle.value.orEmpty(),
                     done = false
                 )
             )

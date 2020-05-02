@@ -5,11 +5,17 @@ import dagger.Provides
 import one.gypsy.neatorganizer.data.repositories.people.FileRepository
 import one.gypsy.neatorganizer.data.repositories.people.InteractionRepository
 import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
+import one.gypsy.neatorganizer.data.repositories.routines.RoutineSchedulesRepository
+import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
+import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTasksRepository
 import one.gypsy.neatorganizer.domain.datasource.people.DeviceFileDataSource
 import one.gypsy.neatorganizer.domain.datasource.people.UserCommunityDataSource
 import one.gypsy.neatorganizer.domain.datasource.people.UserInteractionDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.UserRoutineSchedulesDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.UserRoutineTasksDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.UserRoutinesDataSource
 import one.gypsy.neatorganizer.domain.datasource.tasks.UserSingleTaskGroupsDataSource
 import one.gypsy.neatorganizer.domain.datasource.tasks.UserSingleTasksDataSource
 
@@ -47,6 +53,27 @@ class RepositoryModule {
     @Provides
     fun provideSingleTasksRepository(dataSource: UserSingleTasksDataSource): SingleTasksRepository {
         return SingleTasksRepository(
+            dataSource
+        )
+    }
+
+    @Provides
+    fun provideRoutinesRepository(dataSource: UserRoutinesDataSource): RoutinesRepository {
+        return RoutinesRepository(
+            dataSource
+        )
+    }
+
+    @Provides
+    fun provideRoutineTasksRepository(dataSource: UserRoutineTasksDataSource): RoutineTasksRepository {
+        return RoutineTasksRepository(
+            dataSource
+        )
+    }
+
+    @Provides
+    fun provideRoutineSchedulesRepository(dataSource: UserRoutineSchedulesDataSource): RoutineSchedulesRepository {
+        return RoutineSchedulesRepository(
             dataSource
         )
     }

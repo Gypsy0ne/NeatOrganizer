@@ -7,6 +7,9 @@ import dagger.Provides
 import one.gypsy.neatorganizer.data.database.OrganizerDatabase
 import one.gypsy.neatorganizer.data.database.dao.people.InteractionsDao
 import one.gypsy.neatorganizer.data.database.dao.people.PeopleDao
+import one.gypsy.neatorganizer.data.database.dao.routines.RoutineSchedulesDao
+import one.gypsy.neatorganizer.data.database.dao.routines.RoutineTasksDao
+import one.gypsy.neatorganizer.data.database.dao.routines.RoutinesDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import javax.inject.Singleton
@@ -16,7 +19,11 @@ class DataModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): OrganizerDatabase {
-        return Room.databaseBuilder(application, OrganizerDatabase::class.java, "NeatOrganizer65.db").build()
+        return Room.databaseBuilder(
+            application,
+            OrganizerDatabase::class.java,
+            "NeatOrganizer60.db"
+        ).build()
     }
 
     @Provides
@@ -37,5 +44,20 @@ class DataModule {
     @Provides
     fun provideSingleTasksRepository(organizerDatabase: OrganizerDatabase): SingleTasksDao {
         return organizerDatabase.singleTasksDao()
+    }
+
+    @Provides
+    fun provideRoutinesRepository(organizerDatabase: OrganizerDatabase): RoutinesDao {
+        return organizerDatabase.routinesDao()
+    }
+
+    @Provides
+    fun provideRoutineTasksRepository(organizerDatabase: OrganizerDatabase): RoutineTasksDao {
+        return organizerDatabase.routineTasksDao()
+    }
+
+    @Provides
+    fun provideRoutineSchedulesRepository(organizerDatabase: OrganizerDatabase): RoutineSchedulesDao {
+        return organizerDatabase.routinesSchedulesDao()
     }
 }

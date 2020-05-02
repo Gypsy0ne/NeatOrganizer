@@ -7,3 +7,4 @@ import androidx.room.PrimaryKey
 data class SingleTaskGroupEntity(
     val name: String,
     @PrimaryKey(autoGenerate = true) var id: Long = 0)
+

@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "routines")
 data class RoutineEntity(
-
+    val name: String,
     @PrimaryKey(autoGenerate = true) var id: Long = 0
 )
+

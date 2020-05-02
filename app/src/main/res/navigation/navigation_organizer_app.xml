@@ -25,8 +25,12 @@
     </fragment>
     <fragment
         android:id="@+id/routines"
-        android:name="one.gypsy.neatorganizer.presentation.routines.RoutinesFragment"
-        android:label="RoutinesFragment" />
+        android:name="one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment"
+        android:label="RoutinesFragment">
+        <action
+            android:id="@+id/action_routines_to_addRoutineTaskDialogFragment"
+            app:destination="@id/addRoutineTaskDialogFragment" />
+    </fragment>
     <dialog
         android:id="@+id/person_add"
         android:name="one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment"
@@ -63,4 +67,18 @@
             android:name="groupId"
             app:argType="long" />
     </dialog>
+
+    <dialog
+        android:id="@+id/addRoutineTaskDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineTaskDialogFragment"
+        android:label="AddRoutineTaskDialogFragment">
+        <argument
+            android:name="routineId"
+            app:argType="long" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/routine_add"
+        android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment"
+        android:label="AddRoutineDialogFragment"></dialog>
 </navigation>

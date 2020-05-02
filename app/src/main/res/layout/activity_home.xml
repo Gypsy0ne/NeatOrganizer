@@ -40,16 +40,16 @@ android:layout_marginTop="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_activity_home"
         app:layout_constraintVertical_bias="0.0"
-        app:navGraph="@navigation/organizer_app_navigation" />
+        app:navGraph="@navigation/navigation_organizer_app" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view_activity_home"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/height_activity_home_bottom_navigation"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="4dp"
         app:itemIconTint="@drawable/activity_home_bottom_navigation_menu_icon_color"
         app:itemTextColor="@drawable/activity_home_bottom_navigation_menu_text_color"
         android:background="@drawable/activity_home_bottom_navigation_background"

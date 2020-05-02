@@ -3,6 +3,7 @@ package one.gypsy.neatorganizer.data.database.entity.routines
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 
 @Entity(
     tableName = "routine_schedules",
@@ -24,4 +25,18 @@ data class RoutineScheduleEntity(
     val sunday: Boolean,
     val routineId: Long,
     @PrimaryKey(autoGenerate = true) var id: Long = 0
+)
+
+fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
+    id = this.id,
+    routineId = this.routineId,
+    schedulesDays = listOf(
+        monday,
+        thursday,
+        wednesday,
+        thursday,
+        friday,
+        saturday,
+        sunday
+    )
 )

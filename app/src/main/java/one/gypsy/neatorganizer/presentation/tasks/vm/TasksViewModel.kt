@@ -10,11 +10,11 @@ import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
 class TasksViewModel @Inject constructor(
-    var getAllGroupsWithSingleTasksUseCase: GetAllGroupsWithSingleTasks,
+    var getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
     var updateSingleTaskGroupUseCase: UpdateTaskGroup,
-    var updateSingleTaskUseCase: UpdateTask,
+    var updateSingleSingleTaskUseCase: UpdateSingleTask,
     var removeSingleTaskGroupUseCase: RemoveTaskGroup,
-    var removeSingleTaskUseCase: RemoveTask
+    var removeSingleSingleTaskUseCase: RemoveSingleTask
 ) :
     ViewModel() {
 
@@ -31,7 +31,7 @@ class TasksViewModel @Inject constructor(
     }
 
     init {
-        getAllGroupsWithSingleTasksUseCase.invoke(viewModelScope, Unit) {
+        getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either(
                 ::onGetAllGroupsWithSingleTasksFailure,
                 ::onGetAllGroupsWithSingleTasksSuccess
@@ -127,9 +127,9 @@ class TasksViewModel @Inject constructor(
 
     fun onEditionSubmit(subItem: TaskListItem.TaskListSubItem) {
         findTask(subItem.id, subItem.groupId)?.also {
-            updateSingleTaskUseCase.invoke(
+            updateSingleSingleTaskUseCase.invoke(
                 viewModelScope,
-                UpdateTask.Params(it.copy(name = subItem.name))
+                UpdateSingleTask.Params(it.copy(name = subItem.name))
             ) { result ->
                 result.either(
                     ::onUpdateSingleTaskFailure,
@@ -149,9 +149,9 @@ class TasksViewModel @Inject constructor(
 
     fun onTaskDone(subItem: TaskListItem.TaskListSubItem) {
         findTask(subItem.id, subItem.groupId)?.also {
-            updateSingleTaskUseCase.invoke(
+            updateSingleSingleTaskUseCase.invoke(
                 viewModelScope,
-                UpdateTask.Params(it.copy(done = subItem.done))
+                UpdateSingleTask.Params(it.copy(done = subItem.done))
             ) { result ->
                 result.either(
                     ::onSingleTaskStatusUpdateFailure,
@@ -193,9 +193,9 @@ class TasksViewModel @Inject constructor(
 
     fun onRemove(subItem: TaskListItem.TaskListSubItem) {
         findTask(subItem.id, subItem.groupId)?.also {
-            removeSingleTaskUseCase.invoke(
+            removeSingleSingleTaskUseCase.invoke(
                 viewModelScope,
-                RemoveTask.Params(it)
+                RemoveSingleTask.Params(it)
             ) { result ->
                 result.either(
                     ::onUpdateSingleTaskFailure,

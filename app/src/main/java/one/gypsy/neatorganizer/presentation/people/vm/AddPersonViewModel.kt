@@ -14,6 +14,7 @@ import one.gypsy.neatorganizer.domain.interactors.people.GetImageBitmap
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.SingleLiveEvent
 import one.gypsy.neatorganizer.utils.extensions.default
+import one.gypsy.neatorganizer.utils.extensions.orNow
 import java.util.*
 import javax.inject.Inject
 
@@ -43,10 +44,7 @@ class AddPersonViewModel @Inject constructor(
     val birthDate: LiveData<Date>
         get() = _birthDate
 
-
-    private val _sex = MutableLiveData<Person.Sex>().default(
-        Person.Sex.MALE
-    )
+    private val _sex = MutableLiveData<Person.Sex>().default(Person.Sex.MALE)
     val sex: LiveData<Person.Sex>
         get() = _sex
 
@@ -64,12 +62,11 @@ class AddPersonViewModel @Inject constructor(
         addPersonUseCase.invoke(
             viewModelScope, AddPerson.Params(
                 PersonEntry(
-                    0,
-                    personName.value ?: "",
-                    sex.value ?: Person.Sex.MALE,
-                    selectedThumbnail.value,
-                    0,
-                    birthDate.value ?: Date()
+                    name = personName.value.orEmpty(),
+                    sex = sex.value ?: Person.Sex.MALE,
+                    photoThumbnail = selectedThumbnail.value,
+                    lastInteraction = 0,
+                    dateOfBirth = birthDate.value.orNow()
                 )
             )
         ) {

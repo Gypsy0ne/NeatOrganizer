@@ -15,5 +15,4 @@ class PeopleRepository @Inject constructor(var dataSource: PeopleDataSource) {
 
     suspend fun getPersonProfileById(personId: Long) = dataSource.getPersonProfileById(personId)
 
-//    suspend fun getPersonHsitory(personId: Long) = dataSource.getPersonHistory(personId)
 }

@@ -1,10 +1,17 @@
 package one.gypsy.neatorganizer.domain.dto.routines
 
-import one.gypsy.neatorganizer.domain.dto.Task
+import one.gypsy.neatorganizer.data.database.entity.routines.RoutineTaskEntity
 
 data class RoutineTaskEntry(
-    override val id: Long,
-    override val groupId: Long,
-    override val name: String,
-    override var done: Boolean
-): Task()
+    val id: Long,
+    val routineId: Long,
+    val name: String,
+    var done: Boolean
+)
+
+fun RoutineTaskEntry.toRoutineTaskEntity() = RoutineTaskEntity(
+    name = this.name,
+    done = this.done,
+    routineId = this.routineId,
+    id = this.id
+)
