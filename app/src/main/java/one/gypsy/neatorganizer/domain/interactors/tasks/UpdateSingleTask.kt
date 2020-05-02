@@ -9,16 +9,17 @@ import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class AddTask @Inject constructor(var singleTasksRepository: SingleTasksRepository): BaseUseCase<Long, AddTask.Params>() {
+class UpdateSingleTask @Inject constructor(var singleTaskRepository: SingleTasksRepository) :
+    BaseUseCase<Unit, UpdateSingleTask.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, Long> {
-       return try {
+    override suspend fun run(params: Params): Either<Failure, Unit> {
+        return try {
             withContext(Dispatchers.IO) {
-                Either.Right(singleTasksRepository.addSingleTask(params.singleTask))
+                Either.Right(singleTaskRepository.updateSingleTask(params.singleTask))
             }
-        } catch(exp: Exception) {
+        } catch (exp: Exception) {
             Either.Left(
-                AddSingleTaskGroupFailure(
+                UpdateSingleTaskFailure(
                     exp
                 )
             )
@@ -26,5 +27,5 @@ class AddTask @Inject constructor(var singleTasksRepository: SingleTasksReposito
     }
 
     data class Params(val singleTask: SingleTaskEntry)
-    data class AddSingleTaskGroupFailure(val error: Exception): Failure.FeatureFailure(error)
+    data class UpdateSingleTaskFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

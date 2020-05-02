@@ -18,7 +18,7 @@ class RemoveTaskGroup @Inject constructor(var singleTaskGroupsRepository: Single
             }
         } catch(exp: Exception) {
             Either.Left(
-                AddSingleTaskGroupFailure(
+                RemoveSingleTaskGroupFailure(
                     exp
                 )
             )
@@ -26,5 +26,5 @@ class RemoveTaskGroup @Inject constructor(var singleTaskGroupsRepository: Single
     }
 
     data class Params(val singleTaskGroup: SingleTaskGroup)
-    data class AddSingleTaskGroupFailure(val error: Exception): Failure.FeatureFailure(error)
+    data class RemoveSingleTaskGroupFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

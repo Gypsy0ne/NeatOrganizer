@@ -8,6 +8,8 @@ class RoutinesRepository @Inject constructor(var dataSource: RoutinesDataSource)
 
     suspend fun addRoutine(routine: Routine) = dataSource.add(routine)
 
+    suspend fun updateRoutine(routine: Routine) = dataSource.update(routine)
+
     suspend fun removeRoutine(routine: Routine) = dataSource.remove(routine)
 
     suspend fun getAllRoutines() = dataSource.getAllRoutines()

@@ -13,6 +13,7 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.*
 @Module
 class UseCaseModule {
 
+    // people
     @Provides
     fun provideAddPersonUseCase(peopleRepository: PeopleRepository): AddPerson {
         return AddPerson(
@@ -49,6 +50,7 @@ class UseCaseModule {
         )
     }
 
+    // tasks
     @Provides
     fun provideAddSingleTaskGroup(singleTaskGroupsRepository: SingleTaskGroupsRepository): AddTaskGroup {
         return AddTaskGroup(
@@ -57,8 +59,8 @@ class UseCaseModule {
     }
 
     @Provides
-    fun provideAddSingleTask(singleTasksRepository: SingleTasksRepository): AddTask {
-        return AddTask(
+    fun provideAddSingleTask(singleTasksRepository: SingleTasksRepository): AddSingleTask {
+        return AddSingleTask(
             singleTasksRepository
         )
     }
@@ -71,8 +73,8 @@ class UseCaseModule {
     }
 
     @Provides
-    fun provideUpdateSingleTask(singleTasksRepository: SingleTasksRepository): UpdateTask {
-        return UpdateTask(
+    fun provideUpdateSingleTask(singleTasksRepository: SingleTasksRepository): UpdateSingleTask {
+        return UpdateSingleTask(
             singleTasksRepository
         )
     }
@@ -84,13 +86,14 @@ class UseCaseModule {
         )
     }
 
-
     @Provides
-    fun provideRemoveSingleTask(singleTasksRepository: SingleTasksRepository): RemoveTask {
-        return RemoveTask(
+    fun provideRemoveSingleTask(singleTasksRepository: SingleTasksRepository): RemoveSingleTask {
+        return RemoveSingleTask(
             singleTasksRepository
         )
     }
+
+    //routines
 
 
 }

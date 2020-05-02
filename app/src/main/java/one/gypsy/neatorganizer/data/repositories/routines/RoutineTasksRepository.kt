@@ -6,8 +6,12 @@ import javax.inject.Inject
 
 class RoutineTasksRepository @Inject constructor(var dataSource: RoutineTasksDataSource) {
 
-    suspend fun addRoutine(routineTaskEntry: RoutineTaskEntry) = dataSource.add(routineTaskEntry)
+    suspend fun addRoutineTask(routineTaskEntry: RoutineTaskEntry) =
+        dataSource.add(routineTaskEntry)
 
-    suspend fun removeRoutine(routineTaskEntry: RoutineTaskEntry) =
+    suspend fun updateRoutineTask(routineTaskEntry: RoutineTaskEntry) =
+        dataSource.update(routineTaskEntry)
+
+    suspend fun removeRoutineTask(routineTaskEntry: RoutineTaskEntry) =
         dataSource.remove(routineTaskEntry)
 }

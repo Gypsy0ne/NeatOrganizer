@@ -5,7 +5,8 @@
 
     <data>
 
-        <import type="one.gypsy.neatorganizer.domain.dto.people.Person" />
+        <import type="one.gypsy.neatorganizer.domain.dto.people.Person.Sex" />
+
         <variable
             name="interactionEntriesAdapter"
             type="one.gypsy.neatorganizer.presentation.profile.InteractionEntriesAdapter" />
@@ -13,6 +14,7 @@
         <variable
             name="layoutManager"
             type="androidx.recyclerview.widget.GridLayoutManager" />
+
 
         <variable
             name="viewModel"
@@ -36,25 +38,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:autoSizeMaxTextSize="48sp"
-            app:autoSizeMinTextSize="24sp"
-            app:autoSizeTextType="uniform"
-            android:fontFamily="@font/roboto_medium"
-            android:maxLines="2"
-            android:elevation="8dp"
-            android:outlineProvider="none"
-            tools:text="Sample Name"
             android:id="@+id/text_view_person_profile_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:textColor="@color/white"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="8dp"
+            android:fontFamily="@font/roboto_medium"
+            android:maxLines="2"
+            android:outlineProvider="none"
             android:text="@{viewModel.profile.name}"
+            android:textColor="@color/white"
+            app:autoSizeMaxTextSize="48sp"
+            app:autoSizeMinTextSize="24sp"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_person_profile_avatar"
             app:layout_constraintEnd_toEndOf="@+id/view_fragment_person_profile_info_background"
             app:layout_constraintStart_toEndOf="@+id/image_view_person_profile_avatar"
-            app:layout_constraintTop_toTopOf="@+id/image_view_person_profile_avatar" />
+            app:layout_constraintTop_toTopOf="@+id/image_view_person_profile_avatar"
+            tools:text="Sample Name" />
 
         <ImageView
             android:id="@+id/image_view_person_profile_avatar"
@@ -95,16 +97,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_fragment_person_profile_interaction_history"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            layoutManager="@{layoutManager}"
             adapter="@{interactionEntriesAdapter}"
             adapterData="@{viewModel.profile.interactionHistory}"
+            layoutManager="@{layoutManager}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/person_profile_data_background"
             android:elevation="4dp"
+            android:padding="4dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline_fragment_person_profile_chart_separator"
             app:layout_constraintEnd_toEndOf="@+id/view_fragment_person_profile_info_background"
             app:layout_constraintHorizontal_bias="0.0"
@@ -122,14 +124,14 @@
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/line_chart_fragment_person_profile_interaction_chart"
+            interactionChartData="@{viewModel.profile.interactionHistory}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/person_profile_data_background"
             android:elevation="4dp"
             android:padding="24dp"
-            android:background="@drawable/person_profile_data_background"
-            interactionChartData="@{viewModel.profile.interactionHistory}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/recycler_view_fragment_person_profile_interaction_history"
             app:layout_constraintStart_toStartOf="@+id/recycler_view_fragment_person_profile_interaction_history"

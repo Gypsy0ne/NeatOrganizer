@@ -5,8 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
 fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 
@@ -22,3 +21,4 @@ fun View.show() {
     this.visibility = View.VISIBLE
 }
 
+fun Date?.orNow() = this ?: Date()

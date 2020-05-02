@@ -40,9 +40,9 @@ class RateInteractionViewModel @AssistedInject constructor(var addInteractionEnt
     fun submitInteractionEntry() {
         addInteractionEntryUseCase.invoke(viewModelScope, AddInteractionEntry.Params(
             InteractionEntry(
-                personId,
-                Date(),
-                _rating.value ?: 3
+                profileId = personId,
+                interactionDate = Date(),
+                rating = _rating.value ?: 3
             )
         )) {
             it.either(::onAddInteractionFailure, ::onAddInteractionSuccess)

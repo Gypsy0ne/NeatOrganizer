@@ -83,8 +83,10 @@ class TasksFragment : SectionFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentBinding.viewModel = tasksViewModel
-        fragmentBinding.lifecycleOwner = this
+        fragmentBinding.apply {
+            viewModel = tasksViewModel
+            lifecycleOwner = this@TasksFragment
+        }
         setUpRecyclerView()
     }
 

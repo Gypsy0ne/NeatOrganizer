@@ -1,29 +1,32 @@
-package one.gypsy.neatorganizer.presentation.tasks.vm
+package one.gypsy.neatorganizer.presentation.routines.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
+import one.gypsy.neatorganizer.domain.dto.routines.Routine
+import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutine
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
-class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTaskGroup) :
-    ViewModel() {
+class AddRoutineViewModel @Inject constructor(val addRoutineUseCase: AddRoutine) : ViewModel() {
 
-    val taskGroupTitle = MutableLiveData<String>()
+    val routineTitle = MutableLiveData<String>()
 
     private val _finishedAdding = MutableLiveData<Boolean>()
     val finishedAdding: LiveData<Boolean>
         get() = _finishedAdding
 
-    fun addTaskGroup() {
-        addTaskGroupUseCase.invoke(
+    private val _finishedAdding = MutableLiveData<Boolean>()
+    val finishedAdding: LiveData<Boolean>
+        get() = _finishedAdding
+
+    fun addRoutine() {
+        addRoutineUseCase.invoke(
             viewModelScope,
-            AddTaskGroup.Params(
-                SingleTaskGroup(
-                    taskGroupTitle.value.orEmpty()
+            AddRoutine.Params(
+                Routine(
+                    name = routineTitle.value.orEmpty()
                 )
             )
         ) {
