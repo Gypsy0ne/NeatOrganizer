@@ -22,3 +22,5 @@ fun View.show() {
 }
 
 fun Date?.orNow() = this ?: Date()
+
+fun View.getDimen(id: Int) = context.resources.getDimension(id).toInt()

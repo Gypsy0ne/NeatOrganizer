@@ -15,25 +15,23 @@
         <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
     </style>
-    
+
     <style name="PersonItemTextView">
         <item name="android:lines">1</item>
         <item name="autoSizeTextType">uniform</item>
         <item name="android:layout_height">@dimen/height_item_person_text_view</item>
         <item name="android:layout_width">wrap_content</item>
     </style>
-<!--Add person dialog fragment-->
+    <!--Add person dialog fragment-->
     <style name="DialogFormEditText">
         <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
         <item name="android:textColor">@color/gray</item>
@@ -42,7 +40,8 @@
         <item name="android:drawablePadding">4dp</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">8dp</item>
-        <item name="android:background">@drawable/dialog_fragment_add_person_edit_text_background</item>
+        <item name="android:background">@drawable/dialog_fragment_add_person_edit_text_background
+        </item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/height_dialog_fragment_add_person_form_text</item>
     </style>
@@ -50,6 +49,7 @@
     <style name="DialogAddPersonFormEmailEditText" parent="DialogFormEditText">
         <item name="android:inputType">textEmailAddress</item>
     </style>
+
     <style name="DialogAddPersonFormPhoneEditText" parent="DialogFormEditText">
         <item name="android:inputType">phone</item>
     </style>
@@ -67,6 +67,6 @@
         <item name="autoSizeMaxTextSize">@dimen/max_text_size_dialog_add_person_confirm_text</item>
         <item name="autoSizeMinTextSize">@dimen/min_text_size_dialog_add_person_confirm_text</item>
         <item name="fontFamily">@font/roboto_black</item>
-      </style>
+    </style>
 
 </resources>

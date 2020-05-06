@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
@@ -19,7 +21,7 @@ class AddRoutineDialogFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var viewModel: AddRoutineViewModel
+    lateinit var addRoutineViewModel: AddRoutineViewModel
 
     lateinit var fragmentBinding: DialogFragmentAddRoutineBinding
 
@@ -39,7 +41,8 @@ class AddRoutineDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[AddRoutineViewModel::class.java]
+        addRoutineViewModel =
+            ViewModelProviders.of(this, viewModelFactory)[AddRoutineViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {
@@ -49,8 +52,10 @@ class AddRoutineDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentBinding.viewModel = viewModel
-        fragmentBinding.lifecycleOwner = this
+        fragmentBinding.apply {
+            this.viewModel = addRoutineViewModel
+            lifecycleOwner = this@AddRoutineDialogFragment
+        }
     }
 
     override fun onStart() {
@@ -59,6 +64,10 @@ class AddRoutineDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUpObservers() {
-
+        addRoutineViewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->
+            if (finished)
+                findNavController().popBackStack()
+        })
     }
+
 }

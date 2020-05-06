@@ -30,7 +30,7 @@ data class RoutineScheduleEntity(
 fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
     id = this.id,
     routineId = this.routineId,
-    schedulesDays = listOf(
+    scheduledDays = listOf(
         monday,
         thursday,
         wednesday,

@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
             type="one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineViewModel" />
@@ -13,29 +12,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <one.gypsy.neatorganizer.utils.views.ScheduleDayPicker
+            android:id="@+id/day_picker_dialog_fragment_add_task_group_schedule"
+            scheduleChangeListener="@{(scheduledDays) -> viewModel.onScheduleChanged(scheduledDays)}"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="12dp"
+            app:layout_constraintEnd_toEndOf="@id/edit_text_dialog_fragment_add_task_group_title"
+            app:layout_constraintStart_toStartOf="@id/edit_text_dialog_fragment_add_task_group_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_task_group_title"
             style="@style/DialogFormEditText"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:drawableStart="@drawable/ic_group_add_white_24dp"
             android:hint="Task group title"
             android:maxLength="48"
+            android:text="@={viewModel.routineTitle}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/day_picker_dialog_fragment_add_task_group_schedule" />
 
         <Button
             android:id="@+id/button_dialog_fragment_add_task_group_confirmation"
-
             style="@style/DialogFormButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_margin="24dp"
             android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
             android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
+            android:onClick="@{() -> viewModel.addRoutine()}"
             android:text="@string/add_person_dialog_fragment_confirm"
             android:textColor="@color/dark_yellow"
             app:layout_constraintBottom_toBottomOf="parent"

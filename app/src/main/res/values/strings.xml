@@ -16,4 +16,13 @@
         <item>Good</item>
         <item>Great</item>
     </string-array>
+    <string-array name="schedule_days_short">
+        <item>Mon.</item>
+        <item>Tu.</item>
+        <item>Wed.</item>
+        <item>Th.</item>
+        <item>Fri.</item>
+        <item>Sat.</item>
+        <item>Sun.</item>
+    </string-array>
 </resources>
