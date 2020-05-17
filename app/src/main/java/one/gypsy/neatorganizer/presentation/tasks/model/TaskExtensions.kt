@@ -6,7 +6,7 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 fun SingleTaskGroup.toTaskListHeader(expanded: Boolean) = TaskListItem.TaskListHeader(
     id = this.id,
     name = this.name,
-    subItemsCount = this.tasks?.size ?: 0,
+    subItemsCount = this.tasks.size,
     expanded = expanded
 )
 

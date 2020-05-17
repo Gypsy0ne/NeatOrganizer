@@ -13,7 +13,18 @@ import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel
 import javax.inject.Singleton
 
-@Component(modules = [AssistedInjectModule::class, ActivityModule::class, DataModule::class, FragmentModule::class, DataSourceModule::class, RepositoryModule::class, UseCaseModule::class, ViewModelModule::class, AndroidSupportInjectionModule::class])
+@Component(
+    modules = [AssistedInjectModule::class,
+        ActivityModule::class,
+        DataModule::class,
+        FragmentModule::class,
+        DataSourceModule::class,
+        RepositoryModule::class,
+        UseCaseModule::class,
+        ViewModelModule::class,
+        AndroidSupportInjectionModule::class,
+        UtilsModule::class]
+)
 @Singleton
 interface AppComponent {
 

@@ -8,7 +8,6 @@
             type="one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,6 +20,7 @@
             android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_group_add_white_24dp"
             android:hint="Task title"
+            android:text="@={viewModel.taskTitle}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +33,7 @@
             android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
             android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
             android:text="@string/add_person_dialog_fragment_confirm"
+            android:onClick="@{() -> viewModel.addRoutineTask()}"
             android:textColor="@color/dark_yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_dialog_fragment_add_task_next"
@@ -46,6 +47,7 @@
             android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
             android:drawableStart="@drawable/ic_add_dark_yellow_24dp"
             android:text="@string/add_person_dialog_fragment_next"
+            android:onClick="@{() -> viewModel.addNextRoutineTask()}"
             android:textColor="@color/dark_yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

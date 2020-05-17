@@ -6,6 +6,7 @@ sealed class TaskListItem(
     open val visible: Boolean,
     open val edited: Boolean
 ) {
+    //header is always visible so visible is necessary
     data class TaskListHeader(
         override val id: Long,
         override val name: String,

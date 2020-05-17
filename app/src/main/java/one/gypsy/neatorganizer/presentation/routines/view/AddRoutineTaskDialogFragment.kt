@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
@@ -52,7 +54,10 @@ class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
 
 
     private fun setUpObservers() {
-
+        viewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->
+            if (finished)
+                findNavController().popBackStack()
+        })
     }
 
 }

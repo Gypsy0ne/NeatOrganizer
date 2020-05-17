@@ -94,5 +94,4 @@ class TaskHeaderViewHolder(
             itemClickListener.onRemoveClick(holderData)
         }
     }
-
 }

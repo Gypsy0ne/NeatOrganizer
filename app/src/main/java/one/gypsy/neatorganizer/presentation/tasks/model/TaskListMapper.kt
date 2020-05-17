@@ -24,8 +24,8 @@ class TaskListMapper {
         taskGroup: SingleTaskGroup,
         visible: Boolean
     ): List<TaskListItem> {
-        return taskGroup.tasks?.sortedByDescending { it.id }?.map { taskEntry ->
+        return taskGroup.tasks.sortedByDescending { it.id }.map { taskEntry ->
             taskEntry.toTaskListSubItem(visible)
-        } ?: emptyList()
+        }
     }
 }

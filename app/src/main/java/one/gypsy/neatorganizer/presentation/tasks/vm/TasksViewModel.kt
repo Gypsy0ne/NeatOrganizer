@@ -14,11 +14,10 @@ class TasksViewModel @Inject constructor(
     var updateSingleTaskGroupUseCase: UpdateTaskGroup,
     var updateSingleSingleTaskUseCase: UpdateSingleTask,
     var removeSingleTaskGroupUseCase: RemoveTaskGroup,
-    var removeSingleSingleTaskUseCase: RemoveSingleTask
-) :
-    ViewModel() {
+    var removeSingleSingleTaskUseCase: RemoveSingleTask,
+    var taskListMapper: TaskListMapper
+) : ViewModel() {
 
-    val taskListMapper = TaskListMapper()
     private val allTasks = MediatorLiveData<List<SingleTaskGroup>>()
     private val _listedTasks =
         MediatorLiveData<List<TaskListItem>>().apply {
