@@ -12,15 +12,10 @@ class RoutinesViewModel @Inject constructor(
     val getAllRoutinesUseCase: GetAllRoutines,
     val routineListMapper: RoutineListMapper
 ) : ViewModel() {
-    private val allRoutines = MediatorLiveData<List<Routine>>()
-    private val _listedRoutines =
-        MediatorLiveData<List<RoutineListItem>>().apply {
-            addSource(allRoutines) { routines ->
-                postValue(routineListMapper.mapRoutinesToRoutineListItems(routines))
-            }
-        }
+    private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> =
         Transformations.map(_listedRoutines) { tasks ->
+            //tutaj wstawic filtrowanie od expanded
             tasks
         }
 
@@ -35,12 +30,40 @@ class RoutinesViewModel @Inject constructor(
 
 
     private fun onGetAllRoutineSuccess(routines: LiveData<List<Routine>>) {
-        allRoutines.addSource(routines) {
-            allRoutines.postValue(it)
+        with(_listedRoutines) {
+            addSource(routines) { routines ->
+                //miejsce na wrzucenie filtrowania po expand
+                //pobierz aktualna widocznosc listy
+                //przefiltruj dane na podstawie lsity widocznosci
+                //opublikuj nowa liste z poprzednim stanem widocznosci
+                this.postValue(
+                    routineListMapper.mapRoutinesToVisibleListItems(
+                        routines,
+                        this.value ?: emptyList()
+                    )
+                )
+            }
         }
+
     }
 
     private fun onGetAllRoutineFailure(failure: Failure) {
 
     }
+
+    fun onExpand(headerItem: RoutineListItem.RoutineListHeader) {
+        _listedRoutines.postValue(_listedRoutines.value?.map {
+            negateExpandedIfHeader(it, headerItem)
+        })
+    }
+
+    private fun negateExpandedIfHeader(
+        it: RoutineListItem,
+        headerItem: RoutineListItem.RoutineListHeader
+    ) = if (it is RoutineListItem.RoutineListHeader && it.id == headerItem.id) {
+        it.copy(expanded = !it.expanded)
+    } else {
+        it
+    }
+
 }

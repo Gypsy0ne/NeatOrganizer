@@ -20,7 +20,7 @@ sealed class RoutineListItem(
         override val name: String,
         override val edited: Boolean = false,
         val routineId: Long,
-        val done: Boolean = false,
-        val visible: Boolean = false
+        val done: Boolean = false
+//        val visible: Boolean = false
     ) : RoutineListItem(id = id, name = name, edited = edited)
 }
