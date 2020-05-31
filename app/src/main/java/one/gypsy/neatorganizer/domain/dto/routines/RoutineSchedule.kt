@@ -8,7 +8,11 @@ data class RoutineSchedule(
     val scheduledDays: List<Boolean> = List(7) {
         false
     }
-)
+) {
+    companion object {
+        val EMPTY = RoutineSchedule()
+    }
+}
 
 fun RoutineSchedule.toRoutineScheduleEntity() = RoutineScheduleEntity(
     id = this.id,

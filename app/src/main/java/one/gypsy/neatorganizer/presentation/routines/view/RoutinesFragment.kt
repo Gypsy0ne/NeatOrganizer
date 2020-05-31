@@ -29,15 +29,15 @@ class RoutinesFragment : SectionFragment() {
     val headerClickListener by lazy {
         object : RoutineHeaderViewHolder.ClickListener {
             override fun onExpanderClick(headerItem: RoutineListItem.RoutineListHeader) {
-//                tasksViewModel.onExpand(headerItem)
+                routinesViewModel.onExpand(headerItem)
             }
 
             override fun onEditionSubmitClick(headerItem: RoutineListItem.RoutineListHeader) {
-//                tasksViewModel.onEditionSubmit(headerItem)
+                routinesViewModel.onEditionSubmit(headerItem)
             }
 
             override fun onRemoveClick(headerItem: RoutineListItem.RoutineListHeader) {
-//                tasksViewModel.onRemove(headerItem)
+                routinesViewModel.onRemove(headerItem)
             }
         }
     }

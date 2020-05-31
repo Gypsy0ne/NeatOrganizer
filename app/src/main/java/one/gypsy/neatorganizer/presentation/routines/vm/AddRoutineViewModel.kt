@@ -32,7 +32,8 @@ class AddRoutineViewModel @Inject constructor(
             AddRoutine.Params(
                 Routine(
                     name = routineTitle.value.orEmpty(),
-                    schedule = RoutineSchedule()
+                    schedule = RoutineSchedule.EMPTY,
+                    tasks = emptyList()
                 )
             )
         ) {

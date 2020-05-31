@@ -20,20 +20,20 @@ class RoutineHeaderViewHolder(
 
     override fun bind(data: RoutineListItem) {
         require(data is RoutineListItem.RoutineListHeader)
-        holderData = data
+        with(data) {
+            holderData = this
 
-        setUpAddListener()
-        setUpExpanderListener()
-//        setUpEditListener()
-//        setUpEditionSubmitListener()
-//        setUpRemoveListener()
-//        setUpDoneListener()
+            setUpAddListener()
+            setUpExpanderListener()
+            setUpEditListener()
+            setUpEditionSubmitListener()
+            setUpRemoveListener()
 
-//        itemBinding.apply {
-//            taskSubItem = holderData
-//            executePendingBindings()
-//        }
-
+            itemBinding.apply {
+                headerItem = this@with
+                executePendingBindings()
+            }
+        }
     }
 
     private fun navigateToAddRoutineTask(routineId: Long) {
@@ -42,20 +42,20 @@ class RoutineHeaderViewHolder(
         itemBinding.root.findNavController().navigate(direction)
     }
 
-    //    private fun setEditable(editable: Boolean) {
-//        itemBinding.editTextItemTaskHeaderName.apply {
-//            isFocusable = editable
-//            isFocusableInTouchMode = editable
-//            isEnabled = editable
-//            isClickable = editable
-//        }
-//        if (editable) {
-//            itemBinding.editTextItemTaskHeaderName.requestFocus()
-//        } else {
-//            itemBinding.editTextItemTaskHeaderName.clearFocus()
-//        }
-//    }
-//
+    private fun setEditable(editable: Boolean) {
+        itemBinding.editTextItemRoutineHeaderName.apply {
+            isFocusable = editable
+            isFocusableInTouchMode = editable
+            isEnabled = editable
+            isClickable = editable
+        }
+        if (editable) {
+            itemBinding.editTextItemRoutineHeaderName.requestFocus()
+        } else {
+            itemBinding.editTextItemRoutineHeaderName.clearFocus()
+        }
+    }
+
     private fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
             holderData = holderData.copy(expanded = !holderData.expanded)
@@ -70,27 +70,27 @@ class RoutineHeaderViewHolder(
         }
     }
 
-//    private fun setUpEditListener() {
-//        itemBinding.setEditClickListener {
-//            holderData = holderData.copy(edited = !holderData.edited)
-//            setEditable(holderData.edited)
-//            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-//        }
-//    }
-//
-//    private fun setUpEditionSubmitListener() {
-//        itemBinding.setEditionSubmitClickListener {
-//            holderData = holderData.copy(
-//                name = itemBinding.editTextItemTaskHeaderName.text.toString()
-//            )
-//            itemClickListener.onEditionSubmitClick(holderData)
-//        }
-//    }
-//
-//    private fun setUpRemoveListener() {
-//        itemBinding.setRemoveClickListener {
-//            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-//            itemClickListener.onRemoveClick(holderData)
-//        }
-//    }
+    private fun setUpEditListener() {
+        itemBinding.setEditClickListener {
+            holderData = holderData.copy(edited = !holderData.edited)
+            setEditable(holderData.edited)
+            itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
+        }
+    }
+
+    private fun setUpEditionSubmitListener() {
+        itemBinding.setEditionSubmitClickListener {
+            holderData = holderData.copy(
+                name = itemBinding.editTextItemRoutineHeaderName.text.toString()
+            )
+            clickListener.onEditionSubmitClick(holderData)
+        }
+    }
+
+    private fun setUpRemoveListener() {
+        itemBinding.setRemoveClickListener {
+            itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
+            clickListener.onRemoveClick(holderData)
+        }
+    }
 }
