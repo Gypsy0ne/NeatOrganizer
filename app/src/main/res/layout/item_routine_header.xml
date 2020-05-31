@@ -6,7 +6,7 @@
 
         <variable
             name="headerItem"
-            type="one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem.TaskListHeader" />
+            type="one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem.RoutineListHeader" />
 
         <variable
             name="expanderClickListener"

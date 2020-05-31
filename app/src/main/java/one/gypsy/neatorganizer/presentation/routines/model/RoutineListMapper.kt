@@ -4,8 +4,7 @@ import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 
 class RoutineListMapper {
-    //TODO create list with only visible items in list
-    fun mapRoutinesToVisibleListItems(
+    fun mapRoutinesToListItems(
         routines: List<Routine>,
         oldList: List<RoutineListItem>
     ) =
@@ -33,9 +32,7 @@ class RoutineListMapper {
         mutableListOf<RoutineListItem>().apply {
             val header = routine.toRoutineListHeader(expandedHeader)
             this.add(header)
-            if (header.expanded) {
-                mapRoutineTasksToListSubItems(routine.tasks)
-            }
+            this.addAll(mapRoutineTasksToListSubItems(routine.tasks))
         }
 
     private fun mapRoutineTasksToListSubItems(
@@ -44,12 +41,37 @@ class RoutineListMapper {
         routineTasks[it].toRoutineListSubItem()
     }
 
-    //    private fun getVisibleRoutineTasks(routineTasks: List<RoutineTaskEntry>, expanded) =
-    fun mapExpandedStateOnRoutineListItems() {
+    fun getVisibleItems(items: List<RoutineListItem>) =
+        items.partition { it is RoutineListItem.RoutineListHeader }.let { partedLists ->
+            mutableListOf<RoutineListItem>().apply {
+                partedLists.first
+                    .filterIsInstance<RoutineListItem.RoutineListHeader>()
+                    .forEach { header ->
+                        this.addAll(
+                            getHeaderWithItemsIfExpanded(
+                                header,
+                                partedLists.second
+                            )
+                        )
+                    }
+            }
+        }
 
+    private fun getHeaderWithItemsIfExpanded(
+        header: RoutineListItem.RoutineListHeader,
+        subItems: List<RoutineListItem>
+    ) = mutableListOf<RoutineListItem>().apply {
+        this.add(header)
+        if (header.expanded) {
+            this.addAll(
+                subItems.filter { shouldAddToRoutine(it, header.id) })
+        }
     }
 
-    fun getExpandedRoutines(allRoutineItems: List<RoutineListItem>) {
+    private fun shouldAddToRoutine(
+        it: RoutineListItem,
+        headerId: Long
+    ) = it is RoutineListItem.RoutineListSubItem && headerId == it.routineId
 
-    }
+
 }

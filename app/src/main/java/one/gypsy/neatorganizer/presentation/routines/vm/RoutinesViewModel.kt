@@ -3,20 +3,24 @@ package one.gypsy.neatorganizer.presentation.routines.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.interactors.routines.GetAllRoutines
+import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutine
+import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutine
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
+import one.gypsy.neatorganizer.presentation.routines.model.toRoutine
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
 class RoutinesViewModel @Inject constructor(
     val getAllRoutinesUseCase: GetAllRoutines,
+    val removeRoutine: RemoveRoutine,
+    val updateRoutine: UpdateRoutine,
     val routineListMapper: RoutineListMapper
 ) : ViewModel() {
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> =
-        Transformations.map(_listedRoutines) { tasks ->
-            //tutaj wstawic filtrowanie od expanded
-            tasks
+        Transformations.map(_listedRoutines) { routineItems ->
+            routineListMapper.getVisibleItems(routineItems)
         }
 
     init {
@@ -32,12 +36,8 @@ class RoutinesViewModel @Inject constructor(
     private fun onGetAllRoutineSuccess(routines: LiveData<List<Routine>>) {
         with(_listedRoutines) {
             addSource(routines) { routines ->
-                //miejsce na wrzucenie filtrowania po expand
-                //pobierz aktualna widocznosc listy
-                //przefiltruj dane na podstawie lsity widocznosci
-                //opublikuj nowa liste z poprzednim stanem widocznosci
                 this.postValue(
-                    routineListMapper.mapRoutinesToVisibleListItems(
+                    routineListMapper.mapRoutinesToListItems(
                         routines,
                         this.value ?: emptyList()
                     )
@@ -51,16 +51,35 @@ class RoutinesViewModel @Inject constructor(
 
     }
 
+    fun onEditionSubmit(routineHeaderItem: RoutineListItem.RoutineListHeader) {
+        updateRoutine.invoke(
+            viewModelScope,
+            UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
+        )
+    }
+
+    fun onRemove(routineHeaderItem: RoutineListItem.RoutineListHeader) {
+        removeRoutine.invoke(viewModelScope, RemoveRoutine.Params(routineHeaderItem.toRoutine()))
+    }
+
+    private fun onRemoveRoutineSuccess(unit: Unit) {
+
+    }
+
+    private fun onRemoveRoutineFailure(failure: Failure) {
+
+    }
+
     fun onExpand(headerItem: RoutineListItem.RoutineListHeader) {
         _listedRoutines.postValue(_listedRoutines.value?.map {
-            negateExpandedIfHeader(it, headerItem)
+            negateExpandedIfHeader(it, headerItem.id)
         })
     }
 
     private fun negateExpandedIfHeader(
         it: RoutineListItem,
-        headerItem: RoutineListItem.RoutineListHeader
-    ) = if (it is RoutineListItem.RoutineListHeader && it.id == headerItem.id) {
+        headerItemId: Long
+    ) = if (it is RoutineListItem.RoutineListHeader && it.id == headerItemId) {
         it.copy(expanded = !it.expanded)
     } else {
         it
