@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
+import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 
 class RoutinesAdapter(
-    val headerClickListener: RoutineHeaderViewHolder.ClickListener,
-    val subItemClickListener: RoutineTaskViewHolder.ClickListener
+    val headerClickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>,
+    val subItemClickListener: SubItemClickListener<RoutineListItem.RoutineListSubItem>
 ) : ListAdapter<RoutineListItem, RoutineViewHolder>(DiffCallback()),
     BindableAdapter<RoutineListItem> {
 
@@ -65,8 +67,8 @@ fun RoutineListItem.getViewHolderType(): Int = when (this) {
 fun RoutineViewType.getHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
-    headerClickListener: RoutineHeaderViewHolder.ClickListener,
-    subItemClickListener: RoutineTaskViewHolder.ClickListener
+    headerClickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>,
+    subItemClickListener: SubItemClickListener<RoutineListItem.RoutineListSubItem>
 ) = when (this) {
     RoutineViewType.HEADER -> RoutineHeaderViewHolder(
         DataBindingUtil.inflate(

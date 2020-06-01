@@ -4,20 +4,15 @@ package one.gypsy.neatorganizer.presentation.tasks.view
 import android.view.View
 import androidx.navigation.findNavController
 import one.gypsy.neatorganizer.databinding.ItemTaskHeaderBinding
+import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
 class TaskHeaderViewHolder(
     val itemBinding: ItemTaskHeaderBinding,
-    val itemClickListener: ClickListener
+    val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>
 ) : TaskViewHolder(itemBinding.root) {
 
     lateinit var holderData: TaskListItem.TaskListHeader
-
-    interface ClickListener {
-        fun onExpanderClick(headerItem: TaskListItem.TaskListHeader)
-        fun onEditionSubmitClick(headerItem: TaskListItem.TaskListHeader)
-        fun onRemoveClick(headerItem: TaskListItem.TaskListHeader)
-    }
 
     override fun bind(data: TaskListItem) {
         require(data is TaskListItem.TaskListHeader)
@@ -60,7 +55,7 @@ class TaskHeaderViewHolder(
     private fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
             holderData = holderData.copy(expanded = !holderData.expanded)
-            itemClickListener.onExpanderClick(holderData)
+            clickListener.onExpanderClick(holderData)
         }
     }
 
@@ -84,14 +79,14 @@ class TaskHeaderViewHolder(
             holderData = holderData.copy(
                 name = itemBinding.editTextItemTaskHeaderName.text.toString()
             )
-            itemClickListener.onEditionSubmitClick(holderData)
+            clickListener.onEditionSubmitClick(holderData)
         }
     }
 
     private fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            itemClickListener.onRemoveClick(holderData)
+            clickListener.onRemoveClick(holderData)
         }
     }
 }

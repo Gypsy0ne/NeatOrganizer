@@ -6,7 +6,7 @@
 
         <variable
             name="routineTaskItem"
-            type="one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem.TaskListSubItem" />
+            type="one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem.RoutineListSubItem" />
 
         <variable
             name="editClickListener"

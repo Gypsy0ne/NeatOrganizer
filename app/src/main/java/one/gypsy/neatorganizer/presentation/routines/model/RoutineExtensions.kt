@@ -15,5 +15,5 @@ fun RoutineTaskEntry.toRoutineListSubItem() = RoutineListItem.RoutineListSubItem
     id = this.id,
     name = this.name,
     done = this.done,
-    routineId = this.routineId
+    groupId = this.routineId
 )

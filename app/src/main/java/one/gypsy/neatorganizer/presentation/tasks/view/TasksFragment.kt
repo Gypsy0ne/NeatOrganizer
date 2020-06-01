@@ -15,6 +15,8 @@ import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
+import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 import javax.inject.Inject
@@ -29,7 +31,7 @@ class TasksFragment : SectionFragment() {
     private lateinit var fragmentBinding: FragmentTasksBinding
 
     val headerClickListener by lazy {
-        object: TaskHeaderViewHolder.ClickListener {
+        object : HeaderClickListener<TaskListItem.TaskListHeader> {
             override fun onExpanderClick(headerItem: TaskListItem.TaskListHeader) {
                 tasksViewModel.onExpand(headerItem)
             }
@@ -45,7 +47,7 @@ class TasksFragment : SectionFragment() {
     }
 
     val subItemClickListener by lazy {
-        object: TaskSubItemViewHolder.ClickListener {
+        object : SubItemClickListener<TaskListItem.TaskListSubItem> {
             override fun onDoneClick(subItem: TaskListItem.TaskListSubItem) {
                 tasksViewModel.onTaskDone(subItem)
             }

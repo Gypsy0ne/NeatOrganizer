@@ -2,12 +2,11 @@ package one.gypsy.neatorganizer.presentation.routines.vm
 
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
-import one.gypsy.neatorganizer.domain.interactors.routines.GetAllRoutines
-import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutine
-import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutine
+import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
 import one.gypsy.neatorganizer.presentation.routines.model.toRoutine
+import one.gypsy.neatorganizer.presentation.routines.model.toRoutineTask
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
@@ -15,6 +14,8 @@ class RoutinesViewModel @Inject constructor(
     val getAllRoutinesUseCase: GetAllRoutines,
     val removeRoutine: RemoveRoutine,
     val updateRoutine: UpdateRoutine,
+    val removeRoutineTask: RemoveRoutineTask,
+    val updateRoutineTask: UpdateRoutineTask,
     val routineListMapper: RoutineListMapper
 ) : ViewModel() {
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
@@ -58,16 +59,22 @@ class RoutinesViewModel @Inject constructor(
         )
     }
 
+    fun onTaskUpdate(routineSubItem: RoutineListItem.RoutineListSubItem) {
+        updateRoutineTask.invoke(
+            viewModelScope,
+            UpdateRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
+        )
+    }
+
     fun onRemove(routineHeaderItem: RoutineListItem.RoutineListHeader) {
         removeRoutine.invoke(viewModelScope, RemoveRoutine.Params(routineHeaderItem.toRoutine()))
     }
 
-    private fun onRemoveRoutineSuccess(unit: Unit) {
-
-    }
-
-    private fun onRemoveRoutineFailure(failure: Failure) {
-
+    fun onRemove(routineSubItem: RoutineListItem.RoutineListSubItem) {
+        removeRoutineTask.invoke(
+            viewModelScope,
+            RemoveRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
+        )
     }
 
     fun onExpand(headerItem: RoutineListItem.RoutineListHeader) {

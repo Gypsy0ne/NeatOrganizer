@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
+import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
 class GroupedTasksAdapter(
-    val headerClickListener: TaskHeaderViewHolder.ClickListener,
-    val subItemClickListener: TaskSubItemViewHolder.ClickListener
+    val headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>,
+    val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
 ) : ListAdapter<TaskListItem, TaskViewHolder>(DiffCallback()), BindableAdapter<TaskListItem> {
 
     override fun bindData(dataCollection: List<TaskListItem>) {
@@ -56,8 +58,8 @@ fun TaskListItem.getViewHolderType(): Int = when (this) {
 fun TaskViewType.getHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
-    headerClickListener: TaskHeaderViewHolder.ClickListener,
-    subItemClickListener: TaskSubItemViewHolder.ClickListener
+    headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>,
+    subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
 ) = when (this) {
     TaskViewType.HEADER -> TaskHeaderViewHolder(
         DataBindingUtil.inflate(

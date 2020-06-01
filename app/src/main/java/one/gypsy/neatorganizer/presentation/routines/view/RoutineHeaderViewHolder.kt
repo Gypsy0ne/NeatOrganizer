@@ -2,37 +2,30 @@ package one.gypsy.neatorganizer.presentation.routines.view
 
 import androidx.navigation.findNavController
 import one.gypsy.neatorganizer.databinding.ItemRoutineHeaderBinding
+import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 
 class RoutineHeaderViewHolder(
     val itemBinding: ItemRoutineHeaderBinding,
-    val clickListener: ClickListener
+    val clickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>
 ) :
     RoutineViewHolder(itemBinding.root) {
 
     private lateinit var holderData: RoutineListItem.RoutineListHeader
 
-    interface ClickListener {
-        fun onExpanderClick(headerItem: RoutineListItem.RoutineListHeader)
-        fun onEditionSubmitClick(headerItem: RoutineListItem.RoutineListHeader)
-        fun onRemoveClick(headerItem: RoutineListItem.RoutineListHeader)
-    }
-
     override fun bind(data: RoutineListItem) {
         require(data is RoutineListItem.RoutineListHeader)
-        with(data) {
-            holderData = this
+        holderData = data
 
-            setUpAddListener()
-            setUpExpanderListener()
-            setUpEditListener()
-            setUpEditionSubmitListener()
-            setUpRemoveListener()
+        setUpAddListener()
+        setUpExpanderListener()
+        setUpEditListener()
+        setUpEditionSubmitListener()
+        setUpRemoveListener()
 
-            itemBinding.apply {
-                headerItem = this@with
-                executePendingBindings()
-            }
+        itemBinding.apply {
+            headerItem = data
+            executePendingBindings()
         }
     }
 

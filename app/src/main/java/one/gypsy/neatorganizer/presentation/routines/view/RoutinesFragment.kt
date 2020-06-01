@@ -15,6 +15,8 @@ import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentRoutinesBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
+import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
 import javax.inject.Inject
@@ -27,7 +29,7 @@ class RoutinesFragment : SectionFragment() {
     private lateinit var fragmentBinding: FragmentRoutinesBinding
 
     val headerClickListener by lazy {
-        object : RoutineHeaderViewHolder.ClickListener {
+        object : HeaderClickListener<RoutineListItem.RoutineListHeader> {
             override fun onExpanderClick(headerItem: RoutineListItem.RoutineListHeader) {
                 routinesViewModel.onExpand(headerItem)
             }
@@ -43,17 +45,17 @@ class RoutinesFragment : SectionFragment() {
     }
 
     val subItemClickListener by lazy {
-        object : RoutineTaskViewHolder.ClickListener {
+        object : SubItemClickListener<RoutineListItem.RoutineListSubItem> {
             override fun onDoneClick(subItem: RoutineListItem.RoutineListSubItem) {
-//                tasksViewModel.onTaskDone(subItem)
+                routinesViewModel.onTaskUpdate(subItem)
             }
 
             override fun onEditionSubmitClick(subItem: RoutineListItem.RoutineListSubItem) {
-//                tasksViewModel.onEditionSubmit(subItem)
+                routinesViewModel.onTaskUpdate(subItem)
             }
 
             override fun onRemoveClick(subItem: RoutineListItem.RoutineListSubItem) {
-//                tasksViewModel.onRemove(subItem)
+                routinesViewModel.onRemove(subItem)
             }
 
         }

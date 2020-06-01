@@ -1,18 +1,16 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
 import one.gypsy.neatorganizer.databinding.ItemTaskBinding
+import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
-class TaskSubItemViewHolder(val itemBinding: ItemTaskBinding, val clickListener: ClickListener) :
+class TaskSubItemViewHolder(
+    val itemBinding: ItemTaskBinding,
+    val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
+) :
     TaskViewHolder(itemBinding.root) {
 
     private lateinit var holderData: TaskListItem.TaskListSubItem
-
-    interface ClickListener {
-        fun onDoneClick(subItem: TaskListItem.TaskListSubItem)
-        fun onEditionSubmitClick(subItem: TaskListItem.TaskListSubItem)
-        fun onRemoveClick(subItem: TaskListItem.TaskListSubItem)
-    }
 
     override fun bind(data: TaskListItem) {
         require(data is TaskListItem.TaskListSubItem)

@@ -71,7 +71,7 @@ class RoutineListMapper {
     private fun shouldAddToRoutine(
         it: RoutineListItem,
         headerId: Long
-    ) = it is RoutineListItem.RoutineListSubItem && headerId == it.routineId
+    ) = it is RoutineListItem.RoutineListSubItem && headerId == it.groupId
 
 
 }

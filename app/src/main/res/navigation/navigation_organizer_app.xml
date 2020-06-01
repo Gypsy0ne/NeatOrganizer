@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/organizer_app_navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/organizer_app_navigation"
     app:startDestination="@id/tasks">
 
     <fragment
         android:id="@+id/tasks"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment"
-        android:label="TasksFragment" >
+        android:label="TasksFragment">
         <action
             android:id="@+id/action_tasks_to_addSingleTaskDialogFragment"
             app:destination="@id/addSingleTaskDialogFragment" />
@@ -14,11 +15,10 @@
     <fragment
         android:id="@+id/people"
         android:name="one.gypsy.neatorganizer.presentation.people.view.PeopleFragment"
-        android:label="PeopleFragment" >
+        android:label="PeopleFragment">
         <action
             android:id="@+id/action_people_to_personProfileFragment"
-            app:destination="@id/person_profile_fragment">
-        </action>
+            app:destination="@id/person_profile_fragment"></action>
         <action
             android:id="@+id/action_people_to_rateInteractionDialogFragment"
             app:destination="@id/rateInteractionDialogFragment" />
@@ -80,5 +80,5 @@
     <dialog
         android:id="@+id/routine_add"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment"
-        android:label="AddRoutineDialogFragment"></dialog>
+        android:label="AddRoutineDialogFragment" />
 </navigation>
