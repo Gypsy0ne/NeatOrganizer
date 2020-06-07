@@ -1,9 +1,13 @@
 package one.gypsy.neatorganizer.presentation.routines.view
 
 import androidx.navigation.findNavController
+import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.databinding.ItemRoutineHeaderBinding
 import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
+import one.gypsy.neatorganizer.utils.extensions.hide
+import one.gypsy.neatorganizer.utils.extensions.requestEdit
+import one.gypsy.neatorganizer.utils.extensions.show
 
 class RoutineHeaderViewHolder(
     val itemBinding: ItemRoutineHeaderBinding,
@@ -17,6 +21,8 @@ class RoutineHeaderViewHolder(
         require(data is RoutineListItem.RoutineListHeader)
         holderData = data
 
+        updateEditable()
+        setUpSwipeMenuBehavior()
         setUpAddListener()
         setUpExpanderListener()
         setUpEditListener()
@@ -35,15 +41,44 @@ class RoutineHeaderViewHolder(
         itemBinding.root.findNavController().navigate(direction)
     }
 
-    private fun setEditable(editable: Boolean) {
+    private fun setUpSwipeMenuBehavior() {
+        itemBinding.swipeLayoutItemRoutineHeaderRoot.setMenuSwipeListener(object :
+            SwipeMenuListener {
+            override fun onLeftMenuOpen() {
+                clearEditionStatus()
+            }
+
+            override fun onRightMenuOpen() {
+                clearEditionStatus()
+            }
+        })
+    }
+
+    private fun clearEditionStatus() {
+        holderData = holderData.copy(edited = false)
+        updateEditable()
+    }
+
+    private fun updateEditable() {
         itemBinding.editTextItemRoutineHeaderName.apply {
-            isFocusable = editable
-            isFocusableInTouchMode = editable
-            isEnabled = editable
-            isClickable = editable
+            isFocusable = holderData.edited
+            isFocusableInTouchMode = holderData.edited
+            isEnabled = holderData.edited
+            isClickable = holderData.edited
         }
-        if (editable) {
-            itemBinding.editTextItemRoutineHeaderName.requestFocus()
+
+        itemBinding.buttonItemRoutineHeaderSubmit.apply {
+            if (holderData.edited) {
+                this.show()
+            } else {
+                this.hide()
+            }
+        }
+
+        if (holderData.edited) {
+            itemBinding.editTextItemRoutineHeaderName.apply {
+                requestEdit()
+            }
         } else {
             itemBinding.editTextItemRoutineHeaderName.clearFocus()
         }
@@ -66,7 +101,7 @@ class RoutineHeaderViewHolder(
     private fun setUpEditListener() {
         itemBinding.setEditClickListener {
             holderData = holderData.copy(edited = !holderData.edited)
-            setEditable(holderData.edited)
+            updateEditable()
             itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
         }
     }
