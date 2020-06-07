@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.presentation.listing
 
-interface SubItem {
+interface SubItem : ListedItem {
     val groupId: Long
     val done: Boolean
 }

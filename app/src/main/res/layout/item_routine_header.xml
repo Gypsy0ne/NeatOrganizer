@@ -38,12 +38,15 @@
         app:rightMenuView="@+id/linear_layout_item_routine_header_right_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="2dp"
             android:id="@+id/relative_layout_item_routine_header_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:onClick="@{expanderClickListener}">
+            android:background="@drawable/item_routine_header_background"
+            android:clickable="true">
 
             <EditText
                 android:id="@+id/edit_text_item_routine_header_name"
@@ -54,7 +57,7 @@
                 android:text="@{headerItem.name}"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_submit"
+                app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_expand"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,6 +71,21 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="4dp"
                 android:src="@drawable/ic_check_dark_yellow_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/edit_text_item_routine_header_name"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_item_routine_header_expand"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:drawablePadding="0dp"
+                android:onClick="@{expanderClickListener}"
+                android:padding="16dp"
+                android:src="@drawable/ic_arrow_down_white_32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

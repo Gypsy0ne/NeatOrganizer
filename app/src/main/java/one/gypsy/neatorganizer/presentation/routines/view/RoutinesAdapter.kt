@@ -69,7 +69,7 @@ fun RoutineViewType.getHolder(
     parent: ViewGroup,
     headerClickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>,
     subItemClickListener: SubItemClickListener<RoutineListItem.RoutineListSubItem>
-) = when (this) {
+): RoutineViewHolder = when (this) {
     RoutineViewType.HEADER -> RoutineHeaderViewHolder(
         DataBindingUtil.inflate(
             inflater, resId, parent, false

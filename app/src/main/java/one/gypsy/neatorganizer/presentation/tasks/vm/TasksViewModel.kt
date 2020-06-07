@@ -5,7 +5,6 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.*
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
-import one.gypsy.neatorganizer.presentation.tasks.model.changeVisibility
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
@@ -69,27 +68,27 @@ class TasksViewModel @Inject constructor(
 
 
     fun onExpand(headerItem: TaskListItem.TaskListHeader) {
-        _listedTasks.postValue(_listedTasks.value?.map {
-            mapTaskListItem(it, headerItem)
-        })
+//        _listedTasks.postValue(_listedTasks.value?.map {
+//            mapTaskListItem(it, headerItem)
+//        })
     }
 
-    private fun mapTaskListItem(
-        mappedItem: TaskListItem,
-        headerItem: TaskListItem.TaskListHeader
-    ): TaskListItem {
-        return when {
-            isHeader(mappedItem, headerItem) -> {
-                headerItem
-            }
-            isSubItem(mappedItem, headerItem) -> {
-                mappedItem.changeVisibility(headerItem.expanded)
-            }
-            else -> {
-                mappedItem
-            }
-        }
-    }
+//    private fun mapTaskListItem(
+//        mappedItem: TaskListItem,
+//        headerItem: TaskListItem.TaskListHeader
+//    ): TaskListItem {
+//        return when {
+//            isHeader(mappedItem, headerItem) -> {
+//                headerItem
+//            }
+//            isSubItem(mappedItem, headerItem) -> {
+//                mappedItem.changeVisibility(headerItem.expanded)
+//            }
+//            else -> {
+//                mappedItem
+//            }
+//        }
+//    }
 
     private fun isSubItem(
         it: TaskListItem,

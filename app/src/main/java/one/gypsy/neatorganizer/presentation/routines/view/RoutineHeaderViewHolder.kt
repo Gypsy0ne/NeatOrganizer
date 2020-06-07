@@ -4,6 +4,7 @@ import androidx.navigation.findNavController
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.databinding.ItemRoutineHeaderBinding
 import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.listing.ListedHeader
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.requestEdit
@@ -12,14 +13,13 @@ import one.gypsy.neatorganizer.utils.extensions.show
 class RoutineHeaderViewHolder(
     val itemBinding: ItemRoutineHeaderBinding,
     val clickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>
-) :
-    RoutineViewHolder(itemBinding.root) {
+) : RoutineViewHolder(itemBinding.root), ListedHeader<RoutineListItem.RoutineListHeader> {
 
-    private lateinit var holderData: RoutineListItem.RoutineListHeader
+    override lateinit var viewData: RoutineListItem.RoutineListHeader
 
     override fun bind(data: RoutineListItem) {
         require(data is RoutineListItem.RoutineListHeader)
-        holderData = data
+        viewData = data
 
         updateEditable()
         setUpSwipeMenuBehavior()
@@ -41,7 +41,7 @@ class RoutineHeaderViewHolder(
         itemBinding.root.findNavController().navigate(direction)
     }
 
-    private fun setUpSwipeMenuBehavior() {
+    override fun setUpSwipeMenuBehavior() {
         itemBinding.swipeLayoutItemRoutineHeaderRoot.setMenuSwipeListener(object :
             SwipeMenuListener {
             override fun onLeftMenuOpen() {
@@ -54,71 +54,73 @@ class RoutineHeaderViewHolder(
         })
     }
 
-    private fun clearEditionStatus() {
-        holderData = holderData.copy(edited = false)
+    override fun clearEditionStatus() {
+        viewData = viewData.copy(edited = false)
         updateEditable()
     }
 
-    private fun updateEditable() {
-        itemBinding.editTextItemRoutineHeaderName.apply {
-            isFocusable = holderData.edited
-            isFocusableInTouchMode = holderData.edited
-            isEnabled = holderData.edited
-            isClickable = holderData.edited
+    override fun updateEditable() {
+        changeEditionAttributes()
+
+        if (viewData.edited) {
+            itemBinding.buttonItemRoutineHeaderSubmit.show()
+            itemBinding.buttonItemRoutineHeaderExpand.hide()
+        } else {
+            itemBinding.buttonItemRoutineHeaderSubmit.hide()
+            itemBinding.buttonItemRoutineHeaderExpand.show()
         }
 
-        itemBinding.buttonItemRoutineHeaderSubmit.apply {
-            if (holderData.edited) {
-                this.show()
-            } else {
-                this.hide()
-            }
-        }
-
-        if (holderData.edited) {
-            itemBinding.editTextItemRoutineHeaderName.apply {
-                requestEdit()
-            }
+        if (viewData.edited) {
+            itemBinding.editTextItemRoutineHeaderName.requestEdit()
         } else {
             itemBinding.editTextItemRoutineHeaderName.clearFocus()
         }
     }
 
-    private fun setUpExpanderListener() {
-        itemBinding.setExpanderClickListener {
-            holderData = holderData.copy(expanded = !holderData.expanded)
-            clickListener.onExpanderClick(holderData)
+    private fun changeEditionAttributes() {
+        itemBinding.editTextItemRoutineHeaderName.apply {
+            isFocusable = viewData.edited
+            isFocusableInTouchMode = viewData.edited
+            isEnabled = viewData.edited
+            isClickable = viewData.edited
         }
     }
 
-    private fun setUpAddListener() {
+    override fun setUpExpanderListener() {
+        itemBinding.setExpanderClickListener {
+            viewData = viewData.copy(expanded = !viewData.expanded)
+            clickListener.onExpanderClick(viewData)
+        }
+    }
+
+    override fun setUpAddListener() {
         itemBinding.setAddClickListener {
             itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
-            navigateToAddRoutineTask(holderData.id)
+            navigateToAddRoutineTask(viewData.id)
         }
     }
 
-    private fun setUpEditListener() {
+    override fun setUpEditListener() {
         itemBinding.setEditClickListener {
-            holderData = holderData.copy(edited = !holderData.edited)
+            viewData = viewData.copy(edited = !viewData.edited)
             updateEditable()
             itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
         }
     }
 
-    private fun setUpEditionSubmitListener() {
+    override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
-            holderData = holderData.copy(
+            viewData = viewData.copy(
                 name = itemBinding.editTextItemRoutineHeaderName.text.toString()
             )
-            clickListener.onEditionSubmitClick(holderData)
+            clickListener.onEditionSubmitClick(viewData)
         }
     }
 
-    private fun setUpRemoveListener() {
+    override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
-            clickListener.onRemoveClick(holderData)
+            clickListener.onRemoveClick(viewData)
         }
     }
 }

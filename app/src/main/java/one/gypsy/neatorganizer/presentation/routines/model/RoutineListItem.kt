@@ -4,13 +4,14 @@ import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.presentation.listing.HeaderItem
+import one.gypsy.neatorganizer.presentation.listing.ListedItem
 import one.gypsy.neatorganizer.presentation.listing.SubItem
 
 sealed class RoutineListItem(
-    open val id: Long,
-    open val name: String,
-    open val edited: Boolean
-) {
+    override val id: Long,
+    override val name: String,
+    override val edited: Boolean
+) : ListedItem {
     data class RoutineListHeader(
         override val id: Long,
         override val name: String,
