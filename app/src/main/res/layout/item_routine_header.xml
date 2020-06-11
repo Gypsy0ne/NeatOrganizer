@@ -32,7 +32,7 @@
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
         android:id="@+id/swipe_layout_item_routine_header_root"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="128dp"
         app:contentView="@+id/relative_layout_item_routine_header_container"
         app:leftMenuView="@+id/button_item_routine_header_remove"
         app:rightMenuView="@+id/linear_layout_item_routine_header_right_menu">
@@ -56,7 +56,6 @@
                 android:gravity="center_vertical|start"
                 android:text="@{headerItem.name}"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_expand"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -89,6 +88,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <one.gypsy.neatorganizer.utils.views.ScheduleDayPicker
+                android:id="@+id/day_picker_item_routine_header_schedule"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_item_routine_header_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name"
+                app:layout_constraintTop_toBottomOf="@+id/button_item_routine_header_expand" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
