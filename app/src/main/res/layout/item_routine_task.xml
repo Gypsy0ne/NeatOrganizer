@@ -31,8 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentView="@+id/constraint_layout_item_routine_task_container"
-        app:leftMenuView="@+id/button_item_routine_task_remove"
-        app:rightMenuView="@+id/button_item_routine_task_edit">
+        app:leftMenuView="@+id/constraint_layout_item_routine_task_left_menu"
+        app:rightMenuView="@+id/constraint_layout_item_routine_task_right_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_routine_task_container"
@@ -88,30 +88,47 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/button_item_routine_task_remove"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_task_left_menu"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/item_person_swipe_update_background"
-            android:drawableTop="@drawable/ic_delete_white_24dp"
-            android:drawablePadding="0dp"
-            android:onClick="@{removeClickListener}"
-            android:paddingTop="10dp"
-            android:paddingBottom="4dp"
-            android:textColor="@color/white" />
+            android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/button_item_routine_task_edit"
-            android:layout_width="64dp"
-            android:layout_height="@dimen/height_item_grouped_task_container"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/item_person_swipe_update_background"
-            android:onClick="@{editClickListener}"
-            android:src="@drawable/ic_edit_white_24dp" />
+            <ImageButton
+                android:id="@+id/button_item_routine_task_remove"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:onClick="@{removeClickListener}"
+                android:src="@drawable/ic_delete_white_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="W, 1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_task_right_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/button_item_routine_task_edit"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:onClick="@{editClickListener}"
+                android:src="@drawable/ic_edit_white_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="W,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 </layout>

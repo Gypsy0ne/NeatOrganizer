@@ -101,7 +101,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
-                android:drawableTop="@drawable/ic_edit_white_24dp"
+                android:drawableTop="@drawable/ic_edit_white_24"
                 android:drawablePadding="0dp"
                 android:onClick="@{editClickListener}"
                 android:paddingTop="10dp"

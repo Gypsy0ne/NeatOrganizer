@@ -27,35 +27,37 @@
         <variable
             name="editionSubmitClickListener"
             type="android.view.View.OnClickListener" />
+
     </data>
 
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
         android:id="@+id/swipe_layout_item_routine_header_root"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="112dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         app:contentView="@+id/relative_layout_item_routine_header_container"
-        app:leftMenuView="@+id/button_item_routine_header_remove"
-        app:rightMenuView="@+id/linear_layout_item_routine_header_right_menu">
+        app:leftMenuView="@+id/constraint_layout_item_routine_header_left_menu"
+        app:rightMenuView="@+id/constraint_layout_item_routine_header_right_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="2dp"
             android:id="@+id/relative_layout_item_routine_header_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/item_routine_header_background"
             android:clickable="true">
 
             <EditText
                 android:id="@+id/edit_text_item_routine_header_name"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:background="@android:color/transparent"
-                android:gravity="center_vertical|start"
+                android:gravity="center"
                 android:text="@{headerItem.name}"
                 android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/day_picker_item_routine_header_schedule"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_expand"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,9 +72,9 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="4dp"
                 android:src="@drawable/ic_check_dark_yellow_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_item_routine_header_name"
                 app:layout_constraintEnd_toEndOf="@+id/edit_text_item_routine_header_name"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/edit_text_item_routine_header_name" />
 
             <ImageButton
                 android:id="@+id/button_item_routine_header_expand"
@@ -92,74 +94,95 @@
             <one.gypsy.neatorganizer.utils.views.ScheduleDayPicker
                 android:id="@+id/day_picker_item_routine_header_schedule"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="56dp"
                 android:orientation="horizontal"
                 android:paddingStart="8dp"
-                android:paddingTop="12dp"
+                android:paddingTop="8dp"
                 android:paddingEnd="8dp"
-                android:paddingBottom="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/edit_text_item_routine_header_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name"
-                app:layout_constraintTop_toBottomOf="@+id/button_item_routine_header_expand" />
+                android:paddingBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/button_item_routine_header_submit"
+                app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/button_item_routine_header_remove"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_header_left_menu"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/item_person_swipe_update_background"
-            android:drawableTop="@drawable/ic_delete_white_24dp"
-            android:drawablePadding="0dp"
-            android:onClick="@{removeClickListener}"
-            android:paddingTop="10dp"
-            android:paddingBottom="4dp"
-            android:text="Delete"
-            android:textColor="@color/white" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linear_layout_item_routine_header_right_menu"
+            <Button
+                android:id="@+id/button_item_routine_header_remove"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:drawableTop="@drawable/ic_delete_white_32"
+                android:onClick="@{removeClickListener}"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="Delete"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="W,3:4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_header_right_menu"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/button_item_routine_header_add"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
-                android:drawableTop="@drawable/ic_add_white_32dp"
-                android:drawablePadding="0dp"
+                android:drawableTop="@drawable/ic_add_white_32"
                 android:onClick="@{addClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:text="Add"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="W,3:4"
+                app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_edit"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button_item_routine_header_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
-                android:drawableTop="@drawable/ic_edit_white_24dp"
-                android:drawablePadding="0dp"
+                android:drawableTop="@drawable/ic_edit_white_32"
+                android:gravity="center"
                 android:onClick="@{editClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:text="Edit"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="W,3:4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_item_routine_header_add"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
+
 </layout>

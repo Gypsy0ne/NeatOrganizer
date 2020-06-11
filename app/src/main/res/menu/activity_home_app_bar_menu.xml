@@ -4,6 +4,6 @@
 <item android:id="@+id/add_entry"
     android:orderInCategory="98"
     android:title="@string/activity_home_bottom_navigation_menu_people"
-    android:icon="@drawable/ic_add_white_32dp"
+    android:icon="@drawable/ic_add_white_32"
     app:showAsAction="ifRoom"/>
 </menu>
