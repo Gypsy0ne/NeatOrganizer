@@ -3,10 +3,7 @@ package one.gypsy.neatorganizer.presentation.routines.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.interactors.routines.*
-import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
-import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
-import one.gypsy.neatorganizer.presentation.routines.model.toRoutine
-import one.gypsy.neatorganizer.presentation.routines.model.toRoutineTask
+import one.gypsy.neatorganizer.presentation.routines.model.*
 import one.gypsy.neatorganizer.utils.Failure
 import javax.inject.Inject
 
@@ -16,7 +13,8 @@ class RoutinesViewModel @Inject constructor(
     val updateRoutine: UpdateRoutine,
     val removeRoutineTask: RemoveRoutineTask,
     val updateRoutineTask: UpdateRoutineTask,
-    val routineListMapper: RoutineListMapper
+    val routineListMapper: RoutineListMapper,
+    val updateRoutineSchedule: UpdateRoutineSchedule
 ) : ViewModel() {
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> =
@@ -27,14 +25,13 @@ class RoutinesViewModel @Inject constructor(
     init {
         getAllRoutinesUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                ::onGetAllRoutineFailure,
-                ::onGetAllRoutineSuccess
+                ::onGetAllRoutinesFailure,
+                ::onGetAllRoutinesSuccess
             )
         }
     }
 
-
-    private fun onGetAllRoutineSuccess(routines: LiveData<List<Routine>>) {
+    private fun onGetAllRoutinesSuccess(routines: LiveData<List<Routine>>) {
         with(_listedRoutines) {
             addSource(routines) { routines ->
                 this.postValue(
@@ -48,14 +45,19 @@ class RoutinesViewModel @Inject constructor(
 
     }
 
-    private fun onGetAllRoutineFailure(failure: Failure) {
+    private fun onGetAllRoutinesFailure(failure: Failure) {
 
     }
 
-    fun onEditionSubmit(routineHeaderItem: RoutineListItem.RoutineListHeader) {
+    //TODO add chain invoke
+    fun onHeaderUpdate(routineHeaderItem: RoutineListItem.RoutineListHeader) {
         updateRoutine.invoke(
             viewModelScope,
             UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
+        )
+        updateRoutineSchedule.invoke(
+            viewModelScope,
+            UpdateRoutineSchedule.Params(routineSchedule = routineHeaderItem.getRoutineSchedule())
         )
     }
 

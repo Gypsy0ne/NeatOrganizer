@@ -9,15 +9,6 @@ import androidx.databinding.BindingAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.extensions.getDimen
 
-@BindingAdapter("scheduleChangeListener")
-fun setScheduleChangeListener(
-    view: ScheduleDayPicker,
-    scheduleChangeListener: ScheduleDayPicker.ScheduledDaysPickListener
-) {
-    view.scheduledDaysChangeListener = scheduleChangeListener
-}
-
-//TODO extract dimens
 class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private val daysOfWeekIndicators: List<Button> = List(7) {
@@ -25,9 +16,20 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
     }
 
     var scheduledDaysChangeListener: ScheduledDaysPickListener? = null
+    var interactable: Boolean = true
+        set(value) {
+            daysOfWeekIndicators.forEach {
+                it.isClickable = value
+            }
+            field = value
+        }
 
-    interface ScheduledDaysPickListener {
-        fun onScheduleChange(scheduledDays: List<Boolean>)
+    var scheduleDaysStatus: List<Boolean>
+        get() = daysOfWeekIndicators.map { it.isSelected }
+        set(value) {
+            value.forEachIndexed { index, value ->
+                daysOfWeekIndicators[index].isSelected = value
+            }
     }
 
     init {
@@ -80,4 +82,5 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             text = context.resources.getStringArray(R.array.schedule_days_short)[index]
         }
     }
+
 }

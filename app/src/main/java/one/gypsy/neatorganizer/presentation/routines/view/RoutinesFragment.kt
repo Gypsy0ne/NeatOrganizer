@@ -35,7 +35,7 @@ class RoutinesFragment : SectionFragment() {
             }
 
             override fun onEditionSubmitClick(headerItem: RoutineListItem.RoutineListHeader) {
-                routinesViewModel.onEditionSubmit(headerItem)
+                routinesViewModel.onHeaderUpdate(headerItem)
             }
 
             override fun onRemoveClick(headerItem: RoutineListItem.RoutineListHeader) {

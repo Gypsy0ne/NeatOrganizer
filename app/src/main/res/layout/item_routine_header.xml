@@ -85,6 +85,7 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
+                scheduleDaysStatus="@{headerItem.scheduleDays}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/button_item_routine_header_submit"
                 app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name" />
