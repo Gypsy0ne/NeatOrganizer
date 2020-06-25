@@ -1,23 +1,29 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
 
-import android.view.View
 import androidx.navigation.findNavController
+import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.databinding.ItemTaskHeaderBinding
 import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.listing.ListedHeader
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
+import one.gypsy.neatorganizer.utils.extensions.hide
+import one.gypsy.neatorganizer.utils.extensions.requestEdit
+import one.gypsy.neatorganizer.utils.extensions.show
 
 class TaskHeaderViewHolder(
     val itemBinding: ItemTaskHeaderBinding,
     val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>
-) : TaskViewHolder(itemBinding.root) {
+) : TaskViewHolder(itemBinding.root), ListedHeader<TaskListItem.TaskListHeader> {
 
-    lateinit var holderData: TaskListItem.TaskListHeader
+    override lateinit var viewData: TaskListItem.TaskListHeader
 
     override fun bind(data: TaskListItem) {
         require(data is TaskListItem.TaskListHeader)
-        holderData = data
+        viewData = data
 
+        updateEditable()
+        setUpSwipeMenuBehavior()
         setUpAddListener()
         setUpEditListener()
         setUpEditionSubmitListener()
@@ -25,68 +31,100 @@ class TaskHeaderViewHolder(
         setUpRemoveListener()
 
         itemBinding.apply {
-            headerItem = holderData
+            headerItem = viewData
             executePendingBindings()
         }
     }
 
-    private fun navigateToAddTask(
-        groupId: Long,
-        view: View
-    ) {
-        val direction = TasksFragmentDirections.actionTasksToAddSingleTaskDialogFragment(groupId)
-        view.findNavController().navigate(direction)
-    }
-
-    private fun setEditable(editable: Boolean) {
-        itemBinding.editTextItemTaskHeaderName.apply {
-            isFocusable = editable
-            isFocusableInTouchMode = editable
-            isEnabled = editable
-            isClickable = editable
-        }
-        if (editable) {
-            itemBinding.editTextItemTaskHeaderName.requestFocus()
+    override fun updateEditable() {
+        changeNameEditionAttributes()
+        if (viewData.edited) {
+            onEditStart()
         } else {
-            itemBinding.editTextItemTaskHeaderName.clearFocus()
+            onEditFinish()
         }
     }
 
-    private fun setUpExpanderListener() {
+    private fun onEditFinish() {
+        itemBinding.buttonItemTaskHeaderSubmit.hide()
+        itemBinding.buttonItemTaskHeaderExpand.show()
+        itemBinding.editTextItemTaskHeaderName.clearFocus()
+    }
+
+    private fun onEditStart() {
+        itemBinding.buttonItemTaskHeaderSubmit.show()
+        itemBinding.buttonItemTaskHeaderExpand.hide()
+        itemBinding.editTextItemTaskHeaderName.requestEdit()
+    }
+
+    private fun changeNameEditionAttributes() {
+        itemBinding.editTextItemTaskHeaderName.apply {
+            isFocusable = viewData.edited
+            isFocusableInTouchMode = viewData.edited
+            isEnabled = viewData.edited
+            isClickable = viewData.edited
+        }
+    }
+
+    override fun setUpSwipeMenuBehavior() {
+        itemBinding.swipeLayoutItemTaskHeaderRoot.setMenuSwipeListener(object :
+            SwipeMenuListener {
+            override fun onLeftMenuOpen() {
+                clearEditionStatus()
+            }
+
+            override fun onRightMenuOpen() {
+                clearEditionStatus()
+            }
+        })
+    }
+
+    override fun clearEditionStatus() {
+        viewData = viewData.copy(edited = false)
+        updateEditable()
+    }
+
+
+    override fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
-            holderData = holderData.copy(expanded = !holderData.expanded)
-            clickListener.onExpanderClick(holderData)
+            viewData = viewData.copy(expanded = !viewData.expanded)
+            clickListener.onExpanderClick(viewData)
         }
     }
 
-    private fun setUpAddListener() {
+    override fun setUpAddListener() {
         itemBinding.setAddClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            navigateToAddTask(holderData.id, itemBinding.root)
+            navigateToAddTask(viewData.id)
         }
     }
 
-    private fun setUpEditListener() {
+    private fun navigateToAddTask(groupId: Long) {
+        val direction = TasksFragmentDirections.actionTasksToAddSingleTaskDialogFragment(groupId)
+        itemBinding.root.findNavController().navigate(direction)
+    }
+
+    override fun setUpEditListener() {
         itemBinding.setEditClickListener {
-            holderData = holderData.copy(edited = !holderData.edited)
-            setEditable(holderData.edited)
+            viewData = viewData.copy(edited = !viewData.edited)
+            updateEditable()
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
         }
     }
 
-    private fun setUpEditionSubmitListener() {
+    override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
-            holderData = holderData.copy(
+            viewData = viewData.copy(
                 name = itemBinding.editTextItemTaskHeaderName.text.toString()
             )
-            clickListener.onEditionSubmitClick(holderData)
+            clickListener.onEditionSubmitClick(viewData)
         }
     }
 
-    private fun setUpRemoveListener() {
+    override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            clickListener.onRemoveClick(holderData)
+            clickListener.onRemoveClick(viewData)
         }
     }
 }

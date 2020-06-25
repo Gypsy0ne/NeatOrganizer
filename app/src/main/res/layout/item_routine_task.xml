@@ -84,7 +84,7 @@
                 android:layout_marginStart="4dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:onClick="@{removeClickListener}"
-                android:src="@drawable/ic_delete_white_24dp"
+                android:src="@drawable/ic_delete_white_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
