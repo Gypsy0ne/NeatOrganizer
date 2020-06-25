@@ -14,4 +14,6 @@ class RoutineTasksRepository @Inject constructor(var dataSource: RoutineTasksDat
 
     suspend fun removeRoutineTask(routineTaskEntry: RoutineTaskEntry) =
         dataSource.remove(routineTaskEntry)
+
+    suspend fun resetAllRoutineTasks() = dataSource.resetTasksStatus()
 }

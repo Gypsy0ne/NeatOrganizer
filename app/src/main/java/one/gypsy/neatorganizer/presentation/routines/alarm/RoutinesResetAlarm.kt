@@ -3,18 +3,23 @@ package one.gypsy.neatorganizer.presentation.routines.alarm
 import android.app.AlarmManager
 import android.app.AlarmManager.INTERVAL_FIFTEEN_MINUTES
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.widget.Toast
+import dagger.android.DaggerBroadcastReceiver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
+class RoutinesResetAlarm :
+    DaggerBroadcastReceiver(), CoroutineScope {
+    private var job: Job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default + job
 
-//https://stackoverflow.com/questions/4459058/alarm-manager-example
-class RoutinesResetAlarm : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        Toast.makeText(context, "elo", Toast.LENGTH_LONG).show()
-    }
+//    @Inject
+//    lateinit var resetRoutineTasksUseCase: ResetAllRoutineTasks
 
     fun setWeeklyRoutinesResetAlarm(context: Context) {
         val alarmIntent = Intent(context, RoutinesResetAlarm::class.java).let { intent ->
@@ -25,7 +30,7 @@ class RoutinesResetAlarm : BroadcastReceiver() {
 
         val wakeTime: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+            set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
             set(Calendar.HOUR_OF_DAY, 17)
         }
 
@@ -36,4 +41,5 @@ class RoutinesResetAlarm : BroadcastReceiver() {
             alarmIntent
         )
     }
+
 }

@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:checked="@{routineTaskItem.done}"
                 android:onClick="@{doneClickListener}"
+                android:buttonTint="@color/yellow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

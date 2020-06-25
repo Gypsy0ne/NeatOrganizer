@@ -3,11 +3,13 @@ package one.gypsy.neatorganizer.presentation.routines.alarm
 import android.content.Context
 import android.content.Intent
 import dagger.android.DaggerBroadcastReceiver
+import javax.inject.Inject
 
 
 class RoutinesResetAutoStart : DaggerBroadcastReceiver() {
-    //TODO inject it
-    val routinesResetAlarm: RoutinesResetAlarm = RoutinesResetAlarm()
+
+    @Inject
+    lateinit var routinesResetAlarm: RoutinesResetAlarm
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
