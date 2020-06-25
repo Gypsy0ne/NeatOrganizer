@@ -10,10 +10,9 @@ fun SingleTaskGroup.toTaskListHeader(expanded: Boolean) = TaskListItem.TaskListH
     expanded = expanded
 )
 
-fun SingleTaskEntry.toTaskListSubItem(visible: Boolean) = TaskListItem.TaskListSubItem(
+fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
     id = this.id,
     name = this.name,
-    visible = visible,
     groupId = this.groupId,
     done = this.done
 )
