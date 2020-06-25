@@ -35,5 +35,8 @@ fun RoutineListItem.RoutineListHeader.toRoutine(
     tasks: List<RoutineTaskEntry> = emptyList()
 ) = Routine(this.id, this.name, schedule, tasks)
 
+fun RoutineListItem.RoutineListHeader.getRoutineSchedule() =
+    RoutineSchedule(routineId = this.id, scheduledDays = this.scheduleDays)
+
 fun RoutineListItem.RoutineListSubItem.toRoutineTask() =
     RoutineTaskEntry(id = this.id, routineId = this.groupId, name = this.name, done = this.done)

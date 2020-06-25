@@ -22,7 +22,7 @@ class DataModule {
         return Room.databaseBuilder(
             application,
             OrganizerDatabase::class.java,
-            "NeatOrganizer60.db"
+            "NeatOrganizer59.db"
         ).build()
     }
 

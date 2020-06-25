@@ -55,17 +55,9 @@ class RoutineTaskViewHolder(
         changeEditionAttributes()
 
         if (viewData.edited) {
-            itemBinding.buttonItemRoutineTaskSubmit.show()
-            itemBinding.checkBoxItemRoutineTaskDone.hide()
+            onEditionStart()
         } else {
-            itemBinding.buttonItemRoutineTaskSubmit.hide()
-            itemBinding.checkBoxItemRoutineTaskDone.show()
-        }
-
-        if (viewData.edited) {
-            itemBinding.editTextItemRoutineTaskName.requestEdit()
-        } else {
-            itemBinding.editTextItemRoutineTaskName.clearFocus()
+            onEditionFinish()
         }
     }
 
@@ -78,6 +70,17 @@ class RoutineTaskViewHolder(
         }
     }
 
+    private fun onEditionFinish() {
+        itemBinding.buttonItemRoutineTaskSubmit.hide()
+        itemBinding.checkBoxItemRoutineTaskDone.show()
+        itemBinding.editTextItemRoutineTaskName.clearFocus()
+    }
+
+    private fun onEditionStart() {
+        itemBinding.buttonItemRoutineTaskSubmit.show()
+        itemBinding.checkBoxItemRoutineTaskDone.hide()
+        itemBinding.editTextItemRoutineTaskName.requestEdit()
+    }
 
     override fun setUpEditListener() {
         itemBinding.setEditClickListener {
@@ -90,8 +93,10 @@ class RoutineTaskViewHolder(
     override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
             viewData = viewData.copy(
-                name = itemBinding.editTextItemRoutineTaskName.text.toString()
+                name = itemBinding.editTextItemRoutineTaskName.text.toString(),
+                edited = false
             )
+            updateEditable()
             clickListener.onEditionSubmitClick(viewData)
         }
     }

@@ -36,21 +36,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_routine_task_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_item_grouped_task_container"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/item_routine_task_background"
-            android:elevation="2dp">
+            style="@style/SubItemContainer">
 
             <EditText
                 android:id="@+id/edit_text_item_routine_task_name"
+                style="@style/ListItemName"
                 strokeThrough="@{routineTaskItem.done}"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@android:color/transparent"
                 android:clickable="@{routineTaskItem.edited}"
                 android:enabled="@{routineTaskItem.edited}"
                 android:focusable="@{routineTaskItem.edited}"
@@ -63,14 +54,8 @@
 
             <ImageButton
                 android:id="@+id/button_item_routine_task_submit"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="0dp"
+                style="@style/ItemEditionSubmitButton"
                 android:onClick="@{editionSubmitClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
-                android:src="@drawable/ic_check_dark_yellow_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/edit_text_item_routine_task_name"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -81,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:checked="@{routineTaskItem.done}"
                 android:onClick="@{doneClickListener}"
+                android:buttonTint="@color/yellow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,19 +76,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_routine_task_left_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            style="@style/ListItemMenu">
 
             <ImageButton
                 android:id="@+id/button_item_routine_task_remove"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                style="@style/SubItemMenuButton"
                 android:layout_marginStart="4dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:onClick="@{removeClickListener}"
                 android:src="@drawable/ic_delete_white_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="W, 1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -111,19 +94,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_routine_task_right_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            style="@style/ListItemMenu">
 
             <ImageButton
                 android:id="@+id/button_item_routine_task_edit"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                style="@style/SubItemMenuButton"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:onClick="@{editClickListener}"
                 android:src="@drawable/ic_edit_white_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="W,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

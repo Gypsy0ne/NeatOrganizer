@@ -51,9 +51,7 @@
 
             <EditText
                 android:id="@+id/edit_text_item_routine_header_name"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@android:color/transparent"
+                style="@style/ListItemName"
                 android:gravity="center"
                 android:text="@{headerItem.name}"
                 android:textSize="24sp"
@@ -64,29 +62,16 @@
 
             <ImageButton
                 android:id="@+id/button_item_routine_header_submit"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="0dp"
+                style="@style/ItemEditionSubmitButton"
                 android:onClick="@{editionSubmitClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
-                android:src="@drawable/ic_check_dark_yellow_24dp"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_item_routine_header_name"
                 app:layout_constraintEnd_toEndOf="@+id/edit_text_item_routine_header_name"
                 app:layout_constraintTop_toTopOf="@+id/edit_text_item_routine_header_name" />
 
             <ImageButton
                 android:id="@+id/button_item_routine_header_expand"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="0dp"
+                style="@style/HeaderExpandButton"
                 android:onClick="@{expanderClickListener}"
-                android:padding="16dp"
-                android:src="@drawable/ic_arrow_down_white_32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +85,7 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
+                scheduleDaysStatus="@{headerItem.scheduleDays}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/button_item_routine_header_submit"
                 app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name" />
@@ -109,25 +95,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_routine_header_left_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            style="@style/ListItemMenu">
 
             <Button
                 android:id="@+id/button_item_routine_header_remove"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                style="@style/HeaderMenuButton"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:drawableTop="@drawable/ic_delete_white_32"
                 android:onClick="@{removeClickListener}"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
                 android:text="Delete"
-                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="W,3:4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -135,25 +115,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_item_routine_header_right_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            style="@style/ListItemMenu">
 
             <Button
                 android:id="@+id/button_item_routine_header_add"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                style="@style/HeaderMenuButton"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:drawableTop="@drawable/ic_add_white_32"
                 android:onClick="@{addClickListener}"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
                 android:text="Add"
-                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="W,3:4"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_edit"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,21 +135,15 @@
 
             <Button
                 android:id="@+id/button_item_routine_header_edit"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                style="@style/HeaderMenuButton"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:drawableTop="@drawable/ic_edit_white_32"
-                android:gravity="center"
                 android:onClick="@{editClickListener}"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
                 android:text="Edit"
-                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="W,3:4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_item_routine_header_add"

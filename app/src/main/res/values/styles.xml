@@ -11,6 +11,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
     <style name="cursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
         <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
     </style>
@@ -75,5 +79,60 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:overScrollMode">never</item>
     </style>
+
+    <!--List view items-->
+    <style name="ListItemName">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ListItemMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="SubItemContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_item_grouped_task_container</item>
+        <item name="android:background">@drawable/subitem_background</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
+    <style name="SubItemMenuButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_constraintDimensionRatio">W,1:1</item>
+    </style>
+
+    <style name="HeaderMenuButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="layout_constraintDimensionRatio">W,3:4</item>
+    </style>
+
+    <style name="ItemEditionSubmitButton">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:src">@drawable/ic_check_dark_yellow_24dp</item>
+        <item name="android:background">@drawable/bg_edition_submit_button</item>
+    </style>
+
+    <style name="HeaderExpandButton">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:src">@drawable/ic_arrow_down_white_32dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <!--End of List view items-->
 
 </resources>

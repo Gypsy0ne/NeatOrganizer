@@ -35,10 +35,35 @@ class RoutineHeaderViewHolder(
         }
     }
 
-    private fun navigateToAddRoutineTask(routineId: Long) {
-        val direction =
-            RoutinesFragmentDirections.actionRoutinesToAddRoutineTaskDialogFragment(routineId)
-        itemBinding.root.findNavController().navigate(direction)
+    override fun updateEditable() {
+        changeNameEditionAttributes()
+        itemBinding.dayPickerItemRoutineHeaderSchedule.interactable = viewData.edited
+        if (viewData.edited) {
+            onEditStart()
+        } else {
+            onEditFinish()
+        }
+    }
+
+    private fun onEditFinish() {
+        itemBinding.buttonItemRoutineHeaderSubmit.hide()
+        itemBinding.buttonItemRoutineHeaderExpand.show()
+        itemBinding.editTextItemRoutineHeaderName.clearFocus()
+    }
+
+    private fun onEditStart() {
+        itemBinding.buttonItemRoutineHeaderSubmit.show()
+        itemBinding.buttonItemRoutineHeaderExpand.hide()
+        itemBinding.editTextItemRoutineHeaderName.requestEdit()
+    }
+
+    private fun changeNameEditionAttributes() {
+        itemBinding.editTextItemRoutineHeaderName.apply {
+            isFocusable = viewData.edited
+            isFocusableInTouchMode = viewData.edited
+            isEnabled = viewData.edited
+            isClickable = viewData.edited
+        }
     }
 
     override fun setUpSwipeMenuBehavior() {
@@ -59,33 +84,6 @@ class RoutineHeaderViewHolder(
         updateEditable()
     }
 
-    override fun updateEditable() {
-        changeEditionAttributes()
-
-        if (viewData.edited) {
-            itemBinding.buttonItemRoutineHeaderSubmit.show()
-            itemBinding.buttonItemRoutineHeaderExpand.hide()
-        } else {
-            itemBinding.buttonItemRoutineHeaderSubmit.hide()
-            itemBinding.buttonItemRoutineHeaderExpand.show()
-        }
-
-        if (viewData.edited) {
-            itemBinding.editTextItemRoutineHeaderName.requestEdit()
-        } else {
-            itemBinding.editTextItemRoutineHeaderName.clearFocus()
-        }
-    }
-
-    private fun changeEditionAttributes() {
-        itemBinding.editTextItemRoutineHeaderName.apply {
-            isFocusable = viewData.edited
-            isFocusableInTouchMode = viewData.edited
-            isEnabled = viewData.edited
-            isClickable = viewData.edited
-        }
-    }
-
     override fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
             viewData = viewData.copy(expanded = !viewData.expanded)
@@ -100,6 +98,12 @@ class RoutineHeaderViewHolder(
         }
     }
 
+    private fun navigateToAddRoutineTask(routineId: Long) {
+        val direction =
+            RoutinesFragmentDirections.actionRoutinesToAddRoutineTaskDialogFragment(routineId)
+        itemBinding.root.findNavController().navigate(direction)
+    }
+
     override fun setUpEditListener() {
         itemBinding.setEditClickListener {
             viewData = viewData.copy(edited = !viewData.edited)
@@ -111,8 +115,11 @@ class RoutineHeaderViewHolder(
     override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
             viewData = viewData.copy(
-                name = itemBinding.editTextItemRoutineHeaderName.text.toString()
+                name = itemBinding.editTextItemRoutineHeaderName.text.toString(),
+                scheduleDays = itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus,
+                edited = false
             )
+            updateEditable()
             clickListener.onEditionSubmitClick(viewData)
         }
     }
@@ -123,4 +130,5 @@ class RoutineHeaderViewHolder(
             clickListener.onRemoveClick(viewData)
         }
     }
+
 }

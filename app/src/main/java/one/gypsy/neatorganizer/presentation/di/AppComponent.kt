@@ -23,7 +23,8 @@ import javax.inject.Singleton
         UseCaseModule::class,
         ViewModelModule::class,
         AndroidSupportInjectionModule::class,
-        UtilsModule::class]
+        UtilsModule::class,
+        AlarmModule::class]
 )
 @Singleton
 interface AppComponent {

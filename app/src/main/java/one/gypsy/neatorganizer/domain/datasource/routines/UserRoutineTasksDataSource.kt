@@ -17,4 +17,6 @@ class UserRoutineTasksDataSource @Inject constructor(val routineTasksDao: Routin
     override suspend fun remove(routineTask: RoutineTaskEntry) =
         routineTasksDao.delete(routineTask.toRoutineTaskEntity())
 
+    override suspend fun resetTasksStatus() = routineTasksDao.resetTasksStatus()
+
 }

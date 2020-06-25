@@ -5,9 +5,11 @@ import dagger.Provides
 import one.gypsy.neatorganizer.data.repositories.people.FileRepository
 import one.gypsy.neatorganizer.data.repositories.people.InteractionRepository
 import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
+import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTasksRepository
 import one.gypsy.neatorganizer.domain.interactors.people.*
+import one.gypsy.neatorganizer.domain.interactors.routines.ResetAllRoutineTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.*
 
 @Module
@@ -94,6 +96,11 @@ class UseCaseModule {
     }
 
     //routines
+
+    @Provides
+    fun provideResetAllRoutineTasks(routineTasksRepository: RoutineTasksRepository): ResetAllRoutineTasks {
+        return ResetAllRoutineTasks(routineTasksRepository)
+    }
 
 
 }
