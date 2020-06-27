@@ -23,7 +23,12 @@ class GroupedTasksAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder =
         TaskViewType.values().first { it.resId == viewType }
-            .getHolder(LayoutInflater.from(parent.context), parent, headerClickListener, subItemClickListener)
+            .getHolder(
+                LayoutInflater.from(parent.context),
+                parent,
+                headerClickListener,
+                subItemClickListener
+            )
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -60,7 +65,7 @@ fun TaskViewType.getHolder(
     parent: ViewGroup,
     headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>,
     subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
-) = when (this) {
+): TaskViewHolder = when (this) {
     TaskViewType.HEADER -> TaskHeaderViewHolder(
         DataBindingUtil.inflate(
             inflater, resId, parent, false
