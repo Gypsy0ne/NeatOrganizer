@@ -1,31 +1,89 @@
 package one.gypsy.neatorganizer.presentation.tasks.model
 
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 
 class TaskListMapper {
 
-    fun flattenTaskGroupsToList(
-        taskGroups: List<SingleTaskGroup>,
-        expandedItemsIds: List<Long>
-    ): List<TaskListItem> {
-        val taskListItems = mutableListOf<TaskListItem>()
-
-        taskGroups.sortedByDescending { it.id }.forEach { taskGroup ->
-            val expanded = expandedItemsIds.contains(taskGroup.id)
-            taskListItems.add(
-                taskGroup.toTaskListHeader(expanded)
+    fun mapTasksToListItems(
+        tasksGroups: List<SingleTaskGroup>,
+        oldList: List<TaskListItem>
+    ) = mutableListOf<TaskListItem>().apply {
+        val oldHeaders = oldList.filterIsInstance<TaskListItem.TaskListHeader>()
+        tasksGroups.forEach { taskGroup ->
+            this.addAll(
+                mapTaskGroupToTaskListItems(
+                    taskGroup,
+                    wasHeaderExpanded(oldHeaders, taskGroup)
+                )
             )
-            taskListItems.addAll(mapTaskEntriesOntoSubItems(taskGroup, expanded))
         }
-        return taskListItems
     }
 
-    private fun mapTaskEntriesOntoSubItems(
+    private fun wasHeaderExpanded(
+        oldHeaders: List<TaskListItem.TaskListHeader>,
+        taskGroup: SingleTaskGroup
+    ) = oldHeaders.firstOrNull { it.id == taskGroup.id }?.expanded ?: false
+
+    private fun mapTaskGroupToTaskListItems(
         taskGroup: SingleTaskGroup,
-        visible: Boolean
-    ): List<TaskListItem> {
-        return taskGroup.tasks.sortedByDescending { it.id }.map { taskEntry ->
-            taskEntry.toTaskListSubItem(visible)
+        expandedHeader: Boolean = false
+    ): List<TaskListItem> = mutableListOf<TaskListItem>().apply {
+        with(taskGroup.toTaskListHeader(expandedHeader)) {
+            add(this)
+            addAll(mapTasksToListSubItems(taskGroup.tasks))
         }
     }
+
+    private fun mapTasksToListSubItems(
+        tasks: List<SingleTaskEntry>
+    ) = List(tasks.size) {
+        tasks[it].toTaskListSubItem()
+    }
+
+    fun getVisibleItems(items: List<TaskListItem>) =
+        items.partition { it is TaskListItem.TaskListHeader }
+            .let { partedLists ->
+                mutableListOf<TaskListItem>().apply {
+                    partedLists.first.filterIsInstance<TaskListItem.TaskListHeader>()
+                        .forEach { header ->
+                            this.addAll(
+                                getHeaderWithItemsIfExpanded(
+                                    header, partedLists.second
+                                )
+                            )
+                        }
+                }
+            }
+
+    private fun getHeaderWithItemsIfExpanded(
+        header: TaskListItem.TaskListHeader,
+        subItems: List<TaskListItem>
+    ) = mutableListOf<TaskListItem>().apply {
+        add(header)
+        if (header.expanded) {
+            addAll(
+                subItems.filter { shouldAddToGroup(it, header.id) }
+            )
+        }
+    }
+
+    private fun shouldAddToGroup(
+        listItem: TaskListItem,
+        headerId: Long
+    ) = listItem is TaskListItem.TaskListSubItem && headerId == listItem.groupId
+
+
+    fun updateExpansion(headerItemId: Long, oldList: List<TaskListItem>?) =
+        oldList?.map { negateExpandedIfHeader(it, headerItemId) }
+
+    private fun negateExpandedIfHeader(
+        listedItem: TaskListItem,
+        headerItemId: Long
+    ) = if (listedItem is TaskListItem.TaskListHeader && listedItem.id == headerItemId) {
+        listedItem.copy(expanded = !listedItem.expanded)
+    } else {
+        listedItem
+    }
+
 }

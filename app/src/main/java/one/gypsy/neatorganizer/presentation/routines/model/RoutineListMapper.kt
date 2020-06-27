@@ -30,9 +30,10 @@ class RoutineListMapper {
         expandedHeader: Boolean = false
     ): List<RoutineListItem> =
         mutableListOf<RoutineListItem>().apply {
-            val header = routine.toRoutineListHeader(expandedHeader)
-            this.add(header)
-            this.addAll(mapRoutineTasksToListSubItems(routine.tasks))
+            with(routine.toRoutineListHeader(expandedHeader)) {
+                add(this)
+                addAll(mapRoutineTasksToListSubItems(routine.tasks))
+            }
         }
 
     private fun mapRoutineTasksToListSubItems(
@@ -69,9 +70,19 @@ class RoutineListMapper {
     }
 
     private fun shouldAddToRoutine(
-        it: RoutineListItem,
+        listItem: RoutineListItem,
         headerId: Long
-    ) = it is RoutineListItem.RoutineListSubItem && headerId == it.groupId
+    ) = listItem is RoutineListItem.RoutineListSubItem && headerId == listItem.groupId
 
+    fun updateExpansion(headerItemId: Long, oldList: List<RoutineListItem>?) =
+        oldList?.map { negateExpandedIfHeader(it, headerItemId) }
 
+    private fun negateExpandedIfHeader(
+        listedItem: RoutineListItem,
+        headerItemId: Long
+    ) = if (listedItem is RoutineListItem.RoutineListHeader && listedItem.id == headerItemId) {
+        listedItem.copy(expanded = !listedItem.expanded)
+    } else {
+        listedItem
+    }
 }

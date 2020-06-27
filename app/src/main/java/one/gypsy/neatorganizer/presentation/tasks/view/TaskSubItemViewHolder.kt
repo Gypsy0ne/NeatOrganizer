@@ -1,78 +1,121 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
+import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.databinding.ItemTaskBinding
+import one.gypsy.neatorganizer.presentation.listing.ListedSubItem
 import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
+import one.gypsy.neatorganizer.utils.extensions.hide
+import one.gypsy.neatorganizer.utils.extensions.requestEdit
+import one.gypsy.neatorganizer.utils.extensions.show
 
 class TaskSubItemViewHolder(
     val itemBinding: ItemTaskBinding,
     val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
-) :
-    TaskViewHolder(itemBinding.root) {
+) : TaskViewHolder(itemBinding.root), ListedSubItem<TaskListItem.TaskListSubItem> {
 
-    private lateinit var holderData: TaskListItem.TaskListSubItem
+    override lateinit var viewData: TaskListItem.TaskListSubItem
 
     override fun bind(data: TaskListItem) {
         require(data is TaskListItem.TaskListSubItem)
-        holderData = data
+        viewData = data
 
+        updateEditable()
+        setUpSwipeMenuBehavior()
         setUpEditListener()
         setUpEditionSubmitListener()
         setUpRemoveListener()
         setUpDoneListener()
 
         itemBinding.apply {
-            taskSubItem = holderData
+            taskSubItem = viewData
             executePendingBindings()
         }
 
     }
 
-    private fun setEditable(editable: Boolean) {
-        itemBinding.editTextItemTaskName.apply {
-            isFocusable = editable
-            isFocusableInTouchMode = editable
-            isEnabled = editable
-            isClickable = editable
-        }
-        if (editable) {
-            itemBinding.editTextItemTaskName.requestFocus()
+    override fun setUpSwipeMenuBehavior() {
+        itemBinding.swipeLayoutItemTaskRoot.setMenuSwipeListener(object :
+            SwipeMenuListener {
+            override fun onLeftMenuOpen() {
+                clearEditionStatus()
+            }
+
+            override fun onRightMenuOpen() {
+                clearEditionStatus()
+            }
+        })
+    }
+
+    override fun clearEditionStatus() {
+        viewData = viewData.copy(edited = false)
+        updateEditable()
+    }
+
+    override fun updateEditable() {
+        changeEditionAttributes()
+
+        if (viewData.edited) {
+            onEditionStart()
         } else {
-            itemBinding.editTextItemTaskName.clearFocus()
+            onEditionFinish()
         }
     }
 
-    private fun setUpEditListener() {
+    private fun changeEditionAttributes() {
+        itemBinding.editTextItemTaskName.apply {
+            isFocusable = viewData.edited
+            isFocusableInTouchMode = viewData.edited
+            isEnabled = viewData.edited
+            isClickable = viewData.edited
+        }
+    }
+
+    private fun onEditionFinish() {
+        itemBinding.buttonItemTaskSubmit.hide()
+        itemBinding.checkBoxItemTaskDone.show()
+        itemBinding.editTextItemTaskName.clearFocus()
+    }
+
+    private fun onEditionStart() {
+        itemBinding.buttonItemTaskSubmit.show()
+        itemBinding.checkBoxItemTaskDone.hide()
+        itemBinding.editTextItemTaskName.requestEdit()
+    }
+
+
+    override fun setUpEditListener() {
         itemBinding.setEditClickListener {
-            holderData = holderData.copy(edited = !holderData.edited)
-            setEditable(holderData.edited)
+            viewData = viewData.copy(edited = !viewData.edited)
+            updateEditable()
             itemBinding.swipeLayoutItemTaskRoot.resetStatus()
         }
     }
 
-    private fun setUpEditionSubmitListener() {
+    override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
-            holderData = holderData.copy(
-                name = itemBinding.editTextItemTaskName.text.toString()
+            viewData = viewData.copy(
+                name = itemBinding.editTextItemTaskName.text.toString(),
+                edited = false
             )
-            clickListener.onEditionSubmitClick(holderData)
+            updateEditable()
+            clickListener.onEditionSubmitClick(viewData)
         }
     }
 
-    private fun setUpRemoveListener() {
+    override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskRoot.resetStatus()
-            clickListener.onRemoveClick(holderData)
+            clickListener.onRemoveClick(viewData)
         }
     }
 
-    private fun setUpDoneListener() {
+    override fun setUpDoneListener() {
         itemBinding.setDoneClickListener {
-            holderData = holderData.copy(
-                done = !holderData.done
+            viewData = viewData.copy(
+                done = !viewData.done
             )
-            itemBinding.swipeLayoutItemTaskRoot.resetStatus()
-            clickListener.onDoneClick(holderData)
+            clickListener.onDoneClick(viewData)
         }
     }
 }

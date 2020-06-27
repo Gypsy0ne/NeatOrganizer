@@ -80,18 +80,12 @@ class RoutinesViewModel @Inject constructor(
     }
 
     fun onExpand(headerItem: RoutineListItem.RoutineListHeader) {
-        _listedRoutines.postValue(_listedRoutines.value?.map {
-            negateExpandedIfHeader(it, headerItem.id)
-        })
-    }
-
-    private fun negateExpandedIfHeader(
-        it: RoutineListItem,
-        headerItemId: Long
-    ) = if (it is RoutineListItem.RoutineListHeader && it.id == headerItemId) {
-        it.copy(expanded = !it.expanded)
-    } else {
-        it
+        _listedRoutines.postValue(
+            routineListMapper.updateExpansion(
+                headerItem.id,
+                _listedRoutines.value
+            )
+        )
     }
 
 }

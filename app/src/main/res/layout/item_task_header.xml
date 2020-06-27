@@ -32,28 +32,21 @@
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
         android:id="@+id/swipe_layout_item_task_header_root"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="72dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         app:contentView="@+id/relative_layout_item_task_header_container"
-        app:leftMenuView="@+id/button_item_task_header_remove"
-        app:rightMenuView="@+id/linear_layout_item_task_header_right_menu">
+        app:leftMenuView="@+id/constraint_layout_item_task_header_left_menu"
+        app:rightMenuView="@+id/constraint_layout_item_task_header_right_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relative_layout_item_task_header_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:onClick="@{expanderClickListener}">
+            style="@style/HeaderItemContainer">
 
             <EditText
                 android:id="@+id/edit_text_item_task_header_name"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:clickable="@{headerItem.edited}"
-                android:enabled="@{headerItem.edited}"
-                android:focusable="@{headerItem.edited}"
-                android:focusableInTouchMode="@{headerItem.edited}"
-                android:gravity="center_vertical|start"
+                style="@style/ListItemName"
+                android:gravity="center"
                 android:text="@{headerItem.name}"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,74 +56,80 @@
 
             <ImageButton
                 android:id="@+id/button_item_task_header_submit"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="0dp"
+                style="@style/ItemEditionSubmitButton"
                 android:onClick="@{editionSubmitClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
-                android:src="@drawable/ic_check_dark_yellow_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/button_item_task_header_expand"
+                style="@style/HeaderExpandButton"
+                android:onClick="@{expanderClickListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/button_item_task_header_remove"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/item_person_swipe_update_background"
-            android:drawableTop="@drawable/ic_delete_white_24dp"
-            android:drawablePadding="0dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="4dp"
-            android:text="Delete"
-            android:onClick="@{removeClickListener}"
-            android:textColor="@color/white" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_task_header_left_menu"
+            style="@style/ListItemMenu">
 
-        <LinearLayout
-            android:id="@+id/linear_layout_item_task_header_right_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            <Button
+                android:id="@+id/button_item_task_header_remove"
+                style="@style/HeaderMenuButton.Small"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/item_person_swipe_update_background"
+                android:backgroundTint="@color/red"
+                android:drawableTop="@drawable/ic_delete_white_24"
+                android:onClick="@{removeClickListener}"
+                android:text="Delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_task_header_right_menu"
+            style="@style/ListItemMenu">
 
             <Button
                 android:id="@+id/button_item_task_header_add"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                style="@style/HeaderMenuButton.Small"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
-                android:drawableTop="@drawable/ic_add_white_32"
-                android:drawablePadding="0dp"
+                android:backgroundTint="@color/dark_green"
+                android:drawableTop="@drawable/ic_add_white_24"
                 android:onClick="@{addClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
                 android:text="Add"
-                android:textColor="@color/white" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_item_task_header_edit"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button_item_task_header_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                style="@style/HeaderMenuButton.Small"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
+                android:backgroundTint="@color/male_blue"
                 android:drawableTop="@drawable/ic_edit_white_24"
-                android:drawablePadding="0dp"
                 android:onClick="@{editClickListener}"
-                android:paddingTop="10dp"
-                android:paddingBottom="4dp"
                 android:text="Edit"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_item_task_header_add"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 </layout>

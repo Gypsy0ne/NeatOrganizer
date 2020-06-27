@@ -109,6 +109,16 @@
         <item name="layout_constraintDimensionRatio">W,1:1</item>
     </style>
 
+    <style name="HeaderItemContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/item_routine_header_background</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
     <style name="HeaderMenuButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
@@ -118,9 +128,23 @@
         <item name="layout_constraintDimensionRatio">W,3:4</item>
     </style>
 
+    <style name="HeaderMenuButton.Large" parent="HeaderMenuButton">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="layout_constraintDimensionRatio">W,3:4</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small" parent="HeaderMenuButton">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="layout_constraintDimensionRatio">W,1:1</item>
+    </style>
+
     <style name="ItemEditionSubmitButton">
-        <item name="android:layout_width">24dp</item>
-        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:layout_margin">8dp</item>
         <item name="android:src">@drawable/ic_check_dark_yellow_24dp</item>
         <item name="android:background">@drawable/bg_edition_submit_button</item>

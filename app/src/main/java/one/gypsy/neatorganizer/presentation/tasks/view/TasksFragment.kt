@@ -37,7 +37,7 @@ class TasksFragment : SectionFragment() {
             }
 
             override fun onEditionSubmitClick(headerItem: TaskListItem.TaskListHeader) {
-                tasksViewModel.onEditionSubmit(headerItem)
+                tasksViewModel.onHeaderUpdate(headerItem)
             }
 
             override fun onRemoveClick(headerItem: TaskListItem.TaskListHeader) {
@@ -49,11 +49,11 @@ class TasksFragment : SectionFragment() {
     val subItemClickListener by lazy {
         object : SubItemClickListener<TaskListItem.TaskListSubItem> {
             override fun onDoneClick(subItem: TaskListItem.TaskListSubItem) {
-                tasksViewModel.onTaskDone(subItem)
+                tasksViewModel.onTaskUpdate(subItem)
             }
 
             override fun onEditionSubmitClick(subItem: TaskListItem.TaskListSubItem) {
-                tasksViewModel.onEditionSubmit(subItem)
+                tasksViewModel.onTaskUpdate(subItem)
             }
 
             override fun onRemoveClick(subItem: TaskListItem.TaskListSubItem) {
