@@ -25,8 +25,18 @@
         <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme.Transparent" parent="AppBottomSheetDialogTheme">
+        <item name="bottomSheetStyle">@style/AppModalStyle.Transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
+
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
+    </style>
+
+    <style name="AppModalStyle.Transparent" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="PersonItemTextView">

@@ -32,6 +32,7 @@ class RoutinesFragment : SectionFragment() {
         object : HeaderClickListener<RoutineListItem.RoutineListHeader> {
             override fun onExpanderClick(headerItem: RoutineListItem.RoutineListHeader) {
                 routinesViewModel.onExpand(headerItem)
+                RemoveRoutineSubmitDialogFragment().showNow(parentFragmentManager, "")
             }
 
             override fun onEditionSubmitClick(headerItem: RoutineListItem.RoutineListHeader) {

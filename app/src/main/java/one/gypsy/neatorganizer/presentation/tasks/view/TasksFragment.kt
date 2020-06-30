@@ -97,10 +97,19 @@ class TasksFragment : SectionFragment() {
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+        showRemoveConfirmationDialog()
+
+    }
+
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
         tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
         recyclerViewFragmentTasks.itemAnimator = null
         executePendingBindings()
+    }
+
+    private fun showRemoveConfirmationDialog() {
     }
 }
