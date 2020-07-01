@@ -32,7 +32,6 @@ class RoutinesFragment : SectionFragment() {
         object : HeaderClickListener<RoutineListItem.RoutineListHeader> {
             override fun onExpanderClick(headerItem: RoutineListItem.RoutineListHeader) {
                 routinesViewModel.onExpand(headerItem)
-                RemoveRoutineSubmitDialogFragment().showNow(parentFragmentManager, "")
             }
 
             override fun onEditionSubmitClick(headerItem: RoutineListItem.RoutineListHeader) {
@@ -40,7 +39,7 @@ class RoutinesFragment : SectionFragment() {
             }
 
             override fun onRemoveClick(headerItem: RoutineListItem.RoutineListHeader) {
-                routinesViewModel.onRemove(headerItem)
+                navigateToRemoveRoutineSubmitDialog(headerItem.id, headerItem.subItemsCount)
             }
         }
     }
@@ -106,5 +105,17 @@ class RoutinesFragment : SectionFragment() {
         routinesAdapter = RoutinesAdapter(headerClickListener, subItemClickListener)
         recyclerViewFragmentTasks.itemAnimator = null
         executePendingBindings()
+    }
+
+
+    private fun navigateToRemoveRoutineSubmitDialog(routineId: Long, subItemsCount: Int) {
+        with(
+            RoutinesFragmentDirections.actionRoutinesToRemoveRoutineSubmitDialogFragment(
+                routineId,
+                subItemsCount
+            )
+        ) {
+            findNavController().navigate(this)
+        }
     }
 }

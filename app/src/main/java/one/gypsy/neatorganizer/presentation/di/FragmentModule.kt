@@ -8,6 +8,7 @@ import one.gypsy.neatorganizer.presentation.people.view.RateInteractionDialogFra
 import one.gypsy.neatorganizer.presentation.profile.PersonProfileFragment
 import one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment
 import one.gypsy.neatorganizer.presentation.routines.view.AddRoutineTaskDialogFragment
+import one.gypsy.neatorganizer.presentation.routines.view.RemoveRoutineSubmitDialogFragment
 import one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddTaskDialogFragment
@@ -39,6 +40,9 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddRoutineFragment(): AddRoutineDialogFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeRemoveRoutineSubmitFragment(): RemoveRoutineSubmitDialogFragment
 
     @ContributesAndroidInjector
     abstract fun contributeTasksFragment(): TasksFragment

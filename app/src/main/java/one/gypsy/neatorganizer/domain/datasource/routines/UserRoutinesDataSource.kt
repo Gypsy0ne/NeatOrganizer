@@ -6,7 +6,6 @@ import one.gypsy.neatorganizer.data.database.dao.routines.RoutinesDao
 import one.gypsy.neatorganizer.data.database.entity.routines.toRoutine
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.toRoutineEntity
-import one.gypsy.neatorganizer.domain.dto.routines.toScheduledRoutineEntity
 import javax.inject.Inject
 
 class UserRoutinesDataSource @Inject constructor(val routinesDao: RoutinesDao) :
@@ -24,4 +23,7 @@ class UserRoutinesDataSource @Inject constructor(val routinesDao: RoutinesDao) :
                 it.toRoutine()
             }
         }
+
+    override suspend fun removeRoutineById(routineId: Long) =
+        routinesDao.deleteRoutineById(routineId)
 }

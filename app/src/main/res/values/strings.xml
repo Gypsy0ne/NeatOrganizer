@@ -25,4 +25,9 @@
         <item>Sat.</item>
         <item>Sun.</item>
     </string-array>
+    <plurals name="subItemsCount">
+        <item quantity="zero">This routine consists of no tasks.</item>
+        <item quantity="one">This routine consists of only one task.</item>
+        <item quantity="other">This routine consists of %d tasks.</item>
+    </plurals>
 </resources>

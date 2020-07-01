@@ -13,4 +13,6 @@ class RoutinesRepository @Inject constructor(var dataSource: RoutinesDataSource)
     suspend fun removeRoutine(routine: Routine) = dataSource.remove(routine)
 
     suspend fun getAllRoutines() = dataSource.getAllRoutines()
+
+    suspend fun removeRoutineById(routineId: Long) = dataSource.removeRoutineById(routineId)
 }

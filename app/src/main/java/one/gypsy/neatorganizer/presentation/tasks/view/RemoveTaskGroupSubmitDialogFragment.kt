@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.routines.view
+package one.gypsy.neatorganizer.presentation.tasks.view
 
 import android.content.Context
 import android.os.Bundle
@@ -19,7 +19,7 @@ import one.gypsy.neatorganizer.presentation.common.RemoveViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
 import javax.inject.Inject
 
-class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
+class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var fragmentBinding: DialogFragmentRemoveConfirmationBinding

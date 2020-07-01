@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_tasks_to_addSingleTaskDialogFragment"
             app:destination="@id/addSingleTaskDialogFragment" />
+        <action
+            android:id="@+id/action_tasks_to_removeTaskGroupSubmitDialogFragment"
+            app:destination="@id/removeTaskGroupSubmitDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/people"
@@ -30,6 +33,9 @@
         <action
             android:id="@+id/action_routines_to_addRoutineTaskDialogFragment"
             app:destination="@id/addRoutineTaskDialogFragment" />
+        <action
+            android:id="@+id/action_routines_to_removeRoutineSubmitDialogFragment"
+            app:destination="@id/removeRoutineSubmitDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/person_add"
@@ -75,6 +81,30 @@
         <argument
             android:name="routineId"
             app:argType="long" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/removeRoutineSubmitDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.routines.view.RemoveRoutineSubmitDialogFragment"
+        android:label="RemoveRoutineSubmitDialogFragment">
+        <argument
+            android:name="itemId"
+            app:argType="long" />
+        <argument
+            android:name="subItemsCount"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/removeTaskGroupSubmitDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.RemoveTaskGroupSubmitDialogFragment"
+        android:label="RemoveTaskGroupSubmitDialogFragment">
+        <argument
+            android:name="itemId"
+            app:argType="long" />
+        <argument
+            android:name="subItemsCount"
+            app:argType="integer" />
     </dialog>
 
     <dialog
