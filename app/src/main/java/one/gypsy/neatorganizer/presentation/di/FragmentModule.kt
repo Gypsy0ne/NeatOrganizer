@@ -12,6 +12,7 @@ import one.gypsy.neatorganizer.presentation.routines.view.RemoveRoutineSubmitDia
 import one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.AddTaskDialogFragment
+import one.gypsy.neatorganizer.presentation.tasks.view.RemoveTaskGroupSubmitDialogFragment
 import one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment
 
 @Module
@@ -43,6 +44,9 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRemoveRoutineSubmitFragment(): RemoveRoutineSubmitDialogFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeRemoveTaskGroupSubmitDialogFragment(): RemoveTaskGroupSubmitDialogFragment
 
     @ContributesAndroidInjector
     abstract fun contributeTasksFragment(): TasksFragment

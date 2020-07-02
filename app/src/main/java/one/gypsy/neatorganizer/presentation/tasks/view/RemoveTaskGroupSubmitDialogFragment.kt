@@ -16,14 +16,14 @@ import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentRemoveConfirmationBinding
 import one.gypsy.neatorganizer.presentation.common.RemoveViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
+import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
 import javax.inject.Inject
 
 class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var fragmentBinding: DialogFragmentRemoveConfirmationBinding
-    private val args: RemoveRoutineSubmitDialogFragmentArgs by navArgs()
+    private val args: RemoveTaskGroupSubmitDialogFragmentArgs by navArgs()
 
     private lateinit var viewModel: RemoveViewModel
 
@@ -46,7 +46,7 @@ class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
         setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme_Transparent)
         super.onCreate(savedInstanceState)
         viewModel =
-            ViewModelProviders.of(this, viewModelFactory)[RemoveRoutineViewModel::class.java]
+            ViewModelProviders.of(this, viewModelFactory)[RemoveTaskGroupViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {

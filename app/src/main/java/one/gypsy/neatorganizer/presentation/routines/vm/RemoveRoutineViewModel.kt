@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineById
 import one.gypsy.neatorganizer.presentation.common.RemoveViewModel
+import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.default
 import javax.inject.Inject
 
@@ -17,6 +18,14 @@ class RemoveRoutineViewModel @Inject constructor(val removeRoutineByIdUseCase: R
         get() = _actionFinished
 
     override fun onRemoveSubmit(removedItemId: Long) {
-        removeRoutineByIdUseCase.invoke(viewModelScope, RemoveRoutineById.Params(removedItemId))
+        removeRoutineByIdUseCase.invoke(viewModelScope, RemoveRoutineById.Params(removedItemId)) {
+            it.either(::onRemoveFailure, ::onRemoveSuccess)
+        }
     }
+
+    private fun onRemoveSuccess(unit: Unit) {
+        _actionFinished.postValue(true)
+    }
+
+    private fun onRemoveFailure(failure: Failure) {}
 }

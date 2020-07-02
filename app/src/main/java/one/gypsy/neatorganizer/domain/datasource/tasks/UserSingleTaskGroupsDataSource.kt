@@ -16,6 +16,9 @@ class UserSingleTaskGroupsDataSource @Inject constructor(val singleTaskGroupsDao
     override suspend fun remove(singleTaskGroup: SingleTaskGroup) =
         singleTaskGroupsDao.delete(singleTaskGroup.toSingleTaskGroupEntity())
 
+    override suspend fun removeById(taskGroupId: Long) =
+        singleTaskGroupsDao.deleteTaskGroupById(taskGroupId)
+
     override suspend fun update(singleTaskGroup: SingleTaskGroup) =
         singleTaskGroupsDao.update(singleTaskGroup.toSingleTaskGroupEntity())
 
