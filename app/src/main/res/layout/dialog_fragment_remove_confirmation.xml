@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="submitClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="subItemsCount"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottive_view_dialog_fragment_remove_confirmation_icon"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/oval_white_background"
+            android:elevation="8dp"
+            android:outlineProvider="none"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_remove_content"
+            app:layout_constraintEnd_toEndOf="@+id/constraint_layout_dialog_fragment_remove_content"
+            app:layout_constraintStart_toStartOf="@+id/constraint_layout_dialog_fragment_remove_content"
+            app:layout_constraintTop_toTopOf="@+id/constraint_layout_dialog_fragment_remove_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/obyoby" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_dialog_fragment_remove_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_bottom_sheet_dialog"
+            android:paddingTop="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/text_view_dialog_fragment_remove_confirmation_header"
+                android:layout_width="0dp"
+                removeGroupText="@{subItemsCount}"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@id/text_view_dialog_fragment_remove_confirmation_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_dialog_fragment_remove_confirmation_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Are you sure you want to delete this item?"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/button_dialog_fragment_remove_confirmation_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_dialog_fragment_remove_confirmation_header" />
+
+            <Button
+                android:id="@+id/button_dialog_fragment_remove_confirmation_submit"
+                style="@style/DialogFormButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
+                android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
+                android:text="@string/add_person_dialog_fragment_confirm"
+                android:onClick="@{submitClickListener}"
+                android:textColor="@color/dark_yellow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_dialog_fragment_remove_confirmation_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

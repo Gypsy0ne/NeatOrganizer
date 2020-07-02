@@ -17,4 +17,6 @@ class SingleTaskGroupsRepository @Inject constructor(var dataSource: SingleTaskG
 
     suspend fun getAllSingleTaskGroups() = dataSource.getAllSingleTaskGroups()
 
+    suspend fun removeSingleTaskGroupById(taskGroupId: Long) = dataSource.removeById(taskGroupId)
+
 }

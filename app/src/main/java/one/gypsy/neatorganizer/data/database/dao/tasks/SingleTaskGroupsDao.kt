@@ -15,4 +15,7 @@ interface SingleTaskGroupsDao:
     @Transaction
     @Query("SELECT * FROM single_task_group")
     fun getAllGroupsWithSingleTasks(): LiveData<List<GroupWithSingleTasks>>
+
+    @Query("DELETE FROM SINGLE_TASK_GROUP WHERE id = :taskGroupId")
+    fun deleteTaskGroupById(taskGroupId: Long)
 }

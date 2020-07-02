@@ -41,7 +41,7 @@ class TasksFragment : SectionFragment() {
             }
 
             override fun onRemoveClick(headerItem: TaskListItem.TaskListHeader) {
-                tasksViewModel.onRemove(headerItem)
+                showRemoveConfirmationDialog(headerItem.id, headerItem.subItemsCount)
             }
         }
     }
@@ -102,5 +102,19 @@ class TasksFragment : SectionFragment() {
         tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
         recyclerViewFragmentTasks.itemAnimator = null
         executePendingBindings()
+    }
+
+    private fun showRemoveConfirmationDialog(
+        taskGroupId: Long,
+        subItemsCount: Int
+    ) {
+        with(
+            TasksFragmentDirections.actionTasksToRemoveTaskGroupSubmitDialogFragment(
+                taskGroupId,
+                subItemsCount
+            )
+        ) {
+            findNavController().navigate(this)
+        }
     }
 }
