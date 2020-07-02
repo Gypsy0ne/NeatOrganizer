@@ -92,14 +92,19 @@ class RoutineTaskViewHolder(
 
     override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
-            viewData = viewData.copy(
-                name = itemBinding.editTextItemRoutineTaskName.text.toString(),
-                edited = false
-            )
-            updateEditable()
-            clickListener.onEditionSubmitClick(viewData)
+            if (didItemNameChange()) {
+                viewData = viewData.copy(
+                    name = itemBinding.editTextItemRoutineTaskName.text.toString()
+                )
+                clickListener.onEditionSubmitClick(viewData)
+            } else {
+                clearEditionStatus()
+            }
         }
     }
+
+    private fun didItemNameChange() =
+        viewData.name != itemBinding.editTextItemRoutineTaskName.text.toString()
 
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {

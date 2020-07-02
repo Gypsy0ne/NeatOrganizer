@@ -114,15 +114,22 @@ class RoutineHeaderViewHolder(
 
     override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
-            viewData = viewData.copy(
-                name = itemBinding.editTextItemRoutineHeaderName.text.toString(),
-                scheduleDays = itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus,
-                edited = false
-            )
-            updateEditable()
-            clickListener.onEditionSubmitClick(viewData)
+            if (didItemContentChange()) {
+                viewData = viewData.copy(
+                    name = itemBinding.editTextItemRoutineHeaderName.text.toString(),
+                    scheduleDays = itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus
+                )
+                clickListener.onEditionSubmitClick(viewData)
+            } else {
+                clearEditionStatus()
+            }
         }
     }
+
+    private fun didItemContentChange() =
+        viewData.name != itemBinding.editTextItemRoutineHeaderName.text.toString() ||
+                viewData.scheduleDays != itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus
+
 
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {

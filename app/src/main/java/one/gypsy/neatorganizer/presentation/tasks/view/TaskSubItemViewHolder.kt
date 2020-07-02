@@ -94,14 +94,19 @@ class TaskSubItemViewHolder(
 
     override fun setUpEditionSubmitListener() {
         itemBinding.setEditionSubmitClickListener {
-            viewData = viewData.copy(
-                name = itemBinding.editTextItemTaskName.text.toString(),
-                edited = false
-            )
-            updateEditable()
-            clickListener.onEditionSubmitClick(viewData)
+            if (didItemNameChange()) {
+                viewData = viewData.copy(
+                    name = itemBinding.editTextItemTaskName.text.toString()
+                )
+                clickListener.onEditionSubmitClick(viewData)
+            } else {
+                clearEditionStatus()
+            }
         }
     }
+
+    private fun didItemNameChange() =
+        viewData.name != itemBinding.editTextItemTaskName.text.toString()
 
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
