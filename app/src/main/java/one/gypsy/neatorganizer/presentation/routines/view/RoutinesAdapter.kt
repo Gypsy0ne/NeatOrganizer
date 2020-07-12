@@ -33,10 +33,18 @@ class RoutinesAdapter(
 
     override fun onBindViewHolder(holder: RoutineViewHolder, position: Int) {
         holder.bind(getItem(position))
+        if (holder.itemViewType != RoutineViewType.HEADER.resId) {
+            holder.animate()
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).getViewHolderType()
+    }
+
+    override fun onViewDetachedFromWindow(holder: RoutineViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.clearAnimation()
     }
 
     class DiffCallback : DiffUtil.ItemCallback<RoutineListItem>() {

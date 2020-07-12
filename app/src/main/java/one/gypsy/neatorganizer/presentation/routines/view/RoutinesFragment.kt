@@ -107,7 +107,6 @@ class RoutinesFragment : SectionFragment() {
         executePendingBindings()
     }
 
-
     private fun navigateToRemoveRoutineSubmitDialog(routineId: Long, subItemsCount: Int) {
         with(
             RoutinesFragmentDirections.actionRoutinesToRemoveRoutineSubmitDialogFragment(

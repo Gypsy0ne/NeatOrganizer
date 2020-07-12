@@ -32,10 +32,18 @@ class GroupedTasksAdapter(
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
+        if (holder.itemViewType != TaskViewType.HEADER.resId) {
+            holder.animate()
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).getViewHolderType()
+    }
+
+    override fun onViewDetachedFromWindow(holder: TaskViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.clearAnimation()
     }
 
     class DiffCallback : DiffUtil.ItemCallback<TaskListItem>() {
