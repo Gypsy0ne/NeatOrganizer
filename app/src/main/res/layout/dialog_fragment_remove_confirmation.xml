@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraint_layout_dialog_fragment_remove_content"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
-            app:lottie_rawRes="@raw/obyoby" />
+            app:lottie_rawRes="@raw/remove_confirmation" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_dialog_fragment_remove_content"

@@ -25,11 +25,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_fragment_people"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
-            android:layoutAnimation="@anim/layout_animation_fall_down"
-            android:overScrollMode="never"
+            style="@style/FragmentRecyclerView"
             app:adapter="@{peopleAdapter}"
             app:adapterData="@{viewModel.people}"
             app:layoutManager="@{layoutManager}"
