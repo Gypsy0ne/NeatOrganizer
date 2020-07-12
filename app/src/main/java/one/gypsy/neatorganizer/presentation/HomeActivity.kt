@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.android.AndroidInjection
@@ -46,8 +46,6 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
             }
         }
     }
-
-
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        val navigation = findNavController(R.id.fragment_activity_home_nav_container)
