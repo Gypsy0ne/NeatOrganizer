@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.di
+package one.gypsy.neatorganizer.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +12,6 @@ import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 
 @Suppress("unused")
 @Module
@@ -26,11 +25,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddPersonViewModel::class)
     abstract fun bindAddPersonViewModel(viewModel: AddPersonViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(TasksViewModel::class)
-    abstract fun bindTasksViewModel(viewModel: TasksViewModel): ViewModel
 
     @Binds
     @IntoMap

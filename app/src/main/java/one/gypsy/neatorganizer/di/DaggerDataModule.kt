@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.di
+package one.gypsy.neatorganizer.di
 
 import android.app.Application
 import androidx.room.Room
@@ -15,7 +15,7 @@ import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import javax.inject.Singleton
 
 @Module
-class DataModule {
+class DaggerDataModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): OrganizerDatabase {

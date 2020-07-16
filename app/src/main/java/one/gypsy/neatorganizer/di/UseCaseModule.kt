@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.di
+package one.gypsy.neatorganizer.di
 
 import dagger.Module
 import dagger.Provides

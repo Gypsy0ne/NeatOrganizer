@@ -8,9 +8,8 @@ import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class TasksViewModel @Inject constructor(
+class TasksViewModel constructor(
     var getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
     var updateSingleTaskGroupUseCase: UpdateTaskGroup,
     var updateSingleTaskUseCase: UpdateSingleTask,
@@ -63,13 +62,6 @@ class TasksViewModel @Inject constructor(
         updateSingleTaskUseCase.invoke(
             viewModelScope,
             UpdateSingleTask.Params(singleTask = subItem.toSingleTask())
-        )
-    }
-
-    fun onRemove(headerItem: TaskListItem.TaskListHeader) {
-        removeSingleTaskGroupUseCase.invoke(
-            viewModelScope,
-            RemoveTaskGroup.Params(headerItem.toSingleTaskGroup())
         )
     }
 

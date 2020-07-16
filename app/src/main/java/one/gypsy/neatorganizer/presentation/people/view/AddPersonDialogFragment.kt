@@ -17,7 +17,6 @@ import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddPersonBinding
 import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
-import one.gypsy.neatorganizer.utils.extensions.showToast
 import javax.inject.Inject
 
 
@@ -89,7 +88,7 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
         if (intentData != null) {
             viewModel.handleIntentPictureData(intentData)
         } else {
-            showToast(requireContext(), R.string.add_person_dialog_fragment_image_pick_error)
+//            showToast(requireContext(), R.string.add_person_dialog_fragment_image_pick_error)
         }
     }
     }

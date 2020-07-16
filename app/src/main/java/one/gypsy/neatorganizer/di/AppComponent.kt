@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.di
+package one.gypsy.neatorganizer.di
 
 import android.app.Application
 import com.squareup.inject.assisted.dagger2.AssistedModule
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @Component(
     modules = [AssistedInjectModule::class,
         ActivityModule::class,
-        DataModule::class,
+        DaggerDataModule::class,
         FragmentModule::class,
         DataSourceModule::class,
         RepositoryModule::class,
