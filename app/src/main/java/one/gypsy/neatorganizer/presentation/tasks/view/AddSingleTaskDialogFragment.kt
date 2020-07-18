@@ -11,18 +11,16 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddTaskBinding
-import one.gypsy.neatorganizer.presentation.injector
+import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class AddSingleTaskDialogFragment : BottomSheetDialogFragment() {
 
     private val args: AddSingleTaskDialogFragmentArgs by navArgs()
-
-    val viewModel by lazy {
-        injector.addTaskViewModelFactory.create(
-            args.groupId
-        )
+    private val viewModel: AddTaskViewModel by viewModel {
+        parametersOf(args.groupId)
     }
-
     lateinit var fragmentBinding: DialogFragmentAddTaskBinding
 
     override fun onCreateView(
@@ -35,7 +33,6 @@ class AddSingleTaskDialogFragment : BottomSheetDialogFragment() {
         return fragmentBinding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = viewModel
@@ -46,7 +43,6 @@ class AddSingleTaskDialogFragment : BottomSheetDialogFragment() {
         super.onStart()
         setUpObservers()
     }
-
 
     private fun setUpObservers() {
         viewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->

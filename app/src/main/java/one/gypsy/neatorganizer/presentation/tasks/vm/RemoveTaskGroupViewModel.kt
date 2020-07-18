@@ -5,19 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveTaskGroupById
-import one.gypsy.neatorganizer.presentation.common.RemoveViewModel
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.default
-import javax.inject.Inject
 
-class RemoveTaskGroupViewModel @Inject constructor(val removeTaskGroupByIdUseCase: RemoveTaskGroupById) :
-    ViewModel(), RemoveViewModel {
+class RemoveTaskGroupViewModel(val removeTaskGroupByIdUseCase: RemoveTaskGroupById) :
+    ViewModel() {
 
     private val _actionFinished = MutableLiveData<Boolean>().default(false)
-    override val actionFinished: LiveData<Boolean>
+    val actionFinished: LiveData<Boolean>
         get() = _actionFinished
 
-    override fun onRemoveSubmit(removedItemId: Long) {
+    fun onRemoveSubmit(removedItemId: Long) {
         removeTaskGroupByIdUseCase.invoke(
             viewModelScope,
             RemoveTaskGroupById.Params(removedItemId)

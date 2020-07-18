@@ -10,7 +10,6 @@ import one.gypsy.neatorganizer.presentation.OrganizerApplication
 import one.gypsy.neatorganizer.presentation.people.vm.RateInteractionViewModel
 import one.gypsy.neatorganizer.presentation.profile.vm.PersonProfileViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel
 import javax.inject.Singleton
 
 @Component(
@@ -41,7 +40,6 @@ interface AppComponent {
 
     val personProfileViewModelFactory: PersonProfileViewModel.Factory
     val rateInteractionViewModelFactory: RateInteractionViewModel.Factory
-    val addTaskViewModelFactory: AddTaskViewModel.Factory
     val addRoutineTaskViewModelFactory: AddRoutineTaskViewModel.Factory
 
 }

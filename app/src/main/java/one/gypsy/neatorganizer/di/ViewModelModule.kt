@@ -10,8 +10,6 @@ import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
 
 @Suppress("unused")
 @Module
@@ -28,11 +26,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(AddTaskGroupViewModel::class)
-    abstract fun bindAddTaskGroupViewModel(viewModel: AddTaskGroupViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(RoutinesViewModel::class)
     abstract fun bindRoutinesViewModel(viewModel: RoutinesViewModel): ViewModel
 
@@ -45,11 +38,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RemoveRoutineViewModel::class)
     abstract fun bindRemoveRoutineViewModel(viewModel: RemoveRoutineViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RemoveTaskGroupViewModel::class)
-    abstract fun bindRemoveTaskGroupViewModel(viewModel: RemoveTaskGroupViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

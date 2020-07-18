@@ -4,15 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddTaskViewModel @AssistedInject constructor(
-    var addSingleTaskUseCase: AddSingleTask,
-    @Assisted val groupId: Long
+class AddTaskViewModel(
+    var addSingleTaskUseCase: AddSingleTask, val groupId: Long
 ) : ViewModel() {
     val taskTitle = MutableLiveData<String>()
 
@@ -65,10 +62,5 @@ class AddTaskViewModel @AssistedInject constructor(
 
     private fun onAddNextTaskFailure(failure: Failure) {
 
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(groupId: Long): AddTaskViewModel
     }
 }

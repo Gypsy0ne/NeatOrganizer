@@ -7,10 +7,8 @@ import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTaskGroup) :
-    ViewModel() {
+class AddTaskGroupViewModel(var addTaskGroupUseCase: AddTaskGroup) : ViewModel() {
 
     val taskGroupTitle = MutableLiveData<String>()
 
@@ -38,5 +36,4 @@ class AddTaskGroupViewModel @Inject constructor(var addTaskGroupUseCase: AddTask
     fun onAddSingleTaskGroupFailure(failure: Failure) {
 
     }
-
 }

@@ -7,7 +7,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import one.gypsy.neatorganizer.di.AppComponent
 import one.gypsy.neatorganizer.di.DaggerAppComponent
-import one.gypsy.neatorganizer.di.tasks.*
+import one.gypsy.neatorganizer.di.koin.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import javax.inject.Inject

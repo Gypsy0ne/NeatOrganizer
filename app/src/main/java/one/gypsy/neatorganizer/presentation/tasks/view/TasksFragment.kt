@@ -19,11 +19,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class TasksFragment : SectionFragment() {
 
-    val tasksViewModel: TasksViewModel by viewModel()
-
+    private val tasksViewModel: TasksViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentTasksBinding
 
-    val headerClickListener by lazy {
+    private val headerClickListener by lazy {
         object : HeaderClickListener<TaskListItem.TaskListHeader> {
             override fun onExpanderClick(headerItem: TaskListItem.TaskListHeader) {
                 tasksViewModel.onExpand(headerItem)
@@ -39,7 +38,7 @@ class TasksFragment : SectionFragment() {
         }
     }
 
-    val subItemClickListener by lazy {
+    private val subItemClickListener by lazy {
         object : SubItemClickListener<TaskListItem.TaskListSubItem> {
             override fun onDoneClick(subItem: TaskListItem.TaskListSubItem) {
                 tasksViewModel.onTaskUpdate(subItem)
