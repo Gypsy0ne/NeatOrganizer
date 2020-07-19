@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.domain.interactors.people
+package one.gypsy.neatorganizer.domain.interactors.profile
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
 import one.gypsy.neatorganizer.domain.interactors.people.GetAllPeople
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
 //TODO https://stackoverflow.com/questions/44270577/android-lifecycle-library-viewmodel-using-dagger-2
 //TODO check if interaction status updates when interaction entry is added
-class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople) : ViewModel() {
+class PeopleViewModel(getAllPeopleUseCase: GetAllPeople) : ViewModel() {
 
     private val _people = MediatorLiveData<List<PersonEntry>>()
     val people: LiveData<List<PersonEntry>>
@@ -19,7 +18,7 @@ class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople)
 
     init {
         getAllPeopleUseCase.invoke(viewModelScope, Unit) {
-            it.either(::onGetAllPeopleFailure, :: onGetAllPeopleSuccess)
+            it.either(::onGetAllPeopleFailure, ::onGetAllPeopleSuccess)
         }
     }
 
@@ -32,8 +31,6 @@ class PeopleViewModel @Inject constructor(var getAllPeopleUseCase: GetAllPeople)
             _people.postValue(it)
         }
     }
-
-
 
 
 }

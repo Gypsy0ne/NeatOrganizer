@@ -5,7 +5,11 @@ import dagger.Provides
 import one.gypsy.neatorganizer.data.repositories.people.FileRepository
 import one.gypsy.neatorganizer.data.repositories.people.InteractionRepository
 import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
-import one.gypsy.neatorganizer.domain.interactors.people.*
+import one.gypsy.neatorganizer.domain.interactors.people.AddInteractionEntry
+import one.gypsy.neatorganizer.domain.interactors.people.AddPerson
+import one.gypsy.neatorganizer.domain.interactors.people.GetAllPeople
+import one.gypsy.neatorganizer.domain.interactors.people.GetImageBitmap
+import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonHistory
 
 @Module
 class UseCaseModule {

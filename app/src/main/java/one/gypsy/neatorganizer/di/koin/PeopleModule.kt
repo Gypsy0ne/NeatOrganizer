@@ -1,61 +1,54 @@
 package one.gypsy.neatorganizer.di.koin
 
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineSchedulesRepository
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
-import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
-import one.gypsy.neatorganizer.domain.datasource.routines.*
-import one.gypsy.neatorganizer.domain.interactors.routines.*
-import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
-import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
+import one.gypsy.neatorganizer.data.repositories.people.FileRepository
+import one.gypsy.neatorganizer.data.repositories.people.InteractionRepository
+import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
+import one.gypsy.neatorganizer.domain.datasource.people.*
+import one.gypsy.neatorganizer.domain.interactors.people.AddInteractionEntry
+import one.gypsy.neatorganizer.domain.interactors.people.AddPerson
+import one.gypsy.neatorganizer.domain.interactors.people.GetAllPeople
+import one.gypsy.neatorganizer.domain.interactors.people.GetImageBitmap
+import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonHistory
+import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonProfile
+import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
+import one.gypsy.neatorganizer.presentation.people.vm.RateInteractionViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val peopleDataSourceModule = module {
-    factory<RoutineSchedulesDataSource> { UserRoutineSchedulesDataSource(get()) }
-    factory<RoutinesDataSource> { UserRoutinesDataSource(get()) }
-    factory<RoutineTasksDataSource> { UserRoutineTasksDataSource(get()) }
+    factory<FileDataSource> { DeviceFileDataSource(get()) }
+    factory<InteractionDataSource> { UserInteractionDataSource(get()) }
+    factory<PeopleDataSource> { UserCommunityDataSource(get()) }
 }
 
 val peopleRepositoryModule = module {
-    factory { RoutineSchedulesRepository(get()) }
-    factory { RoutinesRepository(get()) }
-    factory { RoutineTasksRepository(get()) }
+    factory { FileRepository(get()) }
+    factory { InteractionRepository(get()) }
+    factory { PeopleRepository(get()) }
 }
 
 val peopleUseCaseModule = module {
-    factory { AddRoutine(get()) }
-    factory { AddRoutineSchedule(get()) }
-    factory { AddRoutineTask(get()) }
-    factory { GetAllRoutines(get()) }
-    factory { RemoveRoutine(get()) }
-    factory { RemoveRoutineById(get()) }
-    factory { RemoveRoutineTask(get()) }
-    factory { ResetAllRoutineTasks(get()) }
-    factory { UpdateRoutine(get()) }
-    factory { UpdateRoutineSchedule(get()) }
-    factory { UpdateRoutineTask(get()) }
-}
-
-val peopleUtilsModule = module {
-    factory { RoutineListMapper() }
+    factory { AddInteractionEntry(get()) }
+    factory { AddPerson(get()) }
+    factory { GetAllPeople(get()) }
+    factory { GetImageBitmap(get()) }
+    factory {
+        GetPersonHistory(
+            get()
+        )
+    }
+    factory {
+        GetPersonProfile(
+            get()
+        )
+    }
 }
 
 val peopleViewModelModule = module {
-    viewModel { (id: Long) -> AddRoutineTaskViewModel(get(), id) }
-    viewModel { AddRoutineViewModel(addRoutineSchedule = get(), addRoutineUseCase = get()) }
-    viewModel { RemoveRoutineViewModel(get()) }
-    viewModel {
-        RoutinesViewModel(
-            getAllRoutinesUseCase = get(),
-            removeRoutine = get(),
-            updateRoutine = get(),
-            removeRoutineTask = get(),
-            updateRoutineTask = get(),
-            updateRoutineSchedule = get(),
-            routineListMapper = get()
-        )
-    }
+    viewModel { AddPersonViewModel(addPersonUseCase = get(), getImageBitmapUseCase = get()) }
+    viewModel { PeopleViewModel(get()) }
+    viewModel { PersonEntryViewModel() }
+    viewModel { (id: Long) -> RateInteractionViewModel(get(), id) }
 }

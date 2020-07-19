@@ -1,39 +1,27 @@
 package one.gypsy.neatorganizer.presentation.people.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_people.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPeopleBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
 import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
-import javax.inject.Inject
-
+import org.koin.android.viewmodel.ext.android.viewModel
 
 //TODO https://stackoverflow.com/questions/30398247/how-to-filter-a-recyclerview-with-a-searchview
 //https://wrdlbrnft.github.io/SortedListAdapter/
 class PeopleFragment : SectionFragment() {
 
-//    interface PeopleInteractionListener {
+    //    interface PeopleInteractionListener {
 //        fun onPersonEntryUpdateTriggered(personId: Long)
 //    }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-
-    lateinit var peopleViewModel: PeopleViewModel
-
+    private val peopleViewModel: PeopleViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentPeopleBinding
 
 //    private val peopleInteractionListener = object : PeopleInteractionListener {
@@ -52,17 +40,6 @@ class PeopleFragment : SectionFragment() {
         return fragmentBinding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        peopleViewModel = ViewModelProviders.of(this, viewModelFactory)[PeopleViewModel::class.java]
-    }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        AndroidSupportInjection.inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = peopleViewModel
@@ -74,7 +51,6 @@ class PeopleFragment : SectionFragment() {
         findNavController().navigate(R.id.person_add)
         return true
     }
-
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         peopleAdapter = PeopleAdapter()

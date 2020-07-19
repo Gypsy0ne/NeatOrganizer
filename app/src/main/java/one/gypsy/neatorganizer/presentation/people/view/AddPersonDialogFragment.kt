@@ -1,7 +1,6 @@
 package one.gypsy.neatorganizer.presentation.people.view
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,25 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddPersonBinding
 import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
+class AddPersonDialogFragment : BottomSheetDialogFragment() {
 
-class AddPersonDialogFragment: BottomSheetDialogFragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    lateinit var viewModel: AddPersonViewModel
-
-    lateinit var fragmentBinding: DialogFragmentAddPersonBinding
-
+    private val viewModel: AddPersonViewModel by viewModel()
+    private lateinit var fragmentBinding: DialogFragmentAddPersonBinding
     private var lastImagePickRequestCode: Int = 0
 
     override fun onCreateView(
@@ -35,18 +26,9 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentBinding =  DataBindingUtil.inflate(inflater, R.layout.dialog_fragment_add_person, container, false)
+        fragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_fragment_add_person, container, false)
         return fragmentBinding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[AddPersonViewModel::class.java]
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        AndroidSupportInjection.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,14 +42,13 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
         setUpObservers()
     }
 
-
     private fun setUpObservers() {
         viewModel.selectThumbnailPhoto.observe(viewLifecycleOwner, Observer {
             openPhotoPicker(it)
         })
 
         viewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->
-            if(finished)
+            if (finished)
                 findNavController().popBackStack()
         })
     }
@@ -85,11 +66,11 @@ class AddPersonDialogFragment: BottomSheetDialogFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == lastImagePickRequestCode && resultCode == Activity.RESULT_OK) {
             val intentData = data?.data
-        if (intentData != null) {
-            viewModel.handleIntentPictureData(intentData)
-        } else {
+            if (intentData != null) {
+                viewModel.handleIntentPictureData(intentData)
+            } else {
 //            showToast(requireContext(), R.string.add_person_dialog_fragment_image_pick_error)
+            }
         }
-    }
     }
 }

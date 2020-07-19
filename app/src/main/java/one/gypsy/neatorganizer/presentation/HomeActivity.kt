@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
-    val navController by lazy {
+    private val navController by lazy {
         findNavController(R.id.fragment_activity_home_nav_container)
     }
 

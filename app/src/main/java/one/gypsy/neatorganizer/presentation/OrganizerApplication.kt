@@ -40,7 +40,13 @@ class OrganizerApplication : Application(), HasAndroidInjector {
                 routinesDataSourceModule,
                 routinesRepositoryModule,
                 routinesUseCaseModule,
-                routinesUtilsModule
+                routinesUtilsModule,
+                peopleDataSourceModule,
+                peopleRepositoryModule,
+                peopleUseCaseModule,
+                peopleViewModelModule,
+                profileUseCaseModule,
+                profileViewModelModule
             )
         }
     }

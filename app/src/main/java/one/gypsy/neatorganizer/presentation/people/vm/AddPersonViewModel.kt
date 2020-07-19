@@ -16,12 +16,11 @@ import one.gypsy.neatorganizer.utils.SingleLiveEvent
 import one.gypsy.neatorganizer.utils.extensions.default
 import one.gypsy.neatorganizer.utils.extensions.orNow
 import java.util.*
-import javax.inject.Inject
 
 
-class AddPersonViewModel @Inject constructor(
-    var addPersonUseCase: AddPerson,
-    var getImageBitmapUseCase: GetImageBitmap
+class AddPersonViewModel(
+    private val addPersonUseCase: AddPerson,
+    private val getImageBitmapUseCase: GetImageBitmap
 ) : ViewModel() {
 
     private val selectThumbnailPhotoActionRequestCode = 112
