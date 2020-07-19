@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di.koin
+package one.gypsy.neatorganizer.di
 
 import one.gypsy.neatorganizer.data.repositories.people.FileRepository
 import one.gypsy.neatorganizer.data.repositories.people.InteractionRepository
@@ -8,8 +8,6 @@ import one.gypsy.neatorganizer.domain.interactors.people.AddInteractionEntry
 import one.gypsy.neatorganizer.domain.interactors.people.AddPerson
 import one.gypsy.neatorganizer.domain.interactors.people.GetAllPeople
 import one.gypsy.neatorganizer.domain.interactors.people.GetImageBitmap
-import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonHistory
-import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonProfile
 import one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel
 import one.gypsy.neatorganizer.presentation.people.vm.PeopleViewModel
 import one.gypsy.neatorganizer.presentation.people.vm.PersonEntryViewModel
@@ -34,16 +32,6 @@ val peopleUseCaseModule = module {
     factory { AddPerson(get()) }
     factory { GetAllPeople(get()) }
     factory { GetImageBitmap(get()) }
-    factory {
-        GetPersonHistory(
-            get()
-        )
-    }
-    factory {
-        GetPersonProfile(
-            get()
-        )
-    }
 }
 
 val peopleViewModelModule = module {

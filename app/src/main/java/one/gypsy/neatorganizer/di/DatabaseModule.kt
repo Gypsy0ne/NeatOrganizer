@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di.koin
+package one.gypsy.neatorganizer.di
 
 import androidx.room.Room
 import one.gypsy.neatorganizer.data.database.OrganizerDatabase

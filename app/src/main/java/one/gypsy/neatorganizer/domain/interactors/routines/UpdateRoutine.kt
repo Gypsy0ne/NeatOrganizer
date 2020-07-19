@@ -7,9 +7,8 @@ import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class UpdateRoutine @Inject constructor(var routinesRepository: RoutinesRepository) :
+class UpdateRoutine(var routinesRepository: RoutinesRepository) :
     BaseUseCase<Unit, UpdateRoutine.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

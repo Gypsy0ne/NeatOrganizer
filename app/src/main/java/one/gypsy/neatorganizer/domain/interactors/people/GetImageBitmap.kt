@@ -6,9 +6,8 @@ import one.gypsy.neatorganizer.data.repositories.people.FileRepository
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class GetImageBitmap @Inject constructor(var fileRepository: FileRepository) :
+class GetImageBitmap(var fileRepository: FileRepository) :
     BaseUseCase<Bitmap, GetImageBitmap.Params>() {
     override suspend fun run(params: Params): Either<Failure, Bitmap> {
         return try {

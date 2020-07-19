@@ -6,9 +6,8 @@ import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class RemoveRoutineById @Inject constructor(var routinesRepository: RoutinesRepository) :
+class RemoveRoutineById(var routinesRepository: RoutinesRepository) :
     BaseUseCase<Unit, RemoveRoutineById.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

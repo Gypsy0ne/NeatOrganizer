@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di.koin
+package one.gypsy.neatorganizer.di
 
 import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonHistory
 import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonProfile

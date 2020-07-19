@@ -7,13 +7,13 @@ import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class AddInteractionEntry @Inject constructor(val interactionRepository: InteractionRepository): BaseUseCase<Unit, AddInteractionEntry.Params>() {
+class AddInteractionEntry(val interactionRepository: InteractionRepository) :
+    BaseUseCase<Unit, AddInteractionEntry.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 interactionRepository.addInteractionEntry(params.interactionEntry)
                 Either.Right(Unit)
             }

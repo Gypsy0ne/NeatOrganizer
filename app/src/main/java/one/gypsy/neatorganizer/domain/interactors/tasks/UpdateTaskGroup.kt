@@ -7,16 +7,16 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class UpdateTaskGroup @Inject constructor(var singleTaskGroupsRepository: SingleTaskGroupsRepository): BaseUseCase<Unit, UpdateTaskGroup.Params>() {
+class UpdateTaskGroup(var singleTaskGroupsRepository: SingleTaskGroupsRepository) :
+    BaseUseCase<Unit, UpdateTaskGroup.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
                 Either.Right(singleTaskGroupsRepository.updateSingleTaskGroup(params.singleTaskGroup))
             }
-        } catch(exp: Exception) {
+        } catch (exp: Exception) {
             Either.Left(
                 UpdateSingleTaskGroupFailure(
                     exp

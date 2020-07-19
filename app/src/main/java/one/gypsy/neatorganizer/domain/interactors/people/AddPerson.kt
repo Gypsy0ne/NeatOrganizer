@@ -7,12 +7,11 @@ import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class AddPerson @Inject constructor(var peopleRepository: PeopleRepository): BaseUseCase<Long, AddPerson.Params>() {
+class AddPerson(var peopleRepository: PeopleRepository) : BaseUseCase<Long, AddPerson.Params>() {
     override suspend fun run(params: Params): Either<Failure, Long> {
         return try {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 Either.Right(peopleRepository.addPerson(params.personEntry))
             }
         } catch (exp: Exception) {

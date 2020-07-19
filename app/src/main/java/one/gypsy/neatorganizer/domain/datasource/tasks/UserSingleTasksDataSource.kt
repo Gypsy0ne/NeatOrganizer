@@ -3,9 +3,8 @@ package one.gypsy.neatorganizer.domain.datasource.tasks
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskEntity
-import javax.inject.Inject
 
-class UserSingleTasksDataSource @Inject constructor(var singleTasksDao: SingleTasksDao) :
+class UserSingleTasksDataSource(var singleTasksDao: SingleTasksDao) :
     SingleTasksDataSource {
     override suspend fun add(singleTaskEntry: SingleTaskEntry): Long =
         singleTasksDao.insert(singleTaskEntry.toSingleTaskEntity())

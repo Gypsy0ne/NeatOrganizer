@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di.koin
+package one.gypsy.neatorganizer.di
 
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTasksRepository

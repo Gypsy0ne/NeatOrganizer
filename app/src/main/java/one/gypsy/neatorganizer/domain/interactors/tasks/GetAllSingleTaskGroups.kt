@@ -8,9 +8,8 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class GetAllSingleTaskGroups @Inject constructor(var dataSource: SingleTaskGroupsRepository) :
+class GetAllSingleTaskGroups(var dataSource: SingleTaskGroupsRepository) :
     BaseUseCase<LiveData<List<SingleTaskGroup>>, Unit>() {
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<SingleTaskGroup>>> {
         return try {

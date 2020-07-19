@@ -4,33 +4,22 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
-import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), HasAndroidInjector {
-
-    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
+class HomeActivity : AppCompatActivity() {
 
     private val navController by lazy {
         findNavController(R.id.fragment_activity_home_nav_container)
     }
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setUpActionBar()
         setUpNavigationListener()
-        AndroidInjection.inject(this)
     }
 
     private fun setUpActionBar() {
@@ -40,8 +29,8 @@ class HomeActivity : AppCompatActivity(), HasAndroidInjector {
 
     private fun setUpNavigationListener() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
-                 R.id.person_profile_fragment -> bottom_navigation_view_activity_home.hide()
+            when (destination.id) {
+                R.id.person_profile_fragment -> bottom_navigation_view_activity_home.hide()
                 else -> bottom_navigation_view_activity_home.show()
             }
         }

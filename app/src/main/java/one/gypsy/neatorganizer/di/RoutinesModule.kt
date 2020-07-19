@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di.koin
+package one.gypsy.neatorganizer.di
 
 import one.gypsy.neatorganizer.data.repositories.routines.RoutineSchedulesRepository
 import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository

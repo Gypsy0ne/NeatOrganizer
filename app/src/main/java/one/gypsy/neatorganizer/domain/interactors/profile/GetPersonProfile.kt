@@ -8,9 +8,9 @@ import one.gypsy.neatorganizer.domain.dto.people.PersonProfile
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class GetPersonProfile @Inject constructor(var peopleRepository: PeopleRepository): BaseUseCase<LiveData<PersonProfile>, GetPersonProfile.Params>() {
+class GetPersonProfile(var peopleRepository: PeopleRepository) :
+    BaseUseCase<LiveData<PersonProfile>, GetPersonProfile.Params>() {
     override suspend fun run(params: Params): Either<Failure, LiveData<PersonProfile>> {
         return try {
             withContext(Dispatchers.IO) {
