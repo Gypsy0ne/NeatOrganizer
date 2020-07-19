@@ -1,17 +1,13 @@
 package one.gypsy.neatorganizer.presentation.routines.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.android.support.AndroidSupportInjection
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentRoutinesBinding
 import one.gypsy.neatorganizer.presentation.SectionFragment
@@ -19,16 +15,15 @@ import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class RoutinesFragment : SectionFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var routinesViewModel: RoutinesViewModel
+    private val routinesViewModel: RoutinesViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentRoutinesBinding
 
-    val headerClickListener by lazy {
+    private val headerClickListener by lazy {
         object : HeaderClickListener<RoutineListItem.RoutineListHeader> {
             override fun onExpanderClick(headerItem: RoutineListItem.RoutineListHeader) {
                 routinesViewModel.onExpand(headerItem)
@@ -44,7 +39,7 @@ class RoutinesFragment : SectionFragment() {
         }
     }
 
-    val subItemClickListener by lazy {
+    private val subItemClickListener by lazy {
         object : SubItemClickListener<RoutineListItem.RoutineListSubItem> {
             override fun onDoneClick(subItem: RoutineListItem.RoutineListSubItem) {
                 routinesViewModel.onTaskUpdate(subItem)
@@ -69,17 +64,6 @@ class RoutinesFragment : SectionFragment() {
         fragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_routines, container, false)
         return fragmentBinding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        routinesViewModel =
-            ViewModelProviders.of(this, viewModelFactory)[RoutinesViewModel::class.java]
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        AndroidSupportInjection.inject(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -9,7 +9,6 @@ import dagger.android.support.AndroidSupportInjectionModule
 import one.gypsy.neatorganizer.presentation.OrganizerApplication
 import one.gypsy.neatorganizer.presentation.people.vm.RateInteractionViewModel
 import one.gypsy.neatorganizer.presentation.profile.vm.PersonProfileViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
 import javax.inject.Singleton
 
 @Component(
@@ -21,9 +20,7 @@ import javax.inject.Singleton
         RepositoryModule::class,
         UseCaseModule::class,
         ViewModelModule::class,
-        AndroidSupportInjectionModule::class,
-        UtilsModule::class,
-        AlarmModule::class]
+        AndroidSupportInjectionModule::class]
 )
 @Singleton
 interface AppComponent {
@@ -40,8 +37,6 @@ interface AppComponent {
 
     val personProfileViewModelFactory: PersonProfileViewModel.Factory
     val rateInteractionViewModelFactory: RateInteractionViewModel.Factory
-    val addRoutineTaskViewModelFactory: AddRoutineTaskViewModel.Factory
-
 }
 
 @AssistedModule

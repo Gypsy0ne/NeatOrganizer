@@ -4,15 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineTask
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddRoutineTaskViewModel @AssistedInject constructor(
-    var addRoutineTask: AddRoutineTask,
-    @Assisted val routineId: Long
+class AddRoutineTaskViewModel(
+    private val addRoutineTask: AddRoutineTask,
+    private val routineId: Long
 ) : ViewModel() {
     val taskTitle = MutableLiveData<String>()
 
@@ -54,10 +52,5 @@ class AddRoutineTaskViewModel @AssistedInject constructor(
 
     private fun onAddNextRoutineTaskFailure(failure: Failure) {
 
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(routineId: Long): AddRoutineTaskViewModel
     }
 }
