@@ -8,9 +8,8 @@ import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineById
 import one.gypsy.neatorganizer.presentation.common.RemoveViewModel
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.default
-import javax.inject.Inject
 
-class RemoveRoutineViewModel @Inject constructor(val removeRoutineByIdUseCase: RemoveRoutineById) :
+class RemoveRoutineViewModel(private val removeRoutineByIdUseCase: RemoveRoutineById) :
     ViewModel(), RemoveViewModel {
 
     private val _actionFinished = MutableLiveData<Boolean>().default(false)

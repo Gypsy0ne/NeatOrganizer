@@ -7,9 +7,8 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class UpdateRoutineSchedule @Inject constructor(var routineSchedulesRepository: RoutineSchedulesRepository) :
+class UpdateRoutineSchedule(var routineSchedulesRepository: RoutineSchedulesRepository) :
     BaseUseCase<Unit, UpdateRoutineSchedule.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

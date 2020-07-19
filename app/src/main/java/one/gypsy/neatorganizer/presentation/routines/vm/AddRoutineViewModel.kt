@@ -9,11 +9,10 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutine
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineSchedule
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class AddRoutineViewModel @Inject constructor(
-    val addRoutineUseCase: AddRoutine,
-    val addRoutineSchedule: AddRoutineSchedule
+class AddRoutineViewModel(
+    private val addRoutineUseCase: AddRoutine,
+    private val addRoutineSchedule: AddRoutineSchedule
 ) : ViewModel() {
 
     val routineTitle = MutableLiveData<String>()

@@ -5,15 +5,13 @@ import android.app.AlarmManager.INTERVAL_FIFTEEN_MINUTES
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import dagger.android.DaggerBroadcastReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class RoutinesResetAlarm :
-    DaggerBroadcastReceiver(), CoroutineScope {
+class RoutinesResetAlarm : CoroutineScope {
     private var job: Job = Job()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default + job

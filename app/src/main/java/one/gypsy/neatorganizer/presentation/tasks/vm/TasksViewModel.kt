@@ -2,19 +2,20 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.tasks.*
+import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
+import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class TasksViewModel @Inject constructor(
+class TasksViewModel(
     var getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
     var updateSingleTaskGroupUseCase: UpdateTaskGroup,
     var updateSingleTaskUseCase: UpdateSingleTask,
-    var removeSingleTaskGroupUseCase: RemoveTaskGroup,
     var removeSingleSingleTaskUseCase: RemoveSingleTask,
     var taskListMapper: TaskListMapper
 ) : ViewModel() {
@@ -63,13 +64,6 @@ class TasksViewModel @Inject constructor(
         updateSingleTaskUseCase.invoke(
             viewModelScope,
             UpdateSingleTask.Params(singleTask = subItem.toSingleTask())
-        )
-    }
-
-    fun onRemove(headerItem: TaskListItem.TaskListHeader) {
-        removeSingleTaskGroupUseCase.invoke(
-            viewModelScope,
-            RemoveTaskGroup.Params(headerItem.toSingleTaskGroup())
         )
     }
 

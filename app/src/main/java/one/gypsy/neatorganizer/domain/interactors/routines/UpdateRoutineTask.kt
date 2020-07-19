@@ -7,9 +7,8 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class UpdateRoutineTask @Inject constructor(var routineTasksRepository: RoutineTasksRepository) :
+class UpdateRoutineTask(var routineTasksRepository: RoutineTasksRepository) :
     BaseUseCase<Unit, UpdateRoutineTask.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
@@ -17,7 +16,7 @@ class UpdateRoutineTask @Inject constructor(var routineTasksRepository: RoutineT
             withContext(Dispatchers.IO) {
                 Either.Right(routineTasksRepository.updateRoutineTask(params.routineTask))
             }
-        } catch(exp: Exception) {
+        } catch (exp: Exception) {
             Either.Left(
                 UpdateRoutineTaskFailure(
                     exp

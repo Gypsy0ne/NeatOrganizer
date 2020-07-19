@@ -1,7 +1,6 @@
 package one.gypsy.neatorganizer.presentation.profile
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -9,26 +8,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.android.synthetic.main.fragment_person_profile.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentPersonProfileBinding
-import one.gypsy.neatorganizer.presentation.injector
-import one.gypsy.neatorganizer.utils.AxisDateFormatter
-import one.gypsy.neatorganizer.utils.AxisInteractionFormatter
-
+import one.gypsy.neatorganizer.presentation.profile.vm.PersonProfileViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PersonProfileFragment : Fragment() {
 
     private val args: PersonProfileFragmentArgs by navArgs()
-
-    private val personHistoryViewModel by lazy {
-        injector.personProfileViewModelFactory.create(
-            args.personId
-        )
+    private val personHistoryViewModel: PersonProfileViewModel by viewModel {
+        parametersOf(args.personId)
     }
-
     private lateinit var fragmentBinding: FragmentPersonProfileBinding
 
     override fun onCreateView(

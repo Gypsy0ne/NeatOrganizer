@@ -11,19 +11,18 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddRoutineTaskBinding
-import one.gypsy.neatorganizer.presentation.injector
+import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+
 
 class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
 
     private val args: AddRoutineTaskDialogFragmentArgs by navArgs()
-
-    val viewModel by lazy {
-        injector.addRoutineTaskViewModelFactory.create(
-            args.routineId
-        )
+    private val viewModel: AddRoutineTaskViewModel by viewModel {
+        parametersOf(args.routineId)
     }
-
-    lateinit var fragmentBinding: DialogFragmentAddRoutineTaskBinding
+    private lateinit var fragmentBinding: DialogFragmentAddRoutineTaskBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +39,6 @@ class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
         return fragmentBinding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.viewModel = viewModel
@@ -52,12 +50,10 @@ class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
         setUpObservers()
     }
 
-
     private fun setUpObservers() {
         viewModel.finishedAdding.observe(viewLifecycleOwner, Observer { finished ->
             if (finished)
                 findNavController().popBackStack()
         })
     }
-
 }

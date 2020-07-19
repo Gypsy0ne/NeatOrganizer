@@ -13,9 +13,8 @@ import one.gypsy.neatorganizer.domain.dto.people.Person
 import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
 import one.gypsy.neatorganizer.domain.dto.people.PersonProfile
 import java.io.ByteArrayOutputStream
-import javax.inject.Inject
 
-class UserCommunityDataSource @Inject constructor(var peopleDao: PeopleDao) :
+class UserCommunityDataSource(var peopleDao: PeopleDao) :
     PeopleDataSource {
 
     override suspend fun add(personEntry: PersonEntry) =

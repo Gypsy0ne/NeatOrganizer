@@ -5,17 +5,17 @@ import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.routines.model.*
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class RoutinesViewModel @Inject constructor(
-    val getAllRoutinesUseCase: GetAllRoutines,
-    val removeRoutine: RemoveRoutine,
-    val updateRoutine: UpdateRoutine,
-    val removeRoutineTask: RemoveRoutineTask,
-    val updateRoutineTask: UpdateRoutineTask,
-    val routineListMapper: RoutineListMapper,
-    val updateRoutineSchedule: UpdateRoutineSchedule
+class RoutinesViewModel(
+    getAllRoutinesUseCase: GetAllRoutines,
+    private val removeRoutine: RemoveRoutine,
+    private val updateRoutine: UpdateRoutine,
+    private val removeRoutineTask: RemoveRoutineTask,
+    private val updateRoutineTask: UpdateRoutineTask,
+    private val routineListMapper: RoutineListMapper,
+    private val updateRoutineSchedule: UpdateRoutineSchedule
 ) : ViewModel() {
+
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> =
         Transformations.map(_listedRoutines) { routineItems ->

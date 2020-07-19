@@ -2,9 +2,8 @@ package one.gypsy.neatorganizer.data.repositories.tasks
 
 import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTasksDataSource
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import javax.inject.Inject
 
-class SingleTasksRepository @Inject constructor(var dataSource: SingleTasksDataSource) {
+class SingleTasksRepository(var dataSource: SingleTasksDataSource) {
     suspend fun addSingleTask(singleTask: SingleTaskEntry) = dataSource.add(singleTask)
     suspend fun updateSingleTask(singleTask: SingleTaskEntry) = dataSource.update(singleTask)
     suspend fun removeSingleTask(singleTask: SingleTaskEntry) = dataSource.remove(singleTask)

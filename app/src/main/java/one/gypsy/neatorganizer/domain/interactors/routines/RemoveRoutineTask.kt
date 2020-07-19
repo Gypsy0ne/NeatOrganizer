@@ -7,9 +7,8 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class RemoveRoutineTask @Inject constructor(var routineTasksRepository: RoutineTasksRepository) :
+class RemoveRoutineTask(var routineTasksRepository: RoutineTasksRepository) :
     BaseUseCase<Unit, RemoveRoutineTask.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

@@ -6,9 +6,8 @@ import one.gypsy.neatorganizer.data.database.dao.routines.RoutinesDao
 import one.gypsy.neatorganizer.data.database.entity.routines.toRoutine
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.toRoutineEntity
-import javax.inject.Inject
 
-class UserRoutinesDataSource @Inject constructor(val routinesDao: RoutinesDao) :
+class UserRoutinesDataSource(val routinesDao: RoutinesDao) :
     RoutinesDataSource {
 
     override suspend fun add(routine: Routine): Long = routinesDao.insert(routine.toRoutineEntity())

@@ -2,8 +2,8 @@ package one.gypsy.neatorganizer.data.repositories.people
 
 import one.gypsy.neatorganizer.domain.datasource.people.InteractionDataSource
 import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
-import javax.inject.Inject
 
-class InteractionRepository @Inject constructor(var dataSource: InteractionDataSource) {
-    suspend fun addInteractionEntry(interactionEntry: InteractionEntry) = dataSource.add(interactionEntry)
+class InteractionRepository(var dataSource: InteractionDataSource) {
+    suspend fun addInteractionEntry(interactionEntry: InteractionEntry) =
+        dataSource.add(interactionEntry)
 }

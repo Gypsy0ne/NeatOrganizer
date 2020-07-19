@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
 import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
 import one.gypsy.neatorganizer.domain.interactors.people.AddInteractionEntry
 import one.gypsy.neatorganizer.utils.Failure
@@ -13,7 +11,10 @@ import one.gypsy.neatorganizer.utils.UIState
 import one.gypsy.neatorganizer.utils.extensions.default
 import java.util.*
 
-class RateInteractionViewModel @AssistedInject constructor(var addInteractionEntryUseCase: AddInteractionEntry, @Assisted val personId: Long): ViewModel() {
+class RateInteractionViewModel(
+    private val addInteractionEntryUseCase: AddInteractionEntry,
+    private val personId: Long
+) : ViewModel() {
 
     private val _rating = MutableLiveData<Int>().default(3)
     val rating: LiveData<Int>
@@ -33,24 +34,21 @@ class RateInteractionViewModel @AssistedInject constructor(var addInteractionEnt
     }
 
     private fun onAddInteractionSuccess(unit: Unit) {
-            _interactionUpdateStatus.postValue(UIState.Success)
+        _interactionUpdateStatus.postValue(UIState.Success)
     }
 
     // default rating is 3 because there is an issue with setting default value on view creation
     fun submitInteractionEntry() {
-        addInteractionEntryUseCase.invoke(viewModelScope, AddInteractionEntry.Params(
-            InteractionEntry(
-                profileId = personId,
-                interactionDate = Date(),
-                rating = _rating.value ?: 3
+        addInteractionEntryUseCase.invoke(
+            viewModelScope, AddInteractionEntry.Params(
+                InteractionEntry(
+                    profileId = personId,
+                    interactionDate = Date(),
+                    rating = _rating.value ?: 3
+                )
             )
-        )) {
+        ) {
             it.either(::onAddInteractionFailure, ::onAddInteractionSuccess)
         }
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(personId: Long): RateInteractionViewModel
     }
 }

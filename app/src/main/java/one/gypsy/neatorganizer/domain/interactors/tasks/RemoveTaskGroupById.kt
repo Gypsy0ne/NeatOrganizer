@@ -6,9 +6,8 @@ import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepositor
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class RemoveTaskGroupById @Inject constructor(var singleTaskGroupsRepository: SingleTaskGroupsRepository) :
+class RemoveTaskGroupById(var singleTaskGroupsRepository: SingleTaskGroupsRepository) :
     BaseUseCase<Unit, RemoveTaskGroupById.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

@@ -7,9 +7,8 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class AddSingleTask @Inject constructor(var singleTasksRepository: SingleTasksRepository) :
+class AddSingleTask(var singleTasksRepository: SingleTasksRepository) :
     BaseUseCase<Long, AddSingleTask.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Long> {

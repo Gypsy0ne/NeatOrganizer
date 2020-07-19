@@ -6,9 +6,8 @@ import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskGroupEntity
-import javax.inject.Inject
 
-class UserSingleTaskGroupsDataSource @Inject constructor(val singleTaskGroupsDao: SingleTaskGroupsDao) :
+class UserSingleTaskGroupsDataSource(val singleTaskGroupsDao: SingleTaskGroupsDao) :
     SingleTaskGroupsDataSource {
     override suspend fun add(singleTaskGroup: SingleTaskGroup) =
         singleTaskGroupsDao.insert(singleTaskGroup.toSingleTaskGroupEntity())

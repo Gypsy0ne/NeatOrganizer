@@ -1,20 +1,15 @@
 package one.gypsy.neatorganizer.presentation.routines.alarm
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import dagger.android.DaggerBroadcastReceiver
-import javax.inject.Inject
 
-
-class RoutinesResetAutoStart : DaggerBroadcastReceiver() {
-
-    @Inject
-    lateinit var routinesResetAlarm: RoutinesResetAlarm
-
-    override fun onReceive(context: Context, intent: Intent) {
-        super.onReceive(context, intent)
-        if (intent.action == "android.intent.action.BOOT_COMPLETED") {
+class RoutinesResetAutoStart(private val routinesResetAlarm: RoutinesResetAlarm) :
+    BroadcastReceiver() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (context != null && intent?.action == "android.intent.action.BOOT_COMPLETED") {
             routinesResetAlarm.setWeeklyRoutinesResetAlarm(context)
         }
     }
+
 }

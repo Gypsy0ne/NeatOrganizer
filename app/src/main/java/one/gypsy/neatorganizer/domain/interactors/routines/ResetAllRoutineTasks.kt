@@ -6,9 +6,8 @@ import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
-import javax.inject.Inject
 
-class ResetAllRoutineTasks @Inject constructor(var routineTasksRepository: RoutineTasksRepository) :
+class ResetAllRoutineTasks(var routineTasksRepository: RoutineTasksRepository) :
     BaseUseCase<Unit, Unit>() {
 
     override suspend fun run(unit: Unit): Either<Failure, Unit> {
