@@ -12,7 +12,7 @@ class LaunchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableRoutinesReset()
+        enableRoutinesReset()
         redirectToHomeActivity()
     }
 
