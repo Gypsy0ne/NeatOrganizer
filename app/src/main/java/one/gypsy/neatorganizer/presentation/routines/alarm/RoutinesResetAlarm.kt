@@ -46,5 +46,4 @@ class RoutinesResetAlarm : BroadcastReceiver(), CoroutineScope, KoinComponent {
             alarmIntent
         )
     }
-
 }
