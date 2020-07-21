@@ -1,6 +1,8 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
@@ -20,10 +22,11 @@ class TasksViewModel(
     var taskListMapper: TaskListMapper
 ) : ViewModel() {
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
-    val listedTasks: LiveData<List<TaskListItem>> =
-        Transformations.map(_listedTasks) { taskItems ->
-            taskListMapper.getVisibleItems(taskItems)
+    val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            emit(taskListMapper.getVisibleItems(it))
         }
+    }
 
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
@@ -35,12 +38,12 @@ class TasksViewModel(
     }
 
     private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroup>>) {
-        with(_listedTasks) {
-            addSource(taskGroups) { taskGroups ->
-                this.postValue(
+        _listedTasks.addSource(taskGroups) {
+            viewModelScope.launch {
+                _listedTasks.postValue(
                     taskListMapper.mapTasksToListItems(
-                        taskGroups,
-                        this.value ?: emptyList()
+                        it,
+                        _listedTasks.value ?: emptyList()
                     )
                 )
             }
