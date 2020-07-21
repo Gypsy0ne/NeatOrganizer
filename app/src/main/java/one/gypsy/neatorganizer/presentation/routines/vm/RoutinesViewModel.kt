@@ -47,9 +47,7 @@ class RoutinesViewModel(
         }
     }
 
-    private fun onGetAllRoutinesFailure(failure: Failure) {
-
-    }
+    private fun onGetAllRoutinesFailure(failure: Failure) {}
 
     fun onHeaderUpdate(routineHeaderItem: RoutineListItem.RoutineListHeader) {
         viewModelScope.launch {
