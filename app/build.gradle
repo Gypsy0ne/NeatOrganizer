@@ -67,6 +67,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta6'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    //liveData
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata-ktx', version: '2.2.0'
+
 
     //Room
     implementation "androidx.room:room-ktx:2.2.4"

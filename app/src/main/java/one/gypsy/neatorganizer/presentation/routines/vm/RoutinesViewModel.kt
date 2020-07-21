@@ -1,6 +1,8 @@
 package one.gypsy.neatorganizer.presentation.routines.vm
 
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.routines.model.*
@@ -17,10 +19,11 @@ class RoutinesViewModel(
 ) : ViewModel() {
 
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
-    val listedRoutines: LiveData<List<RoutineListItem>> =
-        Transformations.map(_listedRoutines) { routineItems ->
-            routineListMapper.getVisibleItems(routineItems)
+    val listedRoutines: LiveData<List<RoutineListItem>> = _listedRoutines.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            emit(routineListMapper.getVisibleItems(it))
         }
+    }
 
     init {
         getAllRoutinesUseCase.invoke(viewModelScope, Unit) {
@@ -32,33 +35,36 @@ class RoutinesViewModel(
     }
 
     private fun onGetAllRoutinesSuccess(routines: LiveData<List<Routine>>) {
-        with(_listedRoutines) {
-            addSource(routines) { routines ->
-                this.postValue(
+        _listedRoutines.addSource(routines) {
+            viewModelScope.launch {
+                _listedRoutines.postValue(
                     routineListMapper.mapRoutinesToListItems(
-                        routines,
-                        this.value ?: emptyList()
+                        it,
+                        _listedRoutines.value ?: emptyList()
                     )
                 )
             }
         }
-
     }
 
-    private fun onGetAllRoutinesFailure(failure: Failure) {
+    private fun onGetAllRoutinesFailure(failure: Failure) {}
 
-    }
-
-    //TODO add chain invoke
     fun onHeaderUpdate(routineHeaderItem: RoutineListItem.RoutineListHeader) {
-        updateRoutine.invoke(
-            viewModelScope,
-            UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
-        )
-        updateRoutineSchedule.invoke(
-            viewModelScope,
-            UpdateRoutineSchedule.Params(routineSchedule = routineHeaderItem.getRoutineSchedule())
-        )
+        viewModelScope.launch {
+            updateRoutine.invoke(
+                this,
+                UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
+            ) {
+                it.either({
+                    // nop
+                }, {
+                    updateRoutineSchedule.invoke(
+                        this,
+                        UpdateRoutineSchedule.Params(routineSchedule = routineHeaderItem.getRoutineSchedule())
+                    )
+                })
+            }
+        }
     }
 
     fun onTaskUpdate(routineSubItem: RoutineListItem.RoutineListSubItem) {

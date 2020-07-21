@@ -4,6 +4,7 @@ import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 
 class RoutineListMapper {
+
     fun mapRoutinesToListItems(
         routines: List<Routine>,
         oldList: List<RoutineListItem>
@@ -42,7 +43,7 @@ class RoutineListMapper {
         routineTasks[it].toRoutineListSubItem()
     }
 
-    fun getVisibleItems(items: List<RoutineListItem>) =
+    fun getVisibleItems(items: List<RoutineListItem>): List<RoutineListItem> =
         items.partition { it is RoutineListItem.RoutineListHeader }.let { partedLists ->
             mutableListOf<RoutineListItem>().apply {
                 partedLists.first

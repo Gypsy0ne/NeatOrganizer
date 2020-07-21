@@ -41,7 +41,7 @@ class TaskListMapper {
         tasks[it].toTaskListSubItem()
     }
 
-    fun getVisibleItems(items: List<TaskListItem>) =
+    fun getVisibleItems(items: List<TaskListItem>): List<TaskListItem> =
         items.partition { it is TaskListItem.TaskListHeader }
             .let { partedLists ->
                 mutableListOf<TaskListItem>().apply {
