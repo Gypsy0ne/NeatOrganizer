@@ -30,8 +30,13 @@ class TaskHeaderViewHolder(
         setUpExpanderListener()
         setUpRemoveListener()
 
+        bindInitially()
+    }
+
+    private fun bindInitially() {
         itemBinding.apply {
             headerItem = viewData
+            animateChanges = false
             executePendingBindings()
         }
     }

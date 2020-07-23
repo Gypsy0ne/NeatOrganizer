@@ -5,10 +5,9 @@ import android.animation.ObjectAnimator
 import android.view.View
 import androidx.core.animation.addListener
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.utils.CollectionUIState
 
+//TODO extract numbers to integers resources
 @BindingAdapter("lastInteractionBackground")
 fun setInteractionBasedBackground(view: View, lastInteractionInDays: Int) {
     var backgroundResource = when(lastInteractionInDays) {

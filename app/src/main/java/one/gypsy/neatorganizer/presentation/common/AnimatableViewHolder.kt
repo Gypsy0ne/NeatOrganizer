@@ -16,14 +16,14 @@ interface AnimatableViewHolder {
         itemView.startAnimation(
             AnimationUtils.loadAnimation(
                 itemView.context,
-                R.anim.item_animation_enter_from_right
+                R.anim.item_animation_enter_from_bottom
             )
         )
 
     fun animate(onAnimationFinished: () -> Unit) {
         val animation = AnimationUtils.loadAnimation(
             itemView.context,
-            R.anim.item_animation_enter_from_right
+            R.anim.item_animation_enter_from_bottom
         ).apply {
             setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationRepeat(animation: Animation?) {

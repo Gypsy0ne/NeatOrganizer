@@ -9,6 +9,10 @@
             type="one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem.TaskListHeader" />
 
         <variable
+            name="animateChanges"
+            type="Boolean" />
+
+        <variable
             name="expanderClickListener"
             type="android.view.View.OnClickListener" />
 
@@ -65,7 +69,8 @@
             <ImageButton
                 android:id="@+id/button_item_task_header_expand"
                 style="@style/HeaderExpandButton"
-                expanderState="@{headerItem.expanded}"
+                animateChanges="@{animateChanges}"
+                expanded="@{headerItem.expanded}"
                 android:onClick="@{expanderClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
