@@ -25,7 +25,7 @@
             style="@style/FragmentRecyclerView"
             adapter="@{routinesAdapter}"
             adapterData="@{viewModel.listedRoutines}"
-            hasFixedSize="@{false}"
+            hasFixedSize="@{true}"
             layoutManager="@{linearLayoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

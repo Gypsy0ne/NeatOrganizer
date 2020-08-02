@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.binding
 
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.widget.ImageButton
 import androidx.databinding.BindingAdapter
 import one.gypsy.neatorganizer.R
@@ -14,7 +13,7 @@ fun setExpandedState(view: ImageButton, expanded: Boolean, animate: Boolean) {
             R.drawable.avd_up_to_down_arrow
         }
     )
-    if (animate) {
-        (view.drawable as AnimatedVectorDrawable).start()
-    }
+//    if (animate) {
+//        (view.drawable as AnimatedVectorDrawable).start()
+//    }
 }

@@ -27,7 +27,7 @@
         android:label="PeopleFragment">
         <action
             android:id="@+id/action_people_to_personProfileFragment"
-            app:destination="@id/person_profile_fragment"></action>
+            app:destination="@id/person_profile_fragment" />
         <action
             android:id="@+id/action_people_to_rateInteractionDialogFragment"
             app:destination="@id/rateInteractionDialogFragment" />

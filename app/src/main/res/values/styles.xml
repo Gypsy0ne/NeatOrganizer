@@ -95,6 +95,8 @@
     <style name="ListItemName">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/regular_text_size</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
@@ -137,6 +139,9 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="layout_constraintDimensionRatio">W,3:4</item>
+        <item name="android:layout_marginTop">@dimen/regular_space</item>
+        <item name="android:layout_marginStart">@dimen/small_space</item>
+        <item name="android:layout_marginBottom">@dimen/small_space</item>
     </style>
 
     <style name="HeaderMenuButton.Large" parent="HeaderMenuButton">
@@ -166,6 +171,11 @@
         <item name="android:layout_height">32dp</item>
         <item name="android:layout_margin">8dp</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="HeaderRootLayout">
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
     </style>
     <!--End of List view items-->
 
