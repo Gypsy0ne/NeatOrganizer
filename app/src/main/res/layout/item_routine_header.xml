@@ -49,11 +49,11 @@
 
             <EditText
                 android:id="@+id/edit_text_item_routine_header_name"
-                style="@style/ListItemName"
+                style="@style/ListItemName.Header"
                 android:text="@{headerItem.name}"
                 app:layout_constraintBottom_toTopOf="@+id/day_picker_item_routine_header_schedule"
-                app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_expand"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -61,7 +61,8 @@
                 style="@style/ItemEditionSubmitButton"
                 android:onClick="@{editionSubmitClickListener}"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_item_routine_header_name"
-                app:layout_constraintEnd_toEndOf="@+id/edit_text_item_routine_header_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/end_guideline"
                 app:layout_constraintTop_toTopOf="@+id/edit_text_item_routine_header_name" />
 
             <ImageButton
@@ -69,10 +70,13 @@
                 style="@style/HeaderExpandButton"
                 animateChanges="@{animateChanges}"
                 expanded="@{headerItem.expanded}"
+                android:layout_marginEnd="@dimen/regular_space"
                 android:onClick="@{expanderClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/end_guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
 
             <one.gypsy.neatorganizer.utils.views.ScheduleDayPicker
                 android:id="@+id/day_picker_item_routine_header_schedule"
@@ -80,11 +84,24 @@
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:orientation="horizontal"
-                android:padding="@dimen/large_space"
+                android:padding="@dimen/regular_space"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/button_item_routine_header_submit"
-                app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name" />
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,6 +112,7 @@
             <Button
                 android:id="@+id/button_item_routine_header_remove"
                 style="@style/HeaderMenuButton.Large"
+                android:layout_marginStart="@dimen/regular_space"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/red"
                 android:drawableTop="@drawable/ic_delete_white_32"

@@ -40,7 +40,8 @@
 
             <EditText
                 android:id="@+id/edit_text_item_task_name"
-                style="@style/ListItemName"
+                style="@style/ListItemName.Sub"
+                android:layout_marginStart="@dimen/regular_space"
                 strokeThrough="@{taskSubItem.done}"
                 android:clickable="@{taskSubItem.edited}"
                 android:enabled="@{taskSubItem.edited}"
