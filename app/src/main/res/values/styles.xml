@@ -83,6 +83,20 @@
         <item name="fontFamily">@font/roboto_black</item>
     </style>
 
+    <style name="DialogFormButton.Submit" parent="DialogFormButton">
+        <item name="android:background">
+            @drawable/dialog_fragment_yellow_clickable_view_background
+        </item>
+        <item name="android:drawableStart">@drawable/ic_check_dark_yellow_24dp</item>
+        <item name="android:text">@string/add_person_dialog_fragment_confirm</item>
+        <item name="android:textColor">@color/dark_yellow</item>
+    </style>
+
+    <style name="DialogFormButton.Next" parent="DialogFormButton.Submit">
+        <item name="android:drawableStart">@drawable/ic_add_dark_yellow_24dp</item>
+        <item name="android:text">@string/add_person_dialog_fragment_next</item>
+    </style>
+
     <style name="FragmentRecyclerView">
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_width">0dp</item>

@@ -18,11 +18,11 @@
         android:background="@android:color/transparent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottive_view_dialog_fragment_remove_confirmation_icon"
+            android:id="@+id/lottie_view_dialog_fragment_remove_confirmation_icon"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:background="@drawable/oval_white_background"
-            android:elevation="8dp"
+            android:elevation="@dimen/regular_space"
             android:outlineProvider="none"
             app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_remove_content"
             app:layout_constraintEnd_toEndOf="@+id/constraint_layout_dialog_fragment_remove_content"
@@ -47,10 +47,10 @@
                 android:layout_width="0dp"
                 removeGroupText="@{subItemsCount}"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/double_space"
+                android:layout_marginBottom="@dimen/regular_space"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="@dimen/regular_text_size"
                 app:layout_constraintBottom_toTopOf="@id/text_view_dialog_fragment_remove_confirmation_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,9 +60,9 @@
                 android:id="@+id/text_view_dialog_fragment_remove_confirmation_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Are you sure you want to delete this item?"
+                android:text="@string/remove_confirmation_dialog_fragment_content"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="@dimen/medium_text_size"
                 app:layout_constraintBottom_toTopOf="@id/button_dialog_fragment_remove_confirmation_submit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,21 +70,15 @@
 
             <Button
                 android:id="@+id/button_dialog_fragment_remove_confirmation_submit"
-                style="@style/DialogFormButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
-                android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
-                android:text="@string/add_person_dialog_fragment_confirm"
+                style="@style/DialogFormButton.Submit"
+                android:layout_marginTop="@dimen/triple_space"
+                android:layout_marginBottom="@dimen/triple_space"
                 android:onClick="@{submitClickListener}"
-                android:textColor="@color/dark_yellow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_dialog_fragment_remove_confirmation_content" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
