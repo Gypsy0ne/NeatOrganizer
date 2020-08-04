@@ -52,7 +52,6 @@ val routinesViewModelModule = module {
     viewModel {
         RoutinesViewModel(
             getAllRoutinesUseCase = get(),
-            removeRoutine = get(),
             updateRoutine = get(),
             removeRoutineTask = get(),
             updateRoutineTask = get(),

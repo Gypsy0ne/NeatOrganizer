@@ -40,7 +40,8 @@
 
             <EditText
                 android:id="@+id/edit_text_item_task_name"
-                style="@style/ListItemName"
+                style="@style/ListItemName.Sub"
+                android:layout_marginStart="@dimen/regular_space"
                 strokeThrough="@{taskSubItem.done}"
                 android:clickable="@{taskSubItem.edited}"
                 android:enabled="@{taskSubItem.edited}"
@@ -78,12 +79,12 @@
             style="@style/ListItemMenu">
 
             <ImageButton
-            android:id="@+id/button_item_task_remove"
+                android:id="@+id/button_item_task_remove"
                 style="@style/SubItemMenuButton"
-                android:layout_marginStart="4dp"
-            android:background="@drawable/item_person_swipe_update_background"
-            android:onClick="@{removeClickListener}"
+                android:layout_marginStart="@dimen/medium_space"
+                android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/red"
+                android:onClick="@{removeClickListener}"
                 android:src="@drawable/ic_delete_white_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,10 +99,10 @@
             <ImageButton
                 android:id="@+id/button_item_task_edit"
                 style="@style/SubItemMenuButton"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="@dimen/medium_space"
                 android:background="@drawable/item_person_swipe_update_background"
-                android:onClick="@{editClickListener}"
                 android:backgroundTint="@color/male_blue"
+                android:onClick="@{editClickListener}"
                 android:src="@drawable/ic_edit_white_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

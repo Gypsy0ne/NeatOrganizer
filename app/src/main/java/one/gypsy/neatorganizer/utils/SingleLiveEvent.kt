@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.utils
 
 
-import android.util.Log;
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable
 import androidx.lifecycle.LifecycleOwner
@@ -43,6 +43,6 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     companion object {
 
-        private val TAG = "SingleLiveEvent"
+        private const val TAG = "SingleLiveEvent"
     }
 }

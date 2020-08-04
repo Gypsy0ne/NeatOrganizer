@@ -9,6 +9,10 @@
             type="one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem.RoutineListHeader" />
 
         <variable
+            name="animateChanges"
+            type="Boolean" />
+
+        <variable
             name="expanderClickListener"
             type="android.view.View.OnClickListener" />
 
@@ -32,10 +36,9 @@
 
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
         android:id="@+id/swipe_layout_item_routine_header_root"
+        style="@style/HeaderRootLayout"
         android:layout_width="match_parent"
         android:layout_height="112dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
         app:contentView="@+id/relative_layout_item_routine_header_container"
         app:leftMenuView="@+id/constraint_layout_item_routine_header_left_menu"
         app:rightMenuView="@+id/constraint_layout_item_routine_header_right_menu">
@@ -46,13 +49,11 @@
 
             <EditText
                 android:id="@+id/edit_text_item_routine_header_name"
-                style="@style/ListItemName"
-                android:gravity="center"
+                style="@style/ListItemName.Header"
                 android:text="@{headerItem.name}"
-                android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/day_picker_item_routine_header_schedule"
-                app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_expand"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -60,17 +61,22 @@
                 style="@style/ItemEditionSubmitButton"
                 android:onClick="@{editionSubmitClickListener}"
                 app:layout_constraintBottom_toBottomOf="@+id/edit_text_item_routine_header_name"
-                app:layout_constraintEnd_toEndOf="@+id/edit_text_item_routine_header_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/end_guideline"
                 app:layout_constraintTop_toTopOf="@+id/edit_text_item_routine_header_name" />
 
             <ImageButton
                 android:id="@+id/button_item_routine_header_expand"
                 style="@style/HeaderExpandButton"
-                expanderState="@{headerItem.expanded}"
+                animateChanges="@{animateChanges}"
+                expanded="@{headerItem.expanded}"
+                android:layout_marginEnd="@dimen/regular_space"
                 android:onClick="@{expanderClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/end_guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
 
             <one.gypsy.neatorganizer.utils.views.ScheduleDayPicker
                 android:id="@+id/day_picker_item_routine_header_schedule"
@@ -78,14 +84,24 @@
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="8dp"
+                android:padding="@dimen/regular_space"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/button_item_routine_header_submit"
-                app:layout_constraintStart_toStartOf="@id/edit_text_item_routine_header_name" />
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,14 +112,12 @@
             <Button
                 android:id="@+id/button_item_routine_header_remove"
                 style="@style/HeaderMenuButton.Large"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginStart="@dimen/regular_space"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/red"
                 android:drawableTop="@drawable/ic_delete_white_32"
                 android:onClick="@{removeClickListener}"
-                android:text="Delete"
+                android:text="@string/list_item_menu_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -117,14 +131,11 @@
             <Button
                 android:id="@+id/button_item_routine_header_add"
                 style="@style/HeaderMenuButton.Large"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/dark_green"
                 android:drawableTop="@drawable/ic_add_white_32"
                 android:onClick="@{addClickListener}"
-                android:text="Add"
+                android:text="@string/list_item_menu_add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_edit"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -134,14 +145,11 @@
             <Button
                 android:id="@+id/button_item_routine_header_edit"
                 style="@style/HeaderMenuButton.Large"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/male_blue"
                 android:drawableTop="@drawable/ic_edit_white_32"
                 android:onClick="@{editClickListener}"
-                android:text="Edit"
+                android:text="@string/list_item_menu_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

@@ -9,7 +9,6 @@
             type="one.gypsy.neatorganizer.presentation.people.vm.AddPersonViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,10 +17,10 @@
             android:id="@+id/image_view_dialog_fragment_add_person_thumbnail"
             android:layout_width="@dimen/width_dialog_fragment_add_person_thumbnail_slot"
             android:layout_height="@dimen/height_dialog_fragment_add_person_thumbnail_slot"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/triple_space"
+            android:layout_marginEnd="@dimen/double_space"
             android:background="@drawable/dialog_fragment_add_person_photo_view_background"
-            android:elevation="4dp"
+            android:elevation="@dimen/medium_space"
             android:onClick="@{() -> viewModel.startSelectThumbnailPhotoAction()}"
             app:imageBitmap="@{viewModel.selectedThumbnail}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,14 +32,14 @@
             checkedChangeListener="@{(checked) -> viewModel.onSexChanged(checked)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:elevation="4dp"
+            android:layout_marginTop="@dimen/triple_space"
+            android:layout_marginEnd="@dimen/double_space"
+            android:elevation="@dimen/medium_space"
             app:isw_active_tint_icon_left="@color/white"
             app:isw_active_tint_icon_right="@color/white"
             app:isw_background_color="@color/gray"
-            app:isw_icon_left="@drawable/ic_male_black_24dp"
-            app:isw_icon_right="@drawable/ic_female_black_24dp"
+            app:isw_icon_left="@drawable/ic_male_black_24"
+            app:isw_icon_right="@drawable/ic_female_black_24"
             app:isw_inactive_tint_icon_left="@color/blue"
             app:isw_inactive_tint_icon_right="@color/pink"
             app:isw_thumb_color_left="@color/blue"
@@ -51,12 +50,12 @@
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_name"
             style="@style/DialogFormEditText"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:drawableStart="@drawable/ic_person_white_24dp"
-            android:hint="Name"
-            android:maxLength="48"
+            android:layout_marginStart="@dimen/double_space"
+            android:layout_marginTop="@dimen/double_space"
+            android:layout_marginEnd="@dimen/double_space"
+            android:drawableStart="@drawable/ic_person_white_24"
+            android:hint="@string/add_person_dialog_fragment_name_hint"
+            android:maxLength="@integer/regular_text_length"
             android:text="@={viewModel.personName}"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
             app:layout_constraintEnd_toStartOf="@+id/image_view_dialog_fragment_add_person_thumbnail"
@@ -66,12 +65,12 @@
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_description"
             style="@style/DialogFormEditText"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:drawableStart="@drawable/ic_description_white_24dp"
-            android:hint="Description"
-            android:maxLength="64"
+            android:layout_marginStart="@dimen/double_space"
+            android:layout_marginTop="@dimen/regular_space"
+            android:layout_marginEnd="@dimen/double_space"
+            android:drawableStart="@drawable/ic_description_white_24"
+            android:hint="@string/add_person_dialog_fragment_description_hint"
+            android:maxLength="@integer/long_text_length"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_person_name" />
@@ -79,26 +78,25 @@
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_phone_number"
             style="@style/DialogAddPersonFormPhoneEditText"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:drawableStart="@drawable/ic_phone_white_24dp"
-            android:hint="Phone number"
-            android:maxLength="64"
+            android:layout_marginStart="@dimen/double_space"
+            android:layout_marginTop="@dimen/double_space"
+            android:layout_marginEnd="@dimen/double_space"
+            android:drawableStart="@drawable/ic_phone_white_24"
+            android:hint="@string/add_person_dialog_fragment_number_hint"
+            android:maxLength="@integer/short_text_length"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_person_description" />
 
-
         <EditText
             android:id="@+id/edit_text_dialog_fragment_add_person_email"
             style="@style/DialogAddPersonFormEmailEditText"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:drawableStart="@drawable/ic_email_white_24dp"
-            android:hint="Email"
-            android:maxLength="64"
+            android:layout_marginStart="@dimen/double_space"
+            android:layout_marginTop="@dimen/regular_space"
+            android:layout_marginEnd="@dimen/double_space"
+            android:drawableStart="@drawable/ic_email_white_24"
+            android:hint="@string/add_person_dialog_fragment_email_hint"
+            android:maxLength="@integer/long_text_length"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_person_phone_number" />
@@ -108,9 +106,8 @@
             dateChangeListener="@{(date) -> viewModel.onBirthDateChanged(date)}"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/regular_space"
             android:gravity="center_vertical"
-
             app:layout_constraintBottom_toBottomOf="@+id/icon_switch_dialog_fragment_add_person_sex"
             app:layout_constraintStart_toEndOf="@+id/image_view_dialog_fragment_add_person_date_of_birth"
             app:layout_constraintTop_toTopOf="@+id/icon_switch_dialog_fragment_add_person_sex"
@@ -118,19 +115,12 @@
             app:ldp_hint_color="@color/blue"
             app:ldp_text_color="@color/gray" />
 
-
         <Button
             android:id="@+id/button_dialog_fragment_add_person_confirmation"
-            style="@style/DialogFormButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/dialog_fragment_add_person_clickable_view_background"
-            android:drawableStart="@drawable/ic_check_dark_yellow_24dp"
+            style="@style/DialogFormButton.Submit"
+            android:layout_marginTop="@dimen/triple_space"
+            android:layout_marginBottom="@dimen/triple_space"
             android:onClick="@{() -> viewModel.addPerson()}"
-            android:text="@string/add_person_dialog_fragment_confirm"
-            android:textColor="@color/dark_yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,15 +128,14 @@
 
         <ImageView
             android:id="@+id/image_view_dialog_fragment_add_person_date_of_birth"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_cake_gray_24dp"
+            android:layout_width="@dimen/regular_icon_size"
+            android:layout_height="@dimen/regular_icon_size"
+            android:layout_marginStart="@dimen/double_space"
+            android:layout_marginBottom="@dimen/regular_space"
+            android:src="@drawable/ic_cake_gray_24"
             app:layout_constraintBottom_toBottomOf="@+id/date_picker_dialog_fragment_add_person"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/date_picker_dialog_fragment_add_person" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

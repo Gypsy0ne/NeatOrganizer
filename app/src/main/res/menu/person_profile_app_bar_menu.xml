@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/call_person"
-        android:icon="@drawable/ic_phone_white_24dp"
+        android:icon="@drawable/ic_phone_white_24"
         android:orderInCategory="98"
         android:title="call"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/send_email"
-        android:icon="@drawable/ic_email_white_24dp"
+        android:icon="@drawable/ic_email_white_24"
         android:orderInCategory="99"
         android:title="call"
         app:showAsAction="ifRoom" />

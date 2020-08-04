@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!--Universal dimens-->
+    <dimen name="triple_space">24dp</dimen>
+    <dimen name="double_space">16dp</dimen>
+    <dimen name="large_space">12dp</dimen>
+    <dimen name="regular_space">8dp</dimen>
+    <dimen name="medium_space">4dp</dimen>
+    <dimen name="small_space">2dp</dimen>
+    <!--End of universal dimens-->
+
+    <!--Text size universal dimens-->
+    <dimen name="large_text_size">32sp</dimen>
+    <dimen name="regular_text_size">24sp</dimen>
+    <dimen name="medium_text_size">18sp</dimen>
+    <!--End of text size universal dimens-->
+
+    <!--Icons-->
+    <dimen name="large_icon_size">32sp</dimen>
+    <dimen name="regular_icon_size">24sp</dimen>
+    <!--End of icons-->
+
+
     <dimen name="corners_radius_person_profile_data_background">16dp</dimen>
     <dimen name="corners_radius_item_person_background">16dp</dimen>
     <dimen name="width_item_person_avatar_image">64dp</dimen>

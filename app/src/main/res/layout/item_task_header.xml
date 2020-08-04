@@ -9,6 +9,10 @@
             type="one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem.TaskListHeader" />
 
         <variable
+            name="animateChanges"
+            type="Boolean" />
+
+        <variable
             name="expanderClickListener"
             type="android.view.View.OnClickListener" />
 
@@ -31,10 +35,9 @@
 
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
         android:id="@+id/swipe_layout_item_task_header_root"
+        style="@style/HeaderRootLayout"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
         app:contentView="@+id/relative_layout_item_task_header_container"
         app:leftMenuView="@+id/constraint_layout_item_task_header_left_menu"
         app:rightMenuView="@+id/constraint_layout_item_task_header_right_menu">
@@ -45,13 +48,11 @@
 
             <EditText
                 android:id="@+id/edit_text_item_task_header_name"
-                style="@style/ListItemName"
-                android:gravity="center"
+                style="@style/ListItemName.Header"
                 android:text="@{headerItem.name}"
-                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button_item_task_header_submit"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -60,16 +61,33 @@
                 android:onClick="@{editionSubmitClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/end_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/button_item_task_header_expand"
                 style="@style/HeaderExpandButton"
-                expanderState="@{headerItem.expanded}"
+                animateChanges="@{animateChanges}"
+                expanded="@{headerItem.expanded}"
                 android:onClick="@{expanderClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/end_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,14 +98,11 @@
             <Button
                 android:id="@+id/button_item_task_header_remove"
                 style="@style/HeaderMenuButton.Small"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/red"
                 android:drawableTop="@drawable/ic_delete_white_24"
                 android:onClick="@{removeClickListener}"
-                android:text="Delete"
+                android:text="@string/list_item_menu_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,14 +116,11 @@
             <Button
                 android:id="@+id/button_item_task_header_add"
                 style="@style/HeaderMenuButton.Small"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/dark_green"
                 android:drawableTop="@drawable/ic_add_white_24"
                 android:onClick="@{addClickListener}"
-                android:text="Add"
+                android:text="@string/list_item_menu_add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_task_header_edit"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -118,14 +130,11 @@
             <Button
                 android:id="@+id/button_item_task_header_edit"
                 style="@style/HeaderMenuButton.Small"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/male_blue"
                 android:drawableTop="@drawable/ic_edit_white_24"
                 android:onClick="@{editClickListener}"
-                android:text="Edit"
+                android:text="@string/list_item_menu_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

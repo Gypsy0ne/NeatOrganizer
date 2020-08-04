@@ -17,6 +17,8 @@ class GroupedTasksAdapter(
     val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
 ) : ListAdapter<TaskListItem, TaskViewHolder>(DiffCallback()), BindableAdapter<TaskListItem> {
 
+    private var animateChanges = true
+
     override fun bindData(dataCollection: List<TaskListItem>) {
         submitList(dataCollection)
     }
@@ -32,9 +34,18 @@ class GroupedTasksAdapter(
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
-        if (holder.itemViewType != TaskViewType.HEADER.resId) {
+        if (holder.itemViewType != TaskViewType.HEADER.resId && animateChanges) {
             holder.animate()
         }
+        animateChanges = true
+    }
+
+    override fun onCurrentListChanged(
+        previousList: MutableList<TaskListItem>,
+        currentList: MutableList<TaskListItem>
+    ) {
+        super.onCurrentListChanged(previousList, currentList)
+        animateChanges = currentList.size != previousList.size
     }
 
     override fun getItemViewType(position: Int): Int {

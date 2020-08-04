@@ -10,7 +10,6 @@ import one.gypsy.neatorganizer.utils.Failure
 
 class RoutinesViewModel(
     getAllRoutinesUseCase: GetAllRoutines,
-    private val removeRoutine: RemoveRoutine,
     private val updateRoutine: UpdateRoutine,
     private val removeRoutineTask: RemoveRoutineTask,
     private val updateRoutineTask: UpdateRoutineTask,
@@ -72,10 +71,6 @@ class RoutinesViewModel(
             viewModelScope,
             UpdateRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
         )
-    }
-
-    fun onRemove(routineHeaderItem: RoutineListItem.RoutineListHeader) {
-        removeRoutine.invoke(viewModelScope, RemoveRoutine.Params(routineHeaderItem.toRoutine()))
     }
 
     fun onRemove(routineSubItem: RoutineListItem.RoutineListSubItem) {
