@@ -196,10 +196,10 @@ public class EasySwipeMenuLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int count = getChildCount();
-        int left = 0 + getPaddingLeft();
-        int right = 0 + getPaddingLeft();
-        int top = 0 + getPaddingTop();
-        int bottom = 0 + getPaddingTop();
+        int left = getPaddingLeft();
+        int right = getPaddingLeft();
+        int top = getPaddingTop();
+        int bottom = getPaddingTop();
 
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
@@ -228,8 +228,8 @@ public class EasySwipeMenuLayout extends ViewGroup {
         if (mLeftView != null) {
             MarginLayoutParams leftViewLp = (MarginLayoutParams) mLeftView.getLayoutParams();
             int lTop = top + leftViewLp.topMargin;
-            int lLeft = 0 - mLeftView.getMeasuredWidth() + leftViewLp.leftMargin + leftViewLp.rightMargin;
-            int lRight = 0 - leftViewLp.rightMargin;
+            int lLeft = -mLeftView.getMeasuredWidth() + leftViewLp.leftMargin + leftViewLp.rightMargin;
+            int lRight = -leftViewLp.rightMargin;
             int lBottom = lTop + mLeftView.getMeasuredHeight();
             mLeftView.layout(lLeft, lTop, lRight, lBottom);
         }
