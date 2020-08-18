@@ -51,5 +51,6 @@ class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
             }
         })
         fragmentBinding.subItemsCount = args.subItemsCount
+        fragmentBinding.removeGroupType = resources.getString(R.string.remove_group_subject)
     }
 }
