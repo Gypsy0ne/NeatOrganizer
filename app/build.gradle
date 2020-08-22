@@ -73,10 +73,9 @@ dependencies {
     //liveData
     implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata-ktx', version: '2.2.0'
 
-
     //Room
-    implementation "androidx.room:room-ktx:2.2.4"
-    implementation 'androidx.room:room-rxjava2:2.2.4'
+    implementation "androidx.room:room-ktx:2.2.5"
+    implementation 'androidx.room:room-rxjava2:2.2.5'
 
     //rxjava
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'

@@ -70,7 +70,7 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
                 R.drawable.bg_view_schedule_days_indicator,
                 context.theme
             )
-            setAutoSizeTextTypeUniformWithConfiguration(12, 24, 1, TypedValue.COMPLEX_UNIT_SP)
+            setAutoSizeTextTypeUniformWithConfiguration(6, 24, 1, TypedValue.COMPLEX_UNIT_SP)
             weight = 1f
             setMargins(
                 getDimen(R.dimen.margin_start_schedule_days),
