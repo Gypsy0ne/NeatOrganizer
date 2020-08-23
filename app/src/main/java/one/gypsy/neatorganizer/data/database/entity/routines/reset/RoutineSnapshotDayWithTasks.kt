@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.data.database.entity.routines
+package one.gypsy.neatorganizer.data.database.entity.routines.reset
 
 import androidx.room.Embedded
 import androidx.room.Junction
@@ -9,12 +9,9 @@ data class RoutineSnapshotDayWithTasks(
     @Embedded val snapshotDay: RoutineSnapshotDayEntity,
     @Relation(
         parentColumn = "snapshotDayId",
-        entity = RoutineSnapshotTaskEntity::class,
         entityColumn = "snapshotTaskId",
         associateBy = Junction(
-            RoutineSnapshotDayTaskCrossRef::class,
-            parentColumn = "snapshotDayId",
-            entityColumn = "snapshotTaskId"
+            RoutineSnapshotDayTaskCrossRefEntity::class
         )
     )
     val tasks: List<RoutineSnapshotTaskEntity>

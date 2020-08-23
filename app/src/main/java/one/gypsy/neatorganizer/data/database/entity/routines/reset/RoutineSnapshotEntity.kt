@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.data.database.entity.routines
+package one.gypsy.neatorganizer.data.database.entity.routines.reset
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

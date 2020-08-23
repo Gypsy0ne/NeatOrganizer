@@ -7,6 +7,7 @@ interface RoutinesDataSource {
     suspend fun add(routine: Routine): Long
     suspend fun remove(routine: Routine)
     suspend fun update(routine: Routine)
-    suspend fun getAllRoutines(): LiveData<List<Routine>>
+    suspend fun getAllRoutinesObservable(): LiveData<List<Routine>>
+    suspend fun getAllRoutines(): List<Routine>
     suspend fun removeRoutineById(routineId: Long)
 }

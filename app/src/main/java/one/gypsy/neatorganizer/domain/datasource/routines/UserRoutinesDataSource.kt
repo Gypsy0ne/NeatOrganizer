@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.data.database.entity.routines.toRoutine
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.toRoutineEntity
 
-class UserRoutinesDataSource(val routinesDao: RoutinesDao) :
+class UserRoutinesDataSource(private val routinesDao: RoutinesDao) :
     RoutinesDataSource {
 
     override suspend fun add(routine: Routine): Long = routinesDao.insert(routine.toRoutineEntity())
@@ -16,12 +16,15 @@ class UserRoutinesDataSource(val routinesDao: RoutinesDao) :
 
     override suspend fun update(routine: Routine) = routinesDao.update(routine.toRoutineEntity())
 
-    override suspend fun getAllRoutines(): LiveData<List<Routine>> =
-        Transformations.map(routinesDao.getAllScheduledRoutinesWithTasks()) { scheduledRoutinesWithTasks ->
+    override suspend fun getAllRoutinesObservable(): LiveData<List<Routine>> =
+        Transformations.map(routinesDao.getAllScheduledRoutinesWithTasksObservable()) { scheduledRoutinesWithTasks ->
             scheduledRoutinesWithTasks.map {
                 it.toRoutine()
             }
         }
+
+    override suspend fun getAllRoutines(): List<Routine> =
+        routinesDao.getAllScheduledRoutinesWithTasks().map { it.toRoutine() }
 
     override suspend fun removeRoutineById(routineId: Long) =
         routinesDao.deleteRoutineById(routineId)
