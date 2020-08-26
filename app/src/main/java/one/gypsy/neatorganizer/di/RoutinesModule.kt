@@ -33,7 +33,7 @@ val routinesUseCaseModule = module {
     factory { RemoveRoutine(get()) }
     factory { RemoveRoutineById(get()) }
     factory { RemoveRoutineTask(get()) }
-    factory { ResetAllRoutineTasks(get()) }
+    factory { RunAllRoutinesSnapshotReset(get()) }
     factory { UpdateRoutine(get()) }
     factory { UpdateRoutineSchedule(get()) }
     factory { UpdateRoutineTask(get()) }

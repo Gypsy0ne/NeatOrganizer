@@ -1,3 +1,0 @@
-package one.gypsy.neatorganizer.domain.datasource.routines.reset
-
-interface RoutineSnapshotTasksDataSource

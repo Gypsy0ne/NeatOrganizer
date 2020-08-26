@@ -1,5 +1,0 @@
-package one.gypsy.neatorganizer.data.repositories.routines.reset
-
-import one.gypsy.neatorganizer.domain.datasource.routines.reset.RoutineSnapshotDaysDataSource
-
-class RoutineSnapshotDaysRepository(dataSource: RoutineSnapshotDaysDataSource)

@@ -1,43 +1,27 @@
 package one.gypsy.neatorganizer.domain.interactors.routines.reset
 
+import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
 import one.gypsy.neatorganizer.data.repositories.routines.reset.RoutineSnapshotsRepository
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
+import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.reset.RoutineSnapshot
 import java.util.*
-import kotlin.collections.LinkedHashMap
 
-//znalezc sposob na kasownaie tego
 class RoutinesResetSnapshooter(
     val routinesRepository: RoutinesRepository,
-    val routineSnapshotsRepository: RoutineSnapshotsRepository
+    val routineSnapshotsRepository: RoutineSnapshotsRepository,
+    val routineTasksRepository: RoutineTasksRepository
 ) {
 
     suspend fun performWeeklyRoutinesReset() {
-        val allRoutines = routinesRepository.getAllRoutines()
-        val tasksGroupedByDayId = LinkedHashMap<Int, List<RoutineTaskEntry>>()
-        //pogrupowanie wszystkow mape <dzien, lista zadan z niego>
-        allRoutines.forEach { routine ->
-            routine.schedule.scheduledDays.forEachIndexed { index, scheduled ->
-                if (scheduled) {
-                    val scheduledDayTasks = tasksGroupedByDayId[index]
-                    if (scheduledDayTasks != null) {
-                        tasksGroupedByDayId[index] = scheduledDayTasks.plus(routine.tasks)
-                    } else {
-                        tasksGroupedByDayId[index] = routine.tasks
-                    }
-                }
-            }
-        }
+        val snapshot = createRoutinesResetSnapshot(routinesRepository.getAllRoutines())
+        routineSnapshotsRepository.addRoutineSnapshot(snapshot)
+        routineTasksRepository.resetAllRoutineTasks()
+    }
 
-        //utworzenie snapshota
-        var tasksCount = 0
-        allRoutines.forEach { tasksCount += it.tasks.size }
-        val resetSnapshot = RoutineSnapshot(tasksCount, Date())
-
-        //wrzucenie snapshota
-        val snapshotId = routineSnapshotsRepository.addRoutineSnapshot(resetSnapshot)
-
-
+    private fun createRoutinesResetSnapshot(allRoutines: List<Routine>): RoutineSnapshot {
+        val allTasks = allRoutines.flatMap { it.tasks }
+        val tasksDone = allTasks.filter { it.done }.size
+        return RoutineSnapshot(allTasks.size, tasksDone, Date())
     }
 }

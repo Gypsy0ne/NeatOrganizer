@@ -2,27 +2,27 @@ package one.gypsy.neatorganizer.domain.interactors.routines
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.RoutinesResetSnapshooter
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class ResetAllRoutineTasks(var routineTasksRepository: RoutineTasksRepository) :
+class RunAllRoutinesSnapshotReset(private val routinesResetSnapshooter: RoutinesResetSnapshooter) :
     BaseUseCase<Unit, Unit>() {
 
     override suspend fun run(unit: Unit): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(routineTasksRepository.resetAllRoutineTasks())
+                Either.Right(routinesResetSnapshooter.performWeeklyRoutinesReset())
             }
         } catch (exp: Exception) {
             Either.Left(
-                ResetAllRoutineTasksFailure(
+                RunAllRoutinesSnapshotReset(
                     exp
                 )
             )
         }
     }
 
-    data class ResetAllRoutineTasksFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class RunAllRoutinesSnapshotReset(val error: Exception) : Failure.FeatureFailure(error)
 }

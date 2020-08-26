@@ -9,7 +9,7 @@ val databaseModule = module {
         Room.databaseBuilder(
             get(),
             OrganizerDatabase::class.java,
-            "NeatOrganizer59.db"
+            "NeatOrganizer49.db"
         ).build()
     }
 
@@ -20,7 +20,5 @@ val databaseModule = module {
     factory { get<OrganizerDatabase>().routinesSchedulesDao() }
     factory { get<OrganizerDatabase>().singleTaskGroupsDao() }
     factory { get<OrganizerDatabase>().singleTasksDao() }
-    factory { get<OrganizerDatabase>().routineSnapshotDaysDao() }
-    factory { get<OrganizerDatabase>().routineSnapshotTasksDao() }
     factory { get<OrganizerDatabase>().routineSnapshotsDao() }
 }

@@ -50,6 +50,7 @@ dependencies {
     def nav_version = "2.3.0"
     def koin_version= "2.1.6"
     def mockk_version= "1.10.0"
+    def work_manager_version = "2.3.4"
 
     implementation project(":easyswipemenulibrary")
     //testing
@@ -71,6 +72,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-rc1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.work:work-runtime-ktx:$work_manager_version"
 
     //autoscalling edit text
     implementation 'com.github.ViksaaSkool:AutoFitEditText:53238e2d29'
