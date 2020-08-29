@@ -200,4 +200,20 @@
     </style>
     <!--End of List view items-->
 
+
+    <style name="LottieDialogHeader">
+        <item name="android:layout_width">@dimen/width_dialog_lottie_animated_header</item>
+        <item name="android:layout_height">@dimen/height_dialog_lottie_animated_header</item>
+        <item name="android:background">@drawable/oval_white_background</item>
+        <item name="android:elevation">@dimen/regular_space</item>
+        <item name="android:outlineProvider">none</item>
+        <item name="lottie_autoPlay">true</item>
+    </style>
+
+    <style name="DialogContentWindow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
+        <item name="android:paddingTop">@dimen/padding_top_dialog_content_container</item>
+    </style>
 </resources>

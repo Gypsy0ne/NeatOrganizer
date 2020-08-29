@@ -22,25 +22,17 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_view_dialog_fragment_remove_confirmation_icon"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:background="@drawable/oval_white_background"
-            android:elevation="@dimen/regular_space"
-            android:outlineProvider="none"
+            style="@style/LottieDialogHeader"
             app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_remove_content"
             app:layout_constraintEnd_toEndOf="@+id/constraint_layout_dialog_fragment_remove_content"
             app:layout_constraintStart_toStartOf="@+id/constraint_layout_dialog_fragment_remove_content"
             app:layout_constraintTop_toTopOf="@+id/constraint_layout_dialog_fragment_remove_content"
-            app:lottie_autoPlay="true"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/lottie_remove_confirmation_dialog" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_dialog_fragment_remove_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_bottom_sheet_dialog"
-            android:paddingTop="48dp"
+            style="@style/DialogContentWindow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
