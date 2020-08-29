@@ -6,5 +6,4 @@ import one.gypsy.neatorganizer.data.database.entity.people.InteractionEntryEntit
 
 @Dao
 interface InteractionsDao:
-    BaseDao<InteractionEntryEntity> {
-}
+    BaseDao<InteractionEntryEntity>

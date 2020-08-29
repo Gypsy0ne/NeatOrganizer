@@ -200,7 +200,6 @@
     </style>
     <!--End of List view items-->
 
-
     <style name="LottieDialogHeader">
         <item name="android:layout_width">@dimen/width_dialog_lottie_animated_header</item>
         <item name="android:layout_height">@dimen/height_dialog_lottie_animated_header</item>

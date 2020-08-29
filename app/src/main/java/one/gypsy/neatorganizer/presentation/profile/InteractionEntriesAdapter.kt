@@ -38,10 +38,11 @@ class InteractionEntriesAdapter : RecyclerView.Adapter<InteractionEntriesAdapter
         holder.bind(entries[position])
     }
 
-    inner class InteractionEntryViewHolder(private val binding: ItemInteractionBinding) : RecyclerView.ViewHolder(binding.root) {
+    class InteractionEntryViewHolder(private val binding: ItemInteractionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(entry: InteractionEntry) {
-            val interactionViewModel= InteractionEntryViewModel().apply { bind(entry) }
+            val interactionViewModel = InteractionEntryViewModel().apply { bind(entry) }
             binding.apply {
                 viewModel = interactionViewModel
                 executePendingBindings()
