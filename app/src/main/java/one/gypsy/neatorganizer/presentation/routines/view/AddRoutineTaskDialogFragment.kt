@@ -24,6 +24,11 @@ class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
     }
     private lateinit var fragmentBinding: DialogFragmentAddRoutineTaskBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme_Transparent)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

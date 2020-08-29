@@ -18,6 +18,11 @@ class AddRoutineDialogFragment : BottomSheetDialogFragment() {
     private val addRoutineViewModel: AddRoutineViewModel by viewModel()
     private lateinit var fragmentBinding: DialogFragmentAddRoutineBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme_Transparent)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

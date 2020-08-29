@@ -18,6 +18,11 @@ class AddSingleTaskGroupDialogFragment : BottomSheetDialogFragment() {
     private val viewModel: AddTaskGroupViewModel by viewModel()
     private lateinit var fragmentBinding: DialogFragmentAddTaskGroupBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme_Transparent)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
