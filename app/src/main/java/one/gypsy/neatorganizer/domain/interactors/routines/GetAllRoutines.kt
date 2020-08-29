@@ -14,7 +14,7 @@ class GetAllRoutines(var dataSource: RoutinesRepository) :
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<Routine>>> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(dataSource.getAllRoutines())
+                Either.Right(dataSource.getAllRoutinesObservable())
             }
         } catch (exp: Exception) {
             Either.Left(

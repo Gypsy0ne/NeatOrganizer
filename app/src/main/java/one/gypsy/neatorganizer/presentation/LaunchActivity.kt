@@ -1,22 +1,19 @@
 package one.gypsy.neatorganizer.presentation
 
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetAlarm
-import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetAutoStart
+import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
+
 class LaunchActivity : AppCompatActivity(), KoinComponent {
 
-    private val routinesReset: RoutinesResetAlarm by inject()
+    private val routinesResetManager: RoutinesResetManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableRoutinesResetAutoStart()
         enableRoutinesReset()
         redirectToHomeActivity()
     }
@@ -27,15 +24,7 @@ class LaunchActivity : AppCompatActivity(), KoinComponent {
         finish()
     }
 
-    private fun enableRoutinesReset() =
-        routinesReset.setWeeklyRoutinesResetAlarm(applicationContext)
+    private fun enableRoutinesReset() = routinesResetManager.scheduleRoutinesResetWork()
 
-    private fun enableRoutinesResetAutoStart() {
-        val receiver = ComponentName(applicationContext, RoutinesResetAutoStart::class.java)
-        applicationContext.packageManager.setComponentEnabledSetting(
-            receiver,
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
-        )
-    }
+
 }

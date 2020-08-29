@@ -13,7 +13,11 @@ interface RoutinesDao : BaseDao<RoutineEntity> {
 
     @Transaction
     @Query("SELECT * FROM routines")
-    fun getAllScheduledRoutinesWithTasks(): LiveData<List<ScheduledRoutineWithTasks>>
+    fun getAllScheduledRoutinesWithTasksObservable(): LiveData<List<ScheduledRoutineWithTasks>>
+
+    @Transaction
+    @Query("SELECT * FROM routines")
+    fun getAllScheduledRoutinesWithTasks(): List<ScheduledRoutineWithTasks>
 
     @Query("DELETE FROM ROUTINES WHERE id = :routineId")
     fun deleteRoutineById(routineId: Long)

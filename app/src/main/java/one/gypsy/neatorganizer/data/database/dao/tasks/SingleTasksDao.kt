@@ -6,6 +6,4 @@ import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskEntity
 
 @Dao
 interface SingleTasksDao:
-    BaseDao<SingleTaskEntity> {
-
-}
+    BaseDao<SingleTaskEntity>

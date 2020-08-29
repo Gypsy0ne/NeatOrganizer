@@ -1,7 +1,5 @@
 package one.gypsy.neatorganizer.utils
 
-import androidx.recyclerview.widget.RecyclerView
-
 sealed class UIState {
     object Loading: UIState()
     object Empty: UIState()

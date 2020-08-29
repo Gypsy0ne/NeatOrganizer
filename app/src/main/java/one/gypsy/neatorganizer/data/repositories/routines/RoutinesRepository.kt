@@ -11,6 +11,8 @@ class RoutinesRepository(var dataSource: RoutinesDataSource) {
 
     suspend fun removeRoutine(routine: Routine) = dataSource.remove(routine)
 
+    suspend fun getAllRoutinesObservable() = dataSource.getAllRoutinesObservable()
+
     suspend fun getAllRoutines() = dataSource.getAllRoutines()
 
     suspend fun removeRoutineById(routineId: Long) = dataSource.removeRoutineById(routineId)

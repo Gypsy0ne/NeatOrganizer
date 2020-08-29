@@ -59,5 +59,8 @@
     <dimen name="margin_bottom_schedule_days">4dp</dimen>
     <dimen name="margin_start_schedule_days">2dp</dimen>
     <dimen name="margin_end_schedule_days">2dp</dimen>
+    <dimen name="height_dialog_lottie_animated_header">96dp</dimen>
+    <dimen name="width_dialog_lottie_animated_header">96dp</dimen>
+    <dimen name="padding_top_dialog_content_container">48dp</dimen>
     <!---->
 </resources>

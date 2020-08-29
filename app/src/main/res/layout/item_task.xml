@@ -38,7 +38,7 @@
             android:id="@+id/constraint_layout_item_task_container"
             style="@style/SubItemContainer">
 
-            <EditText
+            <com.autofit.et.lib.AutoFitEditText
                 android:id="@+id/edit_text_item_task_name"
                 style="@style/ListItemName.Sub"
                 android:layout_marginStart="@dimen/regular_space"
@@ -49,7 +49,7 @@
                 android:focusableInTouchMode="@{taskSubItem.edited}"
                 android:text="@{taskSubItem.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/check_box_item_task_done"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,7 +58,7 @@
                 style="@style/ItemEditionSubmitButton"
                 android:onClick="@{editionSubmitClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/edit_text_item_task_name"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <CheckBox
@@ -71,6 +71,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

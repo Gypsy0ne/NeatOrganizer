@@ -56,11 +56,11 @@ class UserCommunityDataSource(var peopleDao: PeopleDao) :
                 parseByteArrayToBitmap(it.person.avatar),
                 it.person.lastInteraction,
                 it.person.dateOfBirth,
-                it.interactionHistory.map { it ->
+                it.interactionHistory.map { entry ->
                     InteractionEntry(
-                        profileId = it.personProfileId,
-                        interactionDate = it.creationDate,
-                        rating = it.rating
+                        profileId = entry.personProfileId,
+                        interactionDate = entry.creationDate,
+                        rating = entry.rating
                     )
                 }
             )

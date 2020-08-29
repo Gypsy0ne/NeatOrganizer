@@ -8,45 +8,64 @@
             type="one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
 
-        <EditText
-            style="@style/DialogFormEditText"
-            android:id="@+id/edit_text_dialog_fragment_add_task_content"
-            android:layout_marginStart="@dimen/double_space"
-            android:layout_marginTop="@dimen/double_space"
-            android:layout_marginEnd="@dimen/double_space"
-            android:text="@={viewModel.taskTitle}"
-            android:drawableStart="@drawable/ic_group_add_white_24dp"
-            android:hint="@string/add_task_dialog_fragment_content_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_view_dialog_fragment_remove_confirmation_icon"
+            style="@style/LottieDialogHeader"
+            android:padding="@dimen/small_space"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_add_single_task_content"
+            app:layout_constraintEnd_toEndOf="@+id/constraint_layout_dialog_fragment_add_single_task_content"
+            app:layout_constraintStart_toStartOf="@+id/constraint_layout_dialog_fragment_add_single_task_content"
+            app:layout_constraintTop_toTopOf="@+id/constraint_layout_dialog_fragment_add_single_task_content"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_add_task_dialog" />
 
-        <Button
-            android:id="@+id/button_dialog_fragment_add_task_submit"
-            style="@style/DialogFormButton.Submit"
-            android:layout_marginTop="@dimen/triple_space"
-            android:layout_marginBottom="@dimen/triple_space"
-            android:onClick="@{() -> viewModel.addTask()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_dialog_fragment_add_task_next"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
-
-        <Button
-            android:id="@+id/button_dialog_fragment_add_task_next"
-            style="@style/DialogFormButton.Next"
-            android:onClick="@{() -> viewModel.addNextTask()}"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_dialog_fragment_add_single_task_content"
+            style="@style/DialogContentWindow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_dialog_fragment_add_task_submit"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
+            app:layout_constraintStart_toStartOf="parent">
 
+            <EditText
+                android:id="@+id/edit_text_dialog_fragment_add_task_content"
+                style="@style/DialogFormEditText"
+                android:layout_marginStart="@dimen/double_space"
+                android:layout_marginTop="@dimen/double_space"
+                android:layout_marginEnd="@dimen/double_space"
+                android:drawableStart="@drawable/ic_group_add_white_24dp"
+                android:hint="@string/add_task_dialog_fragment_content_hint"
+                android:text="@={viewModel.taskTitle}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_dialog_fragment_add_task_submit"
+                style="@style/DialogFormButton.Submit"
+                android:layout_marginTop="@dimen/triple_space"
+                android:layout_marginBottom="@dimen/triple_space"
+                android:onClick="@{() -> viewModel.addTask()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_dialog_fragment_add_task_next"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
+
+            <Button
+                android:id="@+id/button_dialog_fragment_add_task_next"
+                style="@style/DialogFormButton.Next"
+                android:onClick="@{() -> viewModel.addNextTask()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_dialog_fragment_add_task_submit"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

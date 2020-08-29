@@ -46,7 +46,7 @@
             android:id="@+id/relative_layout_item_task_header_container"
             style="@style/HeaderItemContainer">
 
-            <EditText
+            <com.autofit.et.lib.AutoFitEditText
                 android:id="@+id/edit_text_item_task_header_name"
                 style="@style/ListItemName.Header"
                 android:text="@{headerItem.name}"
@@ -100,6 +100,7 @@
                 style="@style/HeaderMenuButton.Small"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/red"
+                android:layout_marginStart="@dimen/regular_space"
                 android:drawableTop="@drawable/ic_delete_white_24"
                 android:onClick="@{removeClickListener}"
                 android:text="@string/list_item_menu_delete"
@@ -114,6 +115,7 @@
             style="@style/ListItemMenu">
 
             <Button
+
                 android:id="@+id/button_item_task_header_add"
                 style="@style/HeaderMenuButton.Small"
                 android:background="@drawable/item_person_swipe_update_background"
@@ -121,6 +123,7 @@
                 android:drawableTop="@drawable/ic_add_white_24"
                 android:onClick="@{addClickListener}"
                 android:text="@string/list_item_menu_add"
+                android:layout_marginStart="@dimen/regular_space"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_task_header_edit"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -130,6 +133,7 @@
             <Button
                 android:id="@+id/button_item_task_header_edit"
                 style="@style/HeaderMenuButton.Small"
+                android:layout_marginStart="@dimen/medium_space"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/male_blue"
                 android:drawableTop="@drawable/ic_edit_white_24"

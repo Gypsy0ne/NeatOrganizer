@@ -5,7 +5,6 @@ import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
 import one.gypsy.neatorganizer.domain.datasource.routines.*
 import one.gypsy.neatorganizer.domain.interactors.routines.*
-import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetAlarm
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
 import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineViewModel
@@ -34,7 +33,7 @@ val routinesUseCaseModule = module {
     factory { RemoveRoutine(get()) }
     factory { RemoveRoutineById(get()) }
     factory { RemoveRoutineTask(get()) }
-    factory { ResetAllRoutineTasks(get()) }
+    factory { RunAllRoutinesSnapshotReset(get()) }
     factory { UpdateRoutine(get()) }
     factory { UpdateRoutineSchedule(get()) }
     factory { UpdateRoutineTask(get()) }
@@ -42,7 +41,6 @@ val routinesUseCaseModule = module {
 
 val routinesUtilsModule = module {
     factory { RoutineListMapper() }
-    factory { RoutinesResetAlarm() }
 }
 
 val routinesViewModelModule = module {

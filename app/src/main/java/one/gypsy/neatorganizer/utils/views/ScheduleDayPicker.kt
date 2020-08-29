@@ -2,10 +2,10 @@ package one.gypsy.neatorganizer.utils.views
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.databinding.BindingAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.utils.extensions.getDimen
 
@@ -14,7 +14,6 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
     private val daysOfWeekIndicators: List<Button> = List(7) {
         createScheduleDayIndicator(context, it)
     }
-
     var scheduledDaysChangeListener: ScheduledDaysPickListener? = null
     var interactable: Boolean = true
         set(value) {
@@ -23,14 +22,13 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             }
             field = value
         }
-
     var scheduleDaysStatus: List<Boolean>
         get() = daysOfWeekIndicators.map { it.isSelected }
         set(value) {
             value.forEachIndexed { index, value ->
                 daysOfWeekIndicators[index].isSelected = value
             }
-    }
+        }
 
     init {
         setUpParentView()
@@ -72,6 +70,7 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
                 R.drawable.bg_view_schedule_days_indicator,
                 context.theme
             )
+            setAutoSizeTextTypeUniformWithConfiguration(6, 24, 1, TypedValue.COMPLEX_UNIT_SP)
             weight = 1f
             setMargins(
                 getDimen(R.dimen.margin_start_schedule_days),
@@ -82,5 +81,4 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             text = context.resources.getStringArray(R.array.schedule_days_short)[index]
         }
     }
-
 }
