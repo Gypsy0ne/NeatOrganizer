@@ -21,4 +21,7 @@ interface RoutinesDao : BaseDao<RoutineEntity> {
 
     @Query("DELETE FROM ROUTINES WHERE id = :routineId")
     fun deleteRoutineById(routineId: Long)
+
+    @Query("SELECT * FROM routines")
+    fun getAllRoutines(): List<RoutineEntity>
 }

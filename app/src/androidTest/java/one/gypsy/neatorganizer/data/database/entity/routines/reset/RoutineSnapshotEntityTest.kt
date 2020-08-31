@@ -47,6 +47,7 @@ class RoutineSnapshotEntityTest {
             tasksOverall = modifiedTasksOverall,
             routinesResetDate = modifiedResetDate
         )
+        val modifiedSnapshotId = modifiedSnapshot.routineSnapshotId
         routineSnapshotDao.insert(modifiedSnapshot)
 
         // then
@@ -56,6 +57,7 @@ class RoutineSnapshotEntityTest {
             assertThat(it.tasksOverall).isEqualTo(modifiedTasksOverall)
             assertThat(it.tasksDone).isEqualTo(tasksDone)
             assertThat(it.routinesResetDate).isEqualTo(modifiedResetDate)
+            assertThat(it.routineSnapshotId).isEqualTo(modifiedSnapshotId)
         }
     }
 
@@ -125,6 +127,7 @@ class RoutineSnapshotEntityTest {
         routineSnapshotDao.insert(snapshot)
         val modifiedSnapshot = routineSnapshotDao.getAllRoutineSnapshots().first()
             .copy(tasksOverall = modifiedTasksOverall, tasksDone = modifiedTasksDone)
+        val modifiedSnapshotId = modifiedSnapshot.routineSnapshotId
         routineSnapshotDao.update(modifiedSnapshot)
 
         // then
@@ -133,6 +136,7 @@ class RoutineSnapshotEntityTest {
         selectionResult.first().also {
             assertThat(it.tasksOverall).isEqualTo(modifiedTasksOverall)
             assertThat(it.tasksDone).isEqualTo(modifiedTasksDone)
+            assertThat(it.routineSnapshotId).isEqualTo(modifiedSnapshotId)
         }
     }
 
@@ -173,6 +177,4 @@ class RoutineSnapshotEntityTest {
         assertThat(routineSnapshotDao.getAllRoutineSnapshots()).hasSize(snapshots.size)
             .containsExactlyInAnyOrderElementsOf(snapshots)
     }
-
-
 }
