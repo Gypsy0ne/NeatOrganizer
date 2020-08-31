@@ -24,7 +24,6 @@ data class RoutineScheduleEntity(
     val saturday: Boolean,
     val sunday: Boolean,
     @PrimaryKey val routineId: Long
-
 )
 
 fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
