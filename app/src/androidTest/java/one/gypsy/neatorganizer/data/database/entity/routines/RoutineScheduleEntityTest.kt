@@ -85,6 +85,7 @@ class RoutineScheduleEntityTest {
     fun shouldDeleteRoutineSchedule() {
         // given
         routinesDao.insert(RoutineEntity("foobar", 1))
+        routinesDao.insert(RoutineEntity("foobar", 2))
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
             tuesday = false,
@@ -107,7 +108,8 @@ class RoutineScheduleEntityTest {
         )
 
         // when
-        routineSchedulesDao.insert(routineSchedule)
+        routineSchedulesDao.insert(routineSchedule, deletedRoutineSchedule)
+        routineSchedulesDao.delete(deletedRoutineSchedule)
 
         // then
         val selectedSchedules = routineSchedulesDao.getAllRoutineSchedules()
@@ -191,5 +193,62 @@ class RoutineScheduleEntityTest {
         assertThat(selectedRoutineSchedules).containsExactlyInAnyOrderElementsOf(
             selectedRoutineSchedules
         )
+    }
+
+    @Test
+    fun shouldDeleteRoutineAndSchedule() {
+        // given
+        val routine = RoutineEntity("foobar", 1)
+        val routineSchedule = RoutineScheduleEntity(
+            monday = true,
+            tuesday = false,
+            wednesday = true,
+            thursday = false,
+            friday = true,
+            saturday = false,
+            sunday = true,
+            routineId = routine.id
+        )
+
+        // when
+        routinesDao.insert(routine)
+        routineSchedulesDao.insert(routineSchedule)
+        routinesDao.delete(routine)
+
+        // then
+        val selectedSchedules = routineSchedulesDao.getAllRoutineSchedules()
+        assertThat(selectedSchedules).isEmpty()
+    }
+
+    @Test
+    fun shouldProperlyMapEntityToDomainRepresentation() {
+        // given
+        val routineSchedule = RoutineScheduleEntity(
+            monday = true,
+            tuesday = false,
+            wednesday = true,
+            thursday = false,
+            friday = true,
+            saturday = false,
+            sunday = true,
+            routineId = 1
+        )
+
+        // when
+        val domainRoutineSchedule = routineSchedule.toRoutineSchedule()
+
+        // then
+        assertThat(routineSchedule.routineId).isEqualTo(domainRoutineSchedule.routineId)
+        assertThat(routineSchedule.let {
+            listOf(
+                it.monday,
+                it.tuesday,
+                it.wednesday,
+                it.thursday,
+                it.friday,
+                it.saturday,
+                it.sunday
+            )
+        }).isEqualTo(domainRoutineSchedule.scheduledDays)
     }
 }
