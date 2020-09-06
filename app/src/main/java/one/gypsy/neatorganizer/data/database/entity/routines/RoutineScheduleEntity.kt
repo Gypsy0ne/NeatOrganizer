@@ -24,14 +24,13 @@ data class RoutineScheduleEntity(
     val saturday: Boolean,
     val sunday: Boolean,
     @PrimaryKey val routineId: Long
-
 )
 
 fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
     routineId = this.routineId,
     scheduledDays = listOf(
         monday,
-        thursday,
+        tuesday,
         wednesday,
         thursday,
         friday,

@@ -43,7 +43,7 @@ public class EasySwipeMenuLayout extends ViewGroup {
     private int mScaledTouchSlop;
     private Scroller mScroller;
     private float distanceX;
-    private float finalyDistanceX;
+    private float finalDistanceX;
     private SwipeMenuListener swipeListener;
 
     public EasySwipeMenuLayout(Context context) {
@@ -107,8 +107,6 @@ public class EasySwipeMenuLayout extends ViewGroup {
         } finally {
             typedArray.recycle();
         }
-
-
     }
 
     @Override
@@ -306,8 +304,8 @@ public class EasySwipeMenuLayout extends ViewGroup {
             }
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL: {
-                finalyDistanceX = mFirstP.x - ev.getRawX();
-                if (Math.abs(finalyDistanceX) > mScaledTouchSlop) {
+                finalDistanceX = mFirstP.x - ev.getRawX();
+                if (Math.abs(finalDistanceX) > mScaledTouchSlop) {
 
                     isSwiping = true;
                 }
@@ -333,7 +331,7 @@ public class EasySwipeMenuLayout extends ViewGroup {
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                if (Math.abs(finalyDistanceX) > mScaledTouchSlop) {
+                if (Math.abs(finalDistanceX) > mScaledTouchSlop) {
                     return true;
                 }
                 break;
@@ -343,7 +341,7 @@ public class EasySwipeMenuLayout extends ViewGroup {
             case MotionEvent.ACTION_CANCEL: {
                 if (isSwiping) {
                     isSwiping = false;
-                    finalyDistanceX = 0;
+                    finalDistanceX = 0;
                     return true;
                 }
             }
@@ -397,11 +395,11 @@ public class EasySwipeMenuLayout extends ViewGroup {
      * @return
      */
     private State isShouldOpen(int scrollX) {
-        if (!(mScaledTouchSlop < Math.abs(finalyDistanceX))) {
+        if (!(mScaledTouchSlop < Math.abs(finalDistanceX))) {
             return mStateCache;
         }
-        Log.i(TAG, ">>>finalyDistanceX:" + finalyDistanceX);
-        if (finalyDistanceX < 0) {
+        Log.i(TAG, ">>>finalyDistanceX:" + finalDistanceX);
+        if (finalDistanceX < 0) {
             if (getScrollX() < 0 && mLeftView != null) {
                 if (Math.abs(mLeftView.getWidth() * mFraction) < Math.abs(getScrollX())) {
                     return State.LEFTOPEN;
@@ -411,7 +409,7 @@ public class EasySwipeMenuLayout extends ViewGroup {
             if (getScrollX() > 0 && mRightView != null) {
                 return State.CLOSE;
             }
-        } else if (finalyDistanceX > 0) {
+        } else if (finalDistanceX > 0) {
             if (getScrollX() > 0 && mRightView != null) {
 
                 if (Math.abs(mRightView.getWidth() * mFraction) < Math.abs(getScrollX())) {
