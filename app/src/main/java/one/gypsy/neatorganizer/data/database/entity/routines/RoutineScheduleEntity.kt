@@ -30,7 +30,7 @@ fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
     routineId = this.routineId,
     scheduledDays = listOf(
         monday,
-        thursday,
+        tuesday,
         wednesday,
         thursday,
         friday,
