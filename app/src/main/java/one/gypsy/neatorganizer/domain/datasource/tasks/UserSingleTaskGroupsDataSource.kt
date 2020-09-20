@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskGroup
+import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskGroupEntity
 
 class UserSingleTaskGroupsDataSource(val singleTaskGroupsDao: SingleTaskGroupsDao) :
@@ -27,4 +29,12 @@ class UserSingleTaskGroupsDataSource(val singleTaskGroupsDao: SingleTaskGroupsDa
                 it.toSingleTaskGroup()
             }
         }
+
+    override suspend fun getAllSingleTaskGroupEntries(): LiveData<List<SingleTaskGroupEntry>> =
+        Transformations.map(singleTaskGroupsDao.getAllGroupsWithSingleTasks()) { taskGroups ->
+            taskGroups.map {
+                it.toSingleTaskGroupEntry()
+            }
+        }
+
 }

@@ -8,10 +8,7 @@ import one.gypsy.neatorganizer.domain.datasource.tasks.UserSingleTaskGroupsDataS
 import one.gypsy.neatorganizer.domain.datasource.tasks.UserSingleTasksDataSource
 import one.gypsy.neatorganizer.domain.interactors.tasks.*
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
+import one.gypsy.neatorganizer.presentation.tasks.vm.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -34,6 +31,7 @@ val tasksUseCaseModule = module {
     factory { RemoveTaskGroupById(get()) }
     factory { UpdateSingleTask(get()) }
     factory { UpdateTaskGroup(get()) }
+    factory { GetAllSingleTaskGroupEntries(get()) }
 }
 
 val tasksUtilsModule = module {
@@ -53,4 +51,5 @@ val tasksViewModelModule = module {
     viewModel { RemoveTaskGroupViewModel(get()) }
     viewModel { (id: Long) -> AddTaskViewModel(get(), id) }
     viewModel { AddTaskGroupViewModel(get()) }
+    viewModel { TasksWidgetConfigurationViewModel(get()) }
 }

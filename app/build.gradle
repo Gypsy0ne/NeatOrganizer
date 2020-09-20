@@ -130,4 +130,6 @@ dependencies {
 
     //rating view
     implementation 'com.github.sujithkanna:smileyrating:1.6.8'
+
+    implementation 'com.thebluealliance:spectrum:0.7.1'
 }

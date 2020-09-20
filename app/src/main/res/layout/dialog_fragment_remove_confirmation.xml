@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="submitClickListener"
             type="android.view.View.OnClickListener" />
@@ -10,8 +11,10 @@
         <variable
             name="subItemsCount"
             type="int" />
-        
-        <variable name="removeGroupType" type="String"/>
+
+        <variable
+            name="removeGroupType"
+            type="String" />
 
     </data>
 
@@ -40,11 +43,10 @@
             <TextView
                 android:id="@+id/text_view_dialog_fragment_remove_confirmation_header"
                 android:layout_width="0dp"
-                removeItemsCount="@{subItemsCount}"
-                removeGroupTypeName="@{removeGroupType}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/double_space"
                 android:layout_marginBottom="@dimen/regular_space"
+                android:text="@{@plurals/subItemsCount(subItemsCount, subItemsCount, removeGroupType)}"
                 android:textAlignment="center"
                 android:textSize="@dimen/regular_text_size"
                 app:layout_constraintBottom_toTopOf="@id/text_view_dialog_fragment_remove_confirmation_content"

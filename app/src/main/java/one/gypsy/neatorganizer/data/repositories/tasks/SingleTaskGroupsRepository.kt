@@ -16,6 +16,8 @@ class SingleTaskGroupsRepository(var dataSource: SingleTaskGroupsDataSource) {
 
     suspend fun getAllSingleTaskGroups() = dataSource.getAllSingleTaskGroups()
 
+    suspend fun getAllSingleTaskGroupEntries() = dataSource.getAllSingleTaskGroupEntries()
+
     suspend fun removeSingleTaskGroupById(taskGroupId: Long) = dataSource.removeById(taskGroupId)
 
 }
