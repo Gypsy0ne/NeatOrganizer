@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/rounded_bottom_background"
-            android:elevation="@dimen/medium_space"
+            android:elevation="@dimen/small_space"
             app:layout_constraintBottom_toTopOf="@+id/taskGroupsListGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,14 +43,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55" />
+            app:layout_constraintGuide_percent="0.6" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/bottomMenuGuideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.87" />
+            app:layout_constraintGuide_percent="0.89" />
 
         <com.thebluealliance.spectrum.SpectrumPalette
             android:id="@+id/palette"
@@ -70,11 +70,36 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/rounded_top_background"
-            android:elevation="@dimen/medium_space"
+            android:elevation="@dimen/small_space"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/DialogFormButton.Submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/triple_space"
+            android:elevation="@dimen/double_space"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cancel"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="@style/DialogFormButton.Cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/triple_space"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toStartOf="@+id/submit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

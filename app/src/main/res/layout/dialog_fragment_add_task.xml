@@ -46,9 +46,10 @@
 
             <Button
                 android:id="@+id/button_dialog_fragment_add_task_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 style="@style/DialogFormButton.Submit"
-                android:layout_marginTop="@dimen/triple_space"
-                android:layout_marginBottom="@dimen/triple_space"
+                android:layout_margin="@dimen/triple_space"
                 android:onClick="@{() -> viewModel.addTask()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_dialog_fragment_add_task_next"
@@ -58,7 +59,10 @@
 
             <Button
                 android:id="@+id/button_dialog_fragment_add_task_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 style="@style/DialogFormButton.Next"
+                android:layout_margin="@dimen/triple_space"
                 android:onClick="@{() -> viewModel.addNextTask()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

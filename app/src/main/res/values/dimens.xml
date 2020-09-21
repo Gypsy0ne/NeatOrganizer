@@ -49,7 +49,7 @@
     <dimen name="height_item_grouped_task_container">48dp</dimen>
     <dimen name="padding_start_dialog_fragment_button">40dp</dimen>
     <dimen name="padding_top_dialog_fragment_button">8dp</dimen>
-    <dimen name="padding_end_dialog_fragment_button">48dp</dimen>
+    <dimen name="padding_end_dialog_fragment_button">40dp</dimen>
     <dimen name="padding_bottom_dialog_fragment_button">8dp</dimen>
     <dimen name="height_view_schedule_day_indicator">64dp</dimen>
     <!--End of Lazy date picker dimens-->

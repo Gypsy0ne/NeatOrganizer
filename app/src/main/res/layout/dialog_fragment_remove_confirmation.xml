@@ -68,6 +68,8 @@
 
             <Button
                 android:id="@+id/button_dialog_fragment_remove_confirmation_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/DialogFormButton.Submit"
                 android:layout_marginTop="@dimen/triple_space"
                 android:layout_marginBottom="@dimen/triple_space"
