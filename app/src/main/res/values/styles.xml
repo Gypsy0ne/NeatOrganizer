@@ -116,18 +116,20 @@
 
     <!--List view items-->
     <style name="ListItemName">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
         <item name="android:maxLength">@integer/regular_text_length</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="ListItemName.Header" parent="ListItemName">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EditableListItemName.Header" parent="ListItemName">
         <item name="android:textSize">@dimen/large_text_size</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="ListItemName.Sub" parent="ListItemName">
+    <style name="EditableListItemName.Sub" parent="ListItemName">
         <item name="android:textSize">@dimen/regular_text_size</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:padding">@dimen/small_space</item>
@@ -156,8 +158,6 @@
     </style>
 
     <style name="HeaderItemContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/item_routine_header_background</item>
         <item name="android:layout_marginTop">@dimen/regular_space</item>
         <item name="android:clickable">true</item>
