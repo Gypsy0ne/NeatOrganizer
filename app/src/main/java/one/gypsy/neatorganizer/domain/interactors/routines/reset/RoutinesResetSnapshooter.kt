@@ -8,9 +8,9 @@ import one.gypsy.neatorganizer.domain.dto.routines.reset.RoutineSnapshot
 import java.util.*
 
 class RoutinesResetSnapshooter(
-    val routinesRepository: RoutinesRepository,
-    val routineSnapshotsRepository: RoutineSnapshotsRepository,
-    val routineTasksRepository: RoutineTasksRepository
+    private val routinesRepository: RoutinesRepository,
+    private val routineSnapshotsRepository: RoutineSnapshotsRepository,
+    private val routineTasksRepository: RoutineTasksRepository
 ) {
 
     suspend fun performWeeklyRoutinesReset() {

@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class RemoveTaskGroupById(var singleTaskGroupsRepository: SingleTaskGroupsRepository) :
+class RemoveTaskGroupById(private val singleTaskGroupsRepository: SingleTaskGroupsRepository) :
     BaseUseCase<Unit, RemoveTaskGroupById.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

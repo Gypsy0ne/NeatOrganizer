@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="groupsViewModel"
+            name="configurationViewModel"
             type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetConfigurationViewModel" />
 
         <variable
@@ -15,6 +15,14 @@
         <variable
             name="tasksAdapter"
             type="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupEntriesAdapter" />
+
+        <variable
+            name="cancelButtonListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="submitButtonListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +34,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksGroups"
             adapter="@{tasksAdapter}"
-            adapterData="@{groupsViewModel.taskGroupEntries}"
+            adapterData="@{configurationViewModel.taskGroupEntries}"
             hasFixedSize="@{false}"
             layoutManager="@{layoutManager}"
             android:layout_width="0dp"
@@ -60,6 +68,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:elevation="@dimen/small_space"
+            onColorChanged="@{(color)->configurationViewModel.onColorPicked(color)}"
             app:layout_constraintBottom_toTopOf="@id/bottomMenuGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triple_space"
             android:elevation="@dimen/double_space"
+            android:onClick="@{submitButtonListener}"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -98,6 +108,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triple_space"
+            android:onClick="@{cancelButtonListener}"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toStartOf="@+id/submit"
             app:layout_constraintHorizontal_bias="0.5"

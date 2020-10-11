@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class UpdateSingleTask(var singleTaskRepository: SingleTasksRepository) :
+class UpdateSingleTask(private val singleTaskRepository: SingleTasksRepository) :
     BaseUseCase<Unit, UpdateSingleTask.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

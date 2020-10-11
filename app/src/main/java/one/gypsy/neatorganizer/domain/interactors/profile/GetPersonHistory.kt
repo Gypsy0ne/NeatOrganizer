@@ -10,7 +10,7 @@ import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 import java.util.*
 
-class GetPersonHistory(var peopleRepository: PeopleRepository) :
+class GetPersonHistory(private val peopleRepository: PeopleRepository) :
     BaseUseCase<PersonProfile, GetPersonHistory.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, PersonProfile> {

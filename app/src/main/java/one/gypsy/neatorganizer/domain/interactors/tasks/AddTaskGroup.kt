@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddTaskGroup(var singleTaskGroupsRepository: SingleTaskGroupsRepository) :
+class AddTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRepository) :
     BaseUseCase<Long, AddTaskGroup.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Long> {

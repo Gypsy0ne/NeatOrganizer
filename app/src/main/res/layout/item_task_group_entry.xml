@@ -19,7 +19,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/HeaderItemContainer"
+        android:id="@+id/entryContainer"
+        style="@style/HeaderItemContainer.Selectable"
         android:layout_width="match_parent"
         android:layout_height="64dp">
 

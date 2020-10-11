@@ -4,13 +4,17 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
 
-class TaskGroupEntriesAdapter :
+class TaskGroupEntriesAdapter(
+    private val currentlySelectedItem: LiveData<TaskGroupEntryItem>,
+    private val onSelected: (TaskGroupEntryItem) -> Unit
+) :
     ListAdapter<TaskGroupEntryItem, TaskGroupEntryViewHolder>(DiffCallback()),
     BindableAdapter<TaskGroupEntryItem> {
 
@@ -20,6 +24,8 @@ class TaskGroupEntriesAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskGroupEntryViewHolder =
         TaskGroupEntryViewHolder(
+            currentlySelectedItem,
+            onSelected,
             DataBindingUtil.inflate(
                 LayoutInflater.from(
                     parent.context
@@ -27,8 +33,24 @@ class TaskGroupEntriesAdapter :
             )
         )
 
+
     override fun onBindViewHolder(holder: TaskGroupEntryViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun onViewAttachedToWindow(holder: TaskGroupEntryViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.onAttached()
+    }
+
+    override fun onViewDetachedFromWindow(holder: TaskGroupEntryViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.onDetached()
+    }
+
+    override fun onViewRecycled(holder: TaskGroupEntryViewHolder) {
+        super.onViewRecycled(holder)
+        holder.onRecycled()
     }
 
     class DiffCallback : DiffUtil.ItemCallback<TaskGroupEntryItem>() {

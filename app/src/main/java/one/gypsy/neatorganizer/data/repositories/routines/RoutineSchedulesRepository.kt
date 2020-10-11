@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.data.repositories.routines
 import one.gypsy.neatorganizer.domain.datasource.routines.RoutineSchedulesDataSource
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 
-class RoutineSchedulesRepository(var dataSource: RoutineSchedulesDataSource) {
+class RoutineSchedulesRepository(private val dataSource: RoutineSchedulesDataSource) {
 
     suspend fun addRoutineSchedule(routineSchedule: RoutineSchedule) =
         dataSource.add(routineSchedule)

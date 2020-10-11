@@ -4,7 +4,7 @@ import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskEntity
 
-class UserSingleTasksDataSource(var singleTasksDao: SingleTasksDao) :
+class UserSingleTasksDataSource(private val singleTasksDao: SingleTasksDao) :
     SingleTasksDataSource {
     override suspend fun add(singleTaskEntry: SingleTaskEntry): Long =
         singleTasksDao.insert(singleTaskEntry.toSingleTaskEntity())

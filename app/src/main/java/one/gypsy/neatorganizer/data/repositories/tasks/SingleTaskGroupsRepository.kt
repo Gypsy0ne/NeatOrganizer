@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.data.repositories.tasks
 import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTaskGroupsDataSource
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 
-class SingleTaskGroupsRepository(var dataSource: SingleTaskGroupsDataSource) {
+class SingleTaskGroupsRepository(private val dataSource: SingleTaskGroupsDataSource) {
 
     suspend fun addSingleTaskGroup(singleTaskGroup: SingleTaskGroup) =
         dataSource.add(singleTaskGroup)

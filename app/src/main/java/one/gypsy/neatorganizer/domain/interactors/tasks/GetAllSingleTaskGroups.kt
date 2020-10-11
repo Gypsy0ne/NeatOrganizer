@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class GetAllSingleTaskGroups(var dataSource: SingleTaskGroupsRepository) :
+class GetAllSingleTaskGroups(private val dataSource: SingleTaskGroupsRepository) :
     BaseUseCase<LiveData<List<SingleTaskGroup>>, Unit>() {
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<SingleTaskGroup>>> {
         return try {

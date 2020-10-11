@@ -71,14 +71,12 @@
     <!--End of Add person dialog fragment-->
 
     <style name="DialogFormButton">
-        <item name="android:paddingEnd">@dimen/padding_end_dialog_fragment_button</item>
-        <item name="android:paddingStart">@dimen/padding_start_dialog_fragment_button</item>
-        <item name="android:paddingTop">@dimen/padding_top_dialog_fragment_button</item>
-        <item name="android:paddingBottom">@dimen/padding_bottom_dialog_fragment_button</item>
+        <item name="android:paddingHorizontal">@dimen/double_space</item>
+        <item name="android:paddingVertical">@dimen/regular_space</item>
         <item name="android:maxLines">1</item>
         <item name="autoSizeTextType">uniform</item>
-        <item name="autoSizeMaxTextSize">@dimen/max_text_size_dialog_add_person_confirm_text</item>
-        <item name="autoSizeMinTextSize">@dimen/min_text_size_dialog_add_person_confirm_text</item>
+        <item name="autoSizeMaxTextSize">@dimen/medium_text_size</item>
+        <item name="autoSizeMinTextSize">@dimen/small_text_size</item>
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
 
@@ -97,9 +95,7 @@
     </style>
 
     <style name="DialogFormButton.Cancel" parent="DialogFormButton">
-        <item name="android:background">
-            @drawable/dialog_red_clickable_view_background
-        </item>
+        <item name="android:background">@drawable/dialog_red_clickable_view_background</item>
         <item name="android:drawableStart">@drawable/ic_close_white_24dp</item>
         <item name="drawableTint">@color/dark_red</item>
         <item name="android:text">@string/cancel_button_dialog_text</item>
@@ -158,11 +154,15 @@
     </style>
 
     <style name="HeaderItemContainer">
-        <item name="android:background">@drawable/item_routine_header_background</item>
+        <item name="android:background">@drawable/item_header_background</item>
         <item name="android:layout_marginTop">@dimen/regular_space</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:layout_marginBottom">@dimen/small_space</item>
+    </style>
+
+    <style name="HeaderItemContainer.Selectable">
+        <item name="android:background">@drawable/selectable_item_header_background</item>
     </style>
 
     <style name="HeaderMenuButton">

@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddInteractionEntry(val interactionRepository: InteractionRepository) :
+class AddInteractionEntry(private val interactionRepository: InteractionRepository) :
     BaseUseCase<Unit, AddInteractionEntry.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
