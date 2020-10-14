@@ -9,4 +9,12 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/regular_space"
         android:paddingVertical="@dimen/medium_space" />
+
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="no items inside"
+        android:textColor="@color/white" />
 </FrameLayout>

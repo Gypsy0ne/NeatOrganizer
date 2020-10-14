@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.tasks.view.widget
+package one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration
 
 import android.graphics.drawable.TransitionDrawable
 import androidx.lifecycle.LiveData

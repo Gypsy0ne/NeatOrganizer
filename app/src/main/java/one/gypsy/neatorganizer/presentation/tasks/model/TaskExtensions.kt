@@ -20,3 +20,5 @@ fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
 
 fun SingleTaskGroupEntry.toTaskGroupEntryItem() =
     TaskGroupEntryItem(id, name, tasksCount, tasksDone)
+
+fun SingleTaskEntry.toTaskEntryWidgetItem() = TaskEntryWidgetItem(name, done)

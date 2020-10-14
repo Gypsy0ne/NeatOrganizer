@@ -8,8 +8,8 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class CreateTaskWidget(private val taskWidgetPreferencesRepository: TaskWidgetPreferencesRepository) :
-    BaseUseCase<Unit, CreateTaskWidget.Params>() {
+class SaveTaskWidget(private val taskWidgetPreferencesRepository: TaskWidgetPreferencesRepository) :
+    BaseUseCase<Unit, SaveTaskWidget.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {

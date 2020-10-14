@@ -21,4 +21,5 @@ interface SingleTaskGroupsDao:
 
     @Query("DELETE FROM SINGLE_TASK_GROUP WHERE id = :taskGroupId")
     fun deleteTaskGroupById(taskGroupId: Long)
+
 }

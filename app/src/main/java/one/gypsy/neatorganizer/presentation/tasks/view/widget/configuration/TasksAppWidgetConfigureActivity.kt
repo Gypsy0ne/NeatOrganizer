@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.tasks.view.widget
+package one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -25,14 +25,19 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
 
     public override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
-        // Set the result to CANCELED.  This will cause the widget host to cancel
-        // out of the widget placement if the user presses the back button.
-        setResult(RESULT_CANCELED)
         findWidgetIdFromIntent()
-        // If this activity was started with an intent without an app widget ID, finish with an error.
+        setActivityResult(RESULT_CANCELED)
         invalidateIntentWithWidgetId()
         setDataBoundContentView()
         observeCreationStatus()
+    }
+
+    private fun AppCompatActivity.setActivityResult(status: Int) {
+        val result = Intent().apply {
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+        }
+        setResult(status, result)
+
     }
 
     private fun invalidateIntentWithWidgetId() {
@@ -42,14 +47,10 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
         }
     }
 
-    private fun findWidgetIdFromIntent() {
-        val intent = intent
-        val extras = intent.extras
-        if (extras != null) {
-            appWidgetId = extras.getInt(
-                AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID
-            )
-        }
+    private fun findWidgetIdFromIntent() = intent.extras?.let {
+        appWidgetId = it.getInt(
+            AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID
+        )
     }
 
     private fun setDataBoundContentView() = with(
@@ -97,11 +98,7 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
     private fun onWidgetCreationFinish() {
         val appWidgetManager = AppWidgetManager.getInstance(baseContext)
         widgetViewManager.updateWidget(baseContext, appWidgetManager, appWidgetId)
-
-        val resultValue = Intent().apply {
-            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-        }
-        setResult(RESULT_OK, resultValue)
+        setActivityResult(RESULT_OK)
         finish()
     }
 

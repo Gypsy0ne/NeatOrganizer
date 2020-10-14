@@ -7,4 +7,6 @@ class SingleTasksRepository(private val dataSource: SingleTasksDataSource) {
     suspend fun addSingleTask(singleTask: SingleTaskEntry) = dataSource.add(singleTask)
     suspend fun updateSingleTask(singleTask: SingleTaskEntry) = dataSource.update(singleTask)
     suspend fun removeSingleTask(singleTask: SingleTaskEntry) = dataSource.remove(singleTask)
+    suspend fun getAllSingleTasksByGroupId(groupId: Long) =
+        dataSource.getAllSingleTasksByGroupId(groupId)
 }

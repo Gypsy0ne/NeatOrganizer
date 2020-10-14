@@ -6,9 +6,9 @@ import android.content.Context
 interface WidgetRemoteViewManager {
     fun updateWidget(
         context: Context,
-        appWidgetManager: AppWidgetManager,
+        widgetManager: AppWidgetManager,
         appWidgetId: Int
     )
 
-    fun deleteWidget(context: Context, appWidgetId: Int)
+    fun deleteWidget(appWidgetId: Int)
 }

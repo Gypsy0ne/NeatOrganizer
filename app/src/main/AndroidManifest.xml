@@ -24,7 +24,7 @@
                 android:resource="@xml/tasks_app_widget_info" />
         </receiver>
 
-        <activity android:name=".presentation.tasks.view.widget.TasksAppWidgetConfigureActivity">
+        <activity android:name=".presentation.tasks.view.widget.configuration.TasksAppWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -41,6 +41,12 @@
         <activity
             android:name=".presentation.HomeActivity"
             android:windowSoftInputMode="adjustPan" />
+
+        <service
+            android:name=".presentation.tasks.view.widget.TaskWidgetService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

@@ -3,14 +3,14 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.CreateTaskWidget
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
+import one.gypsy.neatorganizer.domain.interactors.tasks.SaveTaskWidget
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
 import one.gypsy.neatorganizer.presentation.tasks.model.toTaskGroupEntryItem
 
 class TasksWidgetConfigurationViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
-    private val widgetCreationUseCase: CreateTaskWidget
+    private val widgetCreationUseCase: SaveTaskWidget
 ) :
     ViewModel() {
     private val _taskGroupEntries = MediatorLiveData<List<TaskGroupEntryItem>>()
@@ -62,7 +62,7 @@ class TasksWidgetConfigurationViewModel(
         if (taskGroup != null && widgetColor != null) {
             widgetCreationUseCase.invoke(
                 viewModelScope,
-                CreateTaskWidget.Params(
+                SaveTaskWidget.Params(
                     TaskWidgetEntry(
                         appWidgetId = widgetId,
                         taskGroupId = taskGroup.id,

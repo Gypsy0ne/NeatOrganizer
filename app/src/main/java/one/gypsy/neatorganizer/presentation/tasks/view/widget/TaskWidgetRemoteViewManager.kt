@@ -2,6 +2,8 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.RemoteViews
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,12 +40,18 @@ class TaskWidgetRemoteViewManager(private val loadTaskWidgetUseCase: LoadTaskWid
         appWidgetManager: AppWidgetManager,
         taskWidgetEntry: TaskWidgetEntry
     ) {
-        val removeView = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
+        val intent = Intent(context, TaskWidgetService::class.java).apply {
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, taskWidgetEntry.appWidgetId)
+            data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
         }
-        appWidgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, removeView)
+        val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
+            setRemoteAdapter(R.id.tasksList, intent)
+            setEmptyView(R.id.tasksList, R.id.emptyView)
+        }
+        appWidgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, remoteViews)
     }
 
-    override fun deleteWidget(context: Context, appWidgetId: Int) {
+    override fun deleteWidget(appWidgetId: Int) {
         TODO("Not yet implemented")
     }
 

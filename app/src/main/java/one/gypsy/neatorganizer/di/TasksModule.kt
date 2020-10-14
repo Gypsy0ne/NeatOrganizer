@@ -35,8 +35,9 @@ val tasksUseCaseModule = module {
     factory { UpdateSingleTask(get()) }
     factory { UpdateTaskGroup(get()) }
     factory { GetAllSingleTaskGroupEntries(get()) }
-    factory { CreateTaskWidget(get()) }
+    factory { SaveTaskWidget(get()) }
     factory { LoadTaskWidget(get()) }
+    factory { GetAllSingleTasksByGroupId(get()) }
 }
 
 val tasksUtilsModule = module {

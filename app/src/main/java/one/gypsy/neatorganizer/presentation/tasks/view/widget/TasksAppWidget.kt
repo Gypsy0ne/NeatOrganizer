@@ -7,6 +7,7 @@ import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
+
 class TasksAppWidget : AppWidgetProvider(), KoinComponent {
     private val widgetViewManager: WidgetRemoteViewManager by inject()
 
@@ -18,11 +19,12 @@ class TasksAppWidget : AppWidgetProvider(), KoinComponent {
         for (appWidgetId in appWidgetIds) {
             widgetViewManager.updateWidget(context, appWidgetManager, appWidgetId)
         }
+        super.onUpdate(context, appWidgetManager, appWidgetIds)
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
-            widgetViewManager.deleteWidget(context, appWidgetId)
+//            widgetViewManager.deleteWidget(context, appWidgetId)
         }
     }
 
