@@ -42,7 +42,7 @@ val tasksUseCaseModule = module {
 
 val tasksUtilsModule = module {
     factory { TaskListMapper() }
-    factory<WidgetRemoteViewManager> { TaskWidgetRemoteViewManager(get()) }
+    factory<WidgetRemoteViewManager> { TaskWidgetRemoteViewManager(get(), get(), get()) }
 }
 
 val tasksViewModelModule = module {

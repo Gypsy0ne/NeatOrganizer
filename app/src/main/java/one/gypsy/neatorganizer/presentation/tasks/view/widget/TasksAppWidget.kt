@@ -17,9 +17,8 @@ class TasksAppWidget : AppWidgetProvider(), KoinComponent {
         appWidgetIds: IntArray
     ) {
         for (appWidgetId in appWidgetIds) {
-            widgetViewManager.updateWidget(context, appWidgetManager, appWidgetId)
+            widgetViewManager.updateWidget(appWidgetId)
         }
-        super.onUpdate(context, appWidgetManager, appWidgetIds)
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {

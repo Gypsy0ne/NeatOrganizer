@@ -5,9 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
@@ -32,12 +30,9 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
     )
     private var taskGroupId: Long? = null
 
-    override fun onCreate() {
-        //tutaj sobie pobiore dane o widgecie/id grupy
-        CoroutineScope(Dispatchers.IO).launch {
-            loadTaskWidgetUseCase.invoke(this, LoadTaskWidget.Params(appWidgetId)) {
-                it.either({}, ::onLoadTaskWidgetSuccess)
-            }
+    override fun onCreate() = runBlocking {
+        loadTaskWidgetUseCase.invoke(this, LoadTaskWidget.Params(appWidgetId)) {
+            it.either({}, ::onLoadTaskWidgetSuccess)
         }
     }
 
@@ -47,7 +42,7 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 
     override fun onDataSetChanged() {
         taskGroupId?.let {
-            CoroutineScope(Dispatchers.IO).launch {
+            runBlocking {
                 getAllSingleTasksUseCase.invoke(this, GetAllSingleTasksByGroupId.Params(it)) {
                     it.either({}, ::onGetAllSingleTasksSuccess)
                 }
@@ -65,14 +60,15 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 
     override fun getCount(): Int = widgetItems.size
 
-    override fun getViewAt(position: Int): RemoteViews {
-        val remoteViews = RemoteViews(context.packageName, R.layout.widget_item_task)
-        remoteViews.setTextViewText(R.id.taskText, widgetItems[position].text)
+    override fun getViewAt(position: Int): RemoteViews =
+        RemoteViews(context.packageName, R.layout.widget_item_task).apply {
+            setTextViewText(R.id.taskText, widgetItems[position].text)
+        }
 
-        // Next, we set a fill-intent which will be used to fill-in the pending intent template
-        // which is set on the collection view in StackWidgetProvider.
-        // Next, we set a fill-intent which will be used to fill-in the pending intent template
-        // which is set on the collection view in StackWidgetProvider.
+    // Next, we set a fill-intent which will be used to fill-in the pending intent template
+    // which is set on the collection view in StackWidgetProvider.
+    // Next, we set a fill-intent which will be used to fill-in the pending intent template
+    // which is set on the collection view in StackWidgetProvider.
 //        val extras = Bundle().apply {
 //            putInt(StackWidgetProvider.EXTRA_ITEM, position)
 //        }
@@ -80,8 +76,6 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 //            putExtras(extras)
 //        }
 //        remoteViews.setOnClickFillInIntent(R.id.widget_item, fillInIntent)
-        return remoteViews
-    }
 
     override fun getLoadingView(): RemoteViews? = null
 

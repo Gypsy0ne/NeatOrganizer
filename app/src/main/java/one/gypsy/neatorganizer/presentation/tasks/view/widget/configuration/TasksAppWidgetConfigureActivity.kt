@@ -37,7 +37,6 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         }
         setResult(status, result)
-
     }
 
     private fun invalidateIntentWithWidgetId() {
@@ -96,8 +95,7 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
     }
 
     private fun onWidgetCreationFinish() {
-        val appWidgetManager = AppWidgetManager.getInstance(baseContext)
-        widgetViewManager.updateWidget(baseContext, appWidgetManager, appWidgetId)
+        widgetViewManager.updateWidget(appWidgetId)
         setActivityResult(RESULT_OK)
         finish()
     }
