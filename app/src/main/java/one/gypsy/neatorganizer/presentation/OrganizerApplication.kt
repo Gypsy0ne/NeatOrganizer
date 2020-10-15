@@ -19,7 +19,6 @@ class OrganizerApplication : Application() {
                 tasksRepositoryModule,
                 tasksUseCaseModule,
                 tasksUtilsModule,
-                tasksWidgetModule,
                 //Routines
                 routinesViewModelModule,
                 routinesDataSourceModule,

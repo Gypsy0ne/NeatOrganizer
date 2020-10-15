@@ -34,7 +34,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksGroups"
             adapter="@{tasksAdapter}"
-            adapterData="@{configurationViewModel.taskGroupEntries}"
+            adapterData="@{configurationViewModel.listedTaskGroups}"
             hasFixedSize="@{false}"
             layoutManager="@{layoutManager}"
             android:layout_width="0dp"

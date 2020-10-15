@@ -9,7 +9,6 @@ import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.vm.*
-import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -60,10 +59,3 @@ val tasksViewModelModule = module {
     viewModel { AddTaskGroupViewModel(get()) }
     viewModel { TasksWidgetConfigurationViewModel(get(), get()) }
 }
-
-val tasksWidgetModule = module {
-    factory { androidContext().getSharedPreferences(PREFS_NAME, 0) }
-}
-
-private const val PREFS_NAME =
-    "one.gypsy.neatorganizer.presentation.tasks.view.widget.TasksAppWidget"

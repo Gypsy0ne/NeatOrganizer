@@ -13,9 +13,9 @@ class TasksWidgetConfigurationViewModel(
     private val widgetCreationUseCase: SaveTaskWidget
 ) :
     ViewModel() {
-    private val _taskGroupEntries = MediatorLiveData<List<TaskGroupEntryItem>>()
-    val taskGroupEntries: LiveData<List<TaskGroupEntryItem>>
-        get() = _taskGroupEntries
+    private val _listedTaskGroups = MediatorLiveData<List<TaskGroupEntryItem>>()
+    val listedTaskGroups: LiveData<List<TaskGroupEntryItem>>
+        get() = _listedTaskGroups
 
     private val _selectedTaskGroup = MutableLiveData<TaskGroupEntryItem>()
     val selectedTaskGroup: LiveData<TaskGroupEntryItem>
@@ -33,8 +33,8 @@ class TasksWidgetConfigurationViewModel(
     }
 
     private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntries: LiveData<List<SingleTaskGroupEntry>>) {
-        _taskGroupEntries.addSource(taskGroupEntries) { taskGroupEntries ->
-            _taskGroupEntries.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
+        _listedTaskGroups.addSource(taskGroupEntries) { taskGroupEntries ->
+            _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
         }
     }
 
@@ -66,7 +66,8 @@ class TasksWidgetConfigurationViewModel(
                     TaskWidgetEntry(
                         appWidgetId = widgetId,
                         taskGroupId = taskGroup.id,
-                        widgetColor = widgetColor
+                        widgetColor = widgetColor,
+                        taskGroupTitle = selectedTaskGroup.value?.name.orEmpty()
                     )
                 )
             ) {

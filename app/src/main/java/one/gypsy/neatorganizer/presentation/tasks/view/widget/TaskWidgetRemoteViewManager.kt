@@ -20,6 +20,7 @@ class TaskWidgetRemoteViewManager(
 ) : WidgetRemoteViewManager {
     override fun updateWidget(appWidgetId: Int) {
 //launch two async, gather data and then loadWidget
+        //or store whole widget data in db and keep every field fresh with relations
         CoroutineScope(Dispatchers.IO).launch {
             loadTaskWidgetUseCase.invoke(this, LoadTaskWidget.Params(appWidgetId)) {
                 it.either({}, { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) })
@@ -34,6 +35,7 @@ class TaskWidgetRemoteViewManager(
         }
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
             setRemoteAdapter(R.id.tasksList, intent)
+            setTextViewText(R.id.taskGroupTitle, taskWidgetEntry.taskGroupTitle)
             setInt(R.id.tasksList, "setBackgroundColor", taskWidgetEntry.widgetColor)
             setEmptyView(R.id.tasksList, R.id.emptyView)
         }
