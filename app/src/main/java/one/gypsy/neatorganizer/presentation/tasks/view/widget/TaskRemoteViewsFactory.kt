@@ -3,6 +3,7 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import kotlinx.coroutines.runBlocking
@@ -62,7 +63,7 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 
     override fun getViewAt(position: Int): RemoteViews =
         RemoteViews(context.packageName, R.layout.widget_item_task).apply {
-            setTextViewText(R.id.taskText, widgetItems[position].text)
+            styleTaskTextView(widgetItems[position])
         }
 
     // Next, we set a fill-intent which will be used to fill-in the pending intent template
@@ -76,6 +77,17 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 //            putExtras(extras)
 //        }
 //        remoteViews.setOnClickFillInIntent(R.id.widget_item, fillInIntent)
+
+    private fun RemoteViews.styleTaskTextView(widgetItem: TaskEntryWidgetItem) {
+        if (widgetItem.done) {
+            setInt(
+                R.id.taskText,
+                "setPaintFlags",
+                Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
+            )
+        }
+        setTextViewText(R.id.taskText, widgetItem.text)
+    }
 
     override fun getLoadingView(): RemoteViews? = null
 

@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
 import one.gypsy.neatorganizer.utils.Failure
 
 class AddTaskViewModel(
-    var addSingleTaskUseCase: AddSingleTask, val groupId: Long
+    private val addSingleTaskUseCase: AddSingleTask, val groupId: Long
 ) : ViewModel() {
     val taskTitle = MutableLiveData<String>()
 

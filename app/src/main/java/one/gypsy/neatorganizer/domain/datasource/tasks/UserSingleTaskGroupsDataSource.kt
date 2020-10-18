@@ -30,6 +30,11 @@ class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTask
             }
         }
 
+    override suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup> =
+        Transformations.map(singleTaskGroupsDao.getGroupWithSingleTasksById(taskGroupId)) {
+            it.toSingleTaskGroup()
+        }
+
     override suspend fun getAllSingleTaskGroupEntries(): LiveData<List<SingleTaskGroupEntry>> =
         Transformations.map(singleTaskGroupsDao.getAllGroupsWithSingleTasks()) { taskGroups ->
             taskGroups.map {

@@ -1,8 +1,11 @@
 package one.gypsy.neatorganizer.presentation.tasks.view.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.widget.RemoteViews
 import kotlinx.coroutines.CoroutineScope
@@ -12,6 +15,7 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
+import one.gypsy.neatorganizer.presentation.tasks.view.TaskGroupManageActivity
 
 class TaskWidgetRemoteViewManager(
     private val context: Context,
@@ -29,21 +33,48 @@ class TaskWidgetRemoteViewManager(
     }
 
     private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TaskWidgetEntry) {
-        val intent = Intent(context, TaskWidgetService::class.java).apply {
-            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, taskWidgetEntry.appWidgetId)
-            data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
-        }
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
-            setRemoteAdapter(R.id.tasksList, intent)
-            setTextViewText(R.id.taskGroupTitle, taskWidgetEntry.taskGroupTitle)
-            setInt(R.id.tasksList, "setBackgroundColor", taskWidgetEntry.widgetColor)
-            setEmptyView(R.id.tasksList, R.id.emptyView)
+            setUpViews(taskWidgetEntry)
         }
         widgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, remoteViews)
     }
 
+    private fun RemoteViews.setUpViews(taskWidgetEntry: TaskWidgetEntry) {
+        setOnClickPendingIntent(
+            R.id.tasksWidgetContainer,
+            createGroupManageActivityIntent(
+                taskWidgetEntry.appWidgetId,
+                taskWidgetEntry.taskGroupId
+            )
+        )
+        setRemoteAdapter(R.id.tasksList, createWidgetUpdateIntent(taskWidgetEntry.appWidgetId))
+        setEmptyView(R.id.tasksList, R.id.emptyView)
+        setInt(R.id.tasksList, "setBackgroundColor", taskWidgetEntry.widgetColor)
+        setTextViewText(R.id.taskGroupTitle, taskWidgetEntry.taskGroupTitle)
+        setTextColor(R.id.emptyView, taskWidgetEntry.widgetColor)
+    }
+
+    private fun createWidgetUpdateIntent(widgetId: Int) =
+        Intent(context, TaskWidgetService::class.java).apply {
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
+            data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
+        }
+
+    private fun createGroupManageActivityIntent(appwidgetId: Int, taskGroupId: Long) =
+        PendingIntent.getActivity(
+            context,
+            appwidgetId,
+            createManageActivityIntent(taskGroupId),
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+    private fun createManageActivityIntent(taskGroupId: Long) =
+        Intent(context, TaskGroupManageActivity::class.java).apply {
+            putExtra(TaskGroupManageActivity.MANAGED_GROUP_ID_KEY, taskGroupId)
+            flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
+        }
+
     override fun deleteWidget(appWidgetId: Int) {
         TODO("Not yet implemented")
     }
-
 }

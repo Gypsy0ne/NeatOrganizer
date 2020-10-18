@@ -21,6 +21,9 @@ class SingleTaskGroupsRepository(private val dataSource: SingleTaskGroupsDataSou
     suspend fun getAllSingleTasksByGroupId(groupId: Long) =
         dataSource.getAllSingleTaskGroupEntries()
 
+    suspend fun getSingleTaskGroupById(taskGroupId: Long) =
+        dataSource.getSingleTaskGroupById(taskGroupId)
+
     suspend fun removeSingleTaskGroupById(taskGroupId: Long) = dataSource.removeById(taskGroupId)
 
 }

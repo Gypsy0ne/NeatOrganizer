@@ -12,14 +12,13 @@ import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTaskGroup
-import one.gypsy.neatorganizer.utils.Failure
 
 class TasksViewModel(
-    var getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
-    var updateSingleTaskGroupUseCase: UpdateTaskGroup,
-    var updateSingleTaskUseCase: UpdateSingleTask,
-    var removeSingleSingleTaskUseCase: RemoveSingleTask,
-    var taskListMapper: TaskListMapper
+    getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
+    private val updateSingleTaskGroupUseCase: UpdateTaskGroup,
+    private val updateSingleTaskUseCase: UpdateSingleTask,
+    private val removeSingleTaskUseCase: RemoveSingleTask,
+    private val taskListMapper: TaskListMapper
 ) : ViewModel() {
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
     val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
@@ -31,7 +30,7 @@ class TasksViewModel(
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                ::onGetAllGroupsWithSingleTasksFailure,
+                {},
                 ::onGetAllGroupsWithSingleTasksSuccess
             )
         }
@@ -49,8 +48,6 @@ class TasksViewModel(
             }
         }
     }
-
-    private fun onGetAllGroupsWithSingleTasksFailure(failure: Failure) {}
 
     fun onExpand(headerItem: TaskListItem.TaskListHeader) {
         _listedTasks.postValue(taskListMapper.updateExpansion(headerItem.id, _listedTasks.value))
@@ -71,7 +68,7 @@ class TasksViewModel(
     }
 
     fun onRemove(subItem: TaskListItem.TaskListSubItem) {
-        removeSingleSingleTaskUseCase.invoke(
+        removeSingleTaskUseCase.invoke(
             viewModelScope,
             RemoveSingleTask.Params(subItem.toSingleTask())
         )

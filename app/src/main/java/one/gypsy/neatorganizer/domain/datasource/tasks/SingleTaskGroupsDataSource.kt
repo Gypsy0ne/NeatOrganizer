@@ -10,5 +10,6 @@ interface SingleTaskGroupsDataSource {
     suspend fun removeById(taskGroupId: Long)
     suspend fun update(singleTaskGroup: SingleTaskGroup)
     suspend fun getAllSingleTaskGroups(): LiveData<List<SingleTaskGroup>>
+    suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup>
     suspend fun getAllSingleTaskGroupEntries(): LiveData<List<SingleTaskGroupEntry>>
 }

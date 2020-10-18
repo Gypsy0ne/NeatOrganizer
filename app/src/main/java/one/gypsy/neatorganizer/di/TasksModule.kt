@@ -37,6 +37,7 @@ val tasksUseCaseModule = module {
     factory { SaveTaskWidget(get()) }
     factory { LoadTaskWidget(get()) }
     factory { GetAllSingleTasksByGroupId(get()) }
+    factory { GetSingleTaskGroupById(get()) }
 }
 
 val tasksUtilsModule = module {
@@ -47,13 +48,14 @@ val tasksUtilsModule = module {
 val tasksViewModelModule = module {
     viewModel {
         TasksViewModel(
-            removeSingleSingleTaskUseCase = get(),
+            removeSingleTaskUseCase = get(),
             getAllSingleTaskGroupsUseCase = get(),
             taskListMapper = get(),
             updateSingleTaskGroupUseCase = get(),
             updateSingleTaskUseCase = get()
         )
     }
+    viewModel { (id: Long) -> TaskWidgetManageViewModel(id, get(), get(), get()) }
     viewModel { RemoveTaskGroupViewModel(get()) }
     viewModel { (id: Long) -> AddTaskViewModel(get(), id) }
     viewModel { AddTaskGroupViewModel(get()) }

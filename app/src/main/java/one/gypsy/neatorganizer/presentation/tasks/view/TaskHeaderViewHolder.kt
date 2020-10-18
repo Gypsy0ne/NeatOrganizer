@@ -12,8 +12,8 @@ import one.gypsy.neatorganizer.utils.extensions.requestEdit
 import one.gypsy.neatorganizer.utils.extensions.show
 
 class TaskHeaderViewHolder(
-    val itemBinding: ItemTaskHeaderBinding,
-    val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>
+    private val itemBinding: ItemTaskHeaderBinding,
+    private val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>? = null
 ) : TaskViewHolder(itemBinding.root), ListedHeader<TaskListItem.TaskListHeader> {
 
     override lateinit var viewData: TaskListItem.TaskListHeader
@@ -93,7 +93,7 @@ class TaskHeaderViewHolder(
     override fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
             viewData = viewData.copy(expanded = !viewData.expanded)
-            clickListener.onExpanderClick(viewData)
+            clickListener?.onExpanderClick(viewData)
         }
     }
 
@@ -123,7 +123,7 @@ class TaskHeaderViewHolder(
                 viewData = viewData.copy(
                     name = itemBinding.editTextItemTaskHeaderName.text.toString()
                 )
-                clickListener.onEditionSubmitClick(viewData)
+                clickListener?.onEditionSubmitClick(viewData)
             } else {
                 clearEditionStatus()
             }
@@ -136,7 +136,7 @@ class TaskHeaderViewHolder(
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            clickListener.onRemoveClick(viewData)
+            clickListener?.onRemoveClick(viewData)
         }
     }
 }

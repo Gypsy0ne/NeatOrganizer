@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetManageViewModel" />
+
+        <variable
+            name="linearLayoutManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <variable
+            name="tasksAdapter"
+            type="one.gypsy.neatorganizer.presentation.tasks.view.GroupedTasksAdapter" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.tasks.view.TaskGroupManageActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/activity_action_bar_background"
+            android:elevation="@dimen/small_space"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.autofit.et.lib.AutoFitEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="@{viewModel.titleEdited}"
+                android:enabled="@{viewModel.titleEdited}"
+                android:focusable="@{viewModel.titleEdited}"
+                android:focusableInTouchMode="@{viewModel.titleEdited}"
+                android:gravity="center_vertical"
+                android:text="@{viewModel.taskGroupTitle}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/regular_text_size"
+                tools:text="Sample title" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasks"
+            adapter="@{tasksAdapter}"
+            adapterData="@{viewModel.listedTasks}"
+            hasFixedSize="@{false}"
+            layoutManager="@{linearLayoutManager}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addTaskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/double_space"
+            android:layout_marginBottom="@dimen/triple_space"
+            android:background="@color/light_gray"
+            android:src="@drawable/ic_add_white_32"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editTaskGroupButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/double_space"
+            android:layout_marginBottom="@dimen/regular_space"
+            android:src="@drawable/ic_add_white_32"
+            app:backgroundTint="@color/light_gray"
+            app:layout_constraintBottom_toTopOf="@+id/addTaskButton"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

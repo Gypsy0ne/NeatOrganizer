@@ -10,8 +10,8 @@ import one.gypsy.neatorganizer.utils.extensions.requestEdit
 import one.gypsy.neatorganizer.utils.extensions.show
 
 class TaskSubItemViewHolder(
-    val itemBinding: ItemTaskBinding,
-    val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
+    private val itemBinding: ItemTaskBinding,
+    private val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null
 ) : TaskViewHolder(itemBinding.root), ListedSubItem<TaskListItem.TaskListSubItem> {
 
     override lateinit var viewData: TaskListItem.TaskListSubItem
@@ -98,7 +98,7 @@ class TaskSubItemViewHolder(
                 viewData = viewData.copy(
                     name = itemBinding.editTextItemTaskName.text.toString()
                 )
-                clickListener.onEditionSubmitClick(viewData)
+                clickListener?.onEditionSubmitClick(viewData)
             } else {
                 clearEditionStatus()
             }
@@ -111,7 +111,7 @@ class TaskSubItemViewHolder(
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskRoot.resetStatus()
-            clickListener.onRemoveClick(viewData)
+            clickListener?.onRemoveClick(viewData)
         }
     }
 
@@ -120,7 +120,7 @@ class TaskSubItemViewHolder(
             viewData = viewData.copy(
                 done = !viewData.done
             )
-            clickListener.onDoneClick(viewData)
+            clickListener?.onDoneClick(viewData)
         }
     }
 }

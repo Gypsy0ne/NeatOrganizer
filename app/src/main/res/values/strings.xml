@@ -51,4 +51,5 @@
 
     <string name="task_widget_creation_color_warning">Pick a color</string>
     <string name="task_widget_creation_task_warning">Select task group</string>
+    <string name="widget_tasks_empty_view_message">No items to show</string>
 </resources>
