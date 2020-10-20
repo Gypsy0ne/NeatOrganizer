@@ -117,4 +117,5 @@
         android:id="@+id/routine_add"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment"
         android:label="AddRoutineDialogFragment" />
+
 </navigation>

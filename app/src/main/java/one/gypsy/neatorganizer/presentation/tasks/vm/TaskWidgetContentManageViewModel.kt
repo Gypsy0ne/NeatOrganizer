@@ -2,54 +2,44 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupById
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
+import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTasksByGroupIdObservable
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListSubItem
 
-class TaskWidgetManageViewModel(
+class TaskWidgetContentManageViewModel(
     private val taskGroupId: Long,
-    getSingleTaskGroupUseCase: GetSingleTaskGroupById,
+    getAllSingleTasksUseCase: GetAllSingleTasksByGroupIdObservable,
     private val updateSingleTaskUseCase: UpdateSingleTask,
     private val removeSingleTaskUseCase: RemoveSingleTask
 ) : ViewModel() {
 
-    private val _taskGroup = MediatorLiveData<SingleTaskGroup>()
-    val listedTasks: LiveData<List<TaskListItem.TaskListSubItem>> = _taskGroup.switchMap {
+    private val _listedTasks = MediatorLiveData<List<SingleTaskEntry>>()
+    val listedTasks: LiveData<List<TaskListItem.TaskListSubItem>> = _listedTasks.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(it.tasks.map { it.toTaskListSubItem() })
+            emit(it.map { it.toTaskListSubItem() })
         }
     }
-    val taskGroupTitle: LiveData<String> = _taskGroup.switchMap {
-        liveData { emit(it.name) }
-    }
-
-    private val _titleEdited = MutableLiveData<Boolean>(false)
-    val titleEdited: LiveData<Boolean> = _titleEdited
 
     init {
-        getSingleTaskGroupUseCase.invoke(
+        getAllSingleTasksUseCase.invoke(
             viewModelScope,
-            GetSingleTaskGroupById.Params(taskGroupId)
+            GetAllSingleTasksByGroupIdObservable.Params(taskGroupId)
         ) {
             it.either(
                 {},
-                ::onGetGroupsWithSingleTasksSuccess
+                ::onGetAllSingleTasksSuccess
             )
         }
     }
 
-    private fun onGetGroupsWithSingleTasksSuccess(taskGroup: LiveData<SingleTaskGroup>) {
-        _taskGroup.addSource(taskGroup) {
-            _taskGroup.postValue(taskGroup.value)
+    private fun onGetAllSingleTasksSuccess(tasks: LiveData<List<SingleTaskEntry>>) {
+        _listedTasks.addSource(tasks) {
+            _listedTasks.postValue(tasks.value)
         }
-    }
-
-    fun onClick() {
-
     }
 
     fun onTaskUpdate(taskItem: TaskListItem.TaskListSubItem) {

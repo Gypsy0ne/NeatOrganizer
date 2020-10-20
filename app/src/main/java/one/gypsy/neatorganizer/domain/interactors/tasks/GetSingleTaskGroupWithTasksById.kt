@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.domain.interactors.tasks
 
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
@@ -8,23 +9,23 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRepository) :
-    BaseUseCase<Long, AddTaskGroup.Params>() {
-
-    override suspend fun run(params: Params): Either<Failure, Long> {
+class GetSingleTaskGroupWithTasksById(private val dataSource: SingleTaskGroupsRepository) :
+    BaseUseCase<LiveData<SingleTaskGroupWithTasks>, GetSingleTaskGroupWithTasksById.Params>() {
+    override suspend fun run(params: Params): Either<Failure, LiveData<SingleTaskGroupWithTasks>> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(singleTaskGroupsRepository.addSingleTaskGroup(params.singleTaskGroupWithTasks))
+                Either.Right(dataSource.getSingleTaskGroupWithTasksById(params.taskGroupId))
             }
         } catch (exp: Exception) {
             Either.Left(
-                AddSingleTaskGroupFailure(
+                GetSingleTaskGroupWithTasksByIdFailure(
                     exp
                 )
             )
         }
     }
 
-    data class Params(val singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
-    data class AddSingleTaskGroupFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class Params(val taskGroupId: Long)
+    data class GetSingleTaskGroupWithTasksByIdFailure(val error: Exception) :
+        Failure.FeatureFailure()
 }

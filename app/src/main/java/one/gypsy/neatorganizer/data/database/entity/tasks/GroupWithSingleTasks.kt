@@ -2,8 +2,8 @@ package one.gypsy.neatorganizer.data.database.entity.tasks
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 
 data class GroupWithSingleTasks(
     @Embedded val group: SingleTaskGroupEntity, @Relation(
@@ -12,7 +12,7 @@ data class GroupWithSingleTasks(
     ) val tasks: List<SingleTaskEntity>
 )
 
-fun GroupWithSingleTasks.toSingleTaskGroup() = SingleTaskGroup(
+fun GroupWithSingleTasks.toSingleTaskGroupWithTasks() = SingleTaskGroupWithTasks(
     name = this.group.name,
     id = this.group.id,
     tasks = this.tasks.map { it.toSingleTaskEntry() }

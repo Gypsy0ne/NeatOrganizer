@@ -15,7 +15,6 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
-import one.gypsy.neatorganizer.presentation.tasks.view.TaskGroupManageActivity
 
 class TaskWidgetRemoteViewManager(
     private val context: Context,
@@ -64,13 +63,14 @@ class TaskWidgetRemoteViewManager(
         PendingIntent.getActivity(
             context,
             appwidgetId,
-            createManageActivityIntent(taskGroupId),
+            createManageActivityIntent(appwidgetId, taskGroupId),
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-    private fun createManageActivityIntent(taskGroupId: Long) =
-        Intent(context, TaskGroupManageActivity::class.java).apply {
-            putExtra(TaskGroupManageActivity.MANAGED_GROUP_ID_KEY, taskGroupId)
+    private fun createManageActivityIntent(widgetId: Int, taskGroupId: Long) =
+        Intent(context, TaskWidgetActivity::class.java).apply {
+            putExtra(MANAGED_GROUP_ID_KEY, taskGroupId)
+            putExtra(MANAGED_WIDGET_ID_KEY, widgetId)
             flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
         }
 

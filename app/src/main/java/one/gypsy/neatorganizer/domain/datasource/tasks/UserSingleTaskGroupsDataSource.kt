@@ -5,33 +5,40 @@ import androidx.lifecycle.Transformations
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskGroup
 import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskGroupEntry
+import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskGroupEntity
 
 class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTaskGroupsDao) :
     SingleTaskGroupsDataSource {
-    override suspend fun add(singleTaskGroup: SingleTaskGroup) =
-        singleTaskGroupsDao.insert(singleTaskGroup.toSingleTaskGroupEntity())
+    override suspend fun add(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
+        singleTaskGroupsDao.insert(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
-    override suspend fun remove(singleTaskGroup: SingleTaskGroup) =
-        singleTaskGroupsDao.delete(singleTaskGroup.toSingleTaskGroupEntity())
+    override suspend fun remove(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
+        singleTaskGroupsDao.delete(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
     override suspend fun removeById(taskGroupId: Long) =
         singleTaskGroupsDao.deleteTaskGroupById(taskGroupId)
 
-    override suspend fun update(singleTaskGroup: SingleTaskGroup) =
-        singleTaskGroupsDao.update(singleTaskGroup.toSingleTaskGroupEntity())
+    override suspend fun update(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
+        singleTaskGroupsDao.update(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
-    override suspend fun getAllSingleTaskGroups(): LiveData<List<SingleTaskGroup>> =
+    override suspend fun getAllSingleTaskGroupsWithTasks(): LiveData<List<SingleTaskGroupWithTasks>> =
         Transformations.map(singleTaskGroupsDao.getAllGroupsWithSingleTasks()) { taskGroups ->
             taskGroups.map {
-                it.toSingleTaskGroup()
+                it.toSingleTaskGroupWithTasks()
             }
         }
 
-    override suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup> =
+    override suspend fun getSingleTaskGroupWithTasksById(taskGroupId: Long): LiveData<SingleTaskGroupWithTasks> =
         Transformations.map(singleTaskGroupsDao.getGroupWithSingleTasksById(taskGroupId)) {
+            it.toSingleTaskGroupWithTasks()
+        }
+
+    override suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup> =
+        Transformations.map(singleTaskGroupsDao.getSingleTaskGroupById(taskGroupId)) {
             it.toSingleTaskGroup()
         }
 

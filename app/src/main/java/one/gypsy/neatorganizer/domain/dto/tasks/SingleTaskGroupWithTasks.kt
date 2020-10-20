@@ -2,10 +2,11 @@ package one.gypsy.neatorganizer.domain.dto.tasks
 
 import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
 
-data class SingleTaskGroup(
+data class SingleTaskGroupWithTasks(
     val name: String,
-    var id: Long = 0
+    var id: Long = 0,
+    var tasks: List<SingleTaskEntry> = emptyList()
 )
 
-fun SingleTaskGroup.toSingleTaskGroupEntity() =
+fun SingleTaskGroupWithTasks.toSingleTaskGroupEntity() =
     SingleTaskGroupEntity(name = this.name, id = this.id)

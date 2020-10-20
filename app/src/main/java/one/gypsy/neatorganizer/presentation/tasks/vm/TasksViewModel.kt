@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
@@ -36,7 +36,7 @@ class TasksViewModel(
         }
     }
 
-    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroup>>) {
+    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) {
         _listedTasks.addSource(taskGroups) {
             viewModelScope.launch {
                 _listedTasks.postValue(
@@ -56,7 +56,7 @@ class TasksViewModel(
     fun onHeaderUpdate(headerItem: TaskListItem.TaskListHeader) {
         updateSingleTaskGroupUseCase.invoke(
             viewModelScope,
-            UpdateTaskGroup.Params(singleTaskGroup = headerItem.toSingleTaskGroup())
+            UpdateTaskGroup.Params(singleTaskGroupWithTasks = headerItem.toSingleTaskGroup())
         )
     }
 

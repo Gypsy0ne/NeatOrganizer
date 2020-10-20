@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.data.database.entity.tasks.GroupWithSingleTasks
 import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
 
 @Dao
-interface SingleTaskGroupsDao:
+interface SingleTaskGroupsDao :
     BaseDao<SingleTaskGroupEntity> {
 
     @Transaction
@@ -18,6 +18,9 @@ interface SingleTaskGroupsDao:
 
     @Query("SELECT * FROM single_task_group")
     fun getAllSingleTaskGroups(): LiveData<List<SingleTaskGroupEntity>>
+
+    @Query("SELECT * FROM single_task_group WHERE id = :taskGroupId")
+    fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroupEntity>
 
     @Query("SELECT * FROM single_task_group WHERE id = :taskGroupId")
     fun getGroupWithSingleTasksById(taskGroupId: Long): LiveData<GroupWithSingleTasks>

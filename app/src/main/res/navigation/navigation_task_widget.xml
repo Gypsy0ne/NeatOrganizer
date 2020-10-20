@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_task_widget"
+    app:startDestination="@id/taskGroupManageFragment">
+
+    <dialog
+        android:id="@+id/addSingleTaskDialogFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
+        android:label="AddSingleTaskDialogFragment">
+        <argument
+            android:name="groupId"
+            app:argType="long" />
+    </dialog>
+    <fragment
+        android:id="@+id/taskGroupManageFragment"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupManageFragment"
+        android:label="TaskGroupManageFragment">
+        <action
+            android:id="@+id/action_taskGroupManageFragment_to_addSingleTaskDialogFragment"
+            app:destination="@id/addSingleTaskDialogFragment" />
+    </fragment>
+
+</navigation>

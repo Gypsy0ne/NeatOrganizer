@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
@@ -14,7 +14,7 @@ class RemoveTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRe
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(singleTaskGroupsRepository.removeSingleTaskGroup(params.singleTaskGroup))
+                Either.Right(singleTaskGroupsRepository.removeSingleTaskGroup(params.singleTaskGroupWithTasks))
             }
         } catch (exp: Exception) {
             Either.Left(
@@ -25,6 +25,6 @@ class RemoveTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRe
         }
     }
 
-    data class Params(val singleTaskGroup: SingleTaskGroup)
+    data class Params(val singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
     data class RemoveSingleTaskGroupFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

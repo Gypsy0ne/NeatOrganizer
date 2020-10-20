@@ -4,37 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
-            type="one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetManageViewModel" />
-
-        <variable
-            name="linearLayoutManager"
-            type="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <variable
-            name="tasksAdapter"
-            type="one.gypsy.neatorganizer.presentation.tasks.view.GroupedTasksAdapter" />
-
+            type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.tasks.view.TaskGroupManageActivity">
+        tools:context=".presentation.tasks.view.widget.TaskWidgetActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/manageToolbar"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="0dp"
             android:background="@drawable/activity_action_bar_background"
             android:elevation="@dimen/small_space"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:menu="@menu/widget_list_manage_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -53,44 +42,17 @@
                 tools:text="Sample title" />
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tasks"
-            adapter="@{tasksAdapter}"
-            adapterData="@{viewModel.listedTasks}"
-            hasFixedSize="@{false}"
-            layoutManager="@{linearLayoutManager}"
+        <fragment
+            android:id="@+id/navigationFragmentsContainer"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
+            app:defaultNavHost="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addTaskButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/double_space"
-            android:layout_marginBottom="@dimen/triple_space"
-            android:background="@color/light_gray"
-            android:src="@drawable/ic_add_white_32"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/editTaskGroupButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/double_space"
-            android:layout_marginBottom="@dimen/regular_space"
-            android:src="@drawable/ic_add_white_32"
-            app:backgroundTint="@color/light_gray"
-            app:layout_constraintBottom_toTopOf="@+id/addTaskButton"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/manageToolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>
