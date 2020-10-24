@@ -8,17 +8,17 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRepository) :
-    BaseUseCase<Long, AddTaskGroup.Params>() {
+class UpdateSingleTaskGroupWithTasks(private val singleTaskGroupsRepository: SingleTaskGroupsRepository) :
+    BaseUseCase<Unit, UpdateSingleTaskGroupWithTasks.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, Long> {
+    override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(singleTaskGroupsRepository.addSingleTaskGroupWithTasks(params.singleTaskGroupWithTasks))
+                Either.Right(singleTaskGroupsRepository.updateSingleTaskGroupWithTasks(params.singleTaskGroupWithTasks))
             }
         } catch (exp: Exception) {
             Either.Left(
-                AddSingleTaskGroupFailure(
+                UpdateSingleTaskGroupWithTasksFailure(
                     exp
                 )
             )
@@ -26,5 +26,6 @@ class AddTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRepos
     }
 
     data class Params(val singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
-    data class AddSingleTaskGroupFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class UpdateSingleTaskGroupWithTasksFailure(val error: Exception) :
+        Failure.FeatureFailure(error)
 }

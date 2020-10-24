@@ -84,7 +84,7 @@
         <item name="android:background">
             @drawable/dialog_yellow_clickable_view_background
         </item>
-        <item name="android:drawableStart">@drawable/ic_check_dark_yellow_24dp</item>
+        <item name="android:drawableStart">@drawable/ic_check_dark_yellow_24</item>
         <item name="android:text">@string/submit_button_dialog_text</item>
         <item name="android:textColor">@color/dark_yellow</item>
     </style>
@@ -192,7 +192,7 @@
         <item name="android:layout_width">@dimen/large_icon_size</item>
         <item name="android:layout_height">@dimen/large_icon_size</item>
         <item name="android:layout_margin">@dimen/regular_space</item>
-        <item name="android:src">@drawable/ic_check_dark_yellow_24dp</item>
+        <item name="android:src">@drawable/ic_check_dark_yellow_24</item>
         <item name="android:background">@drawable/bg_edition_submit_button</item>
     </style>
 

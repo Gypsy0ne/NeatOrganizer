@@ -14,7 +14,7 @@ class RemoveTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRe
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(singleTaskGroupsRepository.removeSingleTaskGroup(params.singleTaskGroupWithTasks))
+                Either.Right(singleTaskGroupsRepository.removeSingleTaskGroupWithTasks(params.singleTaskGroupWithTasks))
             }
         } catch (exp: Exception) {
             Either.Left(

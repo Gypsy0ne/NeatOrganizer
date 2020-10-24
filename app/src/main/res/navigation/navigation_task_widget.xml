@@ -5,7 +5,7 @@
     app:startDestination="@id/taskGroupManageFragment">
 
     <dialog
-        android:id="@+id/addSingleTaskDialogFragment"
+        android:id="@+id/addSingleTaskDialog"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
         android:label="AddSingleTaskDialogFragment">
         <argument
@@ -16,9 +16,10 @@
         android:id="@+id/taskGroupManageFragment"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupManageFragment"
         android:label="TaskGroupManageFragment">
+
         <action
-            android:id="@+id/action_taskGroupManageFragment_to_addSingleTaskDialogFragment"
-            app:destination="@id/addSingleTaskDialogFragment" />
+            android:id="@+id/action_taskGroupManageFragment_to_addSingleTaskDialog"
+            app:destination="@id/addSingleTaskDialog" />
     </fragment>
 
 </navigation>

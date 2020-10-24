@@ -13,17 +13,21 @@ import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskGroupEntity
 
 class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTaskGroupsDao) :
     SingleTaskGroupsDataSource {
-    override suspend fun add(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
+    override suspend fun addSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         singleTaskGroupsDao.insert(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
-    override suspend fun remove(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
+    override suspend fun removeSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         singleTaskGroupsDao.delete(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
     override suspend fun removeById(taskGroupId: Long) =
         singleTaskGroupsDao.deleteTaskGroupById(taskGroupId)
 
-    override suspend fun update(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
+    override suspend fun updateSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         singleTaskGroupsDao.update(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
+
+    override suspend fun updateSingleTaskGroup(singleTaskGroup: SingleTaskGroup) {
+        singleTaskGroupsDao.update(singleTaskGroup.toSingleTaskGroupEntity())
+    }
 
     override suspend fun getAllSingleTaskGroupsWithTasks(): LiveData<List<SingleTaskGroupWithTasks>> =
         Transformations.map(singleTaskGroupsDao.getAllGroupsWithSingleTasks()) { taskGroups ->

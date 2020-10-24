@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTaskGroupManageBinding
@@ -28,6 +29,7 @@ class TaskGroupManageFragment : Fragment() {
     ): View? {
         viewBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_task_group_manage, container, false)
+        setHasOptionsMenu(true)
         return viewBinding.root
     }
 
@@ -40,23 +42,23 @@ class TaskGroupManageFragment : Fragment() {
         setUpRecyclerView()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        findNavController().navigate(R.id.task_group_add)
-//        navigateToAddTaskDialog()
-        return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.add_entry -> {
+            navigateToAddTaskDialog()
+            true
+        }
+        else -> false
     }
 
-    //    private fun navigateToAddTaskDialog() {
-//        val groupId = intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID)
-//        if(groupId == MANAGED_GROUP_INVALID_ID) {
-//            container.findNavController().navigate(
-//                TaskGroupManageActivityDirections.actionTaskGroupManageActivityToAddSingleTaskDialogFragment(
-//                    groupId
-//                )
-//            )
-//        }
-//    }
-//
+    private fun navigateToAddTaskDialog() {
+        val groupId = arguments?.getLong(MANAGED_GROUP_ID_KEY) ?: MANAGED_GROUP_INVALID_ID
+        if (groupId != MANAGED_GROUP_INVALID_ID) {
+            val direction = TaskGroupManageFragmentDirections
+                .actionTaskGroupManageFragmentToAddSingleTaskDialog(groupId)
+            findNavController(this).navigate(direction)
+        }
+    }
+
     private fun setUpRecyclerView() = viewBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
         tasksAdapter = GroupedTasksAdapter()

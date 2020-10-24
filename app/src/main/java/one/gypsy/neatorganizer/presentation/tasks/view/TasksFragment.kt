@@ -21,6 +21,19 @@ class TasksFragment : SectionFragment() {
 
     private val tasksViewModel: TasksViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentTasksBinding
+    private val onExpanderClick: (headerItem: TaskListItem.TaskListHeader) -> Unit =
+        { tasksViewModel.onExpand(it) }
+    private val onHeaderEditionSubmitClick: (headerItem: TaskListItem.TaskListHeader) -> Unit =
+        { tasksViewModel.onHeaderUpdate(it) }
+    private val onHeaderRemoveClick: (headerItem: TaskListItem.TaskListHeader) -> Unit =
+        { showRemoveConfirmationDialog(it.id, it.subItemsCount) }
+    private val onDoneClick: (subItem: TaskListItem.TaskListSubItem) -> Unit =
+        { tasksViewModel.onTaskUpdate(it) }
+    private val onTaskEditionSubmitClick: (subItem: TaskListItem.TaskListSubItem) -> Unit =
+        { tasksViewModel.onTaskUpdate(it) }
+    private val onTaskRemoveClick: (subItem: TaskListItem.TaskListSubItem) -> Unit =
+        { tasksViewModel.onRemove(it) }
+
 
     private val headerClickListener by lazy {
         object : HeaderClickListener<TaskListItem.TaskListHeader> {

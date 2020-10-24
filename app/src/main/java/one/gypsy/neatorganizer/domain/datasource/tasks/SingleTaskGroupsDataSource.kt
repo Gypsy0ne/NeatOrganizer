@@ -6,10 +6,11 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 
 interface SingleTaskGroupsDataSource {
-    suspend fun add(singleTaskGroupWithTasks: SingleTaskGroupWithTasks): Long
-    suspend fun remove(singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
+    suspend fun addSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks): Long
+    suspend fun removeSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
     suspend fun removeById(taskGroupId: Long)
-    suspend fun update(singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
+    suspend fun updateSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks)
+    suspend fun updateSingleTaskGroup(singleTaskGroup: SingleTaskGroup)
     suspend fun getAllSingleTaskGroupsWithTasks(): LiveData<List<SingleTaskGroupWithTasks>>
     suspend fun getSingleTaskGroupWithTasksById(taskGroupId: Long): LiveData<SingleTaskGroupWithTasks>
     suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup>

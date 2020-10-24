@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
@@ -15,7 +15,7 @@ import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTaskGroup
 
 class TasksViewModel(
     getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
-    private val updateSingleTaskGroupUseCase: UpdateTaskGroup,
+    private val updateSingleTaskGroupUseCase: UpdateSingleTaskGroupWithTasks,
     private val updateSingleTaskUseCase: UpdateSingleTask,
     private val removeSingleTaskUseCase: RemoveSingleTask,
     private val taskListMapper: TaskListMapper
@@ -56,7 +56,7 @@ class TasksViewModel(
     fun onHeaderUpdate(headerItem: TaskListItem.TaskListHeader) {
         updateSingleTaskGroupUseCase.invoke(
             viewModelScope,
-            UpdateTaskGroup.Params(singleTaskGroupWithTasks = headerItem.toSingleTaskGroup())
+            UpdateSingleTaskGroupWithTasks.Params(singleTaskGroupWithTasks = headerItem.toSingleTaskGroup())
         )
     }
 
