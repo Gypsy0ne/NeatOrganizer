@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTaskGroupManageBinding
 import one.gypsy.neatorganizer.presentation.tasks.view.GroupedTasksAdapter
+import one.gypsy.neatorganizer.presentation.tasks.view.TaskSubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetContentManageViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -21,6 +22,12 @@ class TaskGroupManageFragment : Fragment() {
         parametersOf(arguments?.getLong(MANAGED_GROUP_ID_KEY) ?: MANAGED_GROUP_INVALID_ID)
     }
     private lateinit var viewBinding: FragmentTaskGroupManageBinding
+
+    private val subItemClickListener = TaskSubItemClickListener(
+        onDoneClick = { tasksViewModel.onTaskUpdate(it) },
+        onEditionSubmitClick = { tasksViewModel.onTaskUpdate(it) },
+        onRemoveClick = { tasksViewModel.onRemove(it) }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +68,7 @@ class TaskGroupManageFragment : Fragment() {
 
     private fun setUpRecyclerView() = viewBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = GroupedTasksAdapter()
+        tasksAdapter = GroupedTasksAdapter(subItemClickListener = subItemClickListener)
         tasks.itemAnimator = null
         executePendingBindings()
     }

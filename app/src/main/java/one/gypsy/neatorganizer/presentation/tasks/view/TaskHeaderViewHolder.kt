@@ -93,7 +93,7 @@ class TaskHeaderViewHolder(
     override fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
             viewData = viewData.copy(expanded = !viewData.expanded)
-            clickListener?.onExpanderClick(viewData)
+            clickListener?.onExpanderClick?.invoke(viewData)
         }
     }
 
@@ -123,7 +123,7 @@ class TaskHeaderViewHolder(
                 viewData = viewData.copy(
                     name = itemBinding.editTextItemTaskHeaderName.text.toString()
                 )
-                clickListener?.onEditionSubmitClick(viewData)
+                clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
                 clearEditionStatus()
             }
@@ -136,7 +136,7 @@ class TaskHeaderViewHolder(
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            clickListener?.onRemoveClick(viewData)
+            clickListener?.onRemoveClick?.invoke(viewData)
         }
     }
 }

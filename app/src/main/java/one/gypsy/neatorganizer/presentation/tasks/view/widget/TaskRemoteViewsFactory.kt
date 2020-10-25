@@ -24,7 +24,7 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 
     private val loadTaskWidgetUseCase: LoadTaskWidget by inject()
     private val getAllSingleTasksUseCase: GetAllSingleTasksByGroupId by inject()
-    private val widgetItems = arrayListOf<TaskEntryWidgetItem>(TaskEntryWidgetItem("siema", true))
+    private val widgetItems = arrayListOf<TaskEntryWidgetItem>()
     private val appWidgetId: Int = intent.getIntExtra(
         AppWidgetManager.EXTRA_APPWIDGET_ID,
         AppWidgetManager.INVALID_APPWIDGET_ID

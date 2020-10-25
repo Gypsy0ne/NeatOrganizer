@@ -68,6 +68,8 @@ val tasksViewModelModule = module {
             taskGroupId = taskGroupId,
             widgetId = widgetId,
             get(),
+            get(),
+            get(),
             get()
         )
     }

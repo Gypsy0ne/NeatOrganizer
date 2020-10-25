@@ -98,7 +98,7 @@ class TaskSubItemViewHolder(
                 viewData = viewData.copy(
                     name = itemBinding.editTextItemTaskName.text.toString()
                 )
-                clickListener?.onEditionSubmitClick(viewData)
+                clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
                 clearEditionStatus()
             }
@@ -111,7 +111,7 @@ class TaskSubItemViewHolder(
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskRoot.resetStatus()
-            clickListener?.onRemoveClick(viewData)
+            clickListener?.onRemoveClick?.invoke(viewData)
         }
     }
 
@@ -120,7 +120,7 @@ class TaskSubItemViewHolder(
             viewData = viewData.copy(
                 done = !viewData.done
             )
-            clickListener?.onDoneClick(viewData)
+            clickListener?.onDoneClick?.invoke(viewData)
         }
     }
 }
