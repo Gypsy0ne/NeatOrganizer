@@ -3,28 +3,27 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class LoadTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<TaskWidgetEntry, LoadTaskWidget.Params>() {
+class GetAllTaskWidgetIds(private val taskWidgetsRepository: TaskWidgetsRepository) :
+    BaseUseCase<IntArray, Unit>() {
 
-    override suspend fun run(params: Params): Either<Failure, TaskWidgetEntry> {
+    override suspend fun run(params: Unit): Either<Failure, IntArray> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(taskWidgetsRepository.load(params.taskWidgetId))
+                Either.Right(taskWidgetsRepository.getAllWidgetIds())
             }
         } catch (exp: Exception) {
             Either.Left(
-                LoadTaskWidgetFailure(
+                GetAllTaskWidgetIdsFailure(
                     exp
                 )
             )
         }
     }
 
-    data class Params(val taskWidgetId: Int)
-    data class LoadTaskWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class GetAllTaskWidgetIdsFailure(val error: Exception) :
+        Failure.FeatureFailure(error)
 }

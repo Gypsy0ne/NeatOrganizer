@@ -43,7 +43,6 @@ class TasksWidgetViewModel(
     }
 
     fun onTitleEditionFinished(editedTitle: String) {
-        //update group entry in db
         updateTaskGroupUseCase.invoke(
             viewModelScope,
             UpdateSingleTaskGroup.Params(SingleTaskGroup(editedTitle, taskGroupId))

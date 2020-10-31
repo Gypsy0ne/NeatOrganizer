@@ -13,13 +13,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidget
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 
 class TaskWidgetRemoteViewManager(
     private val context: Context,
     private val widgetManager: AppWidgetManager,
-    private val loadTaskWidgetUseCase: LoadTaskWidget
+    private val loadTaskWidgetUseCase: LoadTaskWidget,
+    private val removeTaskWidgetUseCase: DeleteTaskWidget
 ) : WidgetRemoteViewManager {
     override fun updateWidget(appWidgetId: Int) {
 //launch two async, gather data and then loadWidget
@@ -75,6 +77,8 @@ class TaskWidgetRemoteViewManager(
         }
 
     override fun deleteWidget(appWidgetId: Int) {
-        TODO("Not yet implemented")
+        CoroutineScope(Dispatchers.IO).launch {
+            removeTaskWidgetUseCase.invoke(this, DeleteTaskWidget.Params(appWidgetId))
+        }
     }
 }

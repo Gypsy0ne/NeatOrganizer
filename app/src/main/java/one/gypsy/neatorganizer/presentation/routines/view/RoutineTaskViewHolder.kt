@@ -1,12 +1,12 @@
 package one.gypsy.neatorganizer.presentation.routines.view
 
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
+import one.gypsy.neatorganizer.binding.setEditionEnabled
 import one.gypsy.neatorganizer.databinding.ItemRoutineTaskBinding
 import one.gypsy.neatorganizer.presentation.listing.ListedSubItem
 import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.utils.extensions.hide
-import one.gypsy.neatorganizer.utils.extensions.requestEdit
 import one.gypsy.neatorganizer.utils.extensions.show
 
 class RoutineTaskViewHolder(
@@ -61,25 +61,17 @@ class RoutineTaskViewHolder(
         }
     }
 
-    private fun changeEditionAttributes() {
-        itemBinding.editTextItemRoutineTaskName.apply {
-            isFocusable = viewData.edited
-            isFocusableInTouchMode = viewData.edited
-            isEnabled = viewData.edited
-            isClickable = viewData.edited
-        }
-    }
+    private fun changeEditionAttributes() =
+        setEditionEnabled(itemBinding.editTextItemRoutineTaskName, viewData.edited)
 
     private fun onEditionFinish() {
         itemBinding.buttonItemRoutineTaskSubmit.hide()
         itemBinding.checkBoxItemRoutineTaskDone.show()
-        itemBinding.editTextItemRoutineTaskName.clearFocus()
     }
 
     private fun onEditionStart() {
         itemBinding.buttonItemRoutineTaskSubmit.show()
         itemBinding.checkBoxItemRoutineTaskDone.hide()
-        itemBinding.editTextItemRoutineTaskName.requestEdit()
     }
 
     override fun setUpEditListener() {

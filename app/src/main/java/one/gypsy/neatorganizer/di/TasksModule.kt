@@ -2,13 +2,16 @@ package one.gypsy.neatorganizer.di
 
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTasksRepository
-import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetPreferencesRepository
+import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
 import one.gypsy.neatorganizer.domain.datasource.tasks.*
 import one.gypsy.neatorganizer.domain.interactors.tasks.*
+import one.gypsy.neatorganizer.presentation.common.WidgetNotifier
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetNotifier
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.vm.*
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -21,7 +24,7 @@ val tasksDataSourceModule = module {
 val tasksRepositoryModule = module {
     factory { SingleTasksRepository(get()) }
     factory { SingleTaskGroupsRepository(get()) }
-    factory { TaskWidgetPreferencesRepository(get()) }
+    factory { TaskWidgetsRepository(get()) }
 }
 
 val tasksUseCaseModule = module {
@@ -41,11 +44,14 @@ val tasksUseCaseModule = module {
     factory { GetSingleTaskGroupById(get()) }
     factory { GetAllSingleTasksByGroupIdObservable(get()) }
     factory { UpdateSingleTaskGroup(get()) }
+    factory { GetAllTaskWidgetIds(get()) }
+    factory { DeleteTaskWidget(get()) }
 }
 
 val tasksUtilsModule = module {
     factory { TaskListMapper() }
-    factory<WidgetRemoteViewManager> { TaskWidgetRemoteViewManager(get(), get(), get()) }
+    factory<WidgetRemoteViewManager> { TaskWidgetRemoteViewManager(get(), get(), get(), get()) }
+    factory<WidgetNotifier> { TaskWidgetNotifier(androidContext()) }
 }
 
 val tasksViewModelModule = module {

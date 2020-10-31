@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.presentation.tasks.view.widget
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_task_widget.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.ActivityTaskWidgetBinding
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel
-import one.gypsy.neatorganizer.utils.extensions.requestEdit
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -39,7 +39,19 @@ class TaskWidgetActivity : AppCompatActivity() {
             lifecycleOwner = this@TaskWidgetActivity
             executePendingBindings()
         }
+        startWidgetSynchronizationService()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, TaskWidgetSynchronizationService::class.java))
+    }
+
+    private fun startWidgetSynchronizationService() =
+        Intent(this, TaskWidgetSynchronizationService::class.java).also { intent ->
+            startService(intent)
+        }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.widget_list_manage_menu, menu)
@@ -70,9 +82,6 @@ class TaskWidgetActivity : AppCompatActivity() {
         } else {
             onTitleEditionStarted()
             editTitleMenuItem.setIcon(R.drawable.ic_check_dark_yellow_24)
-            //for some reason data bound field in view doesnt change its value on livedata update
-            //manual changing works
-            groupTitle.requestEdit()
         }
     }
 }

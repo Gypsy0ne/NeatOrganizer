@@ -6,4 +6,5 @@ interface TaskWidgetDataSource {
     suspend fun save(taskWidgetEntry: TaskWidgetEntry)
     suspend fun load(taskWidgetId: Int): TaskWidgetEntry
     suspend fun delete(taskWidgetId: Int)
+    suspend fun getAllWidgetIds(): IntArray
 }

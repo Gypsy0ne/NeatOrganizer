@@ -53,6 +53,7 @@
                 style="@style/EditableListItemName.Header"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                editionEnabled="@{headerItem.edited}"
                 android:text="@{headerItem.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
