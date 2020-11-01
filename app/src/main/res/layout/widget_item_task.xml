@@ -8,10 +8,8 @@
     <TextView
         android:id="@+id/taskText"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:autoSizeMaxTextSize="@dimen/medium_text_size"
-        android:autoSizeMinTextSize="6dp"
-        android:autoSizeTextType="uniform"
+        android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="@dimen/small_text_size"
         android:gravity="bottom"
         tools:text="Sample text content" />
 </LinearLayout>

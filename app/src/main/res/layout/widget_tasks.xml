@@ -17,7 +17,7 @@
             android:layout_height="32dp"
             android:layout_marginHorizontal="@dimen/medium_space"
             android:layout_weight="1"
-            android:autoSizeMaxTextSize="@dimen/large_text_size"
+            android:autoSizeMaxTextSize="@dimen/regular_text_size"
             android:autoSizeMinTextSize="6dp"
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
@@ -29,6 +29,7 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/regular_space"
+            android:padding="@dimen/small_space"
             android:layout_weight="0"
             android:src="@drawable/ic_launch_grey_24"
             android:tint="@color/gray" />

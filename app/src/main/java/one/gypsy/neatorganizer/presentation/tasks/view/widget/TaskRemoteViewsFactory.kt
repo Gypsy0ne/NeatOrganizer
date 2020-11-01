@@ -54,7 +54,6 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
     private fun onGetAllSingleTasksSuccess(singleTasks: List<SingleTaskEntry>) {
         widgetItems.clear()
         widgetItems.addAll(singleTasks.map { it.toTaskEntryWidgetItem() })
-
     }
 
     override fun onDestroy() = widgetItems.clear()

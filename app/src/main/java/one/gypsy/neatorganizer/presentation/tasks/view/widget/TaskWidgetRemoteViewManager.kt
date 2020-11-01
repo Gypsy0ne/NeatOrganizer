@@ -38,6 +38,8 @@ class TaskWidgetRemoteViewManager(
             setUpViews(taskWidgetEntry)
         }
         widgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, remoteViews)
+        //TODO whole widget gets updated at once, try to split the process only to necessary operations
+        widgetManager.notifyAppWidgetViewDataChanged(taskWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
     private fun RemoteViews.setUpViews(taskWidgetEntry: TaskWidgetEntry) {
