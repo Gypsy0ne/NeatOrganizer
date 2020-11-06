@@ -78,14 +78,15 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
 //        remoteViews.setOnClickFillInIntent(R.id.widget_item, fillInIntent)
 
     private fun RemoteViews.styleTaskTextView(widgetItem: TaskEntryWidgetItem) {
-        if (widgetItem.done) {
-            setInt(
-                R.id.taskText,
-                "setPaintFlags",
-                Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
-            )
-        }
+        val paintFlags = getPaintFlags(widgetItem.done)
+        setInt(R.id.taskText, "setPaintFlags", paintFlags)
         setTextViewText(R.id.taskText, widgetItem.text)
+    }
+
+    private fun getPaintFlags(done: Boolean): Int = if (done) {
+        Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
+    } else {
+        Paint.STRIKE_THRU_TEXT_FLAG.inv() and Paint.ANTI_ALIAS_FLAG
     }
 
     override fun getLoadingView(): RemoteViews? = null

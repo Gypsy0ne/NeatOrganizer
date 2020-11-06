@@ -3,7 +3,6 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget
 import android.content.Intent
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
@@ -33,7 +32,7 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
     //TODO diff to update only particular widget and only when it is needed
     //TODO if some task group gets deleted remove widget
     private fun onGetAllSingleTaskGroupsSuccess(taskGroupsWithTasks: LiveData<List<SingleTaskGroupWithTasks>>) =
-        taskGroupsWithTasks.observe(this, Observer {
+        taskGroupsWithTasks.observe(this, {
             getAllWidgetIdsUseCase.invoke(lifecycleScope, Unit) {
                 it.either({}, ::onGetAllWidgetIdsSuccess)
             }

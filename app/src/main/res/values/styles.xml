@@ -174,14 +174,14 @@
         <item name="android:layout_marginBottom">@dimen/small_space</item>
     </style>
 
-    <style name="HeaderMenuButton.Large" parent="HeaderMenuButton">
+    <style name="HeaderMenuButton.Large">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:paddingTop">@dimen/double_space</item>
         <item name="android:paddingBottom">@dimen/double_space</item>
         <item name="layout_constraintDimensionRatio">W,3:4</item>
     </style>
 
-    <style name="HeaderMenuButton.Small" parent="HeaderMenuButton">
+    <style name="HeaderMenuButton.Small">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:paddingTop">@dimen/regular_space</item>
         <item name="android:paddingBottom">@dimen/regular_space</item>
@@ -218,9 +218,12 @@
     </style>
 
     <style name="DialogContentWindow">
+        <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
+    </style>
+
+    <style name="DialogContentWindow.Iconed">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
         <item name="android:paddingTop">@dimen/padding_top_dialog_content_container</item>
     </style>
 </resources>

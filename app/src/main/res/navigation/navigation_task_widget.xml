@@ -7,11 +7,12 @@
     <dialog
         android:id="@+id/addSingleTaskDialog"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
-        android:label="AddSingleTaskDialogFragment">
+        android:label="AddSingleTaskDialog">
         <argument
             android:name="groupId"
             app:argType="long" />
     </dialog>
+
     <fragment
         android:id="@+id/taskGroupManageFragment"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupManageFragment"
@@ -20,6 +21,18 @@
         <action
             android:id="@+id/action_taskGroupManageFragment_to_addSingleTaskDialog"
             app:destination="@id/addSingleTaskDialog" />
+        <action
+            android:id="@+id/action_taskGroupManageFragment_to_selectTaskGroupDialog"
+            app:destination="@id/selectTaskGroupDialog" />
     </fragment>
+
+    <dialog
+        android:id="@+id/selectTaskGroupDialog"
+        android:name="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupSelectionDialogFragment"
+        android:label="AddSingleTaskDialogFragment">
+        <argument
+            android:name="widgetId"
+            app:argType="integer" />
+    </dialog>
 
 </navigation>

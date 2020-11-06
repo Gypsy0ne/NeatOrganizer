@@ -23,6 +23,8 @@ class TasksWidgetViewModel(
     private val _titleEdited = MutableLiveData(false)
     val titleEdited: LiveData<Boolean>
         get() = _titleEdited
+    private val _widgetDataLoaded = MutableLiveData(true)
+    val widgetDataLoaded: LiveData<Boolean> = _widgetDataLoaded
 
     init {
         getSingleTaskGroupUseCase.invoke(
@@ -30,7 +32,7 @@ class TasksWidgetViewModel(
             GetSingleTaskGroupById.Params(taskGroupId)
         ) {
             it.either(
-                {},
+                { _widgetDataLoaded.postValue(false) },
                 ::onGetSingleTaskGroupSuccess
             )
         }

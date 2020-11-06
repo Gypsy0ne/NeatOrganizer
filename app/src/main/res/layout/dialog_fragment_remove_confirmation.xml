@@ -35,7 +35,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_dialog_fragment_remove_content"
-            style="@style/DialogContentWindow"
+            style="@style/DialogContentWindow.Iconed"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

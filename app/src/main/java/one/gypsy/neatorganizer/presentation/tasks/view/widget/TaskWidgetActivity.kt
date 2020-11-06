@@ -40,6 +40,22 @@ class TaskWidgetActivity : AppCompatActivity() {
             executePendingBindings()
         }
         startWidgetSynchronizationService()
+        observeDataLoadingStatus()
+    }
+
+    private fun observeDataLoadingStatus() = tasksViewModel.widgetDataLoaded.observe(this) {
+        if (!it) {
+            navigateToSelectTaskGroupDialog()
+        }
+    }
+
+    private fun navigateToSelectTaskGroupDialog() {
+        val widgetId = intent.getIntExtra(MANAGED_WIDGET_ID_KEY, MANAGED_WIDGET_INVALID_ID)
+        if (widgetId != MANAGED_WIDGET_INVALID_ID) {
+            val direction = TaskGroupManageFragmentDirections
+                .actionTaskGroupManageFragmentToSelectTaskGroupDialog(widgetId)
+            findNavController(R.id.navigationFragmentsContainer).navigate(direction)
+        }
     }
 
     override fun onDestroy() {
@@ -73,8 +89,6 @@ class TaskWidgetActivity : AppCompatActivity() {
         else -> false
     }
 
-    //try to move views logic to fragment
-    //changing icons from observer doesnt work
     private fun onEditGroupTitleClicked() = with(tasksViewModel) {
         if (titleEdited.value == true) {
             onTitleEditionFinished(viewBinding.groupTitle.text.toString())

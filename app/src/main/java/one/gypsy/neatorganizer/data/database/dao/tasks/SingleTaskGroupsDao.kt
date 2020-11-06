@@ -20,7 +20,10 @@ interface SingleTaskGroupsDao :
     fun getAllSingleTaskGroups(): LiveData<List<SingleTaskGroupEntity>>
 
     @Query("SELECT * FROM single_task_group WHERE id = :taskGroupId")
-    fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroupEntity>
+    fun getSingleTaskGroupByIdObservable(taskGroupId: Long): LiveData<SingleTaskGroupEntity>
+
+    @Query("SELECT * FROM single_task_group WHERE id = :taskGroupId")
+    fun getSingleTaskGroupById(taskGroupId: Long): SingleTaskGroupEntity
 
     @Query("SELECT * FROM single_task_group WHERE id = :taskGroupId")
     fun getGroupWithSingleTasksById(taskGroupId: Long): LiveData<GroupWithSingleTasks>
