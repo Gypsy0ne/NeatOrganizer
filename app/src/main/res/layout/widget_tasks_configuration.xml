@@ -28,14 +28,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F3F3F3"
-        android:orientation="vertical">
+        android:background="#F3F3F3">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksGroups"
             adapter="@{tasksAdapter}"
             adapterData="@{configurationViewModel.listedTaskGroups}"
-            hasFixedSize="@{false}"
+            hasFixedSize="@{true}"
             layoutManager="@{layoutManager}"
             android:layout_width="0dp"
             android:layout_height="0dp"

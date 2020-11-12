@@ -9,9 +9,8 @@ import android.widget.RemoteViewsService
 import kotlinx.coroutines.runBlocking
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTasksByGroupId
-import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTaskWidget
+import one.gypsy.neatorganizer.domain.interactors.tasks.GetTaskGroupIdByWidgetId
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskEntryWidgetItem
 import one.gypsy.neatorganizer.presentation.tasks.model.toTaskEntryWidgetItem
 import org.koin.core.KoinComponent
@@ -22,7 +21,7 @@ import org.koin.core.inject
 class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
     RemoteViewsService.RemoteViewsFactory, KoinComponent {
 
-    private val loadTaskWidgetUseCase: LoadTaskWidget by inject()
+    private val getTaskGroupIdByWidgetIdUseCase: GetTaskGroupIdByWidgetId by inject()
     private val getAllSingleTasksUseCase: GetAllSingleTasksByGroupId by inject()
     private val widgetItems = arrayListOf<TaskEntryWidgetItem>()
     private val appWidgetId: Int = intent.getIntExtra(
@@ -31,17 +30,20 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
     )
     private var taskGroupId: Long? = null
 
-    override fun onCreate() = runBlocking {
-        loadTaskWidgetUseCase.invoke(this, LoadTaskWidget.Params(appWidgetId)) {
-            it.either({}, ::onLoadTaskWidgetSuccess)
+    override fun onCreate() = loadTaskGroupId()
+
+    private fun loadTaskGroupId() = runBlocking {
+        getTaskGroupIdByWidgetIdUseCase.invoke(this, GetTaskGroupIdByWidgetId.Params(appWidgetId)) {
+            it.either({}, ::loadTaskGroupIdSuccess)
         }
     }
 
-    private fun onLoadTaskWidgetSuccess(widgetEntry: TaskWidgetEntry) {
-        taskGroupId = widgetEntry.taskGroupId
+    private fun loadTaskGroupIdSuccess(loadedTaskGroupId: Long) {
+        taskGroupId = loadedTaskGroupId
     }
 
     override fun onDataSetChanged() {
+        loadTaskGroupId()
         taskGroupId?.let {
             runBlocking {
                 getAllSingleTasksUseCase.invoke(this, GetAllSingleTasksByGroupId.Params(it)) {

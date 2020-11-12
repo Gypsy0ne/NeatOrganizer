@@ -2,11 +2,12 @@ package one.gypsy.neatorganizer.domain.dto.tasks
 
 import one.gypsy.neatorganizer.data.database.entity.tasks.TaskWidgetEntity
 
-class TaskWidgetEntry(
+data class TitledTaskWidgetEntry(
     val appWidgetId: Int,
     val taskGroupId: Long,
-    val widgetColor: Int
+    val widgetColor: Int,
+    val taskGroupTitle: String
 )
 
-fun TaskWidgetEntry.toTaskWidgetEntity() =
+fun TitledTaskWidgetEntry.toTaskWidgetEntity() =
     TaskWidgetEntity(widgetId = appWidgetId, taskGroupId = taskGroupId, color = widgetColor)

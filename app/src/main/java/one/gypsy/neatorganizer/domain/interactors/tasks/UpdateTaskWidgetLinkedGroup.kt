@@ -3,28 +3,33 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
-import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class SaveTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<Unit, SaveTaskWidget.Params>() {
+class UpdateTaskWidgetLinkedGroup(private val taskWidgetsRepository: TaskWidgetsRepository) :
+    BaseUseCase<Unit, UpdateTaskWidgetLinkedGroup.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(taskWidgetsRepository.create(params.titledTaskWidgetEntry))
+                Either.Right(
+                    taskWidgetsRepository.updateLinkedTaskGroup(
+                        params.taskWidgetId,
+                        params.taskGroupId
+                    )
+                )
             }
         } catch (exp: Exception) {
             Either.Left(
-                CreateTaskWidgetFailure(
+                UpdateTaskWidgetLinkedGroupFailure(
                     exp
                 )
             )
         }
     }
 
-    data class Params(val titledTaskWidgetEntry: TitledTaskWidgetEntry)
-    data class CreateTaskWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class Params(val taskWidgetId: Int, val taskGroupId: Long)
+    data class UpdateTaskWidgetLinkedGroupFailure(val error: Exception) :
+        Failure.FeatureFailure(error)
 }

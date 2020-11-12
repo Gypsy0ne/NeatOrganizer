@@ -41,8 +41,9 @@ class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTask
             it.toSingleTaskGroupWithTasks()
         }
 
+    @Suppress("USELESS_ELVIS")
     override suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup> {
-        singleTaskGroupsDao.getSingleTaskGroupById(taskGroupId)
+        singleTaskGroupsDao.getSingleTaskGroupById(taskGroupId) ?: throw NullPointerException()
         return Transformations.map(singleTaskGroupsDao.getSingleTaskGroupByIdObservable(taskGroupId)) {
             it.toSingleTaskGroup()
         }

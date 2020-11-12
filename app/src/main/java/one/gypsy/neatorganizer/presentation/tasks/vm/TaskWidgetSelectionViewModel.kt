@@ -2,16 +2,14 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
-import one.gypsy.neatorganizer.domain.interactors.tasks.SaveTaskWidget
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidget
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidgetLinkedGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
 import one.gypsy.neatorganizer.presentation.tasks.model.toTaskGroupEntryItem
 
 class TaskWidgetSelectionViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
-    private val widgetUpdateUseCase: UpdateTaskWidget
+    private val widgetUpdateUseCase: UpdateTaskWidgetLinkedGroup
 ) :
     ViewModel() {
     private val _listedTaskGroups = MediatorLiveData<List<TaskGroupEntryItem>>()
@@ -22,8 +20,8 @@ class TaskWidgetSelectionViewModel(
     val selectedTaskGroup: LiveData<TaskGroupEntryItem>
         get() = _selectedTaskGroup
 
-    private val _widgetCreationStatus = MutableLiveData<TaskWidgetCreationStatus>()
-    val widgetCreationStatus: LiveData<TaskWidgetCreationStatus> = _widgetCreationStatus
+    private val _widgetSelectionStatus = MutableLiveData<TaskWidgetSelectionStatus>()
+    val widgetSelectionStatus: LiveData<TaskWidgetSelectionStatus> = _widgetSelectionStatus
 
 
     init {
@@ -43,36 +41,26 @@ class TaskWidgetSelectionViewModel(
     }
 
 
-    fun onSubmitClicked(widgetId: Int) {
-        when {
-            selectedTaskGroup.value == null -> _widgetCreationStatus.postValue(
-                TaskWidgetCreationStatus.TaskNotSelectedStatus
-            )
-            else -> submitWidgetCreation(widgetId)
-        }
+    fun onSubmitClicked(widgetId: Int) = when (selectedTaskGroup.value) {
+        null -> _widgetSelectionStatus.postValue(
+            TaskWidgetSelectionStatus.TaskGroupNotSelectedStatus
+        )
+        else -> submitWidgetCreation(widgetId)
     }
 
     private fun submitWidgetCreation(widgetId: Int) {
-        val taskGroup = selectedTaskGroup.value
-        if (taskGroup != null) {
-            widgetCreationUseCase.invoke(
+        selectedTaskGroup.value?.id?.let { groupId ->
+            widgetUpdateUseCase.invoke(
                 viewModelScope,
-                SaveTaskWidget.Params(
-                    TaskWidgetEntry(
-                        appWidgetId = widgetId,
-                        taskGroupId = taskGroup.id,
-                        widgetColor = widgetColor,
-                        taskGroupTitle = selectedTaskGroup.value?.name.orEmpty()
-                    )
-                )
+                UpdateTaskWidgetLinkedGroup.Params(widgetId, groupId)
             ) {
-                it.either({}, ::onCreateTaskWidgetSuccess)
+                it.either({}, ::onUpdateTaskWidgetSuccess)
             }
         }
     }
 
-    private fun onCreateTaskWidgetSuccess(unit: Unit) {
-        _widgetCreationStatus.postValue(TaskWidgetCreationStatus.CreationSuccessStatus)
+    private fun onUpdateTaskWidgetSuccess(unit: Unit) {
+        _widgetSelectionStatus.postValue(TaskWidgetSelectionStatus.SelectionSuccessStatus)
     }
 }
 

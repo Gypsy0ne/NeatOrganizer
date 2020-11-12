@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.domain.interactors.tasks.SaveTaskWidget
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
@@ -63,7 +63,7 @@ class TasksWidgetConfigurationViewModel(
             widgetCreationUseCase.invoke(
                 viewModelScope,
                 SaveTaskWidget.Params(
-                    TaskWidgetEntry(
+                    TitledTaskWidgetEntry(
                         appWidgetId = widgetId,
                         taskGroupId = taskGroup.id,
                         widgetColor = widgetColor,

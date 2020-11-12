@@ -23,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
@@ -41,22 +40,24 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/taskGroups"
+            hasFixedSize="@{true}"
             adapter="@{tasksAdapter}"
             adapterData="@{viewModel.listedTaskGroups}"
-            hasFixedSize="@{false}"
+            android:layout_marginVertical="@dimen/medium_space"
             layoutManager="@{layoutManager}"
             android:layout_width="0dp"
             android:layout_height="320dp"
-            android:layout_marginTop="@dimen/medium_space"
-            android:layout_marginBottom="@dimen/triple_space"
+            android:background="@color/blue"
+            android:elevation="@dimen/small_space"
+            android:paddingHorizontal="@dimen/small_space"
             android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@+id/cancel"
+            app:layout_constraintBottom_toTopOf="@+id/selectionCancelation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <Button
-            android:id="@+id/cancel"
+            android:id="@+id/selectionCancelation"
             style="@style/DialogFormButton.Cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -72,10 +73,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triple_space"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cancel" />
+            app:layout_constraintStart_toEndOf="@+id/selectionCancelation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

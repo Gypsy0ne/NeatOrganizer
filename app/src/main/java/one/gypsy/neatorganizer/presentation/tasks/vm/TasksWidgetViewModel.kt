@@ -3,23 +3,17 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupById
-import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
-import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
-import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 
 class TasksWidgetViewModel(
-    private val taskGroupId: Long,
+    taskGroupId: Long,
     private val widgetId: Int,
-    getSingleTaskGroupUseCase: GetSingleTaskGroupById,
+    private val getSingleTaskGroupUseCase: GetSingleTaskGroupById,
     private val updateTaskGroupUseCase: UpdateSingleTaskGroup,
-    private val updateSingleTaskUseCase: UpdateSingleTask,
-    private val removeSingleTaskUseCase: RemoveSingleTask
 ) : ViewModel() {
 
-    private val _taskGroupTitle: MediatorLiveData<String> = MediatorLiveData()
-    val taskGroupTitle: LiveData<String> = _taskGroupTitle
+    private val _taskGroup: MediatorLiveData<SingleTaskGroup> = MediatorLiveData()
+    val taskGroup: LiveData<SingleTaskGroup> = _taskGroup
     private val _titleEdited = MutableLiveData(false)
     val titleEdited: LiveData<Boolean>
         get() = _titleEdited
@@ -27,31 +21,27 @@ class TasksWidgetViewModel(
     val widgetDataLoaded: LiveData<Boolean> = _widgetDataLoaded
 
     init {
-        getSingleTaskGroupUseCase.invoke(
-            viewModelScope,
-            GetSingleTaskGroupById.Params(taskGroupId)
-        ) {
-            it.either(
-                { _widgetDataLoaded.postValue(false) },
-                ::onGetSingleTaskGroupSuccess
-            )
-        }
+        loadTaskGroupData(taskGroupId)
     }
 
     private fun onGetSingleTaskGroupSuccess(taskGroup: LiveData<SingleTaskGroup>) {
-        _taskGroupTitle.addSource(taskGroup) {
-            _taskGroupTitle.postValue(taskGroup.value?.name)
+        _taskGroup.addSource(taskGroup) {
+            _taskGroup.postValue(taskGroup.value)
         }
+        _widgetDataLoaded.postValue(true)
     }
 
+    //TODO introduce 2 way data binding
     fun onTitleEditionFinished(editedTitle: String) {
-        updateTaskGroupUseCase.invoke(
-            viewModelScope,
-            UpdateSingleTaskGroup.Params(SingleTaskGroup(editedTitle, taskGroupId))
-        ) {
-            it.either({}, {
-                _titleEdited.postValue(false)
-            })
+        taskGroup.value?.id?.let { groupId ->
+            updateTaskGroupUseCase.invoke(
+                viewModelScope,
+                UpdateSingleTaskGroup.Params(SingleTaskGroup(editedTitle, groupId))
+            ) {
+                it.either({}, {
+                    _titleEdited.postValue(false)
+                })
+            }
         }
     }
 
@@ -59,18 +49,13 @@ class TasksWidgetViewModel(
         _titleEdited.value = true
     }
 
-
-    fun onTaskUpdate(subItem: TaskListItem.TaskListSubItem) {
-        updateSingleTaskUseCase.invoke(
-            viewModelScope,
-            UpdateSingleTask.Params(singleTask = subItem.toSingleTask())
-        )
-    }
-
-    fun onRemove(subItem: TaskListItem.TaskListSubItem) {
-        removeSingleTaskUseCase.invoke(
-            viewModelScope,
-            RemoveSingleTask.Params(subItem.toSingleTask())
+    fun loadTaskGroupData(taskGroupId: Long) = getSingleTaskGroupUseCase.invoke(
+        viewModelScope,
+        GetSingleTaskGroupById.Params(taskGroupId)
+    ) {
+        it.either(
+            { _widgetDataLoaded.postValue(false) },
+            ::onGetSingleTaskGroupSuccess
         )
     }
 

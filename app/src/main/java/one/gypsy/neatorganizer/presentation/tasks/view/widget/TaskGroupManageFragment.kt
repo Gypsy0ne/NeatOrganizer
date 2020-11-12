@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTaskGroupManageBinding
@@ -47,6 +48,7 @@ class TaskGroupManageFragment : Fragment() {
             lifecycleOwner = this@TaskGroupManageFragment
         }
         setUpRecyclerView()
+        observeNewTaskSelectionResult()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -73,4 +75,15 @@ class TaskGroupManageFragment : Fragment() {
         executePendingBindings()
     }
 
+
+    private fun observeNewTaskSelectionResult() =
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Long?>("key")
+            ?.observe(viewLifecycleOwner) { selectedGroupId ->
+                if (selectedGroupId != null) {
+                    tasksViewModel.loadTasksData(selectedGroupId)
+                }
+            }
 }

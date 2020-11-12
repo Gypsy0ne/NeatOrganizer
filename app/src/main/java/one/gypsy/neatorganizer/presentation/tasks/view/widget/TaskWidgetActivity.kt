@@ -41,6 +41,7 @@ class TaskWidgetActivity : AppCompatActivity() {
         }
         startWidgetSynchronizationService()
         observeDataLoadingStatus()
+        observeNewTaskSelectionResult()
     }
 
     private fun observeDataLoadingStatus() = tasksViewModel.widgetDataLoaded.observe(this) {
@@ -98,4 +99,17 @@ class TaskWidgetActivity : AppCompatActivity() {
             editTitleMenuItem.setIcon(R.drawable.ic_check_dark_yellow_24)
         }
     }
+
+    private fun observeNewTaskSelectionResult() =
+        findNavController(R.id.navigationFragmentsContainer)
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Long?>("key")
+            ?.observe(this) { selectedGroupId ->
+                if (selectedGroupId != null) {
+                    tasksViewModel.loadTaskGroupData(selectedGroupId)
+                } else {
+                    finish()
+                }
+            }
 }

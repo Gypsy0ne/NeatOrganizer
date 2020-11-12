@@ -11,8 +11,8 @@ import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListSubItem
 
 class TaskWidgetContentManageViewModel(
-    private val taskGroupId: Long,
-    getAllSingleTasksUseCase: GetAllSingleTasksByGroupIdObservable,
+    taskGroupId: Long,
+    private val getAllSingleTasksUseCase: GetAllSingleTasksByGroupIdObservable,
     private val updateSingleTaskUseCase: UpdateSingleTask,
     private val removeSingleTaskUseCase: RemoveSingleTask
 ) : ViewModel() {
@@ -25,15 +25,7 @@ class TaskWidgetContentManageViewModel(
     }
 
     init {
-        getAllSingleTasksUseCase.invoke(
-            viewModelScope,
-            GetAllSingleTasksByGroupIdObservable.Params(taskGroupId)
-        ) {
-            it.either(
-                {},
-                ::onGetAllSingleTasksSuccess
-            )
-        }
+        loadTasksData(taskGroupId)
     }
 
     private fun onGetAllSingleTasksSuccess(tasks: LiveData<List<SingleTaskEntry>>) {
@@ -53,6 +45,16 @@ class TaskWidgetContentManageViewModel(
         removeSingleTaskUseCase.invoke(
             viewModelScope,
             RemoveSingleTask.Params(taskItem.toSingleTask())
+        )
+    }
+
+    fun loadTasksData(taskGroupId: Long) = getAllSingleTasksUseCase.invoke(
+        viewModelScope,
+        GetAllSingleTasksByGroupIdObservable.Params(taskGroupId)
+    ) {
+        it.either(
+            {},
+            ::onGetAllSingleTasksSuccess
         )
     }
 }

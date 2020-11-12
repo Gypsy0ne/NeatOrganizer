@@ -35,7 +35,7 @@
                 android:focusedByDefault="true"
                 editionEnabled="@{viewModel.titleEdited}"
                 android:gravity="center_vertical"
-                android:text="@{viewModel.taskGroupTitle}"
+                android:text="@{viewModel.taskGroup.name}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/regular_text_size"
                 tools:text="Sample title" />

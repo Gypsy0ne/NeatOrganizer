@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidget
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
@@ -33,7 +33,7 @@ class TaskWidgetRemoteViewManager(
         }
     }
 
-    private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TaskWidgetEntry) {
+    private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntry) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
             setUpViews(taskWidgetEntry)
         }
@@ -42,7 +42,7 @@ class TaskWidgetRemoteViewManager(
         widgetManager.notifyAppWidgetViewDataChanged(taskWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
-    private fun RemoteViews.setUpViews(taskWidgetEntry: TaskWidgetEntry) {
+    private fun RemoteViews.setUpViews(taskWidgetEntry: TitledTaskWidgetEntry) {
         setOnClickPendingIntent(
             R.id.tasksWidgetContainer,
             createGroupManageActivityIntent(

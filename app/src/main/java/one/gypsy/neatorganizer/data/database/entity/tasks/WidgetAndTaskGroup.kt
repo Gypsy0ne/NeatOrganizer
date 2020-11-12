@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.data.database.entity.tasks
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 
 class WidgetAndTaskGroup(
     @Relation(
@@ -14,7 +14,7 @@ class WidgetAndTaskGroup(
     val widget: TaskWidgetEntity
 )
 
-fun WidgetAndTaskGroup.toWidgetTaskEntry() = TaskWidgetEntry(
+fun WidgetAndTaskGroup.toTitledWidgetTaskEntry() = TitledTaskWidgetEntry(
     appWidgetId = this.widget.widgetId,
     taskGroupId = this.widget.taskGroupId,
     widgetColor = this.widget.color,
