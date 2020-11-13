@@ -26,23 +26,33 @@ class TaskWidgetRemoteViewManager(
     override fun updateWidget(appWidgetId: Int) {
 //launch two async, gather data and then loadWidget
         //or store whole widget data in db and keep every field fresh with relations
+        //When task group is removed npe/failure comes, to make widget clear onFail should send update intent with warning remote view
         CoroutineScope(Dispatchers.IO).launch {
             loadTaskWidgetUseCase.invoke(this, LoadTaskWidget.Params(appWidgetId)) {
-                it.either({}, { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) })
+                it.either(
+                    { onLoadTaskWidgetFailure(appWidgetId) },
+                    { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) })
             }
         }
     }
 
+    private fun onLoadTaskWidgetFailure(appWidgetId: Int) {
+        val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks_no_content).apply {
+            setUpMissingGroupViews(appWidgetId)
+        }
+        widgetManager.updateAppWidget(appWidgetId, remoteViews)
+    }
+
     private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntry) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
-            setUpViews(taskWidgetEntry)
+            setUpLoadedTaskViews(taskWidgetEntry)
         }
         widgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, remoteViews)
         //TODO whole widget gets updated at once, try to split the process only to necessary operations
         widgetManager.notifyAppWidgetViewDataChanged(taskWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
-    private fun RemoteViews.setUpViews(taskWidgetEntry: TitledTaskWidgetEntry) {
+    private fun RemoteViews.setUpLoadedTaskViews(taskWidgetEntry: TitledTaskWidgetEntry) {
         setOnClickPendingIntent(
             R.id.tasksWidgetContainer,
             createGroupManageActivityIntent(
@@ -55,6 +65,16 @@ class TaskWidgetRemoteViewManager(
         setInt(R.id.tasksList, "setBackgroundColor", taskWidgetEntry.widgetColor)
         setTextViewText(R.id.taskGroupTitle, taskWidgetEntry.taskGroupTitle)
         setTextColor(R.id.emptyView, taskWidgetEntry.widgetColor)
+    }
+
+    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) {
+        setOnClickPendingIntent(
+            R.id.tasksWidgetContainer,
+            createGroupManageActivityIntent(
+                widgetId,
+                MANAGED_GROUP_INVALID_ID
+            )
+        )
     }
 
     private fun createWidgetUpdateIntent(widgetId: Int) =

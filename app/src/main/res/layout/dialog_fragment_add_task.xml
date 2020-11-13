@@ -14,7 +14,7 @@
         android:background="@android:color/transparent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_view_dialog_fragment_remove_confirmation_icon"
+            android:id="@+id/lottie_view_dialog_fragment_add_confirmation_icon"
             style="@style/LottieDialogHeader"
             android:padding="@dimen/small_space"
             app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_add_single_task_content"
