@@ -63,11 +63,11 @@
 
         <com.thebluealliance.spectrum.SpectrumPalette
             android:id="@+id/palette"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:elevation="@dimen/small_space"
             onColorChanged="@{(color)->configurationViewModel.onColorPicked(color)}"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:elevation="@dimen/small_space"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/bottomMenuGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
