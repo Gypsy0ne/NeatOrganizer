@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(organizerToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
@@ -43,10 +43,6 @@ class HomeActivity : AppCompatActivity() {
         Intent(this, TaskWidgetSynchronizationService::class.java).also { intent ->
             startService(intent)
         }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val navigation = findNavController(R.id.fragment_activity_home_nav_container)
-//        return item.onNavDestinationSelected(navigation) || super.onOptionsItemSelected(item)
-//    }
 
     override fun onStart() {
         super.onStart()
@@ -62,9 +58,6 @@ class HomeActivity : AppCompatActivity() {
         return findNavController(R.id.fragment_activity_home_nav_container).navigateUp()
     }
 
-
-    private fun setUpBottomNavigation() {
-        bottom_navigation_view_activity_home.setupWithNavController(findNavController(R.id.fragment_activity_home_nav_container))
-    }
-
+    private fun setUpBottomNavigation() = bottom_navigation_view_activity_home
+        .setupWithNavController(findNavController(R.id.fragment_activity_home_nav_container))
 }

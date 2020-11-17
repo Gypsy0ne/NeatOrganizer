@@ -4,12 +4,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
+import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class LoadTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<TitledTaskWidgetEntry, LoadTaskWidget.Params>() {
+class LoadTitledTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
+    BaseUseCase<TitledTaskWidgetEntry, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, TitledTaskWidgetEntry> {
         return try {
@@ -18,7 +19,7 @@ class LoadTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
             }
         } catch (exp: Exception) {
             Either.Left(
-                LoadTaskWidgetFailure(
+                LoadTitledTaskWidgetFailure(
                     exp
                 )
             )
@@ -26,5 +27,5 @@ class LoadTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
     }
 
     data class Params(val taskWidgetId: Int)
-    data class LoadTaskWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class LoadTitledTaskWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

@@ -11,6 +11,7 @@ import one.gypsy.neatorganizer.utils.Failure
 
 class GetAllSingleTaskGroups(private val dataSource: SingleTaskGroupsRepository) :
     BaseUseCase<LiveData<List<SingleTaskGroupWithTasks>>, Unit>() {
+
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<SingleTaskGroupWithTasks>>> {
         return try {
             withContext(Dispatchers.IO) {

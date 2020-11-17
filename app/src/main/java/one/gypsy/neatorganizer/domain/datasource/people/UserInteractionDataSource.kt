@@ -6,6 +6,7 @@ import one.gypsy.neatorganizer.domain.dto.people.InteractionEntry
 
 class UserInteractionDataSource(private val interactionsDao: InteractionsDao) :
     InteractionDataSource {
+
     override suspend fun add(interactionEntry: InteractionEntry) = interactionsDao.insert(
         InteractionEntryEntity(
             interactionEntry.profileId,

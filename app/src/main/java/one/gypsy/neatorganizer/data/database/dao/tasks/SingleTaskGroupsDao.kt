@@ -9,8 +9,7 @@ import one.gypsy.neatorganizer.data.database.entity.tasks.GroupWithSingleTasks
 import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
 
 @Dao
-interface SingleTaskGroupsDao :
-    BaseDao<SingleTaskGroupEntity> {
+interface SingleTaskGroupsDao : BaseDao<SingleTaskGroupEntity> {
 
     @Transaction
     @Query("SELECT * FROM single_task_group")
@@ -30,6 +29,4 @@ interface SingleTaskGroupsDao :
 
     @Query("DELETE FROM SINGLE_TASK_GROUP WHERE id = :taskGroupId")
     fun deleteTaskGroupById(taskGroupId: Long)
-
-
 }

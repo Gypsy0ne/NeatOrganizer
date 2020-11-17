@@ -21,6 +21,7 @@
             app:popUpTo="@id/organizer_app_navigation"
             app:popUpToInclusive="true" />
     </fragment>
+
     <fragment
         android:id="@+id/people"
         android:name="one.gypsy.neatorganizer.presentation.people.view.PeopleFragment"
@@ -32,6 +33,7 @@
             android:id="@+id/action_people_to_rateInteractionDialogFragment"
             app:destination="@id/rateInteractionDialogFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/routines"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment"
@@ -43,11 +45,11 @@
             android:id="@+id/action_routines_to_removeRoutineSubmitDialogFragment"
             app:destination="@id/removeRoutineSubmitDialogFragment" />
     </fragment>
+
     <dialog
         android:id="@+id/person_add"
         android:name="one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment"
         android:label="AddPersonDialogFragment" />
-
 
     <dialog
         android:id="@+id/task_group_add"
@@ -62,6 +64,7 @@
             android:name="personId"
             app:argType="long" />
     </fragment>
+
     <dialog
         android:id="@+id/rateInteractionDialogFragment"
         android:name="one.gypsy.neatorganizer.presentation.people.view.RateInteractionDialogFragment"

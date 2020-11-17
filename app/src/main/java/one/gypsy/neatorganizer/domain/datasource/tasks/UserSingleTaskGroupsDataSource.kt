@@ -13,6 +13,7 @@ import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskGroupEntity
 
 class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTaskGroupsDao) :
     SingleTaskGroupsDataSource {
+
     override suspend fun addSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         singleTaskGroupsDao.insert(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
@@ -55,5 +56,4 @@ class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTask
                 it.toSingleTaskGroupEntry()
             }
         }
-
 }

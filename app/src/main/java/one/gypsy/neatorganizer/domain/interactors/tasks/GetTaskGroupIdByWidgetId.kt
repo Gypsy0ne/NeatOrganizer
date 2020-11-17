@@ -3,12 +3,13 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
+import one.gypsy.neatorganizer.domain.interactors.tasks.GetTaskGroupIdByWidgetId.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
 class GetTaskGroupIdByWidgetId(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<Long, GetTaskGroupIdByWidgetId.Params>() {
+    BaseUseCase<Long, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Long> {
         return try {

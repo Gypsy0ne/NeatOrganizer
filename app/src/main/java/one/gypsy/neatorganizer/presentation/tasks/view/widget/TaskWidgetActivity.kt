@@ -17,11 +17,9 @@ import org.koin.core.parameter.parametersOf
 
 
 class TaskWidgetActivity : AppCompatActivity() {
+
     private val tasksViewModel: TasksWidgetViewModel by viewModel {
-        parametersOf(
-            intent.getIntExtra(MANAGED_WIDGET_ID_KEY, MANAGED_WIDGET_INVALID_ID),
-            intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID)
-        )
+        parametersOf(intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID))
     }
     private lateinit var viewBinding: ActivityTaskWidgetBinding
     private val editTitleMenuItem by lazy { viewBinding.manageToolbar.menu.getItem(manageToolbar.menu.size - 1) }

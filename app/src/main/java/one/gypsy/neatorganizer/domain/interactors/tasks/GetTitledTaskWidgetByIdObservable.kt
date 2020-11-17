@@ -5,12 +5,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
+import one.gypsy.neatorganizer.domain.interactors.tasks.GetTitledTaskWidgetByIdObservable.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
 class GetTitledTaskWidgetByIdObservable(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<LiveData<TitledTaskWidgetEntry>, GetTitledTaskWidgetByIdObservable.Params>() {
+    BaseUseCase<LiveData<TitledTaskWidgetEntry>, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, LiveData<TitledTaskWidgetEntry>> {
         return try {

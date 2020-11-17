@@ -5,13 +5,15 @@ import androidx.lifecycle.Transformations
 import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
 import one.gypsy.neatorganizer.data.database.entity.tasks.toTaskWidgetEntry
 import one.gypsy.neatorganizer.data.database.entity.tasks.toTitledWidgetTaskEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toTaskWidgetEntity
 
 class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
     TaskWidgetDataSource {
-    override suspend fun save(titledTaskWidgetEntry: TitledTaskWidgetEntry) {
-        widgetsDao.insert(titledTaskWidgetEntry.toTaskWidgetEntity())
+
+    override suspend fun createTaskWidget(taskWidgetEntry: TaskWidgetEntry) {
+        widgetsDao.insert(taskWidgetEntry.toTaskWidgetEntity())
     }
 
     override suspend fun getTitledTaskWidgetById(taskWidgetId: Int): TitledTaskWidgetEntry =
@@ -25,7 +27,8 @@ class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
     override suspend fun getTaskGroupIdByWidgetId(taskWidgetId: Int): Long =
         widgetsDao.getTaskGroupIdByWidgetId(taskWidgetId)
 
-    override suspend fun delete(taskWidgetId: Int) = widgetsDao.deleteWidgetById(taskWidgetId)
+    override suspend fun deleteTaskWidgetById(taskWidgetId: Int) =
+        widgetsDao.deleteWidgetById(taskWidgetId)
 
     override suspend fun updateLinkedTaskGroup(taskWidgetId: Int, taskGroupId: Long) =
         widgetsDao.updateLinkedTaskGroupById(taskWidgetId, taskGroupId)

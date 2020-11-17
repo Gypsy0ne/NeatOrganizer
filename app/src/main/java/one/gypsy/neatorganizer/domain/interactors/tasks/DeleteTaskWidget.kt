@@ -13,7 +13,7 @@ class DeleteTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository)
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(taskWidgetsRepository.delete(params.taskWidgetId))
+                Either.Right(taskWidgetsRepository.deleteTaskWidgetById(params.taskWidgetId))
             }
         } catch (exp: Exception) {
             Either.Left(

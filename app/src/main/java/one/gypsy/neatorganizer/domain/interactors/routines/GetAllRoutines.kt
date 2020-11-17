@@ -11,6 +11,7 @@ import one.gypsy.neatorganizer.utils.Failure
 
 class GetAllRoutines(private val dataSource: RoutinesRepository) :
     BaseUseCase<LiveData<List<Routine>>, Unit>() {
+
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<Routine>>> {
         return try {
             withContext(Dispatchers.IO) {

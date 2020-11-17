@@ -5,12 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
 import one.gypsy.neatorganizer.domain.dto.people.PersonProfile
+import one.gypsy.neatorganizer.domain.interactors.profile.GetPersonProfile.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
 class GetPersonProfile(private val peopleRepository: PeopleRepository) :
-    BaseUseCase<LiveData<PersonProfile>, GetPersonProfile.Params>() {
+    BaseUseCase<LiveData<PersonProfile>, Params>() {
+
     override suspend fun run(params: Params): Either<Failure, LiveData<PersonProfile>> {
         return try {
             withContext(Dispatchers.IO) {
@@ -23,8 +25,8 @@ class GetPersonProfile(private val peopleRepository: PeopleRepository) :
                 )
             )
         }
-
     }
+
     data class Params(val personId: Long)
-    data class GetPersonProfileFailure(val error: Exception): Failure.FeatureFailure(error)
+    data class GetPersonProfileFailure(val error: Exception) : Failure.FeatureFailure(error)
 }
