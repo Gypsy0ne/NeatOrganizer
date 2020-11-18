@@ -14,13 +14,10 @@ import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
 class TaskGroupEntriesAdapter(
     private val currentlySelectedItem: LiveData<TaskGroupEntryItem>,
     private val onSelected: (TaskGroupEntryItem) -> Unit
-) :
-    ListAdapter<TaskGroupEntryItem, TaskGroupEntryViewHolder>(DiffCallback()),
+) : ListAdapter<TaskGroupEntryItem, TaskGroupEntryViewHolder>(DiffCallback()),
     BindableAdapter<TaskGroupEntryItem> {
 
-    override fun bindData(dataCollection: List<TaskGroupEntryItem>) {
-        submitList(dataCollection)
-    }
+    override fun bindData(dataCollection: List<TaskGroupEntryItem>) = submitList(dataCollection)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskGroupEntryViewHolder =
         TaskGroupEntryViewHolder(
@@ -33,10 +30,8 @@ class TaskGroupEntriesAdapter(
             )
         )
 
-
-    override fun onBindViewHolder(holder: TaskGroupEntryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TaskGroupEntryViewHolder, position: Int) =
         holder.bind(getItem(position))
-    }
 
     override fun onViewAttachedToWindow(holder: TaskGroupEntryViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -58,15 +53,11 @@ class TaskGroupEntriesAdapter(
         override fun areItemsTheSame(
             oldItem: TaskGroupEntryItem,
             newItem: TaskGroupEntryItem
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+        ) = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
             oldItem: TaskGroupEntryItem,
             newItem: TaskGroupEntryItem
-        ): Boolean {
-            return oldItem == newItem
-        }
+        ) = oldItem == newItem
     }
 }

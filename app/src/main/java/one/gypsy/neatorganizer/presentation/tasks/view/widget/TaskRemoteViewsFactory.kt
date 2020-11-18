@@ -16,7 +16,6 @@ import one.gypsy.neatorganizer.presentation.tasks.model.toTaskEntryWidgetItem
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-
 //odpowiedzialnosci: mapownaie itemow, sciaganie itemow, tworzenie widokow
 class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
     RemoteViewsService.RemoteViewsFactory, KoinComponent {
@@ -66,18 +65,6 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
         RemoteViews(context.packageName, R.layout.widget_item_task).apply {
             styleTaskTextView(widgetItems[position])
         }
-
-    // Next, we set a fill-intent which will be used to fill-in the pending intent template
-    // which is set on the collection view in StackWidgetProvider.
-    // Next, we set a fill-intent which will be used to fill-in the pending intent template
-    // which is set on the collection view in StackWidgetProvider.
-//        val extras = Bundle().apply {
-//            putInt(StackWidgetProvider.EXTRA_ITEM, position)
-//        }
-//        val fillInIntent = Intent().apply {
-//            putExtras(extras)
-//        }
-//        remoteViews.setOnClickFillInIntent(R.id.widget_item, fillInIntent)
 
     private fun RemoteViews.styleTaskTextView(widgetItem: TaskEntryWidgetItem) {
         val paintFlags = getPaintFlags(widgetItem.done)

@@ -23,17 +23,19 @@ class TaskGroupEntryViewHolder(
         itemBinding.entryContainer.setOnClickListener {
             onSelected(taskGroupEntry)
         }
+        currentlySelectedItem.observe(this) { animateItemSelection(it, taskGroupEntry) }
+    }
 
-        currentlySelectedItem.observe(this) {
-            if (it == taskGroupEntry) {
-                (itemBinding.entryContainer.background as TransitionDrawable).startTransition(
-                    itemView.context.resources.getInteger(
-                        R.integer.short_animation_duration
-                    )
-                )
-            } else {
-                (itemBinding.entryContainer.background as TransitionDrawable).resetTransition()
-            }
-        }
+    private fun animateItemSelection(
+        selectedItem: TaskGroupEntryItem,
+        oldItem: TaskGroupEntryItem
+    ) = if (selectedItem == oldItem) {
+        (itemBinding.entryContainer.background as TransitionDrawable).startTransition(
+            itemView.context.resources.getInteger(
+                R.integer.short_animation_duration
+            )
+        )
+    } else {
+        (itemBinding.entryContainer.background as TransitionDrawable).resetTransition()
     }
 }

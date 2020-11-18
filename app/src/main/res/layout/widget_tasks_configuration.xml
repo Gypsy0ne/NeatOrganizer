@@ -15,14 +15,6 @@
         <variable
             name="tasksAdapter"
             type="one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration.TaskGroupEntriesAdapter" />
-
-        <variable
-            name="cancelButtonListener"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="submitButtonListener"
-            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,28 +80,26 @@
             app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/submitConfiguration"
             style="@style/DialogFormButton.Submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triple_space"
             android:elevation="@dimen/double_space"
-            android:onClick="@{submitButtonListener}"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cancel"
+            app:layout_constraintStart_toEndOf="@+id/cancelConfiguration"
             app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
 
         <Button
-            android:id="@+id/cancel"
+            android:id="@+id/cancelConfiguration"
             style="@style/DialogFormButton.Cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/triple_space"
-            android:onClick="@{cancelButtonListener}"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
-            app:layout_constraintEnd_toStartOf="@+id/submit"
+            app:layout_constraintEnd_toStartOf="@+id/submitConfiguration"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bottomMenu" />

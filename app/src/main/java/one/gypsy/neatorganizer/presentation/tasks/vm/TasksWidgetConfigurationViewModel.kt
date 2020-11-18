@@ -30,52 +30,50 @@ class TasksWidgetConfigurationViewModel(
         }
     }
 
-    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntry>>) {
+    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntry>>) =
         _listedTaskGroups.addSource(taskGroupEntriesObservable) { taskGroupEntries ->
             _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
         }
-    }
 
-    fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) {
+    fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) =
         _selectedTaskGroup.postValue(selectedItem)
-    }
 
     fun onColorPicked(color: Int) {
         pickedColor = color
     }
 
-    fun onSubmitClicked(widgetId: Int) {
-        when {
-            selectedTaskGroup.value == null -> _widgetCreationStatus.postValue(
-                TaskWidgetCreationStatus.TaskNotSelectedStatus
-            )
-            pickedColor == null -> _widgetCreationStatus.postValue(TaskWidgetCreationStatus.ColorNotPickedStatus)
-            else -> submitWidgetCreation(widgetId)
-        }
+    fun onSubmitClicked(widgetId: Int) = when {
+        selectedTaskGroup.value == null -> _widgetCreationStatus.postValue(
+            TaskWidgetCreationStatus.TaskNotSelectedStatus
+        )
+        pickedColor == null -> _widgetCreationStatus.postValue(TaskWidgetCreationStatus.ColorNotPickedStatus)
+        else -> submitWidgetCreation(widgetId)
     }
 
-    private fun submitWidgetCreation(widgetId: Int) {
-        val taskGroup = selectedTaskGroup.value
-        val widgetColor = pickedColor
-        if (taskGroup != null && widgetColor != null) {
+    private fun submitWidgetCreation(widgetId: Int) =
+        createTaskWidgetEntry(widgetId)?.let { widgetEntry ->
             widgetCreationUseCase.invoke(
                 viewModelScope,
-                CreateTaskWidget.Params(
-                    TaskWidgetEntry(
-                        appWidgetId = widgetId,
-                        taskGroupId = taskGroup.id,
-                        widgetColor = widgetColor
-                    )
-                )
+                CreateTaskWidget.Params(widgetEntry)
             ) {
                 it.either({}, ::onCreateTaskWidgetSuccess)
             }
         }
+
+    private fun createTaskWidgetEntry(widgetId: Int): TaskWidgetEntry? {
+        val taskGroup = selectedTaskGroup.value
+        val widgetColor = pickedColor
+        return if (taskGroup != null && widgetColor != null) {
+            TaskWidgetEntry(
+                appWidgetId = widgetId,
+                taskGroupId = taskGroup.id,
+                widgetColor = widgetColor
+            )
+        } else null
     }
 
-    private fun onCreateTaskWidgetSuccess(unit: Unit) {
+    private fun onCreateTaskWidgetSuccess(unit: Unit) =
         _widgetCreationStatus.postValue(TaskWidgetCreationStatus.CreationSuccessStatus)
-    }
 }
 
 sealed class TaskWidgetCreationStatus {

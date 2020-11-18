@@ -28,33 +28,24 @@ class TaskWidgetContentManageViewModel(
         loadTasksData(taskGroupId)
     }
 
-    private fun onGetAllSingleTasksSuccess(tasks: LiveData<List<SingleTaskEntry>>) {
+    private fun onGetAllSingleTasksSuccess(tasks: LiveData<List<SingleTaskEntry>>) =
         _listedTasks.addSource(tasks) {
             _listedTasks.postValue(tasks.value)
         }
-    }
 
-    fun onTaskUpdate(taskItem: TaskListItem.TaskListSubItem) {
-        updateSingleTaskUseCase.invoke(
-            viewModelScope,
-            UpdateSingleTask.Params(singleTask = taskItem.toSingleTask())
-        )
-    }
 
-    fun onRemove(taskItem: TaskListItem.TaskListSubItem) {
-        removeSingleTaskUseCase.invoke(
-            viewModelScope,
-            RemoveSingleTask.Params(taskItem.toSingleTask())
-        )
-    }
+    fun onTaskUpdate(taskItem: TaskListItem.TaskListSubItem) = updateSingleTaskUseCase.invoke(
+        viewModelScope,
+        UpdateSingleTask.Params(singleTask = taskItem.toSingleTask())
+    )
+
+    fun onRemove(taskItem: TaskListItem.TaskListSubItem) = removeSingleTaskUseCase.invoke(
+        viewModelScope,
+        RemoveSingleTask.Params(taskItem.toSingleTask())
+    )
 
     fun loadTasksData(taskGroupId: Long) = getAllSingleTasksUseCase.invoke(
         viewModelScope,
         GetAllSingleTasksByGroupIdObservable.Params(taskGroupId)
-    ) {
-        it.either(
-            {},
-            ::onGetAllSingleTasksSuccess
-        )
-    }
+    ) { it.either({}, ::onGetAllSingleTasksSuccess) }
 }

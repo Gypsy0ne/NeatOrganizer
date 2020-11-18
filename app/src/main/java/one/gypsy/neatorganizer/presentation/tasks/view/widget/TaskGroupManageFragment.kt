@@ -48,7 +48,7 @@ class TaskGroupManageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.setUpContentBinding()
-        observeNewTaskSelectionResult()
+        observeNewGroupSelectionResult()
     }
 
     private fun FragmentTaskGroupManageBinding.setUpContentBinding() {
@@ -81,16 +81,16 @@ class TaskGroupManageFragment : Fragment() {
         }
     }
 
-    private fun observeNewTaskSelectionResult() =
+    private fun observeNewGroupSelectionResult() =
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Long?>("key")
+            ?.getLiveData<Long?>(SELECTED_WIDGET_GROUP_ID_KEY)
             ?.observe(viewLifecycleOwner) {
-                onNewTaskSelected(it)
+                onNewTaskGroupSelected(it)
             }
 
-    private fun onNewTaskSelected(selectedGroupId: Long?) {
+    private fun onNewTaskGroupSelected(selectedGroupId: Long?) {
         if (selectedGroupId != null) {
             tasksViewModel.loadTasksData(selectedGroupId)
         }

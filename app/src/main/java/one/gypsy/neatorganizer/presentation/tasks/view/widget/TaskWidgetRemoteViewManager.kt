@@ -23,10 +23,8 @@ class TaskWidgetRemoteViewManager(
     private val loadTitledTaskWidgetUseCase: LoadTitledTaskWidget,
     private val removeTaskWidgetUseCase: DeleteTaskWidget
 ) : WidgetRemoteViewManager {
+
     override fun updateWidget(appWidgetId: Int) {
-//launch two async, gather data and then loadWidget
-        //or store whole widget data in db and keep every field fresh with relations
-        //When task group is removed npe/failure comes, to make widget clear onFail should send update intent with warning remote view
         CoroutineScope(Dispatchers.IO).launch {
             loadTitledTaskWidgetUseCase.invoke(this, LoadTitledTaskWidget.Params(appWidgetId)) {
                 it.either(
@@ -67,15 +65,13 @@ class TaskWidgetRemoteViewManager(
         setTextColor(R.id.emptyView, taskWidgetEntry.widgetColor)
     }
 
-    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) {
-        setOnClickPendingIntent(
-            R.id.tasksWidgetContainer,
-            createGroupManageActivityIntent(
-                widgetId,
-                MANAGED_GROUP_INVALID_ID
-            )
+    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) = setOnClickPendingIntent(
+        R.id.tasksWidgetContainer,
+        createGroupManageActivityIntent(
+            widgetId,
+            MANAGED_GROUP_INVALID_ID
         )
-    }
+    )
 
     private fun createWidgetUpdateIntent(widgetId: Int) =
         Intent(context, TaskWidgetService::class.java).apply {

@@ -20,6 +20,7 @@ class TasksViewModel(
     private val removeSingleTaskUseCase: RemoveSingleTask,
     private val taskListMapper: TaskListMapper
 ) : ViewModel() {
+
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
     val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
@@ -29,48 +30,38 @@ class TasksViewModel(
 
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
-            it.either(
-                {},
-                ::onGetAllGroupsWithSingleTasksSuccess
-            )
+            it.either({}, ::onGetAllGroupsWithSingleTasksSuccess)
         }
     }
 
-    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) {
+    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) =
         _listedTasks.addSource(taskGroups) {
             viewModelScope.launch {
                 _listedTasks.postValue(
                     taskListMapper.mapTasksToListItems(
                         it,
-                        _listedTasks.value ?: emptyList()
+                        _listedTasks.value.orEmpty()
                     )
                 )
             }
         }
-    }
 
-    fun onExpand(headerItem: TaskListItem.TaskListHeader) {
+    fun onExpand(headerItem: TaskListItem.TaskListHeader) =
         _listedTasks.postValue(taskListMapper.updateExpansion(headerItem.id, _listedTasks.value))
-    }
 
-    fun onHeaderUpdate(headerItem: TaskListItem.TaskListHeader) {
+    fun onHeaderUpdate(headerItem: TaskListItem.TaskListHeader) =
         updateSingleTaskGroupUseCase.invoke(
             viewModelScope,
             UpdateSingleTaskGroupWithTasks.Params(singleTaskGroupWithTasks = headerItem.toSingleTaskGroup())
         )
-    }
 
-    fun onTaskUpdate(subItem: TaskListItem.TaskListSubItem) {
-        updateSingleTaskUseCase.invoke(
-            viewModelScope,
-            UpdateSingleTask.Params(singleTask = subItem.toSingleTask())
-        )
-    }
+    fun onTaskUpdate(subItem: TaskListItem.TaskListSubItem) = updateSingleTaskUseCase.invoke(
+        viewModelScope,
+        UpdateSingleTask.Params(singleTask = subItem.toSingleTask())
+    )
 
-    fun onRemove(subItem: TaskListItem.TaskListSubItem) {
-        removeSingleTaskUseCase.invoke(
-            viewModelScope,
-            RemoveSingleTask.Params(subItem.toSingleTask())
-        )
-    }
+    fun onRemove(subItem: TaskListItem.TaskListSubItem) = removeSingleTaskUseCase.invoke(
+        viewModelScope,
+        RemoveSingleTask.Params(subItem.toSingleTask())
+    )
 }
