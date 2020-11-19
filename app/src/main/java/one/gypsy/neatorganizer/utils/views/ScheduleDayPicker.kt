@@ -73,10 +73,10 @@ class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(co
             setAutoSizeTextTypeUniformWithConfiguration(6, 24, 1, TypedValue.COMPLEX_UNIT_SP)
             weight = 1f
             setMargins(
-                getDimen(R.dimen.margin_start_schedule_days),
-                getDimen(R.dimen.margin_top_schedule_days),
-                getDimen(R.dimen.margin_end_schedule_days),
-                getDimen(R.dimen.margin_bottom_schedule_days)
+                getDimen(R.dimen.normal_25),
+                getDimen(R.dimen.normal_50),
+                getDimen(R.dimen.normal_25),
+                getDimen(R.dimen.normal_50)
             )
             text = context.resources.getStringArray(R.array.schedule_days_short)[index]
         }

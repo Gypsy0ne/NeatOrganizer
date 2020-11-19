@@ -15,7 +15,7 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_view_dialog_fragment_add_confirmation_icon"
             style="@style/LottieDialogHeader"
-            android:padding="@dimen/small_space"
+            android:padding="@dimen/normal_25"
             app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_add_routine_task_content"
             app:layout_constraintEnd_toEndOf="@+id/constraint_layout_dialog_fragment_add_routine_task_content"
             app:layout_constraintStart_toStartOf="@+id/constraint_layout_dialog_fragment_add_routine_task_content"
@@ -33,9 +33,9 @@
             <EditText
                 android:id="@+id/edit_text_dialog_fragment_add_task_content"
                 style="@style/DialogFormEditText"
-                android:layout_marginStart="@dimen/double_space"
-                android:layout_marginTop="@dimen/double_space"
-                android:layout_marginEnd="@dimen/double_space"
+                android:layout_marginStart="@dimen/normal_200"
+                android:layout_marginTop="@dimen/normal_200"
+                android:layout_marginEnd="@dimen/normal_200"
                 android:drawableStart="@drawable/ic_group_add_white_24dp"
                 android:hint="@string/add_routine_task_dialog_fragment_content_hint"
                 android:text="@={viewModel.taskTitle}"
@@ -48,24 +48,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/DialogFormButton.Submit"
-                android:layout_margin="@dimen/triple_space"
+                android:layout_margin="@dimen/normal_300"
                 android:onClick="@{() -> viewModel.addRoutineTask()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_dialog_fragment_add_task_next"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
 
             <Button
                 android:id="@+id/button_dialog_fragment_add_task_next"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/triple_space"
+                android:layout_margin="@dimen/normal_300"
                 style="@style/DialogFormButton.Next"
                 android:onClick="@{() -> viewModel.addNextRoutineTask()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_dialog_fragment_add_task_submit"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
         </androidx.constraintlayout.widget.ConstraintLayout>

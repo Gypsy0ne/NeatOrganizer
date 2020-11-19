@@ -3,27 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <data>
+
         <variable
             name="viewModel"
             type="one.gypsy.neatorganizer.presentation.profile.vm.InteractionEntryViewModel" />
     </data>
+
     <RelativeLayout
         android:id="@+id/relative_layout_item_person_content"
         android:layout_width="wrap_content"
-        android:layout_height="108dp"
-        android:layout_margin="4dp"
-   android:padding="8dp"
+        android:layout_height="@dimen/normal_1300"
+        android:layout_margin="@dimen/normal_50"
+        android:elevation="@dimen/normal_50"
         android:background="@drawable/item_person_white_background"
-        android:elevation="4dp">
+        android:padding="@dimen/normal_100">
 
         <ImageView
             android:id="@+id/image_view_item_interaction_rating"
-            android:layout_width="@dimen/width_item_person_avatar_image"
-            android:layout_height="@dimen/height_item_person_avatar_image"
-            android:padding="6dp"
+            android:layout_width="@dimen/normal_800"
+            android:layout_height="@dimen/normal_800"
+            android:layout_margin="@dimen/normal_100"
             interactionRatingIcon="@{viewModel.interactionEntry.rating}"
-            android:layout_margin="8dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="@dimen/normal_50"
+            android:padding="@dimen/normal_75"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -33,10 +35,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:textColor="@color/gray"
-            app:autoSizeMaxTextSize="@dimen/max_text_size_item_person_date_of_birth_text"
+            app:autoSizeMaxTextSize="@dimen/text_normal_75"
             dateText="@{viewModel.interactionEntry.interactionDate}"
             android:layout_alignParentBottom="true"
-            app:autoSizeMinTextSize="@dimen/min_text_size_item_person_date_of_birth_text"
+            app:autoSizeMinTextSize="@dimen/text_normal_50"
             android:layout_below="@id/image_view_item_interaction_rating"
             android:layout_alignEnd="@id/image_view_item_interaction_rating"
             android:layout_alignStart="@id/image_view_item_interaction_rating"/>

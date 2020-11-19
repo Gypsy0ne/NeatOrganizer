@@ -51,4 +51,7 @@
     <string name="task_widget_creation_color_warning">Pick a color</string>
     <string name="task_widget_creation_task_warning">Select task group</string>
     <string name="widget_tasks_empty_view_message">No items to show</string>
+    <string name="task_group_selection_title">Select new task group</string>
+    <string name="item_person_description">Sample description goes in here</string>
+    <string name="task_widget_missing_content_message">Task group is missing...\ntap to select new one</string>
 </resources>

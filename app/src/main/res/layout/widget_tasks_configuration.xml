@@ -20,7 +20,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F3F3F3">
+        android:background="@color/background_white">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksGroups"
@@ -28,12 +28,12 @@
             adapterData="@{configurationViewModel.listedTaskGroups}"
             hasFixedSize="@{true}"
             layoutManager="@{layoutManager}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
             android:background="@drawable/rounded_bottom_background"
-            android:elevation="@dimen/small_space"
-            android:paddingHorizontal="@dimen/small_space"
-            android:paddingTop="@dimen/regular_space"
+            android:elevation="@dimen/normal_25"
+            android:paddingHorizontal="@dimen/normal_25"
+            android:paddingTop="@dimen/normal_100"
             app:layout_constraintBottom_toTopOf="@+id/taskGroupsListGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,8 +57,8 @@
             android:id="@+id/palette"
             onColorChanged="@{(color)->configurationViewModel.onColorPicked(color)}"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:elevation="@dimen/small_space"
+            android:layout_height="@dimen/normal_0"
+            android:elevation="@dimen/normal_25"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/bottomMenuGuideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,14 +66,14 @@
             app:layout_constraintTop_toBottomOf="@id/taskGroupsListGuideline"
             app:spectrum_autoPadding="true"
             app:spectrum_colors="@array/demo_colors"
-            app:spectrum_columnCount="6" />
+            app:spectrum_columnCount="@integer/color_palette_columns" />
 
         <View
             android:id="@+id/bottomMenu"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
             android:background="@drawable/rounded_top_background"
-            android:elevation="@dimen/small_space"
+            android:elevation="@dimen/normal_25"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,25 +82,23 @@
         <Button
             android:id="@+id/submitConfiguration"
             style="@style/DialogFormButton.Submit"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/triple_space"
-            android:elevation="@dimen/double_space"
+            android:layout_margin="@dimen/normal_300"
+            android:elevation="@dimen/normal_200"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cancelConfiguration"
             app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
 
         <Button
             android:id="@+id/cancelConfiguration"
             style="@style/DialogFormButton.Cancel"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/triple_space"
+            android:layout_margin="@dimen/normal_300"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toStartOf="@+id/submitConfiguration"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
 

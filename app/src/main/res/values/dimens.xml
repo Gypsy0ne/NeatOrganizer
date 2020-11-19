@@ -1,68 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--Universal dimens-->
-    <dimen name="triple_space">24dp</dimen>
-    <dimen name="double_space">16dp</dimen>
-    <dimen name="large_space">12dp</dimen>
-    <dimen name="regular_space">8dp</dimen>
-    <dimen name="medium_space">4dp</dimen>
-    <dimen name="small_space">2dp</dimen>
+    <dimen name="normal_4000">320dp</dimen>
+    <dimen name="normal_1400">112dp</dimen>
+    <dimen name="normal_1300">104dp</dimen>
+    <dimen name="normal_1200">96dp</dimen>
+    <dimen name="normal_1000">80dp</dimen>
+    <dimen name="normal_900">72dp</dimen>
+    <dimen name="normal_800">64dp</dimen>
+    <dimen name="normal_700">56dp</dimen>
+    <dimen name="normal_600">48dp</dimen>
+    <dimen name="normal_500">40dp</dimen>
+    <dimen name="normal_400">32dp</dimen>
+    <dimen name="normal_300">24dp</dimen>
+    <dimen name="normal_200">16dp</dimen>
+    <dimen name="normal_150">12dp</dimen>
+    <dimen name="normal_125">10dp</dimen>
+    <dimen name="normal_100">8dp</dimen>
+    <dimen name="normal_75">6dp</dimen>
+    <dimen name="normal_50">4dp</dimen>
+    <dimen name="normal_25">2dp</dimen>
+    <dimen name="normal_0">0dp</dimen>
     <!--End of universal dimens-->
 
+    <!--Helper dimens-->
+    <dimen name="helper_200">1dp</dimen>
+    <dimen name="helper_100">0.5dp</dimen>
+    <!--End of helper dimens-->
+
     <!--Text size universal dimens-->
-    <dimen name="large_text_size">32sp</dimen>
-    <dimen name="regular_text_size">24sp</dimen>
-    <dimen name="medium_text_size">18sp</dimen>
-    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="text_normal_200">48sp</dimen>
+    <dimen name="text_normal_125">30sp</dimen>
+    <dimen name="text_normal_100">24sp</dimen>
+    <dimen name="text_normal_75">18sp</dimen>
+    <dimen name="text_normal_50">12sp</dimen>
+    <dimen name="text_normal_25">6sp</dimen>
     <!--End of text size universal dimens-->
 
-    <!--Icons-->
-    <dimen name="large_icon_size">32sp</dimen>
-    <dimen name="regular_icon_size">24sp</dimen>
-    <!--End of icons-->
-
-
+    <!--Deprecated-->
     <dimen name="corners_radius_person_profile_data_background">16dp</dimen>
     <dimen name="corners_radius_item_person_background">16dp</dimen>
-    <dimen name="width_item_person_avatar_image">64dp</dimen>
-    <dimen name="height_item_person_avatar_image">64dp</dimen>
-    <dimen name="max_text_size_item_person_date_of_birth_text">16sp</dimen>
-    <dimen name="min_text_size_item_person_date_of_birth_text">12sp</dimen>
-    <dimen name="max_text_size_item_person_name">22sp</dimen>
-    <dimen name="min_text_size_item_person_name">16sp</dimen>
     <dimen name="max_text_size_item_person_description">18sp</dimen>
     <dimen name="min_text_size_item_person_description">12sp</dimen>
-    <dimen name="width_dialog_fragment_add_person_thumbnail_slot">80dp</dimen>
-    <dimen name="height_dialog_fragment_add_person_thumbnail_slot">80dp</dimen>
     <dimen name="height_dialog_fragment_add_person_form_text">40dp</dimen>
     <dimen name="height_dialog_fragment_add_person_date_picker">144dp</dimen>
     <dimen name="min_text_size_dialog_add_person_confirm_text">14sp</dimen>
     <dimen name="max_text_size_dialog_add_person_confirm_text">20sp</dimen>
     <dimen name="max_text_size_dialog_add_person_date_title">18sp</dimen>
     <dimen name="min_text_size_dialog_add_person_date_title">14sp</dimen>
-    <dimen name="height_activity_home_bottom_navigation">56dp</dimen>
     <!--Lazy date picker dimens-->
     <dimen name="lazy_date_picker_width_case" tools:override="true">12dp</dimen>
     <dimen name="lazy_date_picker_height_focus" tools:override="true">2.5dp</dimen>
     <dimen name="lazy_date_picker_width_margin" tools:override="true">1dp</dimen>
     <dimen name="lazy_date_picker_width_space" tools:override="true">6dp</dimen>
-    <dimen name="height_item_person_text_view">24dp</dimen>
-    <dimen name="height_item_grouped_task_container">48dp</dimen>
-    <dimen name="padding_start_dialog_fragment_button">40dp</dimen>
-    <dimen name="padding_top_dialog_fragment_button">8dp</dimen>
-    <dimen name="padding_end_dialog_fragment_button">40dp</dimen>
-    <dimen name="padding_bottom_dialog_fragment_button">8dp</dimen>
-    <dimen name="height_view_schedule_day_indicator">64dp</dimen>
     <!--End of Lazy date picker dimens-->
 
-    <!--    -->
-    <dimen name="margin_top_schedule_days">4dp</dimen>
-    <dimen name="margin_bottom_schedule_days">4dp</dimen>
-    <dimen name="margin_start_schedule_days">2dp</dimen>
-    <dimen name="margin_end_schedule_days">2dp</dimen>
-    <dimen name="height_dialog_lottie_animated_header">96dp</dimen>
-    <dimen name="width_dialog_lottie_animated_header">96dp</dimen>
-    <dimen name="padding_top_dialog_content_container">48dp</dimen>
-
     <dimen name="widget_margin">0dp</dimen>
+    <dimen name="widget_100">40dp</dimen>
+    <dimen name="widget_200">110dp</dimen>
 </resources>

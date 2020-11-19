@@ -42,26 +42,26 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:autoSizeMaxTextSize="@dimen/large_text_size"
-                android:autoSizeMinTextSize="@dimen/medium_text_size"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_600"
+                android:autoSizeMaxTextSize="@dimen/text_normal_125"
+                android:autoSizeMinTextSize="@dimen/text_normal_75"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
-                android:padding="@dimen/medium_space"
-                android:text="Select new task group"
-                android:textSize="@dimen/large_text_size"
+                android:padding="@dimen/normal_50"
+                android:text="@string/task_group_selection_title"
+                android:textSize="@dimen/text_normal_125"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="320dp"
-                android:layout_marginTop="@dimen/double_space"
-                android:layout_marginBottom="@dimen/triple_space"
-                app:cardCornerRadius="@dimen/double_space"
-                app:cardElevation="0dp"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_4000"
+                android:layout_marginTop="@dimen/normal_200"
+                android:layout_marginBottom="@dimen/normal_300"
+                app:cardCornerRadius="@dimen/normal_200"
+                app:cardElevation="@dimen/normal_0"
                 app:layout_constraintBottom_toTopOf="@+id/selectionCancelation"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,30 +76,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
-                    android:paddingHorizontal="@dimen/medium_space" />
+                    android:paddingHorizontal="@dimen/normal_50" />
             </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/selectionCancelation"
                 style="@style/DialogFormButton.Cancel"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/triple_space"
+                android:layout_margin="@dimen/normal_300"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/selectionConfirmation"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/selectionConfirmation"
                 style="@style/DialogFormButton.Submit"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/triple_space"
-
+                android:layout_margin="@dimen/normal_300"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/selectionCancelation" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
