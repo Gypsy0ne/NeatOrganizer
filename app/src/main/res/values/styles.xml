@@ -80,7 +80,7 @@
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
 
-    <style name="DialogFormButton.Submit" parent="DialogFormButton">
+    <style name="DialogFormButton.Submit">
         <item name="android:background">
             @drawable/dialog_yellow_clickable_view_background
         </item>
@@ -94,7 +94,7 @@
         <item name="android:text">@string/next_button_dialog_fragment_text</item>
     </style>
 
-    <style name="DialogFormButton.Cancel" parent="DialogFormButton">
+    <style name="DialogFormButton.Cancel">
         <item name="android:background">@drawable/dialog_red_clickable_view_background</item>
         <item name="android:drawableStart">@drawable/ic_close_white_24dp</item>
         <item name="drawableTint">@color/dark_red</item>
