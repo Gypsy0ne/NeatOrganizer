@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.data.repositories.people
 import one.gypsy.neatorganizer.domain.datasource.people.PeopleDataSource
 import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
 
-class PeopleRepository(var dataSource: PeopleDataSource) {
+class PeopleRepository(private val dataSource: PeopleDataSource) {
 
     suspend fun addPerson(personEntry: PersonEntry) = dataSource.add(personEntry)
 

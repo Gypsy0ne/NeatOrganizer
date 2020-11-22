@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class UpdateRoutineSchedule(var routineSchedulesRepository: RoutineSchedulesRepository) :
+class UpdateRoutineSchedule(private val routineSchedulesRepository: RoutineSchedulesRepository) :
     BaseUseCase<Unit, UpdateRoutineSchedule.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddTaskGroupViewModel(var addTaskGroupUseCase: AddTaskGroup) : ViewModel() {
+class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : ViewModel() {
 
     val taskGroupTitle = MutableLiveData<String>()
 
@@ -20,7 +20,7 @@ class AddTaskGroupViewModel(var addTaskGroupUseCase: AddTaskGroup) : ViewModel()
         addTaskGroupUseCase.invoke(
             viewModelScope,
             AddTaskGroup.Params(
-                SingleTaskGroup(
+                SingleTaskGroupWithTasks(
                     taskGroupTitle.value.orEmpty()
                 )
             )

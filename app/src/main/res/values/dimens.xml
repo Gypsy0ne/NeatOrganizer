@@ -13,6 +13,7 @@
     <dimen name="large_text_size">32sp</dimen>
     <dimen name="regular_text_size">24sp</dimen>
     <dimen name="medium_text_size">18sp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
     <!--End of text size universal dimens-->
 
     <!--Icons-->
@@ -49,7 +50,7 @@
     <dimen name="height_item_grouped_task_container">48dp</dimen>
     <dimen name="padding_start_dialog_fragment_button">40dp</dimen>
     <dimen name="padding_top_dialog_fragment_button">8dp</dimen>
-    <dimen name="padding_end_dialog_fragment_button">48dp</dimen>
+    <dimen name="padding_end_dialog_fragment_button">40dp</dimen>
     <dimen name="padding_bottom_dialog_fragment_button">8dp</dimen>
     <dimen name="height_view_schedule_day_indicator">64dp</dimen>
     <!--End of Lazy date picker dimens-->
@@ -62,5 +63,11 @@
     <dimen name="height_dialog_lottie_animated_header">96dp</dimen>
     <dimen name="width_dialog_lottie_animated_header">96dp</dimen>
     <dimen name="padding_top_dialog_content_container">48dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
     <!---->
 </resources>

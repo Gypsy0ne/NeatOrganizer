@@ -1,17 +1,17 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
+import one.gypsy.neatorganizer.binding.setEditionEnabled
 import one.gypsy.neatorganizer.databinding.ItemTaskBinding
 import one.gypsy.neatorganizer.presentation.listing.ListedSubItem
 import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.utils.extensions.hide
-import one.gypsy.neatorganizer.utils.extensions.requestEdit
 import one.gypsy.neatorganizer.utils.extensions.show
 
 class TaskSubItemViewHolder(
-    val itemBinding: ItemTaskBinding,
-    val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
+    private val itemBinding: ItemTaskBinding,
+    private val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null
 ) : TaskViewHolder(itemBinding.root), ListedSubItem<TaskListItem.TaskListSubItem> {
 
     override lateinit var viewData: TaskListItem.TaskListSubItem
@@ -62,25 +62,17 @@ class TaskSubItemViewHolder(
         }
     }
 
-    private fun changeEditionAttributes() {
-        itemBinding.editTextItemTaskName.apply {
-            isFocusable = viewData.edited
-            isFocusableInTouchMode = viewData.edited
-            isEnabled = viewData.edited
-            isClickable = viewData.edited
-        }
-    }
+    private fun changeEditionAttributes() =
+        setEditionEnabled(itemBinding.editTextItemTaskName, viewData.edited)
 
     private fun onEditionFinish() {
         itemBinding.buttonItemTaskSubmit.hide()
         itemBinding.checkBoxItemTaskDone.show()
-        itemBinding.editTextItemTaskName.clearFocus()
     }
 
     private fun onEditionStart() {
         itemBinding.buttonItemTaskSubmit.show()
         itemBinding.checkBoxItemTaskDone.hide()
-        itemBinding.editTextItemTaskName.requestEdit()
     }
 
 
@@ -98,7 +90,7 @@ class TaskSubItemViewHolder(
                 viewData = viewData.copy(
                     name = itemBinding.editTextItemTaskName.text.toString()
                 )
-                clickListener.onEditionSubmitClick(viewData)
+                clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
                 clearEditionStatus()
             }
@@ -111,7 +103,7 @@ class TaskSubItemViewHolder(
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskRoot.resetStatus()
-            clickListener.onRemoveClick(viewData)
+            clickListener?.onRemoveClick?.invoke(viewData)
         }
     }
 
@@ -120,7 +112,7 @@ class TaskSubItemViewHolder(
             viewData = viewData.copy(
                 done = !viewData.done
             )
-            clickListener.onDoneClick(viewData)
+            clickListener?.onDoneClick?.invoke(viewData)
         }
     }
 }

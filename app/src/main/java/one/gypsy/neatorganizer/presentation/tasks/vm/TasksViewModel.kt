@@ -3,23 +3,22 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskGroup
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTaskGroup
-import one.gypsy.neatorganizer.utils.Failure
 
 class TasksViewModel(
-    var getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
-    var updateSingleTaskGroupUseCase: UpdateTaskGroup,
-    var updateSingleTaskUseCase: UpdateSingleTask,
-    var removeSingleSingleTaskUseCase: RemoveSingleTask,
-    var taskListMapper: TaskListMapper
+    getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
+    private val updateSingleTaskGroupUseCase: UpdateSingleTaskGroupWithTasks,
+    private val updateSingleTaskUseCase: UpdateSingleTask,
+    private val removeSingleTaskUseCase: RemoveSingleTask,
+    private val taskListMapper: TaskListMapper
 ) : ViewModel() {
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
     val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
@@ -31,13 +30,13 @@ class TasksViewModel(
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                ::onGetAllGroupsWithSingleTasksFailure,
+                {},
                 ::onGetAllGroupsWithSingleTasksSuccess
             )
         }
     }
 
-    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroup>>) {
+    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) {
         _listedTasks.addSource(taskGroups) {
             viewModelScope.launch {
                 _listedTasks.postValue(
@@ -50,8 +49,6 @@ class TasksViewModel(
         }
     }
 
-    private fun onGetAllGroupsWithSingleTasksFailure(failure: Failure) {}
-
     fun onExpand(headerItem: TaskListItem.TaskListHeader) {
         _listedTasks.postValue(taskListMapper.updateExpansion(headerItem.id, _listedTasks.value))
     }
@@ -59,7 +56,7 @@ class TasksViewModel(
     fun onHeaderUpdate(headerItem: TaskListItem.TaskListHeader) {
         updateSingleTaskGroupUseCase.invoke(
             viewModelScope,
-            UpdateTaskGroup.Params(singleTaskGroup = headerItem.toSingleTaskGroup())
+            UpdateSingleTaskGroupWithTasks.Params(singleTaskGroupWithTasks = headerItem.toSingleTaskGroup())
         )
     }
 
@@ -71,7 +68,7 @@ class TasksViewModel(
     }
 
     fun onRemove(subItem: TaskListItem.TaskListSubItem) {
-        removeSingleSingleTaskUseCase.invoke(
+        removeSingleTaskUseCase.invoke(
             viewModelScope,
             RemoveSingleTask.Params(subItem.toSingleTask())
         )

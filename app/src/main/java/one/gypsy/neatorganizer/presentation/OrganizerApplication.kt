@@ -36,7 +36,9 @@ class OrganizerApplication : Application() {
                 //Routines Reset
                 routinesResetDataSourceModule,
                 routinesResetRepositoryModule,
-                routinesResetUtilsModule
+                routinesResetUtilsModule,
+                //Widget
+                serviceModule
             )
         }
     }

@@ -11,6 +11,7 @@ import one.gypsy.neatorganizer.data.database.dao.routines.RoutineTasksDao
 import one.gypsy.neatorganizer.data.database.dao.routines.RoutinesDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
+import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
 import one.gypsy.neatorganizer.data.database.entity.people.InteractionEntryEntity
 import one.gypsy.neatorganizer.data.database.entity.people.PersonEntity
 import one.gypsy.neatorganizer.data.database.entity.routines.RoutineEntity
@@ -19,6 +20,7 @@ import one.gypsy.neatorganizer.data.database.entity.routines.RoutineTaskEntity
 import one.gypsy.neatorganizer.data.database.entity.routines.reset.RoutineSnapshotEntity
 import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskEntity
 import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
+import one.gypsy.neatorganizer.data.database.entity.tasks.TaskWidgetEntity
 
 @Database(
     entities = [PersonEntity::class,
@@ -28,7 +30,8 @@ import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
         RoutineEntity::class,
         RoutineScheduleEntity::class,
         RoutineTaskEntity::class,
-        RoutineSnapshotEntity::class],
+        RoutineSnapshotEntity::class,
+        TaskWidgetEntity::class],
     version = 1
 )
 @TypeConverters(Converters::class)
@@ -41,4 +44,5 @@ abstract class OrganizerDatabase : RoomDatabase() {
     abstract fun routinesDao(): RoutinesDao
     abstract fun routinesSchedulesDao(): RoutineSchedulesDao
     abstract fun routineTasksDao(): RoutineTasksDao
+    abstract fun taskWidgetDao(): TaskWidgetsDao
 }

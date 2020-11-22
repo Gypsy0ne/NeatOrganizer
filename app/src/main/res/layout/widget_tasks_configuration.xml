@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="configurationViewModel"
+            type="one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetConfigurationViewModel" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <variable
+            name="tasksAdapter"
+            type="one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration.TaskGroupEntriesAdapter" />
+
+        <variable
+            name="cancelButtonListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="submitButtonListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F3F3F3">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasksGroups"
+            adapter="@{tasksAdapter}"
+            adapterData="@{configurationViewModel.listedTaskGroups}"
+            hasFixedSize="@{true}"
+            layoutManager="@{layoutManager}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_bottom_background"
+            android:elevation="@dimen/small_space"
+            android:paddingHorizontal="@dimen/small_space"
+            android:paddingTop="@dimen/regular_space"
+            app:layout_constraintBottom_toTopOf="@+id/taskGroupsListGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/taskGroupsListGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomMenuGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.89" />
+
+        <com.thebluealliance.spectrum.SpectrumPalette
+            android:id="@+id/palette"
+            onColorChanged="@{(color)->configurationViewModel.onColorPicked(color)}"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:elevation="@dimen/small_space"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/bottomMenuGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/taskGroupsListGuideline"
+            app:spectrum_autoPadding="true"
+            app:spectrum_colors="@array/demo_colors"
+            app:spectrum_columnCount="6" />
+
+        <View
+            android:id="@+id/bottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_top_background"
+            android:elevation="@dimen/small_space"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/DialogFormButton.Submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/triple_space"
+            android:elevation="@dimen/double_space"
+            android:onClick="@{submitButtonListener}"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cancel"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="@style/DialogFormButton.Cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/triple_space"
+            android:onClick="@{cancelButtonListener}"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toStartOf="@+id/submit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

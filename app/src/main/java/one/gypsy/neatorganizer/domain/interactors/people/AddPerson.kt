@@ -8,7 +8,8 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddPerson(var peopleRepository: PeopleRepository) : BaseUseCase<Long, AddPerson.Params>() {
+class AddPerson(private val peopleRepository: PeopleRepository) :
+    BaseUseCase<Long, AddPerson.Params>() {
     override suspend fun run(params: Params): Either<Failure, Long> {
         return try {
             withContext(Dispatchers.IO) {

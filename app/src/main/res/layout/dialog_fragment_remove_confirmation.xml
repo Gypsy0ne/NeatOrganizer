@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="submitClickListener"
             type="android.view.View.OnClickListener" />
@@ -10,8 +11,10 @@
         <variable
             name="subItemsCount"
             type="int" />
-        
-        <variable name="removeGroupType" type="String"/>
+
+        <variable
+            name="removeGroupType"
+            type="String" />
 
     </data>
 
@@ -32,7 +35,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_dialog_fragment_remove_content"
-            style="@style/DialogContentWindow"
+            style="@style/DialogContentWindow.Iconed"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -40,11 +43,10 @@
             <TextView
                 android:id="@+id/text_view_dialog_fragment_remove_confirmation_header"
                 android:layout_width="0dp"
-                removeItemsCount="@{subItemsCount}"
-                removeGroupTypeName="@{removeGroupType}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/double_space"
                 android:layout_marginBottom="@dimen/regular_space"
+                android:text="@{@plurals/subItemsCount(subItemsCount, subItemsCount, removeGroupType)}"
                 android:textAlignment="center"
                 android:textSize="@dimen/regular_text_size"
                 app:layout_constraintBottom_toTopOf="@id/text_view_dialog_fragment_remove_confirmation_content"
@@ -66,6 +68,8 @@
 
             <Button
                 android:id="@+id/button_dialog_fragment_remove_confirmation_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/DialogFormButton.Submit"
                 android:layout_marginTop="@dimen/triple_space"
                 android:layout_marginBottom="@dimen/triple_space"

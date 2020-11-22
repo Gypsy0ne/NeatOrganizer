@@ -1,11 +1,13 @@
 package one.gypsy.neatorganizer.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetSynchronizationService
 import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
 
@@ -20,10 +22,11 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setUpActionBar()
         setUpNavigationListener()
+        startWidgetSynchronizationService()
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(toolbar_activity_home)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
@@ -36,6 +39,10 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun startWidgetSynchronizationService() =
+        Intent(this, TaskWidgetSynchronizationService::class.java).also { intent ->
+            startService(intent)
+        }
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        val navigation = findNavController(R.id.fragment_activity_home_nav_container)
 //        return item.onNavDestinationSelected(navigation) || super.onOptionsItemSelected(item)
@@ -44,6 +51,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         setUpBottomNavigation()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, TaskWidgetSynchronizationService::class.java))
     }
 
     override fun onSupportNavigateUp(): Boolean {

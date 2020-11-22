@@ -3,17 +3,17 @@ package one.gypsy.neatorganizer.presentation.tasks.view
 
 import androidx.navigation.findNavController
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
+import one.gypsy.neatorganizer.binding.setEditionEnabled
 import one.gypsy.neatorganizer.databinding.ItemTaskHeaderBinding
 import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.listing.ListedHeader
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.utils.extensions.hide
-import one.gypsy.neatorganizer.utils.extensions.requestEdit
 import one.gypsy.neatorganizer.utils.extensions.show
 
 class TaskHeaderViewHolder(
-    val itemBinding: ItemTaskHeaderBinding,
-    val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>
+    private val itemBinding: ItemTaskHeaderBinding,
+    private val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>? = null
 ) : TaskViewHolder(itemBinding.root), ListedHeader<TaskListItem.TaskListHeader> {
 
     override lateinit var viewData: TaskListItem.TaskListHeader
@@ -53,23 +53,16 @@ class TaskHeaderViewHolder(
     private fun onEditFinish() {
         itemBinding.buttonItemTaskHeaderSubmit.hide()
         itemBinding.buttonItemTaskHeaderExpand.show()
-        itemBinding.editTextItemTaskHeaderName.clearFocus()
     }
 
     private fun onEditStart() {
         itemBinding.buttonItemTaskHeaderSubmit.show()
         itemBinding.buttonItemTaskHeaderExpand.hide()
-        itemBinding.editTextItemTaskHeaderName.requestEdit()
     }
 
-    private fun changeNameEditionAttributes() {
-        itemBinding.editTextItemTaskHeaderName.apply {
-            isFocusable = viewData.edited
-            isFocusableInTouchMode = viewData.edited
-            isEnabled = viewData.edited
-            isClickable = viewData.edited
-        }
-    }
+    private fun changeNameEditionAttributes() =
+        setEditionEnabled(itemBinding.editTextItemTaskHeaderName, viewData.edited)
+
 
     override fun setUpSwipeMenuBehavior() {
         itemBinding.swipeLayoutItemTaskHeaderRoot.setMenuSwipeListener(object :
@@ -93,7 +86,7 @@ class TaskHeaderViewHolder(
     override fun setUpExpanderListener() {
         itemBinding.setExpanderClickListener {
             viewData = viewData.copy(expanded = !viewData.expanded)
-            clickListener.onExpanderClick(viewData)
+            clickListener?.onExpanderClick?.invoke(viewData)
         }
     }
 
@@ -123,7 +116,7 @@ class TaskHeaderViewHolder(
                 viewData = viewData.copy(
                     name = itemBinding.editTextItemTaskHeaderName.text.toString()
                 )
-                clickListener.onEditionSubmitClick(viewData)
+                clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
                 clearEditionStatus()
             }
@@ -136,7 +129,7 @@ class TaskHeaderViewHolder(
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {
             itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            clickListener.onRemoveClick(viewData)
+            clickListener?.onRemoveClick?.invoke(viewData)
         }
     }
 }

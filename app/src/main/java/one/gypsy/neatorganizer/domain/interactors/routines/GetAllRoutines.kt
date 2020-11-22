@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class GetAllRoutines(var dataSource: RoutinesRepository) :
+class GetAllRoutines(private val dataSource: RoutinesRepository) :
     BaseUseCase<LiveData<List<Routine>>, Unit>() {
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<Routine>>> {
         return try {

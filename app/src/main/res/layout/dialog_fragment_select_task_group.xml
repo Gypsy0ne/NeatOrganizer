@@ -1,0 +1,108 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetSelectionViewModel" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <variable
+            name="tasksAdapter"
+            type="one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration.TaskGroupEntriesAdapter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animatedDialogIcon"
+            style="@style/LottieDialogHeader"
+            app:layout_constraintBottom_toTopOf="@+id/dialogContainer"
+            app:layout_constraintEnd_toEndOf="@+id/dialogContainer"
+            app:layout_constraintStart_toStartOf="@+id/dialogContainer"
+            app:layout_constraintTop_toTopOf="@+id/dialogContainer"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_add_task_group_dialog" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialogContainer"
+            style="@style/DialogContentWindow.Iconed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:autoSizeMaxTextSize="@dimen/large_text_size"
+                android:autoSizeMinTextSize="@dimen/medium_text_size"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:padding="@dimen/medium_space"
+                android:text="Select new task group"
+                android:textSize="@dimen/large_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="320dp"
+                android:layout_marginTop="@dimen/double_space"
+                android:layout_marginBottom="@dimen/triple_space"
+                app:cardCornerRadius="@dimen/double_space"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/selectionCancelation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/taskGroups"
+                    adapter="@{tasksAdapter}"
+                    adapterData="@{viewModel.listedTaskGroups}"
+                    hasFixedSize="@{true}"
+                    layoutManager="@{layoutManager}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="@dimen/medium_space" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/selectionCancelation"
+                style="@style/DialogFormButton.Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/triple_space"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/selectionConfirmation"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/selectionConfirmation"
+                style="@style/DialogFormButton.Submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/triple_space"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/selectionCancelation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

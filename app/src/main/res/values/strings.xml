@@ -6,7 +6,8 @@
     <string name="activity_home_bottom_navigation_menu_tasks">Tasks</string>
     <string name="activity_home_bottom_navigation_menu_timer">Timer</string>
     <string name="add_person_dialog_fragment_image_pick_error">Error while loading the image</string>
-    <string name="submit_button_dialog_fragment_text">Submit</string>
+    <string name="submit_button_dialog_text">Submit</string>
+    <string name="cancel_button_dialog_text">Cancel</string>
     <string name="item_person_interaction_update">update</string>
     <string name="next_button_dialog_fragment_text">next</string>
     <string name="list_item_menu_edit">Edit</string>
@@ -43,4 +44,12 @@
         <item quantity="one">This %2$s consists of %1$d task.</item>
         <item quantity="other">This %2$s consists of %1$d tasks.</item>
     </plurals>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="item_task_group_entry_tasks_ratio">%1$d / %2$d</string>
+
+    <string name="task_widget_creation_color_warning">Pick a color</string>
+    <string name="task_widget_creation_task_warning">Select task group</string>
+    <string name="widget_tasks_empty_view_message">No items to show</string>
 </resources>

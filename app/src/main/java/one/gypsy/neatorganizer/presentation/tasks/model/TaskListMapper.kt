@@ -1,16 +1,16 @@
 package one.gypsy.neatorganizer.presentation.tasks.model
 
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 
 class TaskListMapper {
 
     fun mapTasksToListItems(
-        tasksGroups: List<SingleTaskGroup>,
+        tasksGroupWithTasks: List<SingleTaskGroupWithTasks>,
         oldList: List<TaskListItem>
     ) = mutableListOf<TaskListItem>().apply {
         val oldHeaders = oldList.filterIsInstance<TaskListItem.TaskListHeader>()
-        tasksGroups.forEach { taskGroup ->
+        tasksGroupWithTasks.forEach { taskGroup ->
             this.addAll(
                 mapTaskGroupToTaskListItems(
                     taskGroup,
@@ -22,16 +22,16 @@ class TaskListMapper {
 
     private fun wasHeaderExpanded(
         oldHeaders: List<TaskListItem.TaskListHeader>,
-        taskGroup: SingleTaskGroup
-    ) = oldHeaders.firstOrNull { it.id == taskGroup.id }?.expanded ?: false
+        taskGroupWithTasks: SingleTaskGroupWithTasks
+    ) = oldHeaders.firstOrNull { it.id == taskGroupWithTasks.id }?.expanded ?: false
 
     private fun mapTaskGroupToTaskListItems(
-        taskGroup: SingleTaskGroup,
+        taskGroupWithTasks: SingleTaskGroupWithTasks,
         expandedHeader: Boolean = false
     ): List<TaskListItem> = mutableListOf<TaskListItem>().apply {
-        with(taskGroup.toTaskListHeader(expandedHeader)) {
+        with(taskGroupWithTasks.toTaskListHeader(expandedHeader)) {
             add(this)
-            addAll(mapTasksToListSubItems(taskGroup.tasks))
+            addAll(mapTasksToListSubItems(taskGroupWithTasks.tasks))
         }
     }
 

@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class GetImageBitmap(var fileRepository: FileRepository) :
+class GetImageBitmap(private val fileRepository: FileRepository) :
     BaseUseCase<Bitmap, GetImageBitmap.Params>() {
     override suspend fun run(params: Params): Either<Failure, Bitmap> {
         return try {

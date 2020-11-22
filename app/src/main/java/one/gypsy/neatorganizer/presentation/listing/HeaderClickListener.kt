@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.presentation.listing
 
 interface HeaderClickListener<T : HeaderItem> {
-    fun onExpanderClick(headerItem: T)
-    fun onEditionSubmitClick(headerItem: T)
-    fun onRemoveClick(headerItem: T)
+    val onExpanderClick: (headerItem: T) -> Unit
+    val onEditionSubmitClick: (headerItem: T) -> Unit
+    val onRemoveClick: (headerItem: T) -> Unit
 }

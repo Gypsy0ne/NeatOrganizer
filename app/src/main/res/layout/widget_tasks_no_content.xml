@@ -1,0 +1,33 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tasksWidgetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/small_space"
+    android:background="@drawable/task_widget_background"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/triple_space"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/triple_space"
+            android:src="@drawable/ic_widget_missing_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:autoSizeMaxTextSize="@dimen/regular_text_size"
+            android:autoSizeMinTextSize="@dimen/small_text_size"
+            android:autoSizeTextType="uniform"
+            android:gravity="center_horizontal"
+            android:text="Task group is missing...\ntap to select new one" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -41,6 +41,8 @@
 
         <Button
             android:id="@+id/button_dialog_fragment_rate_interaction_confirmation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             style="@style/DialogFormButton.Submit"
             android:onClick="@{() -> viewModel.submitInteractionEntry()}"
             android:layout_marginTop="32dp"

@@ -13,8 +13,8 @@ import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
 class GroupedTasksAdapter(
-    val headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>,
-    val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
+    private val headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>? = null,
+    private val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null
 ) : ListAdapter<TaskListItem, TaskViewHolder>(DiffCallback()), BindableAdapter<TaskListItem> {
 
     private var animateChanges = true
@@ -82,8 +82,8 @@ fun TaskListItem.getViewHolderType(): Int = when (this) {
 fun TaskViewType.getHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
-    headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>,
-    subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>
+    headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>?,
+    subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>?
 ): TaskViewHolder = when (this) {
     TaskViewType.HEADER -> TaskHeaderViewHolder(
         DataBindingUtil.inflate(

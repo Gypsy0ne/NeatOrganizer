@@ -2,27 +2,29 @@ package one.gypsy.neatorganizer.di
 
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTasksRepository
-import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTaskGroupsDataSource
-import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTasksDataSource
-import one.gypsy.neatorganizer.domain.datasource.tasks.UserSingleTaskGroupsDataSource
-import one.gypsy.neatorganizer.domain.datasource.tasks.UserSingleTasksDataSource
+import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
+import one.gypsy.neatorganizer.domain.datasource.tasks.*
 import one.gypsy.neatorganizer.domain.interactors.tasks.*
+import one.gypsy.neatorganizer.presentation.common.WidgetNotifier
+import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.AddTaskViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetNotifier
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetRemoteViewManager
+import one.gypsy.neatorganizer.presentation.tasks.vm.*
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val tasksDataSourceModule = module {
     factory<SingleTasksDataSource> { UserSingleTasksDataSource(get()) }
     factory<SingleTaskGroupsDataSource> { UserSingleTaskGroupsDataSource(get()) }
+    factory<TaskWidgetDataSource> { UserTaskWidgetDataSource(get()) }
 }
 
 val tasksRepositoryModule = module {
     factory { SingleTasksRepository(get()) }
     factory { SingleTaskGroupsRepository(get()) }
+    factory { TaskWidgetsRepository(get()) }
 }
 
 val tasksUseCaseModule = module {
@@ -33,24 +35,51 @@ val tasksUseCaseModule = module {
     factory { RemoveTaskGroup(get()) }
     factory { RemoveTaskGroupById(get()) }
     factory { UpdateSingleTask(get()) }
-    factory { UpdateTaskGroup(get()) }
+    factory { UpdateSingleTaskGroupWithTasks(get()) }
+    factory { GetAllSingleTaskGroupEntries(get()) }
+    factory { SaveTaskWidget(get()) }
+    factory { LoadTaskWidget(get()) }
+    factory { GetAllSingleTasksByGroupId(get()) }
+    factory { GetSingleTaskGroupWithTasksById(get()) }
+    factory { GetSingleTaskGroupById(get()) }
+    factory { GetAllSingleTasksByGroupIdObservable(get()) }
+    factory { UpdateSingleTaskGroup(get()) }
+    factory { GetAllTaskWidgetIds(get()) }
+    factory { DeleteTaskWidget(get()) }
+    factory { UpdateTaskWidgetLinkedGroup(get()) }
+    factory { GetAllTaskWidgets(get()) }
+    factory { GetTitledTaskWidgetByIdObservable(get()) }
+    factory { GetTaskGroupIdByWidgetId(get()) }
 }
 
 val tasksUtilsModule = module {
     factory { TaskListMapper() }
+    factory<WidgetRemoteViewManager> { TaskWidgetRemoteViewManager(get(), get(), get(), get()) }
+    factory<WidgetNotifier> { TaskWidgetNotifier(androidContext()) }
 }
 
 val tasksViewModelModule = module {
     viewModel {
         TasksViewModel(
-            removeSingleSingleTaskUseCase = get(),
+            removeSingleTaskUseCase = get(),
             getAllSingleTaskGroupsUseCase = get(),
             taskListMapper = get(),
             updateSingleTaskGroupUseCase = get(),
             updateSingleTaskUseCase = get()
         )
     }
+    viewModel { TaskWidgetSelectionViewModel(get(), get()) }
+    viewModel { (id: Long) -> TaskWidgetContentManageViewModel(id, get(), get(), get()) }
     viewModel { RemoveTaskGroupViewModel(get()) }
     viewModel { (id: Long) -> AddTaskViewModel(get(), id) }
     viewModel { AddTaskGroupViewModel(get()) }
+    viewModel { TasksWidgetConfigurationViewModel(get(), get()) }
+    viewModel { (widgetId: Int, taskGroupId: Long) ->
+        TasksWidgetViewModel(
+            taskGroupId = taskGroupId,
+            widgetId = widgetId,
+            get(),
+            get(),
+        )
+    }
 }

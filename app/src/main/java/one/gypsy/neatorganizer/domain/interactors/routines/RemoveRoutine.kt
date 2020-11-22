@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class RemoveRoutine(var routinesRepository: RoutinesRepository) :
+class RemoveRoutine(private val routinesRepository: RoutinesRepository) :
     BaseUseCase<Unit, RemoveRoutine.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {

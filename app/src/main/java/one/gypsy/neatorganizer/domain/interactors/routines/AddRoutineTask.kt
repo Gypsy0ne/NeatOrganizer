@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class AddRoutineTask(var routineTasksRepository: RoutineTasksRepository) :
+class AddRoutineTask(private val routineTasksRepository: RoutineTasksRepository) :
     BaseUseCase<Long, AddRoutineTask.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Long> {

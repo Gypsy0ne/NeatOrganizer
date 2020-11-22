@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class GetPersonProfile(var peopleRepository: PeopleRepository) :
+class GetPersonProfile(private val peopleRepository: PeopleRepository) :
     BaseUseCase<LiveData<PersonProfile>, GetPersonProfile.Params>() {
     override suspend fun run(params: Params): Either<Failure, LiveData<PersonProfile>> {
         return try {
