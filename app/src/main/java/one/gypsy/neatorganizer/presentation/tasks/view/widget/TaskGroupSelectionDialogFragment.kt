@@ -49,14 +49,9 @@ class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
         fragmentBinding.bindLayout()
     }
 
-    private fun DialogFragmentSelectTaskGroupBinding.bindLayout() {
-        viewModel = selectionViewModel
-        lifecycleOwner = this@TaskGroupSelectionDialogFragment
-        bindViews()
-    }
-
-    private fun observeSelectionStatus() =
-        selectionViewModel.widgetSelectionStatus.observe(this@TaskGroupSelectionDialogFragment) {
+    private fun observeSelectionStatus() = selectionViewModel
+        .widgetSelectionStatus
+        .observe(this@TaskGroupSelectionDialogFragment) {
             when (it) {
                 TaskWidgetSelectionStatus.TaskGroupNotSelectedStatus -> context?.showShortToast(
                     resources.getString(R.string.task_widget_creation_task_warning)
@@ -66,6 +61,12 @@ class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
                 )
             }
         }
+
+    private fun DialogFragmentSelectTaskGroupBinding.bindLayout() {
+        viewModel = selectionViewModel
+        lifecycleOwner = this@TaskGroupSelectionDialogFragment
+        bindViews()
+    }
 
     private fun DialogFragmentSelectTaskGroupBinding.bindViews() {
         bindRecyclerView()

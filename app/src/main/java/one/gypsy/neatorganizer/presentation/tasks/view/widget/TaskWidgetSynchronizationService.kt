@@ -36,9 +36,6 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
         return START_STICKY
     }
 
-    //for now livedata invokes flow every time it is used and for every widget
-    //TODO diff to update only particular widget and only when it is needed
-    //TODO if some task group gets deleted remove widget
     private fun onGetAllSingleTaskGroupsSuccess(taskGroupsWithTasks: LiveData<List<SingleTaskGroupWithTasks>>) =
         taskGroupsWithTasks.observe(this, {
             getAllWidgetIdsUseCase.invoke(lifecycleScope, Unit) {

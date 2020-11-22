@@ -4,12 +4,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroupWithTasks.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
 class UpdateSingleTaskGroupWithTasks(private val singleTaskGroupsRepository: SingleTaskGroupsRepository) :
-    BaseUseCase<Unit, UpdateSingleTaskGroupWithTasks.Params>() {
+    BaseUseCase<Unit, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {

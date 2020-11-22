@@ -15,33 +15,41 @@ import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-
 class TaskWidgetActivity : AppCompatActivity() {
+
     private val tasksViewModel: TasksWidgetViewModel by viewModel {
-        parametersOf(
-            intent.getIntExtra(MANAGED_WIDGET_ID_KEY, MANAGED_WIDGET_INVALID_ID),
-            intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID)
-        )
+        parametersOf(intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID))
     }
     private lateinit var viewBinding: ActivityTaskWidgetBinding
     private val editTitleMenuItem by lazy { viewBinding.manageToolbar.menu.getItem(manageToolbar.menu.size - 1) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_task_widget)
+        setUpBinding()
         setSupportActionBar(manageToolbar)
-        findNavController(R.id.navigationFragmentsContainer).setGraph(
-            R.navigation.navigation_task_widget,
-            createStartDestinationBundle()
-        )
+        setNavigationGraph()
+        startWidgetSynchronizationService()
+        observeDataLoadingStatus()
+        observeNewGroupSelectionResult()
+    }
+
+    private fun setUpBinding() {
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_task_widget)
         viewBinding.apply {
             viewModel = tasksViewModel
             lifecycleOwner = this@TaskWidgetActivity
             executePendingBindings()
         }
-        startWidgetSynchronizationService()
-        observeDataLoadingStatus()
-        observeNewTaskSelectionResult()
+    }
+
+    private fun setNavigationGraph() = findNavController(R.id.navigationFragmentsContainer)
+        .setGraph(R.navigation.navigation_task_widget, createStartDestinationBundle())
+
+    private fun createStartDestinationBundle() = Bundle().apply {
+        putLong(
+            MANAGED_GROUP_ID_KEY,
+            intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID)
+        )
     }
 
     private fun observeDataLoadingStatus() = tasksViewModel.widgetDataLoaded.observe(this) {
@@ -69,17 +77,9 @@ class TaskWidgetActivity : AppCompatActivity() {
             startService(intent)
         }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.widget_list_manage_menu, menu)
         return true
-    }
-
-    private fun createStartDestinationBundle() = Bundle().apply {
-        putLong(
-            MANAGED_GROUP_ID_KEY,
-            intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID)
-        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -100,16 +100,18 @@ class TaskWidgetActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeNewTaskSelectionResult() =
+    private fun observeNewGroupSelectionResult() =
         findNavController(R.id.navigationFragmentsContainer)
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Long?>("key")
-            ?.observe(this) { selectedGroupId ->
-                if (selectedGroupId != null) {
-                    tasksViewModel.loadTaskGroupData(selectedGroupId)
-                } else {
-                    finish()
-                }
+            ?.getLiveData<Long?>(SELECTED_WIDGET_GROUP_ID_KEY)
+            ?.observe(this) {
+                onNewTaskSelected(it)
             }
+
+    private fun onNewTaskSelected(selectedGroupId: Long?) = if (selectedGroupId != null) {
+        tasksViewModel.loadTaskGroupData(selectedGroupId)
+    } else {
+        finish()
+    }
 }

@@ -11,6 +11,7 @@ import one.gypsy.neatorganizer.utils.Failure
 
 class GetAllPeople(private val peopleRepository: PeopleRepository) :
     BaseUseCase<LiveData<List<PersonEntry>>, Unit>() {
+
     override suspend fun run(params: Unit): Either<Failure, LiveData<List<PersonEntry>>> {
         return try {
             withContext(Dispatchers.IO) {
@@ -25,5 +26,5 @@ class GetAllPeople(private val peopleRepository: PeopleRepository) :
         }
     }
 
-    data class GetAllPeopleFailure(val error: Exception): Failure.FeatureFailure(error)
+    data class GetAllPeopleFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

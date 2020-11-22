@@ -10,19 +10,16 @@ import one.gypsy.neatorganizer.presentation.tasks.model.toTaskGroupEntryItem
 class TaskWidgetSelectionViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
     private val widgetUpdateUseCase: UpdateTaskWidgetLinkedGroup
-) :
-    ViewModel() {
+) : ViewModel() {
+
     private val _listedTaskGroups = MediatorLiveData<List<TaskGroupEntryItem>>()
-    val listedTaskGroups: LiveData<List<TaskGroupEntryItem>>
-        get() = _listedTaskGroups
+    val listedTaskGroups: LiveData<List<TaskGroupEntryItem>> = _listedTaskGroups
 
     private val _selectedTaskGroup = MutableLiveData<TaskGroupEntryItem>()
-    val selectedTaskGroup: LiveData<TaskGroupEntryItem>
-        get() = _selectedTaskGroup
+    val selectedTaskGroup: LiveData<TaskGroupEntryItem> = _selectedTaskGroup
 
     private val _widgetSelectionStatus = MutableLiveData<TaskWidgetSelectionStatus>()
     val widgetSelectionStatus: LiveData<TaskWidgetSelectionStatus> = _widgetSelectionStatus
-
 
     init {
         getAllTaskGroupEntriesUseCase.invoke(viewModelScope, Unit) {
@@ -30,16 +27,13 @@ class TaskWidgetSelectionViewModel(
         }
     }
 
-    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntries: LiveData<List<SingleTaskGroupEntry>>) {
-        _listedTaskGroups.addSource(taskGroupEntries) { taskGroupEntries ->
+    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntry>>) =
+        _listedTaskGroups.addSource(taskGroupEntriesObservable) { taskGroupEntries ->
             _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
         }
-    }
 
-    fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) {
+    fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) =
         _selectedTaskGroup.postValue(selectedItem)
-    }
-
 
     fun onSubmitClicked(widgetId: Int) = when (selectedTaskGroup.value) {
         null -> _widgetSelectionStatus.postValue(
@@ -48,20 +42,16 @@ class TaskWidgetSelectionViewModel(
         else -> submitWidgetCreation(widgetId)
     }
 
-    private fun submitWidgetCreation(widgetId: Int) {
+    private fun submitWidgetCreation(widgetId: Int) =
         selectedTaskGroup.value?.id?.let { groupId ->
             widgetUpdateUseCase.invoke(
                 viewModelScope,
                 UpdateTaskWidgetLinkedGroup.Params(widgetId, groupId)
-            ) {
-                it.either({}, ::onUpdateTaskWidgetSuccess)
-            }
+            ) { it.either({}, ::onUpdateTaskWidgetSuccess) }
         }
-    }
 
-    private fun onUpdateTaskWidgetSuccess(unit: Unit) {
+    private fun onUpdateTaskWidgetSuccess(unit: Unit) =
         _widgetSelectionStatus.postValue(TaskWidgetSelectionStatus.SelectionSuccessStatus)
-    }
 }
 
 sealed class TaskWidgetSelectionStatus {

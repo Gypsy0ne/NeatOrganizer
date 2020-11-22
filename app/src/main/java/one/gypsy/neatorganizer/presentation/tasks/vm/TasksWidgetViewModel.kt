@@ -7,16 +7,16 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
 
 class TasksWidgetViewModel(
     taskGroupId: Long,
-    private val widgetId: Int,
     private val getSingleTaskGroupUseCase: GetSingleTaskGroupById,
     private val updateTaskGroupUseCase: UpdateSingleTaskGroup,
 ) : ViewModel() {
 
     private val _taskGroup: MediatorLiveData<SingleTaskGroup> = MediatorLiveData()
     val taskGroup: LiveData<SingleTaskGroup> = _taskGroup
+
     private val _titleEdited = MutableLiveData(false)
-    val titleEdited: LiveData<Boolean>
-        get() = _titleEdited
+    val titleEdited: LiveData<Boolean> = _titleEdited
+
     private val _widgetDataLoaded = MutableLiveData(true)
     val widgetDataLoaded: LiveData<Boolean> = _widgetDataLoaded
 

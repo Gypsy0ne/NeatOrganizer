@@ -11,6 +11,7 @@ import org.junit.Before
 import org.junit.Test
 
 class TaskWidgetEntityTest {
+
     private lateinit var taskWidgetsDao: TaskWidgetsDao
     private lateinit var taskGroupDao: SingleTaskGroupsDao
     private lateinit var database: OrganizerDatabase
@@ -33,12 +34,14 @@ class TaskWidgetEntityTest {
     @Test
     fun shouldGetWidgetWithTaskGroupByWidgetId() {
         // given
-        val widgetId = 63L
+        val widgetId = 63
         val widgetColor = 11221122
         val taskGroupId = 12L
-        val widget =
-            TaskWidgetEntity(widgetId = widgetId, color = widgetColor, taskGroupId = taskGroupId)
-
+        val widget = TaskWidgetEntity(
+            widgetId = widgetId,
+            color = widgetColor,
+            taskGroupId = taskGroupId
+        )
         val taskGroup = SingleTaskGroupEntity("foobar", taskGroupId)
 
         // when

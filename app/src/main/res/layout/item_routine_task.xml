@@ -41,9 +41,9 @@
             <com.autofit.et.lib.AutoFitEditText
                 android:id="@+id/edit_text_item_routine_task_name"
                 style="@style/EditableListItemName.Sub"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/regular_space"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_0"
+                android:layout_marginStart="@dimen/normal_100"
                 strokeThrough="@{routineTaskItem.done}"
                 android:text="@{routineTaskItem.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +86,7 @@
             <ImageButton
                 android:id="@+id/button_item_routine_task_remove"
                 style="@style/SubItemMenuButton"
-                android:layout_marginStart="@dimen/medium_space"
+                android:layout_marginStart="@dimen/normal_50"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:onClick="@{removeClickListener}"
                 android:backgroundTint="@color/red"
@@ -105,7 +105,7 @@
             <ImageButton
                 android:id="@+id/button_item_routine_task_edit"
                 style="@style/SubItemMenuButton"
-                android:layout_marginEnd="@dimen/medium_space"
+                android:layout_marginEnd="@dimen/normal_50"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:onClick="@{editClickListener}"
                 android:src="@drawable/ic_edit_white_24"

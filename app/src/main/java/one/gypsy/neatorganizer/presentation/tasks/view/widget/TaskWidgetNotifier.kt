@@ -7,6 +7,7 @@ import one.gypsy.neatorganizer.presentation.common.WidgetNotifier
 
 
 class TaskWidgetNotifier(private val context: Context) : WidgetNotifier {
+
     override fun sendUpdateWidgetBroadcast(widgetIds: IntArray) =
         context.sendBroadcast(createUpdateIntent(widgetIds))
 

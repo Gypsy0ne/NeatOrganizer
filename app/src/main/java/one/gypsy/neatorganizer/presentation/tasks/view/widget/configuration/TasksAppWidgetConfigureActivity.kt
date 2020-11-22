@@ -3,7 +3,6 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -18,6 +17,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TasksAppWidgetConfigureActivity : AppCompatActivity() {
+
     private val widgetConfigurationViewModel: TasksWidgetConfigurationViewModel by viewModel()
     private val widgetViewManager: WidgetRemoteViewManager by inject()
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
@@ -57,24 +57,32 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
             R.layout.widget_tasks_configuration
         )
     ) {
-        bindViewFields()
+        bindViews()
         setContentView(root)
     }
 
-    private fun WidgetTasksConfigurationBinding.bindViewFields() {
+    private fun WidgetTasksConfigurationBinding.bindViews() {
         configurationViewModel = widgetConfigurationViewModel
+        lifecycleOwner = this@TasksAppWidgetConfigureActivity
+        bindButtons()
+        bindRecyclerView()
+        executePendingBindings()
+    }
+
+    private fun WidgetTasksConfigurationBinding.bindButtons() {
+        cancelConfiguration.setOnClickListener {
+            finish()
+        }
+        submitConfiguration.setOnClickListener {
+            widgetConfigurationViewModel.onSubmitClicked(appWidgetId)
+        }
+    }
+
+    private fun WidgetTasksConfigurationBinding.bindRecyclerView() {
         tasksAdapter = TaskGroupEntriesAdapter(widgetConfigurationViewModel.selectedTaskGroup) {
             widgetConfigurationViewModel.onTaskGroupSelected(it)
         }
-        cancelButtonListener = View.OnClickListener {
-            finish()
-        }
-        submitButtonListener = View.OnClickListener {
-            widgetConfigurationViewModel.onSubmitClicked(appWidgetId)
-        }
         layoutManager = LinearLayoutManager(baseContext)
-        lifecycleOwner = this@TasksAppWidgetConfigureActivity
-        executePendingBindings()
     }
 
     private fun observeCreationStatus() {

@@ -42,7 +42,7 @@
     <style name="PersonItemTextView">
         <item name="android:lines">1</item>
         <item name="autoSizeTextType">uniform</item>
-        <item name="android:layout_height">@dimen/height_item_person_text_view</item>
+        <item name="android:layout_height">@dimen/normal_300</item>
         <item name="android:layout_width">wrap_content</item>
     </style>
     <!--Add person dialog fragment-->
@@ -52,9 +52,9 @@
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">@integer/regular_text_length</item>
         <item name="android:inputType">textLongMessage</item>
-        <item name="android:drawablePadding">@dimen/medium_space</item>
-        <item name="android:paddingStart">@dimen/regular_space</item>
-        <item name="android:paddingEnd">@dimen/regular_space</item>
+        <item name="android:drawablePadding">@dimen/normal_50</item>
+        <item name="android:paddingStart">@dimen/normal_100</item>
+        <item name="android:paddingEnd">@dimen/normal_100</item>
         <item name="android:background">@drawable/dialog_add_person_edit_text_background
         </item>
         <item name="android:layout_width">0dp</item>
@@ -71,16 +71,16 @@
     <!--End of Add person dialog fragment-->
 
     <style name="DialogFormButton">
-        <item name="android:paddingHorizontal">@dimen/double_space</item>
-        <item name="android:paddingVertical">@dimen/regular_space</item>
+        <item name="android:paddingHorizontal">@dimen/normal_200</item>
+        <item name="android:paddingVertical">@dimen/normal_100</item>
         <item name="android:maxLines">1</item>
         <item name="autoSizeTextType">uniform</item>
-        <item name="autoSizeMaxTextSize">@dimen/medium_text_size</item>
-        <item name="autoSizeMinTextSize">@dimen/small_text_size</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_normal_75</item>
+        <item name="autoSizeMinTextSize">@dimen/text_normal_50</item>
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
 
-    <style name="DialogFormButton.Submit" parent="DialogFormButton">
+    <style name="DialogFormButton.Submit">
         <item name="android:background">
             @drawable/dialog_yellow_clickable_view_background
         </item>
@@ -94,7 +94,7 @@
         <item name="android:text">@string/next_button_dialog_fragment_text</item>
     </style>
 
-    <style name="DialogFormButton.Cancel" parent="DialogFormButton">
+    <style name="DialogFormButton.Cancel">
         <item name="android:background">@drawable/dialog_red_clickable_view_background</item>
         <item name="android:drawableStart">@drawable/ic_close_white_24dp</item>
         <item name="drawableTint">@color/dark_red</item>
@@ -105,7 +105,7 @@
     <style name="FragmentRecyclerView">
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_marginBottom">@dimen/medium_space</item>
+        <item name="android:layout_marginBottom">@dimen/normal_50</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:overScrollMode">never</item>
     </style>
@@ -121,14 +121,14 @@
     </style>
 
     <style name="EditableListItemName.Header" parent="ListItemName">
-        <item name="android:textSize">@dimen/large_text_size</item>
+        <item name="android:textSize">@dimen/text_normal_125</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="EditableListItemName.Sub" parent="ListItemName">
-        <item name="android:textSize">@dimen/regular_text_size</item>
+        <item name="android:textSize">@dimen/text_normal_100</item>
         <item name="android:gravity">start|center_vertical</item>
-        <item name="android:padding">@dimen/small_space</item>
+        <item name="android:padding">@dimen/normal_25</item>
     </style>
 
     <style name="ListItemMenu">
@@ -138,13 +138,13 @@
 
     <style name="SubItemContainer">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/height_item_grouped_task_container</item>
+        <item name="android:layout_height">@dimen/normal_600</item>
         <item name="android:background">@drawable/subitem_background</item>
-        <item name="android:elevation">@dimen/small_space</item>
-        <item name="android:layout_marginStart">@dimen/regular_space</item>
-        <item name="android:layout_marginEnd">@dimen/regular_space</item>
-        <item name="android:layout_marginTop">@dimen/small_space</item>
-        <item name="android:layout_marginBottom">@dimen/small_space</item>
+        <item name="android:elevation">@dimen/normal_25</item>
+        <item name="android:layout_marginStart">@dimen/normal_100</item>
+        <item name="android:layout_marginEnd">@dimen/normal_100</item>
+        <item name="android:layout_marginTop">@dimen/normal_25</item>
+        <item name="android:layout_marginBottom">@dimen/normal_25</item>
     </style>
 
     <style name="SubItemMenuButton">
@@ -155,10 +155,10 @@
 
     <style name="HeaderItemContainer">
         <item name="android:background">@drawable/item_header_background</item>
-        <item name="android:layout_marginTop">@dimen/regular_space</item>
+        <item name="android:layout_marginTop">@dimen/normal_100</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
-        <item name="android:layout_marginBottom">@dimen/small_space</item>
+        <item name="android:layout_marginBottom">@dimen/normal_25</item>
     </style>
 
     <style name="HeaderItemContainer.Selectable">
@@ -170,49 +170,49 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="layout_constraintDimensionRatio">W,3:4</item>
-        <item name="android:layout_marginTop">@dimen/regular_space</item>
-        <item name="android:layout_marginBottom">@dimen/small_space</item>
+        <item name="android:layout_marginTop">@dimen/normal_100</item>
+        <item name="android:layout_marginBottom">@dimen/normal_25</item>
     </style>
 
     <style name="HeaderMenuButton.Large">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:paddingTop">@dimen/double_space</item>
-        <item name="android:paddingBottom">@dimen/double_space</item>
+        <item name="android:paddingTop">@dimen/normal_200</item>
+        <item name="android:paddingBottom">@dimen/normal_200</item>
         <item name="layout_constraintDimensionRatio">W,3:4</item>
     </style>
 
     <style name="HeaderMenuButton.Small">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:paddingTop">@dimen/regular_space</item>
-        <item name="android:paddingBottom">@dimen/regular_space</item>
+        <item name="android:paddingTop">@dimen/normal_100</item>
+        <item name="android:paddingBottom">@dimen/normal_100</item>
         <item name="layout_constraintDimensionRatio">W,1:1</item>
     </style>
 
     <style name="ItemEditionSubmitButton">
-        <item name="android:layout_width">@dimen/large_icon_size</item>
-        <item name="android:layout_height">@dimen/large_icon_size</item>
-        <item name="android:layout_margin">@dimen/regular_space</item>
+        <item name="android:layout_width">@dimen/normal_400</item>
+        <item name="android:layout_height">@dimen/normal_400</item>
+        <item name="android:layout_margin">@dimen/normal_100</item>
         <item name="android:src">@drawable/ic_check_dark_yellow_24</item>
         <item name="android:background">@drawable/bg_edition_submit_button</item>
     </style>
 
     <style name="HeaderExpandButton">
-        <item name="android:layout_width">@dimen/large_icon_size</item>
-        <item name="android:layout_height">@dimen/large_icon_size</item>
+        <item name="android:layout_width">@dimen/normal_400</item>
+        <item name="android:layout_height">@dimen/normal_400</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="HeaderRootLayout">
-        <item name="android:paddingStart">@dimen/regular_space</item>
-        <item name="android:paddingEnd">@dimen/regular_space</item>
+        <item name="android:paddingStart">@dimen/normal_100</item>
+        <item name="android:paddingEnd">@dimen/normal_100</item>
     </style>
     <!--End of List view items-->
 
     <style name="LottieDialogHeader">
-        <item name="android:layout_width">@dimen/width_dialog_lottie_animated_header</item>
-        <item name="android:layout_height">@dimen/height_dialog_lottie_animated_header</item>
+        <item name="android:layout_width">@dimen/normal_1200</item>
+        <item name="android:layout_height">@dimen/normal_1200</item>
         <item name="android:background">@drawable/oval_white_background</item>
-        <item name="android:elevation">@dimen/regular_space</item>
+        <item name="android:elevation">@dimen/normal_100</item>
         <item name="android:outlineProvider">none</item>
         <item name="lottie_autoPlay">true</item>
     </style>
@@ -224,6 +224,6 @@
     <style name="DialogContentWindow.Iconed">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:paddingTop">@dimen/padding_top_dialog_content_container</item>
+        <item name="android:paddingTop">@dimen/normal_600</item>
     </style>
 </resources>

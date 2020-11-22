@@ -19,11 +19,11 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class TaskGroupManageFragment : Fragment() {
+
     private val tasksViewModel: TaskWidgetContentManageViewModel by viewModel {
         parametersOf(arguments?.getLong(MANAGED_GROUP_ID_KEY) ?: MANAGED_GROUP_INVALID_ID)
     }
     private lateinit var viewBinding: FragmentTaskGroupManageBinding
-
     private val subItemClickListener = TaskSubItemClickListener(
         onDoneClick = { tasksViewModel.onTaskUpdate(it) },
         onEditionSubmitClick = { tasksViewModel.onTaskUpdate(it) },
@@ -35,20 +35,33 @@ class TaskGroupManageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_task_group_manage, container, false)
+        viewBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_task_group_manage,
+            container,
+            false
+        )
         setHasOptionsMenu(true)
         return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.apply {
-            viewModel = tasksViewModel
-            lifecycleOwner = this@TaskGroupManageFragment
-        }
+        viewBinding.setUpContentBinding()
+        observeNewGroupSelectionResult()
+    }
+
+    private fun FragmentTaskGroupManageBinding.setUpContentBinding() {
+        viewModel = tasksViewModel
+        lifecycleOwner = this@TaskGroupManageFragment
         setUpRecyclerView()
-        observeNewTaskSelectionResult()
+    }
+
+    private fun FragmentTaskGroupManageBinding.setUpRecyclerView() {
+        linearLayoutManager = LinearLayoutManager(context)
+        tasksAdapter = GroupedTasksAdapter(subItemClickListener = subItemClickListener)
+        tasks.itemAnimator = null
+        executePendingBindings()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -68,22 +81,18 @@ class TaskGroupManageFragment : Fragment() {
         }
     }
 
-    private fun setUpRecyclerView() = viewBinding.apply {
-        linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = GroupedTasksAdapter(subItemClickListener = subItemClickListener)
-        tasks.itemAnimator = null
-        executePendingBindings()
-    }
-
-
-    private fun observeNewTaskSelectionResult() =
+    private fun observeNewGroupSelectionResult() =
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Long?>("key")
-            ?.observe(viewLifecycleOwner) { selectedGroupId ->
-                if (selectedGroupId != null) {
-                    tasksViewModel.loadTasksData(selectedGroupId)
-                }
+            ?.getLiveData<Long?>(SELECTED_WIDGET_GROUP_ID_KEY)
+            ?.observe(viewLifecycleOwner) {
+                onNewTaskGroupSelected(it)
             }
+
+    private fun onNewTaskGroupSelected(selectedGroupId: Long?) {
+        if (selectedGroupId != null) {
+            tasksViewModel.loadTasksData(selectedGroupId)
+        }
+    }
 }

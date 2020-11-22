@@ -37,7 +37,7 @@
         android:id="@+id/swipe_layout_item_task_header_root"
         style="@style/HeaderRootLayout"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="@dimen/normal_900"
         app:contentView="@+id/relative_layout_item_task_header_container"
         app:leftMenuView="@+id/constraint_layout_item_task_header_left_menu"
         app:rightMenuView="@+id/constraint_layout_item_task_header_right_menu">
@@ -51,8 +51,8 @@
             <com.autofit.et.lib.AutoFitEditText
                 android:id="@+id/edit_text_item_task_header_name"
                 style="@style/EditableListItemName.Header"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_0"
                 android:text="@{headerItem.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
@@ -104,7 +104,7 @@
                 style="@style/HeaderMenuButton.Small"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/red"
-                android:layout_marginStart="@dimen/regular_space"
+                android:layout_marginStart="@dimen/normal_100"
                 android:drawableTop="@drawable/ic_delete_white_24"
                 android:onClick="@{removeClickListener}"
                 android:text="@string/list_item_menu_delete"
@@ -127,17 +127,16 @@
                 android:drawableTop="@drawable/ic_add_white_24"
                 android:onClick="@{addClickListener}"
                 android:text="@string/list_item_menu_add"
-                android:layout_marginStart="@dimen/regular_space"
+                android:layout_marginStart="@dimen/normal_100"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_task_header_edit"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button_item_task_header_edit"
                 style="@style/HeaderMenuButton.Small"
-                android:layout_marginStart="@dimen/medium_space"
+                android:layout_marginStart="@dimen/normal_50"
                 android:background="@drawable/item_person_swipe_update_background"
                 android:backgroundTint="@color/male_blue"
                 android:drawableTop="@drawable/ic_edit_white_24"
@@ -145,7 +144,6 @@
                 android:text="@string/list_item_menu_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_item_task_header_add"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

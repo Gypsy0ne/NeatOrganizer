@@ -14,11 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".presentation.tasks.view.widget.TaskWidgetActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="" />
+            android:launchMode="singleTask" />
 
         <receiver android:name=".presentation.tasks.view.widget.TasksAppWidget">
             <intent-filter>
@@ -35,15 +35,16 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.LaunchActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.HomeActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -54,6 +55,7 @@
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <service android:name=".presentation.tasks.view.widget.TaskWidgetSynchronizationService" />
+
     </application>
 
 </manifest>

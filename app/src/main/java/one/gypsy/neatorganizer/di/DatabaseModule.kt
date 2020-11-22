@@ -9,7 +9,7 @@ val databaseModule = module {
         Room.databaseBuilder(
             get(),
             OrganizerDatabase::class.java,
-            "NeatOrganizer19.db"
+            "NeatOrganizer.db"
         ).build()
     }
 

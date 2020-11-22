@@ -4,12 +4,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.people.PeopleRepository
 import one.gypsy.neatorganizer.domain.dto.people.PersonEntry
+import one.gypsy.neatorganizer.domain.interactors.people.AddPerson.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
 class AddPerson(private val peopleRepository: PeopleRepository) :
-    BaseUseCase<Long, AddPerson.Params>() {
+    BaseUseCase<Long, Params>() {
+
     override suspend fun run(params: Params): Either<Failure, Long> {
         return try {
             withContext(Dispatchers.IO) {

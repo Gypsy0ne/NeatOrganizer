@@ -1,11 +1,16 @@
 package one.gypsy.neatorganizer.data.repositories.tasks
 
 import one.gypsy.neatorganizer.domain.datasource.tasks.TaskWidgetDataSource
-import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 
 class TaskWidgetsRepository(private val taskWidgetDataSource: TaskWidgetDataSource) {
-    suspend fun create(widgetEntry: TitledTaskWidgetEntry) = taskWidgetDataSource.save(widgetEntry)
-    suspend fun delete(taskWidgetId: Int) = taskWidgetDataSource.delete(taskWidgetId)
+
+    suspend fun createTaskWidget(widgetEntry: TaskWidgetEntry) =
+        taskWidgetDataSource.createTaskWidget(widgetEntry)
+
+    suspend fun deleteTaskWidgetById(taskWidgetId: Int) =
+        taskWidgetDataSource.deleteTaskWidgetById(taskWidgetId)
+
     suspend fun getTitledTaskWidgetById(taskWidgetId: Int) =
         taskWidgetDataSource.getTitledTaskWidgetById(taskWidgetId)
 
@@ -19,5 +24,6 @@ class TaskWidgetsRepository(private val taskWidgetDataSource: TaskWidgetDataSour
         taskWidgetDataSource.updateLinkedTaskGroup(taskWidgetId, taskGroupId)
 
     suspend fun getAllWidgetIds() = taskWidgetDataSource.getAllWidgetIds()
+
     suspend fun getAllTaskWidgets() = taskWidgetDataSource.getAllTaskWidgetsObservable()
 }
