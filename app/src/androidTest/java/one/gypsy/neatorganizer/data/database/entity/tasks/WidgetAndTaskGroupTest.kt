@@ -1,42 +1,22 @@
 package one.gypsy.neatorganizer.data.database.entity.tasks
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
-import one.gypsy.neatorganizer.data.database.OrganizerDatabase
+import one.gypsy.neatorganizer.data.database.DatabaseTest
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 
-class WidgetAndTaskGroupTest {
+class WidgetAndTaskGroupTest : DatabaseTest() {
 
     private lateinit var taskWidgetsDao: TaskWidgetsDao
     private lateinit var taskGroupDao: SingleTaskGroupsDao
-    private lateinit var database: OrganizerDatabase
-
-    @Rule
-    @JvmField
-    var rule: TestRule = InstantTaskExecutorRule()
 
     @Before
-    fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            OrganizerDatabase::class.java
-        ).build()
+    override fun setup() {
+        super.setup()
         taskWidgetsDao = database.taskWidgetDao()
         taskGroupDao = database.singleTaskGroupsDao()
-    }
-
-    @After
-    fun finish() {
-        database.close()
     }
 
     @Test
@@ -60,8 +40,8 @@ class WidgetAndTaskGroupTest {
 
         // then
         selectedWidgetWithTaskGroup.observeForever {
-            Assertions.assertThat(it.widget).isEqualToComparingFieldByField(widget)
-            Assertions.assertThat(it.singleTaskGroup).isEqualToComparingFieldByField(taskGroup)
+            assertThat(it.widget).isEqualToComparingFieldByField(widget)
+            assertThat(it.singleTaskGroup).isEqualToComparingFieldByField(taskGroup)
         }
     }
 
@@ -83,9 +63,9 @@ class WidgetAndTaskGroupTest {
         val selectedWidgetWithTaskGroup = taskWidgetsDao.getWidgetWithTaskGroupById(widgetId)
 
         // then
-        Assertions.assertThat(selectedWidgetWithTaskGroup.widget)
+        assertThat(selectedWidgetWithTaskGroup.widget)
             .isEqualToComparingFieldByField(widget)
-        Assertions.assertThat(selectedWidgetWithTaskGroup.singleTaskGroup)
+        assertThat(selectedWidgetWithTaskGroup.singleTaskGroup)
             .isEqualToComparingFieldByField(
                 taskGroup
             )
@@ -114,7 +94,7 @@ class WidgetAndTaskGroupTest {
         val widgetWithTaskGroup = taskWidgetsDao.getWidgetWithTaskGroupById(widgetId)
 
         // then
-        Assertions.assertThat(widgetWithTaskGroup.singleTaskGroup.id).isEqualTo(swappedTaskGroupId)
+        assertThat(widgetWithTaskGroup.singleTaskGroup.id).isEqualTo(swappedTaskGroupId)
     }
 
     @Test
