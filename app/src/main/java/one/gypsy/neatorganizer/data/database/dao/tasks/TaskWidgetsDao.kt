@@ -10,6 +10,12 @@ import one.gypsy.neatorganizer.data.database.entity.tasks.WidgetAndTaskGroup
 @Dao
 interface TaskWidgetsDao : BaseDao<TaskWidgetEntity> {
 
+    @Query("SELECT * FROM task_widgets")
+    fun getAllTaskWidgets(): List<TaskWidgetEntity>
+
+    @Query("SELECT * FROM task_widgets WHERE widgetId = :taskWidgetId")
+    fun getWidgetById(taskWidgetId: Int): TaskWidgetEntity
+
     @Query("SELECT * FROM task_widgets WHERE widgetId = :taskWidgetId")
     fun getWidgetWithTaskGroupById(taskWidgetId: Int): WidgetAndTaskGroup
 
