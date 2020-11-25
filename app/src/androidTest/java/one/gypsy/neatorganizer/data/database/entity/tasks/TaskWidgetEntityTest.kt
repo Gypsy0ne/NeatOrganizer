@@ -42,12 +42,14 @@ class TaskWidgetEntityTest {
     fun shouldUpdateTaskWidget() {
         // given
         val updatedTaskGroupId = 423L
-        val taskWidget = TaskWidgetEntity(widgetId = 312, taskGroupId = 12, color = 312221)
+        val updatedWidgetId = 312
+        val taskWidget =
+            TaskWidgetEntity(widgetId = updatedWidgetId, taskGroupId = 12, color = 312221)
 
         // when
         taskWidgetsDao.insert(taskWidget)
         taskWidgetsDao.update(taskWidget.copy(taskGroupId = updatedTaskGroupId))
-        val updatedTaskWidget = taskWidgetsDao.getWidgetById(taskWidget.widgetId)
+        val updatedTaskWidget = taskWidgetsDao.getWidgetById(updatedWidgetId)
 
         // then
         assertThat(updatedTaskWidget.taskGroupId).isEqualTo(updatedTaskGroupId)
@@ -84,72 +86,22 @@ class TaskWidgetEntityTest {
     @Test
     fun shouldGetWidgetById() {
         // given
-        val taskWidget = TaskWidgetEntity(widgetId = 312, taskGroupId = 12, color = 312221)
+        val fetchedWidgetId = 312
+        val taskWidget =
+            TaskWidgetEntity(widgetId = fetchedWidgetId, taskGroupId = 12, color = 312221)
 
         // when
         taskWidgetsDao.insert(taskWidget)
-        val fetchedTaskWidget = taskWidgetsDao.getWidgetById(taskWidget.widgetId)
+        val fetchedTaskWidget = taskWidgetsDao.getWidgetById(fetchedWidgetId)
 
         // then
         assertThat(fetchedTaskWidget).isEqualToComparingFieldByField(taskWidget)
     }
 
     @Test
-    fun shouldGetWidgetWithTaskGroupByWidgetId() {
-        // given
-        val widgetId = 22
-        val widgetColor = 11221122
-        val taskGroupId = 12L
-        val widget = TaskWidgetEntity(
-            widgetId = widgetId,
-            color = widgetColor,
-            taskGroupId = taskGroupId
-        )
-        val taskGroup = SingleTaskGroupEntity("foobar", taskGroupId)
-
-        // when
-        taskWidgetsDao.insert(widget)
-        taskGroupDao.insert(taskGroup)
-        val selectedWidgetWithTaskGroup = taskWidgetsDao.getWidgetWithTaskGroupById(widgetId)
-
-        // then
-        assertThat(selectedWidgetWithTaskGroup.widget).isEqualToComparingFieldByField(widget)
-        assertThat(selectedWidgetWithTaskGroup.singleTaskGroup).isEqualToComparingFieldByField(
-            taskGroup
-        )
-    }
-
-    @Test
-    fun shouldGetWidgetWithTaskGroupByIdObservable() {
-        // given
-        val widgetId = 22
-        val widgetColor = 11221122
-        val taskGroupId = 12L
-        val widget = TaskWidgetEntity(
-            widgetId = widgetId,
-            color = widgetColor,
-            taskGroupId = taskGroupId
-        )
-        val taskGroup = SingleTaskGroupEntity("foobar", taskGroupId)
-
-        // when
-        taskWidgetsDao.insert(widget)
-        taskGroupDao.insert(taskGroup)
-        val selectedWidgetWithTaskGroup = taskWidgetsDao.getWidgetWithTaskGroupByIdObservable(
-            widgetId
-        )
-
-        // then
-        selectedWidgetWithTaskGroup.observeForever {
-            assertThat(it.widget).isEqualToComparingFieldByField(widget)
-            assertThat(it.singleTaskGroup).isEqualToComparingFieldByField(taskGroup)
-        }
-    }
-
-    @Test
     fun shouldGetAllWidgetIds() {
         // given
-        val widgets = listOf(
+        val widgets = arrayOf(
             TaskWidgetEntity(widgetId = 12, color = 123123, taskGroupId = 66L),
             TaskWidgetEntity(widgetId = 13, color = 123132, taskGroupId = 62L),
             TaskWidgetEntity(widgetId = 14, color = 123634, taskGroupId = 64L),
@@ -157,7 +109,7 @@ class TaskWidgetEntityTest {
         )
 
         // when
-        taskWidgetsDao.insert(*widgets.toTypedArray())
+        taskWidgetsDao.insert(*widgets)
         val taskWidgetIds = taskWidgetsDao.getAllWidgetIds()
 
         // then
@@ -181,36 +133,9 @@ class TaskWidgetEntityTest {
     }
 
     @Test
-    fun shouldUpdateLinkedTaskGroupById() {
-        // given
-        val widgetId = 22
-        val widgetColor = 11221122
-        val taskGroupId = 12L
-        val swappedTaskGroupId = 22L
-        val widget = TaskWidgetEntity(
-            widgetId = widgetId,
-            color = widgetColor,
-            taskGroupId = taskGroupId
-        )
-        val taskGroups = listOf(
-            SingleTaskGroupEntity("foobar", taskGroupId),
-            SingleTaskGroupEntity("foobar", swappedTaskGroupId)
-        )
-
-        // when
-        taskWidgetsDao.insert(widget)
-        taskGroupDao.insert(*taskGroups.toTypedArray())
-        taskWidgetsDao.updateLinkedTaskGroupById(widgetId, swappedTaskGroupId)
-        val widgetWithTaskGroup = taskWidgetsDao.getWidgetWithTaskGroupById(widgetId)
-
-        // then
-        assertThat(widgetWithTaskGroup.singleTaskGroup.id).isEqualTo(swappedTaskGroupId)
-    }
-
-    @Test
     fun shouldGetAllTaskWidgetsObservable() {
         // given
-        val taskWidgets = listOf(
+        val taskWidgets = arrayOf(
             TaskWidgetEntity(widgetId = 12, color = 3456786, taskGroupId = 35L),
             TaskWidgetEntity(widgetId = 22, color = 3456786, taskGroupId = 38L),
             TaskWidgetEntity(widgetId = 52, color = 3456786, taskGroupId = 32L),
@@ -218,12 +143,12 @@ class TaskWidgetEntityTest {
         )
 
         // when
-        taskWidgetsDao.insert(*taskWidgets.toTypedArray())
+        taskWidgetsDao.insert(*taskWidgets)
         val taskWidgetsObservable = taskWidgetsDao.getAllTaskWidgetsObservable()
 
         // then
         taskWidgetsObservable.observeForever {
-            assertThat(it).containsExactlyInAnyOrderElementsOf(taskWidgets)
+            assertThat(it).containsExactlyInAnyOrderElementsOf(taskWidgets.toList())
         }
     }
 
@@ -246,5 +171,21 @@ class TaskWidgetEntityTest {
 
         // then
         assertThat(taskGroupIdLinkedToWidget).isEqualTo(widgetTaskGroupId)
+    }
+
+    @Test
+    fun shouldMapToDomainModel() {
+        // given
+        val taskWidget = TaskWidgetEntity(widgetId = 13, taskGroupId = 12L, color = 121233)
+
+        // when
+        val domainTaskWidget = taskWidget.toTaskWidgetEntry()
+
+        // then
+        with(domainTaskWidget) {
+            assertThat(appWidgetId).isEqualTo(taskWidget.widgetId)
+            assertThat(widgetColor).isEqualTo(taskWidget.color)
+            assertThat(taskGroupId).isEqualTo(taskWidget.taskGroupId)
+        }
     }
 }
