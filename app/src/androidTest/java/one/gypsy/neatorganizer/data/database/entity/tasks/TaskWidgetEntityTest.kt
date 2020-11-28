@@ -1,41 +1,22 @@
 package one.gypsy.neatorganizer.data.database.entity.tasks
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
-import one.gypsy.neatorganizer.data.database.OrganizerDatabase
+import one.gypsy.neatorganizer.data.database.DatabaseTest
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 
-class TaskWidgetEntityTest {
+class TaskWidgetEntityTest : DatabaseTest() {
 
     private lateinit var taskWidgetsDao: TaskWidgetsDao
     private lateinit var taskGroupDao: SingleTaskGroupsDao
-    private lateinit var database: OrganizerDatabase
-
-    @Rule
-    @JvmField
-    var rule: TestRule = InstantTaskExecutorRule()
 
     @Before
-    fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            OrganizerDatabase::class.java
-        ).build()
+    override fun setup() {
+        super.setup()
         taskWidgetsDao = database.taskWidgetDao()
         taskGroupDao = database.singleTaskGroupsDao()
-    }
-
-    @After
-    fun finish() {
-        database.close()
     }
 
     @Test
@@ -43,8 +24,11 @@ class TaskWidgetEntityTest {
         // given
         val updatedTaskGroupId = 423L
         val updatedWidgetId = 312
-        val taskWidget =
-            TaskWidgetEntity(widgetId = updatedWidgetId, taskGroupId = 12, color = 312221)
+        val taskWidget = TaskWidgetEntity(
+            widgetId = updatedWidgetId,
+            taskGroupId = 12,
+            color = 312221
+        )
 
         // when
         taskWidgetsDao.insert(taskWidget)
@@ -87,8 +71,11 @@ class TaskWidgetEntityTest {
     fun shouldGetWidgetById() {
         // given
         val fetchedWidgetId = 312
-        val taskWidget =
-            TaskWidgetEntity(widgetId = fetchedWidgetId, taskGroupId = 12, color = 312221)
+        val taskWidget = TaskWidgetEntity(
+            widgetId = fetchedWidgetId,
+            taskGroupId = 12,
+            color = 312221
+        )
 
         // when
         taskWidgetsDao.insert(taskWidget)

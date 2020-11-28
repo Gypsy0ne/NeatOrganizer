@@ -1,33 +1,21 @@
 package one.gypsy.neatorganizer.data.database.entity.routines
 
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
-import one.gypsy.neatorganizer.data.database.OrganizerDatabase
+import one.gypsy.neatorganizer.data.database.DatabaseTest
 import one.gypsy.neatorganizer.data.database.dao.routines.RoutineSchedulesDao
 import one.gypsy.neatorganizer.data.database.dao.routines.RoutinesDao
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class RoutineScheduleEntityTest {
+class RoutineScheduleEntityTest : DatabaseTest() {
     private lateinit var routineSchedulesDao: RoutineSchedulesDao
     private lateinit var routinesDao: RoutinesDao
-    private lateinit var database: OrganizerDatabase
 
     @Before
-    fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            OrganizerDatabase::class.java
-        ).build()
+    override fun setup() {
+        super.setup()
         routinesDao = database.routinesDao()
         routineSchedulesDao = database.routinesSchedulesDao()
-    }
-
-    @After
-    fun finish() {
-        database.close()
     }
 
     @Test
