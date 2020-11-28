@@ -132,8 +132,12 @@ class SingleTaskEntityTest : DatabaseTest() {
     @Test
     fun shouldProperlyMapToDomainModel() {
         // given
-        val singleTaskEntity =
-            SingleTaskEntity(groupId = 1L, id = 11L, name = "foobar1", done = true)
+        val singleTaskEntity = SingleTaskEntity(
+            groupId = 1L,
+            id = 11L,
+            name = "foobar1",
+            done = true
+        )
 
         // when
         val domainSingleTask = singleTaskEntity.toSingleTaskEntry()

@@ -78,4 +78,55 @@ class GroupWithSingleTasksTest : DatabaseTest() {
             assertThat(it.tasks).containsExactlyInAnyOrderElementsOf(tasks.toList())
         }
     }
+
+    @Test
+    fun shouldProperlyMapToGroupWithTasksDomainModel() {
+        // given
+        val taskGroupId = 1L
+        val tasks = listOf(
+            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
+            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
+            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
+        )
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId)
+        val groupWithSingleTasks = GroupWithSingleTasks(tasks = tasks, group = taskGroup)
+
+        // when
+        val domainGroupWithSingleTasks = groupWithSingleTasks.toSingleTaskGroupWithTasks()
+
+        // then
+        with(domainGroupWithSingleTasks) {
+            assertThat(groupWithSingleTasks.group.id).isEqualTo(id)
+            assertThat(groupWithSingleTasks.group.name).isEqualTo(name)
+            assertThat(groupWithSingleTasks.tasks.map { it.toSingleTaskEntry() }).containsExactlyInAnyOrderElementsOf(
+                this.tasks
+            )
+
+        }
+    }
+
+    @Test
+    fun shouldProperlyMapToTaskGroupDomainModel() {
+        // given
+        val taskGroupId = 1L
+        val tasks = listOf(
+            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
+            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
+            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
+        )
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId)
+        val groupWithSingleTasks = GroupWithSingleTasks(tasks = tasks, group = taskGroup)
+
+        // when
+        val domainSingleTaskGroup = groupWithSingleTasks.toSingleTaskGroupEntry()
+
+        // then
+        with(domainSingleTaskGroup) {
+            assertThat(id).isEqualTo(taskGroup.id)
+            assertThat(name).isEqualTo(taskGroup.name)
+            assertThat(tasksCount).isEqualTo(tasks.count())
+            assertThat(tasksDone).isEqualTo(tasks.count { it.done })
+
+        }
+    }
 }
