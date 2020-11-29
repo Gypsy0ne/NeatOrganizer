@@ -8,35 +8,19 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetSynchronizationService
-import one.gypsy.neatorganizer.utils.extensions.hide
-import one.gypsy.neatorganizer.utils.extensions.show
 
 class HomeActivity : AppCompatActivity() {
-
-    private val navController by lazy {
-        findNavController(R.id.fragment_activity_home_nav_container)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setUpActionBar()
-        setUpNavigationListener()
         startWidgetSynchronizationService()
     }
 
     private fun setUpActionBar() {
         setSupportActionBar(organizerToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
-
-    private fun setUpNavigationListener() {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.person_profile_fragment -> bottom_navigation_view_activity_home.hide()
-                else -> bottom_navigation_view_activity_home.show()
-            }
-        }
     }
 
     private fun startWidgetSynchronizationService() =

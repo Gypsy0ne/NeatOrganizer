@@ -13,8 +13,6 @@ val databaseModule = module {
         ).build()
     }
 
-    factory { get<OrganizerDatabase>().interactionDao() }
-    factory { get<OrganizerDatabase>().personDao() }
     factory { get<OrganizerDatabase>().routineTasksDao() }
     factory { get<OrganizerDatabase>().routinesDao() }
     factory { get<OrganizerDatabase>().routinesSchedulesDao() }

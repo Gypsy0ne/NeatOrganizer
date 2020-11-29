@@ -39,13 +39,6 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="PersonItemTextView">
-        <item name="android:lines">1</item>
-        <item name="autoSizeTextType">uniform</item>
-        <item name="android:layout_height">@dimen/normal_300</item>
-        <item name="android:layout_width">wrap_content</item>
-    </style>
-    <!--Add person dialog fragment-->
     <style name="DialogFormEditText">
         <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
         <item name="android:textColor">@color/gray</item>
@@ -55,20 +48,10 @@
         <item name="android:drawablePadding">@dimen/normal_50</item>
         <item name="android:paddingStart">@dimen/normal_100</item>
         <item name="android:paddingEnd">@dimen/normal_100</item>
-        <item name="android:background">@drawable/dialog_add_person_edit_text_background
-        </item>
+        <item name="android:background">@drawable/dialog_add_person_edit_text_background</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/height_dialog_fragment_add_person_form_text</item>
     </style>
-
-    <style name="DialogAddPersonFormEmailEditText" parent="DialogFormEditText">
-        <item name="android:inputType">textEmailAddress</item>
-    </style>
-
-    <style name="DialogAddPersonFormPhoneEditText" parent="DialogFormEditText">
-        <item name="android:inputType">phone</item>
-    </style>
-    <!--End of Add person dialog fragment-->
 
     <style name="DialogFormButton">
         <item name="android:paddingHorizontal">@dimen/normal_200</item>

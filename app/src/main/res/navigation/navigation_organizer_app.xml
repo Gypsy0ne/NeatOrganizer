@@ -23,18 +23,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/people"
-        android:name="one.gypsy.neatorganizer.presentation.people.view.PeopleFragment"
-        android:label="PeopleFragment">
-        <action
-            android:id="@+id/action_people_to_personProfileFragment"
-            app:destination="@id/person_profile_fragment" />
-        <action
-            android:id="@+id/action_people_to_rateInteractionDialogFragment"
-            app:destination="@id/rateInteractionDialogFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/routines"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment"
         android:label="RoutinesFragment">
@@ -47,32 +35,9 @@
     </fragment>
 
     <dialog
-        android:id="@+id/person_add"
-        android:name="one.gypsy.neatorganizer.presentation.people.view.AddPersonDialogFragment"
-        android:label="AddPersonDialogFragment" />
-
-    <dialog
         android:id="@+id/task_group_add"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
         android:label="AddTaskGroupDialogFragment" />
-
-    <fragment
-        android:id="@+id/person_profile_fragment"
-        android:name="one.gypsy.neatorganizer.presentation.profile.PersonProfileFragment"
-        android:label="PersonHistoryFragment">
-        <argument
-            android:name="personId"
-            app:argType="long" />
-    </fragment>
-
-    <dialog
-        android:id="@+id/rateInteractionDialogFragment"
-        android:name="one.gypsy.neatorganizer.presentation.people.view.RateInteractionDialogFragment"
-        android:label="RateInteractionDialogFragment">
-        <argument
-            android:name="personId"
-            app:argType="long" />
-    </dialog>
 
     <dialog
         android:id="@+id/addSingleTaskDialogFragment"

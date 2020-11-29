@@ -25,14 +25,6 @@ class OrganizerApplication : Application() {
                 routinesRepositoryModule,
                 routinesUseCaseModule,
                 routinesUtilsModule,
-                //People
-                peopleDataSourceModule,
-                peopleRepositoryModule,
-                peopleUseCaseModule,
-                peopleViewModelModule,
-                //Profile
-                profileUseCaseModule,
-                profileViewModelModule,
                 //Routines Reset
                 routinesResetDataSourceModule,
                 routinesResetRepositoryModule,
