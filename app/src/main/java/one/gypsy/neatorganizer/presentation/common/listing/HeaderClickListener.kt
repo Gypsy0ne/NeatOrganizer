@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.listing
+package one.gypsy.neatorganizer.presentation.common.listing
 
 interface HeaderClickListener<T : HeaderItem> {
     val onExpanderClick: (headerItem: T) -> Unit

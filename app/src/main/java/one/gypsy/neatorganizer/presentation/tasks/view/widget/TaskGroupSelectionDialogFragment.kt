@@ -86,7 +86,10 @@ class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun dismissWithSelectionResult(selectedGroupId: Long?) {
-        findNavController().previousBackStackEntry?.savedStateHandle?.set("key", selectedGroupId)
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+            SELECTED_WIDGET_GROUP_ID_KEY,
+            selectedGroupId
+        )
         dismiss()
     }
 }

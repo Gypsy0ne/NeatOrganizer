@@ -3,9 +3,9 @@ package one.gypsy.neatorganizer.presentation.routines.model
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
-import one.gypsy.neatorganizer.presentation.listing.HeaderItem
-import one.gypsy.neatorganizer.presentation.listing.ListedItem
-import one.gypsy.neatorganizer.presentation.listing.SubItem
+import one.gypsy.neatorganizer.presentation.common.listing.HeaderItem
+import one.gypsy.neatorganizer.presentation.common.listing.ListedItem
+import one.gypsy.neatorganizer.presentation.common.listing.SubItem
 
 sealed class RoutineListItem(
     override val id: Long,

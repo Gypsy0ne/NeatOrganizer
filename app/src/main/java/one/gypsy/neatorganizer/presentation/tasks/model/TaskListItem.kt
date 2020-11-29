@@ -2,8 +2,8 @@ package one.gypsy.neatorganizer.presentation.tasks.model
 
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
-import one.gypsy.neatorganizer.presentation.listing.HeaderItem
-import one.gypsy.neatorganizer.presentation.listing.SubItem
+import one.gypsy.neatorganizer.presentation.common.listing.HeaderItem
+import one.gypsy.neatorganizer.presentation.common.listing.SubItem
 
 sealed class TaskListItem(
     open val id: Long,

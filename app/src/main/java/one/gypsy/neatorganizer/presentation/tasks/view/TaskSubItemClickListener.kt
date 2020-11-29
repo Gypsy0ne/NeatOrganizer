@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
-import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
+import one.gypsy.neatorganizer.presentation.common.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 
 class TaskSubItemClickListener(

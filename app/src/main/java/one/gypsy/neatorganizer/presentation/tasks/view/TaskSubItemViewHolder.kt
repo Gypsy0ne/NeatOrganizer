@@ -3,8 +3,8 @@ package one.gypsy.neatorganizer.presentation.tasks.view
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.binding.setEditionEnabled
 import one.gypsy.neatorganizer.databinding.ItemTaskBinding
-import one.gypsy.neatorganizer.presentation.listing.ListedSubItem
-import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
+import one.gypsy.neatorganizer.presentation.common.listing.ListedSubItem
+import one.gypsy.neatorganizer.presentation.common.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show

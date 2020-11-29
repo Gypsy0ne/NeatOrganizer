@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.binding.BindableAdapter
-import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
-import one.gypsy.neatorganizer.presentation.listing.SubItemClickListener
+import one.gypsy.neatorganizer.presentation.common.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.common.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 
 class RoutinesAdapter(

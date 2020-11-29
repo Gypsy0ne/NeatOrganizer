@@ -4,8 +4,8 @@ import androidx.navigation.findNavController
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.binding.setEditionEnabled
 import one.gypsy.neatorganizer.databinding.ItemRoutineHeaderBinding
-import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
-import one.gypsy.neatorganizer.presentation.listing.ListedHeader
+import one.gypsy.neatorganizer.presentation.common.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.common.listing.ListedHeader
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show

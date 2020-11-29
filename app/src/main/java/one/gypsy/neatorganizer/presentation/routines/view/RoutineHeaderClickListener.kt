@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.presentation.routines.view
 
-import one.gypsy.neatorganizer.presentation.listing.HeaderClickListener
+import one.gypsy.neatorganizer.presentation.common.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
 
 class RoutineHeaderClickListener(

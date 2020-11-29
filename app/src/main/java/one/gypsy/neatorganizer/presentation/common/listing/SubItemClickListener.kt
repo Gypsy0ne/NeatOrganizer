@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.presentation.listing
+package one.gypsy.neatorganizer.presentation.common.listing
 
 interface SubItemClickListener<T : SubItem> {
     val onDoneClick: (subItem: T) -> Unit
