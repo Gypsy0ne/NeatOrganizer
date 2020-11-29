@@ -1,5 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tasksWidgetContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,7 +33,8 @@
             android:padding="@dimen/normal_25"
             android:layout_weight="0"
             android:src="@drawable/ic_launch_grey_24"
-            app:tint="@color/gray" />
+            android:tint="@color/gray"
+            tools:ignore="UseAppTint" />
     </LinearLayout>
 
     <ImageView
