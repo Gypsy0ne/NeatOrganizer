@@ -19,7 +19,6 @@ class TasksFragment : SectionFragment() {
     private val tasksViewModel: TasksViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentTasksBinding
 
-
     private val headerClickListener = TaskHeaderClickListener(
         onExpanderClick = { tasksViewModel.onExpand(it) },
         onEditionSubmitClick = { tasksViewModel.onHeaderUpdate(it) },
@@ -36,7 +35,7 @@ class TasksFragment : SectionFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_tasks, container, false)
         return fragmentBinding.root
