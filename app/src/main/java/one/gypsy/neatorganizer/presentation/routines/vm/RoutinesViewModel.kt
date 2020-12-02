@@ -21,11 +21,7 @@ class RoutinesViewModel(
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> = _listedRoutines.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-            if (it.isEmpty()) {
-                _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
-            } else {
-                _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
-            }
+            it.updateLoadingStatus()
             emit(routineListMapper.getVisibleItems(it))
         }
     }
@@ -40,6 +36,12 @@ class RoutinesViewModel(
                 ::onGetAllRoutinesSuccess
             )
         }
+    }
+
+    private fun List<RoutineListItem>.updateLoadingStatus() = if (isEmpty()) {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
+    } else {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
     }
 
     private fun onGetAllRoutinesSuccess(routines: LiveData<List<Routine>>) {
@@ -64,9 +66,7 @@ class RoutinesViewModel(
                 UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
             ) {
                 it.either(
-                    {
-                        // nop
-                    },
+                    {},
                     {
                         updateRoutineSchedule.invoke(
                             this,

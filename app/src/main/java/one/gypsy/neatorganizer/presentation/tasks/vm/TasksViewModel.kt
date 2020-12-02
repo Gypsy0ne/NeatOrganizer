@@ -25,12 +25,7 @@ class TasksViewModel(
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
     val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-            // extract
-            if (it.isEmpty()) {
-                _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
-            } else {
-                _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
-            }
+            it.updateLoadingStatus()
             emit(taskListMapper.getVisibleItems(it))
         }
     }
@@ -42,6 +37,12 @@ class TasksViewModel(
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either({}, ::onGetAllGroupsWithSingleTasksSuccess)
         }
+    }
+
+    private fun List<TaskListItem>.updateLoadingStatus() = if (isEmpty()) {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
+    } else {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
     }
 
     private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) =
