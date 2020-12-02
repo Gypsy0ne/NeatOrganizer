@@ -8,6 +8,7 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
@@ -24,14 +25,24 @@ class TasksViewModel(
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
     val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            it.updateLoadingStatus()
             emit(taskListMapper.getVisibleItems(it))
         }
     }
+    private val _contentLoadingStatus =
+        MutableLiveData<ContentLoadingStatus>(ContentLoadingStatus.ContentLoading)
+    val contentLoadingStatus: LiveData<ContentLoadingStatus> = _contentLoadingStatus
 
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either({}, ::onGetAllGroupsWithSingleTasksSuccess)
         }
+    }
+
+    private fun List<TaskListItem>.updateLoadingStatus() = if (isEmpty()) {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
+    } else {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
     }
 
     private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) =

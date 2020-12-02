@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.interactors.routines.*
+import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.routines.model.*
 import one.gypsy.neatorganizer.utils.Failure
 
@@ -20,9 +21,13 @@ class RoutinesViewModel(
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> = _listedRoutines.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            it.updateLoadingStatus()
             emit(routineListMapper.getVisibleItems(it))
         }
     }
+    private val _contentLoadingStatus =
+        MutableLiveData<ContentLoadingStatus>(ContentLoadingStatus.ContentLoading)
+    val contentLoadingStatus: LiveData<ContentLoadingStatus> = _contentLoadingStatus
 
     init {
         getAllRoutinesUseCase.invoke(viewModelScope, Unit) {
@@ -31,6 +36,12 @@ class RoutinesViewModel(
                 ::onGetAllRoutinesSuccess
             )
         }
+    }
+
+    private fun List<RoutineListItem>.updateLoadingStatus() = if (isEmpty()) {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
+    } else {
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
     }
 
     private fun onGetAllRoutinesSuccess(routines: LiveData<List<Routine>>) {
@@ -54,14 +65,15 @@ class RoutinesViewModel(
                 this,
                 UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
             ) {
-                it.either({
-                    // nop
-                }, {
-                    updateRoutineSchedule.invoke(
-                        this,
-                        UpdateRoutineSchedule.Params(routineSchedule = routineHeaderItem.getRoutineSchedule())
-                    )
-                })
+                it.either(
+                    {},
+                    {
+                        updateRoutineSchedule.invoke(
+                            this,
+                            UpdateRoutineSchedule.Params(routineSchedule = routineHeaderItem.getRoutineSchedule())
+                        )
+                    }
+                )
             }
         }
     }
@@ -88,5 +100,4 @@ class RoutinesViewModel(
             )
         )
     }
-
 }
