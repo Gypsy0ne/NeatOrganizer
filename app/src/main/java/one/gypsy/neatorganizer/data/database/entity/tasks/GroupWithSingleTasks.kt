@@ -6,7 +6,8 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 
 data class GroupWithSingleTasks(
-    @Embedded val group: SingleTaskGroupEntity, @Relation(
+    @Embedded val group: SingleTaskGroupEntity,
+    @Relation(
         parentColumn = "id",
         entityColumn = "groupId"
     ) val tasks: List<SingleTaskEntity>
@@ -15,7 +16,8 @@ data class GroupWithSingleTasks(
 fun GroupWithSingleTasks.toSingleTaskGroupWithTasks() = SingleTaskGroupWithTasks(
     name = this.group.name,
     id = this.group.id,
-    tasks = this.tasks.map { it.toSingleTaskEntry() }
+    tasks = this.tasks.map { it.toSingleTaskEntry() },
+    createdAt = group.createdAt
 )
 
 fun GroupWithSingleTasks.toSingleTaskGroupEntry() = SingleTaskGroupEntry(

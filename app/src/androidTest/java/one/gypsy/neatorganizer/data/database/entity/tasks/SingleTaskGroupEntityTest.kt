@@ -19,7 +19,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldInsertSingleTaskGroup() {
         // given
-        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = 1L)
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = 1L, createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -32,7 +32,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldRemoveSingleTaskGroup() {
         // given
-        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = 1L)
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = 1L, createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -46,7 +46,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldUpdateSingleTaskGroup() {
         // given
-        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = 1L)
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = 1L, createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -62,9 +62,9 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     fun shouldGetAllSingleTaskGroups() {
         // given
         val taskGroups = arrayOf(
-            SingleTaskGroupEntity(id = 1L, name = "foobar"),
-            SingleTaskGroupEntity(id = 2L, name = "foobar2"),
-            SingleTaskGroupEntity(id = 3L, name = "foobar3"),
+            SingleTaskGroupEntity(id = 1L, name = "foobar", createdAt = 123124),
+            SingleTaskGroupEntity(id = 2L, name = "foobar2", createdAt = 123124),
+            SingleTaskGroupEntity(id = 3L, name = "foobar3", createdAt = 123124),
         )
 
         // when
@@ -80,7 +80,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldGetSingleTaskGroupByIdObservable() {
         // given
-        val taskGroup = SingleTaskGroupEntity(id = 1L, name = "foobar")
+        val taskGroup = SingleTaskGroupEntity(id = 1L, name = "foobar", createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -95,7 +95,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldGetSingleTaskGroupById() {
         // given
-        val taskGroup = SingleTaskGroupEntity(id = 1L, name = "foobar")
+        val taskGroup = SingleTaskGroupEntity(id = 1L, name = "foobar", createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -108,7 +108,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldDeleteTaskGroupById() {
         // given
-        val taskGroup = SingleTaskGroupEntity(id = 1L, name = "foobar")
+        val taskGroup = SingleTaskGroupEntity(id = 1L, name = "foobar", createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -122,7 +122,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldMapToDomainModel() {
         // given
-        val taskGroupEntity = SingleTaskGroupEntity(id = 1L, name = "foobar")
+        val taskGroupEntity = SingleTaskGroupEntity(id = 1L, name = "foobar", createdAt = 123124)
 
         // when
         val domainTaskGroup = taskGroupEntity.toSingleTaskGroup()
@@ -131,6 +131,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
         with(domainTaskGroup) {
             assertThat(taskGroupEntity.id).isEqualTo(id)
             assertThat(taskGroupEntity.name).isEqualTo(name)
+            assertThat(taskGroupEntity.createdAt).isEqualTo(createdAt)
         }
     }
 }

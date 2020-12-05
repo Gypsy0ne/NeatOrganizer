@@ -7,13 +7,15 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 
 @Entity(
     tableName = "routine_schedules",
-    foreignKeys = [ForeignKey(
-        entity = RoutineEntity::class,
-        parentColumns = ["id"],
-        childColumns = ["routineId"],
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
-    )]
+    foreignKeys = [
+        ForeignKey(
+            entity = RoutineEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["routineId"],
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        )
+    ]
 )
 data class RoutineScheduleEntity(
     val monday: Boolean,

@@ -11,9 +11,9 @@ import kotlinx.coroutines.test.setMain
 import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
 import one.gypsy.neatorganizer.data.repositories.routines.reset.RoutineSnapshotsRepository
-import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -77,8 +77,8 @@ class RoutinesResetSnapshooterTest {
             RoutineTaskEntry(10, 2, "task5", true)
         )
         val routines = listOf(
-            Routine(1, "rutyna1", routineSchedule1, tasks1),
-            Routine(2, "rutyna2", routineSchedule2, tasks2)
+            RoutineWithTasks(1, "rutyna1", routineSchedule1, tasks1),
+            RoutineWithTasks(2, "rutyna2", routineSchedule2, tasks2)
         )
     }
 }

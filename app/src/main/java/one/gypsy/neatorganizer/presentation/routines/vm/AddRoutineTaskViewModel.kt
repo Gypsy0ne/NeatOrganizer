@@ -29,7 +29,8 @@ class AddRoutineTaskViewModel(
                 RoutineTaskEntry(
                     routineId = routineId,
                     name = taskTitle.value.orEmpty(),
-                    done = false
+                    done = false,
+                    createdAt = System.currentTimeMillis()
                 )
             )
         ) {
@@ -37,13 +38,11 @@ class AddRoutineTaskViewModel(
         }
     }
 
-
     private fun onAddRoutineTaskSuccess(newTaskId: Long) {
         _finishedAdding.postValue(true)
     }
 
     private fun onAddRoutineTaskFailure(failure: Failure) {
-
     }
 
     private fun onAddNextRoutineTaskSuccess(newTaskId: Long) {
@@ -51,6 +50,5 @@ class AddRoutineTaskViewModel(
     }
 
     private fun onAddNextRoutineTaskFailure(failure: Failure) {
-
     }
 }

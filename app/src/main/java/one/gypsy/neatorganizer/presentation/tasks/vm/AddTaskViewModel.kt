@@ -8,7 +8,8 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
 
 class AddTaskViewModel(
-    private val addSingleTaskUseCase: AddSingleTask, val groupId: Long
+    private val addSingleTaskUseCase: AddSingleTask,
+    val groupId: Long
 ) : ViewModel() {
 
     val taskTitle = MutableLiveData<String>()
@@ -23,7 +24,8 @@ class AddTaskViewModel(
                 SingleTaskEntry(
                     groupId = groupId,
                     name = taskTitle.value.orEmpty(),
-                    done = false
+                    done = false,
+                    createdAt = System.currentTimeMillis()
                 )
             )
         ) {
@@ -38,7 +40,8 @@ class AddTaskViewModel(
                 SingleTaskEntry(
                     groupId = groupId,
                     name = taskTitle.value.orEmpty(),
-                    done = false
+                    done = false,
+                    createdAt = System.currentTimeMillis()
                 )
             )
         ) {

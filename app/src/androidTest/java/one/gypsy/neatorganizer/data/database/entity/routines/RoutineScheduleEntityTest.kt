@@ -21,7 +21,7 @@ class RoutineScheduleEntityTest : DatabaseTest() {
     @Test
     fun shouldInsertReplaceRoutineSchedule() {
         // given
-        routinesDao.insert(RoutineEntity("foobar", 1))
+        routinesDao.insert(RoutineEntity("foobar", id = 1, createdAt = 123124))
         val routineScheduleId = 1L
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
@@ -49,7 +49,7 @@ class RoutineScheduleEntityTest : DatabaseTest() {
     @Test
     fun shouldInsertRoutineSchedule() {
         // given
-        routinesDao.insert(RoutineEntity("foobar", 1))
+        routinesDao.insert(RoutineEntity("foobar", id = 1, createdAt = 123124))
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
             tuesday = false,
@@ -72,8 +72,8 @@ class RoutineScheduleEntityTest : DatabaseTest() {
     @Test
     fun shouldDeleteRoutineSchedule() {
         // given
-        routinesDao.insert(RoutineEntity("foobar", 1))
-        routinesDao.insert(RoutineEntity("foobar", 2))
+        routinesDao.insert(RoutineEntity("foobar", id = 1, createdAt = 123124))
+        routinesDao.insert(RoutineEntity("foobar", id = 2, createdAt = 123124))
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
             tuesday = false,
@@ -107,7 +107,7 @@ class RoutineScheduleEntityTest : DatabaseTest() {
     @Test
     fun shouldUpdateRoutineSchedule() {
         // given
-        routinesDao.insert(RoutineEntity("foobar", 1))
+        routinesDao.insert(RoutineEntity("foobar", id = 1, createdAt = 123124))
         val routineScheduleId = 1L
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
@@ -136,9 +136,9 @@ class RoutineScheduleEntityTest : DatabaseTest() {
     fun shouldGetAllRoutineSchedule() {
         // given
         routinesDao.insert(
-            RoutineEntity("foobar", 1),
-            RoutineEntity("foobar", 2),
-            RoutineEntity("foobar", 3)
+            RoutineEntity("foobar", id = 1, createdAt = 123124),
+            RoutineEntity("foobar", id = 2, createdAt = 123124),
+            RoutineEntity("foobar", id = 3, createdAt = 123124)
         )
         val routineSchedules = listOf(
             RoutineScheduleEntity(
@@ -186,7 +186,7 @@ class RoutineScheduleEntityTest : DatabaseTest() {
     @Test
     fun shouldDeleteRoutineAndSchedule() {
         // given
-        val routine = RoutineEntity("foobar", 1)
+        val routine = RoutineEntity("foobar", id = 1, createdAt = 123124)
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
             tuesday = false,
@@ -227,16 +227,18 @@ class RoutineScheduleEntityTest : DatabaseTest() {
 
         // then
         assertThat(routineSchedule.routineId).isEqualTo(domainRoutineSchedule.routineId)
-        assertThat(routineSchedule.let {
-            listOf(
-                it.monday,
-                it.tuesday,
-                it.wednesday,
-                it.thursday,
-                it.friday,
-                it.saturday,
-                it.sunday
-            )
-        }).isEqualTo(domainRoutineSchedule.scheduledDays)
+        assertThat(
+            routineSchedule.let {
+                listOf(
+                    it.monday,
+                    it.tuesday,
+                    it.wednesday,
+                    it.thursday,
+                    it.friday,
+                    it.saturday,
+                    it.sunday
+                )
+            }
+        ).isEqualTo(domainRoutineSchedule.scheduledDays)
     }
 }

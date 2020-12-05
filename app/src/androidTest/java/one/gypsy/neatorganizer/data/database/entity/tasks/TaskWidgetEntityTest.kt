@@ -100,8 +100,10 @@ class TaskWidgetEntityTest : DatabaseTest() {
         val taskWidgetIds = taskWidgetsDao.getAllWidgetIds()
 
         // then
-        assertThat(taskWidgetIds).containsExactlyInAnyOrder(*widgets.map { it.widgetId }
-            .toIntArray())
+        assertThat(taskWidgetIds).containsExactlyInAnyOrder(
+            *widgets.map { it.widgetId }
+                .toIntArray()
+        )
     }
 
     @Test
@@ -153,7 +155,13 @@ class TaskWidgetEntityTest : DatabaseTest() {
                 color = 112233
             )
         )
-        taskGroupDao.insert(SingleTaskGroupEntity(name = "foobar", id = widgetTaskGroupId))
+        taskGroupDao.insert(
+            SingleTaskGroupEntity(
+                name = "foobar",
+                id = widgetTaskGroupId,
+                createdAt = 12344122
+            )
+        )
         val taskGroupIdLinkedToWidget = taskWidgetsDao.getTaskGroupIdByWidgetId(taskWidgetId)
 
         // then

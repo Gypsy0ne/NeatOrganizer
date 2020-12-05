@@ -1,13 +1,13 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
 import androidx.lifecycle.LiveData
-import one.gypsy.neatorganizer.domain.dto.routines.Routine
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 
 interface RoutinesDataSource {
-    suspend fun add(routine: Routine): Long
-    suspend fun remove(routine: Routine)
-    suspend fun update(routine: Routine)
-    suspend fun getAllRoutinesObservable(): LiveData<List<Routine>>
-    suspend fun getAllRoutines(): List<Routine>
+    suspend fun add(routine: RoutineWithTasks): Long
+    suspend fun remove(routine: RoutineWithTasks)
+    suspend fun update(routine: RoutineWithTasks)
+    suspend fun getAllRoutinesObservable(): LiveData<List<RoutineWithTasks>>
+    suspend fun getAllRoutines(): List<RoutineWithTasks>
     suspend fun removeRoutineById(routineId: Long)
 }

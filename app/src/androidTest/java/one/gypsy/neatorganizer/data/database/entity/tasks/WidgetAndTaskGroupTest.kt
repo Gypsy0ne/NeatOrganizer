@@ -29,7 +29,7 @@ class WidgetAndTaskGroupTest : DatabaseTest() {
             color = 11221122,
             taskGroupId = taskGroupId
         )
-        val taskGroup = SingleTaskGroupEntity("foobar", taskGroupId)
+        val taskGroup = SingleTaskGroupEntity("foobar", id = taskGroupId, createdAt = 123124)
 
         // when
         taskWidgetsDao.insert(widget)
@@ -55,7 +55,7 @@ class WidgetAndTaskGroupTest : DatabaseTest() {
             color = 11221122,
             taskGroupId = taskGroupId
         )
-        val taskGroup = SingleTaskGroupEntity("foobar", taskGroupId)
+        val taskGroup = SingleTaskGroupEntity("foobar", id = taskGroupId, createdAt = 123124)
 
         // when
         taskWidgetsDao.insert(widget)
@@ -83,8 +83,8 @@ class WidgetAndTaskGroupTest : DatabaseTest() {
             taskGroupId = taskGroupId
         )
         val taskGroups = arrayOf(
-            SingleTaskGroupEntity("foobar", taskGroupId),
-            SingleTaskGroupEntity("foobar", swappedTaskGroupId)
+            SingleTaskGroupEntity("foobar", id = taskGroupId, createdAt = 123124),
+            SingleTaskGroupEntity("foobar", id = swappedTaskGroupId, createdAt = 123124)
         )
 
         // when
@@ -102,7 +102,7 @@ class WidgetAndTaskGroupTest : DatabaseTest() {
         // given
         val taskWidget = WidgetAndTaskGroup(
             widget = TaskWidgetEntity(widgetId = 13, taskGroupId = 12L, color = 121233),
-            singleTaskGroup = SingleTaskGroupEntity(name = "foobar", id = 12L)
+            singleTaskGroup = SingleTaskGroupEntity(name = "foobar", id = 12L, createdAt = 123124)
         )
 
         // when

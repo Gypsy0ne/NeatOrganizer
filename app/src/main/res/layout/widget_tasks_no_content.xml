@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/normal_300"
+        android:layout_marginHorizontal="@dimen/normal_100"
         android:orientation="vertical">
 
         <ImageView
@@ -26,6 +27,7 @@
             android:autoSizeMaxTextSize="@dimen/text_normal_100"
             android:autoSizeMinTextSize="@dimen/text_normal_50"
             android:autoSizeTextType="uniform"
+            android:maxLines="2"
             android:gravity="center_horizontal"
             android:text="@string/task_widget_missing_content_message" />
     </LinearLayout>
