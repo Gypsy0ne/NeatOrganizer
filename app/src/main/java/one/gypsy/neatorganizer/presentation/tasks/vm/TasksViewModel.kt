@@ -2,6 +2,7 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
@@ -13,6 +14,7 @@ import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListMapper
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTaskGroup
+import one.gypsy.neatorganizer.utils.extensions.delayItemsEmission
 
 class TasksViewModel(
     getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
@@ -25,8 +27,9 @@ class TasksViewModel(
     private val _listedTasks = MediatorLiveData<List<TaskListItem>>()
     val listedTasks: LiveData<List<TaskListItem>> = _listedTasks.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            val listedItems = viewModelScope.async { taskListMapper.getVisibleItems(it) }
             it.updateLoadingStatus()
-            emit(taskListMapper.getVisibleItems(it))
+            emit(listedItems.await())
         }
     }
     private val _contentLoadingStatus =
@@ -48,12 +51,14 @@ class TasksViewModel(
     private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) =
         _listedTasks.addSource(taskGroups) {
             viewModelScope.launch {
-                _listedTasks.postValue(
+                val mappedTasks = viewModelScope.async {
                     taskListMapper.mapTasksToListItems(
                         it,
-                        _listedTasks.value.orEmpty()
+                        _listedTasks.value ?: emptyList()
                     )
-                )
+                }
+                delayItemsEmission(it.size)
+                _listedTasks.postValue(mappedTasks.await())
             }
         }
 

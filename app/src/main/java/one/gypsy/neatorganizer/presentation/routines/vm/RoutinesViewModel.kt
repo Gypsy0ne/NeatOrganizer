@@ -2,12 +2,14 @@ package one.gypsy.neatorganizer.presentation.routines.vm
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.routines.model.*
 import one.gypsy.neatorganizer.utils.Failure
+import one.gypsy.neatorganizer.utils.extensions.delayItemsEmission
 
 class RoutinesViewModel(
     getAllRoutinesUseCase: GetAllRoutines,
@@ -21,8 +23,9 @@ class RoutinesViewModel(
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
     val listedRoutines: LiveData<List<RoutineListItem>> = _listedRoutines.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            val listedItems = viewModelScope.async { routineListMapper.getVisibleItems(it) }
             it.updateLoadingStatus()
-            emit(routineListMapper.getVisibleItems(it))
+            emit(listedItems.await())
         }
     }
     private val _contentLoadingStatus =
@@ -47,17 +50,20 @@ class RoutinesViewModel(
     private fun onGetAllRoutinesSuccess(routines: LiveData<List<RoutineWithTasks>>) {
         _listedRoutines.addSource(routines) {
             viewModelScope.launch {
-                _listedRoutines.postValue(
+                val mappedRoutines = viewModelScope.async {
                     routineListMapper.mapRoutinesToListItems(
                         it,
                         _listedRoutines.value ?: emptyList()
                     )
-                )
+                }
+                delayItemsEmission(it.size)
+                _listedRoutines.postValue(mappedRoutines.await())
             }
         }
     }
 
-    private fun onGetAllRoutinesFailure(failure: Failure) {}
+    private fun onGetAllRoutinesFailure(failure: Failure) =
+        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
 
     fun onHeaderUpdate(routineHeaderItem: RoutineListItem.RoutineListHeader) {
         viewModelScope.launch {
