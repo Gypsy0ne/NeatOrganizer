@@ -53,7 +53,7 @@ class RoutinesViewModel(
                 val mappedRoutines = viewModelScope.async {
                     routineListMapper.mapRoutinesToListItems(
                         it,
-                        _listedRoutines.value ?: emptyList()
+                        _listedRoutines.value.orEmpty()
                     )
                 }
                 delayItemsEmission(it.size)

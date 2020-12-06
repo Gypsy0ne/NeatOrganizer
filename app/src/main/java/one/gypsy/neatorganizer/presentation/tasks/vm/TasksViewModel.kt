@@ -54,7 +54,7 @@ class TasksViewModel(
                 val mappedTasks = viewModelScope.async {
                     taskListMapper.mapTasksToListItems(
                         it,
-                        _listedTasks.value ?: emptyList()
+                        _listedTasks.value.orEmpty()
                     )
                 }
                 delayItemsEmission(it.size)
