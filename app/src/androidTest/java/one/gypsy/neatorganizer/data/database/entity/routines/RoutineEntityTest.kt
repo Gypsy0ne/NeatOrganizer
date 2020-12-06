@@ -20,7 +20,7 @@ class RoutineEntityTest : DatabaseTest() {
     fun shouldInsertRoutine() {
         // given
         val routineName = "foobar"
-        val routine = RoutineEntity(routineName)
+        val routine = RoutineEntity(routineName, createdAt = 123124)
 
         // when
         routineEntityDao.insert(routine)
@@ -36,12 +36,14 @@ class RoutineEntityTest : DatabaseTest() {
         // given
         val routineName = "foobar"
         val replacedRoutineName = "foobar2"
-        val routine = RoutineEntity(routineName)
+        val routine = RoutineEntity(routineName, createdAt = 123124)
 
         // when
         routineEntityDao.insert(routine)
-        val replacedRoutine =
-            routineEntityDao.getAllRoutines().first().copy(name = replacedRoutineName)
+        val replacedRoutine = routineEntityDao
+            .getAllRoutines()
+            .first()
+            .copy(name = replacedRoutineName)
         val replacedRoutineId = replacedRoutine.id
         routineEntityDao.insert(replacedRoutine)
 
@@ -59,12 +61,14 @@ class RoutineEntityTest : DatabaseTest() {
         // given
         val routineName = "foobar"
         val updatedRoutineName = "foobar2"
-        val routine = RoutineEntity(routineName)
+        val routine = RoutineEntity(routineName, createdAt = 123124)
 
         // when
         routineEntityDao.insert(routine)
-        val updatedRoutine =
-            routineEntityDao.getAllRoutines().first().copy(name = updatedRoutineName)
+        val updatedRoutine = routineEntityDao
+            .getAllRoutines()
+            .first()
+            .copy(name = updatedRoutineName)
         val updatedRoutineId = updatedRoutine.id
         routineEntityDao.insert(updatedRoutine)
 
@@ -82,8 +86,12 @@ class RoutineEntityTest : DatabaseTest() {
         // given
         val deletedRoutineName = "to delete"
         val deletedRoutineId = 2L
-        val routine = RoutineEntity("foobar", 1)
-        val routineToDelete = RoutineEntity(deletedRoutineName, deletedRoutineId)
+        val routine = RoutineEntity("foobar", id = 1, createdAt = 123124)
+        val routineToDelete = RoutineEntity(
+            deletedRoutineName,
+            id = deletedRoutineId,
+            createdAt = 123124
+        )
 
         // when
         routineEntityDao.insert(routine, routineToDelete)
@@ -92,7 +100,7 @@ class RoutineEntityTest : DatabaseTest() {
         // then
         val selectedRoutines = routineEntityDao.getAllRoutines()
         assertThat(selectedRoutines).hasSize(1)
-        selectedRoutines.first().apply {
+        with(selectedRoutines.first()) {
             assertThat(name).isNotEqualTo(deletedRoutineName)
             assertThat(id).isNotEqualTo(deletedRoutineId)
         }
@@ -102,11 +110,11 @@ class RoutineEntityTest : DatabaseTest() {
     fun shouldGetAllRoutines() {
         // given
         val routines = listOf(
-            RoutineEntity("name1", 1),
-            RoutineEntity("name2", 2),
-            RoutineEntity("name3", 3),
-            RoutineEntity("name4", 4),
-            RoutineEntity("name5", 5)
+            RoutineEntity("name1", id = 1, createdAt = 123124),
+            RoutineEntity("name2", id = 2, createdAt = 123124),
+            RoutineEntity("name3", id = 3, createdAt = 123124),
+            RoutineEntity("name4", id = 4, createdAt = 123124),
+            RoutineEntity("name5", id = 5, createdAt = 123124)
         )
 
         // when
@@ -120,13 +128,13 @@ class RoutineEntityTest : DatabaseTest() {
     @Test
     fun shouldDeleteRoutineById() {
         // given
-        val routineToDelete = RoutineEntity("name2", 2)
+        val routineToDelete = RoutineEntity(name = "name2", id = 2, createdAt = 12)
         val routines = listOf(
-            RoutineEntity("name1", 1),
+            RoutineEntity("name1", id = 1, createdAt = 13),
             routineToDelete,
-            RoutineEntity("name3", 3),
-            RoutineEntity("name4", 4),
-            RoutineEntity("name5", 5)
+            RoutineEntity("name3", id = 3, createdAt = 523),
+            RoutineEntity("name4", id = 4, createdAt = 15243),
+            RoutineEntity("name5", id = 5, createdAt = 14225)
         )
 
         // when
@@ -137,5 +145,4 @@ class RoutineEntityTest : DatabaseTest() {
         val selectedRoutines = routineEntityDao.getAllRoutines()
         assertThat(selectedRoutines).doesNotContain(routineToDelete).hasSize(routines.size - 1)
     }
-
 }

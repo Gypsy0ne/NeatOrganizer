@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.routines.Routine
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutine
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineSchedule
 import one.gypsy.neatorganizer.utils.Failure
@@ -29,10 +29,11 @@ class AddRoutineViewModel(
         addRoutineUseCase.invoke(
             viewModelScope,
             AddRoutine.Params(
-                Routine(
+                RoutineWithTasks(
                     name = routineTitle.value.orEmpty(),
                     schedule = RoutineSchedule.EMPTY,
-                    tasks = emptyList()
+                    tasks = emptyList(),
+                    createdAt = System.currentTimeMillis()
                 )
             )
         ) {
@@ -55,7 +56,6 @@ class AddRoutineViewModel(
     }
 
     fun onAddRoutineFailure(failure: Failure) {
-
     }
 
     fun onAddRoutineScheduleSuccess(newRoutineScheduleId: Long) {
@@ -63,7 +63,6 @@ class AddRoutineViewModel(
     }
 
     fun onAddRoutineScheduleFailure(failure: Failure) {
-
     }
 
     fun onScheduleChanged(updatedScheduleDays: List<Boolean>) {

@@ -27,11 +27,12 @@ class SingleTaskEntityTest : DatabaseTest() {
             id = 10L,
             groupId = taskGroupId,
             name = "foobar",
-            done = true
+            done = true,
+            createdAt = 12344122
         )
 
         // when
-        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId))
+        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId, createdAt = 12344122))
         tasksDao.insert(singleTask)
         val tasks = tasksDao.getAllSingleTasksByGroupId(taskGroupId)
 
@@ -48,11 +49,12 @@ class SingleTaskEntityTest : DatabaseTest() {
             id = 10L,
             groupId = taskGroupId,
             name = "foobar",
-            done = true
+            done = true,
+            createdAt = 12344122
         )
 
         // when
-        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId))
+        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId, createdAt = 12344122))
         tasksDao.insert(singleTask)
         tasksDao.delete(singleTask)
         val tasks = tasksDao.getAllSingleTasksByGroupId(taskGroupId)
@@ -70,11 +72,12 @@ class SingleTaskEntityTest : DatabaseTest() {
             id = 10L,
             groupId = taskGroupId,
             name = "foobar",
-            done = true
+            done = true,
+            createdAt = 12344122
         )
 
         // when
-        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId))
+        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId, createdAt = 12344122))
         tasksDao.insert(singleTask)
         val updatedTask = singleTask.copy(name = updatedTaskName)
         tasksDao.update(updatedTask)
@@ -90,15 +93,45 @@ class SingleTaskEntityTest : DatabaseTest() {
         // given
         val taskGroupId = 12L
         val tasks = arrayOf(
-            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 24L, name = "foobar4", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 55L, name = "foobar5", done = true)
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 11L,
+                name = "foobar1",
+                done = true,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 12L,
+                name = "foobar2",
+                done = false,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 33L,
+                name = "foobar3",
+                done = false,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 24L,
+                name = "foobar4",
+                done = true,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 55L,
+                name = "foobar5",
+                done = true,
+                createdAt = 12344122
+            )
         )
 
         // when
-        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId))
+        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId, createdAt = 12344122))
         tasksDao.insert(*tasks)
         val fetchedTasks = tasksDao.getAllSingleTasksByGroupId(taskGroupId)
 
@@ -111,15 +144,45 @@ class SingleTaskEntityTest : DatabaseTest() {
         // given
         val taskGroupId = 12L
         val tasks = arrayOf(
-            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 24L, name = "foobar4", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 55L, name = "foobar5", done = true)
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 11L,
+                name = "foobar1",
+                done = true,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 12L,
+                name = "foobar2",
+                done = false,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 33L,
+                name = "foobar3",
+                done = false,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 24L,
+                name = "foobar4",
+                done = true,
+                createdAt = 12344122
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 55L,
+                name = "foobar5",
+                done = true,
+                createdAt = 12344122
+            )
         )
 
         // when
-        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId))
+        taskGroupsDao.insert(SingleTaskGroupEntity("bar", id = taskGroupId, createdAt = 12344122))
         tasksDao.insert(*tasks)
         val fetchedTasksObservable = tasksDao.getAllSingleTasksByGroupIdObservable(taskGroupId)
 
@@ -136,7 +199,8 @@ class SingleTaskEntityTest : DatabaseTest() {
             groupId = 1L,
             id = 11L,
             name = "foobar1",
-            done = true
+            done = true,
+            createdAt = 12344122
         )
 
         // when
@@ -148,6 +212,7 @@ class SingleTaskEntityTest : DatabaseTest() {
             assertThat(singleTaskEntity.groupId).isEqualTo(groupId)
             assertThat(singleTaskEntity.id).isEqualTo(id)
             assertThat(singleTaskEntity.name).isEqualTo(name)
+            assertThat(singleTaskEntity.createdAt).isEqualTo(createdAt)
         }
     }
 }

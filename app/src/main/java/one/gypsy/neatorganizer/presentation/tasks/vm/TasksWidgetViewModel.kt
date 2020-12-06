@@ -31,16 +31,23 @@ class TasksWidgetViewModel(
         _widgetDataLoaded.postValue(true)
     }
 
-    //TODO introduce 2 way data binding
+    // TODO introduce 2 way data binding
     fun onTitleEditionFinished(editedTitle: String) {
-        taskGroup.value?.id?.let { groupId ->
+        taskGroup.value?.let { taskGroup ->
             updateTaskGroupUseCase.invoke(
                 viewModelScope,
-                UpdateSingleTaskGroup.Params(SingleTaskGroup(editedTitle, groupId))
+                UpdateSingleTaskGroup.Params(
+                    taskGroup.copy(
+                        name = editedTitle,
+                        id = taskGroup.id,
+                        createdAt = taskGroup.createdAt
+                    )
+                )
             ) {
-                it.either({}, {
-                    _titleEdited.postValue(false)
-                })
+                it.either(
+                    {},
+                    { _titleEdited.postValue(false) }
+                )
             }
         }
     }
@@ -58,5 +65,4 @@ class TasksWidgetViewModel(
             ::onGetSingleTaskGroupSuccess
         )
     }
-
 }

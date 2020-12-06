@@ -8,14 +8,16 @@ fun SingleTaskGroupWithTasks.toTaskListHeader(expanded: Boolean) = TaskListItem.
     id = this.id,
     name = this.name,
     subItemsCount = this.tasks.size,
-    expanded = expanded
+    expanded = expanded,
+    createdAt = this.createdAt
 )
 
 fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
     id = this.id,
     name = this.name,
     groupId = this.groupId,
-    done = this.done
+    done = this.done,
+    createdAt = this.createdAt
 )
 
 fun SingleTaskGroupEntry.toTaskGroupEntryItem() =

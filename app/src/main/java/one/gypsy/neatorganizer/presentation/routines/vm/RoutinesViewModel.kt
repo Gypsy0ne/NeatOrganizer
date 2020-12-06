@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.presentation.routines.vm
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import one.gypsy.neatorganizer.domain.dto.routines.Routine
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.routines.model.*
@@ -44,7 +44,7 @@ class RoutinesViewModel(
         _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
     }
 
-    private fun onGetAllRoutinesSuccess(routines: LiveData<List<Routine>>) {
+    private fun onGetAllRoutinesSuccess(routines: LiveData<List<RoutineWithTasks>>) {
         _listedRoutines.addSource(routines) {
             viewModelScope.launch {
                 _listedRoutines.postValue(

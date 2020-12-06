@@ -21,7 +21,8 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
             viewModelScope,
             AddTaskGroup.Params(
                 SingleTaskGroupWithTasks(
-                    taskGroupTitle.value.orEmpty()
+                    taskGroupTitle.value.orEmpty(),
+                    createdAt = System.currentTimeMillis()
                 )
             )
         ) {
@@ -34,6 +35,5 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
     }
 
     fun onAddSingleTaskGroupFailure(failure: Failure) {
-
     }
 }

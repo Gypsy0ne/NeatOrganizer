@@ -26,7 +26,7 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
     fun shouldGetScheduledRoutineWithTasks() {
         // given
         val routineId = 1L
-        val scheduledRoutine = RoutineEntity("foobar", routineId)
+        val scheduledRoutine = RoutineEntity("foobar", id = routineId, createdAt = 123124)
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
             tuesday = true,
@@ -38,10 +38,10 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
             routineId = routineId
         )
         val routineTasks = listOf(
-            RoutineTaskEntity("taskOne", true, routineId = routineId, id = 1L),
-            RoutineTaskEntity("taskTwo", true, routineId = routineId, id = 2L),
-            RoutineTaskEntity("taskThree", false, routineId = routineId, id = 3L),
-            RoutineTaskEntity("taskFour", true, routineId = routineId, id = 4L)
+            RoutineTaskEntity("taskOne", true, routineId = routineId, id = 1L, createdAt = 123124),
+            RoutineTaskEntity("taskTwo", true, routineId = routineId, id = 2L, createdAt = 123124),
+            RoutineTaskEntity("taskThree", false, routineId = routineId, id = 3L, createdAt = 1231),
+            RoutineTaskEntity("taskFour", true, routineId = routineId, id = 4L, createdAt = 123124)
         )
         routineEntityDao.insert(scheduledRoutine)
         routineTaskEntityDao.insert(*routineTasks.toTypedArray())
@@ -63,7 +63,7 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
     fun shouldMapToDomainModel() {
         // given
         val scheduledRoutineId = 1L
-        val scheduledRoutine = RoutineEntity("foobar", scheduledRoutineId)
+        val scheduledRoutine = RoutineEntity("foobar", id = scheduledRoutineId, createdAt = 123124)
         val routineSchedule = RoutineScheduleEntity(
             monday = true,
             tuesday = true,
@@ -75,39 +75,66 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
             routineId = scheduledRoutineId
         )
         val routineTasks = listOf(
-            RoutineTaskEntity("taskOne", true, routineId = scheduledRoutineId, id = 1L),
-            RoutineTaskEntity("taskTwo", true, routineId = scheduledRoutineId, id = 2L),
-            RoutineTaskEntity("taskThree", false, routineId = scheduledRoutineId, id = 3L),
-            RoutineTaskEntity("taskFour", true, routineId = scheduledRoutineId, id = 4L)
+            RoutineTaskEntity(
+                "taskOne",
+                true,
+                routineId = scheduledRoutineId,
+                id = 1L,
+                createdAt = 1231
+            ),
+            RoutineTaskEntity(
+                "taskTwo",
+                true,
+                routineId = scheduledRoutineId,
+                id = 2L,
+                createdAt = 123
+            ),
+            RoutineTaskEntity(
+                "taskThree",
+                false,
+                routineId = scheduledRoutineId,
+                id = 3L,
+                createdAt = 12
+            ),
+            RoutineTaskEntity(
+                "taskFour",
+                true,
+                routineId = scheduledRoutineId,
+                id = 4L,
+                createdAt = 1231
+            )
         )
         val scheduledRoutineWithTasks =
             ScheduledRoutineWithTasks(scheduledRoutine, routineTasks, routineSchedule)
 
         // when
-        val domainScheduledRoutineWithTasks = scheduledRoutineWithTasks.toRoutine()
+        val domainScheduledRoutineWithTasks = scheduledRoutineWithTasks.toRoutineWithTasks()
 
-        //then
+        // then
         assertThat(domainScheduledRoutineWithTasks.id).isEqualTo(scheduledRoutine.id)
         assertThat(domainScheduledRoutineWithTasks.name).isEqualTo(scheduledRoutine.name)
         domainScheduledRoutineWithTasks.schedule.apply {
             assertThat(routineId).isEqualTo(scheduledRoutine.id)
-            assertThat(scheduledDays).isEqualTo(routineSchedule.let {
-                listOf(
-                    it.monday,
-                    it.tuesday,
-                    it.wednesday,
-                    it.thursday,
-                    it.friday,
-                    it.saturday,
-                    it.sunday
-                )
-            })
+            assertThat(scheduledDays).isEqualTo(
+                routineSchedule.let {
+                    listOf(
+                        it.monday,
+                        it.tuesday,
+                        it.wednesday,
+                        it.thursday,
+                        it.friday,
+                        it.saturday,
+                        it.sunday
+                    )
+                }
+            )
         }
         domainScheduledRoutineWithTasks.tasks.forEachIndexed { index, routineTaskEntry ->
             assertThat(routineTaskEntry.done).isEqualTo(routineTasks[index].done)
             assertThat(routineTaskEntry.id).isEqualTo(routineTasks[index].id)
             assertThat(routineTaskEntry.routineId).isEqualTo(routineTasks[index].routineId)
             assertThat(routineTaskEntry.name).isEqualTo(routineTasks[index].name)
+            assertThat(routineTaskEntry.createdAt).isEqualTo(routineTasks[index].createdAt)
         }
     }
 
@@ -115,17 +142,29 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
     fun shouldMapToEmptySchedule() {
         // given
         val scheduledRoutineId = 1L
-        val scheduledRoutine = RoutineEntity("foobar", scheduledRoutineId)
+        val scheduledRoutine = RoutineEntity("foobar", id = scheduledRoutineId, createdAt = 123124)
         val routineSchedule = null
         val routineTasks = listOf(
-            RoutineTaskEntity("taskOne", true, routineId = scheduledRoutineId, id = 1L),
-            RoutineTaskEntity("taskTwo", true, routineId = scheduledRoutineId, id = 2L)
+            RoutineTaskEntity(
+                "taskOne",
+                true,
+                routineId = scheduledRoutineId,
+                id = 1L,
+                createdAt = 1124
+            ),
+            RoutineTaskEntity(
+                "taskTwo",
+                true,
+                routineId = scheduledRoutineId,
+                id = 2L,
+                createdAt = 123
+            )
         )
         val scheduledRoutineWithTasks =
             ScheduledRoutineWithTasks(scheduledRoutine, routineTasks, routineSchedule)
 
         // when
-        val domainScheduledRoutineWithTasks = scheduledRoutineWithTasks.toRoutine()
+        val domainScheduledRoutineWithTasks = scheduledRoutineWithTasks.toRoutineWithTasks()
 
         // then
         assertThat(domainScheduledRoutineWithTasks.schedule.scheduledDays).isEqualTo(RoutineSchedule.EMPTY.scheduledDays)

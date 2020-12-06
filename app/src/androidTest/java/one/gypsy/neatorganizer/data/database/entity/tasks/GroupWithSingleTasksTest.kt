@@ -23,23 +23,59 @@ class GroupWithSingleTasksTest : DatabaseTest() {
     fun shouldGetAllGroupsWithSingleTasks() {
         // given
         val taskGroups = arrayOf(
-            SingleTaskGroupEntity(name = "group1", id = 1L),
-            SingleTaskGroupEntity(name = "group2", id = 23L),
-            SingleTaskGroupEntity(name = "group3", id = 543L),
+            SingleTaskGroupEntity(name = "group1", id = 1L, createdAt = 123124),
+            SingleTaskGroupEntity(name = "group2", id = 23L, createdAt = 123124),
+            SingleTaskGroupEntity(name = "group3", id = 543L, createdAt = 123124),
         )
         val tasks = arrayOf(
             listOf(
-                SingleTaskEntity(groupId = 1L, id = 11L, name = "task1`", done = true),
-                SingleTaskEntity(groupId = 1L, id = 12L, name = "task2", done = false),
-                SingleTaskEntity(groupId = 1L, id = 999L, name = "task6", done = true)
+                SingleTaskEntity(
+                    groupId = 1L,
+                    id = 11L,
+                    name = "task1`",
+                    done = true,
+                    createdAt = 1234
+                ),
+                SingleTaskEntity(
+                    groupId = 1L,
+                    id = 12L,
+                    name = "task2",
+                    done = false,
+                    createdAt = 1224
+                ),
+                SingleTaskEntity(
+                    groupId = 1L,
+                    id = 999L,
+                    name = "task6",
+                    done = true,
+                    createdAt = 1224
+                )
             ),
             listOf(
-                SingleTaskEntity(groupId = 23L, id = 31L, name = "task3", done = false),
-                SingleTaskEntity(groupId = 23L, id = 51L, name = "task4", done = true)
+                SingleTaskEntity(
+                    groupId = 23L,
+                    id = 31L,
+                    name = "task3",
+                    done = false,
+                    createdAt = 1234
+                ),
+                SingleTaskEntity(
+                    groupId = 23L,
+                    id = 51L,
+                    name = "task4",
+                    done = true,
+                    createdAt = 1231
+                )
             ),
             listOf(
-                SingleTaskEntity(groupId = 543L, id = 641L, name = "task5", done = false)
-            ),
+                SingleTaskEntity(
+                    groupId = 543L,
+                    id = 641L,
+                    name = "task5",
+                    done = false,
+                    createdAt = 1231
+                )
+            )
         )
 
         // when
@@ -61,11 +97,29 @@ class GroupWithSingleTasksTest : DatabaseTest() {
         // given
         val taskGroupId = 1L
         val tasks = arrayOf(
-            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 11L,
+                name = "foobar1",
+                done = true,
+                createdAt = 123124
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 12L,
+                name = "foobar2",
+                done = false,
+                createdAt = 123124
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 33L,
+                name = "foobar3",
+                done = false,
+                createdAt = 123124
+            )
         )
-        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId)
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId, createdAt = 123124)
 
         // when
         taskGroupsDao.insert(taskGroup)
@@ -84,11 +138,29 @@ class GroupWithSingleTasksTest : DatabaseTest() {
         // given
         val taskGroupId = 1L
         val tasks = listOf(
-            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 11L,
+                name = "foobar1",
+                done = true,
+                createdAt = 123124
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 12L,
+                name = "foobar2",
+                done = false,
+                createdAt = 123124
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 33L,
+                name = "foobar3",
+                done = false,
+                createdAt = 123124
+            ),
         )
-        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId)
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId, createdAt = 123124)
         val groupWithSingleTasks = GroupWithSingleTasks(tasks = tasks, group = taskGroup)
 
         // when
@@ -97,11 +169,11 @@ class GroupWithSingleTasksTest : DatabaseTest() {
         // then
         with(domainGroupWithSingleTasks) {
             assertThat(groupWithSingleTasks.group.id).isEqualTo(id)
+            assertThat(groupWithSingleTasks.group.createdAt).isEqualTo(createdAt)
             assertThat(groupWithSingleTasks.group.name).isEqualTo(name)
             assertThat(groupWithSingleTasks.tasks.map { it.toSingleTaskEntry() }).containsExactlyInAnyOrderElementsOf(
                 this.tasks
             )
-
         }
     }
 
@@ -110,11 +182,29 @@ class GroupWithSingleTasksTest : DatabaseTest() {
         // given
         val taskGroupId = 1L
         val tasks = listOf(
-            SingleTaskEntity(groupId = taskGroupId, id = 11L, name = "foobar1", done = true),
-            SingleTaskEntity(groupId = taskGroupId, id = 12L, name = "foobar2", done = false),
-            SingleTaskEntity(groupId = taskGroupId, id = 33L, name = "foobar3", done = false),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 11L,
+                name = "foobar1",
+                done = true,
+                createdAt = 123124
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 12L,
+                name = "foobar2",
+                done = false,
+                createdAt = 123124
+            ),
+            SingleTaskEntity(
+                groupId = taskGroupId,
+                id = 33L,
+                name = "foobar3",
+                done = false,
+                createdAt = 123124
+            )
         )
-        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId)
+        val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId, createdAt = 123124)
         val groupWithSingleTasks = GroupWithSingleTasks(tasks = tasks, group = taskGroup)
 
         // when
@@ -126,7 +216,6 @@ class GroupWithSingleTasksTest : DatabaseTest() {
             assertThat(name).isEqualTo(taskGroup.name)
             assertThat(tasksCount).isEqualTo(tasks.count())
             assertThat(tasksDone).isEqualTo(tasks.count { it.done })
-
         }
     }
 }
