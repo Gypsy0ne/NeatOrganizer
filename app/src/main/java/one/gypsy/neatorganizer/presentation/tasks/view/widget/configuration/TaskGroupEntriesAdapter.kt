@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -26,7 +25,8 @@ class TaskGroupEntriesAdapter(
             DataBindingUtil.inflate(
                 LayoutInflater.from(
                     parent.context
-                ), R.layout.item_task_group_entry, parent, false
+                ),
+                R.layout.item_task_group_entry, parent, false
             )
         )
 
