@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,7 @@ class TaskGroupManageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_task_group_manage,
@@ -48,7 +49,7 @@ class TaskGroupManageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.setUpContentBinding()
-        observeNewGroupSelectionResult()
+        findNavController().observeNewGroupSelectionResult()
     }
 
     private fun FragmentTaskGroupManageBinding.setUpContentBinding() {
@@ -66,33 +67,29 @@ class TaskGroupManageFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.add_entry -> {
-            navigateToAddTaskDialog()
+            findNavController(this).navigateToAddTaskDialog()
             true
         }
         else -> false
     }
 
-    private fun navigateToAddTaskDialog() {
-        val groupId = arguments?.getLong(MANAGED_GROUP_ID_KEY) ?: MANAGED_GROUP_INVALID_ID
-        if (groupId != MANAGED_GROUP_INVALID_ID) {
-            val direction = TaskGroupManageFragmentDirections
-                .actionTaskGroupManageFragmentToAddSingleTaskDialog(groupId)
-            findNavController(this).navigate(direction)
+    private fun NavController.navigateToAddTaskDialog() =
+        arguments?.getLong(MANAGED_GROUP_ID_KEY)?.let {
+            navigate(
+                TaskGroupManageFragmentDirections
+                    .widgetTaskGroupManageToSingleTaskAddition(it)
+            )
         }
-    }
 
-    private fun observeNewGroupSelectionResult() =
-        findNavController()
-            .currentBackStackEntry
+    private fun NavController.observeNewGroupSelectionResult() =
+        currentBackStackEntry
             ?.savedStateHandle
             ?.getLiveData<Long?>(SELECTED_WIDGET_GROUP_ID_KEY)
             ?.observe(viewLifecycleOwner) {
                 onNewTaskGroupSelected(it)
             }
 
-    private fun onNewTaskGroupSelected(selectedGroupId: Long?) {
-        if (selectedGroupId != null) {
-            tasksViewModel.loadTasksData(selectedGroupId)
-        }
+    private fun onNewTaskGroupSelected(selectedGroupId: Long?) = selectedGroupId?.let {
+        tasksViewModel.loadTasksData(it)
     }
 }

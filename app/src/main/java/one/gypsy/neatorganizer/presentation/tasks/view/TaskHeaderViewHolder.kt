@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.presentation.tasks.view
 
-
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.binding.setEditionEnabled
@@ -33,13 +33,12 @@ class TaskHeaderViewHolder(
         bindInitially()
     }
 
-    private fun bindInitially() {
+    private fun bindInitially() =
         itemBinding.apply {
             headerItem = viewData
             animateChanges = false
             executePendingBindings()
         }
-    }
 
     override fun updateEditable() {
         changeNameEditionAttributes()
@@ -63,58 +62,53 @@ class TaskHeaderViewHolder(
     private fun changeNameEditionAttributes() =
         setEditionEnabled(itemBinding.editTextItemTaskHeaderName, viewData.edited)
 
-
-    override fun setUpSwipeMenuBehavior() {
+    override fun setUpSwipeMenuBehavior() =
         itemBinding.swipeLayoutItemTaskHeaderRoot.setMenuSwipeListener(object :
-            SwipeMenuListener {
-            override fun onLeftMenuOpen() {
-                clearEditionStatus()
-            }
+                SwipeMenuListener {
+                override fun onLeftMenuOpen() {
+                    clearEditionStatus()
+                }
 
-            override fun onRightMenuOpen() {
-                clearEditionStatus()
-            }
-        })
-    }
+                override fun onRightMenuOpen() {
+                    clearEditionStatus()
+                }
+            })
 
     override fun clearEditionStatus() {
         viewData = viewData.copy(edited = false)
         updateEditable()
     }
 
-
-    override fun setUpExpanderListener() {
-        itemBinding.setExpanderClickListener {
+    override fun setUpExpanderListener() = with(itemBinding) {
+        setExpanderClickListener {
             viewData = viewData.copy(expanded = !viewData.expanded)
             clickListener?.onExpanderClick?.invoke(viewData)
         }
     }
 
-    override fun setUpAddListener() {
-        itemBinding.setAddClickListener {
-            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
-            navigateToAddTask(viewData.id)
+    override fun setUpAddListener() = with(itemBinding) {
+        setAddClickListener {
+            swipeLayoutItemTaskHeaderRoot.resetStatus()
+            root.findNavController().navigateToAddTask(viewData.id)
         }
     }
 
-    private fun navigateToAddTask(groupId: Long) {
-        val direction = TasksFragmentDirections.actionTasksToAddSingleTaskDialogFragment(groupId)
-        itemBinding.root.findNavController().navigate(direction)
-    }
+    private fun NavController.navigateToAddTask(groupId: Long) =
+        navigate(TasksFragmentDirections.tasksToSingleTaskAddition(groupId))
 
-    override fun setUpEditListener() {
-        itemBinding.setEditClickListener {
+    override fun setUpEditListener() = with(itemBinding) {
+        setEditClickListener {
             viewData = viewData.copy(edited = !viewData.edited)
             updateEditable()
-            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
+            swipeLayoutItemTaskHeaderRoot.resetStatus()
         }
     }
 
-    override fun setUpEditionSubmitListener() {
-        itemBinding.setEditionSubmitClickListener {
+    override fun setUpEditionSubmitListener() = with(itemBinding) {
+        setEditionSubmitClickListener {
             if (didItemNameChange()) {
                 viewData = viewData.copy(
-                    name = itemBinding.editTextItemTaskHeaderName.text.toString()
+                    name = editTextItemTaskHeaderName.text.toString()
                 )
                 clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
@@ -126,9 +120,9 @@ class TaskHeaderViewHolder(
     private fun didItemNameChange() =
         viewData.name != itemBinding.editTextItemTaskHeaderName.text.toString()
 
-    override fun setUpRemoveListener() {
-        itemBinding.setRemoveClickListener {
-            itemBinding.swipeLayoutItemTaskHeaderRoot.resetStatus()
+    override fun setUpRemoveListener() = with(itemBinding) {
+        setRemoveClickListener {
+            swipeLayoutItemTaskHeaderRoot.resetStatus()
             clickListener?.onRemoveClick?.invoke(viewData)
         }
     }

@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_task_widget"
-    app:startDestination="@id/taskGroupManageFragment">
+    app:startDestination="@id/widgetTaskGroupManage">
 
     <dialog
-        android:id="@+id/addSingleTaskDialog"
+        android:id="@+id/widgetSingleTaskAddition"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
         android:label="AddSingleTaskDialog">
         <argument
@@ -14,20 +14,20 @@
     </dialog>
 
     <fragment
-        android:id="@+id/taskGroupManageFragment"
+        android:id="@+id/widgetTaskGroupManage"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupManageFragment"
         android:label="TaskGroupManageFragment">
 
         <action
-            android:id="@+id/action_taskGroupManageFragment_to_addSingleTaskDialog"
-            app:destination="@id/addSingleTaskDialog" />
+            android:id="@+id/widgetTaskGroupManageToSingleTaskAddition"
+            app:destination="@id/widgetSingleTaskAddition" />
         <action
-            android:id="@+id/action_taskGroupManageFragment_to_selectTaskGroupDialog"
-            app:destination="@id/selectTaskGroupDialog" />
+            android:id="@+id/widgetTaskGroupManageToTaskGroupSelection"
+            app:destination="@id/widgetTaskGroupSelection" />
     </fragment>
 
     <dialog
-        android:id="@+id/selectTaskGroupDialog"
+        android:id="@+id/widgetTaskGroupSelection"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskGroupSelectionDialogFragment"
         android:label="AddSingleTaskDialogFragment">
         <argument
