@@ -21,9 +21,7 @@ fun View.fadeIn() {
         alpha(1f)
         duration = resources.getInteger(R.integer.minimal_animation_duration).toLong()
         setListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animation: Animator?) {
-                show()
-            }
+            override fun onAnimationStart(animation: Animator?) = show()
 
             override fun onAnimationEnd(animation: Animator?) {}
 
@@ -42,9 +40,7 @@ fun View.fadeOut() {
         setListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {}
 
-            override fun onAnimationEnd(animation: Animator?) {
-                hide()
-            }
+            override fun onAnimationEnd(animation: Animator?) = hide()
 
             override fun onAnimationCancel(animation: Animator?) {}
 
