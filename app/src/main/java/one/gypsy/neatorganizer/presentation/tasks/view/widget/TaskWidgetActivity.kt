@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_task_widget.*
 import one.gypsy.neatorganizer.R
@@ -30,7 +31,7 @@ class TaskWidgetActivity : AppCompatActivity() {
         setNavigationGraph()
         startWidgetSynchronizationService()
         observeDataLoadingStatus()
-        observeNewGroupSelectionResult()
+        findNavController(R.id.navigationFragmentsContainer).observeNewGroupSelectionResult()
     }
 
     private fun setUpBinding() {
@@ -54,16 +55,17 @@ class TaskWidgetActivity : AppCompatActivity() {
 
     private fun observeDataLoadingStatus() = tasksViewModel.widgetDataLoaded.observe(this) {
         if (!it) {
-            navigateToSelectTaskGroupDialog()
+            findNavController(R.id.navigationFragmentsContainer).navigateToSelectTaskGroupDialog()
         }
     }
 
-    private fun navigateToSelectTaskGroupDialog() {
+    private fun NavController.navigateToSelectTaskGroupDialog() {
         val widgetId = intent.getIntExtra(MANAGED_WIDGET_ID_KEY, MANAGED_WIDGET_INVALID_ID)
         if (widgetId != MANAGED_WIDGET_INVALID_ID) {
-            val direction = TaskGroupManageFragmentDirections
-                .actionTaskGroupManageFragmentToSelectTaskGroupDialog(widgetId)
-            findNavController(R.id.navigationFragmentsContainer).navigate(direction)
+            navigate(
+                TaskGroupManageFragmentDirections
+                    .widgetTaskGroupManageToTaskGroupSelection(widgetId)
+            )
         }
     }
 
@@ -100,12 +102,11 @@ class TaskWidgetActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeNewGroupSelectionResult() =
-        findNavController(R.id.navigationFragmentsContainer)
-            .currentBackStackEntry
+    private fun NavController.observeNewGroupSelectionResult() =
+        currentBackStackEntry
             ?.savedStateHandle
             ?.getLiveData<Long?>(SELECTED_WIDGET_GROUP_ID_KEY)
-            ?.observe(this) {
+            ?.observe(this@TaskWidgetActivity) {
                 onNewTaskSelected(it)
             }
 

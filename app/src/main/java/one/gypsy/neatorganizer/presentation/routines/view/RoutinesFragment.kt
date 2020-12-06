@@ -14,7 +14,6 @@ import one.gypsy.neatorganizer.presentation.SectionFragment
 import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class RoutinesFragment : SectionFragment() {
 
     private val routinesViewModel: RoutinesViewModel by viewModel()
@@ -43,7 +42,7 @@ class RoutinesFragment : SectionFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        findNavController().navigate(R.id.routine_add)
+        findNavController().navigate(R.id.routineAddition)
         return true
     }
 
@@ -67,14 +66,11 @@ class RoutinesFragment : SectionFragment() {
         executePendingBindings()
     }
 
-    private fun navigateToRemoveRoutineSubmitDialog(routineId: Long, subItemsCount: Int) {
-        with(
-            RoutinesFragmentDirections.actionRoutinesToRemoveRoutineSubmitDialogFragment(
+    private fun navigateToRemoveRoutineSubmitDialog(routineId: Long, subItemsCount: Int) =
+        findNavController().navigate(
+            RoutinesFragmentDirections.routinesToRemoveRoutineConfirmation(
                 routineId,
                 subItemsCount
             )
-        ) {
-            findNavController().navigate(this)
-        }
-    }
+        )
 }

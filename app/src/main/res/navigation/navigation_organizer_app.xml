@@ -9,13 +9,13 @@
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment"
         android:label="TasksFragment">
         <action
-            android:id="@+id/action_tasks_to_addSingleTaskDialogFragment"
-            app:destination="@id/addSingleTaskDialogFragment" />
+            android:id="@+id/tasksToSingleTaskAddition"
+            app:destination="@id/singleTaskAddition" />
         <action
-            android:id="@+id/action_tasks_to_removeTaskGroupSubmitDialogFragment"
-            app:destination="@id/removeTaskGroupSubmitDialogFragment" />
+            android:id="@+id/tasksToSingleTaskGroupRemoveConfirmation"
+            app:destination="@id/removeTaskGroupConfirmation" />
         <action
-            android:id="@+id/action_tasks_to_routines"
+            android:id="@+id/tasksToRoutinesAction"
             app:destination="@id/routines"
             app:launchSingleTop="true"
             app:popUpTo="@id/organizer_app_navigation"
@@ -27,20 +27,20 @@
         android:name="one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment"
         android:label="RoutinesFragment">
         <action
-            android:id="@+id/action_routines_to_addRoutineTaskDialogFragment"
-            app:destination="@id/addRoutineTaskDialogFragment" />
+            android:id="@+id/routinesToRoutineTaskAddition"
+            app:destination="@id/routineTaskAddition" />
         <action
-            android:id="@+id/action_routines_to_removeRoutineSubmitDialogFragment"
-            app:destination="@id/removeRoutineSubmitDialogFragment" />
+            android:id="@+id/routinesToRemoveRoutineConfirmation"
+            app:destination="@id/removeRoutineConfirmation" />
     </fragment>
 
     <dialog
-        android:id="@+id/task_group_add"
+        android:id="@+id/taskGroupAddition"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
         android:label="AddTaskGroupDialogFragment" />
 
     <dialog
-        android:id="@+id/addSingleTaskDialogFragment"
+        android:id="@+id/singleTaskAddition"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
         android:label="AddSingleTaskDialogFragment">
         <argument
@@ -49,7 +49,7 @@
     </dialog>
 
     <dialog
-        android:id="@+id/addRoutineTaskDialogFragment"
+        android:id="@+id/routineTaskAddition"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineTaskDialogFragment"
         android:label="AddRoutineTaskDialogFragment">
         <argument
@@ -58,7 +58,7 @@
     </dialog>
 
     <dialog
-        android:id="@+id/removeRoutineSubmitDialogFragment"
+        android:id="@+id/removeRoutineConfirmation"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.RemoveRoutineSubmitDialogFragment"
         android:label="RemoveRoutineSubmitDialogFragment">
         <argument
@@ -70,7 +70,7 @@
     </dialog>
 
     <dialog
-        android:id="@+id/removeTaskGroupSubmitDialogFragment"
+        android:id="@+id/removeTaskGroupConfirmation"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.RemoveTaskGroupSubmitDialogFragment"
         android:label="RemoveTaskGroupSubmitDialogFragment">
         <argument
@@ -82,7 +82,7 @@
     </dialog>
 
     <dialog
-        android:id="@+id/routine_add"
+        android:id="@+id/routineAddition"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment"
         android:label="AddRoutineDialogFragment" />
 

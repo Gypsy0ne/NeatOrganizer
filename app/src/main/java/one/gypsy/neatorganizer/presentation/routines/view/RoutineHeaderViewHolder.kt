@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.presentation.routines.view
 
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.guanaj.easyswipemenulibrary.SwipeMenuListener
 import one.gypsy.neatorganizer.binding.setEditionEnabled
@@ -58,58 +59,52 @@ class RoutineHeaderViewHolder(
     private fun changeNameEditionAttributes() =
         setEditionEnabled(itemBinding.editTextItemRoutineHeaderName, viewData.edited)
 
-    override fun setUpSwipeMenuBehavior() {
+    override fun setUpSwipeMenuBehavior() =
         itemBinding.swipeLayoutItemRoutineHeaderRoot.setMenuSwipeListener(object :
-            SwipeMenuListener {
-            override fun onLeftMenuOpen() {
-                clearEditionStatus()
-            }
+                SwipeMenuListener {
+                override fun onLeftMenuOpen() {
+                    clearEditionStatus()
+                }
 
-            override fun onRightMenuOpen() {
-                clearEditionStatus()
-            }
-        })
-    }
+                override fun onRightMenuOpen() {
+                    clearEditionStatus()
+                }
+            })
 
     override fun clearEditionStatus() {
         viewData = viewData.copy(edited = false)
         updateEditable()
     }
 
-    override fun setUpExpanderListener() {
+    override fun setUpExpanderListener() =
         itemBinding.setExpanderClickListener {
             viewData = viewData.copy(expanded = !viewData.expanded)
             clickListener.onExpanderClick(viewData)
         }
-    }
 
-    override fun setUpAddListener() {
+    override fun setUpAddListener() =
         itemBinding.setAddClickListener {
             itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
-            navigateToAddRoutineTask(viewData.id)
+            itemBinding.root.findNavController().navigateToAddRoutineTask(viewData.id)
         }
-    }
 
-    private fun navigateToAddRoutineTask(routineId: Long) {
-        val direction =
-            RoutinesFragmentDirections.actionRoutinesToAddRoutineTaskDialogFragment(routineId)
-        itemBinding.root.findNavController().navigate(direction)
-    }
+    private fun NavController.navigateToAddRoutineTask(routineId: Long) =
+        navigate(RoutinesFragmentDirections.routinesToRoutineTaskAddition(routineId))
 
-    override fun setUpEditListener() {
-        itemBinding.setEditClickListener {
+    override fun setUpEditListener() = with(itemBinding) {
+        setEditClickListener {
             viewData = viewData.copy(edited = !viewData.edited)
             updateEditable()
-            itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
+            swipeLayoutItemRoutineHeaderRoot.resetStatus()
         }
     }
 
-    override fun setUpEditionSubmitListener() {
-        itemBinding.setEditionSubmitClickListener {
+    override fun setUpEditionSubmitListener() = with(itemBinding) {
+        setEditionSubmitClickListener {
             if (didItemContentChange()) {
                 viewData = viewData.copy(
-                    name = itemBinding.editTextItemRoutineHeaderName.text.toString(),
-                    scheduleDays = itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus
+                    name = editTextItemRoutineHeaderName.text.toString(),
+                    scheduleDays = dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus
                 )
                 clickListener.onEditionSubmitClick(viewData)
             } else {
@@ -120,14 +115,12 @@ class RoutineHeaderViewHolder(
 
     private fun didItemContentChange() =
         viewData.name != itemBinding.editTextItemRoutineHeaderName.text.toString() ||
-                viewData.scheduleDays != itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus
+            viewData.scheduleDays != itemBinding.dayPickerItemRoutineHeaderSchedule.scheduleDaysStatus
 
-
-    override fun setUpRemoveListener() {
-        itemBinding.setRemoveClickListener {
-            itemBinding.swipeLayoutItemRoutineHeaderRoot.resetStatus()
+    override fun setUpRemoveListener() = with(itemBinding) {
+        setRemoveClickListener {
+            swipeLayoutItemRoutineHeaderRoot.resetStatus()
             clickListener.onRemoveClick(viewData)
         }
     }
-
 }

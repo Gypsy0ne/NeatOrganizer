@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
@@ -22,7 +23,12 @@ class TasksFragment : SectionFragment() {
     private val headerClickListener = TaskHeaderClickListener(
         onExpanderClick = { tasksViewModel.onExpand(it) },
         onEditionSubmitClick = { tasksViewModel.onHeaderUpdate(it) },
-        onRemoveClick = { showRemoveConfirmationDialog(it.id, it.subItemsCount) }
+        onRemoveClick = {
+            findNavController().showRemoveConfirmationDialog(
+                it.id,
+                it.subItemsCount
+            )
+        }
     )
 
     private val subItemClickListener = TaskSubItemClickListener(
@@ -51,7 +57,7 @@ class TasksFragment : SectionFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        findNavController().navigate(R.id.task_group_add)
+        findNavController().navigate(R.id.taskGroupAddition)
         return true
     }
 
@@ -62,17 +68,13 @@ class TasksFragment : SectionFragment() {
         executePendingBindings()
     }
 
-    private fun showRemoveConfirmationDialog(
+    private fun NavController.showRemoveConfirmationDialog(
         taskGroupId: Long,
         subItemsCount: Int
-    ) {
-        with(
-            TasksFragmentDirections.actionTasksToRemoveTaskGroupSubmitDialogFragment(
-                taskGroupId,
-                subItemsCount
-            )
-        ) {
-            findNavController().navigate(this)
-        }
-    }
+    ) = navigate(
+        TasksFragmentDirections.tasksToSingleTaskGroupRemoveConfirmation(
+            taskGroupId,
+            subItemsCount
+        )
+    )
 }
