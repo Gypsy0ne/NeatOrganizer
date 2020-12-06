@@ -35,7 +35,7 @@ class TaskGroupManageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_task_group_manage,
