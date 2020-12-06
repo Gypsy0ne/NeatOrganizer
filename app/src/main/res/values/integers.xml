@@ -4,6 +4,7 @@
     <integer name="default_recycler_view_cache_size">20</integer>
     <integer name="color_palette_columns">6</integer>
 
+    <integer name="minimal_animation_duration">150</integer>
     <integer name="short_animation_duration">250</integer>
     <integer name="medium_animation_duration">450</integer>
     <integer name="long_animation_duration">800</integer>
