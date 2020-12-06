@@ -7,7 +7,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class LifecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+abstract class LifecycleViewHolder(itemView: View) :
+    RecyclerView.ViewHolder(itemView),
     LifecycleOwner {
 
     private val lifecycleRegistry = createLifecycleRegistry()

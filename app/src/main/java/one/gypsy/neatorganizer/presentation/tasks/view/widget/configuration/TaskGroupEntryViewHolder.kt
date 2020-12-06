@@ -14,16 +14,23 @@ class TaskGroupEntryViewHolder(
     private val itemBinding: ItemTaskGroupEntryBinding
 ) : LifecycleViewHolder(itemBinding.root) {
 
+    private lateinit var itemEntry: TaskGroupEntryItem
+
     fun bind(taskGroupEntry: TaskGroupEntryItem) {
+        itemEntry = taskGroupEntry
         itemBinding.apply {
-            name = taskGroupEntry.name
-            tasksCount = taskGroupEntry.tasksCount
-            tasksDone = taskGroupEntry.tasksDone
+            name = itemEntry.name
+            tasksCount = itemEntry.tasksCount
+            tasksDone = itemEntry.tasksDone
+            entryContainer.setOnClickListener {
+                onSelected(itemEntry)
+            }
         }
-        itemBinding.entryContainer.setOnClickListener {
-            onSelected(taskGroupEntry)
-        }
-        currentlySelectedItem.observe(this) { animateItemSelection(it, taskGroupEntry) }
+    }
+
+    override fun onAttached() {
+        super.onAttached()
+        currentlySelectedItem.observe(this) { animateItemSelection(it, itemEntry) }
     }
 
     private fun animateItemSelection(

@@ -33,7 +33,6 @@ class TaskWidgetContentManageViewModel(
             _listedTasks.postValue(tasks.value)
         }
 
-
     fun onTaskUpdate(taskItem: TaskListItem.TaskListSubItem) = updateSingleTaskUseCase.invoke(
         viewModelScope,
         UpdateSingleTask.Params(singleTask = taskItem.toSingleTask())
