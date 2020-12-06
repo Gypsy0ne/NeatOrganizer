@@ -33,12 +33,17 @@ class GroupedTasksAdapter(
             )
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        if (holder.itemViewType != TaskViewType.HEADER.resId && animateChanges) {
-            holder.animate()
+        with(holder) {
+            bind(getItem(position))
+            if (shouldAnimateChanges(this)) {
+                animate()
+            }
         }
         animateChanges = true
     }
+
+    private fun shouldAnimateChanges(holder: TaskViewHolder) =
+        holder.itemViewType != TaskViewType.HEADER.resId && animateChanges
 
     override fun onCurrentListChanged(
         previousList: MutableList<TaskListItem>,
@@ -88,7 +93,8 @@ fun TaskViewType.getHolder(
     TaskViewType.HEADER -> TaskHeaderViewHolder(
         DataBindingUtil.inflate(
             inflater, resId, parent, false
-        ), headerClickListener
+        ),
+        headerClickListener
     )
     TaskViewType.SUB_ITEM -> TaskSubItemViewHolder(
         DataBindingUtil.inflate(
@@ -100,4 +106,3 @@ fun TaskViewType.getHolder(
         subItemClickListener
     )
 }
-

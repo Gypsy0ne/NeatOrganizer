@@ -40,8 +40,10 @@ class RoutineEntityTest : DatabaseTest() {
 
         // when
         routineEntityDao.insert(routine)
-        val replacedRoutine =
-            routineEntityDao.getAllRoutines().first().copy(name = replacedRoutineName)
+        val replacedRoutine = routineEntityDao
+            .getAllRoutines()
+            .first()
+            .copy(name = replacedRoutineName)
         val replacedRoutineId = replacedRoutine.id
         routineEntityDao.insert(replacedRoutine)
 
@@ -63,8 +65,10 @@ class RoutineEntityTest : DatabaseTest() {
 
         // when
         routineEntityDao.insert(routine)
-        val updatedRoutine =
-            routineEntityDao.getAllRoutines().first().copy(name = updatedRoutineName)
+        val updatedRoutine = routineEntityDao
+            .getAllRoutines()
+            .first()
+            .copy(name = updatedRoutineName)
         val updatedRoutineId = updatedRoutine.id
         routineEntityDao.insert(updatedRoutine)
 
@@ -83,8 +87,11 @@ class RoutineEntityTest : DatabaseTest() {
         val deletedRoutineName = "to delete"
         val deletedRoutineId = 2L
         val routine = RoutineEntity("foobar", id = 1, createdAt = 123124)
-        val routineToDelete =
-            RoutineEntity(deletedRoutineName, id = deletedRoutineId, createdAt = 123124)
+        val routineToDelete = RoutineEntity(
+            deletedRoutineName,
+            id = deletedRoutineId,
+            createdAt = 123124
+        )
 
         // when
         routineEntityDao.insert(routine, routineToDelete)
@@ -93,7 +100,7 @@ class RoutineEntityTest : DatabaseTest() {
         // then
         val selectedRoutines = routineEntityDao.getAllRoutines()
         assertThat(selectedRoutines).hasSize(1)
-        selectedRoutines.first().apply {
+        with(selectedRoutines.first()) {
             assertThat(name).isNotEqualTo(deletedRoutineName)
             assertThat(id).isNotEqualTo(deletedRoutineId)
         }

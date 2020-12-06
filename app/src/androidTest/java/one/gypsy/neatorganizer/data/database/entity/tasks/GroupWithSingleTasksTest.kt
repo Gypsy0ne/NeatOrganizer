@@ -34,21 +34,21 @@ class GroupWithSingleTasksTest : DatabaseTest() {
                     id = 11L,
                     name = "task1`",
                     done = true,
-                    createdAt = 123124
+                    createdAt = 1234
                 ),
                 SingleTaskEntity(
                     groupId = 1L,
                     id = 12L,
                     name = "task2",
                     done = false,
-                    createdAt = 123124
+                    createdAt = 1224
                 ),
                 SingleTaskEntity(
                     groupId = 1L,
                     id = 999L,
                     name = "task6",
                     done = true,
-                    createdAt = 123124
+                    createdAt = 1224
                 )
             ),
             listOf(
@@ -57,14 +57,14 @@ class GroupWithSingleTasksTest : DatabaseTest() {
                     id = 31L,
                     name = "task3",
                     done = false,
-                    createdAt = 123124
+                    createdAt = 1234
                 ),
                 SingleTaskEntity(
                     groupId = 23L,
                     id = 51L,
                     name = "task4",
                     done = true,
-                    createdAt = 123124
+                    createdAt = 1231
                 )
             ),
             listOf(
@@ -73,9 +73,9 @@ class GroupWithSingleTasksTest : DatabaseTest() {
                     id = 641L,
                     name = "task5",
                     done = false,
-                    createdAt = 123124
+                    createdAt = 1231
                 )
-            ),
+            )
         )
 
         // when
@@ -117,7 +117,7 @@ class GroupWithSingleTasksTest : DatabaseTest() {
                 name = "foobar3",
                 done = false,
                 createdAt = 123124
-            ),
+            )
         )
         val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId, createdAt = 123124)
 
@@ -202,7 +202,7 @@ class GroupWithSingleTasksTest : DatabaseTest() {
                 name = "foobar3",
                 done = false,
                 createdAt = 123124
-            ),
+            )
         )
         val taskGroup = SingleTaskGroupEntity(name = "foobar", id = taskGroupId, createdAt = 123124)
         val groupWithSingleTasks = GroupWithSingleTasks(tasks = tasks, group = taskGroup)

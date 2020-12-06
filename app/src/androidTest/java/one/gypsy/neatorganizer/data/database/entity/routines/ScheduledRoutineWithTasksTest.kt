@@ -40,13 +40,7 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
         val routineTasks = listOf(
             RoutineTaskEntity("taskOne", true, routineId = routineId, id = 1L, createdAt = 123124),
             RoutineTaskEntity("taskTwo", true, routineId = routineId, id = 2L, createdAt = 123124),
-            RoutineTaskEntity(
-                "taskThree",
-                false,
-                routineId = routineId,
-                id = 3L,
-                createdAt = 123124
-            ),
+            RoutineTaskEntity("taskThree", false, routineId = routineId, id = 3L, createdAt = 1231),
             RoutineTaskEntity("taskFour", true, routineId = routineId, id = 4L, createdAt = 123124)
         )
         routineEntityDao.insert(scheduledRoutine)
@@ -86,28 +80,28 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
                 true,
                 routineId = scheduledRoutineId,
                 id = 1L,
-                createdAt = 123124
+                createdAt = 1231
             ),
             RoutineTaskEntity(
                 "taskTwo",
                 true,
                 routineId = scheduledRoutineId,
                 id = 2L,
-                createdAt = 123124
+                createdAt = 123
             ),
             RoutineTaskEntity(
                 "taskThree",
                 false,
                 routineId = scheduledRoutineId,
                 id = 3L,
-                createdAt = 123124
+                createdAt = 12
             ),
             RoutineTaskEntity(
                 "taskFour",
                 true,
                 routineId = scheduledRoutineId,
                 id = 4L,
-                createdAt = 123124
+                createdAt = 1231
             )
         )
         val scheduledRoutineWithTasks =
@@ -156,14 +150,14 @@ class ScheduledRoutineWithTasksTest : DatabaseTest() {
                 true,
                 routineId = scheduledRoutineId,
                 id = 1L,
-                createdAt = 123124
+                createdAt = 1124
             ),
             RoutineTaskEntity(
                 "taskTwo",
                 true,
                 routineId = scheduledRoutineId,
                 id = 2L,
-                createdAt = 123124
+                createdAt = 123
             )
         )
         val scheduledRoutineWithTasks =

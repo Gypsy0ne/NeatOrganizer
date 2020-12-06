@@ -64,14 +64,13 @@ class RoutineTaskEntityTest : DatabaseTest() {
                 id = taskId,
                 createdAt = 12344122
             )
-        val replacedRoutineTask =
-            RoutineTaskEntity(
-                "replaced",
-                false,
-                routineId = routineTaskId,
-                id = taskId,
-                createdAt = 12344122
-            )
+        val replacedRoutineTask = RoutineTaskEntity(
+            "replaced",
+            false,
+            routineId = routineTaskId,
+            id = taskId,
+            createdAt = 12344122
+        )
         routinesDao.insert(RoutineEntity("foobar", id = routineTaskId, createdAt = 12344122))
         routineTasksDao.insert(replacedRoutineTask)
 
@@ -102,14 +101,13 @@ class RoutineTaskEntityTest : DatabaseTest() {
             id = taskId,
             createdAt = 12344122
         )
-        val deletedTask =
-            RoutineTaskEntity(
-                "deleted",
-                false,
-                routineId = routineTaskId,
-                id = deletedTaskId,
-                createdAt = 12344122
-            )
+        val deletedTask = RoutineTaskEntity(
+            "deleted",
+            false,
+            routineId = routineTaskId,
+            id = deletedTaskId,
+            createdAt = 12344122
+        )
         routinesDao.insert(RoutineEntity("foobar", id = routineTaskId, createdAt = 12344122))
         routineTasksDao.insert(deletedTask)
         routineTasksDao.insert(routineTask)
@@ -132,22 +130,20 @@ class RoutineTaskEntityTest : DatabaseTest() {
         val taskDone = true
         val routineTaskId = 1L
         val taskId = 1L
-        val routineTask =
-            RoutineTaskEntity(
-                "foobar",
-                taskDone,
-                routineId = routineTaskId,
-                id = taskId,
-                createdAt = 12344122
-            )
-        val updatedRoutineTask =
-            RoutineTaskEntity(
-                "replaced",
-                false,
-                routineId = routineTaskId,
-                id = taskId,
-                createdAt = 12344122
-            )
+        val routineTask = RoutineTaskEntity(
+            "foobar",
+            taskDone,
+            routineId = routineTaskId,
+            id = taskId,
+            createdAt = 12344122
+        )
+        val updatedRoutineTask = RoutineTaskEntity(
+            "replaced",
+            false,
+            routineId = routineTaskId,
+            id = taskId,
+            createdAt = 12344122
+        )
         routinesDao.insert(RoutineEntity("foobar", id = routineTaskId, createdAt = 12344122))
         routineTasksDao.insert(routineTask)
 
@@ -236,8 +232,13 @@ class RoutineTaskEntityTest : DatabaseTest() {
     @Test
     fun shouldMapEntityToDomainModel() {
         // given
-        val routineTaskEntity =
-            RoutineTaskEntity("foobar", true, routineId = 1, id = 1, createdAt = 12344122)
+        val routineTaskEntity = RoutineTaskEntity(
+            "foobar",
+            true,
+            routineId = 1,
+            id = 1,
+            createdAt = 12344122
+        )
 
         // when
         val domainRoutineTask = routineTaskEntity.toRoutineTaskEntry()
