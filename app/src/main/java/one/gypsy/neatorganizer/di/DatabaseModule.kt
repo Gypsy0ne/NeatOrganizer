@@ -20,4 +20,5 @@ val databaseModule = module {
     single { get<OrganizerDatabase>().singleTasksDao() }
     factory { get<OrganizerDatabase>().routineSnapshotsDao() }
     factory { get<OrganizerDatabase>().taskWidgetDao() }
+    factory { get<OrganizerDatabase>().notesDao() }
 }

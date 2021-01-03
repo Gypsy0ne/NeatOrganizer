@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.presentation.common
 
+import androidx.lifecycle.MutableLiveData
 import one.gypsy.neatorganizer.R
 
 sealed class ContentLoadingStatus {
@@ -19,3 +20,10 @@ fun ContentLoadingStatus.toTasksStatusAnimationResource() = when (this) {
     ContentLoadingStatus.ContentEmpty -> R.raw.lottie_empty_tasks
     ContentLoadingStatus.ContentLoading -> R.raw.lottie_loading
 }
+
+fun MutableLiveData<ContentLoadingStatus>.updateLoadingStatus(items: List<*>) =
+    if (items.isEmpty()) {
+        postValue(ContentLoadingStatus.ContentEmpty)
+    } else {
+        postValue(ContentLoadingStatus.ContentLoaded)
+    }

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
-import one.gypsy.neatorganizer.utils.Failure
 
 class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : ViewModel() {
 
@@ -26,14 +25,11 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
                 )
             )
         ) {
-            it.either(::onAddSingleTaskGroupFailure, ::onAddSingleTaskGroupSuccess)
+            it.either({}, ::onAddSingleTaskGroupSuccess)
         }
     }
 
     fun onAddSingleTaskGroupSuccess(newTaskGroupId: Long) {
         _finishedAdding.postValue(true)
-    }
-
-    fun onAddSingleTaskGroupFailure(failure: Failure) {
     }
 }

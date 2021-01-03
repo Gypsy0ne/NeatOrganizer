@@ -49,7 +49,7 @@
                 android:enabled="@{taskSubItem.edited}"
                 android:focusable="@{taskSubItem.edited}"
                 android:focusableInTouchMode="@{taskSubItem.edited}"
-                android:text="@{taskSubItem.name}"
+                android:text="@{taskSubItem.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="parent"

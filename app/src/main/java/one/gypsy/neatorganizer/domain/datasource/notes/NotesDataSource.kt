@@ -5,8 +5,8 @@ import one.gypsy.neatorganizer.domain.dto.notes.Note
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 
 interface NotesDataSource {
-    fun insert(note: Note): Long
-    fun remove(note: Note)
+    fun insert(noteEntry: NoteEntry): Long
+    fun deleteById(noteId: Long)
     fun update(note: Note)
     fun getAllNoteEntriesObservable(): LiveData<List<NoteEntry>>
     fun getNoteById(noteId: Long): LiveData<Note>

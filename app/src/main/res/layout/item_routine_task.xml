@@ -45,7 +45,7 @@
                 android:layout_height="@dimen/normal_0"
                 android:layout_marginStart="@dimen/normal_100"
                 strokeThrough="@{routineTaskItem.done}"
-                android:text="@{routineTaskItem.name}"
+                android:text="@{routineTaskItem.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="parent"

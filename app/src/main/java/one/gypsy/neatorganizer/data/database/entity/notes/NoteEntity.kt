@@ -10,7 +10,7 @@ import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val title: String,
-    val content: String,
+    val content: String = "",
     override val createdAt: Long
 ) : Timestamped
 

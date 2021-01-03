@@ -35,7 +35,7 @@ class RoutinesFragment : SectionFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_routines, container, false)
         return fragmentBinding.root

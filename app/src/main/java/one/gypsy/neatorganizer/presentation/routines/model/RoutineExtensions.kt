@@ -6,7 +6,7 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 fun RoutineWithTasks.toRoutineListHeader(expanded: Boolean = false) =
     RoutineListItem.RoutineListHeader(
         id = this.id,
-        name = this.name,
+        title = this.name,
         subItemsCount = this.tasks.size,
         expanded = expanded,
         scheduleDays = this.schedule.scheduledDays,
@@ -15,7 +15,7 @@ fun RoutineWithTasks.toRoutineListHeader(expanded: Boolean = false) =
 
 fun RoutineTaskEntry.toRoutineListSubItem() = RoutineListItem.RoutineListSubItem(
     id = this.id,
-    name = this.name,
+    title = this.name,
     done = this.done,
     groupId = this.routineId,
     createdAt = this.createdAt

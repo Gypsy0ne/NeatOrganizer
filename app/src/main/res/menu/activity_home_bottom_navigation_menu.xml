@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--<item android:id="@+id/people"-->
-<!--    android:title="@string/activity_home_bottom_navigation_menu_people"-->
-<!--    android:icon="@drawable/ic_people_white_24dp"-->
-<!--    app:showAsAction="ifRoom"/>-->
-    <item android:id="@+id/tasks"
+    <item
+        android:id="@+id/tasks"
+        android:icon="@drawable/ic_tasks_white_24"
         android:title="@string/activity_home_bottom_navigation_menu_tasks"
-        android:icon="@drawable/ic_tasks_white_24dp"
-        app:showAsAction="ifRoom"/>
-<item android:id="@+id/routines"
-    android:title="@string/activity_home_bottom_navigation_menu_routines"
-    android:icon="@drawable/ic_routines_white_24dp"
-    app:showAsAction="ifRoom"/>
-
-<!--<item android:id="@+id/timer"-->
-<!--    android:title="@string/activity_home_bottom_navigation_menu_timer"-->
-<!--    android:icon="@drawable/ic_timer_black_24dp"-->
-<!--    app:showAsAction="ifRoom"/>-->
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/notes"
+        android:icon="@drawable/ic_note_24"
+        android:title="@string/activity_home_bottom_navigation_menu_notes"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/routines"
+        android:icon="@drawable/ic_routines_white_24dp"
+        android:title="@string/activity_home_bottom_navigation_menu_routines"
+        app:showAsAction="ifRoom" />
 </menu>

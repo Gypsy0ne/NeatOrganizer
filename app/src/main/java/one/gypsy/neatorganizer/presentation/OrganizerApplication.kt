@@ -11,26 +11,31 @@ class OrganizerApplication : Application() {
         startKoin {
             androidContext(this@OrganizerApplication)
             modules(
-                //DB
+                // Db
                 databaseModule,
-                //Tasks
+                // Tasks
                 tasksViewModelModule,
                 tasksDataSourceModule,
                 tasksRepositoryModule,
                 tasksUseCaseModule,
                 tasksUtilsModule,
-                //Routines
+                // Routines
                 routinesViewModelModule,
                 routinesDataSourceModule,
                 routinesRepositoryModule,
                 routinesUseCaseModule,
                 routinesUtilsModule,
-                //Routines Reset
+                // Routines Reset
                 routinesResetDataSourceModule,
                 routinesResetRepositoryModule,
                 routinesResetUtilsModule,
-                //Widget
-                serviceModule
+                // Widget
+                serviceModule,
+                // Notes
+                notesViewModelModule,
+                notesDataSourceModule,
+                notesRepositoryModule,
+                notesUseCaseModule
             )
         }
     }

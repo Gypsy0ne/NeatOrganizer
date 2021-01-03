@@ -7,9 +7,9 @@ import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 
 class NotesRepository(private val dataSource: NotesDataSource) {
 
-    fun insertNote(note: Note) = dataSource.insert(note)
+    fun insertNoteEntry(noteEntry: NoteEntry) = dataSource.insert(noteEntry)
 
-    fun removeNote(note: Note) = dataSource.remove(note)
+    fun deleteNoteById(noteId: Long) = dataSource.deleteById(noteId)
 
     fun updateNote(note: Note) = dataSource.update(note)
 

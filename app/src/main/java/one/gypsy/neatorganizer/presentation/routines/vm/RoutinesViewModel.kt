@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
+import one.gypsy.neatorganizer.presentation.common.updateLoadingStatus
 import one.gypsy.neatorganizer.presentation.routines.model.*
 import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.delayItemsEmission
@@ -24,7 +25,7 @@ class RoutinesViewModel(
     val listedRoutines: LiveData<List<RoutineListItem>> = _listedRoutines.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
             val listedItems = viewModelScope.async { routineListMapper.getVisibleItems(it) }
-            it.updateLoadingStatus()
+            _contentLoadingStatus.updateLoadingStatus(it)
             emit(listedItems.await())
         }
     }
@@ -39,12 +40,6 @@ class RoutinesViewModel(
                 ::onGetAllRoutinesSuccess
             )
         }
-    }
-
-    private fun List<RoutineListItem>.updateLoadingStatus() = if (isEmpty()) {
-        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
-    } else {
-        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentLoaded)
     }
 
     private fun onGetAllRoutinesSuccess(routines: LiveData<List<RoutineWithTasks>>) {
@@ -63,7 +58,7 @@ class RoutinesViewModel(
     }
 
     private fun onGetAllRoutinesFailure(failure: Failure) =
-        _contentLoadingStatus.postValue(ContentLoadingStatus.ContentEmpty)
+        _contentLoadingStatus.updateLoadingStatus(emptyList<RoutineListItem>())
 
     fun onHeaderUpdate(routineHeaderItem: RoutineListItem.RoutineListHeader) {
         viewModelScope.launch {

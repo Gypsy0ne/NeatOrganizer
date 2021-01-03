@@ -11,9 +11,9 @@ import one.gypsy.neatorganizer.domain.dto.notes.toNoteEntity
 
 class UserNotesDataSource(private val notesDao: NotesDao) : NotesDataSource {
 
-    override fun insert(note: Note) = notesDao.insert(note.toNoteEntity())
+    override fun insert(noteEntry: NoteEntry) = notesDao.insert(noteEntry.toNoteEntity())
 
-    override fun remove(note: Note) = notesDao.delete(note.toNoteEntity())
+    override fun deleteById(noteId: Long) = notesDao.deleteNoteById(noteId)
 
     override fun update(note: Note) = notesDao.update(note.toNoteEntity())
 

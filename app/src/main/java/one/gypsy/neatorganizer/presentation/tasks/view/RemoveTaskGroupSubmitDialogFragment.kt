@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -13,7 +12,6 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentRemoveConfirmationBinding
 import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
 
@@ -45,11 +43,11 @@ class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
         fragmentBinding.setSubmitClickListener {
             viewModel.onRemoveSubmit(args.itemId)
         }
-        viewModel.actionFinished.observe(viewLifecycleOwner, Observer {
+        viewModel.actionFinished.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
             }
-        })
+        }
         fragmentBinding.subItemsCount = args.subItemsCount
         fragmentBinding.removeGroupType = resources.getString(R.string.remove_group_subject)
     }

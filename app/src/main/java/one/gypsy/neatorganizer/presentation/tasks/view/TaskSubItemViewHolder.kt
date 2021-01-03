@@ -31,20 +31,19 @@ class TaskSubItemViewHolder(
             taskSubItem = viewData
             executePendingBindings()
         }
-
     }
 
     override fun setUpSwipeMenuBehavior() {
         itemBinding.swipeLayoutItemTaskRoot.setMenuSwipeListener(object :
-            SwipeMenuListener {
-            override fun onLeftMenuOpen() {
-                clearEditionStatus()
-            }
+                SwipeMenuListener {
+                override fun onLeftMenuOpen() {
+                    clearEditionStatus()
+                }
 
-            override fun onRightMenuOpen() {
-                clearEditionStatus()
-            }
-        })
+                override fun onRightMenuOpen() {
+                    clearEditionStatus()
+                }
+            })
     }
 
     override fun clearEditionStatus() {
@@ -75,7 +74,6 @@ class TaskSubItemViewHolder(
         itemBinding.checkBoxItemTaskDone.hide()
     }
 
-
     override fun setUpEditListener() {
         itemBinding.setEditClickListener {
             viewData = viewData.copy(edited = !viewData.edited)
@@ -88,7 +86,7 @@ class TaskSubItemViewHolder(
         itemBinding.setEditionSubmitClickListener {
             if (didItemNameChange()) {
                 viewData = viewData.copy(
-                    name = itemBinding.editTextItemTaskName.text.toString()
+                    title = itemBinding.editTextItemTaskName.text.toString()
                 )
                 clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
@@ -98,7 +96,7 @@ class TaskSubItemViewHolder(
     }
 
     private fun didItemNameChange() =
-        viewData.name != itemBinding.editTextItemTaskName.text.toString()
+        viewData.title != itemBinding.editTextItemTaskName.text.toString()
 
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {

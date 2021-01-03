@@ -8,6 +8,8 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetSynchronizationService
+import one.gypsy.neatorganizer.utils.extensions.hide
+import one.gypsy.neatorganizer.utils.extensions.show
 
 class HomeActivity : AppCompatActivity() {
 
@@ -16,6 +18,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setUpActionBar()
         startWidgetSynchronizationService()
+        setUpLocationListener()
     }
 
     private fun setUpActionBar() {
@@ -44,4 +47,14 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setUpBottomNavigation() = bottom_navigation_view_activity_home
         .setupWithNavController(findNavController(R.id.fragment_activity_home_nav_container))
+
+    private fun setUpLocationListener() {
+        findNavController(R.id.fragment_activity_home_nav_container).addOnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == R.id.noteDetails) {
+                bottom_navigation_view_activity_home.hide()
+            } else {
+                bottom_navigation_view_activity_home.show()
+            }
+        }
+    }
 }

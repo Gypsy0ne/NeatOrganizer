@@ -20,6 +20,12 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/organizer_app_navigation"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/tasksToNotesAction"
+            app:destination="@id/notes"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/organizer_app_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -34,10 +40,39 @@
             app:destination="@id/removeRoutineConfirmation" />
     </fragment>
 
+    <fragment
+        android:id="@+id/notes"
+        android:name="one.gypsy.neatorganizer.presentation.notes.view.NotesFragment"
+        android:label="NotesFragment">
+
+        <action
+            android:id="@+id/notesToNoteDetails"
+            app:destination="@id/noteDetails" />
+
+        <action
+            android:id="@+id/notesToDeleteNoteConfirmation"
+            app:destination="@id/deleteNoteConfirmation" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteDetails"
+        android:name="one.gypsy.neatorganizer.presentation.notes.view.NoteDetailsFragment"
+        android:label="NoteDetailsFragment">
+        <argument
+            android:name="noteId"
+            app:argType="long" />
+    </fragment>
+
     <dialog
         android:id="@+id/taskGroupAddition"
         android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
         android:label="AddTaskGroupDialogFragment" />
+
+    <dialog
+        android:id="@+id/noteAddition"
+        android:name="one.gypsy.neatorganizer.presentation.notes.view.AddNoteDialogFragment"
+        android:label="AddNoteDialogFragment" />
 
     <dialog
         android:id="@+id/singleTaskAddition"
@@ -85,5 +120,14 @@
         android:id="@+id/routineAddition"
         android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment"
         android:label="AddRoutineDialogFragment" />
+
+    <dialog
+        android:id="@+id/deleteNoteConfirmation"
+        android:name="one.gypsy.neatorganizer.presentation.notes.view.DeleteNoteDialogFragment"
+        android:label="DeleteNoteSubmitDialogFragment">
+        <argument
+            android:name="noteId"
+            app:argType="long" />
+    </dialog>
 
 </navigation>

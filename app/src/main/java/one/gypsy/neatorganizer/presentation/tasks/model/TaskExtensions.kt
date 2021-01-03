@@ -6,7 +6,7 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 
 fun SingleTaskGroupWithTasks.toTaskListHeader(expanded: Boolean) = TaskListItem.TaskListHeader(
     id = this.id,
-    name = this.name,
+    title = this.name,
     subItemsCount = this.tasks.size,
     expanded = expanded,
     createdAt = this.createdAt
@@ -14,7 +14,7 @@ fun SingleTaskGroupWithTasks.toTaskListHeader(expanded: Boolean) = TaskListItem.
 
 fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
     id = this.id,
-    name = this.name,
+    title = this.name,
     groupId = this.groupId,
     done = this.done,
     createdAt = this.createdAt

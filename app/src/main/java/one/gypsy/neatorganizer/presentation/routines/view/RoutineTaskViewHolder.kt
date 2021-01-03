@@ -35,15 +35,15 @@ class RoutineTaskViewHolder(
 
     override fun setUpSwipeMenuBehavior() {
         itemBinding.swipeLayoutItemRoutineTaskRoot.setMenuSwipeListener(object :
-            SwipeMenuListener {
-            override fun onLeftMenuOpen() {
-                clearEditionStatus()
-            }
+                SwipeMenuListener {
+                override fun onLeftMenuOpen() {
+                    clearEditionStatus()
+                }
 
-            override fun onRightMenuOpen() {
-                clearEditionStatus()
-            }
-        })
+                override fun onRightMenuOpen() {
+                    clearEditionStatus()
+                }
+            })
     }
 
     override fun clearEditionStatus() {
@@ -86,7 +86,7 @@ class RoutineTaskViewHolder(
         itemBinding.setEditionSubmitClickListener {
             if (didItemNameChange()) {
                 viewData = viewData.copy(
-                    name = itemBinding.editTextItemRoutineTaskName.text.toString()
+                    title = itemBinding.editTextItemRoutineTaskName.text.toString()
                 )
                 clickListener.onEditionSubmitClick(viewData)
             } else {
@@ -96,7 +96,7 @@ class RoutineTaskViewHolder(
     }
 
     private fun didItemNameChange() =
-        viewData.name != itemBinding.editTextItemRoutineTaskName.text.toString()
+        viewData.title != itemBinding.editTextItemRoutineTaskName.text.toString()
 
     override fun setUpRemoveListener() {
         itemBinding.setRemoveClickListener {

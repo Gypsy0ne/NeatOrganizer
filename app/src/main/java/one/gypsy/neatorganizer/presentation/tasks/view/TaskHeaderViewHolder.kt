@@ -108,7 +108,7 @@ class TaskHeaderViewHolder(
         setEditionSubmitClickListener {
             if (didItemNameChange()) {
                 viewData = viewData.copy(
-                    name = editTextItemTaskHeaderName.text.toString()
+                    title = editTextItemTaskHeaderName.text.toString()
                 )
                 clickListener?.onEditionSubmitClick?.invoke(viewData)
             } else {
@@ -118,7 +118,7 @@ class TaskHeaderViewHolder(
     }
 
     private fun didItemNameChange() =
-        viewData.name != itemBinding.editTextItemTaskHeaderName.text.toString()
+        viewData.title != itemBinding.editTextItemTaskHeaderName.text.toString()
 
     override fun setUpRemoveListener() = with(itemBinding) {
         setRemoveClickListener {

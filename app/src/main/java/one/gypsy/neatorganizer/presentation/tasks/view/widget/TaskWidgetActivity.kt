@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -22,7 +21,7 @@ class TaskWidgetActivity : AppCompatActivity() {
         parametersOf(intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID))
     }
     private lateinit var viewBinding: ActivityTaskWidgetBinding
-    private val editTitleMenuItem by lazy { viewBinding.manageToolbar.menu.getItem(manageToolbar.menu.size - 1) }
+    private lateinit var appBarMenu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,27 +78,30 @@ class TaskWidgetActivity : AppCompatActivity() {
             startService(intent)
         }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.widget_list_manage_menu, menu)
+        appBarMenu = menu
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.edit_group -> {
-            onEditGroupTitleClicked()
-            true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.edit_group_title -> onEditGroupTitleClicked()
+            R.id.save_group_title -> onSaveGroupTitleClicked()
         }
-        else -> false
+        return true
     }
 
-    private fun onEditGroupTitleClicked() = with(tasksViewModel) {
-        if (titleEdited.value == true) {
-            onTitleEditionFinished(viewBinding.groupTitle.text.toString())
-            editTitleMenuItem.setIcon(R.drawable.ic_edit_white_24)
-        } else {
-            onTitleEditionStarted()
-            editTitleMenuItem.setIcon(R.drawable.ic_check_dark_yellow_24)
-        }
+    private fun onEditGroupTitleClicked() {
+        appBarMenu.findItem(R.id.edit_group_title).isVisible = false
+        appBarMenu.findItem(R.id.save_group_title).isVisible = true
+        tasksViewModel.onTitleEditionStarted()
+    }
+
+    private fun onSaveGroupTitleClicked() {
+        appBarMenu.findItem(R.id.edit_group_title).isVisible = true
+        appBarMenu.findItem(R.id.save_group_title).isVisible = false
+        tasksViewModel.onTitleEditionFinished(viewBinding.groupTitle.text.toString())
     }
 
     private fun NavController.observeNewGroupSelectionResult() =

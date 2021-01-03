@@ -6,7 +6,8 @@ import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 import one.gypsy.neatorganizer.R
 
-abstract class SectionFragment: Fragment() {
+abstract class SectionFragment(private val menuId: Int? = R.menu.activity_home_app_bar_menu) :
+    Fragment() {
 
 //    protected fun setUpSearchViewIcons(menu: Menu) {
 //        val searchViewMenuItem = menu.findItem(R.id.action_search)
@@ -19,14 +20,18 @@ abstract class SectionFragment: Fragment() {
 //        closeImage.setImageResource(R.drawable.ic_close_white_24dp)
 //    }
 
+    protected lateinit var appBarMenu: Menu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.activity_home_app_bar_menu, menu)
+        menuId?.let {
+            inflater.inflate(it, menu)
+        }
+        appBarMenu = menu
         return super.onCreateOptionsMenu(menu, inflater)
     }
-
 }
