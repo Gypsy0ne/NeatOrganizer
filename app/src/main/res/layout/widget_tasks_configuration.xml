@@ -65,7 +65,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/taskGroupsListGuideline"
             app:spectrum_autoPadding="true"
-            app:spectrum_colors="@array/demo_colors"
+            app:spectrum_colors="@array/widget_colors"
             app:spectrum_columnCount="@integer/color_palette_columns" />
 
         <View

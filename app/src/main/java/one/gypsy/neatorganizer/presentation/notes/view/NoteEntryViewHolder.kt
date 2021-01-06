@@ -10,7 +10,7 @@ class NoteEntryViewHolder(private val itemBinding: ItemNoteBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
     fun bind(data: NoteEntryItem) {
-
+        itemBinding.noteEntryItem = data
         itemBinding.noteItemContent.setOnClickListener {
             itemBinding.root.findNavController().navigateToNoteDetails(data.id)
         }

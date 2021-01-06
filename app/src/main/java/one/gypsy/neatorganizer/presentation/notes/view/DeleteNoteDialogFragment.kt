@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddNoteBinding
@@ -48,9 +47,9 @@ class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUpObservers() {
-        viewModel.finishedAdding.observe(viewLifecycleOwner) { finished ->
-            if (finished)
-                findNavController().popBackStack()
-        }
+//        viewModel.finishedAdding.observe(viewLifecycleOwner) { finished ->
+//            if (finished)
+//                findNavController().popBackStack()
+//        }
     }
 }

@@ -29,13 +29,13 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text_view_dialog_fragment_scheduled_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_day_range_24"
                 android:gravity="center"
                 android:layout_marginStart="@dimen/normal_50"
-                android:text="Scheduled days"
+                android:text="@string/add_routine_dialog_scheduled_days"
                 android:layout_marginTop="@dimen/normal_100"
                 android:drawablePadding="@dimen/normal_100"
                 android:textSize="@dimen/text_normal_75"
@@ -52,7 +52,7 @@
                 android:paddingVertical="@dimen/normal_150"
                 app:layout_constraintEnd_toEndOf="@id/edit_text_dialog_fragment_add_task_group_title"
                 app:layout_constraintStart_toStartOf="@id/edit_text_dialog_fragment_add_task_group_title"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_dialog_fragment_scheduled_days" />
 
             <EditText
                 android:id="@+id/edit_text_dialog_fragment_add_task_group_title"

@@ -10,6 +10,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentAddNoteBinding
 import one.gypsy.neatorganizer.presentation.notes.vm.AddNoteViewModel
+import one.gypsy.neatorganizer.presentation.notes.vm.NoteCreationStatus
+import one.gypsy.neatorganizer.utils.extensions.showShortToast
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AddNoteDialogFragment : BottomSheetDialogFragment() {
@@ -44,13 +46,16 @@ class AddNoteDialogFragment : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        setUpObservers()
+        observeCreationStatus()
     }
 
-    private fun setUpObservers() {
-        viewModel.finishedAdding.observe(viewLifecycleOwner) { finished ->
-            if (finished)
+    private fun observeCreationStatus() {
+        viewModel.noteCreationStatus.observe(this) {
+            if (it == NoteCreationStatus.ColorNotPickedStatus) {
+                context?.showShortToast((resources.getString(R.string.task_widget_creation_color_warning)))
+            } else {
                 findNavController().popBackStack()
+            }
         }
     }
 }

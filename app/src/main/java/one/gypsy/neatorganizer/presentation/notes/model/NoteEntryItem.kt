@@ -6,4 +6,5 @@ data class NoteEntryItem(
     override val id: Long,
     val createdAt: Long,
     override val title: String,
+    val color: Int
 ) : Listed

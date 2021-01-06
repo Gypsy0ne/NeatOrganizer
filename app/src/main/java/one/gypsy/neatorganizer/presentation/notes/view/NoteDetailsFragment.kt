@@ -70,7 +70,7 @@ class NoteDetailsFragment : SectionFragment(R.menu.fragment_note_details_menu) {
     private fun initTitleViewBehavior() =
         titleView?.also { titleView ->
             detailsViewModel.edited.observe(viewLifecycleOwner) {
-                setEditionEnabled(titleView, it)
+                setEditionEnabled(titleView, it, false)
             }
             detailsViewModel.note.observe(viewLifecycleOwner) {
                 titleView.setText(it.title)
@@ -109,7 +109,12 @@ class NoteDetailsFragment : SectionFragment(R.menu.fragment_note_details_menu) {
     private fun onSaveNoteClicked() {
         appBarMenu.findItem(R.id.edit_note).isVisible = true
         appBarMenu.findItem(R.id.save_note).isVisible = false
-        titleView?.let { detailsViewModel.onTitleEditionFinish(it.text.toString()) }
+        titleView?.let {
+            detailsViewModel.onEditionFinish(
+                it.text.toString(),
+                fragmentBinding.noteContent.text.toString()
+            )
+        }
         detailsViewModel.onEditIconClicked()
     }
 

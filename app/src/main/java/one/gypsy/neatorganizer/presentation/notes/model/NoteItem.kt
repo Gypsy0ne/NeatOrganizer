@@ -7,7 +7,9 @@ data class NoteItem(
     val id: Long,
     val title: String,
     val content: String,
-    override val createdAt: Long
+    override val createdAt: Long,
+    val color: Int
 ) : Timestamped
 
-fun NoteItem.toNote() = Note(id = id, title = title, content = content, createdAt = createdAt)
+fun NoteItem.toNote() =
+    Note(id = id, title = title, content = content, createdAt = createdAt, color = color)

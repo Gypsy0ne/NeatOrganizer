@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -9,28 +8,22 @@
             type="one.gypsy.neatorganizer.presentation.notes.vm.NoteViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <one.gypsy.neatorganizer.utils.views.LinedEditText
             android:id="@+id/noteContent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
-            android:clickable="@{viewModel.edited}"
-            android:enabled="@{viewModel.edited}"
-            android:focusable="@{viewModel.edited}"
-            android:focusableInTouchMode="@{viewModel.edited}"
             android:gravity="top|start"
+            android:enabled="@{viewModel.edited}"
             android:padding="@dimen/normal_100"
             android:scrollbars="vertical"
             android:text="@{viewModel.note.content}"
-            android:textSize="@dimen/text_normal_75"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_normal_75" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

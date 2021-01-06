@@ -39,10 +39,10 @@ class NoteViewModel(
         _edited.postValue(!editionEnabled)
     }
 
-    fun onTitleEditionFinish(newTitle: String) = note.value?.let {
+    fun onEditionFinish(title: String, content: String) = note.value?.let {
         updateNoteUseCase.invoke(
             viewModelScope,
-            UpdateNote.Params(it.copy(title = newTitle).toNote())
+            UpdateNote.Params(it.copy(title = title, content = content).toNote())
         )
     }
 }

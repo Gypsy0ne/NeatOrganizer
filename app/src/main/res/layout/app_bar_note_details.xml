@@ -11,7 +11,7 @@
         android:focusedByDefault="true"
         android:gravity="center_vertical"
         android:maxLength="@integer/regular_text_length"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_normal_100"
         tools:text="Sample title" />
 

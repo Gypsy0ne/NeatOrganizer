@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 import one.gypsy.neatorganizer.domain.interactors.notes.InsertNoteEntry
 
-class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : ViewModel() {
+class DeleteNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : ViewModel() {
 
     val noteTitle = MutableLiveData<String>()
     private var pickedColor: Int? = null
@@ -44,9 +44,4 @@ class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : Vi
     fun onColorPicked(color: Int) {
         pickedColor = color
     }
-}
-
-sealed class NoteCreationStatus {
-    object ColorNotPickedStatus : NoteCreationStatus()
-    object CreationSuccessStatus : NoteCreationStatus()
 }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.WidgetTasksConfigurationBinding
@@ -86,7 +85,7 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
     }
 
     private fun observeCreationStatus() {
-        widgetConfigurationViewModel.widgetCreationStatus.observe(this, Observer {
+        widgetConfigurationViewModel.widgetCreationStatus.observe(this) {
             when (it) {
                 TaskWidgetCreationStatus.TaskNotSelectedStatus -> {
                     baseContext.showShortToast(resources.getString(R.string.task_widget_creation_task_warning))
@@ -98,7 +97,7 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
                     onWidgetCreationFinish()
                 }
             }
-        })
+        }
     }
 
     private fun onWidgetCreationFinish() {
@@ -106,5 +105,4 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
         setActivityResult(RESULT_OK)
         finish()
     }
-
 }

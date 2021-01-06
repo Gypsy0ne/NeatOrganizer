@@ -51,8 +51,8 @@
         <item name="android:paddingStart">@dimen/normal_100</item>
         <item name="android:paddingEnd">@dimen/normal_100</item>
         <item name="android:background">@drawable/dialog_add_person_edit_text_background</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/height_dialog_fragment_add_person_form_text</item>
+        <item name="android:layout_width">@dimen/normal_0</item>
+        <item name="android:layout_height">@dimen/normal_500</item>
     </style>
 
     <style name="DialogFormButton">

@@ -15,14 +15,14 @@ fun setStrikeThrough(view: EditText, strokeThrough: Boolean) {
 }
 
 @BindingAdapter("editionEnabled")
-fun setEditionEnabled(view: EditText, enabled: Boolean) {
+fun setEditionEnabled(view: EditText, enabled: Boolean, requestEdit: Boolean = true) {
     view.apply {
         isFocusable = enabled
         isFocusableInTouchMode = enabled
         isEnabled = enabled
         isClickable = enabled
 
-        if (enabled) {
+        if (enabled && requestEdit) {
             requestEdit()
         } else {
             clearFocus()

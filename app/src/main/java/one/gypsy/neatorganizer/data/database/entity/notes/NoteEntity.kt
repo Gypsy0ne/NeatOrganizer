@@ -11,9 +11,22 @@ data class NoteEntity(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val title: String,
     val content: String = "",
-    override val createdAt: Long
+    override val createdAt: Long,
+    val color: Int
 ) : Timestamped
 
-fun NoteEntity.toNoteEntry() = NoteEntry(id = id, title = title, createdAt = createdAt)
+fun NoteEntity.toNoteEntry() = NoteEntry(
+    id = id,
+    title = title,
+    createdAt = createdAt,
+    color = color
+)
 
-fun NoteEntity.toNote() = Note(id = id, content = content, title = title, createdAt = createdAt)
+fun NoteEntity.toNote() =
+    Note(
+        id = id,
+        content = content,
+        title = title,
+        createdAt = createdAt,
+        color = color
+    )

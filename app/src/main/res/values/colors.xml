@@ -28,7 +28,7 @@
     <color name="light_gray">#B2B8BB</color>
 
     <!--Widget color palette colors-->
-    <array name="demo_colors">
+    <array name="widget_colors">
         <item>@color/md_red_500</item>
         <item>@color/md_pink_500</item>
         <item>@color/md_purple_500</item>
@@ -47,6 +47,15 @@
         <item>@color/md_deep_orange_500</item>
         <item>@color/md_grey_500</item>
         <item>@color/md_blue_grey_500</item>
+    </array>
+
+    <array name="note_colors">
+        <item>@color/md_red_500</item>
+        <item>@color/md_deep_purple_500</item>
+        <item>@color/md_blue_500</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_yellow_500</item>
+        <item>@color/md_orange_500</item>
     </array>
 
     <color name="md_red_500">#F44336</color>
