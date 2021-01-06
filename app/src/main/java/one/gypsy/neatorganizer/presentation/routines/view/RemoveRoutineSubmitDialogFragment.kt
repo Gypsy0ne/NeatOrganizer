@@ -5,19 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.databinding.DialogFragmentRemoveConfirmationBinding
+import one.gypsy.neatorganizer.databinding.DialogFragmentGroupRemoveConfirmationBinding
 import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var fragmentBinding: DialogFragmentRemoveConfirmationBinding
+    private lateinit var fragmentBinding: DialogFragmentGroupRemoveConfirmationBinding
     private val args: RemoveRoutineSubmitDialogFragmentArgs by navArgs()
     private val viewModel: RemoveRoutineViewModel by viewModel()
 
@@ -28,7 +26,7 @@ class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
     ): View? {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.dialog_fragment_remove_confirmation,
+            R.layout.dialog_fragment_group_remove_confirmation,
             container,
             false
         )
@@ -45,11 +43,12 @@ class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
         fragmentBinding.setSubmitClickListener {
             viewModel.onRemoveSubmit(args.itemId)
         }
-        viewModel.actionFinished.observe(viewLifecycleOwner, Observer {
+        viewModel.actionFinished.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
             }
-        })
+        }
+
         fragmentBinding.subItemsCount = args.subItemsCount
         fragmentBinding.removeGroupType = resources.getString(R.string.remove_routine_subject)
     }

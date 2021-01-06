@@ -55,6 +55,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/createdOn" />
 
             <ImageButton
+                android:id="@+id/noteDeletion"
                 android:layout_width="@dimen/normal_300"
                 android:layout_height="@dimen/normal_300"
                 android:layout_marginTop="@dimen/normal_100"

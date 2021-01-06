@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.DeleteNoteById
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.common.updateLoadingStatus
@@ -13,8 +12,7 @@ import one.gypsy.neatorganizer.presentation.notes.model.toNoteEntryItem
 import one.gypsy.neatorganizer.utils.extensions.delayItemsEmission
 
 class NotesListingViewModel(
-    private val deleteNoteByIdUseCase: DeleteNoteById,
-    private val getAllNoteEntriesUseCase: GetAllNoteEntries,
+    getAllNoteEntriesUseCase: GetAllNoteEntries,
 ) : ViewModel() {
 
     private val _listedNotes: MediatorLiveData<List<NoteEntryItem>> = MediatorLiveData()

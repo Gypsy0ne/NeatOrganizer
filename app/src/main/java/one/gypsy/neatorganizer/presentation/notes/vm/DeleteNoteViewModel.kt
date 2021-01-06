@@ -4,44 +4,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.InsertNoteEntry
+import one.gypsy.neatorganizer.domain.interactors.notes.DeleteNoteById
+import one.gypsy.neatorganizer.utils.Failure
+import one.gypsy.neatorganizer.utils.extensions.default
 
-class DeleteNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : ViewModel() {
+class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNoteById) : ViewModel() {
 
-    val noteTitle = MutableLiveData<String>()
-    private var pickedColor: Int? = null
+    private val _actionFinished = MutableLiveData<Boolean>().default(false)
+    val actionFinished: LiveData<Boolean> = _actionFinished
 
-    private val _noteCreationStatus = MutableLiveData<NoteCreationStatus>()
-    val noteCreationStatus: LiveData<NoteCreationStatus> = _noteCreationStatus
-
-    fun onSubmitClicked() = if (pickedColor == null) {
-        _noteCreationStatus.postValue(NoteCreationStatus.ColorNotPickedStatus)
-    } else {
-        addNote()
-    }
-
-    private fun addNote() {
-        pickedColor?.let { noteColor ->
-            insertNoteEntryUseCase.invoke(
-                viewModelScope,
-                InsertNoteEntry.Params(
-                    NoteEntry(
-                        title = noteTitle.value.orEmpty(),
-                        createdAt = System.currentTimeMillis(),
-                        color = noteColor
-                    )
-                )
-            ) {
-                it.either(
-                    {},
-                    { _noteCreationStatus.postValue(NoteCreationStatus.CreationSuccessStatus) }
-                )
-            }
+    fun onRemoveSubmit(removedItemId: Long) {
+        deleteNoteByIdUseCase.invoke(
+            viewModelScope,
+            DeleteNoteById.Params(removedItemId)
+        ) {
+            it.either(::onRemoveFailure, ::onRemoveSuccess)
         }
     }
 
-    fun onColorPicked(color: Int) {
-        pickedColor = color
+    private fun onRemoveSuccess(unit: Unit) {
+        _actionFinished.postValue(true)
     }
+
+    private fun onRemoveFailure(failure: Failure) {}
 }
