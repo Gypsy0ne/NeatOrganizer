@@ -21,6 +21,12 @@ fun ContentLoadingStatus.toTasksStatusAnimationResource() = when (this) {
     ContentLoadingStatus.ContentLoading -> R.raw.lottie_loading
 }
 
+fun ContentLoadingStatus.toNotesStatusAnimationResource() = when (this) {
+    ContentLoadingStatus.ContentLoaded -> 0
+    ContentLoadingStatus.ContentEmpty -> R.raw.lottie_empty_notes
+    ContentLoadingStatus.ContentLoading -> R.raw.lottie_loading
+}
+
 fun MutableLiveData<ContentLoadingStatus>.updateLoadingStatus(items: List<*>) =
     if (items.isEmpty()) {
         postValue(ContentLoadingStatus.ContentEmpty)

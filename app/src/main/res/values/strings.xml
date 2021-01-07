@@ -18,7 +18,7 @@
     <string name="add_note_dialog_fragment_content_hint">Note title</string>
     <string name="add_task_dialog_fragment_content_hint">Task title</string>
     <string name="add_routine_task_dialog_fragment_content_hint">Task title</string>
-    <string name="add_routine_dialog_fragment_content_hint">Task group title</string>
+    <string name="add_routine_dialog_fragment_content_hint">Routine title</string>
     <string name="remove_group_subject">group</string>
     <string name="remove_routine_subject">routine</string>
     <string-array name="schedule_days_short">
