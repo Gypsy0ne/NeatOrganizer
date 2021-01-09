@@ -15,9 +15,9 @@ android {
         enabled = true
     }
 
-        testOptions {
-            unitTests.returnDefaultValues = true
-        }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 
     compileSdkVersion 29
     defaultConfig {
@@ -120,17 +120,6 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
-
-    //Custom switch
-    implementation 'com.polyak:icon-switch:1.0.0'
-
-    implementation 'com.mikhaellopez:lazydatepicker:1.0.5'
-
-    //Chart view
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
-    //rating view
-    implementation 'com.github.sujithkanna:smileyrating:1.6.8'
 
     implementation 'com.thebluealliance:spectrum:0.7.1'
 }

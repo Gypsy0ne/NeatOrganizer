@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
         .setupWithNavController(findNavController(R.id.fragment_activity_home_nav_container))
 
     private fun setUpLocationListener() {
-        findNavController(R.id.fragment_activity_home_nav_container).addOnDestinationChangedListener { controller, destination, arguments ->
+        findNavController(R.id.fragment_activity_home_nav_container).addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.noteDetails) {
                 bottom_navigation_view_activity_home.hide()
             } else {

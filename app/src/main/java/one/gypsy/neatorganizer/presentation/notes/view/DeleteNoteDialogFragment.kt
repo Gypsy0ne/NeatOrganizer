@@ -51,8 +51,8 @@ class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
         setUpObservers()
     }
 
-    private fun setUpObservers() =
-        viewModel.actionFinished.observe(viewLifecycleOwner) { finished ->
+    private fun setUpObservers() = viewModel.actionFinished
+        .observe(viewLifecycleOwner) { finished ->
             if (finished)
                 findNavController().popBackStack()
         }

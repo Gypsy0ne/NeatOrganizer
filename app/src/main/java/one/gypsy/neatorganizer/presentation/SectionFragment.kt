@@ -6,8 +6,9 @@ import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 import one.gypsy.neatorganizer.R
 
-abstract class SectionFragment(private val menuId: Int? = R.menu.activity_home_app_bar_menu) :
-    Fragment() {
+abstract class SectionFragment(
+    private val menuId: Int? = R.menu.activity_home_app_bar_menu
+) : Fragment() {
 
 //    protected fun setUpSearchViewIcons(menu: Menu) {
 //        val searchViewMenuItem = menu.findItem(R.id.action_search)

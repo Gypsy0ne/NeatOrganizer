@@ -13,7 +13,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/routines"
-        android:icon="@drawable/ic_routines_white_24dp"
+        android:icon="@drawable/ic_routines_white_24"
         android:title="@string/activity_home_bottom_navigation_menu_routines"
         app:showAsAction="ifRoom" />
 </menu>

@@ -6,15 +6,39 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import one.gypsy.neatorganizer.R
 
 class LinedEditText(context: Context, attrs: AttributeSet?) : AppCompatEditText(context, attrs) {
 
     private val mRect: Rect = Rect()
     private val mPaint: Paint = Paint()
+    var lineColor: Int
+        set(value) {
+            mPaint.color = value
+            invalidate()
+        }
+        get() = mPaint.color
 
     init {
         mPaint.style = Paint.Style.STROKE
-        mPaint.color = -0x7fffff01
+        setAttributedLineColor(context, attrs)
+    }
+
+    private fun setAttributedLineColor(
+        context: Context,
+        attrs: AttributeSet?
+    ) {
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.LinedEditText,
+            0, 0
+        ).apply {
+            try {
+                mPaint.color = getInteger(R.styleable.LinedEditText_lineColor, DEFAULT_PAINT_COLOR)
+            } finally {
+                recycle()
+            }
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -32,5 +56,9 @@ class LinedEditText(context: Context, attrs: AttributeSet?) : AppCompatEditText(
             )
         }
         super.onDraw(canvas)
+    }
+
+    companion object {
+        private const val DEFAULT_PAINT_COLOR = -0x7fffff01
     }
 }

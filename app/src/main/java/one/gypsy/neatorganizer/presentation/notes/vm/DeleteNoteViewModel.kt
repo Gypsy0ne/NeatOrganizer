@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.interactors.notes.DeleteNoteById
-import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.default
 
 class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNoteById) : ViewModel() {
@@ -18,13 +17,11 @@ class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNoteById) : V
             viewModelScope,
             DeleteNoteById.Params(removedItemId)
         ) {
-            it.either(::onRemoveFailure, ::onRemoveSuccess)
+            it.either({}, ::onRemoveSuccess)
         }
     }
 
     private fun onRemoveSuccess(unit: Unit) {
         _actionFinished.postValue(true)
     }
-
-    private fun onRemoveFailure(failure: Failure) {}
 }

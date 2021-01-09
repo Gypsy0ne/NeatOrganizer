@@ -9,8 +9,9 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class InsertNoteEntry(private val notesRepository: NotesRepository) :
-    BaseUseCase<Long, Params>() {
+class InsertNoteEntry(
+    private val notesRepository: NotesRepository
+) : BaseUseCase<Long, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Long> {
         return try {

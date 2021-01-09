@@ -24,8 +24,12 @@ class NotesFragment : SectionFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_notes, container, false)
+        fragmentBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_notes,
+            container,
+            false
+        )
         return fragmentBinding.root
     }
 
@@ -50,16 +54,6 @@ class NotesFragment : SectionFragment() {
         notesListing.itemAnimator = null
         executePendingBindings()
     }
-
-//    private fun NavController.showRemoveConfirmationDialog(
-//        taskGroupId: Long,
-//        subItemsCount: Int
-//    ) = navigate(
-//        TasksFragmentDirections.tasksToSingleTaskGroupRemoveConfirmation(
-//            taskGroupId,
-//            subItemsCount
-//        )
-//    )
 
     private companion object {
         const val GRID_SPAN_COUNT = 2

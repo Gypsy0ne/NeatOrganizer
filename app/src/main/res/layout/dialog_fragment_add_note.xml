@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_view_dialog_fragment_add_confirmation_icon"
+            android:id="@+id/dialogIcon"
             style="@style/LottieDialogHeader"
             app:layout_constraintBottom_toTopOf="@+id/addNoteContent"
             app:layout_constraintEnd_toEndOf="@+id/addNoteContent"
@@ -34,7 +34,7 @@
                 style="@style/DialogFormEditText"
                 android:layout_marginHorizontal="@dimen/normal_200"
                 android:layout_marginTop="@dimen/normal_200"
-                android:drawableStart="@drawable/ic_group_add_white_24dp"
+                android:drawableStart="@drawable/ic_group_add_white_24"
                 android:hint="@string/add_note_dialog_fragment_content_hint"
                 android:text="@={viewModel.noteTitle}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                 android:drawableStart="@drawable/ic_brush_24"
                 android:drawablePadding="@dimen/normal_100"
                 android:gravity="center"
-                android:text="Note color"
+                android:text="@string/add_note_dialog_fragment_color_header"
                 android:textSize="@dimen/text_normal_75"
                 app:layout_constraintStart_toStartOf="@+id/newNoteTitle"
                 app:layout_constraintTop_toBottomOf="@+id/newNoteTitle" />

@@ -22,11 +22,10 @@ fun NoteEntity.toNoteEntry() = NoteEntry(
     color = color
 )
 
-fun NoteEntity.toNote() =
-    Note(
-        id = id,
-        content = content,
-        title = title,
-        createdAt = createdAt,
-        color = color
-    )
+fun NoteEntity.toNote() = Note(
+    id = id,
+    content = content,
+    title = title,
+    createdAt = createdAt,
+    color = color
+)
