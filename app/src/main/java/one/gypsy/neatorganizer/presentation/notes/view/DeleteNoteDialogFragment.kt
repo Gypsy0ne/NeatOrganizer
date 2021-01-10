@@ -28,7 +28,7 @@ class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.dialog_fragment_single_remove_confirmation,
