@@ -9,13 +9,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.databinding.DialogFragmentRemoveConfirmationBinding
+import one.gypsy.neatorganizer.databinding.DialogFragmentGroupRemoveConfirmationBinding
 import one.gypsy.neatorganizer.presentation.tasks.vm.RemoveTaskGroupViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var fragmentBinding: DialogFragmentRemoveConfirmationBinding
+    private lateinit var fragmentBinding: DialogFragmentGroupRemoveConfirmationBinding
     private val args: RemoveTaskGroupSubmitDialogFragmentArgs by navArgs()
     private val viewModel: RemoveTaskGroupViewModel by viewModel()
 
@@ -26,7 +26,7 @@ class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
     ): View? {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.dialog_fragment_remove_confirmation,
+            R.layout.dialog_fragment_group_remove_confirmation,
             container,
             false
         )

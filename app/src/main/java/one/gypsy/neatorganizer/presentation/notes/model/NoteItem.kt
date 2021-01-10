@@ -11,5 +11,10 @@ data class NoteItem(
     val color: Int
 ) : Timestamped
 
-fun NoteItem.toNote() =
-    Note(id = id, title = title, content = content, createdAt = createdAt, color = color)
+fun NoteItem.toNote() = Note(
+    id = id,
+    title = title,
+    content = content,
+    createdAt = createdAt,
+    color = color
+)

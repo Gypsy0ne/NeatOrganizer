@@ -24,7 +24,8 @@ class NoteEntityTest : DatabaseTest() {
             id = noteId,
             title = "elo",
             content = "really short content",
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            color = 123123
         )
 
         // when
@@ -43,7 +44,8 @@ class NoteEntityTest : DatabaseTest() {
             id = noteId,
             title = "elo",
             content = "really short content",
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            color = 123123
         )
         val updatedNote = note.copy(title = "updated one", content = "updated story")
 
@@ -64,7 +66,8 @@ class NoteEntityTest : DatabaseTest() {
             id = noteId,
             title = "elo",
             content = "really short content",
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            color = 123123
         )
 
         // when
@@ -84,7 +87,8 @@ class NoteEntityTest : DatabaseTest() {
             id = noteId,
             title = "elo",
             content = "really short content",
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            color = 123123
         )
 
         // when
@@ -105,19 +109,22 @@ class NoteEntityTest : DatabaseTest() {
                 id = 1,
                 title = "elo1",
                 content = "really short content1",
-                createdAt = System.currentTimeMillis()
+                createdAt = System.currentTimeMillis(),
+                color = 123123
             ),
             NoteEntity(
                 id = 2,
                 title = "elo2",
                 content = "really short content2",
-                createdAt = System.currentTimeMillis()
+                createdAt = System.currentTimeMillis(),
+                color = 123123
             ),
             NoteEntity(
                 id = 3,
                 title = "elo3",
                 content = "really short content3",
-                createdAt = System.currentTimeMillis()
+                createdAt = System.currentTimeMillis(),
+                color = 123123
             )
         )
 
@@ -139,19 +146,22 @@ class NoteEntityTest : DatabaseTest() {
                 id = 1,
                 title = "elo1",
                 content = "really short content1",
-                createdAt = System.currentTimeMillis()
+                createdAt = System.currentTimeMillis(),
+                color = 123122
             ),
             NoteEntity(
                 id = 2,
                 title = "elo2",
                 content = "really short content2",
-                createdAt = System.currentTimeMillis()
+                createdAt = System.currentTimeMillis(),
+                color = 123111
             ),
             NoteEntity(
                 id = 3,
                 title = "elo3",
                 content = "really short content3",
-                createdAt = System.currentTimeMillis()
+                createdAt = System.currentTimeMillis(),
+                color = 1266654
             )
         )
 
@@ -170,7 +180,8 @@ class NoteEntityTest : DatabaseTest() {
             id = 1,
             title = "elo1",
             content = "really short content1",
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            color = 123123
         )
 
         // when
@@ -181,6 +192,7 @@ class NoteEntityTest : DatabaseTest() {
             assertThat(id).isEqualTo(noteEntity.id)
             assertThat(title).isEqualTo(noteEntity.title)
             assertThat(createdAt).isEqualTo(noteEntity.createdAt)
+            assertThat(color).isEqualTo(noteEntity.color)
         }
     }
 
@@ -191,7 +203,8 @@ class NoteEntityTest : DatabaseTest() {
             id = 1,
             title = "elo1",
             content = "really short content1",
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
+            color = 123123
         )
 
         // when
@@ -203,6 +216,7 @@ class NoteEntityTest : DatabaseTest() {
             assertThat(content).isEqualTo(noteEntity.content)
             assertThat(title).isEqualTo(noteEntity.title)
             assertThat(createdAt).isEqualTo(noteEntity.createdAt)
+            assertThat(color).isEqualTo(note.color)
         }
     }
 }

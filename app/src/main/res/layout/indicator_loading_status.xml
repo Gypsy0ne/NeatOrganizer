@@ -8,8 +8,14 @@
             type="int" />
     </data>
 
-    <com.airbnb.lottie.LottieAnimationView
-        lottieAnimationResource="@{lottieResourceFile}"
-        android:layout_width="@dimen/normal_1400"
-        android:layout_height="@dimen/normal_1400" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            lottieAnimationResource="@{lottieResourceFile}"
+            android:layout_width="@dimen/normal_4000"
+            android:layout_height="@dimen/normal_4000" />
+    </FrameLayout>
+
 </layout>

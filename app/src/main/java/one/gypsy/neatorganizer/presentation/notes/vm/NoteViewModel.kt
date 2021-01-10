@@ -33,9 +33,6 @@ class NoteViewModel(
     }
 
     fun onEditIconClicked() = _edited.value?.let { editionEnabled ->
-        if (editionEnabled) {
-            // zapisz, czyli udapte invoke
-        }
         _edited.postValue(!editionEnabled)
     }
 

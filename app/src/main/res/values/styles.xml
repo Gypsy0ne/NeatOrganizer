@@ -2,8 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="windowActionModeOverlay">true</item>
-        <item name="actionModeBackground">@drawable/activity_action_bar_background</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
@@ -69,7 +67,8 @@
         <item name="android:background">
             @drawable/dialog_yellow_clickable_view_background
         </item>
-        <item name="android:drawableStart">@drawable/ic_check_dark_yellow_24</item>
+        <item name="android:drawableStart">@drawable/ic_check_white_24</item>
+        <item name="drawableTint">@color/dark_yellow</item>
         <item name="android:text">@string/submit_button_dialog_text</item>
         <item name="android:textColor">@color/dark_yellow</item>
     </style>
@@ -177,7 +176,8 @@
         <item name="android:layout_width">@dimen/normal_400</item>
         <item name="android:layout_height">@dimen/normal_400</item>
         <item name="android:layout_margin">@dimen/normal_100</item>
-        <item name="android:src">@drawable/ic_check_dark_yellow_24</item>
+        <item name="android:src">@drawable/ic_check_white_24</item>
+        <item name="drawableTint">@color/dark_yellow</item>
         <item name="android:background">@drawable/bg_edition_submit_button</item>
     </style>
 

@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.databinding.DialogFragmentAddNoteBinding
-import one.gypsy.neatorganizer.presentation.notes.vm.AddNoteViewModel
+import one.gypsy.neatorganizer.databinding.DialogFragmentSingleRemoveConfirmationBinding
+import one.gypsy.neatorganizer.presentation.notes.vm.DeleteNoteViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
 
-    private val viewModel: AddNoteViewModel by viewModel()
-    private lateinit var fragmentBinding: DialogFragmentAddNoteBinding
+    private val viewModel: DeleteNoteViewModel by viewModel()
+    private lateinit var fragmentBinding: DialogFragmentSingleRemoveConfirmationBinding
+    private val args: DeleteNoteDialogFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme_Transparent)
@@ -25,10 +28,10 @@ class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.dialog_fragment_add_note,
+            R.layout.dialog_fragment_single_remove_confirmation,
             container,
             false
         )
@@ -37,8 +40,10 @@ class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentBinding.viewModel = viewModel
         fragmentBinding.lifecycleOwner = this
+        fragmentBinding.setSubmitClickListener {
+            viewModel.onRemoveSubmit(args.noteId)
+        }
     }
 
     override fun onStart() {
@@ -46,10 +51,9 @@ class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
         setUpObservers()
     }
 
-    private fun setUpObservers() {
-//        viewModel.finishedAdding.observe(viewLifecycleOwner) { finished ->
-//            if (finished)
-//                findNavController().popBackStack()
-//        }
-    }
+    private fun setUpObservers() = viewModel.actionFinished
+        .observe(viewLifecycleOwner) { finished ->
+            if (finished)
+                findNavController().popBackStack()
+        }
 }

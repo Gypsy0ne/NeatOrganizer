@@ -36,7 +36,7 @@
                 android:layout_marginStart="@dimen/normal_200"
                 android:layout_marginTop="@dimen/normal_200"
                 android:layout_marginEnd="@dimen/normal_200"
-                android:drawableStart="@drawable/ic_group_add_white_24dp"
+                android:drawableStart="@drawable/ic_group_add_white_24"
                 android:hint="@string/add_routine_task_dialog_fragment_content_hint"
                 android:text="@={viewModel.taskTitle}"
                 app:layout_constraintEnd_toEndOf="parent"

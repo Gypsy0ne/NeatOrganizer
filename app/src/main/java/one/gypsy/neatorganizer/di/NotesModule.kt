@@ -5,6 +5,7 @@ import one.gypsy.neatorganizer.domain.datasource.notes.NotesDataSource
 import one.gypsy.neatorganizer.domain.datasource.notes.UserNotesDataSource
 import one.gypsy.neatorganizer.domain.interactors.notes.*
 import one.gypsy.neatorganizer.presentation.notes.vm.AddNoteViewModel
+import one.gypsy.neatorganizer.presentation.notes.vm.DeleteNoteViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NotesListingViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -37,8 +38,12 @@ val notesViewModelModule = module {
     viewModel { AddNoteViewModel(insertNoteEntryUseCase = get()) }
     viewModel {
         NotesListingViewModel(
-            deleteNoteByIdUseCase = get(),
             getAllNoteEntriesUseCase = get()
+        )
+    }
+    viewModel {
+        DeleteNoteViewModel(
+            deleteNoteByIdUseCase = get(),
         )
     }
 }

@@ -8,8 +8,9 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class DeleteNoteById(private val notesRepository: NotesRepository) :
-    BaseUseCase<Unit, Params>() {
+class DeleteNoteById(
+    private val notesRepository: NotesRepository
+) : BaseUseCase<Unit, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {

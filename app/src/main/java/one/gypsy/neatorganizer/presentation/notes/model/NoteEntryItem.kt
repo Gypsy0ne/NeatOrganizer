@@ -3,8 +3,8 @@ package one.gypsy.neatorganizer.presentation.notes.model
 import one.gypsy.neatorganizer.presentation.common.listing.Listed
 
 data class NoteEntryItem(
-    override val id: Long,
     val createdAt: Long,
+    val color: Int,
     override val title: String,
-    val color: Int
+    override val id: Long
 ) : Listed
