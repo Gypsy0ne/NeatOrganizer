@@ -35,8 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:onClick="@{() -> onItemSelect.invoke(noteEntryItem)}"
-            android:stateListAnimator="@animator/selection_elevation_rise">
+            android:onClick="@{() -> onItemSelect.invoke(noteEntryItem)}">
 
             <TextView
                 android:id="@+id/createdOn"

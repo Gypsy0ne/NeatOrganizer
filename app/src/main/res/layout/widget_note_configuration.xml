@@ -29,7 +29,7 @@
             android:background="@drawable/rounded_bottom_background"
             android:elevation="@dimen/normal_25"
             android:gravity="center"
-            android:text="Select the note"
+            android:text="@string/widget_note_configuration_title"
             android:textSize="@dimen/text_normal_125"
             app:layout_constraintBottom_toTopOf="@+id/headerGuideline"
             app:layout_constraintEnd_toEndOf="parent"

@@ -47,5 +47,5 @@
     <string name="item_note_creation_date_prefix">Created on %1$s</string>
     <string name="add_routine_dialog_scheduled_days">Scheduled days</string>
     <string name="add_note_dialog_fragment_color_header">Note color</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="widget_note_configuration_title">Select the note</string>
 </resources>
