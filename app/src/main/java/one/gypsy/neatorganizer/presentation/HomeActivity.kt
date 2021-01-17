@@ -8,8 +8,8 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetSynchronizationService
-import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
+import one.gypsy.neatorganizer.utils.extensions.shrink
 
 class HomeActivity : AppCompatActivity() {
 
@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setUpLocationListener() {
         findNavController(R.id.fragment_activity_home_nav_container).addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.noteDetails) {
-                bottom_navigation_view_activity_home.hide()
+                bottom_navigation_view_activity_home.shrink()
             } else {
                 bottom_navigation_view_activity_home.show()
             }

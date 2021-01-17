@@ -8,8 +8,8 @@ import one.gypsy.neatorganizer.databinding.ItemRoutineHeaderBinding
 import one.gypsy.neatorganizer.presentation.common.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.common.listing.ListedHeader
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
-import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
+import one.gypsy.neatorganizer.utils.extensions.shrink
 
 class RoutineHeaderViewHolder(
     val itemBinding: ItemRoutineHeaderBinding,
@@ -47,13 +47,13 @@ class RoutineHeaderViewHolder(
     }
 
     private fun onEditFinish() {
-        itemBinding.buttonItemRoutineHeaderSubmit.hide()
+        itemBinding.buttonItemRoutineHeaderSubmit.shrink()
         itemBinding.buttonItemRoutineHeaderExpand.show()
     }
 
     private fun onEditStart() {
         itemBinding.buttonItemRoutineHeaderSubmit.show()
-        itemBinding.buttonItemRoutineHeaderExpand.hide()
+        itemBinding.buttonItemRoutineHeaderExpand.shrink()
     }
 
     private fun changeNameEditionAttributes() =
