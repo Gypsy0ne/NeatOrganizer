@@ -14,6 +14,7 @@ class TaskGroupEntryViewHolder(
     private val itemBinding: ItemTaskGroupEntryBinding
 ) : LifecycleViewHolder(itemBinding.root) {
 
+    // TODO this field might be kept within the binding
     private lateinit var itemEntry: TaskGroupEntryItem
 
     fun bind(taskGroupEntry: TaskGroupEntryItem) {
@@ -30,13 +31,12 @@ class TaskGroupEntryViewHolder(
 
     override fun onAttached() {
         super.onAttached()
-        currentlySelectedItem.observe(this) { animateItemSelection(it, itemEntry) }
+        currentlySelectedItem.observe(this) { animateItemSelection(it) }
     }
 
     private fun animateItemSelection(
         selectedItem: TaskGroupEntryItem,
-        oldItem: TaskGroupEntryItem
-    ) = if (selectedItem == oldItem) {
+    ) = if (selectedItem == itemEntry) {
         (itemBinding.entryContainer.background as TransitionDrawable).startTransition(
             itemView.context.resources.getInteger(
                 R.integer.short_animation_duration

@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
+import one.gypsy.neatorganizer.utils.Failure
 
 class AddTaskViewModel(
     private val addSingleTaskUseCase: AddSingleTask,
-    val groupId: Long
+    private val groupId: Long
 ) : ViewModel() {
 
     val taskTitle = MutableLiveData<String>()
@@ -17,7 +18,11 @@ class AddTaskViewModel(
     private val _finishedAdding = MutableLiveData<Boolean>()
     val finishedAdding: LiveData<Boolean> = _finishedAdding
 
-    fun addTask() {
+    fun addTask() = add({}, { _finishedAdding.postValue(true) })
+
+    fun addNextTask() = add({}, { taskTitle.postValue("") })
+
+    fun add(onFailure: (Failure) -> Any, onSuccess: (Unit) -> Any) {
         addSingleTaskUseCase.invoke(
             viewModelScope,
             AddSingleTask.Params(
@@ -29,27 +34,7 @@ class AddTaskViewModel(
                 )
             )
         ) {
-            it.either({}, ::onAddTaskSuccess)
+            it.either(onFailure, onSuccess)
         }
     }
-
-    fun addNextTask() {
-        addSingleTaskUseCase.invoke(
-            viewModelScope,
-            AddSingleTask.Params(
-                SingleTaskEntry(
-                    groupId = groupId,
-                    name = taskTitle.value.orEmpty(),
-                    done = false,
-                    createdAt = System.currentTimeMillis()
-                )
-            )
-        ) {
-            it.either({}, ::onAddNextTaskSuccess)
-        }
-    }
-
-    private fun onAddTaskSuccess(newTaskId: Long) = _finishedAdding.postValue(true)
-
-    private fun onAddNextTaskSuccess(newTaskId: Long) = taskTitle.postValue("")
 }

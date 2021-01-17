@@ -12,17 +12,17 @@ class AddRoutineTaskViewModel(
     private val addRoutineTask: AddRoutineTask,
     private val routineId: Long
 ) : ViewModel() {
+
     val taskTitle = MutableLiveData<String>()
 
     private val _finishedAdding = MutableLiveData<Boolean>()
-    val finishedAdding: LiveData<Boolean>
-        get() = _finishedAdding
+    val finishedAdding: LiveData<Boolean> = _finishedAdding
 
-    fun addRoutineTask() = add(::onAddRoutineTaskFailure, ::onAddRoutineTaskSuccess)
+    fun addRoutineTask() = add({}, { _finishedAdding.postValue(true) })
 
-    fun addNextRoutineTask() = add(::onAddNextRoutineTaskFailure, ::onAddNextRoutineTaskSuccess)
+    fun addNextRoutineTask() = add({}, { taskTitle.postValue("") })
 
-    private fun add(onFailure: (Failure) -> Any, onSuccess: (Long) -> Any) {
+    private fun add(onFailure: (Failure) -> Any, onSuccess: (Unit) -> Any) {
         addRoutineTask.invoke(
             viewModelScope,
             AddRoutineTask.Params(
@@ -36,19 +36,5 @@ class AddRoutineTaskViewModel(
         ) {
             it.either(onFailure, onSuccess)
         }
-    }
-
-    private fun onAddRoutineTaskSuccess(newTaskId: Long) {
-        _finishedAdding.postValue(true)
-    }
-
-    private fun onAddRoutineTaskFailure(failure: Failure) {
-    }
-
-    private fun onAddNextRoutineTaskSuccess(newTaskId: Long) {
-        taskTitle.postValue("")
-    }
-
-    private fun onAddNextRoutineTaskFailure(failure: Failure) {
     }
 }

@@ -3,6 +3,7 @@ package one.gypsy.neatorganizer.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import one.gypsy.neatorganizer.data.database.dao.notes.NoteWidgetsDao
 import one.gypsy.neatorganizer.data.database.dao.notes.NotesDao
 import one.gypsy.neatorganizer.data.database.dao.routines.RoutineSchedulesDao
 import one.gypsy.neatorganizer.data.database.dao.routines.RoutineSnapshotsDao
@@ -12,6 +13,7 @@ import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
 import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
 import one.gypsy.neatorganizer.data.database.entity.notes.NoteEntity
+import one.gypsy.neatorganizer.data.database.entity.notes.NoteWidgetEntity
 import one.gypsy.neatorganizer.data.database.entity.routines.RoutineEntity
 import one.gypsy.neatorganizer.data.database.entity.routines.RoutineScheduleEntity
 import one.gypsy.neatorganizer.data.database.entity.routines.RoutineTaskEntity
@@ -29,7 +31,8 @@ import one.gypsy.neatorganizer.data.database.entity.tasks.TaskWidgetEntity
         RoutineTaskEntity::class,
         RoutineSnapshotEntity::class,
         TaskWidgetEntity::class,
-        NoteEntity::class
+        NoteEntity::class,
+        NoteWidgetEntity::class
     ],
     version = 1
 )
@@ -43,4 +46,5 @@ abstract class OrganizerDatabase : RoomDatabase() {
     abstract fun routineTasksDao(): RoutineTasksDao
     abstract fun taskWidgetDao(): TaskWidgetsDao
     abstract fun notesDao(): NotesDao
+    abstract fun noteWidgetDao(): NoteWidgetsDao
 }

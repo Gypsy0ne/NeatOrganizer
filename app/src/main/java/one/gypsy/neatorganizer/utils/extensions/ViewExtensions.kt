@@ -2,17 +2,24 @@ package one.gypsy.neatorganizer.utils.extensions
 
 import android.animation.Animator
 import android.view.View
+import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import one.gypsy.neatorganizer.R
 
+fun View.shrink() {
+    this.visibility = GONE
+}
+
 fun View.hide() {
-    this.visibility = View.GONE
+    this.visibility = INVISIBLE
 }
 
 fun View.show() {
-    this.visibility = View.VISIBLE
+    this.visibility = VISIBLE
 }
 
 fun View.fadeIn() {
@@ -40,7 +47,7 @@ fun View.fadeOut() {
         setListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {}
 
-            override fun onAnimationEnd(animation: Animator?) = hide()
+            override fun onAnimationEnd(animation: Animator?) = shrink()
 
             override fun onAnimationCancel(animation: Animator?) {}
 

@@ -6,8 +6,8 @@ import one.gypsy.neatorganizer.databinding.ItemTaskBinding
 import one.gypsy.neatorganizer.presentation.common.listing.ListedSubItem
 import one.gypsy.neatorganizer.presentation.common.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
-import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
+import one.gypsy.neatorganizer.utils.extensions.shrink
 
 class TaskSubItemViewHolder(
     private val itemBinding: ItemTaskBinding,
@@ -65,13 +65,13 @@ class TaskSubItemViewHolder(
         setEditionEnabled(itemBinding.editTextItemTaskName, viewData.edited)
 
     private fun onEditionFinish() {
-        itemBinding.buttonItemTaskSubmit.hide()
+        itemBinding.buttonItemTaskSubmit.shrink()
         itemBinding.checkBoxItemTaskDone.show()
     }
 
     private fun onEditionStart() {
         itemBinding.buttonItemTaskSubmit.show()
-        itemBinding.checkBoxItemTaskDone.hide()
+        itemBinding.checkBoxItemTaskDone.shrink()
     }
 
     override fun setUpEditListener() {

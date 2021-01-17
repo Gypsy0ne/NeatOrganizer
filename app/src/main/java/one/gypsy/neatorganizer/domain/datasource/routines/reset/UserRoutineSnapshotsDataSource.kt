@@ -6,7 +6,6 @@ import one.gypsy.neatorganizer.domain.dto.routines.reset.toRoutineSnapshotEntity
 
 class UserRoutineSnapshotsDataSource(private val routineSnapshotsDao: RoutineSnapshotsDao) :
     RoutineSnapshotsDataSource {
-    override suspend fun add(snapshot: RoutineSnapshot): Long =
+    override suspend fun add(snapshot: RoutineSnapshot) =
         routineSnapshotsDao.insert(snapshot.toRoutineSnapshotEntity())
-
 }

@@ -7,7 +7,7 @@
     android:minHeight="@dimen/widget_200"
     android:minResizeWidth="@dimen/widget_200"
     android:minResizeHeight="@dimen/widget_100"
-    android:previewImage="@drawable/task_appwidget_preview"
+    android:previewImage="@drawable/appwidget_preview"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="3600000"
     android:widgetCategory="home_screen" />

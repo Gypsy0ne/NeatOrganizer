@@ -85,11 +85,17 @@ class TaskWidgetActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.edit_group_title -> onEditGroupTitleClicked()
-            R.id.save_group_title -> onSaveGroupTitleClicked()
+        return when (item.itemId) {
+            R.id.edit_group_title -> {
+                onEditGroupTitleClicked()
+                true
+            }
+            R.id.save_group_title -> {
+                onSaveGroupTitleClicked()
+                true
+            }
+            else -> false
         }
-        return true
     }
 
     private fun onEditGroupTitleClicked() {

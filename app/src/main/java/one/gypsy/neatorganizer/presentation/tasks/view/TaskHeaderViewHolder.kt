@@ -8,8 +8,8 @@ import one.gypsy.neatorganizer.databinding.ItemTaskHeaderBinding
 import one.gypsy.neatorganizer.presentation.common.listing.HeaderClickListener
 import one.gypsy.neatorganizer.presentation.common.listing.ListedHeader
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
-import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
+import one.gypsy.neatorganizer.utils.extensions.shrink
 
 class TaskHeaderViewHolder(
     private val itemBinding: ItemTaskHeaderBinding,
@@ -50,13 +50,13 @@ class TaskHeaderViewHolder(
     }
 
     private fun onEditFinish() {
-        itemBinding.buttonItemTaskHeaderSubmit.hide()
+        itemBinding.buttonItemTaskHeaderSubmit.shrink()
         itemBinding.buttonItemTaskHeaderExpand.show()
     }
 
     private fun onEditStart() {
         itemBinding.buttonItemTaskHeaderSubmit.show()
-        itemBinding.buttonItemTaskHeaderExpand.hide()
+        itemBinding.buttonItemTaskHeaderExpand.shrink()
     }
 
     private fun changeNameEditionAttributes() =

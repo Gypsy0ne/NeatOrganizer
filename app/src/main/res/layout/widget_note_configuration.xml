@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="configurationViewModel"
+            type="one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetConfigurationViewModel" />
+
+        <variable
+            name="notesAdapter"
+            type="one.gypsy.neatorganizer.presentation.notes.view.widget.configuration.WidgetNoteEntriesAdapter" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.GridLayoutManager" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_white">
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:background="@drawable/rounded_bottom_background"
+            android:elevation="@dimen/normal_25"
+            android:gravity="center"
+            android:text="@string/widget_note_configuration_title"
+            android:textSize="@dimen/text_normal_125"
+            app:layout_constraintBottom_toTopOf="@+id/headerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/headerGuideline"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/availableNotes"
+            adapter="@{notesAdapter}"
+            adapterData="@{configurationViewModel.listedNotes}"
+            hasFixedSize="@{false}"
+            layoutManager="@{layoutManager}"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            app:layout_constraintBottom_toTopOf="@+id/bottomMenuGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerGuideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomMenuGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.89" />
+
+        <View
+            android:id="@+id/bottomMenu"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:background="@drawable/rounded_top_background"
+            android:elevation="@dimen/normal_25"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
+
+        <Button
+            android:id="@+id/submitConfiguration"
+            style="@style/DialogFormButton.Submit"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_300"
+            android:elevation="@dimen/normal_200"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cancelConfiguration"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+        <Button
+            android:id="@+id/cancelConfiguration"
+            style="@style/DialogFormButton.Cancel"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_300"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toStartOf="@+id/submitConfiguration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

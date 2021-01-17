@@ -12,8 +12,7 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
     val taskGroupTitle = MutableLiveData<String>()
 
     private val _finishedAdding = MutableLiveData<Boolean>()
-    val finishedAdding: LiveData<Boolean>
-        get() = _finishedAdding
+    val finishedAdding: LiveData<Boolean> = _finishedAdding
 
     fun addTaskGroup() {
         addTaskGroupUseCase.invoke(
@@ -25,11 +24,7 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
                 )
             )
         ) {
-            it.either({}, ::onAddSingleTaskGroupSuccess)
+            it.either({}, { _finishedAdding.postValue(true) })
         }
-    }
-
-    fun onAddSingleTaskGroupSuccess(newTaskGroupId: Long) {
-        _finishedAdding.postValue(true)
     }
 }

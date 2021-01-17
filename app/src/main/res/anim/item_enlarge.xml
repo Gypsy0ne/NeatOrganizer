@@ -1,5 +1,5 @@
 <scale xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="150"
+    android:duration="@integer/minimal_animation_duration"
     android:fromXScale="1"
     android:fromYScale="1"
     android:pivotX="50%"

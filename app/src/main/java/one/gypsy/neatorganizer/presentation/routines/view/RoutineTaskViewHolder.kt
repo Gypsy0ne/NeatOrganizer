@@ -6,8 +6,8 @@ import one.gypsy.neatorganizer.databinding.ItemRoutineTaskBinding
 import one.gypsy.neatorganizer.presentation.common.listing.ListedSubItem
 import one.gypsy.neatorganizer.presentation.common.listing.SubItemClickListener
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListItem
-import one.gypsy.neatorganizer.utils.extensions.hide
 import one.gypsy.neatorganizer.utils.extensions.show
+import one.gypsy.neatorganizer.utils.extensions.shrink
 
 class RoutineTaskViewHolder(
     val itemBinding: ItemRoutineTaskBinding,
@@ -65,13 +65,13 @@ class RoutineTaskViewHolder(
         setEditionEnabled(itemBinding.editTextItemRoutineTaskName, viewData.edited)
 
     private fun onEditionFinish() {
-        itemBinding.buttonItemRoutineTaskSubmit.hide()
+        itemBinding.buttonItemRoutineTaskSubmit.shrink()
         itemBinding.checkBoxItemRoutineTaskDone.show()
     }
 
     private fun onEditionStart() {
         itemBinding.buttonItemRoutineTaskSubmit.show()
-        itemBinding.checkBoxItemRoutineTaskDone.hide()
+        itemBinding.checkBoxItemRoutineTaskDone.shrink()
     }
 
     override fun setUpEditListener() {
