@@ -3,4 +3,8 @@
     <declare-styleable name="LinedEditText">
         <attr name="lineColor" format="integer" />
     </declare-styleable>
+    <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetBackgroundColor" format="color" />
+        <attr name="appWidgetTextColor" format="color" />
+    </declare-styleable>
 </resources>

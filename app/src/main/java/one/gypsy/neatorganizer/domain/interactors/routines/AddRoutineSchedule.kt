@@ -9,9 +9,9 @@ import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
 class AddRoutineSchedule(private val routineSchedulesRepository: RoutineSchedulesRepository) :
-    BaseUseCase<Long, AddRoutineSchedule.Params>() {
+    BaseUseCase<Unit, AddRoutineSchedule.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, Long> {
+    override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
                 Either.Right(routineSchedulesRepository.addRoutineSchedule(params.routineSchedule))

@@ -11,18 +11,18 @@ import one.gypsy.neatorganizer.domain.dto.notes.toNoteEntity
 
 class UserNotesDataSource(private val notesDao: NotesDao) : NotesDataSource {
 
-    override fun insert(noteEntry: NoteEntry) = notesDao.insert(noteEntry.toNoteEntity())
+    override suspend fun insert(noteEntry: NoteEntry) = notesDao.insert(noteEntry.toNoteEntity())
 
-    override fun deleteById(noteId: Long) = notesDao.deleteNoteById(noteId)
+    override suspend fun deleteById(noteId: Long) = notesDao.deleteNoteById(noteId)
 
-    override fun update(note: Note) = notesDao.update(note.toNoteEntity())
+    override suspend fun update(note: Note) = notesDao.update(note.toNoteEntity())
 
-    override fun getAllNoteEntriesObservable(): LiveData<List<NoteEntry>> =
+    override suspend fun getAllNoteEntriesObservable(): LiveData<List<NoteEntry>> =
         Transformations.map(notesDao.getAllNotesObservable()) {
             it.map { entity -> entity.toNoteEntry() }
         }
 
-    override fun getNoteById(noteId: Long): LiveData<Note> =
+    override suspend fun getNoteById(noteId: Long): LiveData<Note> =
         Transformations.map(notesDao.getNoteByIdObservable(noteId)) {
             it.toNote()
         }

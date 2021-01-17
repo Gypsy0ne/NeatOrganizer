@@ -33,6 +33,7 @@ class TaskGroupEntriesAdapter(
     override fun onBindViewHolder(holder: TaskGroupEntryViewHolder, position: Int) =
         holder.bind(getItem(position))
 
+    // TODO extract binding logic from adapters
     override fun onViewAttachedToWindow(holder: TaskGroupEntryViewHolder) {
         super.onViewAttachedToWindow(holder)
         holder.onAttached()

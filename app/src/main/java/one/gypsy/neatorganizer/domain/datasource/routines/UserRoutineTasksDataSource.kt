@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.domain.dto.routines.toRoutineTaskEntity
 class UserRoutineTasksDataSource(private val routineTasksDao: RoutineTasksDao) :
     RoutineTasksDataSource {
 
-    override suspend fun add(routineTask: RoutineTaskEntry): Long =
+    override suspend fun add(routineTask: RoutineTaskEntry) =
         routineTasksDao.insert(routineTask.toRoutineTaskEntity())
 
     override suspend fun update(routineTask: RoutineTaskEntry) =
@@ -17,5 +17,4 @@ class UserRoutineTasksDataSource(private val routineTasksDao: RoutineTasksDao) :
         routineTasksDao.delete(routineTask.toRoutineTaskEntity())
 
     override suspend fun resetTasksStatus() = routineTasksDao.resetTasksStatus()
-
 }

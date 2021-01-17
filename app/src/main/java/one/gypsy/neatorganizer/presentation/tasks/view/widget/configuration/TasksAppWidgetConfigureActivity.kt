@@ -1,64 +1,33 @@
 package one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration
 
-import android.appwidget.AppWidgetManager
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.WidgetTasksConfigurationBinding
-import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
+import one.gypsy.neatorganizer.presentation.common.WidgetConfigurationActivity
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetCreationStatus
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetConfigurationViewModel
 import one.gypsy.neatorganizer.utils.extensions.showShortToast
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TasksAppWidgetConfigureActivity : AppCompatActivity() {
+class TasksAppWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     private val widgetConfigurationViewModel: TasksWidgetConfigurationViewModel by viewModel()
-    private val widgetViewManager: WidgetRemoteViewManager by inject()
-    private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
 
-    public override fun onCreate(icicle: Bundle?) {
-        super.onCreate(icicle)
-        findWidgetIdFromIntent()
-        setActivityResult(RESULT_CANCELED)
-        invalidateIntentWithWidgetId()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setDataBoundContentView()
         observeCreationStatus()
     }
 
-    private fun AppCompatActivity.setActivityResult(status: Int) {
-        val result = Intent().apply {
-            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-        }
-        setResult(status, result)
-    }
-
-    private fun invalidateIntentWithWidgetId() {
-        if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
-            finish()
-            return
-        }
-    }
-
-    private fun findWidgetIdFromIntent() = intent.extras?.let {
-        appWidgetId = it.getInt(
-            AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID
-        )
-    }
-
-    private fun setDataBoundContentView() = with(
+    private fun setDataBoundContentView() =
         DataBindingUtil.setContentView<WidgetTasksConfigurationBinding>(
             this,
             R.layout.widget_tasks_configuration
-        )
-    ) {
-        bindViews()
-        setContentView(root)
-    }
+        ).also {
+            it.bindViews()
+        }
 
     private fun WidgetTasksConfigurationBinding.bindViews() {
         configurationViewModel = widgetConfigurationViewModel
@@ -98,11 +67,5 @@ class TasksAppWidgetConfigureActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun onWidgetCreationFinish() {
-        widgetViewManager.updateWidget(appWidgetId)
-        setActivityResult(RESULT_OK)
-        finish()
     }
 }

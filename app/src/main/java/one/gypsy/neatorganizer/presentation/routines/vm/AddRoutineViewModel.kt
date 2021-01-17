@@ -8,7 +8,6 @@ import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutine
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineSchedule
-import one.gypsy.neatorganizer.utils.Failure
 
 class AddRoutineViewModel(
     private val addRoutineUseCase: AddRoutine,
@@ -18,8 +17,7 @@ class AddRoutineViewModel(
     val routineTitle = MutableLiveData<String>()
 
     private val _finishedAdding = MutableLiveData<Boolean>()
-    val finishedAdding: LiveData<Boolean>
-        get() = _finishedAdding
+    val finishedAdding: LiveData<Boolean> = _finishedAdding
 
     private var scheduledDays: List<Boolean> = List(7) {
         false
@@ -37,7 +35,7 @@ class AddRoutineViewModel(
                 )
             )
         ) {
-            it.either(::onAddRoutineFailure, ::onAddRoutineSuccess)
+            it.either({}, ::onAddRoutineSuccess)
         }
     }
 
@@ -51,18 +49,8 @@ class AddRoutineViewModel(
                 )
             )
         ) {
-            it.either(::onAddRoutineScheduleFailure, ::onAddRoutineScheduleSuccess)
+            it.either({}, { _finishedAdding.postValue(true) })
         }
-    }
-
-    fun onAddRoutineFailure(failure: Failure) {
-    }
-
-    fun onAddRoutineScheduleSuccess(newRoutineScheduleId: Long) {
-        _finishedAdding.postValue(true)
-    }
-
-    fun onAddRoutineScheduleFailure(failure: Failure) {
     }
 
     fun onScheduleChanged(updatedScheduleDays: List<Boolean>) {
