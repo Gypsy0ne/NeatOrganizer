@@ -13,6 +13,7 @@ import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetRemoteVi
 import one.gypsy.neatorganizer.presentation.tasks.vm.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val tasksDataSourceModule = module {
@@ -45,7 +46,7 @@ val tasksUseCaseModule = module {
     factory { GetAllSingleTasksByGroupIdObservable(get()) }
     factory { UpdateSingleTaskGroup(get()) }
     factory { GetAllTaskWidgetIds(get()) }
-    factory { DeleteTaskWidget(get()) }
+    factory { DeleteTaskWidgetById(get()) }
     factory { UpdateTaskWidgetLinkedGroup(get()) }
     factory { GetAllTaskWidgets(get()) }
     factory { GetTitledTaskWidgetByIdObservable(get()) }
@@ -54,7 +55,7 @@ val tasksUseCaseModule = module {
 
 val tasksUtilsModule = module {
     factory { TaskListMapper() }
-    factory<WidgetRemoteViewManager> { TaskWidgetRemoteViewManager(get(), get(), get(), get()) }
+    factory<WidgetRemoteViewManager>(named("taskRemoteViewManager")) { TaskWidgetRemoteViewManager(get(), get(), get(), get()) }
     factory<WidgetNotifier> { TaskWidgetNotifier(androidContext()) }
 }
 
@@ -82,3 +83,4 @@ val tasksViewModelModule = module {
         )
     }
 }
+

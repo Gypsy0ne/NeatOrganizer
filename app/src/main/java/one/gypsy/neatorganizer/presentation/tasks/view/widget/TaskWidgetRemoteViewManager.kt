@@ -13,15 +13,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidget
+import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidgetById
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
 
 class TaskWidgetRemoteViewManager(
     private val context: Context,
     private val widgetManager: AppWidgetManager,
     private val loadTitledTaskWidgetUseCase: LoadTitledTaskWidget,
-    private val removeTaskWidgetUseCase: DeleteTaskWidget
+    private val removeTaskWidgetUseCase: DeleteTaskWidgetById
 ) : WidgetRemoteViewManager {
 
     override fun updateWidget(appWidgetId: Int) {
@@ -29,18 +32,20 @@ class TaskWidgetRemoteViewManager(
             loadTitledTaskWidgetUseCase.invoke(this, LoadTitledTaskWidget.Params(appWidgetId)) {
                 it.either(
                     { onLoadTaskWidgetFailure(appWidgetId) },
-                    { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) })
+                    { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) }
+                )
             }
         }
     }
 
     private fun onLoadTaskWidgetFailure(appWidgetId: Int) {
-        val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks_no_content).apply {
+        val remoteViews = RemoteViews(context.packageName, R.layout.widget_no_content).apply {
             setUpMissingGroupViews(appWidgetId)
         }
         widgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
 
+    //TODO it uses directly domain objects turn it into model objects
     private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntry) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
             setUpLoadedTaskViews(taskWidgetEntry)
@@ -52,7 +57,7 @@ class TaskWidgetRemoteViewManager(
 
     private fun RemoteViews.setUpLoadedTaskViews(taskWidgetEntry: TitledTaskWidgetEntry) {
         setOnClickPendingIntent(
-            R.id.tasksWidgetContainer,
+            R.id.widgetContainer,
             createGroupManageActivityIntent(
                 taskWidgetEntry.appWidgetId,
                 taskWidgetEntry.taskGroupId
@@ -66,7 +71,7 @@ class TaskWidgetRemoteViewManager(
     }
 
     private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) = setOnClickPendingIntent(
-        R.id.tasksWidgetContainer,
+        R.id.widgetContainer,
         createGroupManageActivityIntent(
             widgetId,
             MANAGED_GROUP_INVALID_ID
@@ -96,7 +101,7 @@ class TaskWidgetRemoteViewManager(
 
     override fun deleteWidget(appWidgetId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            removeTaskWidgetUseCase.invoke(this, DeleteTaskWidget.Params(appWidgetId))
+            removeTaskWidgetUseCase.invoke(this, DeleteTaskWidgetById.Params(appWidgetId))
         }
     }
 }

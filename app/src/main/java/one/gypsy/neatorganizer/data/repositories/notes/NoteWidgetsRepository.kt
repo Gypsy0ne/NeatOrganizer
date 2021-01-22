@@ -9,5 +9,7 @@ class NoteWidgetsRepository(private val dataSource: NoteWidgetsDataSource) {
 
     suspend fun deleteNoteWidgetById(noteWidgetId: Int) = dataSource.deleteById(noteWidgetId)
 
+    suspend fun getTitledNoteWidget(noteWidgetId: Int) = dataSource.getTitledNoteWidget(noteWidgetId)
+
     suspend fun updateNoteWidget(noteWidget: NoteWidgetEntry) = dataSource.update(noteWidget)
 }

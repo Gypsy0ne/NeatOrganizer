@@ -3,29 +3,28 @@ package one.gypsy.neatorganizer.domain.interactors.notes.widget
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import one.gypsy.neatorganizer.data.repositories.notes.NoteWidgetsRepository
-import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.widget.SaveNoteWidget.Params
+import one.gypsy.neatorganizer.domain.interactors.notes.widget.DeleteNoteWidgetById.Params
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class SaveNoteWidget(private val noteWidgetsRepository: NoteWidgetsRepository) :
+class DeleteNoteWidgetById(private val noteWidgetsRepository: NoteWidgetsRepository) :
     BaseUseCase<Unit, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {
             withContext(Dispatchers.IO) {
-                Either.Right(noteWidgetsRepository.insertNoteWidget(params.noteWidget))
+                Either.Right(noteWidgetsRepository.deleteNoteWidgetById(params.noteWidgetId))
             }
         } catch (exp: Exception) {
             Either.Left(
-                SaveNoteWidgetFailure(
+                DeleteNoteWidgetByIdFailure(
                     exp
                 )
             )
         }
     }
 
-    data class Params(val noteWidget: NoteWidgetEntry)
-    data class SaveNoteWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class Params(val noteWidgetId: Int)
+    data class DeleteNoteWidgetByIdFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

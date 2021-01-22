@@ -11,6 +11,11 @@ import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_task_widget.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.ActivityTaskWidgetBinding
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.SELECTED_WIDGET_GROUP_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_INVALID_ID
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

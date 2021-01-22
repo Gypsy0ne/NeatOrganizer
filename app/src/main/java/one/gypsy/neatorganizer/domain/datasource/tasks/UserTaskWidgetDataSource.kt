@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
 import one.gypsy.neatorganizer.data.database.entity.tasks.toTaskWidgetEntry
-import one.gypsy.neatorganizer.data.database.entity.tasks.toTitledWidgetTaskEntry
+import one.gypsy.neatorganizer.data.database.entity.tasks.toTitledTaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toTaskWidgetEntity
@@ -17,11 +17,11 @@ class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
     }
 
     override suspend fun getTitledTaskWidgetById(taskWidgetId: Int): TitledTaskWidgetEntry =
-        widgetsDao.getWidgetWithTaskGroupById(taskWidgetId).toTitledWidgetTaskEntry()
+        widgetsDao.getWidgetWithTaskGroupById(taskWidgetId).toTitledTaskWidgetEntry()
 
     override suspend fun getTitledTaskWidgetByIdObservable(taskWidgetId: Int): LiveData<TitledTaskWidgetEntry> =
         Transformations.map(widgetsDao.getWidgetWithTaskGroupByIdObservable(taskWidgetId)) {
-            it.toTitledWidgetTaskEntry()
+            it.toTitledTaskWidgetEntry()
         }
 
     override suspend fun getTaskGroupIdByWidgetId(taskWidgetId: Int): Long =

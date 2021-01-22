@@ -1,21 +1,58 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noteWidgetContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/appWidgetBackgroundColor"
-    android:padding="@dimen/widget_margin"
-    android:theme="@style/ThemeOverlay.NeatOrganizer.AppWidgetContainer">
+    android:layout_margin="@dimen/normal_25"
+    android:background="@drawable/task_widget_background"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_400"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_400"
+            android:layout_marginHorizontal="@dimen/normal_50"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="@dimen/text_normal_100"
+            android:autoSizeMinTextSize="@dimen/text_normal_25"
+            android:autoSizeTextType="uniform"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray" />
+
+        <ImageView
+            android:id="@+id/expandWindow"
+            android:layout_width="@dimen/normal_300"
+            android:layout_height="@dimen/normal_300"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/normal_100"
+            android:padding="@dimen/normal_25"
+            android:layout_weight="0"
+            android:src="@drawable/ic_launch_grey_24"
+            android:tint="@color/gray"
+            tools:ignore="UseAppTint" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/titleListSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/helper_200"
+        android:layout_marginHorizontal="@dimen/normal_25"
+        android:layout_marginTop="@dimen/normal_400"
+        android:background="@color/light_gray" />
 
     <TextView
-        android:id="@+id/appwidget_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="?attr/appWidgetBackgroundColor"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textColor="?attr/appWidgetTextColor"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
-</RelativeLayout>
+        android:id="@+id/noteContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/helper_100"
+        android:layout_marginTop="@dimen/normal_400"
+        android:scrollbars="vertical"
+        android:layout_marginBottom="@dimen/helper_100"
+        android:paddingHorizontal="@dimen/normal_50" />
+
+</FrameLayout>

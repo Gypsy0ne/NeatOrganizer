@@ -14,7 +14,7 @@ class TaskWidgetNotifier(private val context: Context) : WidgetNotifier {
     private fun createUpdateIntent(updatedWidgetsIds: IntArray) =
         Intent(context, TasksAppWidget::class.java).apply {
             action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-            putExtra(TasksAppWidget.WIDGET_UPDATE_IDS_KEY, updatedWidgetsIds)
+            putExtra(TasksAppWidget.TASK_WIDGET_UPDATE_IDS_KEY, updatedWidgetsIds)
         }
 
 }

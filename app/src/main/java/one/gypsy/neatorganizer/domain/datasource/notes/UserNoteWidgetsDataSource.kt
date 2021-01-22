@@ -1,6 +1,7 @@
 package one.gypsy.neatorganizer.domain.datasource.notes
 
 import one.gypsy.neatorganizer.data.database.dao.notes.NoteWidgetsDao
+import one.gypsy.neatorganizer.data.database.entity.notes.toTitledNoteWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.notes.toNoteWidgetEntity
 
@@ -12,6 +13,8 @@ class UserNoteWidgetsDataSource(private val noteWidgetsDao: NoteWidgetsDao) :
 
     override suspend fun deleteById(noteWidgetId: Int) =
         noteWidgetsDao.deleteWidgetById(noteWidgetId)
+
+    override suspend fun getTitledNoteWidget(noteWidgetId: Int) = noteWidgetsDao.getWidgetWithNoteById(noteWidgetId).toTitledNoteWidgetEntry()
 
     override suspend fun update(noteWidget: NoteWidgetEntry) =
         noteWidgetsDao.update(noteWidget.toNoteWidgetEntity())
