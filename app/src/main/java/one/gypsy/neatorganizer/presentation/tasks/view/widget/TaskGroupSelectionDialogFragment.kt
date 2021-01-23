@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentSelectTaskGroupBinding
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.SELECTED_WIDGET_GROUP_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration.TaskGroupEntriesAdapter
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetSelectionStatus
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetSelectionViewModel
@@ -33,7 +34,7 @@ class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.dialog_fragment_select_task_group,

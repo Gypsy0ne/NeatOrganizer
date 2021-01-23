@@ -35,7 +35,8 @@ class OrganizerApplication : Application() {
                 notesViewModelModule,
                 notesDataSourceModule,
                 notesRepositoryModule,
-                notesUseCaseModule
+                notesUseCaseModule,
+                notesUtilsModule
             )
         }
     }

@@ -1,6 +1,10 @@
 package one.gypsy.neatorganizer.presentation.notes.vm
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.notes.Note
 import one.gypsy.neatorganizer.domain.interactors.notes.GetNoteById
 import one.gypsy.neatorganizer.domain.interactors.notes.UpdateNote
@@ -10,7 +14,7 @@ import one.gypsy.neatorganizer.presentation.notes.model.toNoteItem
 
 class NoteViewModel(
     noteId: Long,
-    private val getNoteByIdUseCase: GetNoteById,
+    getNoteByIdUseCase: GetNoteById,
     private val updateNoteUseCase: UpdateNote
 ) : ViewModel() {
 

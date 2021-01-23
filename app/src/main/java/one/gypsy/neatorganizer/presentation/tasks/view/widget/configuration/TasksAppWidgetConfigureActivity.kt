@@ -6,14 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.WidgetTasksConfigurationBinding
 import one.gypsy.neatorganizer.presentation.common.WidgetConfigurationActivity
+import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetCreationStatus
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetConfigurationViewModel
 import one.gypsy.neatorganizer.utils.extensions.showShortToast
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
 
 class TasksAppWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     private val widgetConfigurationViewModel: TasksWidgetConfigurationViewModel by viewModel()
+    override val widgetViewManager: WidgetRemoteViewManager by inject(named("taskRemoteViewManager"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

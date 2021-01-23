@@ -11,6 +11,8 @@ import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.domain.interactors.notes.GetNoteById
 import one.gypsy.neatorganizer.domain.interactors.notes.InsertNoteEntry
 import one.gypsy.neatorganizer.domain.interactors.notes.UpdateNote
+import one.gypsy.neatorganizer.domain.interactors.notes.widget.DeleteNoteWidgetById
+import one.gypsy.neatorganizer.domain.interactors.notes.widget.LoadTitledNoteWidget
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.SaveNoteWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.notes.view.widget.remote.NoteWidgetRemoteViewManager
@@ -19,13 +21,13 @@ import one.gypsy.neatorganizer.presentation.notes.vm.DeleteNoteViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetConfigurationViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NotesListingViewModel
-import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetRemoteViewManager
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-
-//TODO extract modules and then split di files
+// TODO extract modules and then split di files
+// introduce scopes for util classes
+// pack many modules into one
 val notesDataSourceModule = module {
     factory<NotesDataSource> { UserNotesDataSource(get()) }
     factory<NoteWidgetsDataSource> { UserNoteWidgetsDataSource(get()) }
@@ -44,9 +46,17 @@ val notesUseCaseModule = module {
     factory { UpdateNote(get()) }
     factory { SaveNoteWidget(get()) }
     factory { DeleteNoteWidgetById(get()) }
+    factory { LoadTitledNoteWidget(get()) }
 }
-val notesUitlsModule = module {
-    factory<WidgetRemoteViewManager>(named("noteRemoteViewManager")) { NoteWidgetRemoteViewManager(get(), get(), get(), get()) }
+val notesUtilsModule = module {
+    factory<WidgetRemoteViewManager>(named("noteRemoteViewManager")) {
+        NoteWidgetRemoteViewManager(
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 }
 
 val notesViewModelModule = module {
