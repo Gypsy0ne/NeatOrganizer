@@ -1,6 +1,10 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidgetLinkedGroup
@@ -35,11 +39,12 @@ class TaskWidgetSelectionViewModel(
     fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) =
         _selectedTaskGroup.postValue(selectedItem)
 
-    fun onSubmitClicked(widgetId: Int) = when (selectedTaskGroup.value) {
-        null -> _widgetSelectionStatus.postValue(
+    fun onSubmitClicked(widgetId: Int) = if (selectedTaskGroup.value == null) {
+        _widgetSelectionStatus.postValue(
             TaskWidgetSelectionStatus.TaskGroupNotSelectedStatus
         )
-        else -> submitWidgetCreation(widgetId)
+    } else {
+        submitWidgetCreation(widgetId)
     }
 
     private fun submitWidgetCreation(widgetId: Int) =

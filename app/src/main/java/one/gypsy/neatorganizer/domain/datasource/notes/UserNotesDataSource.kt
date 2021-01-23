@@ -22,8 +22,11 @@ class UserNotesDataSource(private val notesDao: NotesDao) : NotesDataSource {
             it.map { entity -> entity.toNoteEntry() }
         }
 
-    override suspend fun getNoteById(noteId: Long): LiveData<Note> =
-        Transformations.map(notesDao.getNoteByIdObservable(noteId)) {
+    @Suppress("USELESS_ELVIS")
+    override suspend fun getNoteById(noteId: Long): LiveData<Note> {
+        notesDao.getNoteById(noteId) ?: throw NullPointerException()
+        return Transformations.map(notesDao.getNoteByIdObservable(noteId)) {
             it.toNote()
         }
+    }
 }

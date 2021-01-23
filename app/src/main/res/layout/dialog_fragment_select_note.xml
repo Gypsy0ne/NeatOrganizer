@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetSelectionViewModel" />
+            type="one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetSelectionViewModel" />
 
         <variable
             name="layoutManager"
@@ -28,8 +28,8 @@
             app:layout_constraintEnd_toEndOf="@+id/dialogContainer"
             app:layout_constraintStart_toStartOf="@+id/dialogContainer"
             app:layout_constraintTop_toTopOf="@+id/dialogContainer"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/lottie_add_task_group_dialog" />
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_add_note_dialog" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dialogContainer"
@@ -49,7 +49,7 @@
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:padding="@dimen/normal_50"
-                android:text="@string/task_group_selection_title"
+                android:text="@string/note_selection_title"
                 android:textSize="@dimen/text_normal_125"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +69,10 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/taskGroups"
-                    adapter="@{tasksAdapter}"
-                    adapterData="@{viewModel.listedTaskGroups}"
-                    hasFixedSize="@{true}"
-                    layoutManager="@{layoutManager}"
+                    adapter="@{}"
+                    adapterData="@{}"
+                    hasFixedSize="@{}"
+                    layoutManager="@{}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:overScrollMode="never"

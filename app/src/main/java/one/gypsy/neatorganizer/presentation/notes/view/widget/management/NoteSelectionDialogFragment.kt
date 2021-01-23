@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.dialog_fragment_select_note.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentSelectNoteBinding
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetSelectionViewModel
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.SELECTED_WIDGET_NOTE_ID_KEY
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
@@ -38,7 +41,12 @@ class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
         return fragmentBinding.root
     }
 
-    //    private fun observeSelectionStatus() = selectionViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fragmentBinding.bindLayout()
+    }
+
+    //        private fun observeSelectionStatus() = selectionViewModel
 //        .widgetSelectionStatus
 //        .observe(this@NoteSelectionDialogFragment) {
 //            when (it) {
@@ -51,34 +59,36 @@ class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
 //            }
 //        }
 //
-//    private fun DialogFragmentSelectTaskGroupBinding.bindLayout() {
-//        viewModel = selectionViewModel
-//        lifecycleOwner = this@NoteSelectionDialogFragment
-//        bindViews()
-//    }
-//
-//    private fun DialogFragmentSelectTaskGroupBinding.bindViews() {
+    private fun DialogFragmentSelectNoteBinding.bindLayout() {
+        viewModel = selectionViewModel
+        lifecycleOwner = this@NoteSelectionDialogFragment
+        bindViews()
+    }
+
+    //
+    private fun DialogFragmentSelectNoteBinding.bindViews() {
 //        bindRecyclerView()
-//        bindButtons()
-//    }
-//
-//    private fun DialogFragmentSelectTaskGroupBinding.bindRecyclerView() {
+        bindButtons()
+    }
+
+    //
+//    private fun NoteWidgetSelectionViewModel.bindRecyclerView() {
 //        tasksAdapter = TaskGroupEntriesAdapter(selectionViewModel.selectedTaskGroup) {
 //            selectionViewModel.onTaskGroupSelected(it)
 //        }
 //        layoutManager = LinearLayoutManager(context)
 //    }
 //
-//    private fun DialogFragmentSelectTaskGroupBinding.bindButtons() {
-//        selectionCancelation.setOnClickListener { dismissWithSelectionResult(null) }
-//        selectionConfirmation.setOnClickListener { selectionViewModel.onSubmitClicked(args.widgetId) }
-//    }
-//
-//    private fun dismissWithSelectionResult(selectedGroupId: Long?) {
-//        findNavController().previousBackStackEntry?.savedStateHandle?.set(
-//            SELECTED_WIDGET_GROUP_ID_KEY,
-//            selectedGroupId
-//        )
-//        dismiss()
-//    }
+    private fun DialogFragmentSelectNoteBinding.bindButtons() {
+        selectionCancelation.setOnClickListener { dismissWithSelectionResult(null) }
+        selectionConfirmation.setOnClickListener { selectionViewModel.onSubmitClicked(args.widgetId) }
+    }
+
+    private fun dismissWithSelectionResult(selectedNoteId: Long?) {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+            SELECTED_WIDGET_NOTE_ID_KEY,
+            selectedNoteId
+        )
+        requireActivity().finish()
+    }
 }

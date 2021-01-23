@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.autofit.et.lib.AutoFitEditText
-                android:id="@+id/groupTitle"
+                android:id="@+id/barTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusedByDefault="true"

@@ -42,6 +42,7 @@
     <string name="note_widget_creation_task_warning">Select note</string>
     <string name="widget_tasks_empty_view_message">No items to show</string>
     <string name="task_group_selection_title">Select new task group</string>
+    <string name="note_selection_title">Select new note</string>
     <string name="item_person_description">Sample description goes in here</string>
     <string name="task_widget_missing_content_message">Task group is missing…\nTap to select new one!</string>
     <string name="item_note_creation_date_prefix">Created on %1$s</string>

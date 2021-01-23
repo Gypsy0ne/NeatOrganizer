@@ -12,9 +12,9 @@ import one.gypsy.neatorganizer.presentation.notes.model.NoteItem
 import one.gypsy.neatorganizer.presentation.notes.model.toNote
 import one.gypsy.neatorganizer.presentation.notes.model.toNoteItem
 
-class NoteViewModel(
+class NoteWidgetContentManageViewModel(
     noteId: Long,
-    getNoteByIdUseCase: GetNoteById,
+    private val getNoteByIdUseCase: GetNoteById,
     private val updateNoteUseCase: UpdateNote
 ) : ViewModel() {
 
@@ -24,17 +24,18 @@ class NoteViewModel(
     private val _edited = MutableLiveData(false)
     val edited: LiveData<Boolean> = _edited
 
+    private val _dataLoadingStatus = MutableLiveData<NoteManageLoadingStatus>()
+    val dataLoadingStatus: LiveData<NoteManageLoadingStatus> = _dataLoadingStatus
+
     init {
-        getNoteByIdUseCase.invoke(
-            viewModelScope,
-            GetNoteById.Params(noteId)
-        ) { it.either({}, ::onGetNoteByIdSuccess) }
+        loadNoteData(noteId)
     }
 
     private fun onGetNoteByIdSuccess(noteObservable: LiveData<Note>) {
         _note.addSource(noteObservable) {
             _note.postValue(it.toNoteItem())
         }
+        _dataLoadingStatus.postValue(NoteManageLoadingStatus.Success)
     }
 
     fun onEditIconClicked() = _edited.value?.let { editionEnabled ->
@@ -47,4 +48,19 @@ class NoteViewModel(
             UpdateNote.Params(it.copy(title = title, content = content).toNote())
         )
     }
+
+    fun loadNoteData(noteId: Long) = getNoteByIdUseCase.invoke(
+        viewModelScope,
+        GetNoteById.Params(noteId)
+    ) {
+        it.either(
+            { _dataLoadingStatus.postValue(NoteManageLoadingStatus.Error) },
+            ::onGetNoteByIdSuccess
+        )
+    }
+}
+
+sealed class NoteManageLoadingStatus {
+    object Error : NoteManageLoadingStatus()
+    object Success : NoteManageLoadingStatus()
 }

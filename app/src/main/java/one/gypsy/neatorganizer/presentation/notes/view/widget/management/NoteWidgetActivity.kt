@@ -1,35 +1,45 @@
 package one.gypsy.neatorganizer.presentation.notes.view.widget.management
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_task_widget.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.ActivityNoteWidgetBinding
-import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring
+import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetViewModel
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.MANAGED_NOTE_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.MANAGED_NOTE_INVALID_ID
-import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class NoteWidgetActivity : AppCompatActivity() {
 
+    private val noteViewModel: NoteWidgetViewModel by viewModel {
+        parametersOf(intent.getLongExtra(MANAGED_NOTE_ID_KEY, MANAGED_NOTE_INVALID_ID))
+    }
     private lateinit var viewBinding: ActivityNoteWidgetBinding
-    private lateinit var appBarMenu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpBinding()
-        setSupportActionBar(manageToolbar)
+        setUpActionBar()
         setNavigationGraph()
+        // TODO sync service
+    }
 
+    private fun setUpActionBar() {
+        setSupportActionBar(manageToolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun setUpBinding() {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_note_widget)
         viewBinding.apply {
-            //bind VM
+            viewModel = noteViewModel
             lifecycleOwner = this@NoteWidgetActivity
             executePendingBindings()
         }
@@ -46,12 +56,9 @@ class NoteWidgetActivity : AppCompatActivity() {
                 MANAGED_NOTE_INVALID_ID
             )
         )
+        putInt(
+            MANAGED_WIDGET_ID_KEY,
+            intent.getIntExtra(MANAGED_WIDGET_ID_KEY, WidgetKeyring.MANAGED_WIDGET_INVALID_ID)
+        )
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.widget_note_manage_menu, menu)
-        appBarMenu = menu
-        return true
-    }
-
 }

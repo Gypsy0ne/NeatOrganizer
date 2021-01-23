@@ -20,6 +20,7 @@ import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+// TODO whole app bar logic might be moved to manage fragment
 class TaskWidgetActivity : AppCompatActivity() {
 
     private val tasksViewModel: TasksWidgetViewModel by viewModel {
@@ -58,7 +59,8 @@ class TaskWidgetActivity : AppCompatActivity() {
     }
 
     private fun observeDataLoadingStatus() = tasksViewModel.widgetDataLoaded.observe(this) {
-        if (!it) {
+        // TODO use sealed class here
+        if (it.not()) {
             findNavController(R.id.navigationFragmentsContainer).navigateToSelectTaskGroupDialog()
         }
     }
@@ -112,7 +114,7 @@ class TaskWidgetActivity : AppCompatActivity() {
     private fun onSaveGroupTitleClicked() {
         appBarMenu.findItem(R.id.edit_group_title).isVisible = true
         appBarMenu.findItem(R.id.save_group_title).isVisible = false
-        tasksViewModel.onTitleEditionFinished(viewBinding.groupTitle.text.toString())
+        tasksViewModel.onTitleEditionFinished(viewBinding.barTitle.text.toString())
     }
 
     private fun NavController.observeNewGroupSelectionResult() =

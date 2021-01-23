@@ -22,23 +22,9 @@
             android:background="@drawable/activity_action_bar_background"
             android:elevation="@dimen/normal_25"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:menu="@menu/widget_note_manage_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.autofit.et.lib.AutoFitEditText
-                android:id="@+id/noteTitle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusedByDefault="true"
-                editionEnabled="@{}"
-                android:gravity="center_vertical"
-                android:text="@{}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_normal_100"
-                tools:text="Sample title" />
-        </androidx.appcompat.widget.Toolbar>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <fragment
             android:id="@+id/navigationFragmentsContainer"
