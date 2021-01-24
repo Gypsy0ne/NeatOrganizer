@@ -9,11 +9,11 @@
 
         <variable
             name="layoutManager"
-            type="androidx.recyclerview.widget.LinearLayoutManager" />
+            type="androidx.recyclerview.widget.GridLayoutManager" />
 
         <variable
-            name="tasksAdapter"
-            type="one.gypsy.neatorganizer.presentation.tasks.view.widget.configuration.TaskGroupEntriesAdapter" />
+            name="notesAdapter"
+            type="one.gypsy.neatorganizer.presentation.notes.view.widget.configuration.WidgetNoteEntriesAdapter" />
 
     </data>
 
@@ -69,10 +69,10 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/taskGroups"
-                    adapter="@{}"
-                    adapterData="@{}"
-                    hasFixedSize="@{}"
-                    layoutManager="@{}"
+                    adapter="@{notesAdapter}"
+                    adapterData="@{viewModel.listedNotes}"
+                    hasFixedSize="@{false}"
+                    layoutManager="@{layoutManager}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:overScrollMode="never"

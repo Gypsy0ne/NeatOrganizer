@@ -7,18 +7,25 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_fragment_select_note.*
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.DialogFragmentSelectNoteBinding
+import one.gypsy.neatorganizer.presentation.notes.view.widget.configuration.WidgetNoteEntriesAdapter
+import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetSelectionStatus
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetSelectionViewModel
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.SELECTED_WIDGET_NOTE_ID_KEY
+import one.gypsy.neatorganizer.utils.extensions.showShortToast
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
 
     private val args: NoteSelectionDialogFragmentArgs by navArgs()
-    private val selectionViewModel: NoteWidgetSelectionViewModel by viewModel()
+    private val selectionViewModel: NoteWidgetSelectionViewModel by viewModel {
+        parametersOf(args.widgetId)
+    }
     lateinit var fragmentBinding: DialogFragmentSelectNoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,51 +51,63 @@ class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding.bindLayout()
+        observeSelectionStatus()
     }
 
-    //        private fun observeSelectionStatus() = selectionViewModel
-//        .widgetSelectionStatus
-//        .observe(this@NoteSelectionDialogFragment) {
-//            when (it) {
-//                TaskWidgetSelectionStatus.TaskGroupNotSelectedStatus -> context?.showShortToast(
-//                    resources.getString(R.string.task_widget_creation_task_warning)
-//                )
-//                TaskWidgetSelectionStatus.SelectionSuccessStatus -> dismissWithSelectionResult(
-//                    selectionViewModel.selectedTaskGroup.value?.id
-//                )
-//            }
-//        }
-//
+    private fun observeSelectionStatus() = selectionViewModel
+        .widgetSelectionStatus
+        .observe(this@NoteSelectionDialogFragment) {
+            when (it) {
+                NoteWidgetSelectionStatus.NoteNotSelectedStatus -> requireContext().showShortToast(
+                    resources.getString(R.string.note_widget_creation_task_warning)
+                )
+                NoteWidgetSelectionStatus.SelectionSuccessStatus -> finishSelection(
+                    selectionViewModel.selectedNote.value?.id
+                )
+            }
+        }
+
     private fun DialogFragmentSelectNoteBinding.bindLayout() {
         viewModel = selectionViewModel
         lifecycleOwner = this@NoteSelectionDialogFragment
         bindViews()
     }
 
-    //
     private fun DialogFragmentSelectNoteBinding.bindViews() {
-//        bindRecyclerView()
+        bindRecyclerView()
         bindButtons()
     }
 
-    //
-//    private fun NoteWidgetSelectionViewModel.bindRecyclerView() {
-//        tasksAdapter = TaskGroupEntriesAdapter(selectionViewModel.selectedTaskGroup) {
-//            selectionViewModel.onTaskGroupSelected(it)
-//        }
-//        layoutManager = LinearLayoutManager(context)
-//    }
-//
-    private fun DialogFragmentSelectNoteBinding.bindButtons() {
-        selectionCancelation.setOnClickListener { dismissWithSelectionResult(null) }
-        selectionConfirmation.setOnClickListener { selectionViewModel.onSubmitClicked(args.widgetId) }
+    private fun DialogFragmentSelectNoteBinding.bindRecyclerView() {
+        notesAdapter = WidgetNoteEntriesAdapter(selectionViewModel.selectedNote) {
+            selectionViewModel.onNoteSelected(it)
+        }
+        layoutManager = GridLayoutManager(requireContext(), GRID_SPAN_COUNT)
     }
 
-    private fun dismissWithSelectionResult(selectedNoteId: Long?) {
+    private fun DialogFragmentSelectNoteBinding.bindButtons() {
+        selectionCancelation.setOnClickListener { cancelSelection(null) }
+        selectionConfirmation.setOnClickListener { selectionViewModel.onSubmitClicked() }
+    }
+
+    private fun cancelSelection(selectedNoteId: Long?) {
+        setSelectionResult(selectedNoteId)
+        requireActivity().finish()
+    }
+
+    private fun finishSelection(selectedNoteId: Long?) {
+        setSelectionResult(selectedNoteId)
+        dismiss()
+    }
+
+    private fun setSelectionResult(selectedNoteId: Long?) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(
             SELECTED_WIDGET_NOTE_ID_KEY,
             selectedNoteId
         )
-        requireActivity().finish()
+    }
+
+    private companion object {
+        const val GRID_SPAN_COUNT = 2
     }
 }

@@ -37,6 +37,7 @@ class NoteWidgetConfigurationViewModel(
         }
     }
 
+    // TODO doesnt have to be in saync tack, because it is already on background thread
     private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntry>>) {
         _listedNotes.addSource(noteEntriesObservable) {
             viewModelScope.launch {

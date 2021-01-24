@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.presentation.notes.view.widget.management
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -28,7 +29,7 @@ class NoteWidgetActivity : AppCompatActivity() {
         setUpBinding()
         setUpActionBar()
         setNavigationGraph()
-        // TODO sync service
+        startWidgetSynchronizationService()
     }
 
     private fun setUpActionBar() {
@@ -61,4 +62,14 @@ class NoteWidgetActivity : AppCompatActivity() {
             intent.getIntExtra(MANAGED_WIDGET_ID_KEY, WidgetKeyring.MANAGED_WIDGET_INVALID_ID)
         )
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, NoteWidgetSynchronizationService::class.java))
+    }
+
+    private fun startWidgetSynchronizationService() =
+        Intent(this, NoteWidgetSynchronizationService::class.java).also { intent ->
+            startService(intent)
+        }
 }

@@ -13,35 +13,45 @@ import one.gypsy.neatorganizer.presentation.common.WidgetNotifier
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.inject
+import org.koin.core.qualifier.named
 
 class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
 
     private val getAllWidgetIdsUseCase: GetAllTaskWidgetIds by inject()
-    private val widgetNotifier: WidgetNotifier by inject()
+    private val widgetNotifier: WidgetNotifier by inject(named("taskWidgetNotifier"))
     private val getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups = get()
     private val getAllTaskWidgetsUseCase: GetAllTaskWidgets = get()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         getAllSingleTaskGroupsUseCase.invoke(lifecycleScope, Unit) {
-            it.either({
-                stopSelf()
-            }, ::onGetAllSingleTaskGroupsSuccess)
+            it.either(
+                {
+                    stopSelf()
+                },
+                ::onGetAllSingleTaskGroupsSuccess
+            )
         }
         getAllTaskWidgetsUseCase.invoke(lifecycleScope, Unit) {
-            it.either({
-                stopSelf()
-            }, ::onGetAllTaskWidgetsSuccess)
+            it.either(
+                {
+                    stopSelf()
+                },
+                ::onGetAllTaskWidgetsSuccess
+            )
         }
         return START_STICKY
     }
 
     private fun onGetAllSingleTaskGroupsSuccess(taskGroupsWithTasks: LiveData<List<SingleTaskGroupWithTasks>>) =
-        taskGroupsWithTasks.observe(this, {
-            getAllWidgetIdsUseCase.invoke(lifecycleScope, Unit) {
-                it.either({}, ::updateTaskWidgets)
+        taskGroupsWithTasks.observe(
+            this,
+            {
+                getAllWidgetIdsUseCase.invoke(lifecycleScope, Unit) {
+                    it.either({}, ::updateTaskWidgets)
+                }
             }
-        })
+        )
 
     private fun updateTaskWidgets(taskWidgetIds: IntArray) {
         widgetNotifier.sendUpdateWidgetBroadcast(taskWidgetIds)
@@ -52,6 +62,4 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
             updateTaskWidgets(it.map { widget -> widget.appWidgetId }.toIntArray())
         }
     }
-
 }
-
