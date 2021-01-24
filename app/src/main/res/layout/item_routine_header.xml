@@ -72,7 +72,6 @@
             <ImageButton
                 android:id="@+id/button_item_routine_header_expand"
                 style="@style/HeaderExpandButton"
-                animateChanges="@{animateChanges}"
                 expanded="@{headerItem.expanded}"
                 android:layout_marginEnd="@dimen/normal_100"
                 android:onClick="@{expanderClickListener}"
