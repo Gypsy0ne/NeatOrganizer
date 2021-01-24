@@ -8,7 +8,7 @@
         android:id="@+id/barTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Untitled note"
+        android:hint="@string/bar_note_untitled_hint"
         android:focusedByDefault="true"
         android:gravity="center_vertical"
         android:maxLength="@integer/regular_text_length"

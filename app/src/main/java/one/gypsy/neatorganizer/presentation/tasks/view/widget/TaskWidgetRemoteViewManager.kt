@@ -45,13 +45,13 @@ class TaskWidgetRemoteViewManager(
         widgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
 
-    //TODO it uses directly domain objects turn it into model objects
+    // TODO it uses directly domain objects turn it into model objects
     private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntry) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
             setUpLoadedTaskViews(taskWidgetEntry)
         }
         widgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, remoteViews)
-        //TODO whole widget gets updated at once, try to split the process only to necessary operations
+        // TODO whole widget gets updated at once, try to split the process only to necessary operations
         widgetManager.notifyAppWidgetViewDataChanged(taskWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
@@ -70,13 +70,19 @@ class TaskWidgetRemoteViewManager(
         setTextColor(R.id.emptyView, taskWidgetEntry.widgetColor)
     }
 
-    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) = setOnClickPendingIntent(
-        R.id.widgetContainer,
-        createGroupManageActivityIntent(
-            widgetId,
-            MANAGED_GROUP_INVALID_ID
+    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) {
+        setOnClickPendingIntent(
+            R.id.widgetContainer,
+            createGroupManageActivityIntent(
+                widgetId,
+                MANAGED_GROUP_INVALID_ID
+            )
         )
-    )
+        setTextViewText(
+            R.id.noContentMessage,
+            context.getString(R.string.task_widget_missing_content_message)
+        )
+    }
 
     private fun createWidgetUpdateIntent(widgetId: Int) =
         Intent(context, TaskWidgetService::class.java).apply {

@@ -40,22 +40,17 @@ class NoteWidgetRemoteViewManager(
 
     private fun onLoadNoteWidgetFailure(appWidgetId: Int) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_no_content).apply {
-            //TODO ustawic opis pod obrazkiem z resourca
             setUpMissingNoteViews(appWidgetId)
         }
         widgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
 
-    //TODO it uses directly domain objects turn it into model objects
+    // TODO it uses directly domain objects turn it into model objects
     private fun onLoadNoteWidgetSuccess(noteWidgetEntry: TitledNoteWidgetEntry) {
-        //TODO change layout resource
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_note).apply {
             setUpLoadedNoteView(noteWidgetEntry)
         }
         widgetManager.updateAppWidget(noteWidgetEntry.appWidgetId, remoteViews)
-        //TODO whole widget gets updated at once, try to split the process only to necessary operations
-        //TODO check if it is needed
-//        widgetManager.notifyAppWidgetViewDataChanged(noteWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
     private fun RemoteViews.setUpLoadedNoteView(noteWidgetEntry: TitledNoteWidgetEntry) {
@@ -66,19 +61,24 @@ class NoteWidgetRemoteViewManager(
                 noteWidgetEntry.noteId
             )
         )
-        //TODO style the text
         setTextViewText(R.id.noteContent, noteWidgetEntry.noteContent)
         setInt(R.id.noteContent, "setBackgroundColor", noteWidgetEntry.widgetColor)
         setTextViewText(R.id.noteTitle, noteWidgetEntry.noteTitle)
     }
 
-    private fun RemoteViews.setUpMissingNoteViews(widgetId: Int) = setOnClickPendingIntent(
-        R.id.widgetContainer,
-        createNoteManageActivityIntent(
-            widgetId,
-            MANAGED_NOTE_INVALID_ID
+    private fun RemoteViews.setUpMissingNoteViews(widgetId: Int) {
+        setOnClickPendingIntent(
+            R.id.widgetContainer,
+            createNoteManageActivityIntent(
+                widgetId,
+                MANAGED_NOTE_INVALID_ID
+            )
         )
-    )
+        setTextViewText(
+            R.id.noContentMessage,
+            context.getString(R.string.note_widget_missing_content_message)
+        )
+    }
 
     private fun createNoteManageActivityIntent(appwidgetId: Int, noteId: Long) =
         PendingIntent.getActivity(

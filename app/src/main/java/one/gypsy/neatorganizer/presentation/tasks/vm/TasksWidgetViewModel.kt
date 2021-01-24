@@ -1,6 +1,10 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupById
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
@@ -52,9 +56,7 @@ class TasksWidgetViewModel(
         }
     }
 
-    fun onTitleEditionStarted() {
-        _titleEdited.value = true
-    }
+    fun onTitleEditionStarted() = _titleEdited.postValue(true)
 
     fun loadTaskGroupData(taskGroupId: Long) = getSingleTaskGroupUseCase.invoke(
         viewModelScope,

@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:focusedByDefault="true"
                 editionEnabled="@{viewModel.titleEdited}"
+                requestEdit="@{true}"
                 android:gravity="center_vertical"
                 android:text="@{viewModel.taskGroup.name}"
                 android:textColor="@color/white"
