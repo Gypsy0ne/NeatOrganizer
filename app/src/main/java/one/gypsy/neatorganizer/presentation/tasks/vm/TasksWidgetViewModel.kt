@@ -21,8 +21,8 @@ class TasksWidgetViewModel(
     private val _titleEdited = MutableLiveData(false)
     val titleEdited: LiveData<Boolean> = _titleEdited
 
-    private val _widgetDataLoaded = MutableLiveData(true)
-    val widgetDataLoaded: LiveData<Boolean> = _widgetDataLoaded
+    private val _widgetDataLoaded = MutableLiveData<TaskWidgetDataLoadingStatus>()
+    val widgetDataLoaded: LiveData<TaskWidgetDataLoadingStatus> = _widgetDataLoaded
 
     init {
         loadTaskGroupData(taskGroupId)
@@ -32,10 +32,9 @@ class TasksWidgetViewModel(
         _taskGroup.addSource(taskGroup) {
             _taskGroup.postValue(taskGroup.value)
         }
-        _widgetDataLoaded.postValue(true)
+        _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
     }
 
-    // TODO introduce 2 way data binding
     fun onTitleEditionFinished(editedTitle: String) {
         taskGroup.value?.let { taskGroup ->
             updateTaskGroupUseCase.invoke(
@@ -63,8 +62,13 @@ class TasksWidgetViewModel(
         GetSingleTaskGroupById.Params(taskGroupId)
     ) {
         it.either(
-            { _widgetDataLoaded.postValue(false) },
+            { _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingError) },
             ::onGetSingleTaskGroupSuccess
         )
     }
+}
+
+sealed class TaskWidgetDataLoadingStatus {
+    object LoadingError : TaskWidgetDataLoadingStatus()
+    object LoadingSuccess : TaskWidgetDataLoadingStatus()
 }

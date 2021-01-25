@@ -32,7 +32,7 @@ class NoteWidgetRemoteViewManager(
             loadTitledNoteWidgetUseCase.invoke(this, LoadTitledNoteWidget.Params(appWidgetId)) {
                 it.either(
                     { onLoadNoteWidgetFailure(appWidgetId) },
-                    { noteWidgetEntry -> onLoadNoteWidgetSuccess(noteWidgetEntry) }
+                    ::onLoadNoteWidgetSuccess
                 )
             }
         }

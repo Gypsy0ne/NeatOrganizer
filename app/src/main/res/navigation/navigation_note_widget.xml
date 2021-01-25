@@ -18,7 +18,8 @@
         android:id="@+id/widgetNoteSelection"
         android:name="one.gypsy.neatorganizer.presentation.notes.view.widget.management.NoteSelectionDialogFragment"
         android:label="SelectNoteDialogFragment">
-        <argument
+
+    <argument
             android:name="widgetId"
             app:argType="integer" />
     </dialog>

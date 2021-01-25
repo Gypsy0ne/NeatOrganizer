@@ -16,6 +16,7 @@ import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.SELECTED_WIDGET_GROUP_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_INVALID_ID
+import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetDataLoadingStatus
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -59,8 +60,7 @@ class TaskWidgetActivity : AppCompatActivity() {
     }
 
     private fun observeDataLoadingStatus() = tasksViewModel.widgetDataLoaded.observe(this) {
-        // TODO use sealed class here
-        if (it.not()) {
+        if (it == TaskWidgetDataLoadingStatus.LoadingError) {
             findNavController(R.id.navigationFragmentsContainer).navigateToSelectTaskGroupDialog()
         }
     }

@@ -27,7 +27,6 @@ import one.gypsy.neatorganizer.presentation.notes.vm.NoteViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetConfigurationViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetContentManageViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetSelectionViewModel
-import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NotesListingViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -79,9 +78,6 @@ val notesViewModelModule = module {
             getNoteByIdUseCase = get(),
             updateNoteUseCase = get()
         )
-    }
-    viewModel { (id: Long) ->
-        NoteWidgetViewModel()
     }
     viewModel { AddNoteViewModel(insertNoteEntryUseCase = get()) }
     viewModel {

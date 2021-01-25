@@ -14,7 +14,6 @@
         <variable
             name="notesAdapter"
             type="one.gypsy.neatorganizer.presentation.notes.view.widget.configuration.WidgetNoteEntriesAdapter" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/taskGroups"
+                    android:id="@+id/notesCollection"
                     adapter="@{notesAdapter}"
                     adapterData="@{viewModel.listedNotes}"
                     hasFixedSize="@{false}"
@@ -101,5 +100,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

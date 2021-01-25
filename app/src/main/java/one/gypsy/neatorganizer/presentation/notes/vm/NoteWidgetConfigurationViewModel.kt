@@ -5,7 +5,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
@@ -37,16 +36,10 @@ class NoteWidgetConfigurationViewModel(
         }
     }
 
-    // TODO doesnt have to be in saync tack, because it is already on background thread
     private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntry>>) {
         _listedNotes.addSource(noteEntriesObservable) {
             viewModelScope.launch {
-                val mappedEntries = viewModelScope.async {
-                    it.map { it.toNoteEntryItem() }
-                }
-                mappedEntries.await().let {
-                    _listedNotes.postValue(it)
-                }
+                _listedNotes.postValue(it.map { it.toNoteEntryItem() })
             }
         }
     }

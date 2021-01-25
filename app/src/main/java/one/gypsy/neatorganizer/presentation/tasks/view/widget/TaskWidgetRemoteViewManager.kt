@@ -32,7 +32,7 @@ class TaskWidgetRemoteViewManager(
             loadTitledTaskWidgetUseCase.invoke(this, LoadTitledTaskWidget.Params(appWidgetId)) {
                 it.either(
                     { onLoadTaskWidgetFailure(appWidgetId) },
-                    { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) }
+                    ::onLoadTaskWidgetSuccess
                 )
             }
         }
