@@ -46,7 +46,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/tasks_app_widget_info" />
+                android:resource="@xml/tasks_widget_info" />
         </receiver>
 
         <activity android:name=".presentation.tasks.view.widget.configuration.TasksAppWidgetConfigureActivity">
