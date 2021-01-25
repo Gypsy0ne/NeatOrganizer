@@ -63,10 +63,10 @@ val notesUseCaseModule = module {
 val notesUtilsModule = module {
     factory<WidgetRemoteViewManager>(named("noteRemoteViewManager")) {
         NoteWidgetRemoteViewManager(
-            get(),
-            get(),
-            get(),
-            get()
+            context = get(),
+            widgetManager = get(),
+            loadTitledNoteWidgetUseCase = get(),
+            deleteNoteWidgetUseCase = get()
         )
     }
     factory<WidgetNotifier>(named("noteWidgetNotifier")) { NoteWidgetNotifier(androidContext()) }

@@ -11,7 +11,6 @@ fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: List<T>?) {
     }
 }
 
-// TODO fixedSize and layoutManager doesnt have to set with binding adapter but in code
 @BindingAdapter(value = ["adapter", "layoutManager", "hasFixedSize"], requireAll = false)
 fun setAdapter(
     recyclerView: RecyclerView,

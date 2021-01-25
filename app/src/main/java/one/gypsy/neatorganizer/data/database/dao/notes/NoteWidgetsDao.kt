@@ -10,18 +10,22 @@ import one.gypsy.neatorganizer.data.database.entity.notes.WidgetAndNote
 @Dao
 interface NoteWidgetsDao : BaseDao<NoteWidgetEntity> {
 
+    // TODO unit test
     @Query("SELECT * FROM note_widgets WHERE widgetId = :noteWidgetId")
     fun getWidgetWithNoteById(noteWidgetId: Int): WidgetAndNote
 
     @Query("DELETE FROM note_widgets WHERE widgetId = :noteWidgetId")
     fun deleteWidgetById(noteWidgetId: Int)
 
+    // TODO unit test
     @Query("UPDATE note_widgets SET noteId = :noteId WHERE widgetId = :noteWidgetId")
     fun updateLinkedTaskGroupById(noteWidgetId: Int, noteId: Long)
 
+    // TODO unit test
     @Query("SELECT widgetId FROM note_widgets")
     fun getAllWidgetIds(): IntArray
 
+    // TODO unit test
     @Query("SELECT * FROM note_widgets")
     fun getAllNoteWidgetsObservable(): LiveData<List<NoteWidgetEntity>>
 }

@@ -90,10 +90,10 @@ val tasksUtilsModule = module {
     factory { TaskListMapper() }
     factory<WidgetRemoteViewManager>(named("taskRemoteViewManager")) {
         TaskWidgetRemoteViewManager(
-            get(),
-            get(),
-            get(),
-            get()
+            context = get(),
+            widgetManager = get(),
+            loadTitledTaskWidgetUseCase = get(),
+            removeTaskWidgetUseCase = get()
         )
     }
     factory<WidgetNotifier>(named("taskWidgetNotifier")) { TaskWidgetNotifier(androidContext()) }

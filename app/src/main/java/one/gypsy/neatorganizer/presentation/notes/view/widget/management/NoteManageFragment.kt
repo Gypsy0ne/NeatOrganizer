@@ -35,9 +35,9 @@ class NoteManageFragment : Fragment() {
     private lateinit var viewBinding: FragmentNoteManageBinding
     private lateinit var appBarMenu: Menu
     private val titleView by lazy {
-        (activity as? AppCompatActivity)?.supportActionBar?.customView?.findViewById<AutoFitEditText>(
-            R.id.barTitle
-        )
+        (activity as? AppCompatActivity)?.supportActionBar
+            ?.customView
+            ?.findViewById<AutoFitEditText>(R.id.barTitle)
     }
 
     override fun onCreateView(
@@ -78,11 +78,11 @@ class NoteManageFragment : Fragment() {
 
     private fun initTitleViewBehavior() =
         titleView?.also { titleView ->
-            noteViewModel.edited.observe(viewLifecycleOwner) {
-                setEditionEnabled(titleView, it, false)
+            noteViewModel.edited.observe(viewLifecycleOwner) { edited ->
+                setEditionEnabled(titleView, edited, false)
             }
-            noteViewModel.note.observe(viewLifecycleOwner) {
-                titleView.setText(it.title)
+            noteViewModel.note.observe(viewLifecycleOwner) { note ->
+                titleView.setText(note.title)
             }
         }
 
