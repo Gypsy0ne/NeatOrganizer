@@ -2,6 +2,7 @@ package one.gypsy.neatorganizer.data.database.entity.notes
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import one.gypsy.neatorganizer.domain.dto.notes.TitledNoteWidgetEntry
 
 class WidgetAndNote(
     @Relation(
@@ -10,12 +11,13 @@ class WidgetAndNote(
     )
     val note: NoteEntity,
     @Embedded
-    val widget: NoteEntity
+    val widget: NoteWidgetEntity
 )
 
-// fun WidgetAndTaskGroup.toTitledWidgetTaskEntry() = TitledTaskWidgetEntry(
-//    appWidgetId = this.widget.widgetId,
-//    taskGroupId = this.widget.taskGroupId,
-//    widgetColor = this.widget.color,
-//    taskGroupTitle = this.singleTaskGroup.name
-// )
+fun WidgetAndNote.toTitledNoteWidgetEntry() = TitledNoteWidgetEntry(
+    appWidgetId = this.widget.widgetId,
+    noteId = this.widget.noteId,
+    widgetColor = this.widget.color,
+    noteTitle = this.note.title,
+    noteContent = this.note.content
+)

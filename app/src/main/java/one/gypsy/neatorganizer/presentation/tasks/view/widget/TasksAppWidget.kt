@@ -7,14 +7,14 @@ import android.content.Intent
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-
+import org.koin.core.qualifier.named
 
 class TasksAppWidget : AppWidgetProvider(), KoinComponent {
 
-    private val widgetViewManager: WidgetRemoteViewManager by inject()
+    private val widgetViewManager: WidgetRemoteViewManager by inject(named("taskRemoteViewManager"))
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent?.hasExtra(WIDGET_UPDATE_IDS_KEY) == true) {
+        if (intent?.hasExtra(TASK_WIDGET_UPDATE_IDS_KEY) == true) {
             context?.let {
                 onUpdate(
                     it, AppWidgetManager.getInstance(it), intent.getIdsArray()
@@ -23,7 +23,7 @@ class TasksAppWidget : AppWidgetProvider(), KoinComponent {
         } else super.onReceive(context, intent)
     }
 
-    private fun Intent.getIdsArray() = getIntArrayExtra(WIDGET_UPDATE_IDS_KEY) ?: intArrayOf()
+    private fun Intent.getIdsArray() = getIntArrayExtra(TASK_WIDGET_UPDATE_IDS_KEY) ?: intArrayOf()
 
     override fun onUpdate(
         context: Context,
@@ -46,6 +46,6 @@ class TasksAppWidget : AppWidgetProvider(), KoinComponent {
     override fun onDisabled(context: Context) {}
 
     companion object {
-        const val WIDGET_UPDATE_IDS_KEY = "updatedTaskWidgetIds"
+        const val TASK_WIDGET_UPDATE_IDS_KEY = "updatedTaskWidgetIds"
     }
 }

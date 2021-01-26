@@ -57,7 +57,11 @@ class RoutineHeaderViewHolder(
     }
 
     private fun changeNameEditionAttributes() =
-        setEditionEnabled(itemBinding.editTextItemRoutineHeaderName, viewData.edited)
+        setEditionEnabled(
+            view = itemBinding.editTextItemRoutineHeaderName,
+            editionEnabled = viewData.edited,
+            requestEdit = true
+        )
 
     override fun setUpSwipeMenuBehavior() =
         itemBinding.swipeLayoutItemRoutineHeaderRoot.setMenuSwipeListener(object :

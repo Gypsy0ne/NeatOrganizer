@@ -62,7 +62,11 @@ class RoutineTaskViewHolder(
     }
 
     private fun changeEditionAttributes() =
-        setEditionEnabled(itemBinding.editTextItemRoutineTaskName, viewData.edited)
+        setEditionEnabled(
+            view = itemBinding.editTextItemRoutineTaskName,
+            editionEnabled = viewData.edited,
+            requestEdit = true
+        )
 
     private fun onEditionFinish() {
         itemBinding.buttonItemRoutineTaskSubmit.shrink()

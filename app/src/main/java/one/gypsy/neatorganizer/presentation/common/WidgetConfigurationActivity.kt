@@ -4,11 +4,10 @@ import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import org.koin.android.ext.android.inject
 
 abstract class WidgetConfigurationActivity : AppCompatActivity() {
 
-    protected val widgetViewManager: WidgetRemoteViewManager by inject()
+    protected abstract val widgetViewManager: WidgetRemoteViewManager
     protected var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
 
     public override fun onCreate(savedInstanceState: Bundle?) {

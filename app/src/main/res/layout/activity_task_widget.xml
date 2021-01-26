@@ -28,11 +28,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.autofit.et.lib.AutoFitEditText
-                android:id="@+id/groupTitle"
+                android:id="@+id/barTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusedByDefault="true"
                 editionEnabled="@{viewModel.titleEdited}"
+                requestEdit="@{true}"
                 android:gravity="center_vertical"
                 android:text="@{viewModel.taskGroup.name}"
                 android:textColor="@color/white"

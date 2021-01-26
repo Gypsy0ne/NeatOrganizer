@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.presentation.notes.view.widget.management.NoteWidgetSynchronizationService
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetSynchronizationService
 import one.gypsy.neatorganizer.utils.extensions.show
 import one.gypsy.neatorganizer.utils.extensions.shrink
@@ -17,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setUpActionBar()
-        startWidgetSynchronizationService()
+        startWidgetSynchronizationServices()
         setUpLocationListener()
     }
 
@@ -26,10 +27,14 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-    private fun startWidgetSynchronizationService() =
+    private fun startWidgetSynchronizationServices() {
         Intent(this, TaskWidgetSynchronizationService::class.java).also { intent ->
             startService(intent)
         }
+        Intent(this, NoteWidgetSynchronizationService::class.java).also { intent ->
+            startService(intent)
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -38,7 +43,12 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        stopServices()
+    }
+
+    private fun stopServices() {
         stopService(Intent(this, TaskWidgetSynchronizationService::class.java))
+        stopService(Intent(this, NoteWidgetSynchronizationService::class.java))
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -42,10 +42,14 @@
     <string name="note_widget_creation_task_warning">Select note</string>
     <string name="widget_tasks_empty_view_message">No items to show</string>
     <string name="task_group_selection_title">Select new task group</string>
+    <string name="note_selection_title">Select new note</string>
     <string name="item_person_description">Sample description goes in here</string>
     <string name="task_widget_missing_content_message">Task group is missing…\nTap to select new one!</string>
+    <string name="note_widget_missing_content_message">Note is missing…\nTap to select new one!</string>
     <string name="item_note_creation_date_prefix">Created on %1$s</string>
     <string name="add_routine_dialog_scheduled_days">Scheduled days</string>
     <string name="add_note_dialog_fragment_color_header">Note color</string>
     <string name="widget_note_configuration_title">Select the note</string>
+    <string name="task_widget_untitled_hint">Untitled task group</string>
+    <string name="bar_note_untitled_hint">Untitled note</string>
 </resources>

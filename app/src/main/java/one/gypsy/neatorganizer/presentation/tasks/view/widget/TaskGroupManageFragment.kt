@@ -15,6 +15,9 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTaskGroupManageBinding
 import one.gypsy.neatorganizer.presentation.tasks.view.GroupedTasksAdapter
 import one.gypsy.neatorganizer.presentation.tasks.view.TaskSubItemClickListener
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.SELECTED_WIDGET_GROUP_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetContentManageViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

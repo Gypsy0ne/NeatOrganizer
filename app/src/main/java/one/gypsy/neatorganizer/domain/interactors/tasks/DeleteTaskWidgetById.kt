@@ -7,8 +7,8 @@ import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure
 
-class DeleteTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<Unit, DeleteTaskWidget.Params>() {
+class DeleteTaskWidgetById(private val taskWidgetsRepository: TaskWidgetsRepository) :
+    BaseUseCase<Unit, DeleteTaskWidgetById.Params>() {
 
     override suspend fun run(params: Params): Either<Failure, Unit> {
         return try {

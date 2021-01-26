@@ -60,7 +60,11 @@ class TaskHeaderViewHolder(
     }
 
     private fun changeNameEditionAttributes() =
-        setEditionEnabled(itemBinding.editTextItemTaskHeaderName, viewData.edited)
+        setEditionEnabled(
+            view = itemBinding.editTextItemTaskHeaderName,
+            editionEnabled = viewData.edited,
+            requestEdit = true
+        )
 
     override fun setUpSwipeMenuBehavior() =
         itemBinding.swipeLayoutItemTaskHeaderRoot.setMenuSwipeListener(object :

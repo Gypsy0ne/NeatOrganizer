@@ -177,7 +177,7 @@
         <item name="android:layout_height">@dimen/normal_400</item>
         <item name="android:layout_margin">@dimen/normal_100</item>
         <item name="android:src">@drawable/ic_check_white_24</item>
-        <item name="drawableTint">@color/dark_yellow</item>
+        <item name="android:tint">@color/dark_yellow</item>
         <item name="android:background">@drawable/bg_edition_submit_button</item>
     </style>
 

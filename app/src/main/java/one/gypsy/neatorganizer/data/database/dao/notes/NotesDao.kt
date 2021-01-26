@@ -18,6 +18,10 @@ interface NotesDao : BaseDao<NoteEntity> {
     @Query("SELECT * FROM notes WHERE id = :noteId")
     fun getNoteByIdObservable(noteId: Long): LiveData<NoteEntity>
 
+    // TODO unit test
+    @Query("SELECT * FROM notes WHERE id = :noteId")
+    fun getNoteById(noteId: Long): NoteEntity
+
     @Query("DELETE FROM notes WHERE id = :noteId")
     fun deleteNoteById(noteId: Long)
 }

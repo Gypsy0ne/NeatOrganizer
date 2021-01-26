@@ -62,7 +62,11 @@ class TaskSubItemViewHolder(
     }
 
     private fun changeEditionAttributes() =
-        setEditionEnabled(itemBinding.editTextItemTaskName, viewData.edited)
+        setEditionEnabled(
+            view = itemBinding.editTextItemTaskName,
+            editionEnabled = viewData.edited,
+            requestEdit = true
+        )
 
     private fun onEditionFinish() {
         itemBinding.buttonItemTaskSubmit.shrink()

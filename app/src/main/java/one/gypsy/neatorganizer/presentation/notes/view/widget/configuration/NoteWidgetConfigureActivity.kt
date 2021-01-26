@@ -6,14 +6,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.WidgetNoteConfigurationBinding
 import one.gypsy.neatorganizer.presentation.common.WidgetConfigurationActivity
+import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetConfigurationViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetCreationStatus
 import one.gypsy.neatorganizer.utils.extensions.showShortToast
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
 
 class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     private val viewModel: NoteWidgetConfigurationViewModel by viewModel()
+    override val widgetViewManager: WidgetRemoteViewManager by inject(named("noteRemoteViewManager"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

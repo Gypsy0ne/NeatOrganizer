@@ -106,7 +106,7 @@ class WidgetAndTaskGroupTest : DatabaseTest() {
         )
 
         // when
-        val domainWidgetAndGroup = taskWidget.toTitledWidgetTaskEntry()
+        val domainWidgetAndGroup = taskWidget.toTitledTaskWidgetEntry()
 
         // then
         with(domainWidgetAndGroup) {

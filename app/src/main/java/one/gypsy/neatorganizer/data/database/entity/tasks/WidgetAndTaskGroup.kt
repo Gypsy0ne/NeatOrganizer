@@ -14,7 +14,7 @@ class WidgetAndTaskGroup(
     val widget: TaskWidgetEntity
 )
 
-fun WidgetAndTaskGroup.toTitledWidgetTaskEntry() = TitledTaskWidgetEntry(
+fun WidgetAndTaskGroup.toTitledTaskWidgetEntry() = TitledTaskWidgetEntry(
     appWidgetId = this.widget.widgetId,
     taskGroupId = this.widget.taskGroupId,
     widgetColor = this.widget.color,

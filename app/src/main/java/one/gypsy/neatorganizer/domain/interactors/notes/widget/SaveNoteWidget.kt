@@ -19,7 +19,7 @@ class SaveNoteWidget(private val noteWidgetsRepository: NoteWidgetsRepository) :
             }
         } catch (exp: Exception) {
             Either.Left(
-                UpdateNoteWidgetFailure(
+                SaveNoteWidgetFailure(
                     exp
                 )
             )
@@ -27,5 +27,5 @@ class SaveNoteWidget(private val noteWidgetsRepository: NoteWidgetsRepository) :
     }
 
     data class Params(val noteWidget: NoteWidgetEntry)
-    data class UpdateNoteWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
+    data class SaveNoteWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

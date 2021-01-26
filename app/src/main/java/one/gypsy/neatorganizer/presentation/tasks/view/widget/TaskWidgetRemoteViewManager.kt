@@ -13,15 +13,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidget
+import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidgetById
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
 
 class TaskWidgetRemoteViewManager(
     private val context: Context,
     private val widgetManager: AppWidgetManager,
     private val loadTitledTaskWidgetUseCase: LoadTitledTaskWidget,
-    private val removeTaskWidgetUseCase: DeleteTaskWidget
+    private val removeTaskWidgetUseCase: DeleteTaskWidgetById
 ) : WidgetRemoteViewManager {
 
     override fun updateWidget(appWidgetId: Int) {
@@ -29,30 +32,32 @@ class TaskWidgetRemoteViewManager(
             loadTitledTaskWidgetUseCase.invoke(this, LoadTitledTaskWidget.Params(appWidgetId)) {
                 it.either(
                     { onLoadTaskWidgetFailure(appWidgetId) },
-                    { taskWidgetEntry -> onLoadTaskWidgetSuccess(taskWidgetEntry) })
+                    ::onLoadTaskWidgetSuccess
+                )
             }
         }
     }
 
     private fun onLoadTaskWidgetFailure(appWidgetId: Int) {
-        val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks_no_content).apply {
+        val remoteViews = RemoteViews(context.packageName, R.layout.widget_no_content).apply {
             setUpMissingGroupViews(appWidgetId)
         }
         widgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
 
+    // TODO it uses directly domain objects turn it into model objects
     private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntry) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
             setUpLoadedTaskViews(taskWidgetEntry)
         }
         widgetManager.updateAppWidget(taskWidgetEntry.appWidgetId, remoteViews)
-        //TODO whole widget gets updated at once, try to split the process only to necessary operations
+        // TODO whole widget gets updated at once, try to split the process only to necessary operations
         widgetManager.notifyAppWidgetViewDataChanged(taskWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
     private fun RemoteViews.setUpLoadedTaskViews(taskWidgetEntry: TitledTaskWidgetEntry) {
         setOnClickPendingIntent(
-            R.id.tasksWidgetContainer,
+            R.id.widgetContainer,
             createGroupManageActivityIntent(
                 taskWidgetEntry.appWidgetId,
                 taskWidgetEntry.taskGroupId
@@ -65,13 +70,19 @@ class TaskWidgetRemoteViewManager(
         setTextColor(R.id.emptyView, taskWidgetEntry.widgetColor)
     }
 
-    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) = setOnClickPendingIntent(
-        R.id.tasksWidgetContainer,
-        createGroupManageActivityIntent(
-            widgetId,
-            MANAGED_GROUP_INVALID_ID
+    private fun RemoteViews.setUpMissingGroupViews(widgetId: Int) {
+        setOnClickPendingIntent(
+            R.id.widgetContainer,
+            createGroupManageActivityIntent(
+                widgetId,
+                MANAGED_GROUP_INVALID_ID
+            )
         )
-    )
+        setTextViewText(
+            R.id.noContentMessage,
+            context.getString(R.string.task_widget_missing_content_message)
+        )
+    }
 
     private fun createWidgetUpdateIntent(widgetId: Int) =
         Intent(context, TaskWidgetService::class.java).apply {
@@ -96,7 +107,7 @@ class TaskWidgetRemoteViewManager(
 
     override fun deleteWidget(appWidgetId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            removeTaskWidgetUseCase.invoke(this, DeleteTaskWidget.Params(appWidgetId))
+            removeTaskWidgetUseCase.invoke(this, DeleteTaskWidgetById.Params(appWidgetId))
         }
     }
 }
