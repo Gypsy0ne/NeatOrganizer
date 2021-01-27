@@ -2,15 +2,19 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.autofit.et.lib.AutoFitEditText
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.FragmentTaskGroupManageBinding
 import one.gypsy.neatorganizer.presentation.tasks.view.GroupedTasksAdapter
@@ -33,6 +37,12 @@ class TaskGroupManageFragment : Fragment() {
         onEditionSubmitClick = { tasksViewModel.onTaskUpdate(it) },
         onRemoveClick = { tasksViewModel.onRemove(it) }
     )
+    private lateinit var appBarMenu: Menu
+    private val titleView by lazy {
+        (activity as? AppCompatActivity)?.supportActionBar
+            ?.customView
+            ?.findViewById<AutoFitEditText>(R.id.barTitle)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,12 +78,30 @@ class TaskGroupManageFragment : Fragment() {
         executePendingBindings()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.add_entry -> {
-            findNavController(this).navigateToAddTaskDialog()
-            true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.widget_list_manage_menu, menu)
+        appBarMenu = menu
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.edit_group_title -> onEditGroupTitleClicked()
+            R.id.save_group_title -> onSaveGroupTitleClicked()
+            R.id.add_entry -> findNavController(this).navigateToAddTaskDialog()
         }
-        else -> false
+        return true
+    }
+
+    private fun onEditGroupTitleClicked() {
+        appBarMenu.findItem(R.id.edit_group_title).isVisible = false
+        appBarMenu.findItem(R.id.save_group_title).isVisible = true
+//        tasksViewModel.onTitleEditionStarted()
+    }
+
+    private fun onSaveGroupTitleClicked() {
+        appBarMenu.findItem(R.id.edit_group_title).isVisible = true
+        appBarMenu.findItem(R.id.save_group_title).isVisible = false
+//        tasksViewModel.onTitleEditionFinished(viewBinding.barTitle.text.toString())
     }
 
     private fun NavController.navigateToAddTaskDialog() =

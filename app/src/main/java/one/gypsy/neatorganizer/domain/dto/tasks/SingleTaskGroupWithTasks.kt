@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.dto.tasks
 
 import one.gypsy.neatorganizer.data.database.entity.Timestamped
 import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
-
+// TODO make it as composition object which holds Entries and Group in one place
 data class SingleTaskGroupWithTasks(
     val name: String,
     var id: Long = 0,

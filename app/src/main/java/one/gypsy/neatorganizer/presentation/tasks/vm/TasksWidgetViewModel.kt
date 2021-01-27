@@ -7,19 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupById
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
 
 class TasksWidgetViewModel(
     taskGroupId: Long,
     private val getSingleTaskGroupUseCase: GetSingleTaskGroupById,
-    private val updateTaskGroupUseCase: UpdateSingleTaskGroup,
 ) : ViewModel() {
 
     private val _taskGroup: MediatorLiveData<SingleTaskGroup> = MediatorLiveData()
     val taskGroup: LiveData<SingleTaskGroup> = _taskGroup
-
-    private val _titleEdited = MutableLiveData(false)
-    val titleEdited: LiveData<Boolean> = _titleEdited
 
     private val _widgetDataLoaded = MutableLiveData<TaskWidgetDataLoadingStatus>()
     val widgetDataLoaded: LiveData<TaskWidgetDataLoadingStatus> = _widgetDataLoaded
@@ -34,28 +29,6 @@ class TasksWidgetViewModel(
         }
         _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
     }
-
-    fun onTitleEditionFinished(editedTitle: String) {
-        taskGroup.value?.let { taskGroup ->
-            updateTaskGroupUseCase.invoke(
-                viewModelScope,
-                UpdateSingleTaskGroup.Params(
-                    taskGroup.copy(
-                        name = editedTitle,
-                        id = taskGroup.id,
-                        createdAt = taskGroup.createdAt
-                    )
-                )
-            ) {
-                it.either(
-                    {},
-                    { _titleEdited.postValue(false) }
-                )
-            }
-        }
-    }
-
-    fun onTitleEditionStarted() = _titleEdited.postValue(true)
 
     fun loadTaskGroupData(taskGroupId: Long) = getSingleTaskGroupUseCase.invoke(
         viewModelScope,

@@ -2,8 +2,6 @@ package one.gypsy.neatorganizer.presentation.tasks.view.widget
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -28,7 +26,6 @@ class TaskWidgetActivity : AppCompatActivity() {
         parametersOf(intent.getLongExtra(MANAGED_GROUP_ID_KEY, MANAGED_GROUP_INVALID_ID))
     }
     private lateinit var viewBinding: ActivityTaskWidgetBinding
-    private lateinit var appBarMenu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,38 +81,6 @@ class TaskWidgetActivity : AppCompatActivity() {
         Intent(this, TaskWidgetSynchronizationService::class.java).also { intent ->
             startService(intent)
         }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.widget_list_manage_menu, menu)
-        appBarMenu = menu
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.edit_group_title -> {
-                onEditGroupTitleClicked()
-                true
-            }
-            R.id.save_group_title -> {
-                onSaveGroupTitleClicked()
-                true
-            }
-            else -> false
-        }
-    }
-
-    private fun onEditGroupTitleClicked() {
-        appBarMenu.findItem(R.id.edit_group_title).isVisible = false
-        appBarMenu.findItem(R.id.save_group_title).isVisible = true
-        tasksViewModel.onTitleEditionStarted()
-    }
-
-    private fun onSaveGroupTitleClicked() {
-        appBarMenu.findItem(R.id.edit_group_title).isVisible = true
-        appBarMenu.findItem(R.id.save_group_title).isVisible = false
-        tasksViewModel.onTitleEditionFinished(viewBinding.barTitle.text.toString())
-    }
 
     private fun NavController.observeNewGroupSelectionResult() =
         currentBackStackEntry
