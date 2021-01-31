@@ -138,7 +138,7 @@ class TaskGroupManageFragment : Fragment() {
     }
 
     private fun NavController.navigateToAddTaskDialog() =
-        arguments?.getLong(MANAGED_GROUP_ID_KEY)?.let {
+        tasksViewModel.taskGroup.value?.id?.let {
             navigate(
                 TaskGroupManageFragmentDirections
                     .widgetTaskGroupManageToSingleTaskAddition(it)
