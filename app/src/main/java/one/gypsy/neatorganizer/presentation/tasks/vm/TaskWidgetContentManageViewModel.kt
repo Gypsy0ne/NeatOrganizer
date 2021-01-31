@@ -22,7 +22,7 @@ import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListSubItem
 
 class TaskWidgetContentManageViewModel(
     taskGroupId: Long,
-    private val getAllSingleTasksUseCase: GetSingleTaskGroupWithTasksById,
+    private val getSingleTaskGroupWithTasksUseCase: GetSingleTaskGroupWithTasksById,
     private val updateSingleTaskUseCase: UpdateSingleTask,
     private val removeSingleTaskUseCase: RemoveSingleTask,
     private val updateTaskGroupUseCase: UpdateSingleTaskGroup
@@ -42,19 +42,21 @@ class TaskWidgetContentManageViewModel(
     private val _titleEdited = MutableLiveData(false)
     val titleEdited: LiveData<Boolean> = _titleEdited
 
+    private val _widgetDataLoaded = MutableLiveData<TaskWidgetDataLoadingStatus>()
+    val widgetDataLoaded: LiveData<TaskWidgetDataLoadingStatus> = _widgetDataLoaded
+
     init {
-        loadTasksData(taskGroupId)
+        loadTaskGroupWithTasks(taskGroupId)
     }
 
-    private fun onGetAllSingleTasksSuccess(taskGroup: LiveData<SingleTaskGroupWithTasks>) {
-        // introduce distinction cause listed tasks will get triggered on title change
-        _listedTasks.addSource(taskGroup) {
-            _listedTasks.postValue(taskGroup.value?.tasks)
+    private fun onGetAllSingleTasksSuccess(taskGroupWithTasks: LiveData<SingleTaskGroupWithTasks>) {
+        _listedTasks.addSource(taskGroupWithTasks) {
+            _listedTasks.postValue(taskGroupWithTasks.value?.tasks)
         }
-        // this is the place where dto model should be composition   
-        _taskGroup.addSource(taskGroup) {
-            _listedTasks.postValue(taskGroup.value)
+        _taskGroup.addSource(taskGroupWithTasks) {
+            _taskGroup.postValue(taskGroupWithTasks.value?.taskGroup)
         }
+        _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
     }
 
     fun onTitleEditionFinished(editedTitle: String) {
@@ -71,13 +73,11 @@ class TaskWidgetContentManageViewModel(
             ) {
                 it.either(
                     {},
-                    { _titleEdited.postValue(false) }
+                    {}
                 )
             }
         }
     }
-
-    fun onTitleEditionStarted() = _titleEdited.postValue(true)
 
     fun onTaskUpdate(taskItem: TaskListItem.TaskListSubItem) = updateSingleTaskUseCase.invoke(
         viewModelScope,
@@ -89,8 +89,24 @@ class TaskWidgetContentManageViewModel(
         RemoveSingleTask.Params(taskItem.toSingleTask())
     )
 
-    fun loadTasksData(taskGroupId: Long) = getAllSingleTasksUseCase.invoke(
+    fun onEditIconClicked() = _titleEdited.value?.let { editionEnabled ->
+        _titleEdited.postValue(!editionEnabled)
+    }
+
+    fun loadTaskGroupWithTasks(taskGroupId: Long) = getSingleTaskGroupWithTasksUseCase.invoke(
         viewModelScope,
         GetSingleTaskGroupWithTasksById.Params(taskGroupId)
-    ) { it.either({}, ::onGetAllSingleTasksSuccess) }
+    ) {
+        it.either(
+            {
+                _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingError)
+            },
+            ::onGetAllSingleTasksSuccess
+        )
+    }
+}
+
+sealed class TaskWidgetDataLoadingStatus {
+    object LoadingError : TaskWidgetDataLoadingStatus()
+    object LoadingSuccess : TaskWidgetDataLoadingStatus()
 }

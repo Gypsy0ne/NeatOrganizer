@@ -17,6 +17,9 @@ class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTask
     override suspend fun addSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         singleTaskGroupsDao.insert(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
+    override suspend fun addSingleTaskGroup(singleTaskGroup: SingleTaskGroup) =
+        singleTaskGroupsDao.insert(singleTaskGroup.toSingleTaskGroupEntity())
+
     override suspend fun removeSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         singleTaskGroupsDao.delete(singleTaskGroupWithTasks.toSingleTaskGroupEntity())
 
@@ -37,10 +40,13 @@ class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTask
             }
         }
 
-    override suspend fun getSingleTaskGroupWithTasksById(taskGroupId: Long): LiveData<SingleTaskGroupWithTasks> =
-        Transformations.map(singleTaskGroupsDao.getGroupWithSingleTasksById(taskGroupId)) {
+    @Suppress("USELESS_ELVIS")
+    override suspend fun getSingleTaskGroupWithTasksById(taskGroupId: Long): LiveData<SingleTaskGroupWithTasks> {
+        singleTaskGroupsDao.getSingleTaskGroupById(taskGroupId) ?: throw NullPointerException()
+        return Transformations.map(singleTaskGroupsDao.getGroupWithSingleTasksById(taskGroupId)) {
             it.toSingleTaskGroupWithTasks()
         }
+    }
 
     @Suppress("USELESS_ELVIS")
     override suspend fun getSingleTaskGroupById(taskGroupId: Long): LiveData<SingleTaskGroup> {

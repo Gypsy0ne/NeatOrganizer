@@ -9,8 +9,8 @@ import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.databinding.ActivityNoteWidgetBinding
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.MANAGED_NOTE_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.MANAGED_NOTE_INVALID_ID
-import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
+import one.gypsy.neatorganizer.presentation.tasks.view.widget.WidgetKeyring.MANAGED_WIDGET_INVALID_ID
 
 class NoteWidgetActivity : AppCompatActivity() {
 
@@ -42,7 +42,7 @@ class NoteWidgetActivity : AppCompatActivity() {
         )
         putInt(
             MANAGED_WIDGET_ID_KEY,
-            intent.getIntExtra(MANAGED_WIDGET_ID_KEY, WidgetKeyring.MANAGED_WIDGET_INVALID_ID)
+            intent.getIntExtra(MANAGED_WIDGET_ID_KEY, MANAGED_WIDGET_INVALID_ID)
         )
     }
 

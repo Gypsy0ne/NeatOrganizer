@@ -9,6 +9,9 @@ class SingleTaskGroupsRepository(private val dataSource: SingleTaskGroupsDataSou
     suspend fun addSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         dataSource.addSingleTaskGroupWithTasks(singleTaskGroupWithTasks)
 
+    suspend fun addSingleTaskGroup(singleTaskGroup: SingleTaskGroup) =
+        dataSource.addSingleTaskGroup(singleTaskGroup)
+
     suspend fun removeSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
         dataSource.removeSingleTaskGroupWithTasks(singleTaskGroupWithTasks)
 
@@ -29,5 +32,4 @@ class SingleTaskGroupsRepository(private val dataSource: SingleTaskGroupsDataSou
         dataSource.getSingleTaskGroupById(taskGroupId)
 
     suspend fun removeSingleTaskGroupById(taskGroupId: Long) = dataSource.removeById(taskGroupId)
-
 }

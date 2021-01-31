@@ -23,7 +23,7 @@ class TaskListMapper {
     private fun wasHeaderExpanded(
         oldHeaders: List<TaskListItem.TaskListHeader>,
         taskGroupWithTasks: SingleTaskGroupWithTasks
-    ) = oldHeaders.firstOrNull { it.id == taskGroupWithTasks.id }?.expanded ?: false
+    ) = oldHeaders.firstOrNull { it.id == taskGroupWithTasks.taskGroup.id }?.expanded ?: false
 
     private fun mapTaskGroupToTaskListItems(
         taskGroupWithTasks: SingleTaskGroupWithTasks,
@@ -73,7 +73,6 @@ class TaskListMapper {
         headerId: Long
     ) = listItem is TaskListItem.TaskListSubItem && headerId == listItem.groupId
 
-
     fun updateExpansion(headerItemId: Long, oldList: List<TaskListItem>?) =
         oldList?.map { negateExpandedIfHeader(it, headerItemId) }
 
@@ -85,5 +84,4 @@ class TaskListMapper {
     } else {
         listedItem
     }
-
 }
