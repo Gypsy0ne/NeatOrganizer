@@ -40,10 +40,9 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
                 ::onGetAllTaskWidgetsSuccess
             )
         }
-        return START_STICKY
+        return START_REDELIVER_INTENT
     }
 
-    // TODO can use ids from fetched widget entries
     private fun onGetAllSingleTaskGroupsSuccess(taskGroupsWithTasks: LiveData<List<SingleTaskGroupWithTasks>>) =
         taskGroupsWithTasks.observe(
             this,

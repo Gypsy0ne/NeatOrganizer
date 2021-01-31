@@ -14,10 +14,8 @@ data class GroupWithSingleTasks(
 )
 
 fun GroupWithSingleTasks.toSingleTaskGroupWithTasks() = SingleTaskGroupWithTasks(
-    name = this.group.name,
-    id = this.group.id,
+    taskGroup = group.toSingleTaskGroup(),
     tasks = this.tasks.map { it.toSingleTaskEntry() },
-    createdAt = group.createdAt
 )
 
 fun GroupWithSingleTasks.toSingleTaskGroupEntry() = SingleTaskGroupEntry(

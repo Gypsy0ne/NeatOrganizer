@@ -43,7 +43,6 @@ import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetContentManageView
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetSelectionViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetConfigurationViewModel
-import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -109,17 +108,28 @@ val tasksViewModelModule = module {
             updateSingleTaskUseCase = get()
         )
     }
-    viewModel { TaskWidgetSelectionViewModel(get(), get()) }
-    viewModel { (id: Long) -> TaskWidgetContentManageViewModel(id, get(), get(), get()) }
-    viewModel { RemoveTaskGroupViewModel(get()) }
-    viewModel { (id: Long) -> AddTaskViewModel(get(), id) }
-    viewModel { AddTaskGroupViewModel(get()) }
-    viewModel { TasksWidgetConfigurationViewModel(get(), get()) }
-    viewModel { (taskGroupId: Long) ->
-        TasksWidgetViewModel(
-            taskGroupId = taskGroupId,
-            get(),
-            get()
+    viewModel {
+        TaskWidgetSelectionViewModel(
+            getAllTaskGroupEntriesUseCase = get(),
+            widgetUpdateUseCase = get()
+        )
+    }
+    viewModel { (id: Long) ->
+        TaskWidgetContentManageViewModel(
+            taskGroupId = id,
+            getSingleTaskGroupWithTasksUseCase = get(),
+            updateSingleTaskUseCase = get(),
+            removeSingleTaskUseCase = get(),
+            updateTaskGroupUseCase = get()
+        )
+    }
+    viewModel { RemoveTaskGroupViewModel(removeTaskGroupByIdUseCase = get()) }
+    viewModel { (id: Long) -> AddTaskViewModel(addSingleTaskUseCase = get(), groupId = id) }
+    viewModel { AddTaskGroupViewModel(addTaskGroupUseCase = get()) }
+    viewModel {
+        TasksWidgetConfigurationViewModel(
+            getAllTaskGroupEntriesUseCase = get(),
+            widgetCreationUseCase = get()
         )
     }
 }

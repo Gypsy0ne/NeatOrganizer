@@ -62,7 +62,7 @@ class NoteDetailsFragment : SectionFragment(R.menu.note_details_menu) {
     private fun setTitleBarCustomView() =
         (activity as? AppCompatActivity)?.supportActionBar?.apply {
             setDisplayShowCustomEnabled(true)
-            setCustomView(R.layout.app_bar_note_details)
+            setCustomView(R.layout.editable_title_bar)
         }
 
     private fun initTitleViewBehavior() =

@@ -2,6 +2,7 @@ package one.gypsy.neatorganizer.presentation.tasks.model
 
 import one.gypsy.neatorganizer.data.database.entity.Timestamped
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.presentation.common.listing.Editable
 import one.gypsy.neatorganizer.presentation.common.listing.HeaderItem
@@ -35,10 +36,8 @@ sealed class TaskListItem(
 fun TaskListItem.TaskListHeader.toSingleTaskGroup(
     taskEntries: List<SingleTaskEntry> = emptyList()
 ) = SingleTaskGroupWithTasks(
-    name = this.title,
-    id = this.id,
-    tasks = taskEntries,
-    createdAt = this.createdAt
+    taskGroup = SingleTaskGroup(id = this.id, name = this.title, createdAt = this.createdAt),
+    tasks = taskEntries
 )
 
 fun TaskListItem.TaskListSubItem.toSingleTask() =

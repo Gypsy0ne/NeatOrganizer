@@ -1,37 +1,80 @@
 package one.gypsy.neatorganizer.presentation.tasks.vm
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.liveData
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTasksByGroupIdObservable
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupWithTasksById
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
+import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
 import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListSubItem
 
 class TaskWidgetContentManageViewModel(
     taskGroupId: Long,
-    private val getAllSingleTasksUseCase: GetAllSingleTasksByGroupIdObservable,
+    private val getSingleTaskGroupWithTasksUseCase: GetSingleTaskGroupWithTasksById,
     private val updateSingleTaskUseCase: UpdateSingleTask,
-    private val removeSingleTaskUseCase: RemoveSingleTask
+    private val removeSingleTaskUseCase: RemoveSingleTask,
+    private val updateTaskGroupUseCase: UpdateSingleTaskGroup
 ) : ViewModel() {
 
+    private val _taskGroup = MediatorLiveData<SingleTaskGroup>()
+    val taskGroup: LiveData<SingleTaskGroup> = _taskGroup
+
     private val _listedTasks = MediatorLiveData<List<SingleTaskEntry>>()
-    val listedTasks: LiveData<List<TaskListItem.TaskListSubItem>> = _listedTasks.switchMap {
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(it.map { it.toTaskListSubItem() })
+    val listedTasks: LiveData<List<TaskListItem.TaskListSubItem>> =
+        _listedTasks.distinctUntilChanged().switchMap {
+            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+                emit(it.map { it.toTaskListSubItem() })
+            }
         }
-    }
+
+    private val _titleEdited = MutableLiveData(false)
+    val titleEdited: LiveData<Boolean> = _titleEdited
+
+    private val _widgetDataLoaded = MutableLiveData<TaskWidgetDataLoadingStatus>()
+    val widgetDataLoaded: LiveData<TaskWidgetDataLoadingStatus> = _widgetDataLoaded
 
     init {
-        loadTasksData(taskGroupId)
+        loadTaskGroupWithTasks(taskGroupId)
     }
 
-    private fun onGetAllSingleTasksSuccess(tasks: LiveData<List<SingleTaskEntry>>) =
-        _listedTasks.addSource(tasks) {
-            _listedTasks.postValue(tasks.value)
+    private fun onGetAllSingleTasksSuccess(taskGroupWithTasks: LiveData<SingleTaskGroupWithTasks>) {
+        _listedTasks.addSource(taskGroupWithTasks) {
+            _listedTasks.postValue(taskGroupWithTasks.value?.tasks)
         }
+        _taskGroup.addSource(taskGroupWithTasks) {
+            _taskGroup.postValue(taskGroupWithTasks.value?.taskGroup)
+        }
+        _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
+    }
+
+    fun onTitleEditionFinished(editedTitle: String) {
+        taskGroup.value?.let { taskGroup ->
+            updateTaskGroupUseCase.invoke(
+                viewModelScope,
+                UpdateSingleTaskGroup.Params(
+                    taskGroup.copy(
+                        name = editedTitle,
+                        id = taskGroup.id,
+                        createdAt = taskGroup.createdAt
+                    )
+                )
+            ) {
+                it.either({}, {})
+            }
+        }
+    }
 
     fun onTaskUpdate(taskItem: TaskListItem.TaskListSubItem) = updateSingleTaskUseCase.invoke(
         viewModelScope,
@@ -43,8 +86,24 @@ class TaskWidgetContentManageViewModel(
         RemoveSingleTask.Params(taskItem.toSingleTask())
     )
 
-    fun loadTasksData(taskGroupId: Long) = getAllSingleTasksUseCase.invoke(
+    fun onEditIconClicked() = _titleEdited.value?.let { editionEnabled ->
+        _titleEdited.postValue(!editionEnabled)
+    }
+
+    fun loadTaskGroupWithTasks(taskGroupId: Long) = getSingleTaskGroupWithTasksUseCase.invoke(
         viewModelScope,
-        GetAllSingleTasksByGroupIdObservable.Params(taskGroupId)
-    ) { it.either({}, ::onGetAllSingleTasksSuccess) }
+        GetSingleTaskGroupWithTasksById.Params(taskGroupId)
+    ) {
+        it.either(
+            {
+                _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingError)
+            },
+            ::onGetAllSingleTasksSuccess
+        )
+    }
+}
+
+sealed class TaskWidgetDataLoadingStatus {
+    object LoadingError : TaskWidgetDataLoadingStatus()
+    object LoadingSuccess : TaskWidgetDataLoadingStatus()
 }

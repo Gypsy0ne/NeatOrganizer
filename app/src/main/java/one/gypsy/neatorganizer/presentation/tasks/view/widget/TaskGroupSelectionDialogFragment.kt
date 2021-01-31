@@ -57,7 +57,7 @@ class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
                 TaskWidgetSelectionStatus.TaskGroupNotSelectedStatus -> context?.showShortToast(
                     resources.getString(R.string.task_widget_creation_task_warning)
                 )
-                TaskWidgetSelectionStatus.SelectionSuccessStatus -> dismissWithSelectionResult(
+                TaskWidgetSelectionStatus.SelectionSuccessStatus -> onSelectionSuccess(
                     selectionViewModel.selectedTaskGroup.value?.id
                 )
             }
@@ -82,15 +82,24 @@ class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun DialogFragmentSelectTaskGroupBinding.bindButtons() {
-        selectionCancelation.setOnClickListener { dismissWithSelectionResult(null) }
+        selectionCancelation.setOnClickListener { onCancelClicked() }
         selectionConfirmation.setOnClickListener { selectionViewModel.onSubmitClicked(args.widgetId) }
     }
 
-    private fun dismissWithSelectionResult(selectedGroupId: Long?) {
+    private fun setSelectionResult(selectedGroupId: Long?) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(
             SELECTED_WIDGET_GROUP_ID_KEY,
             selectedGroupId
         )
+    }
+
+    private fun onSelectionSuccess(selectedGroupId: Long?) {
+        setSelectionResult(selectedGroupId)
         dismiss()
+    }
+
+    private fun onCancelClicked() {
+        setSelectionResult(null)
+        requireActivity().finish()
     }
 }
