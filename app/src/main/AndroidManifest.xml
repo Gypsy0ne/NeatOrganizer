@@ -69,8 +69,6 @@
 
         <service
             android:name=".presentation.tasks.view.widget.TaskWidgetService"
-            android:enabled="true"
-            android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <service android:name=".presentation.tasks.view.widget.TaskWidgetSynchronizationService" />
 
