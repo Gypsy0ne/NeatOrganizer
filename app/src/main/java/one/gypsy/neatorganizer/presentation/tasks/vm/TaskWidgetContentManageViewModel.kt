@@ -71,10 +71,7 @@ class TaskWidgetContentManageViewModel(
                     )
                 )
             ) {
-                it.either(
-                    {},
-                    {}
-                )
+                it.either({}, {})
             }
         }
     }
