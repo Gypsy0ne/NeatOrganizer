@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.dto.tasks
 
-import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
+import one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity
 
 data class SingleTaskGroupWithTasks(
     val taskGroup: SingleTaskGroup,

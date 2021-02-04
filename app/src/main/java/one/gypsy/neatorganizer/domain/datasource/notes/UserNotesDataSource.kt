@@ -2,14 +2,14 @@ package one.gypsy.neatorganizer.domain.datasource.notes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import one.gypsy.neatorganizer.data.database.dao.notes.NotesDao
-import one.gypsy.neatorganizer.data.database.entity.notes.toNote
-import one.gypsy.neatorganizer.data.database.entity.notes.toNoteEntry
 import one.gypsy.neatorganizer.domain.dto.notes.Note
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
+import one.gypsy.neatorganizer.domain.dto.notes.toNote
 import one.gypsy.neatorganizer.domain.dto.notes.toNoteEntity
+import one.gypsy.neatorganizer.domain.dto.notes.toNoteEntry
 
-class UserNotesDataSource(private val notesDao: NotesDao) : NotesDataSource {
+class UserNotesDataSource(private val notesDao: one.gypsy.neatorganizer.database.dao.notes.NotesDao) :
+    NotesDataSource {
 
     override suspend fun insert(noteEntry: NoteEntry) = notesDao.insert(noteEntry.toNoteEntity())
 

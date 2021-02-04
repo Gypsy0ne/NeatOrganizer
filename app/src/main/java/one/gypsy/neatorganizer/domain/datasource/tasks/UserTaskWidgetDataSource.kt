@@ -2,12 +2,12 @@ package one.gypsy.neatorganizer.domain.datasource.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import one.gypsy.neatorganizer.data.database.dao.tasks.TaskWidgetsDao
-import one.gypsy.neatorganizer.data.database.entity.tasks.toTaskWidgetEntry
-import one.gypsy.neatorganizer.data.database.entity.tasks.toTitledTaskWidgetEntry
+import one.gypsy.neatorganizer.database.dao.tasks.TaskWidgetsDao
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toTaskWidgetEntity
+import one.gypsy.neatorganizer.domain.dto.tasks.toTaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.toTitledTaskWidgetEntry
 
 class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
     TaskWidgetDataSource {
@@ -39,5 +39,4 @@ class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
         Transformations.map(widgetsDao.getAllTaskWidgetsObservable()) {
             it.map { taskWidgetEntity -> taskWidgetEntity.toTaskWidgetEntry() }
         }
-
 }

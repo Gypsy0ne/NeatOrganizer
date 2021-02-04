@@ -1,8 +1,8 @@
 package one.gypsy.neatorganizer.domain.dto.routines
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
-import one.gypsy.neatorganizer.data.database.entity.routines.RoutineEntity
-import one.gypsy.neatorganizer.data.database.entity.routines.ScheduledRoutineWithTasks
+import one.gypsy.neatorganizer.database.entity.routines.RoutineEntity
+import one.gypsy.neatorganizer.database.entity.routines.ScheduledRoutineWithTasks
+import one.gypsy.neatorganizer.utils.Timestamped
 
 data class RoutineWithTasks(
     val id: Long = 0,
@@ -13,10 +13,15 @@ data class RoutineWithTasks(
 ) : Timestamped
 
 fun RoutineWithTasks.toRoutineEntity() =
-    RoutineEntity(name = this.name, id = this.id, createdAt = this.createdAt)
+    RoutineEntity(
+        name = this.name,
+        id = this.id,
+        createdAt = this.createdAt
+    )
 
-fun RoutineWithTasks.toScheduledRoutineEntity() = ScheduledRoutineWithTasks(
-    routine = this.toRoutineEntity(),
-    schedule = this.schedule.toRoutineScheduleEntity(),
-    tasks = this.tasks.map { it.toRoutineTaskEntity() }
-)
+fun RoutineWithTasks.toScheduledRoutineEntity() =
+    ScheduledRoutineWithTasks(
+        routine = this.toRoutineEntity(),
+        schedule = this.schedule.toRoutineScheduleEntity(),
+        tasks = this.tasks.map { it.toRoutineTaskEntity() }
+    )

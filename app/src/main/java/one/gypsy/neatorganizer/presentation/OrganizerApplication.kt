@@ -1,6 +1,7 @@
 package one.gypsy.neatorganizer.presentation
 
 import android.app.Application
+import one.gypsy.neatorganizer.database.databaseModule
 import one.gypsy.neatorganizer.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

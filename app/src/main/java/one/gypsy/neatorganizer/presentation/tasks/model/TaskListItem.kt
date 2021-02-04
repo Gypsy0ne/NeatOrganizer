@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.presentation.tasks.model
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
@@ -13,14 +12,14 @@ sealed class TaskListItem(
     override val id: Long,
     override val title: String,
     override val edited: Boolean
-) : Listed, Timestamped, Editable {
+) : Listed, Editable {
     data class TaskListHeader(
         override val id: Long,
         override val title: String,
         override val edited: Boolean = false,
         override val subItemsCount: Int = 0,
         override val expanded: Boolean = false,
-        override val createdAt: Long
+        val createdAt: Long
     ) : TaskListItem(id = id, title = title, edited = edited), HeaderItem
 
     data class TaskListSubItem(
@@ -29,7 +28,7 @@ sealed class TaskListItem(
         override val edited: Boolean = false,
         override val groupId: Long,
         override val done: Boolean = false,
-        override val createdAt: Long
+        val createdAt: Long
     ) : TaskListItem(id = id, title = title, edited = edited), SubItem
 }
 

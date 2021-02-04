@@ -1,7 +1,5 @@
 package one.gypsy.neatorganizer.di
 
-import one.gypsy.neatorganizer.data.repositories.notes.NoteWidgetsRepository
-import one.gypsy.neatorganizer.data.repositories.notes.NotesRepository
 import one.gypsy.neatorganizer.domain.datasource.notes.NoteWidgetsDataSource
 import one.gypsy.neatorganizer.domain.datasource.notes.NotesDataSource
 import one.gypsy.neatorganizer.domain.datasource.notes.UserNoteWidgetsDataSource
@@ -28,6 +26,8 @@ import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetConfigurationView
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetContentManageViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NoteWidgetSelectionViewModel
 import one.gypsy.neatorganizer.presentation.notes.vm.NotesListingViewModel
+import one.gypsy.neatorganizer.repositories.notes.NoteWidgetsRepository
+import one.gypsy.neatorganizer.repositories.notes.NotesRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named

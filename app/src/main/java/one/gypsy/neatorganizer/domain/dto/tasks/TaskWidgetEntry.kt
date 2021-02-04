@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.dto.tasks
 
-import one.gypsy.neatorganizer.data.database.entity.tasks.TaskWidgetEntity
+import one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity
 
 class TaskWidgetEntry(
     val appWidgetId: Int,
@@ -9,4 +9,8 @@ class TaskWidgetEntry(
 )
 
 fun TaskWidgetEntry.toTaskWidgetEntity() =
-    TaskWidgetEntity(widgetId = appWidgetId, taskGroupId = taskGroupId, color = widgetColor)
+    TaskWidgetEntity(
+        widgetId = appWidgetId,
+        taskGroupId = taskGroupId,
+        color = widgetColor
+    )

@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.dto.tasks
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
-import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskEntity
+import one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity
+import one.gypsy.neatorganizer.utils.Timestamped
 
 data class SingleTaskEntry(
     val id: Long = 0,

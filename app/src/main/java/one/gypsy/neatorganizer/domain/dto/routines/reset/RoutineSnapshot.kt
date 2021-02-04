@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.dto.routines.reset
 
-import one.gypsy.neatorganizer.data.database.entity.routines.reset.RoutineSnapshotEntity
-import java.util.*
+import one.gypsy.neatorganizer.database.entity.routines.reset.RoutineSnapshotEntity
+import java.util.Date
 
 data class RoutineSnapshot(
     val tasksOverall: Int,
@@ -11,4 +11,8 @@ data class RoutineSnapshot(
 )
 
 fun RoutineSnapshot.toRoutineSnapshotEntity() =
-    RoutineSnapshotEntity(tasksOverall, tasksDone, resetDate)
+    RoutineSnapshotEntity(
+        tasksOverall,
+        tasksDone,
+        resetDate
+    )

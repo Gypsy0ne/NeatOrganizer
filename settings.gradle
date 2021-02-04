@@ -1,2 +1,3 @@
+include ':app:database'
 include ':app', ':easyswipemenulibrary'
 rootProject.name='NeatOrganizer'

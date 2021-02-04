@@ -1,10 +1,9 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
-import one.gypsy.neatorganizer.data.database.dao.routines.RoutineTasksDao
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.domain.dto.routines.toRoutineTaskEntity
 
-class UserRoutineTasksDataSource(private val routineTasksDao: RoutineTasksDao) :
+class UserRoutineTasksDataSource(private val routineTasksDao: one.gypsy.neatorganizer.database.dao.routines.RoutineTasksDao) :
     RoutineTasksDataSource {
 
     override suspend fun add(routineTask: RoutineTaskEntry) =

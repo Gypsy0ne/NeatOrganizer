@@ -2,8 +2,8 @@ package one.gypsy.neatorganizer.domain.interactors.routines
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
+import one.gypsy.neatorganizer.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure

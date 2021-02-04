@@ -3,8 +3,8 @@ package one.gypsy.neatorganizer.domain.interactors.notes.widget
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.data.repositories.notes.NoteWidgetsRepository
 import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
+import one.gypsy.neatorganizer.repositories.notes.NoteWidgetsRepository
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure

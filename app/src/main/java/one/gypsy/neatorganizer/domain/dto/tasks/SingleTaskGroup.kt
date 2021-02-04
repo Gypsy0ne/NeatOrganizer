@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.dto.tasks
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
-import one.gypsy.neatorganizer.data.database.entity.tasks.SingleTaskGroupEntity
+import one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity
+import one.gypsy.neatorganizer.utils.Timestamped
 
 data class SingleTaskGroup(
     val name: String,
@@ -10,4 +10,8 @@ data class SingleTaskGroup(
 ) : Timestamped
 
 fun SingleTaskGroup.toSingleTaskGroupEntity() =
-    SingleTaskGroupEntity(name = this.name, id = this.id, createdAt = this.createdAt)
+    SingleTaskGroupEntity(
+        name = this.name,
+        id = this.id,
+        createdAt = this.createdAt
+    )

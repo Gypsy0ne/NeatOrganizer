@@ -1,8 +1,5 @@
 package one.gypsy.neatorganizer.di
 
-import one.gypsy.neatorganizer.data.repositories.tasks.SingleTaskGroupsRepository
-import one.gypsy.neatorganizer.data.repositories.tasks.SingleTasksRepository
-import one.gypsy.neatorganizer.data.repositories.tasks.TaskWidgetsRepository
 import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTaskGroupsDataSource
 import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTasksDataSource
 import one.gypsy.neatorganizer.domain.datasource.tasks.TaskWidgetDataSource
@@ -43,6 +40,9 @@ import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetContentManageView
 import one.gypsy.neatorganizer.presentation.tasks.vm.TaskWidgetSelectionViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksViewModel
 import one.gypsy.neatorganizer.presentation.tasks.vm.TasksWidgetConfigurationViewModel
+import one.gypsy.neatorganizer.repositories.tasks.SingleTaskGroupsRepository
+import one.gypsy.neatorganizer.repositories.tasks.SingleTasksRepository
+import one.gypsy.neatorganizer.repositories.tasks.TaskWidgetsRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named

@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.presentation.routines.model
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
@@ -13,7 +12,7 @@ sealed class RoutineListItem(
     override val id: Long,
     override val title: String,
     override val edited: Boolean
-) : Listed, Timestamped, Editable {
+) : Listed, Editable {
     data class RoutineListHeader(
         override val id: Long,
         override val title: String,
@@ -21,7 +20,7 @@ sealed class RoutineListItem(
         override val subItemsCount: Int = 0,
         override val expanded: Boolean = false,
         val scheduleDays: List<Boolean>,
-        override val createdAt: Long
+        val createdAt: Long
     ) : RoutineListItem(id = id, title = title, edited = edited), HeaderItem
 
     data class RoutineListSubItem(
@@ -30,7 +29,7 @@ sealed class RoutineListItem(
         override val edited: Boolean = false,
         override val groupId: Long,
         override val done: Boolean = false,
-        override val createdAt: Long
+        val createdAt: Long
     ) : RoutineListItem(id = id, title = title, edited = edited), SubItem
 }
 

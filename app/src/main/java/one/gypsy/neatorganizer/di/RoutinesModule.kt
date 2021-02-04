@@ -1,15 +1,30 @@
 package one.gypsy.neatorganizer.di
 
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineSchedulesRepository
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
-import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
-import one.gypsy.neatorganizer.domain.datasource.routines.*
-import one.gypsy.neatorganizer.domain.interactors.routines.*
+import one.gypsy.neatorganizer.domain.datasource.routines.RoutineSchedulesDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.RoutineTasksDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.RoutinesDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.UserRoutineSchedulesDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.UserRoutineTasksDataSource
+import one.gypsy.neatorganizer.domain.datasource.routines.UserRoutinesDataSource
+import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutine
+import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineSchedule
+import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineTask
+import one.gypsy.neatorganizer.domain.interactors.routines.GetAllRoutines
+import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutine
+import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineById
+import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineTask
+import one.gypsy.neatorganizer.domain.interactors.routines.RunAllRoutinesSnapshotReset
+import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutine
+import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutineSchedule
+import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutineTask
 import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
 import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
 import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
+import one.gypsy.neatorganizer.repositories.routines.RoutineSchedulesRepository
+import one.gypsy.neatorganizer.repositories.routines.RoutineTasksRepository
+import one.gypsy.neatorganizer.repositories.routines.RoutinesRepository
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
