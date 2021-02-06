@@ -1,11 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
@@ -47,15 +43,15 @@ android {
 
 dependencies {
 
-    def nav_version = "2.3.0"
+    def nav_version = "2.3.3"
     def koin_version = "2.1.6"
     def mockk_version = "1.10.0"
-    def work_manager_version = "2.3.4"
+    def work_manager_version = "2.5.0"
     def androidx_lifecycle_version = "2.3.0-rc01"
-    def room_version = "2.2.5"
+    def room_version = "2.2.6"
 
     implementation project(":easyswipemenulibrary")
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "org.assertj:assertj-core:3.16.1"
     androidTestImplementation "org.assertj:assertj-core:3.16.1"
@@ -68,16 +64,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidx_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$androidx_lifecycle_version"
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3'
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.work:work-runtime-ktx:$work_manager_version"
 
     //autoscalling edit text
@@ -88,10 +80,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
-
-    //recyclerview + cardview
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
 
     // Koin
     implementation "org.koin:koin-core:$koin_version"
