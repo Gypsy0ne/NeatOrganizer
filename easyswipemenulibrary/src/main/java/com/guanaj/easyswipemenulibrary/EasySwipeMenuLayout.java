@@ -272,12 +272,11 @@ public class EasySwipeMenuLayout extends ViewGroup {
                     break;
                 }
 
-                scrollBy((int) (distanceX), 0);//滑动使用scrollBy
-                //越界修正
+                scrollBy((int) (distanceX), 0);//scrollBy
                 if (getScrollX() < 0) {
                     if (!mCanRightSwipe || mLeftView == null) {
                         scrollTo(0, 0);
-                    } else {//左滑
+                    } else {
                         if (getScrollX() < mLeftView.getLeft()) {
 
                             scrollTo(mLeftView.getLeft(), 0);
@@ -350,12 +349,6 @@ public class EasySwipeMenuLayout extends ViewGroup {
         return super.onInterceptTouchEvent(event);
     }
 
-    /**
-     * 自动设置状态
-     *
-     * @param result
-     */
-
     private void handlerSwipeMenu(State result) {
         if (result == State.LEFTOPEN) {
             mScroller.startScroll(getScrollX(), 0, mLeftView.getLeft() - getScrollX(), 0);
@@ -387,13 +380,6 @@ public class EasySwipeMenuLayout extends ViewGroup {
         }
     }
 
-    /**
-     * 根据当前的scrollX的值判断松开手后应处于何种状态
-     *
-     * @param
-     * @param scrollX
-     * @return
-     */
     private State isShouldOpen(int scrollX) {
         if (!(mScaledTouchSlop < Math.abs(finalDistanceX))) {
             return mStateCache;
@@ -483,7 +469,6 @@ public class EasySwipeMenuLayout extends ViewGroup {
     }
 
     private boolean isLeftToRight() {
-        //➡滑动
         return distanceX < 0;
 
     }
