@@ -2,6 +2,7 @@ object Version {
 
     // Android configuration
     const val kotlinVersion = "1.4.20"
+    const val gradleVersion = "4.1.2"
     const val compileSdkVersion = 29
     const val minSdkVersion = 26
     const val targetSdkVersion = 29

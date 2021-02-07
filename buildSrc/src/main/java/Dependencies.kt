@@ -18,7 +18,6 @@ object Koin {
     const val core = "org.koin:koin-core:${Version.koin_version}"
     const val core_ext = "org.koin:koin-core-ext:${Version.koin_version}"
     const val viewmodel = "org.koin:koin-android-viewmodel:${Version.koin_version}"
-
     // testImpl
     const val test = "org.koin:koin-test:${Version.koin_version}"
 }
@@ -26,7 +25,6 @@ object Koin {
 object Glide {
     // impl
     const val glide = "com.github.bumptech.glide:glide:${Version.glide_version}"
-
     // annotationProcessor
     const val compiler = "com.github.bumptech.glide:compiler:${Version.glide_version}"
 }
@@ -55,10 +53,8 @@ object Room {
     // impl
     const val ktx = "androidx.room:room-ktx:${Version.room_version}"
     const val runtime = "androidx.room:room-runtime:${Version.room_version}"
-
     // kapt
     const val compiler = "androidx.room:room-compiler:${Version.room_version}"
-
     // testImpl
     const val testing = "androidx.room:room-testing:${Version.room_version}"
 }
