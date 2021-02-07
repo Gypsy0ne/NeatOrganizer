@@ -7,7 +7,6 @@ import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-
 class LaunchActivity : AppCompatActivity(), KoinComponent {
 
     private val routinesResetManager: RoutinesResetManager by inject()
@@ -25,6 +24,4 @@ class LaunchActivity : AppCompatActivity(), KoinComponent {
     }
 
     private fun enableRoutinesReset() = routinesResetManager.scheduleRoutinesResetWork()
-
-
 }

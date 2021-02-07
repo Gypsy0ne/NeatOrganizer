@@ -1,10 +1,10 @@
 package one.gypsy.neatorganizer.di
 
-import one.gypsy.neatorganizer.data.repositories.routines.reset.RoutineSnapshotsRepository
 import one.gypsy.neatorganizer.domain.datasource.routines.reset.RoutineSnapshotsDataSource
 import one.gypsy.neatorganizer.domain.datasource.routines.reset.UserRoutineSnapshotsDataSource
 import one.gypsy.neatorganizer.domain.interactors.routines.reset.RoutinesResetSnapshooter
 import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetManager
+import one.gypsy.neatorganizer.repositories.routines.reset.RoutineSnapshotsRepository
 import org.koin.dsl.module
 
 val routinesResetDataSourceModule = module {

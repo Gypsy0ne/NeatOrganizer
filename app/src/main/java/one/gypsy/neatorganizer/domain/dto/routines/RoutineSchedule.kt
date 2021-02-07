@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.dto.routines
 
-import one.gypsy.neatorganizer.data.database.entity.routines.RoutineScheduleEntity
+import one.gypsy.neatorganizer.database.entity.routines.RoutineScheduleEntity
 
 data class RoutineSchedule(
     val routineId: Long = 0,

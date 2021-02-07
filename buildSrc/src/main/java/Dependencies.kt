@@ -9,7 +9,7 @@ object Dependencies {
 }
 
 object Module {
-    const val database = ""
+    const val database = ":database"
     const val easySwipeMenu = ":easyswipemenulibrary"
 }
 

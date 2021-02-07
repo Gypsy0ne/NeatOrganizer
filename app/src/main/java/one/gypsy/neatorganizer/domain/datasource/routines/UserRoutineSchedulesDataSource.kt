@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
-import one.gypsy.neatorganizer.data.database.dao.routines.RoutineSchedulesDao
+import one.gypsy.neatorganizer.database.dao.routines.RoutineSchedulesDao
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.toRoutineScheduleEntity
 

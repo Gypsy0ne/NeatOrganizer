@@ -1,11 +1,11 @@
 package one.gypsy.neatorganizer.domain.interactors.routines.reset
 
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
-import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
-import one.gypsy.neatorganizer.data.repositories.routines.reset.RoutineSnapshotsRepository
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.dto.routines.reset.RoutineSnapshot
-import java.util.*
+import one.gypsy.neatorganizer.repositories.routines.RoutineTasksRepository
+import one.gypsy.neatorganizer.repositories.routines.RoutinesRepository
+import one.gypsy.neatorganizer.repositories.routines.reset.RoutineSnapshotsRepository
+import java.util.Date
 
 class RoutinesResetSnapshooter(
     private val routinesRepository: RoutinesRepository,

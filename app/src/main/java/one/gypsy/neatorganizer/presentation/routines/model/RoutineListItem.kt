@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.presentation.routines.model
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
@@ -13,7 +12,7 @@ sealed class RoutineListItem(
     override val id: Long,
     override val title: String,
     override val edited: Boolean
-) : Listed, Timestamped, Editable {
+) : Listed, one.gypsy.neatorganizer.database.entity.Timestamped, Editable {
     data class RoutineListHeader(
         override val id: Long,
         override val title: String,

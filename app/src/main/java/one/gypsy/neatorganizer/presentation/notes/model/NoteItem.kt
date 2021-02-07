@@ -1,6 +1,5 @@
 package one.gypsy.neatorganizer.presentation.notes.model
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
 import one.gypsy.neatorganizer.domain.dto.notes.Note
 
 data class NoteItem(
@@ -9,7 +8,7 @@ data class NoteItem(
     val content: String,
     override val createdAt: Long,
     val color: Int
-) : Timestamped
+) : one.gypsy.neatorganizer.database.entity.Timestamped
 
 fun NoteItem.toNote() = Note(
     id = id,

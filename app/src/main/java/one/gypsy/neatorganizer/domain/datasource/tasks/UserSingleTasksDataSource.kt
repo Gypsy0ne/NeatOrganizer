@@ -2,8 +2,8 @@ package one.gypsy.neatorganizer.domain.datasource.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import one.gypsy.neatorganizer.data.database.dao.tasks.SingleTasksDao
-import one.gypsy.neatorganizer.data.database.entity.tasks.toSingleTaskEntry
+import one.gypsy.neatorganizer.database.dao.tasks.SingleTasksDao
+import one.gypsy.neatorganizer.database.entity.tasks.toSingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.toSingleTaskEntity
 

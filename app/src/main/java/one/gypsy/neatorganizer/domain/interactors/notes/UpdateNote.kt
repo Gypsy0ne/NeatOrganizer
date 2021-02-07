@@ -2,9 +2,9 @@ package one.gypsy.neatorganizer.domain.interactors.notes
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.data.repositories.notes.NotesRepository
 import one.gypsy.neatorganizer.domain.dto.notes.Note
 import one.gypsy.neatorganizer.domain.interactors.notes.UpdateNote.Params
+import one.gypsy.neatorganizer.repositories.notes.NotesRepository
 import one.gypsy.neatorganizer.utils.BaseUseCase
 import one.gypsy.neatorganizer.utils.Either
 import one.gypsy.neatorganizer.utils.Failure

@@ -1,15 +1,14 @@
 package one.gypsy.neatorganizer.domain.dto.routines
 
-import one.gypsy.neatorganizer.data.database.entity.Timestamped
-import one.gypsy.neatorganizer.data.database.entity.routines.RoutineTaskEntity
+import one.gypsy.neatorganizer.database.entity.routines.RoutineTaskEntity
 
 data class RoutineTaskEntry(
     val id: Long = 0,
     val routineId: Long,
     val name: String,
     var done: Boolean,
-    override val createdAt: Long
-) : Timestamped
+    val createdAt: Long
+)
 
 fun RoutineTaskEntry.toRoutineTaskEntity() = RoutineTaskEntity(
     name = this.name,

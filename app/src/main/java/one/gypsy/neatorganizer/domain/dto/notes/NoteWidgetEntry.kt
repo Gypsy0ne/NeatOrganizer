@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.dto.notes
 
-import one.gypsy.neatorganizer.data.database.entity.notes.NoteWidgetEntity
+import one.gypsy.neatorganizer.database.entity.notes.NoteWidgetEntity
 
 data class NoteWidgetEntry(
     val widgetId: Int,
@@ -8,5 +8,8 @@ data class NoteWidgetEntry(
     val color: Int
 )
 
-fun NoteWidgetEntry.toNoteWidgetEntity() =
-    NoteWidgetEntity(widgetId = widgetId, color = color, noteId = noteId)
+fun NoteWidgetEntry.toNoteWidgetEntity() = NoteWidgetEntity(
+    widgetId = widgetId,
+    color = color,
+    noteId = noteId
+)

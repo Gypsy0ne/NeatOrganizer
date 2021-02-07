@@ -2,6 +2,7 @@ apply from: Dependencies.common
 
 dependencies {
     implementation project(Module.easySwipeMenu)
+    implementation project(Module.database)
 
     implementation Koin.core
     implementation Koin.core_ext
@@ -14,11 +15,6 @@ dependencies {
     implementation Spectrum.spectrum
 
     implementation Lottie.lottie
-
-    kapt Room.compiler
-    implementation Room.ktx
-    implementation Room.runtime
-    testImplementation Room.testing
 
     testImplementation Mockk.mockk
 
