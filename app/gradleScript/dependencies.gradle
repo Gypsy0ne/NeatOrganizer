@@ -1,0 +1,40 @@
+apply from: Dependencies.common
+
+dependencies {
+    implementation project(Module.easySwipeMenu)
+
+    implementation Koin.core
+    implementation Koin.core_ext
+    implementation Koin.viewmodel
+    testImplementation Koin.test
+
+    implementation Glide.glide
+    annotationProcessor Glide.compiler
+
+    implementation Spectrum.spectrum
+
+    implementation Lottie.lottie
+
+    kapt Room.compiler
+    implementation Room.ktx
+    implementation Room.runtime
+    testImplementation Room.testing
+
+    testImplementation Mockk.mockk
+
+    implementation AutoFitEditText.autoFitEditText
+
+    implementation Lifecycle.runtime
+    implementation Lifecycle.viewmodel
+    implementation Lifecycle.ext
+    implementation Lifecycle.livedata
+
+    implementation Navigation.fragment
+    implementation Navigation.ui
+
+    implementation WorkManager.runtime
+
+    implementation ConstraintLayout.constraintLayout
+
+    implementation Material.material
+}
