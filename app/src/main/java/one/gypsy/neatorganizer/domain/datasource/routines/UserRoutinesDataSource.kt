@@ -3,9 +3,9 @@ package one.gypsy.neatorganizer.domain.datasource.routines
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
-import one.gypsy.neatorganizer.database.entity.routines.toRoutineWithTasks
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
 import one.gypsy.neatorganizer.domain.dto.routines.toRoutineEntity
+import one.gypsy.neatorganizer.domain.dto.routines.toRoutineWithTasks
 
 class UserRoutinesDataSource(private val routinesDao: RoutinesDao) :
     RoutinesDataSource {

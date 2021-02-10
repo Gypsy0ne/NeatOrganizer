@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 
 apply from: Dependencies.dependency
 
+android {
+    compileSdkVersion Version.compileSdkVersion
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
