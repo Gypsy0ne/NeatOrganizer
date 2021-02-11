@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.InsertNoteEntry
+import one.gypsy.neatorganizer.domain.notes.InsertNoteEntry
 
 class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : ViewModel() {
 

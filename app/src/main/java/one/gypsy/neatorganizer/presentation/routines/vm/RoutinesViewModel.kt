@@ -5,20 +5,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.interactors.Failure
 import one.gypsy.neatorganizer.domain.interactors.routines.*
 import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.common.updateLoadingStatus
 import one.gypsy.neatorganizer.presentation.routines.model.*
-import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.delayItemsEmission
 
 class RoutinesViewModel(
-    getAllRoutinesUseCase: GetAllRoutines,
-    private val updateRoutine: UpdateRoutine,
-    private val removeRoutineTask: RemoveRoutineTask,
-    private val updateRoutineTask: UpdateRoutineTask,
+    getAllRoutinesUseCase: one.gypsy.neatorganizer.domain.routines.GetAllRoutines,
+    private val updateRoutine: one.gypsy.neatorganizer.domain.routines.UpdateRoutine,
+    private val removeRoutineTask: one.gypsy.neatorganizer.domain.routines.RemoveRoutineTask,
+    private val updateRoutineTask: one.gypsy.neatorganizer.domain.routines.UpdateRoutineTask,
     private val routineListMapper: RoutineListMapper,
-    private val updateRoutineSchedule: UpdateRoutineSchedule
+    private val updateRoutineSchedule: one.gypsy.neatorganizer.domain.routines.UpdateRoutineSchedule
 ) : ViewModel() {
 
     private val _listedRoutines = MediatorLiveData<List<RoutineListItem>>()
@@ -57,21 +57,23 @@ class RoutinesViewModel(
         }
     }
 
-    private fun onGetAllRoutinesFailure(failure: Failure) =
+    private fun onGetAllRoutinesFailure(failure: one.gypsy.neatorganizer.domain.interactors.Failure) =
         _contentLoadingStatus.updateLoadingStatus(emptyList<RoutineListItem>())
 
     fun onHeaderUpdate(routineHeaderItem: RoutineListItem.RoutineListHeader) {
         viewModelScope.launch {
             updateRoutine.invoke(
                 this,
-                UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
+                one.gypsy.neatorganizer.domain.routines.UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
             ) {
                 it.either(
                     {},
                     {
                         updateRoutineSchedule.invoke(
                             this,
-                            UpdateRoutineSchedule.Params(routineSchedule = routineHeaderItem.getRoutineSchedule())
+                            one.gypsy.neatorganizer.domain.routines.UpdateRoutineSchedule.Params(
+                                routineSchedule = routineHeaderItem.getRoutineSchedule()
+                            )
                         )
                     }
                 )
@@ -82,14 +84,14 @@ class RoutinesViewModel(
     fun onTaskUpdate(routineSubItem: RoutineListItem.RoutineListSubItem) {
         updateRoutineTask.invoke(
             viewModelScope,
-            UpdateRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
+            one.gypsy.neatorganizer.domain.routines.UpdateRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
         )
     }
 
     fun onRemove(routineSubItem: RoutineListItem.RoutineListSubItem) {
         removeRoutineTask.invoke(
             viewModelScope,
-            RemoveRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
+            one.gypsy.neatorganizer.domain.routines.RemoveRoutineTask.Params(routineTask = routineSubItem.toRoutineTask())
         )
     }
 

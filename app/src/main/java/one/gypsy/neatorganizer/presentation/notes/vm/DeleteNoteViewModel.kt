@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.interactors.notes.DeleteNoteById
+import one.gypsy.neatorganizer.domain.notes.DeleteNoteById
 import one.gypsy.neatorganizer.utils.extensions.default
 
 class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNoteById) : ViewModel() {

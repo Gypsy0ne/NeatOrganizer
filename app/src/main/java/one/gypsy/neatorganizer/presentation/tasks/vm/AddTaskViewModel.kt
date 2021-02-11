@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
-import one.gypsy.neatorganizer.utils.Failure
+import one.gypsy.neatorganizer.domain.interactors.Failure
+import one.gypsy.neatorganizer.domain.tasks.AddSingleTask
 
 class AddTaskViewModel(
     private val addSingleTaskUseCase: AddSingleTask,
@@ -22,7 +22,10 @@ class AddTaskViewModel(
 
     fun addNextTask() = add({}, { taskTitle.postValue("") })
 
-    fun add(onFailure: (Failure) -> Any, onSuccess: (Unit) -> Any) {
+    fun add(
+        onFailure: (one.gypsy.neatorganizer.domain.interactors.Failure) -> Any,
+        onSuccess: (Unit) -> Any
+    ) {
         addSingleTaskUseCase.invoke(
             viewModelScope,
             AddSingleTask.Params(

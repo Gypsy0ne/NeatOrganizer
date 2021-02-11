@@ -12,13 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupWithTasksById
-import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
+import one.gypsy.neatorganizer.domain.tasks.GetSingleTaskGroupWithTasksById
+import one.gypsy.neatorganizer.domain.tasks.RemoveSingleTask
+import one.gypsy.neatorganizer.domain.tasks.UpdateSingleTask
+import one.gypsy.neatorganizer.domain.tasks.UpdateSingleTaskGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem
 import one.gypsy.neatorganizer.presentation.tasks.model.toSingleTask
-import one.gypsy.neatorganizer.presentation.tasks.model.toTaskListSubItem
 
 class TaskWidgetContentManageViewModel(
     taskGroupId: Long,
@@ -51,16 +50,16 @@ class TaskWidgetContentManageViewModel(
 
     private fun onGetAllSingleTasksSuccess(taskGroupWithTasks: LiveData<SingleTaskGroupWithTasks>) {
         _listedTasks.addSource(taskGroupWithTasks) {
-            _listedTasks.postValue(taskGroupWithTasks.value?.tasks)
+            _listedTasks.postValue(taskGroupWithTasks.value.tasks)
         }
         _taskGroup.addSource(taskGroupWithTasks) {
-            _taskGroup.postValue(taskGroupWithTasks.value?.taskGroup)
+            _taskGroup.postValue(taskGroupWithTasks.value.taskGroup)
         }
         _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
     }
 
     fun onTitleEditionFinished(editedTitle: String) {
-        taskGroup.value?.let { taskGroup ->
+        taskGroup.value.let { taskGroup ->
             updateTaskGroupUseCase.invoke(
                 viewModelScope,
                 UpdateSingleTaskGroup.Params(

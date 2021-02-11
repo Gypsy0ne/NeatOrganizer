@@ -1,0 +1,12 @@
+apply from: Dependencies.common
+
+dependencies {
+    implementation project(Module.database)
+
+    implementation Koin.core
+    implementation Koin.core_ext
+
+    implementation Lifecycle.livedata
+    implementation Lifecycle.ext
+    implementation Lifecycle.runtime
+}

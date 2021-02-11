@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveTaskGroupById
-import one.gypsy.neatorganizer.utils.Failure
+import one.gypsy.neatorganizer.domain.interactors.Failure
+import one.gypsy.neatorganizer.domain.tasks.RemoveTaskGroupById
 import one.gypsy.neatorganizer.utils.extensions.default
 
 class RemoveTaskGroupViewModel(private val removeTaskGroupByIdUseCase: RemoveTaskGroupById) :
@@ -28,5 +28,5 @@ class RemoveTaskGroupViewModel(private val removeTaskGroupByIdUseCase: RemoveTas
         _actionFinished.postValue(true)
     }
 
-    private fun onRemoveFailure(failure: Failure) {}
+    private fun onRemoveFailure(failure: one.gypsy.neatorganizer.domain.interactors.Failure) {}
 }

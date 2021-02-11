@@ -13,8 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidgetById
-import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget
+import one.gypsy.neatorganizer.domain.tasks.DeleteTaskWidgetById
+import one.gypsy.neatorganizer.domain.tasks.LoadTitledTaskWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID

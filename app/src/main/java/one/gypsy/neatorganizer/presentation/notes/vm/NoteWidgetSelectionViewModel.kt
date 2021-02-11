@@ -8,10 +8,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
-import one.gypsy.neatorganizer.domain.interactors.notes.widget.UpdateWidgetNote
+import one.gypsy.neatorganizer.domain.notes.GetAllNoteEntries
+import one.gypsy.neatorganizer.domain.notes.widget.UpdateWidgetNote
 import one.gypsy.neatorganizer.presentation.notes.model.NoteEntryItem
-import one.gypsy.neatorganizer.presentation.notes.model.toNoteEntryItem
 
 class NoteWidgetSelectionViewModel(
     getAllNoteEntriesUseCase: GetAllNoteEntries,

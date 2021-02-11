@@ -12,8 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.notes.TitledNoteWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.widget.DeleteNoteWidgetById
-import one.gypsy.neatorganizer.domain.interactors.notes.widget.LoadTitledNoteWidget
+import one.gypsy.neatorganizer.domain.notes.widget.DeleteNoteWidgetById
+import one.gypsy.neatorganizer.domain.notes.widget.LoadTitledNoteWidget
 import one.gypsy.neatorganizer.presentation.common.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.presentation.notes.view.widget.management.NoteWidgetActivity
 import one.gypsy.neatorganizer.presentation.tasks.view.widget.NoteWidgetKeyring.MANAGED_NOTE_ID_KEY

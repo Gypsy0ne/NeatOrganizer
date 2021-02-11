@@ -6,11 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.notes.Note
-import one.gypsy.neatorganizer.domain.interactors.notes.GetNoteById
-import one.gypsy.neatorganizer.domain.interactors.notes.UpdateNote
+import one.gypsy.neatorganizer.domain.notes.GetNoteById
+import one.gypsy.neatorganizer.domain.notes.UpdateNote
 import one.gypsy.neatorganizer.presentation.notes.model.NoteItem
 import one.gypsy.neatorganizer.presentation.notes.model.toNote
-import one.gypsy.neatorganizer.presentation.notes.model.toNoteItem
 
 class NoteWidgetContentManageViewModel(
     noteId: Long,

@@ -8,10 +8,9 @@ import android.widget.RemoteViewsService
 import kotlinx.coroutines.runBlocking
 import one.gypsy.neatorganizer.R
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTasksByGroupId
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetTaskGroupIdByWidgetId
+import one.gypsy.neatorganizer.domain.tasks.GetAllSingleTasksByGroupId
+import one.gypsy.neatorganizer.domain.tasks.GetTaskGroupIdByWidgetId
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskEntryWidgetItem
-import one.gypsy.neatorganizer.presentation.tasks.model.toTaskEntryWidgetItem
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

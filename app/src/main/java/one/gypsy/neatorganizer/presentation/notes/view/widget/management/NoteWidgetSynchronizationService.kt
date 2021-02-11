@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
-import one.gypsy.neatorganizer.domain.interactors.notes.widget.GetAllNoteWidgetIds
-import one.gypsy.neatorganizer.domain.interactors.notes.widget.GetAllNoteWidgets
+import one.gypsy.neatorganizer.domain.notes.GetAllNoteEntries
+import one.gypsy.neatorganizer.domain.notes.widget.GetAllNoteWidgetIds
+import one.gypsy.neatorganizer.domain.notes.widget.GetAllNoteWidgets
 import one.gypsy.neatorganizer.presentation.common.WidgetNotifier
 import org.koin.core.KoinComponent
 import org.koin.core.get

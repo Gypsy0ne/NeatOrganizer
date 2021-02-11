@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllTaskWidgetIds
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllTaskWidgets
+import one.gypsy.neatorganizer.domain.tasks.GetAllSingleTaskGroups
+import one.gypsy.neatorganizer.domain.tasks.GetAllTaskWidgetIds
+import one.gypsy.neatorganizer.domain.tasks.GetAllTaskWidgets
 import one.gypsy.neatorganizer.presentation.common.WidgetNotifier
 import org.koin.core.KoinComponent
 import org.koin.core.get

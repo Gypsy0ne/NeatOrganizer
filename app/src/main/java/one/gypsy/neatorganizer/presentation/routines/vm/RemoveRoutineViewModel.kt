@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineById
+import one.gypsy.neatorganizer.domain.interactors.Failure
+import one.gypsy.neatorganizer.domain.routines.RemoveRoutineById
 import one.gypsy.neatorganizer.presentation.common.RemoveViewModel
-import one.gypsy.neatorganizer.utils.Failure
 import one.gypsy.neatorganizer.utils.extensions.default
 
-class RemoveRoutineViewModel(private val removeRoutineByIdUseCase: RemoveRoutineById) :
+class RemoveRoutineViewModel(private val removeRoutineByIdUseCase: one.gypsy.neatorganizer.domain.routines.RemoveRoutineById) :
     ViewModel(), RemoveViewModel {
 
     private val _actionFinished = MutableLiveData<Boolean>().default(false)
@@ -17,7 +17,10 @@ class RemoveRoutineViewModel(private val removeRoutineByIdUseCase: RemoveRoutine
         get() = _actionFinished
 
     override fun onRemoveSubmit(removedItemId: Long) {
-        removeRoutineByIdUseCase.invoke(viewModelScope, RemoveRoutineById.Params(removedItemId)) {
+        removeRoutineByIdUseCase.invoke(
+            viewModelScope,
+            one.gypsy.neatorganizer.domain.routines.RemoveRoutineById.Params(removedItemId)
+        ) {
             it.either(::onRemoveFailure, ::onRemoveSuccess)
         }
     }
@@ -26,5 +29,5 @@ class RemoveRoutineViewModel(private val removeRoutineByIdUseCase: RemoveRoutine
         _actionFinished.postValue(true)
     }
 
-    private fun onRemoveFailure(failure: Failure) {}
+    private fun onRemoveFailure(failure: one.gypsy.neatorganizer.domain.interactors.Failure) {}
 }

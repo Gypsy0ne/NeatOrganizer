@@ -3,10 +3,9 @@ package one.gypsy.neatorganizer.presentation.tasks.vm
 import androidx.lifecycle.*
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.CreateTaskWidget
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
+import one.gypsy.neatorganizer.domain.tasks.CreateTaskWidget
+import one.gypsy.neatorganizer.domain.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
-import one.gypsy.neatorganizer.presentation.tasks.model.toTaskGroupEntryItem
 
 class TasksWidgetConfigurationViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
@@ -51,7 +50,7 @@ class TasksWidgetConfigurationViewModel(
     }
 
     private fun submitWidgetCreation(widgetId: Int) =
-        createTaskWidgetEntry(widgetId)?.let { widgetEntry ->
+        createTaskWidgetEntry(widgetId).let { widgetEntry ->
             widgetCreationUseCase.invoke(
                 viewModelScope,
                 CreateTaskWidget.Params(widgetEntry)

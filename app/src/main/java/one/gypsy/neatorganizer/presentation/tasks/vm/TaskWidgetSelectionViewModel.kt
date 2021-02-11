@@ -6,10 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidgetLinkedGroup
+import one.gypsy.neatorganizer.domain.tasks.GetAllSingleTaskGroupEntries
+import one.gypsy.neatorganizer.domain.tasks.UpdateTaskWidgetLinkedGroup
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskGroupEntryItem
-import one.gypsy.neatorganizer.presentation.tasks.model.toTaskGroupEntryItem
 
 class TaskWidgetSelectionViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,

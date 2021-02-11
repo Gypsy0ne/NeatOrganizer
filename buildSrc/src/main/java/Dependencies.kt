@@ -11,6 +11,8 @@ object Dependencies {
 object Module {
     const val database = ":database"
     const val easySwipeMenu = ":easyswipemenulibrary"
+    const val domain = ":domain"
+    const val data = ":data"
 }
 
 object Koin {

@@ -5,10 +5,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
-import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
-import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
-import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.tasks.GetAllSingleTaskGroups
+import one.gypsy.neatorganizer.domain.tasks.RemoveSingleTask
+import one.gypsy.neatorganizer.domain.tasks.UpdateSingleTask
+import one.gypsy.neatorganizer.domain.tasks.UpdateSingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.presentation.common.ContentLoadingStatus
 import one.gypsy.neatorganizer.presentation.common.updateLoadingStatus
 import one.gypsy.neatorganizer.presentation.tasks.model.TaskListItem

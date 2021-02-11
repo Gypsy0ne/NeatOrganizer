@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
-import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutine
-import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineSchedule
+import one.gypsy.neatorganizer.domain.routines.AddRoutine
+import one.gypsy.neatorganizer.domain.routines.AddRoutineSchedule
 
 class AddRoutineViewModel(
-    private val addRoutineUseCase: AddRoutine,
-    private val addRoutineSchedule: AddRoutineSchedule
+    private val addRoutineUseCase: one.gypsy.neatorganizer.domain.routines.AddRoutine,
+    private val addRoutineSchedule: one.gypsy.neatorganizer.domain.routines.AddRoutineSchedule
 ) : ViewModel() {
 
     val routineTitle = MutableLiveData<String>()
@@ -26,7 +26,7 @@ class AddRoutineViewModel(
     fun addRoutine() {
         addRoutineUseCase.invoke(
             viewModelScope,
-            AddRoutine.Params(
+            one.gypsy.neatorganizer.domain.routines.AddRoutine.Params(
                 RoutineWithTasks(
                     name = routineTitle.value.orEmpty(),
                     schedule = RoutineSchedule.EMPTY,
@@ -42,7 +42,7 @@ class AddRoutineViewModel(
     fun onAddRoutineSuccess(newRoutineId: Long) {
         addRoutineSchedule.invoke(
             viewModelScope,
-            AddRoutineSchedule.Params(
+            one.gypsy.neatorganizer.domain.routines.AddRoutineSchedule.Params(
                 RoutineSchedule(
                     routineId = newRoutineId,
                     scheduledDays = scheduledDays
