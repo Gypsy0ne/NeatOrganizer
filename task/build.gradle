@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: Dependencies.dependency
+
+android {
+    dataBinding {
+        enabled = true
+    }
+    
+    compileSdkVersion Version.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Version.minSdkVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = Version.jvmTarget
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

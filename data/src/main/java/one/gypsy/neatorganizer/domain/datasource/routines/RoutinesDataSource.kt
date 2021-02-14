@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
 import androidx.lifecycle.LiveData
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.routines.RoutineWithTasks
 
 interface RoutinesDataSource {
     suspend fun add(routine: RoutineWithTasks): Long

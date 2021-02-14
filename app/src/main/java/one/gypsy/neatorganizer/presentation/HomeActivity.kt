@@ -7,10 +7,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_home.*
 import one.gypsy.neatorganizer.R
-import one.gypsy.neatorganizer.presentation.notes.view.widget.management.NoteWidgetSynchronizationService
-import one.gypsy.neatorganizer.presentation.tasks.view.widget.TaskWidgetSynchronizationService
-import one.gypsy.neatorganizer.utils.extensions.show
-import one.gypsy.neatorganizer.utils.extensions.shrink
+import one.gypsy.neatorganizer.core.utils.extensions.show
+import one.gypsy.neatorganizer.core.utils.extensions.shrink
+import one.gypsy.neatorganizer.note.view.widget.management.NoteWidgetSynchronizationService
+import one.gypsy.neatorganizer.task.view.widget.TaskWidgetSynchronizationService
 
 class HomeActivity : AppCompatActivity() {
 

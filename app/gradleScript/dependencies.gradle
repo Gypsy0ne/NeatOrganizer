@@ -4,21 +4,12 @@ dependencies {
     implementation project(Module.easySwipeMenu)
 
 
-    implementation Koin.core
-    implementation Koin.core_ext
-    implementation Koin.viewmodel
-    testImplementation Koin.test
-
     implementation Glide.glide
     annotationProcessor Glide.compiler
 
-    implementation Spectrum.spectrum
-
-    implementation Lottie.lottie
-
     testImplementation Mockk.mockk
 
-    implementation AutoFitEditText.autoFitEditText
+    implementation View.autoFitEditText
 
     implementation Lifecycle.runtime
     implementation Lifecycle.viewmodel
@@ -30,7 +21,7 @@ dependencies {
 
     implementation WorkManager.runtime
 
-    implementation ConstraintLayout.constraintLayout
+    implementation View.constraintLayout
 
-    implementation Material.material
+    implementation View.material
 }

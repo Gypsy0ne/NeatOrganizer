@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
+import one.gypsy.neatorganizer.domain.routines.RoutineTaskEntry
 
 interface RoutineTasksDataSource {
     suspend fun add(routineTask: RoutineTaskEntry)

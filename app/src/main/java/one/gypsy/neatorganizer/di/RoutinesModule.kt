@@ -1,15 +1,17 @@
 package one.gypsy.neatorganizer.di
 
-import one.gypsy.neatorganizer.presentation.routines.model.RoutineListMapper
-import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineTaskViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.AddRoutineViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.RemoveRoutineViewModel
-import one.gypsy.neatorganizer.presentation.routines.vm.RoutinesViewModel
+import one.gypsy.neatorganizer.routine.alarm.RoutinesResetManager
+import one.gypsy.neatorganizer.routine.model.RoutineListMapper
+import one.gypsy.neatorganizer.routine.vm.AddRoutineTaskViewModel
+import one.gypsy.neatorganizer.routine.vm.AddRoutineViewModel
+import one.gypsy.neatorganizer.routine.vm.RemoveRoutineViewModel
+import one.gypsy.neatorganizer.routine.vm.RoutinesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val routinesUtilsModule = module {
     factory { RoutineListMapper() }
+    factory { RoutinesResetManager(get()) }
 }
 
 val routinesViewModelModule = module {

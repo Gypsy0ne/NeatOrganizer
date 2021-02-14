@@ -22,6 +22,7 @@ import one.gypsy.neatorganizer.domain.interactors.routines.RunAllRoutinesSnapsho
 import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutine
 import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutineSchedule
 import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutineTask
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.RoutinesResetSnapshooter
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.CreateTaskWidget
@@ -49,6 +50,7 @@ import one.gypsy.neatorganizer.domain.repositories.notes.NotesRepository
 import one.gypsy.neatorganizer.domain.repositories.routines.RoutineSchedulesRepository
 import one.gypsy.neatorganizer.domain.repositories.routines.RoutineTasksRepository
 import one.gypsy.neatorganizer.domain.repositories.routines.RoutinesRepository
+import one.gypsy.neatorganizer.domain.repositories.routines.reset.RoutineSnapshotsRepository
 import one.gypsy.neatorganizer.domain.repositories.tasks.SingleTaskGroupsRepository
 import one.gypsy.neatorganizer.domain.repositories.tasks.SingleTasksRepository
 import one.gypsy.neatorganizer.domain.repositories.tasks.TaskWidgetsRepository
@@ -61,6 +63,22 @@ val domainModule = module {
     routinesRepositoryModule
     tasksUseCaseModule
     tasksRepositoryModule
+    routinesResetRepositoryModule
+    routinesResetUtilsModule
+}
+
+private val routinesResetRepositoryModule = module {
+    factory { RoutineSnapshotsRepository(get()) }
+}
+
+private val routinesResetUtilsModule = module {
+    factory {
+        RoutinesResetSnapshooter(
+            routinesRepository = get(),
+            routineSnapshotsRepository = get(),
+            routineTasksRepository = get()
+        )
+    }
 }
 
 private val tasksRepositoryModule = module {

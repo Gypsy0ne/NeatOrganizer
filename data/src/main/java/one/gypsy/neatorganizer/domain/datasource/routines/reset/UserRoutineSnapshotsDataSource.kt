@@ -1,8 +1,8 @@
 package one.gypsy.neatorganizer.domain.datasource.routines.reset
 
 import one.gypsy.neatorganizer.database.dao.routines.RoutineSnapshotsDao
-import one.gypsy.neatorganizer.domain.dto.routines.reset.RoutineSnapshot
-import one.gypsy.neatorganizer.domain.dto.routines.reset.toRoutineSnapshotEntity
+import one.gypsy.neatorganizer.domain.routines.reset.RoutineSnapshot
+import one.gypsy.neatorganizer.domain.routines.reset.toRoutineSnapshotEntity
 
 class UserRoutineSnapshotsDataSource(private val routineSnapshotsDao: RoutineSnapshotsDao) :
     RoutineSnapshotsDataSource {

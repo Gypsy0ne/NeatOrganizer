@@ -9,6 +9,10 @@ object Dependencies {
 }
 
 object Module {
+    const val routine = ":routine"
+    const val task = ":task"
+    const val note = ":note"
+    const val core = ":core"
     const val database = ":database"
     const val easySwipeMenu = ":easyswipemenulibrary"
     const val domain = ":domain"
@@ -31,16 +35,6 @@ object Glide {
     const val compiler = "com.github.bumptech.glide:compiler:${Version.glide_version}"
 }
 
-object Spectrum {
-    // impl
-    const val spectrum = "com.thebluealliance:spectrum:${Version.spectrum_version}"
-}
-
-object Lottie {
-    // impl
-    const val lottie = "com.airbnb.android:lottie:${Version.lottie_version}"
-}
-
 object Junit {
     // testImpl
     const val junit = "junit:junit:${Version.junit_version}"
@@ -59,12 +53,6 @@ object Room {
     const val compiler = "androidx.room:room-compiler:${Version.room_version}"
     // testImpl
     const val testing = "androidx.room:room-testing:${Version.room_version}"
-}
-
-object AutoFitEditText {
-    // impl
-    const val autoFitEditText =
-        "com.github.ViksaaSkool:AutoFitEditText:${Version.auto_fit_edit_text_version}"
 }
 
 object Mockk {
@@ -94,15 +82,21 @@ object WorkManager {
     const val runtime = "androidx.work:work-runtime-ktx:${Version.work_manager_version}"
 }
 
-object Material {
-    // impl
-    const val material = "com.google.android.material:material:${Version.material_version}"
-}
-
-object ConstraintLayout {
+object View {
     // impl
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${Version.constraint_layout_version}"
+    const val recyclerView = "androidx.recyclerview:recyclerview:${Version.recycler_view_version}"
+    const val autoFitEditText =
+        "com.github.ViksaaSkool:AutoFitEditText:${Version.auto_fit_edit_text_version}"
+    const val material = "com.google.android.material:material:${Version.material_version}"
+    const val lottie = "com.airbnb.android:lottie:${Version.lottie_version}"
+    const val spectrum = "com.thebluealliance:spectrum:${Version.spectrum_version}"
+}
+
+object AppCompat {
+    // impl
+    const val appCompat = "androidx.appcompat:appcompat:${Version.appcompat_version}"
 }
 
 object TestUtils {

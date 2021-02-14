@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/tasks"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.view.TasksFragment"
+        android:name="one.gypsy.neatorganizer.task.view.TasksFragment"
         android:label="TasksFragment">
         <action
             android:id="@+id/tasksToSingleTaskAddition"
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/routines"
-        android:name="one.gypsy.neatorganizer.presentation.routines.view.RoutinesFragment"
+        android:name="one.gypsy.neatorganizer.routine.view.RoutinesFragment"
         android:label="RoutinesFragment">
         <action
             android:id="@+id/routinesToRoutineTaskAddition"
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/notes"
-        android:name="one.gypsy.neatorganizer.presentation.notes.view.NotesFragment"
+        android:name="one.gypsy.neatorganizer.note.view.NotesFragment"
         android:label="NotesFragment">
 
         <action
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/noteDetails"
-        android:name="one.gypsy.neatorganizer.presentation.notes.view.NoteDetailsFragment"
+        android:name="one.gypsy.neatorganizer.note.view.NoteDetailsFragment"
         android:label="NoteDetailsFragment">
         <argument
             android:name="noteId"
@@ -66,17 +66,17 @@
 
     <dialog
         android:id="@+id/taskGroupAddition"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskGroupDialogFragment"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskGroupDialogFragment"
         android:label="AddTaskGroupDialogFragment" />
 
     <dialog
         android:id="@+id/noteAddition"
-        android:name="one.gypsy.neatorganizer.presentation.notes.view.AddNoteDialogFragment"
+        android:name="one.gypsy.neatorganizer.note.view.AddNoteDialogFragment"
         android:label="AddNoteDialogFragment" />
 
     <dialog
         android:id="@+id/singleTaskAddition"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.view.AddSingleTaskDialogFragment"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskDialogFragment"
         android:label="AddSingleTaskDialogFragment">
         <argument
             android:name="groupId"
@@ -85,7 +85,7 @@
 
     <dialog
         android:id="@+id/routineTaskAddition"
-        android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineTaskDialogFragment"
+        android:name="one.gypsy.neatorganizer.routine.view.AddRoutineTaskDialogFragment"
         android:label="AddRoutineTaskDialogFragment">
         <argument
             android:name="routineId"
@@ -94,7 +94,7 @@
 
     <dialog
         android:id="@+id/removeRoutineConfirmation"
-        android:name="one.gypsy.neatorganizer.presentation.routines.view.RemoveRoutineSubmitDialogFragment"
+        android:name="one.gypsy.neatorganizer.routine.view.RemoveRoutineSubmitDialogFragment"
         android:label="RemoveRoutineSubmitDialogFragment">
         <argument
             android:name="itemId"
@@ -106,7 +106,7 @@
 
     <dialog
         android:id="@+id/removeTaskGroupConfirmation"
-        android:name="one.gypsy.neatorganizer.presentation.tasks.view.RemoveTaskGroupSubmitDialogFragment"
+        android:name="one.gypsy.neatorganizer.task.view.RemoveTaskGroupSubmitDialogFragment"
         android:label="RemoveTaskGroupSubmitDialogFragment">
         <argument
             android:name="itemId"
@@ -118,12 +118,12 @@
 
     <dialog
         android:id="@+id/routineAddition"
-        android:name="one.gypsy.neatorganizer.presentation.routines.view.AddRoutineDialogFragment"
+        android:name="one.gypsy.neatorganizer.routine.view.AddRoutineDialogFragment"
         android:label="AddRoutineDialogFragment" />
 
     <dialog
         android:id="@+id/deleteNoteConfirmation"
-        android:name="one.gypsy.neatorganizer.presentation.notes.view.DeleteNoteDialogFragment"
+        android:name="one.gypsy.neatorganizer.note.view.DeleteNoteDialogFragment"
         android:label="DeleteNoteSubmitDialogFragment">
         <argument
             android:name="noteId"

@@ -1,0 +1,26 @@
+apply from: Dependencies.common
+
+dependencies {
+    implementation project(Module.easySwipeMenu)
+    implementation project(Module.domain)
+    implementation project(Module.core)
+
+    implementation Lifecycle.livedata
+    implementation Lifecycle.ext
+    implementation Lifecycle.runtime
+    implementation Lifecycle.viewmodel
+
+    implementation Koin.viewmodel
+    testImplementation Koin.test
+
+    implementation View.constraintLayout
+    implementation View.recyclerView
+    implementation View.autoFitEditText
+    implementation View.lottie
+    implementation View.spectrum
+
+    implementation AppCompat.appCompat
+
+    implementation Navigation.fragment
+    implementation Navigation.ui
+}

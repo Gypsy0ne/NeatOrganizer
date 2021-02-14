@@ -1,3 +1,7 @@
+include ':routine'
+include ':task'
+include ':note'
+include ':core'
 include ':domain'
 include ':data'
 include ':database'

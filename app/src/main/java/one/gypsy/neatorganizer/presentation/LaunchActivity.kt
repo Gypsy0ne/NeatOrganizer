@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import one.gypsy.neatorganizer.presentation.routines.alarm.RoutinesResetManager
+import one.gypsy.neatorganizer.routine.alarm.RoutinesResetManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

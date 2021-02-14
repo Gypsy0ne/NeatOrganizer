@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
+import one.gypsy.neatorganizer.domain.routines.RoutineSchedule
 
 interface RoutineSchedulesDataSource {
     suspend fun add(routineSchedule: RoutineSchedule)

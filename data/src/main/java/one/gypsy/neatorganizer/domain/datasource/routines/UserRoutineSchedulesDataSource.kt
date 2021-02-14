@@ -1,8 +1,8 @@
 package one.gypsy.neatorganizer.domain.datasource.routines
 
 import one.gypsy.neatorganizer.database.dao.routines.RoutineSchedulesDao
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
-import one.gypsy.neatorganizer.domain.dto.routines.toRoutineScheduleEntity
+import one.gypsy.neatorganizer.domain.routines.RoutineSchedule
+import one.gypsy.neatorganizer.domain.routines.toRoutineScheduleEntity
 
 class UserRoutineSchedulesDataSource(private val routineSchedulesDao: RoutineSchedulesDao) :
     RoutineSchedulesDataSource {

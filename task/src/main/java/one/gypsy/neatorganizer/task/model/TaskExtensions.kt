@@ -1,0 +1,26 @@
+package one.gypsy.neatorganizer.task.model
+
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+
+fun SingleTaskGroupWithTasks.toTaskListHeader(expanded: Boolean) = TaskListItem.TaskListHeader(
+    id = this.taskGroup.id,
+    title = this.taskGroup.name,
+    subItemsCount = this.tasks.size,
+    expanded = expanded,
+    createdAt = this.taskGroup.createdAt
+)
+
+fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
+    id = this.id,
+    title = this.name,
+    groupId = this.groupId,
+    done = this.done,
+    createdAt = this.createdAt
+)
+
+fun SingleTaskGroupEntry.toTaskGroupEntryItem() =
+    TaskGroupEntryItem(id, name, tasksCount, tasksDone)
+
+fun SingleTaskEntry.toTaskEntryWidgetItem() = TaskEntryWidgetItem(name, done)

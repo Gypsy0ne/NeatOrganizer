@@ -7,7 +7,8 @@ package one.gypsy.neatorganizer.domain.interactors
 sealed class Failure(val exception: Exception = Exception("Failure")) {
 
     /** * Extend this class for feature specific failures.*/
-    open class FeatureFailure(featureException: Exception = Exception("Feature failure")) : Failure(featureException)
+    open class FeatureFailure(featureException: Exception = Exception("Feature failure")) :
+        Failure(featureException)
 
     override fun equals(other: Any?): Boolean {
         return other is Failure

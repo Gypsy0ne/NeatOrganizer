@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/widgetNoteManage"
-        android:name="one.gypsy.neatorganizer.presentation.notes.view.widget.management.NoteManageFragment"
+        android:name="one.gypsy.neatorganizer.note.view.widget.management.NoteManageFragment"
         android:label="NoteManageFragment">
 
         <action
@@ -16,7 +16,7 @@
 
     <dialog
         android:id="@+id/widgetNoteSelection"
-        android:name="one.gypsy.neatorganizer.presentation.notes.view.widget.management.NoteSelectionDialogFragment"
+        android:name="one.gypsy.neatorganizer.note.view.widget.management.NoteSelectionDialogFragment"
         android:label="SelectNoteDialogFragment">
 
     <argument
