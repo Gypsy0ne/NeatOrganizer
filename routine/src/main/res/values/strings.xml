@@ -3,4 +3,5 @@
     <string name="add_routine_task_dialog_fragment_content_hint">Task title</string>
     <string name="add_routine_dialog_fragment_content_hint">Routine title</string>
     <string name="remove_routine_subject">routine</string>
+    <string name="add_routine_dialog_scheduled_days">Scheduled days</string>
 </resources>
