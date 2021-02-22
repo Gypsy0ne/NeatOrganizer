@@ -11,7 +11,6 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTasksByGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetTaskGroupIdByWidgetId
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.model.TaskEntryWidgetItem
-import one.gypsy.neatorganizer.task.model.toTaskEntryWidgetItem
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

@@ -13,7 +13,6 @@ import one.gypsy.neatorganizer.core.utils.extensions.delayItemsEmission
 import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
-import one.gypsy.neatorganizer.note.model.toNoteEntryItem
 
 class NotesListingViewModel(
     getAllNoteEntriesUseCase: GetAllNoteEntries,

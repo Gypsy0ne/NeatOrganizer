@@ -11,7 +11,6 @@ import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.SaveNoteWidget
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
-import one.gypsy.neatorganizer.note.model.toNoteEntryItem
 
 class NoteWidgetConfigurationViewModel(
     getAllNoteEntriesUseCase: GetAllNoteEntries,

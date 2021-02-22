@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.database.entity.routines
 
-import one.gypsy.neatorganizer.data.database.DatabaseTest
+import one.gypsy.neatorganizer.domain.database.DatabaseTest
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

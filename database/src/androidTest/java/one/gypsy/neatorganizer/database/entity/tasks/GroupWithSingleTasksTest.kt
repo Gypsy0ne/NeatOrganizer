@@ -1,11 +1,11 @@
-package one.gypsy.neatorganizer.data.database.entity.tasks
+package one.gypsy.neatorganizer.domain.database.entity.tasks
 
-import one.gypsy.neatorganizer.data.database.DatabaseTest
 import one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
 import one.gypsy.neatorganizer.database.dao.tasks.SingleTasksDao
 import one.gypsy.neatorganizer.database.entity.tasks.toSingleTaskEntry
 import one.gypsy.neatorganizer.database.entity.tasks.toSingleTaskGroupEntry
 import one.gypsy.neatorganizer.database.entity.tasks.toSingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.database.DatabaseTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test

@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -25,6 +25,6 @@ class RemoveSingleTask(private val singleTasksRepository: SingleTasksRepository)
         }
     }
 
-    data class Params(val singleTask: SingleTaskEntry)
+    data class Params(val singleTask: SingleTaskEntryDto)
     data class RemoveSingleTaskFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -25,6 +25,6 @@ class AddTaskGroup(private val singleTaskGroupsRepository: SingleTaskGroupsRepos
         }
     }
 
-    data class Params(val singleTaskGroup: SingleTaskGroup)
+    data class Params(val singleTaskGroup: SingleTaskGroupDto)
     data class AddSingleTaskGroupFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

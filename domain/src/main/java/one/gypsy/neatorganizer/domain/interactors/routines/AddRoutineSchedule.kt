@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.routines
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineScheduleDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -25,6 +25,6 @@ class AddRoutineSchedule(private val routineSchedulesRepository: RoutineSchedule
         }
     }
 
-    data class Params(val routineSchedule: RoutineSchedule)
+    data class Params(val routineSchedule: RoutineScheduleDto)
     data class AddRoutineScheduleFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

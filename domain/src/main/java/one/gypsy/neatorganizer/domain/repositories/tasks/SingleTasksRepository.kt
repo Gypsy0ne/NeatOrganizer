@@ -1,7 +1,7 @@
 package one.gypsy.neatorganizer.domain.repositories.tasks
 
 import one.gypsy.neatorganizer.domain.datasource.tasks.SingleTasksDataSource
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
+import one.gypsy.neatorganizer.domain.model.tasks.SingleTaskEntry
 
 class SingleTasksRepository(private val dataSource: SingleTasksDataSource) {
 

@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.data.database
+package one.gypsy.neatorganizer.domain.database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room

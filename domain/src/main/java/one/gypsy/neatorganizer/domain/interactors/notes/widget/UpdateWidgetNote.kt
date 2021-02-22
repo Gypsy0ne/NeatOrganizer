@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.notes.widget
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -26,6 +26,6 @@ class UpdateWidgetNote(private val noteWidgetsRepository: NoteWidgetsRepository)
         }
     }
 
-    data class Params(val noteWidget: NoteWidgetEntry)
+    data class Params(val noteWidget: NoteWidgetEntryDto)
     data class UpdateNoteWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

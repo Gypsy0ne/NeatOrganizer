@@ -18,7 +18,6 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
 import one.gypsy.neatorganizer.task.model.TaskListItem
 import one.gypsy.neatorganizer.task.model.toSingleTask
-import one.gypsy.neatorganizer.task.model.toTaskListSubItem
 
 class TaskWidgetContentManageViewModel(
     taskGroupId: Long,
@@ -51,16 +50,16 @@ class TaskWidgetContentManageViewModel(
 
     private fun onGetAllSingleTasksSuccess(taskGroupWithTasks: LiveData<SingleTaskGroupWithTasks>) {
         _listedTasks.addSource(taskGroupWithTasks) {
-            _listedTasks.postValue(taskGroupWithTasks.value?.tasks)
+            _listedTasks.postValue(taskGroupWithTasks.value.tasks)
         }
         _taskGroup.addSource(taskGroupWithTasks) {
-            _taskGroup.postValue(taskGroupWithTasks.value?.taskGroup)
+            _taskGroup.postValue(taskGroupWithTasks.value.taskGroup)
         }
         _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
     }
 
     fun onTitleEditionFinished(editedTitle: String) {
-        taskGroup.value?.let { taskGroup ->
+        taskGroup.value.let { taskGroup ->
             updateTaskGroupUseCase.invoke(
                 viewModelScope,
                 UpdateSingleTaskGroup.Params(

@@ -9,7 +9,6 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidgetLinkedGroup
 import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
-import one.gypsy.neatorganizer.task.model.toTaskGroupEntryItem
 
 class TaskWidgetSelectionViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
@@ -27,7 +26,7 @@ class TaskWidgetSelectionViewModel(
 
     init {
         getAllTaskGroupEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either({}, ::onGetAllSingleTaskGroupEntriesSuccess)
+            it.either({}, { it.value?.first(). })
         }
     }
 

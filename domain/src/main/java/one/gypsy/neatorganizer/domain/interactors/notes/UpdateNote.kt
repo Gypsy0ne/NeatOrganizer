@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.notes
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.notes.Note
+import one.gypsy.neatorganizer.domain.dto.notes.NoteDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -27,6 +27,6 @@ class UpdateNote(
         }
     }
 
-    data class Params(val note: Note)
+    data class Params(val note: NoteDto)
     data class AddRoutineFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
 
 class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : ViewModel() {
@@ -18,7 +18,7 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
         addTaskGroupUseCase.invoke(
             viewModelScope,
             AddTaskGroup.Params(
-                SingleTaskGroup(
+                SingleTaskGroupDto(
                     name = taskGroupTitle.value.orEmpty(),
                     createdAt = System.currentTimeMillis()
                 )

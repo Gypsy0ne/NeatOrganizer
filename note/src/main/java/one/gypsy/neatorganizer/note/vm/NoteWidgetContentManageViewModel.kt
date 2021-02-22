@@ -10,7 +10,6 @@ import one.gypsy.neatorganizer.domain.interactors.notes.GetNoteById
 import one.gypsy.neatorganizer.domain.interactors.notes.UpdateNote
 import one.gypsy.neatorganizer.note.model.NoteItem
 import one.gypsy.neatorganizer.note.model.toNote
-import one.gypsy.neatorganizer.note.model.toNoteItem
 
 class NoteWidgetContentManageViewModel(
     noteId: Long,

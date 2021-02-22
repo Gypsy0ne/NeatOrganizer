@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -26,6 +26,6 @@ class CreateTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository)
         }
     }
 
-    data class Params(val taskWidgetEntry: TaskWidgetEntry)
+    data class Params(val taskWidgetEntry: TaskWidgetEntryDto)
     data class CreateTaskWidgetFailure(val error: Exception) : Failure.FeatureFailure(error)
 }

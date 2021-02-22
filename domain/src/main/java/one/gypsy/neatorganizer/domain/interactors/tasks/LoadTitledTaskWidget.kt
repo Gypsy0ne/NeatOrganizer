@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.tasks
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -10,9 +10,9 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget.Par
 import one.gypsy.neatorganizer.domain.repositories.tasks.TaskWidgetsRepository
 
 class LoadTitledTaskWidget(private val taskWidgetsRepository: TaskWidgetsRepository) :
-    BaseUseCase<TitledTaskWidgetEntry, Params>() {
+    BaseUseCase<TitledTaskWidgetEntryDto, Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, TitledTaskWidgetEntry> {
+    override suspend fun run(params: Params): Either<Failure, TitledTaskWidgetEntryDto> {
         return try {
             withContext(Dispatchers.IO) {
                 Either.Right(taskWidgetsRepository.getTitledTaskWidgetById(params.taskWidgetId))

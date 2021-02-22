@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.domain.interactors.routines
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntryDto
 import one.gypsy.neatorganizer.domain.interactors.BaseUseCase
 import one.gypsy.neatorganizer.domain.interactors.Either
 import one.gypsy.neatorganizer.domain.interactors.Failure
@@ -25,6 +25,6 @@ class RemoveRoutineTask(private val routineTasksRepository: RoutineTasksReposito
         }
     }
 
-    data class Params(val routineTask: RoutineTaskEntry)
+    data class Params(val routineTask: RoutineTaskEntryDto)
     data class RemoveRoutineTaskFailure(val error: Exception) : Failure.FeatureFailure(error)
 }
