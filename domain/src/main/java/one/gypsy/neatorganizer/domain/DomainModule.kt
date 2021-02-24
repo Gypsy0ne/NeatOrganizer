@@ -56,22 +56,22 @@ import one.gypsy.neatorganizer.domain.repositories.tasks.SingleTasksRepository
 import one.gypsy.neatorganizer.domain.repositories.tasks.TaskWidgetsRepository
 import org.koin.dsl.module
 
-val domainModule = module {
-    notesRepositoryModule
-    notesUseCaseModule
-    routinesUseCaseModule
-    routinesRepositoryModule
-    tasksUseCaseModule
-    tasksRepositoryModule
-    routinesResetRepositoryModule
-    routinesResetUtilsModule
-}
+// val domainModule = module {
+//    notesRepositoryModule
+//    notesUseCaseModule
+//    routinesUseCaseModule
+//    routinesRepositoryModule
+//    tasksUseCaseModule
+//    tasksRepositoryModule
+//    routinesResetRepositoryModule
+//    routinesResetUtilsModule
+// }
 
-private val routinesResetRepositoryModule = module {
+val routinesResetRepositoryModule = module {
     factory { RoutineSnapshotsRepository(get()) }
 }
 
-private val routinesResetUtilsModule = module {
+val routinesResetUtilsModule = module {
     factory {
         RoutinesResetSnapshooter(
             routinesRepository = get(),
@@ -81,13 +81,13 @@ private val routinesResetUtilsModule = module {
     }
 }
 
-private val tasksRepositoryModule = module {
+val tasksRepositoryModule = module {
     factory { SingleTasksRepository(get()) }
     factory { SingleTaskGroupsRepository(get()) }
     factory { TaskWidgetsRepository(get()) }
 }
 
-private val tasksUseCaseModule = module {
+val tasksUseCaseModule = module {
     factory { AddSingleTask(get()) }
     factory { AddTaskGroup(get()) }
     factory { GetAllSingleTaskGroups(get()) }
@@ -112,13 +112,13 @@ private val tasksUseCaseModule = module {
     factory { GetTaskGroupIdByWidgetId(get()) }
 }
 
-private val routinesRepositoryModule = module {
+val routinesRepositoryModule = module {
     factory { RoutineSchedulesRepository(get()) }
     factory { RoutinesRepository(get()) }
     factory { RoutineTasksRepository(get()) }
 }
 
-private val routinesUseCaseModule = module {
+val routinesUseCaseModule = module {
     factory { AddRoutine(get()) }
     factory { AddRoutineSchedule(get()) }
     factory { AddRoutineTask(get()) }
@@ -132,12 +132,12 @@ private val routinesUseCaseModule = module {
     factory { UpdateRoutineTask(get()) }
 }
 
-private val notesRepositoryModule = module {
+val notesRepositoryModule = module {
     factory { NotesRepository(get()) }
     factory { NoteWidgetsRepository(get()) }
 }
 
-private val notesUseCaseModule = module {
+val notesUseCaseModule = module {
     factory { DeleteNoteById(get()) }
     factory { GetAllNoteEntries(get()) }
     factory { GetNoteById(get()) }

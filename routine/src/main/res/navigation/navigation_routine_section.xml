@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_routine_section">
+
+    <fragment
+        android:id="@+id/routines"
+        android:name="one.gypsy.neatorganizer.routine.view.RoutinesFragment"
+        android:label="RoutinesFragment">
+        <action
+            android:id="@+id/routinesToRoutineTaskAddition"
+            app:destination="@id/routineTaskAddition" />
+        <action
+            android:id="@+id/routinesToRemoveRoutineConfirmation"
+            app:destination="@id/removeRoutineConfirmation" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/routineTaskAddition"
+        android:name="one.gypsy.neatorganizer.routine.view.AddRoutineTaskDialogFragment"
+        android:label="AddRoutineTaskDialogFragment">
+        <argument
+            android:name="routineId"
+            app:argType="long" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/removeRoutineConfirmation"
+        android:name="one.gypsy.neatorganizer.routine.view.RemoveRoutineSubmitDialogFragment"
+        android:label="RemoveRoutineSubmitDialogFragment">
+        <argument
+            android:name="itemId"
+            app:argType="long" />
+        <argument
+            android:name="subItemsCount"
+            app:argType="integer" />
+    </dialog>
+
+
+    <dialog
+        android:id="@+id/routineAddition"
+        android:name="one.gypsy.neatorganizer.routine.view.AddRoutineDialogFragment"
+        android:label="AddRoutineDialogFragment" />
+
+</navigation>

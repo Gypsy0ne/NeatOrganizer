@@ -6,5 +6,4 @@
     <string name="add_note_dialog_fragment_color_header">Note color</string>
     <string name="widget_note_configuration_title">Select the note</string>
     <string name="add_note_dialog_fragment_content_hint">Note title</string>
-    <string name="bar_note_untitled_hint">Untitled note</string>
 </resources>

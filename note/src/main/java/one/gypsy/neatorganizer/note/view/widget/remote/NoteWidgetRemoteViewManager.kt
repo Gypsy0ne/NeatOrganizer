@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.core.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
+import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.domain.dto.notes.TitledNoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.DeleteNoteWidgetById
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.LoadTitledNoteWidget
@@ -24,7 +25,7 @@ internal class NoteWidgetRemoteViewManager(
     private val widgetManager: AppWidgetManager,
     private val loadTitledNoteWidgetUseCase: LoadTitledNoteWidget,
     private val deleteNoteWidgetUseCase: DeleteNoteWidgetById
-) : one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager {
+) : WidgetRemoteViewManager {
 
     override fun updateWidget(appWidgetId: Int) {
         CoroutineScope(Dispatchers.IO).launch {

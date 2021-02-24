@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">NeatOrganizer</string>
-    <string name="home_activity_menu_add">Add</string>
     <string name="activity_home_bottom_navigation_menu_routines">Routines</string>
     <string name="activity_home_bottom_navigation_menu_tasks">Tasks</string>
     <string name="activity_home_bottom_navigation_menu_notes">Notes</string>

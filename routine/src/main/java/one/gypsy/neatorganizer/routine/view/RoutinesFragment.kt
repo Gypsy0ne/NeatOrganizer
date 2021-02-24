@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import one.gypsy.neatorganizer.core.SectionFragment
 import one.gypsy.neatorganizer.routine.R
 import one.gypsy.neatorganizer.routine.databinding.FragmentRoutinesBinding
 import one.gypsy.neatorganizer.routine.vm.RoutinesViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-internal class RoutinesFragment : one.gypsy.neatorganizer.core.SectionFragment() {
+internal class RoutinesFragment : SectionFragment() {
 
     private val routinesViewModel: RoutinesViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentRoutinesBinding

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_task_section">
+    <fragment
+        android:id="@+id/tasks"
+        android:name="one.gypsy.neatorganizer.task.view.TasksFragment"
+        android:label="TasksFragment">
+        <action
+            android:id="@+id/tasksToSingleTaskAddition"
+            app:destination="@id/singleTaskAddition" />
+        <action
+            android:id="@+id/tasksToSingleTaskGroupRemoveConfirmation"
+            app:destination="@id/removeTaskGroupConfirmation" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/taskGroupAddition"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskGroupDialogFragment"
+        android:label="AddTaskGroupDialogFragment" />
+
+    <dialog
+        android:id="@+id/singleTaskAddition"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskDialogFragment"
+        android:label="AddSingleTaskDialogFragment">
+        <argument
+            android:name="groupId"
+            app:argType="long" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/removeTaskGroupConfirmation"
+        android:name="one.gypsy.neatorganizer.task.view.RemoveTaskGroupSubmitDialogFragment"
+        android:label="RemoveTaskGroupSubmitDialogFragment">
+        <argument
+            android:name="itemId"
+            app:argType="long" />
+        <argument
+            android:name="subItemsCount"
+            app:argType="integer" />
+    </dialog>
+
+</navigation>

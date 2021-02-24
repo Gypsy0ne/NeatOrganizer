@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<item
+    <item
         android:id="@+id/edit_note"
         android:icon="@drawable/ic_edit_white_24"
         android:orderInCategory="98"
-        android:title="@string/home_activity_menu_add"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        tools:ignore="MenuTitle" />
 
     <item
         android:id="@+id/save_note"
         android:icon="@drawable/ic_check_white_24dp"
         android:orderInCategory="97"
-        android:title="@string/home_activity_menu_add"
         android:visible="false"
         app:showAsAction="ifRoom" />
 
@@ -21,6 +21,6 @@
         android:id="@+id/share_note"
         android:icon="@drawable/ic_share_24"
         android:orderInCategory="96"
-        android:title="@string/home_activity_menu_add"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        tools:ignore="MenuTitle" />
 </menu>

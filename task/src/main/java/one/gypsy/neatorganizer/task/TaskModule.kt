@@ -1,5 +1,6 @@
 package one.gypsy.neatorganizer.task
 
+import android.appwidget.AppWidgetManager
 import one.gypsy.neatorganizer.core.widget.WidgetNotifier
 import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.task.model.TaskListMapper
@@ -17,17 +18,17 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val taskModule = module {
-    taskUtilsModule
-    taskViewModelModule
-}
+// val taskModule = module {
+//    taskUtilsModule
+//    taskViewModelModule
+// }
 
-private val taskUtilsModule = module {
+val taskUtilsModule = module {
     factory { TaskListMapper() }
     factory<WidgetRemoteViewManager>(named("taskRemoteViewManager")) {
         TaskWidgetRemoteViewManager(
             context = get(),
-            widgetManager = get(),
+            widgetManager = AppWidgetManager.getInstance(get()),
             loadTitledTaskWidgetUseCase = get(),
             removeTaskWidgetUseCase = get()
         )
@@ -35,7 +36,7 @@ private val taskUtilsModule = module {
     factory<WidgetNotifier>(named("taskWidgetNotifier")) { TaskWidgetNotifier(androidContext()) }
 }
 
-private val taskViewModelModule = module {
+val taskViewModelModule = module {
     viewModel {
         TasksViewModel(
             removeSingleTaskUseCase = get(),

@@ -20,29 +20,29 @@ import one.gypsy.neatorganizer.data.datasource.tasks.UserSingleTasksDataSource
 import one.gypsy.neatorganizer.data.datasource.tasks.UserTaskWidgetDataSource
 import org.koin.dsl.module
 
-val dataModule = module {
-    notesDataSourceModule
-    routinesDataSourceModule
-    routinesResetDataSourceModule
-    tasksDataSourceModule
-}
+// val dataModule = module {
+//    notesDataSourceModule
+//    routinesDataSourceModule
+//    routinesResetDataSourceModule
+//    tasksDataSourceModule
+// }
 
-private val notesDataSourceModule = module {
+val notesDataSourceModule = module {
     factory<NotesDataSource> { UserNotesDataSource(get()) }
     factory<NoteWidgetsDataSource> { UserNoteWidgetsDataSource(get()) }
 }
 
-private val routinesDataSourceModule = module {
+val routinesDataSourceModule = module {
     factory<RoutineSchedulesDataSource> { UserRoutineSchedulesDataSource(get()) }
     factory<RoutinesDataSource> { UserRoutinesDataSource(get()) }
     factory<RoutineTasksDataSource> { UserRoutineTasksDataSource(get()) }
 }
 
-private val routinesResetDataSourceModule = module {
+val routinesResetDataSourceModule = module {
     factory<RoutineSnapshotsDataSource> { UserRoutineSnapshotsDataSource(get()) }
 }
 
-private val tasksDataSourceModule = module {
+val tasksDataSourceModule = module {
     factory<SingleTasksDataSource> { UserSingleTasksDataSource(get()) }
     factory<SingleTaskGroupsDataSource> { UserSingleTaskGroupsDataSource(get()) }
     factory<TaskWidgetDataSource> { UserTaskWidgetDataSource(get()) }
