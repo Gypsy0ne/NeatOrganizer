@@ -11,7 +11,7 @@ import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
 import one.gypsy.neatorganizer.task.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
 
-class TaskWidgetActivity : AppCompatActivity() {
+internal class TaskWidgetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

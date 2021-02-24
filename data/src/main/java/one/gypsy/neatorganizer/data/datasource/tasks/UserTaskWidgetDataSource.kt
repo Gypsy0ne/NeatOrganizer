@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.data.model.tasks.toTaskWidgetEntry
 import one.gypsy.neatorganizer.data.model.tasks.toTitledTaskWidgetEntry
 import one.gypsy.neatorganizer.database.dao.tasks.TaskWidgetsDao
 
-class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
+internal class UserTaskWidgetDataSource(private val widgetsDao: TaskWidgetsDao) :
     TaskWidgetDataSource {
 
     override suspend fun createTaskWidget(taskWidgetEntry: TaskWidgetEntry) {

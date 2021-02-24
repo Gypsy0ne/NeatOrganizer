@@ -21,7 +21,7 @@ object Module {
 
 object Koin {
     // impl
-    const val core = "org.koin:koin-core:${Version.koin_version}"
+    const val core = "org.koin:koin-android:${Version.koin_version}"
     const val core_ext = "org.koin:koin-core-ext:${Version.koin_version}"
     const val viewmodel = "org.koin:koin-android-viewmodel:${Version.koin_version}"
     // testImpl

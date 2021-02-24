@@ -12,7 +12,7 @@ import one.gypsy.neatorganizer.task.databinding.DialogFragmentAddTaskGroupBindin
 import one.gypsy.neatorganizer.task.vm.AddTaskGroupViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AddSingleTaskGroupDialogFragment : BottomSheetDialogFragment() {
+internal class AddSingleTaskGroupDialogFragment : BottomSheetDialogFragment() {
 
     private val viewModel: AddTaskGroupViewModel by viewModel()
     private lateinit var fragmentBinding: DialogFragmentAddTaskGroupBinding

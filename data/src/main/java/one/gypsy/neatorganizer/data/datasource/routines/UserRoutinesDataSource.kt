@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.data.model.routines.toRoutineEntity
 import one.gypsy.neatorganizer.data.model.routines.toRoutineWithTasks
 import one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
 
-class UserRoutinesDataSource(private val routinesDao: RoutinesDao) :
+internal class UserRoutinesDataSource(private val routinesDao: RoutinesDao) :
     RoutinesDataSource {
 
     override suspend fun add(routine: RoutineWithTasks) =

@@ -5,12 +5,13 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidgetLinkedGroup
 import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
+import one.gypsy.neatorganizer.task.model.toTaskGroupEntryItem
 
-class TaskWidgetSelectionViewModel(
+internal class TaskWidgetSelectionViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
     private val widgetUpdateUseCase: UpdateTaskWidgetLinkedGroup
 ) : ViewModel() {
@@ -26,11 +27,11 @@ class TaskWidgetSelectionViewModel(
 
     init {
         getAllTaskGroupEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either({}, { it.value?.first(). })
+            it.either({}, ::onGetAllSingleTaskGroupEntriesSuccess)
         }
     }
 
-    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntry>>) =
+    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntryDto>>) =
         _listedTaskGroups.addSource(taskGroupEntriesObservable) { taskGroupEntries ->
             _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
         }

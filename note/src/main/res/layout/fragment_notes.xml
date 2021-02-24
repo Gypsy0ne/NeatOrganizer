@@ -17,6 +17,7 @@
             type="one.gypsy.neatorganizer.note.view.NoteEntriesAdapter" />
 
         <import type="one.gypsy.neatorganizer.core.listing.ContentLoadingStatusKt" />
+        <import type="one.gypsy.neatorganizer.note.R" />
 
     </data>
 
@@ -46,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.4"
-            app:lottieResourceFile="@{ContentLoadingStatusKt.toNotesStatusAnimationResource(viewModel.contentLoadingStatus)}" />
+            app:lottieResourceFile="@{ContentLoadingStatusKt.toStatusAnimationResource(viewModel.contentLoadingStatus, R.raw.lottie_empty_notes)}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

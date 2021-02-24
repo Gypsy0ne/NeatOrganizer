@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.core.utils.extensions.shrink
 import one.gypsy.neatorganizer.task.databinding.ItemTaskBinding
 import one.gypsy.neatorganizer.task.model.TaskListItem
 
-class TaskSubItemViewHolder(
+internal class TaskSubItemViewHolder(
     private val itemBinding: ItemTaskBinding,
     private val clickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null
 ) : TaskViewHolder(itemBinding.root), ListedSubItem<TaskListItem.TaskListSubItem> {

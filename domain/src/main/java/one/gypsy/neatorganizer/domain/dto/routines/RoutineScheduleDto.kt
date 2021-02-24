@@ -13,7 +13,7 @@ data class RoutineScheduleDto(
     }
 }
 
-fun RoutineScheduleDto.toRoutineSchedule() = RoutineSchedule(
+internal fun RoutineScheduleDto.toRoutineSchedule() = RoutineSchedule(
     routineId = this.routineId,
     scheduledDays = scheduledDays
 )

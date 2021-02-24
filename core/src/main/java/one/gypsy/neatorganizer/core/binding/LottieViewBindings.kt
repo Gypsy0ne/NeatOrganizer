@@ -3,6 +3,8 @@ package one.gypsy.neatorganizer.core.binding
 import androidx.databinding.BindingAdapter
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
+import one.gypsy.neatorganizer.core.utils.extensions.fadeIn
+import one.gypsy.neatorganizer.core.utils.extensions.fadeOut
 
 @BindingAdapter("lottieAnimationResource")
 fun bindLottieAnimationResource(view: LottieAnimationView, animationResource: Int) = with(view) {

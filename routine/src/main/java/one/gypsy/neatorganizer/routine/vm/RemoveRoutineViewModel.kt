@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.core.utils.extensions.default
 import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineById
 
-class RemoveRoutineViewModel(
+internal class RemoveRoutineViewModel(
     private val removeRoutineByIdUseCase: RemoveRoutineById
 ) : ViewModel() {
 

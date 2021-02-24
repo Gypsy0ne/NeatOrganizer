@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di
+package one.gypsy.neatorganizer.routine
 
 import one.gypsy.neatorganizer.routine.alarm.RoutinesResetManager
 import one.gypsy.neatorganizer.routine.model.RoutineListMapper
@@ -9,12 +9,17 @@ import one.gypsy.neatorganizer.routine.vm.RoutinesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val routinesUtilsModule = module {
+val routineModule = module {
+    routineViewModelModule
+    routineUtilsModule
+}
+
+private val routineUtilsModule = module {
     factory { RoutineListMapper() }
     factory { RoutinesResetManager(get()) }
 }
 
-val routinesViewModelModule = module {
+private val routineViewModelModule = module {
     viewModel { (id: Long) -> AddRoutineTaskViewModel(get(), id) }
     viewModel { AddRoutineViewModel(addRoutineSchedule = get(), addRoutineUseCase = get()) }
     viewModel { RemoveRoutineViewModel(get()) }

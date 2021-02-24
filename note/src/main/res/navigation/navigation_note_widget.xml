@@ -19,9 +19,14 @@
         android:name="one.gypsy.neatorganizer.note.view.widget.management.NoteSelectionDialogFragment"
         android:label="SelectNoteDialogFragment">
 
-    <argument
+        <argument
             android:name="widgetId"
             app:argType="integer" />
     </dialog>
+
+    <dialog
+        android:id="@+id/noteAddition"
+        android:name="one.gypsy.neatorganizer.note.view.AddNoteDialogFragment"
+        android:label="AddNoteDialogFragment" />
 
 </navigation>

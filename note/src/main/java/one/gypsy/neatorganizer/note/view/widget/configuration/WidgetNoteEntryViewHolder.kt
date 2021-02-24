@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.note.R
 import one.gypsy.neatorganizer.note.databinding.WidgetItemNoteBinding
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
 
-class WidgetNoteEntryViewHolder(
+internal class WidgetNoteEntryViewHolder(
     private val itemBinding: WidgetItemNoteBinding,
     private val currentlySelectedItem: LiveData<NoteEntryItem>,
     private val onSelected: (NoteEntryItem) -> Unit

@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntryDto
 import one.gypsy.neatorganizer.domain.interactors.routines.AddRoutineTask
 
-class AddRoutineTaskViewModel(
+internal class AddRoutineTaskViewModel(
     private val addRoutineTask: AddRoutineTask,
     private val routineId: Long
 ) : ViewModel() {
@@ -28,7 +28,7 @@ class AddRoutineTaskViewModel(
         addRoutineTask.invoke(
             viewModelScope,
             AddRoutineTask.Params(
-                RoutineTaskEntry(
+                RoutineTaskEntryDto(
                     routineId = routineId,
                     name = taskTitle.value.orEmpty(),
                     done = false,

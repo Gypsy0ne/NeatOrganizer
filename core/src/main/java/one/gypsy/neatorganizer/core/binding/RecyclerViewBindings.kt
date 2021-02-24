@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.core.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.core.R
 
 @BindingAdapter("adapterData")
 fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: List<T>?) {

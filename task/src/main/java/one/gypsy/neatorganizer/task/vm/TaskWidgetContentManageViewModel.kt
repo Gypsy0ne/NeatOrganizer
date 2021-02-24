@@ -9,17 +9,18 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetSingleTaskGroupWithTasksById
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTaskGroup
 import one.gypsy.neatorganizer.task.model.TaskListItem
 import one.gypsy.neatorganizer.task.model.toSingleTask
+import one.gypsy.neatorganizer.task.model.toTaskListSubItem
 
-class TaskWidgetContentManageViewModel(
+internal class TaskWidgetContentManageViewModel(
     taskGroupId: Long,
     private val getSingleTaskGroupWithTasksUseCase: GetSingleTaskGroupWithTasksById,
     private val updateSingleTaskUseCase: UpdateSingleTask,
@@ -27,10 +28,11 @@ class TaskWidgetContentManageViewModel(
     private val updateTaskGroupUseCase: UpdateSingleTaskGroup
 ) : ViewModel() {
 
-    private val _taskGroup = MediatorLiveData<SingleTaskGroup>()
-    val taskGroup: LiveData<SingleTaskGroup> = _taskGroup
+    // TODO it should use UI model
+    private val _taskGroup = MediatorLiveData<SingleTaskGroupDto>()
+    val taskGroup: LiveData<SingleTaskGroupDto> = _taskGroup
 
-    private val _listedTasks = MediatorLiveData<List<SingleTaskEntry>>()
+    private val _listedTasks = MediatorLiveData<List<SingleTaskEntryDto>>()
     val listedTasks: LiveData<List<TaskListItem.TaskListSubItem>> =
         _listedTasks.distinctUntilChanged().switchMap {
             liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
@@ -48,18 +50,18 @@ class TaskWidgetContentManageViewModel(
         loadTaskGroupWithTasks(taskGroupId)
     }
 
-    private fun onGetAllSingleTasksSuccess(taskGroupWithTasks: LiveData<SingleTaskGroupWithTasks>) {
+    private fun onGetAllSingleTasksSuccess(taskGroupWithTasks: LiveData<SingleTaskGroupWithTasksDto>) {
         _listedTasks.addSource(taskGroupWithTasks) {
-            _listedTasks.postValue(taskGroupWithTasks.value.tasks)
+            _listedTasks.postValue(taskGroupWithTasks.value?.tasks)
         }
         _taskGroup.addSource(taskGroupWithTasks) {
-            _taskGroup.postValue(taskGroupWithTasks.value.taskGroup)
+            _taskGroup.postValue(taskGroupWithTasks.value?.taskGroup)
         }
         _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingSuccess)
     }
 
     fun onTitleEditionFinished(editedTitle: String) {
-        taskGroup.value.let { taskGroup ->
+        taskGroup.value?.let { taskGroup ->
             updateTaskGroupUseCase.invoke(
                 viewModelScope,
                 UpdateSingleTaskGroup.Params(

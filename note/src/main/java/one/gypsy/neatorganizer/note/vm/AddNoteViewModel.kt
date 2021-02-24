@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
+import one.gypsy.neatorganizer.domain.dto.notes.NoteEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.InsertNoteEntry
 
-class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : ViewModel() {
+internal class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : ViewModel() {
 
     val noteTitle = MutableLiveData<String>()
     private var pickedColor: Int? = null
@@ -26,7 +26,7 @@ class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEntry) : Vi
             insertNoteEntryUseCase.invoke(
                 viewModelScope,
                 InsertNoteEntry.Params(
-                    NoteEntry(
+                    NoteEntryDto(
                         title = noteTitle.value.orEmpty(),
                         createdAt = System.currentTimeMillis(),
                         color = noteColor

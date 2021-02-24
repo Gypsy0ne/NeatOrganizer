@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
-import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.notes.NoteEntryDto
+import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.SaveNoteWidget
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
+import one.gypsy.neatorganizer.note.model.toNoteEntryItem
 
-class NoteWidgetConfigurationViewModel(
+internal class NoteWidgetConfigurationViewModel(
     getAllNoteEntriesUseCase: GetAllNoteEntries,
     private val saveNoteWidgetUseCase: SaveNoteWidget
 ) : ViewModel() {
@@ -35,7 +36,7 @@ class NoteWidgetConfigurationViewModel(
         }
     }
 
-    private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntry>>) {
+    private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntryDto>>) {
         _listedNotes.addSource(noteEntriesObservable) {
             viewModelScope.launch {
                 _listedNotes.postValue(it.map { it.toNoteEntryItem() })
@@ -54,7 +55,7 @@ class NoteWidgetConfigurationViewModel(
             saveNoteWidgetUseCase.invoke(
                 viewModelScope,
                 SaveNoteWidget.Params(
-                    NoteWidgetEntry(
+                    NoteWidgetEntryDto(
                         widgetId = widgetId,
                         noteId = it.id,
                         color = it.color

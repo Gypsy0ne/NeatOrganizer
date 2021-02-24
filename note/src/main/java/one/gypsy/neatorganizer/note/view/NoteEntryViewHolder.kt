@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import one.gypsy.neatorganizer.note.databinding.ItemNoteBinding
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
 
-class NoteEntryViewHolder(
+internal class NoteEntryViewHolder(
     private val itemBinding: ItemNoteBinding
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 

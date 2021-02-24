@@ -9,7 +9,7 @@ data class TitledTaskWidgetEntryDto(
     val taskGroupTitle: String
 )
 
-fun TitledTaskWidgetEntryDto.toTitledTaskWidgetEntry() = TitledTaskWidgetEntry(
+internal fun TitledTaskWidgetEntryDto.toTitledTaskWidgetEntry() = TitledTaskWidgetEntry(
     appWidgetId = appWidgetId,
     taskGroupId = taskGroupId,
     taskGroupTitle = taskGroupTitle,

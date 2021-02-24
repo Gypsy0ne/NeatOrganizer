@@ -10,11 +10,12 @@ import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.core.listing.ContentLoadingStatus
 import one.gypsy.neatorganizer.core.listing.updateLoadingStatus
 import one.gypsy.neatorganizer.core.utils.extensions.delayItemsEmission
-import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
+import one.gypsy.neatorganizer.domain.dto.notes.NoteEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
+import one.gypsy.neatorganizer.note.model.toNoteEntryItem
 
-class NotesListingViewModel(
+internal class NotesListingViewModel(
     getAllNoteEntriesUseCase: GetAllNoteEntries,
 ) : ViewModel() {
 
@@ -34,7 +35,7 @@ class NotesListingViewModel(
         }
     }
 
-    private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntry>>) {
+    private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntryDto>>) {
         _listedNotes.addSource(noteEntriesObservable) {
             viewModelScope.launch {
                 val mappedEntries = viewModelScope.async {

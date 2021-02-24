@@ -1,12 +1,12 @@
 package one.gypsy.neatorganizer.task.model
 
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
 
-class TaskListMapper {
+internal class TaskListMapper {
 
     fun mapTasksToListItems(
-        tasksGroupWithTasks: List<SingleTaskGroupWithTasks>,
+        tasksGroupWithTasks: List<SingleTaskGroupWithTasksDto>,
         oldList: List<TaskListItem>
     ) = mutableListOf<TaskListItem>().apply {
         val oldHeaders = oldList.filterIsInstance<TaskListItem.TaskListHeader>()
@@ -22,11 +22,11 @@ class TaskListMapper {
 
     private fun wasHeaderExpanded(
         oldHeaders: List<TaskListItem.TaskListHeader>,
-        taskGroupWithTasks: SingleTaskGroupWithTasks
+        taskGroupWithTasks: SingleTaskGroupWithTasksDto
     ) = oldHeaders.firstOrNull { it.id == taskGroupWithTasks.taskGroup.id }?.expanded ?: false
 
     private fun mapTaskGroupToTaskListItems(
-        taskGroupWithTasks: SingleTaskGroupWithTasks,
+        taskGroupWithTasks: SingleTaskGroupWithTasksDto,
         expandedHeader: Boolean = false
     ): List<TaskListItem> = mutableListOf<TaskListItem>().apply {
         with(taskGroupWithTasks.toTaskListHeader(expandedHeader)) {
@@ -36,7 +36,7 @@ class TaskListMapper {
     }
 
     private fun mapTasksToListSubItems(
-        tasks: List<SingleTaskEntry>
+        tasks: List<SingleTaskEntryDto>
     ) = List(tasks.size) {
         tasks[it].toTaskListSubItem()
     }

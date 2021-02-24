@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.di
+package one.gypsy.neatorganizer.note
 
 import one.gypsy.neatorganizer.core.widget.WidgetNotifier
 import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
@@ -16,8 +16,13 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val notesUtilsModule = module {
-    factory<one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager>(named("noteRemoteViewManager")) {
+val noteModule = module {
+    noteUtilsModule
+    noteViewModelModule
+}
+
+private val noteUtilsModule = module {
+    factory<WidgetRemoteViewManager>(named("noteRemoteViewManager")) {
         NoteWidgetRemoteViewManager(
             context = get(),
             widgetManager = get(),
@@ -25,14 +30,14 @@ val notesUtilsModule = module {
             deleteNoteWidgetUseCase = get()
         )
     }
-    factory<one.gypsy.neatorganizer.core.widget.WidgetNotifier>(named("noteWidgetNotifier")) {
+    factory<WidgetNotifier>(named("noteWidgetNotifier")) {
         NoteWidgetNotifier(
             androidContext()
         )
     }
 }
 
-val notesViewModelModule = module {
+private val noteViewModelModule = module {
     viewModel { (id: Long) ->
         NoteViewModel(
             id,

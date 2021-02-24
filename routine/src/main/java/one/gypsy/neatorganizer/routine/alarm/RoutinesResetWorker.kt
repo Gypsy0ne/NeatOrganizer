@@ -11,7 +11,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import kotlin.coroutines.CoroutineContext
 
-class RoutinesResetWorker(context: Context, workerParameters: WorkerParameters) :
+internal class RoutinesResetWorker(context: Context, workerParameters: WorkerParameters) :
     Worker(context, workerParameters), CoroutineScope, KoinComponent {
 
     private val resetRoutineTasksUseCase: RunAllRoutinesSnapshotReset by inject()

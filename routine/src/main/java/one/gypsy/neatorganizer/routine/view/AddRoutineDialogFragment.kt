@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.routine.databinding.DialogFragmentAddRoutineBindi
 import one.gypsy.neatorganizer.routine.vm.AddRoutineViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AddRoutineDialogFragment : BottomSheetDialogFragment() {
+internal class AddRoutineDialogFragment : BottomSheetDialogFragment() {
 
     private val addRoutineViewModel: AddRoutineViewModel by viewModel()
     private lateinit var fragmentBinding: DialogFragmentAddRoutineBinding
@@ -27,7 +27,7 @@ class AddRoutineDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.dialog_fragment_add_routine,

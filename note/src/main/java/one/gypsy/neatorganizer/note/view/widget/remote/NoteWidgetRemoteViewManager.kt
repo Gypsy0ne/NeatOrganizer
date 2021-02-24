@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.core.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
-import one.gypsy.neatorganizer.domain.dto.notes.TitledNoteWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.notes.TitledNoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.DeleteNoteWidgetById
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.LoadTitledNoteWidget
 import one.gypsy.neatorganizer.note.R
@@ -19,7 +19,7 @@ import one.gypsy.neatorganizer.note.view.widget.NoteWidgetKeyring.MANAGED_NOTE_I
 import one.gypsy.neatorganizer.note.view.widget.NoteWidgetKeyring.MANAGED_NOTE_INVALID_ID
 import one.gypsy.neatorganizer.note.view.widget.management.NoteWidgetActivity
 
-class NoteWidgetRemoteViewManager(
+internal class NoteWidgetRemoteViewManager(
     private val context: Context,
     private val widgetManager: AppWidgetManager,
     private val loadTitledNoteWidgetUseCase: LoadTitledNoteWidget,
@@ -45,14 +45,14 @@ class NoteWidgetRemoteViewManager(
     }
 
     // TODO it uses directly domain objects turn it into model objects
-    private fun onLoadNoteWidgetSuccess(noteWidgetEntry: TitledNoteWidgetEntry) {
+    private fun onLoadNoteWidgetSuccess(noteWidgetEntry: TitledNoteWidgetEntryDto) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_note).apply {
             setUpLoadedNoteView(noteWidgetEntry)
         }
         widgetManager.updateAppWidget(noteWidgetEntry.appWidgetId, remoteViews)
     }
 
-    private fun RemoteViews.setUpLoadedNoteView(noteWidgetEntry: TitledNoteWidgetEntry) {
+    private fun RemoteViews.setUpLoadedNoteView(noteWidgetEntry: TitledNoteWidgetEntryDto) {
         setOnClickPendingIntent(
             R.id.noteWidgetContainer,
             createNoteManageActivityIntent(

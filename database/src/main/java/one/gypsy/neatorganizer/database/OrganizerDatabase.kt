@@ -37,7 +37,7 @@ import one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity
     version = 1
 )
 @TypeConverters(Converters::class)
-abstract class OrganizerDatabase : RoomDatabase() {
+internal abstract class OrganizerDatabase : RoomDatabase() {
     abstract fun routineSnapshotsDao(): RoutineSnapshotsDao
     abstract fun singleTaskGroupsDao(): SingleTaskGroupsDao
     abstract fun singleTasksDao(): SingleTasksDao

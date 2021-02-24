@@ -9,7 +9,7 @@ data class TitledTaskWidgetEntry(
     val taskGroupTitle: String
 )
 
-fun TitledTaskWidgetEntry.toTaskWidgetEntity() = TaskWidgetEntity(
+internal fun TitledTaskWidgetEntry.toTaskWidgetEntity() = TaskWidgetEntity(
     widgetId = appWidgetId,
     taskGroupId = taskGroupId,
     color = widgetColor

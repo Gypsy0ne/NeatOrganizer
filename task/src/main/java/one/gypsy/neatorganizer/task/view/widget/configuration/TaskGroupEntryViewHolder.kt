@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.databinding.ItemTaskGroupEntryBinding
 import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
 
-class TaskGroupEntryViewHolder(
+internal class TaskGroupEntryViewHolder(
     private val currentlySelectedItem: LiveData<TaskGroupEntryItem>,
     private val onSelected: (TaskGroupEntryItem) -> Unit,
     private val itemBinding: ItemTaskGroupEntryBinding

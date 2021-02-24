@@ -9,7 +9,7 @@ class NoteEntryDto(
     val color: Int
 )
 
-fun NoteEntryDto.toNoteEntry() = NoteEntry(
+internal fun NoteEntryDto.toNoteEntry() = NoteEntry(
     id = id,
     createdAt = createdAt,
     title = title,

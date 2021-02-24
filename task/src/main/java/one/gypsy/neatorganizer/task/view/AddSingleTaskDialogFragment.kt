@@ -14,7 +14,7 @@ import one.gypsy.neatorganizer.task.vm.AddTaskViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class AddSingleTaskDialogFragment : BottomSheetDialogFragment() {
+internal class AddSingleTaskDialogFragment : BottomSheetDialogFragment() {
 
     private val args: AddSingleTaskDialogFragmentArgs by navArgs()
     private val viewModel: AddTaskViewModel by viewModel {
@@ -31,7 +31,7 @@ class AddSingleTaskDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_fragment_add_task, container, false)
         return fragmentBinding.root

@@ -1,18 +1,19 @@
 package one.gypsy.neatorganizer.task.model
 
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntryDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
 
-fun SingleTaskGroupWithTasks.toTaskListHeader(expanded: Boolean) = TaskListItem.TaskListHeader(
-    id = this.taskGroup.id,
-    title = this.taskGroup.name,
-    subItemsCount = this.tasks.size,
-    expanded = expanded,
-    createdAt = this.taskGroup.createdAt
-)
+internal fun SingleTaskGroupWithTasksDto.toTaskListHeader(expanded: Boolean) =
+    TaskListItem.TaskListHeader(
+        id = this.taskGroup.id,
+        title = this.taskGroup.name,
+        subItemsCount = this.tasks.size,
+        expanded = expanded,
+        createdAt = this.taskGroup.createdAt
+    )
 
-fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
+internal fun SingleTaskEntryDto.toTaskListSubItem() = TaskListItem.TaskListSubItem(
     id = this.id,
     title = this.name,
     groupId = this.groupId,
@@ -20,7 +21,7 @@ fun SingleTaskEntry.toTaskListSubItem() = TaskListItem.TaskListSubItem(
     createdAt = this.createdAt
 )
 
-fun SingleTaskGroupEntry.toTaskGroupEntryItem() =
+internal fun SingleTaskGroupEntryDto.toTaskGroupEntryItem() =
     TaskGroupEntryItem(id, name, tasksCount, tasksDone)
 
-fun SingleTaskEntry.toTaskEntryWidgetItem() = TaskEntryWidgetItem(name, done)
+internal fun SingleTaskEntryDto.toTaskEntryWidgetItem() = TaskEntryWidgetItem(name, done)

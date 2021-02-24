@@ -10,7 +10,7 @@ data class RoutineWithTasksDto(
     val createdAt: Long
 )
 
-fun RoutineWithTasksDto.toRoutineWithTasks() =
+internal fun RoutineWithTasksDto.toRoutineWithTasks() =
     RoutineWithTasks(
         name = this.name,
         id = this.id,

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.core.listing.ContentLoadingStatus
 import one.gypsy.neatorganizer.core.listing.updateLoadingStatus
 import one.gypsy.neatorganizer.core.utils.extensions.delayItemsEmission
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasksDto
 import one.gypsy.neatorganizer.domain.interactors.Failure
 import one.gypsy.neatorganizer.domain.interactors.routines.GetAllRoutines
 import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineTask
@@ -26,7 +26,7 @@ import one.gypsy.neatorganizer.routine.model.getRoutineSchedule
 import one.gypsy.neatorganizer.routine.model.toRoutine
 import one.gypsy.neatorganizer.routine.model.toRoutineTask
 
-class RoutinesViewModel(
+internal class RoutinesViewModel(
     getAllRoutinesUseCase: GetAllRoutines,
     private val updateRoutine: UpdateRoutine,
     private val removeRoutineTask: RemoveRoutineTask,
@@ -56,7 +56,7 @@ class RoutinesViewModel(
         }
     }
 
-    private fun onGetAllRoutinesSuccess(routines: LiveData<List<RoutineWithTasks>>) {
+    private fun onGetAllRoutinesSuccess(routines: LiveData<List<RoutineWithTasksDto>>) {
         _listedRoutines.addSource(routines) {
             viewModelScope.launch {
                 val mappedRoutines = viewModelScope.async {

@@ -13,7 +13,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
-class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
+internal class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     private val viewModel: NoteWidgetConfigurationViewModel by viewModel()
     override val widgetViewManager: one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager by inject(

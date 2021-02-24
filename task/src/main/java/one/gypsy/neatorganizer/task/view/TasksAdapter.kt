@@ -12,7 +12,7 @@ import one.gypsy.neatorganizer.core.listing.SubItemClickListener
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.model.TaskListItem
 
-class GroupedTasksAdapter(
+internal class GroupedTasksAdapter(
     private val headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>? = null,
     private val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null
 ) : ListAdapter<TaskListItem, TaskViewHolder>(DiffCallback()), BindableAdapter<TaskListItem> {
@@ -74,17 +74,17 @@ class GroupedTasksAdapter(
     }
 }
 
-enum class TaskViewType(@LayoutRes val resId: Int) {
+internal enum class TaskViewType(@LayoutRes val resId: Int) {
     HEADER(R.layout.item_task_header),
     SUB_ITEM(R.layout.item_task)
 }
 
-fun TaskListItem.getViewHolderType(): Int = when (this) {
+internal fun TaskListItem.getViewHolderType(): Int = when (this) {
     is TaskListItem.TaskListHeader -> TaskViewType.HEADER.resId
     is TaskListItem.TaskListSubItem -> TaskViewType.SUB_ITEM.resId
 }
 
-fun TaskViewType.getHolder(
+internal fun TaskViewType.getHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
     headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>?,

@@ -1,8 +1,8 @@
 package one.gypsy.neatorganizer.note.model
 
-import one.gypsy.neatorganizer.domain.dto.notes.Note
+import one.gypsy.neatorganizer.domain.dto.notes.NoteDto
 
-data class NoteItem(
+internal data class NoteItem(
     val id: Long,
     val title: String,
     val content: String,
@@ -10,7 +10,7 @@ data class NoteItem(
     val color: Int
 )
 
-fun NoteItem.toNote() = Note(
+internal fun NoteItem.toDto() = NoteDto(
     id = id,
     title = title,
     content = content,

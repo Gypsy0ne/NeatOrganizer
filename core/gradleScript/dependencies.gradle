@@ -11,6 +11,10 @@ dependencies {
     implementation View.recyclerView
     implementation View.material
     implementation View.constraintLayout
+    implementation View.lottie
+    implementation View.spectrum
 
     implementation AppCompat.appCompat
+    implementation Glide.glide
+    annotationProcessor Glide.compiler
 }

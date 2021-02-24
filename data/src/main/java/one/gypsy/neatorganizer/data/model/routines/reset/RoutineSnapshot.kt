@@ -10,7 +10,7 @@ data class RoutineSnapshot(
     val id: Long = 0
 )
 
-fun RoutineSnapshot.toRoutineSnapshotEntity() = RoutineSnapshotEntity(
+internal fun RoutineSnapshot.toRoutineSnapshotEntity() = RoutineSnapshotEntity(
     tasksOverall,
     tasksDone,
     resetDate

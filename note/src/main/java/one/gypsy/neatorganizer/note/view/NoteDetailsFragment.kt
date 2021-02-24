@@ -17,7 +17,8 @@ import one.gypsy.neatorganizer.note.vm.NoteViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteDetailsFragment : one.gypsy.neatorganizer.core.SectionFragment(R.menu.note_details_menu) {
+internal class NoteDetailsFragment :
+    one.gypsy.neatorganizer.core.SectionFragment(R.menu.note_details_menu) {
 
     private val args: NoteDetailsFragmentArgs by navArgs()
     private val detailsViewModel: NoteViewModel by viewModel {

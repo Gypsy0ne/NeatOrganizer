@@ -27,7 +27,7 @@ import one.gypsy.neatorganizer.note.vm.NoteWidgetContentManageViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteManageFragment : Fragment() {
+internal class NoteManageFragment : Fragment() {
 
     private val noteViewModel: NoteWidgetContentManageViewModel by viewModel {
         parametersOf(arguments?.getLong(MANAGED_NOTE_ID_KEY) ?: MANAGED_NOTE_INVALID_ID)

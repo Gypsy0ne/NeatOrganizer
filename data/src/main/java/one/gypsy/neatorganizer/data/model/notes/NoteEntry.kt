@@ -9,7 +9,7 @@ class NoteEntry(
     val color: Int
 )
 
-fun NoteEntry.toNoteEntity() = NoteEntity(
+internal fun NoteEntry.toNoteEntity() = NoteEntity(
     id = id,
     createdAt = createdAt,
     title = title,

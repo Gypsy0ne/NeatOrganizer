@@ -6,7 +6,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
-import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.core.R
 
 class LinedEditText(context: Context, attrs: AttributeSet?) : AppCompatEditText(context, attrs) {
 

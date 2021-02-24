@@ -1,12 +1,12 @@
 package one.gypsy.neatorganizer.routine.model
 
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasksDto
 
-class RoutineListMapper {
+internal class RoutineListMapper {
 
     fun mapRoutinesToListItems(
-        routines: List<RoutineWithTasks>,
+        routines: List<RoutineWithTasksDto>,
         oldList: List<RoutineListItem>
     ) =
         mutableListOf<RoutineListItem>().apply {
@@ -23,11 +23,11 @@ class RoutineListMapper {
 
     private fun wasHeaderExpanded(
         oldHeaders: List<RoutineListItem.RoutineListHeader>,
-        routine: RoutineWithTasks
+        routine: RoutineWithTasksDto
     ) = oldHeaders.firstOrNull { it.id == routine.id }?.expanded ?: false
 
     private fun mapRoutineToRoutineListItems(
-        routine: RoutineWithTasks,
+        routine: RoutineWithTasksDto,
         expandedHeader: Boolean = false
     ): List<RoutineListItem> =
         mutableListOf<RoutineListItem>().apply {
@@ -38,7 +38,7 @@ class RoutineListMapper {
         }
 
     private fun mapRoutineTasksToListSubItems(
-        routineTasks: List<RoutineTaskEntry>
+        routineTasks: List<RoutineTaskEntryDto>
     ) = List(routineTasks.size) {
         routineTasks[it].toRoutineListSubItem()
     }

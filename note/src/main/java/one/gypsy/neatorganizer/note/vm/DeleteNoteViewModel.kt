@@ -7,7 +7,8 @@ import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.core.utils.extensions.default
 import one.gypsy.neatorganizer.domain.interactors.notes.DeleteNoteById
 
-class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNoteById) : ViewModel() {
+internal class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNoteById) :
+    ViewModel() {
 
     private val _actionFinished = MutableLiveData<Boolean>().default(false)
     val actionFinished: LiveData<Boolean> = _actionFinished

@@ -8,7 +8,7 @@ data class SingleTaskGroupDto(
     val createdAt: Long
 )
 
-fun SingleTaskGroupDto.toSingleTaskGroup() = SingleTaskGroup(
+internal fun SingleTaskGroupDto.toSingleTaskGroup() = SingleTaskGroup(
     name = this.name,
     id = this.id,
     createdAt = this.createdAt

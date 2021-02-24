@@ -2,7 +2,7 @@ package one.gypsy.neatorganizer.core.binding
 
 import android.widget.ImageButton
 import androidx.databinding.BindingAdapter
-import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.core.R
 
 @BindingAdapter("expanded")
 fun setExpandedState(view: ImageButton, expanded: Boolean) {

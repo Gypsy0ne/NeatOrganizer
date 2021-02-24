@@ -14,7 +14,7 @@ import one.gypsy.neatorganizer.note.vm.AddNoteViewModel
 import one.gypsy.neatorganizer.note.vm.NoteCreationStatus
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AddNoteDialogFragment : BottomSheetDialogFragment() {
+internal class AddNoteDialogFragment : BottomSheetDialogFragment() {
 
     private val viewModel: AddNoteViewModel by viewModel()
     private lateinit var fragmentBinding: DialogFragmentAddNoteBinding

@@ -10,7 +10,7 @@ import one.gypsy.neatorganizer.core.binding.BindableAdapter
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
 
-class TaskGroupEntriesAdapter(
+internal class TaskGroupEntriesAdapter(
     private val currentlySelectedItem: LiveData<TaskGroupEntryItem>,
     private val onSelected: (TaskGroupEntryItem) -> Unit
 ) : ListAdapter<TaskGroupEntryItem, TaskGroupEntryViewHolder>(DiffCallback()),

@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.data.model.notes.toNoteEntity
 import one.gypsy.neatorganizer.data.model.notes.toNoteEntry
 import one.gypsy.neatorganizer.database.dao.notes.NotesDao
 
-class UserNotesDataSource(private val notesDao: NotesDao) : NotesDataSource {
+internal class UserNotesDataSource(private val notesDao: NotesDao) : NotesDataSource {
 
     override suspend fun insert(noteEntry: NoteEntry) = notesDao.insert(noteEntry.toNoteEntity())
 

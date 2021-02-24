@@ -6,7 +6,7 @@ import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 
 abstract class SectionFragment(
-    private val menuId: Int? = R.menu.activity_home_app_bar_menu
+    private val menuId: Int? = R.menu.section_app_bar_menu
 ) : Fragment() {
 
 //    protected fun setUpSearchViewIcons(menu: Menu) {

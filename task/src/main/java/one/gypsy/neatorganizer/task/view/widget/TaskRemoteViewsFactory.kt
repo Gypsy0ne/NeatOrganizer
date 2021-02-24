@@ -6,16 +6,19 @@ import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import kotlinx.coroutines.runBlocking
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTasksByGroupId
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetTaskGroupIdByWidgetId
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.model.TaskEntryWidgetItem
+import one.gypsy.neatorganizer.task.model.toTaskEntryWidgetItem
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
-    RemoteViewsService.RemoteViewsFactory, KoinComponent {
+internal class TaskRemoteViewsFactory(
+    private val context: Context,
+    intent: Intent
+) : RemoteViewsService.RemoteViewsFactory, KoinComponent {
 
     private val getTaskGroupIdByWidgetIdUseCase: GetTaskGroupIdByWidgetId by inject()
     private val getAllSingleTasksUseCase: GetAllSingleTasksByGroupId by inject()
@@ -49,7 +52,7 @@ class TaskRemoteViewsFactory(private val context: Context, intent: Intent) :
         }
     }
 
-    private fun onGetAllSingleTasksSuccess(singleTasks: List<SingleTaskEntry>) {
+    private fun onGetAllSingleTasksSuccess(singleTasks: List<SingleTaskEntryDto>) {
         widgetItems.clear()
         widgetItems.addAll(singleTasks.map { it.toTaskEntryWidgetItem() })
     }

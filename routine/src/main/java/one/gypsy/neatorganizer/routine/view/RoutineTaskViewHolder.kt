@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.core.utils.extensions.shrink
 import one.gypsy.neatorganizer.routine.databinding.ItemRoutineTaskBinding
 import one.gypsy.neatorganizer.routine.model.RoutineListItem
 
-class RoutineTaskViewHolder(
+internal class RoutineTaskViewHolder(
     val itemBinding: ItemRoutineTaskBinding,
     val clickListener: SubItemClickListener<RoutineListItem.RoutineListSubItem>
 ) : RoutineViewHolder(itemBinding.root), ListedSubItem<RoutineListItem.RoutineListSubItem> {

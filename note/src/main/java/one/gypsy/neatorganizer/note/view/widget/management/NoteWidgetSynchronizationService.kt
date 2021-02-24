@@ -4,8 +4,9 @@ import android.content.Intent
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
-import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
-import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntry
+import one.gypsy.neatorganizer.core.widget.WidgetNotifier
+import one.gypsy.neatorganizer.domain.dto.notes.NoteEntryDto
+import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.GetAllNoteWidgetIds
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.GetAllNoteWidgets
@@ -17,7 +18,7 @@ import org.koin.core.qualifier.named
 class NoteWidgetSynchronizationService : LifecycleService(), KoinComponent {
 
     private val getAllWidgetIdsUseCase: GetAllNoteWidgetIds by inject()
-    private val widgetNotifier: one.gypsy.neatorganizer.core.widget.WidgetNotifier by inject(named("noteWidgetNotifier"))
+    private val widgetNotifier: WidgetNotifier by inject(named("noteWidgetNotifier"))
     private val getAllNoteEntriesUseCase: GetAllNoteEntries = get()
     private val getAllNoteWidgetsUseCase: GetAllNoteWidgets = get()
 
@@ -42,7 +43,7 @@ class NoteWidgetSynchronizationService : LifecycleService(), KoinComponent {
         return START_STICKY
     }
 
-    private fun onGetAllNotesSuccess(notes: LiveData<List<NoteEntry>>) =
+    private fun onGetAllNotesSuccess(notes: LiveData<List<NoteEntryDto>>) =
         notes.observe(
             this,
             {
@@ -56,7 +57,7 @@ class NoteWidgetSynchronizationService : LifecycleService(), KoinComponent {
         widgetNotifier.sendUpdateWidgetBroadcast(noteWidgetIds)
     }
 
-    private fun onGetAllNoteWidgetsSuccess(noteWidgets: LiveData<List<NoteWidgetEntry>>) {
+    private fun onGetAllNoteWidgetsSuccess(noteWidgets: LiveData<List<NoteWidgetEntryDto>>) {
         noteWidgets.observe(this) {
             updateNoteWidgets(it.map { widget -> widget.widgetId }.toIntArray())
         }

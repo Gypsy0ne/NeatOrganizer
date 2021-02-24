@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -15,7 +14,7 @@ import one.gypsy.neatorganizer.routine.vm.AddRoutineTaskViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
+internal class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
 
     private val args: AddRoutineTaskDialogFragmentArgs by navArgs()
     private val viewModel: AddRoutineTaskViewModel by viewModel {
@@ -32,7 +31,7 @@ class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding =
             DataBindingUtil.inflate(
                 inflater,
@@ -54,13 +53,10 @@ class AddRoutineTaskDialogFragment : BottomSheetDialogFragment() {
         setUpObservers()
     }
 
-    private fun setUpObservers() {
-        viewModel.finishedAdding.observe(
-            viewLifecycleOwner,
-            Observer { finished ->
-                if (finished)
-                    findNavController().popBackStack()
-            }
-        )
+    private fun setUpObservers() = viewModel.finishedAdding.observe(
+        viewLifecycleOwner
+    ) { finished ->
+        if (finished)
+            findNavController().popBackStack()
     }
 }

@@ -16,7 +16,7 @@
     </style>
 
     <style name="cursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
-        <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
@@ -40,7 +40,7 @@
     </style>
 
     <style name="DialogFormEditText">
-        <item name="android:textCursorDrawable">@drawable/activity_home_edit_text_cursor</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">@integer/regular_text_length</item>

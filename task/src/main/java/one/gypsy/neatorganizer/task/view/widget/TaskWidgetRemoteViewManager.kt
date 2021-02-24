@@ -13,14 +13,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.core.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
 import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
-import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.TitledTaskWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.DeleteTaskWidgetById
 import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
 import one.gypsy.neatorganizer.task.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
 
-class TaskWidgetRemoteViewManager(
+internal class TaskWidgetRemoteViewManager(
     private val context: Context,
     private val widgetManager: AppWidgetManager,
     private val loadTitledTaskWidgetUseCase: LoadTitledTaskWidget,
@@ -46,7 +46,7 @@ class TaskWidgetRemoteViewManager(
     }
 
     // TODO it uses directly domain objects turn it into model objects
-    private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntry) {
+    private fun onLoadTaskWidgetSuccess(taskWidgetEntry: TitledTaskWidgetEntryDto) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_tasks).apply {
             setUpLoadedTaskViews(taskWidgetEntry)
         }
@@ -55,7 +55,7 @@ class TaskWidgetRemoteViewManager(
         widgetManager.notifyAppWidgetViewDataChanged(taskWidgetEntry.appWidgetId, R.id.tasksList)
     }
 
-    private fun RemoteViews.setUpLoadedTaskViews(taskWidgetEntry: TitledTaskWidgetEntry) {
+    private fun RemoteViews.setUpLoadedTaskViews(taskWidgetEntry: TitledTaskWidgetEntryDto) {
         setOnClickPendingIntent(
             R.id.widgetContainer,
             createGroupManageActivityIntent(

@@ -20,7 +20,7 @@ import one.gypsy.neatorganizer.note.vm.NoteWidgetSelectionViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
+internal class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
 
     private val args: NoteSelectionDialogFragmentArgs by navArgs()
     private val selectionViewModel: NoteWidgetSelectionViewModel by viewModel {

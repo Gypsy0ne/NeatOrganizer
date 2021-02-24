@@ -1,9 +1,9 @@
 package one.gypsy.neatorganizer.routine.model
 
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasksDto
 
-fun RoutineWithTasks.toRoutineListHeader(expanded: Boolean = false) =
+internal fun RoutineWithTasksDto.toRoutineListHeader(expanded: Boolean = false) =
     RoutineListItem.RoutineListHeader(
         id = this.id,
         title = this.name,
@@ -13,7 +13,7 @@ fun RoutineWithTasks.toRoutineListHeader(expanded: Boolean = false) =
         createdAt = this.createdAt
     )
 
-fun RoutineTaskEntry.toRoutineListSubItem() = RoutineListItem.RoutineListSubItem(
+internal fun RoutineTaskEntryDto.toRoutineListSubItem() = RoutineListItem.RoutineListSubItem(
     id = this.id,
     title = this.name,
     done = this.done,

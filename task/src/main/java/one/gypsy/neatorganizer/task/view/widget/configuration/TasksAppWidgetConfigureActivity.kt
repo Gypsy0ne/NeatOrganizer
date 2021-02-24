@@ -14,7 +14,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
-class TasksAppWidgetConfigureActivity : WidgetConfigurationActivity() {
+internal class TasksAppWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     private val widgetConfigurationViewModel: TasksWidgetConfigurationViewModel by viewModel()
     override val widgetViewManager: WidgetRemoteViewManager by inject(named("taskRemoteViewManager"))

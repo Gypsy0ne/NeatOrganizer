@@ -2,6 +2,13 @@ apply from: Dependencies.common
 
 dependencies {
     implementation project(Module.easySwipeMenu)
+    implementation project(Module.routine)
+    implementation project(Module.note)
+    implementation project(Module.task)
+    implementation project(Module.core)
+    implementation project(Module.data)
+    implementation project(Module.database)
+    implementation project(Module.domain)
 
 
     implementation Glide.glide

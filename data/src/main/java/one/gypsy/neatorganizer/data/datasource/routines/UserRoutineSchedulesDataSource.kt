@@ -4,7 +4,7 @@ import one.gypsy.neatorganizer.data.model.routines.RoutineSchedule
 import one.gypsy.neatorganizer.data.model.routines.toRoutineScheduleEntity
 import one.gypsy.neatorganizer.database.dao.routines.RoutineSchedulesDao
 
-class UserRoutineSchedulesDataSource(private val routineSchedulesDao: RoutineSchedulesDao) :
+internal class UserRoutineSchedulesDataSource(private val routineSchedulesDao: RoutineSchedulesDao) :
     RoutineSchedulesDataSource {
 
     override suspend fun add(routineSchedule: RoutineSchedule) =

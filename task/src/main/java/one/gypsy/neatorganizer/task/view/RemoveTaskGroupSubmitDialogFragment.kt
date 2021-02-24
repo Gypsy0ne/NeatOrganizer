@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import one.gypsy.neatorganizer.core.databinding.DialogFragmentGroupRemoveConfirmationBinding
 import one.gypsy.neatorganizer.task.R
-import one.gypsy.neatorganizer.task.databinding.DialogFragmentGroupRemoveConfirmationBinding
 import one.gypsy.neatorganizer.task.vm.RemoveTaskGroupViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
+internal class RemoveTaskGroupSubmitDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var fragmentBinding: DialogFragmentGroupRemoveConfirmationBinding
     private val args: RemoveTaskGroupSubmitDialogFragmentArgs by navArgs()

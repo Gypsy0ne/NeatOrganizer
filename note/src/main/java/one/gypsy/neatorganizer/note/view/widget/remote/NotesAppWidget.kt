@@ -9,7 +9,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.qualifier.named
 
-class NotesAppWidget : AppWidgetProvider(), KoinComponent {
+internal class NotesAppWidget : AppWidgetProvider(), KoinComponent {
 
     private val widgetViewManager: WidgetRemoteViewManager by inject(named("noteRemoteViewManager"))
 

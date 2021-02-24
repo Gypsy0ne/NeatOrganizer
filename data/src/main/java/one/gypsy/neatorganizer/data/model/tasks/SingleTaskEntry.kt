@@ -10,7 +10,7 @@ data class SingleTaskEntry(
     val createdAt: Long
 )
 
-fun SingleTaskEntry.toSingleTaskEntity() = SingleTaskEntity(
+internal fun SingleTaskEntry.toSingleTaskEntity() = SingleTaskEntity(
     id = this.id,
     done = this.done,
     groupId = this.groupId,

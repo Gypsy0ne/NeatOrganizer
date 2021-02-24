@@ -11,7 +11,7 @@ import one.gypsy.neatorganizer.core.utils.extensions.shrink
 import one.gypsy.neatorganizer.routine.databinding.ItemRoutineHeaderBinding
 import one.gypsy.neatorganizer.routine.model.RoutineListItem
 
-class RoutineHeaderViewHolder(
+internal class RoutineHeaderViewHolder(
     val itemBinding: ItemRoutineHeaderBinding,
     val clickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>
 ) : RoutineViewHolder(itemBinding.root), ListedHeader<RoutineListItem.RoutineListHeader> {

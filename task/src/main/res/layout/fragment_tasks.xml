@@ -17,6 +17,7 @@
             type="one.gypsy.neatorganizer.task.view.GroupedTasksAdapter" />
 
         <import type="one.gypsy.neatorganizer.core.listing.ContentLoadingStatusKt" />
+        <import type="one.gypsy.neatorganizer.task.R" />
 
     </data>
 
@@ -46,6 +47,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.4"
-            app:lottieResourceFile="@{ContentLoadingStatusKt.toTasksStatusAnimationResource(viewModel.contentLoadingStatus)}" />
+            app:lottieResourceFile="@{ContentLoadingStatusKt.toStatusAnimationResource(viewModel.contentLoadingStatus, R.raw.lottie_empty_tasks)}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,19 +6,19 @@ import one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity
 import one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity
 import one.gypsy.neatorganizer.database.entity.tasks.WidgetAndTaskGroup
 
-fun GroupWithSingleTasks.toSingleTaskGroupWithTasks() = SingleTaskGroupWithTasks(
+internal fun GroupWithSingleTasks.toSingleTaskGroupWithTasks() = SingleTaskGroupWithTasks(
     taskGroup = group.toSingleTaskGroup(),
     tasks = this.tasks.map { it.toSingleTaskEntry() },
 )
 
-fun GroupWithSingleTasks.toSingleTaskGroupEntry() = SingleTaskGroupEntry(
+internal fun GroupWithSingleTasks.toSingleTaskGroupEntry() = SingleTaskGroupEntry(
     group.id,
     group.name,
     tasksDone = tasks.count { it.done },
     tasksCount = tasks.count()
 )
 
-fun SingleTaskEntity.toSingleTaskEntry() =
+internal fun SingleTaskEntity.toSingleTaskEntry() =
     SingleTaskEntry(
         id = this.id,
         name = this.name,
@@ -27,13 +27,13 @@ fun SingleTaskEntity.toSingleTaskEntry() =
         createdAt = this.createdAt
     )
 
-fun SingleTaskGroupEntity.toSingleTaskGroup() =
+internal fun SingleTaskGroupEntity.toSingleTaskGroup() =
     SingleTaskGroup(name, id = id, createdAt = this.createdAt)
 
-fun TaskWidgetEntity.toTaskWidgetEntry() =
+internal fun TaskWidgetEntity.toTaskWidgetEntry() =
     TaskWidgetEntry(appWidgetId = widgetId, taskGroupId = taskGroupId, widgetColor = color)
 
-fun WidgetAndTaskGroup.toTitledTaskWidgetEntry() = TitledTaskWidgetEntry(
+internal fun WidgetAndTaskGroup.toTitledTaskWidgetEntry() = TitledTaskWidgetEntry(
     appWidgetId = this.widget.widgetId,
     taskGroupId = this.widget.taskGroupId,
     widgetColor = this.widget.color,

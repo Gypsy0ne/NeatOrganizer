@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import one.gypsy.neatorganizer.note.view.widget.remote.NotesAppWidget
 
-class NoteWidgetNotifier(private val context: Context) :
+internal class NoteWidgetNotifier(private val context: Context) :
     one.gypsy.neatorganizer.core.widget.WidgetNotifier {
 
     override fun sendUpdateWidgetBroadcast(widgetIds: IntArray) =

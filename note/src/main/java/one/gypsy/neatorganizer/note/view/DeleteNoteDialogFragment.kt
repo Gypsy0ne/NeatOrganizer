@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.note.databinding.DialogFragmentSingleRemoveConfir
 import one.gypsy.neatorganizer.note.vm.DeleteNoteViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
+internal class DeleteNoteDialogFragment : BottomSheetDialogFragment() {
 
     private val viewModel: DeleteNoteViewModel by viewModel()
     private lateinit var fragmentBinding: DialogFragmentSingleRemoveConfirmationBinding

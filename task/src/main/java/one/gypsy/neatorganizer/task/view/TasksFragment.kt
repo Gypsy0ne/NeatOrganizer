@@ -15,7 +15,7 @@ import one.gypsy.neatorganizer.task.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.task.vm.TasksViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TasksFragment : SectionFragment() {
+internal class TasksFragment : SectionFragment() {
 
     private val tasksViewModel: TasksViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentTasksBinding

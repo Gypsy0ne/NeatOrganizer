@@ -12,7 +12,7 @@ import one.gypsy.neatorganizer.core.listing.SubItemClickListener
 import one.gypsy.neatorganizer.routine.R
 import one.gypsy.neatorganizer.routine.model.RoutineListItem
 
-class RoutinesAdapter(
+internal class RoutinesAdapter(
     val headerClickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>,
     val subItemClickListener: SubItemClickListener<RoutineListItem.RoutineListSubItem>
 ) : ListAdapter<RoutineListItem, RoutineViewHolder>(DiffCallback()),
@@ -73,17 +73,17 @@ class RoutinesAdapter(
     }
 }
 
-enum class RoutineViewType(@LayoutRes val resId: Int) {
+internal enum class RoutineViewType(@LayoutRes val resId: Int) {
     HEADER(R.layout.item_routine_header),
     SUB_ITEM(R.layout.item_routine_task)
 }
 
-fun RoutineListItem.getViewHolderType(): Int = when (this) {
+internal fun RoutineListItem.getViewHolderType(): Int = when (this) {
     is RoutineListItem.RoutineListHeader -> RoutineViewType.HEADER.resId
     is RoutineListItem.RoutineListSubItem -> RoutineViewType.SUB_ITEM.resId
 }
 
-fun RoutineViewType.getHolder(
+internal fun RoutineViewType.getHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
     headerClickListener: HeaderClickListener<RoutineListItem.RoutineListHeader>,

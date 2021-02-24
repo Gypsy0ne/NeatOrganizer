@@ -1,12 +1,12 @@
 package one.gypsy.neatorganizer.note.model
 
-import one.gypsy.neatorganizer.domain.dto.notes.Note
-import one.gypsy.neatorganizer.domain.dto.notes.NoteEntry
+import one.gypsy.neatorganizer.domain.dto.notes.NoteDto
+import one.gypsy.neatorganizer.domain.dto.notes.NoteEntryDto
 
-fun NoteEntry.toNoteEntryItem() =
+internal fun NoteEntryDto.toNoteEntryItem() =
     NoteEntryItem(id = id, createdAt = createdAt, title = title, color = color)
 
-fun Note.toNoteItem() = NoteItem(
+internal fun NoteDto.toNoteItem() = NoteItem(
     id = id,
     content = content,
     title = title,

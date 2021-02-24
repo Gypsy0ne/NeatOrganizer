@@ -13,7 +13,7 @@ data class RoutineSchedule(
     }
 }
 
-fun RoutineSchedule.toRoutineScheduleEntity() = RoutineScheduleEntity(
+internal fun RoutineSchedule.toRoutineScheduleEntity() = RoutineScheduleEntity(
     routineId = this.routineId,
     monday = this.scheduledDays[0],
     tuesday = this.scheduledDays[1],

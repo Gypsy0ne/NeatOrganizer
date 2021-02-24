@@ -18,7 +18,7 @@ import one.gypsy.neatorganizer.task.vm.TaskWidgetSelectionStatus
 import one.gypsy.neatorganizer.task.vm.TaskWidgetSelectionViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
+internal class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
 
     private val args: TaskGroupSelectionDialogFragmentArgs by navArgs()
     private val selectionViewModel: TaskWidgetSelectionViewModel by viewModel()

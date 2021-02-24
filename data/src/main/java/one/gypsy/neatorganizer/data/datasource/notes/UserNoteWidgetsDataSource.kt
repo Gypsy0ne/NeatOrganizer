@@ -8,7 +8,7 @@ import one.gypsy.neatorganizer.data.model.notes.toNoteWidgetEntry
 import one.gypsy.neatorganizer.data.model.notes.toTitledNoteWidgetEntry
 import one.gypsy.neatorganizer.database.dao.notes.NoteWidgetsDao
 
-class UserNoteWidgetsDataSource(private val noteWidgetsDao: NoteWidgetsDao) :
+internal class UserNoteWidgetsDataSource(private val noteWidgetsDao: NoteWidgetsDao) :
     NoteWidgetsDataSource {
 
     override suspend fun insert(noteWidget: NoteWidgetEntry) =

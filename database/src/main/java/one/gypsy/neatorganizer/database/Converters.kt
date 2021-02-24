@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.database
 import androidx.room.TypeConverter
 import java.util.Date
 
-class Converters {
+internal class Converters {
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? {
         return value?.let {

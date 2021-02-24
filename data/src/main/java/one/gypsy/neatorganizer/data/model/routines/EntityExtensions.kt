@@ -4,7 +4,7 @@ import one.gypsy.neatorganizer.database.entity.routines.RoutineScheduleEntity
 import one.gypsy.neatorganizer.database.entity.routines.RoutineTaskEntity
 import one.gypsy.neatorganizer.database.entity.routines.ScheduledRoutineWithTasks
 
-fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
+internal fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
     routineId = this.routineId,
     scheduledDays = listOf(
         monday,
@@ -17,7 +17,7 @@ fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
     )
 )
 
-fun RoutineTaskEntity.toRoutineTaskEntry() =
+internal fun RoutineTaskEntity.toRoutineTaskEntry() =
     RoutineTaskEntry(
         id = this.id,
         routineId = this.routineId,
@@ -26,7 +26,7 @@ fun RoutineTaskEntity.toRoutineTaskEntry() =
         createdAt = this.createdAt
     )
 
-fun ScheduledRoutineWithTasks.toRoutineWithTasks() =
+internal fun ScheduledRoutineWithTasks.toRoutineWithTasks() =
     RoutineWithTasks(
         id = this.routine.id,
         name = this.routine.name,

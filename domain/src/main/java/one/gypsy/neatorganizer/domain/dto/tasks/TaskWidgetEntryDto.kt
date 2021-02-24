@@ -8,7 +8,7 @@ class TaskWidgetEntryDto(
     val widgetColor: Int
 )
 
-fun TaskWidgetEntryDto.toTaskWidgetEntry() = TaskWidgetEntry(
+internal fun TaskWidgetEntryDto.toTaskWidgetEntry() = TaskWidgetEntry(
     appWidgetId = appWidgetId,
     taskGroupId = taskGroupId,
     widgetColor = widgetColor

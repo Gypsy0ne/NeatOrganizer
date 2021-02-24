@@ -4,11 +4,11 @@ import one.gypsy.neatorganizer.core.listing.Editable
 import one.gypsy.neatorganizer.core.listing.HeaderItem
 import one.gypsy.neatorganizer.core.listing.Listed
 import one.gypsy.neatorganizer.core.listing.SubItem
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroup
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupDto
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
 
-sealed class TaskListItem(
+internal sealed class TaskListItem(
     override val id: Long,
     override val title: String,
     override val edited: Boolean
@@ -32,15 +32,15 @@ sealed class TaskListItem(
     ) : TaskListItem(id = id, title = title, edited = edited), SubItem
 }
 
-fun TaskListItem.TaskListHeader.toSingleTaskGroup(
-    taskEntries: List<SingleTaskEntry> = emptyList()
-) = SingleTaskGroupWithTasks(
-    taskGroup = SingleTaskGroup(id = this.id, name = this.title, createdAt = this.createdAt),
+internal fun TaskListItem.TaskListHeader.toSingleTaskGroup(
+    taskEntries: List<SingleTaskEntryDto> = emptyList()
+) = SingleTaskGroupWithTasksDto(
+    taskGroup = SingleTaskGroupDto(id = this.id, name = this.title, createdAt = this.createdAt),
     tasks = taskEntries
 )
 
-fun TaskListItem.TaskListSubItem.toSingleTask() =
-    SingleTaskEntry(
+internal fun TaskListItem.TaskListSubItem.toSingleTask() =
+    SingleTaskEntryDto(
         id = this.id,
         name = this.title,
         done = this.done,

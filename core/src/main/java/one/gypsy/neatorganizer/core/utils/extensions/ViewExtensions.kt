@@ -8,7 +8,7 @@ import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat
-import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.core.R
 
 fun View.shrink() {
     this.visibility = GONE

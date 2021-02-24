@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.core.binding.BindableAdapter
 import one.gypsy.neatorganizer.note.R
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
 
-class NoteEntriesAdapter :
+internal class NoteEntriesAdapter :
     ListAdapter<NoteEntryItem, NoteEntryViewHolder>(DiffCallback()),
     BindableAdapter<NoteEntryItem> {
 

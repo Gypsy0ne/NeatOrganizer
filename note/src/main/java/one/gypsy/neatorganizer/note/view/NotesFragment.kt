@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.note.databinding.FragmentNotesBinding
 import one.gypsy.neatorganizer.note.vm.NotesListingViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class NotesFragment : one.gypsy.neatorganizer.core.SectionFragment() {
+internal class NotesFragment : one.gypsy.neatorganizer.core.SectionFragment() {
 
     private val notesViewModel: NotesListingViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentNotesBinding

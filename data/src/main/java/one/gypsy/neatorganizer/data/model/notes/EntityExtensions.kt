@@ -4,14 +4,14 @@ import one.gypsy.neatorganizer.database.entity.notes.NoteEntity
 import one.gypsy.neatorganizer.database.entity.notes.NoteWidgetEntity
 import one.gypsy.neatorganizer.database.entity.notes.WidgetAndNote
 
-fun NoteEntity.toNoteEntry() = NoteEntry(
+internal fun NoteEntity.toNoteEntry() = NoteEntry(
     id = id,
     title = title,
     createdAt = createdAt,
     color = color
 )
 
-fun NoteEntity.toNote() = Note(
+internal fun NoteEntity.toNote() = Note(
     id = id,
     content = content,
     title = title,
@@ -19,10 +19,10 @@ fun NoteEntity.toNote() = Note(
     color = color
 )
 
-fun NoteWidgetEntity.toNoteWidgetEntry() =
+internal fun NoteWidgetEntity.toNoteWidgetEntry() =
     NoteWidgetEntry(widgetId = widgetId, noteId = noteId, color = color)
 
-fun WidgetAndNote.toTitledNoteWidgetEntry() = TitledNoteWidgetEntry(
+internal fun WidgetAndNote.toTitledNoteWidgetEntry() = TitledNoteWidgetEntry(
     appWidgetId = this.widget.widgetId,
     noteId = this.widget.noteId,
     widgetColor = this.widget.color,

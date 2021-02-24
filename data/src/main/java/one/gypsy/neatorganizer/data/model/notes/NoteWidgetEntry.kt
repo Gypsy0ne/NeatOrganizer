@@ -8,7 +8,7 @@ data class NoteWidgetEntry(
     val color: Int
 )
 
-fun NoteWidgetEntry.toNoteWidgetEntity() = NoteWidgetEntity(
+internal fun NoteWidgetEntry.toNoteWidgetEntity() = NoteWidgetEntity(
     widgetId = widgetId,
     color = color,
     noteId = noteId

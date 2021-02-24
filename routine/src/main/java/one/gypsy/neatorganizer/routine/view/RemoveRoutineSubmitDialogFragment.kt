@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.routine.R
 import one.gypsy.neatorganizer.routine.vm.RemoveRoutineViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
+internal class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var fragmentBinding: DialogFragmentGroupRemoveConfirmationBinding
     private val args: RemoveRoutineSubmitDialogFragmentArgs by navArgs()
@@ -23,7 +23,7 @@ class RemoveRoutineSubmitDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.dialog_fragment_group_remove_confirmation,

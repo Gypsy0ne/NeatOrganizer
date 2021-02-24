@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import one.gypsy.neatorganizer.core.listing.ContentLoadingStatus
 import one.gypsy.neatorganizer.core.listing.updateLoadingStatus
 import one.gypsy.neatorganizer.core.utils.extensions.delayItemsEmission
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.RemoveSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateSingleTask
@@ -23,7 +23,7 @@ import one.gypsy.neatorganizer.task.model.TaskListMapper
 import one.gypsy.neatorganizer.task.model.toSingleTask
 import one.gypsy.neatorganizer.task.model.toSingleTaskGroup
 
-class TasksViewModel(
+internal class TasksViewModel(
     getAllSingleTaskGroupsUseCase: GetAllSingleTaskGroups,
     private val updateSingleTaskGroupUseCase: UpdateSingleTaskGroupWithTasks,
     private val updateSingleTaskUseCase: UpdateSingleTask,
@@ -46,13 +46,13 @@ class TasksViewModel(
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                { _contentLoadingStatus.updateLoadingStatus(emptyList<SingleTaskGroupWithTasks>()) },
+                { _contentLoadingStatus.updateLoadingStatus(emptyList<SingleTaskGroupWithTasksDto>()) },
                 ::onGetAllGroupsWithSingleTasksSuccess
             )
         }
     }
 
-    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasks>>) =
+    private fun onGetAllGroupsWithSingleTasksSuccess(taskGroups: LiveData<List<SingleTaskGroupWithTasksDto>>) =
         _listedTasks.addSource(taskGroups) {
             viewModelScope.launch {
                 val mappedTasks = viewModelScope.async {

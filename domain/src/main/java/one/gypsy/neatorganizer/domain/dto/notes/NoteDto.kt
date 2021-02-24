@@ -10,7 +10,7 @@ class NoteDto(
     val color: Int
 )
 
-fun NoteDto.toNote() = Note(
+internal fun NoteDto.toNote() = Note(
     id = id,
     title = title,
     content = content,

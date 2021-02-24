@@ -5,8 +5,11 @@ import android.widget.RemoteViews
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.model.TaskEntryWidgetItem
 
-class TaskRemoteViewHolder(widgetItem: TaskEntryWidgetItem, packageName: String, layoutId: Int) :
-    RemoteViews(packageName, layoutId) {
+internal class TaskRemoteViewHolder(
+    widgetItem: TaskEntryWidgetItem,
+    packageName: String,
+    layoutId: Int
+) : RemoteViews(packageName, layoutId) {
 
     init {
         styleTaskTextView(widgetItem)

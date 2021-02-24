@@ -5,13 +5,14 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntry
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntryDto
+import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.CreateTaskWidget
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
+import one.gypsy.neatorganizer.task.model.toTaskGroupEntryItem
 
-class TasksWidgetConfigurationViewModel(
+internal class TasksWidgetConfigurationViewModel(
     getAllTaskGroupEntriesUseCase: GetAllSingleTaskGroupEntries,
     private val widgetCreationUseCase: CreateTaskWidget
 ) : ViewModel() {
@@ -33,7 +34,7 @@ class TasksWidgetConfigurationViewModel(
         }
     }
 
-    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntry>>) =
+    private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntryDto>>) =
         _listedTaskGroups.addSource(taskGroupEntriesObservable) { taskGroupEntries ->
             _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
         }
@@ -54,7 +55,7 @@ class TasksWidgetConfigurationViewModel(
     }
 
     private fun submitWidgetCreation(widgetId: Int) =
-        createTaskWidgetEntry(widgetId).let { widgetEntry ->
+        createTaskWidgetEntry(widgetId)?.let { widgetEntry ->
             widgetCreationUseCase.invoke(
                 viewModelScope,
                 CreateTaskWidget.Params(widgetEntry)
@@ -63,11 +64,11 @@ class TasksWidgetConfigurationViewModel(
             }
         }
 
-    private fun createTaskWidgetEntry(widgetId: Int): TaskWidgetEntry? {
+    private fun createTaskWidgetEntry(widgetId: Int): TaskWidgetEntryDto? {
         val taskGroup = selectedTaskGroup.value
         val widgetColor = pickedColor
         return if (taskGroup != null && widgetColor != null) {
-            TaskWidgetEntry(
+            TaskWidgetEntryDto(
                 appWidgetId = widgetId,
                 taskGroupId = taskGroup.id,
                 widgetColor = widgetColor

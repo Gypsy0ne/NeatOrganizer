@@ -13,7 +13,3 @@ java {
 android {
     compileSdkVersion Version.compileSdkVersion
 }
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlinVersion}"
-}

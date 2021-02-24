@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_note_widget.manageToolbar
-import kotlinx.android.synthetic.main.activity_task_widget.*
 import one.gypsy.neatorganizer.core.widget.WidgetKeyring.MANAGED_WIDGET_ID_KEY
 import one.gypsy.neatorganizer.core.widget.WidgetKeyring.MANAGED_WIDGET_INVALID_ID
 import one.gypsy.neatorganizer.note.R
@@ -13,7 +12,7 @@ import one.gypsy.neatorganizer.note.databinding.ActivityNoteWidgetBinding
 import one.gypsy.neatorganizer.note.view.widget.NoteWidgetKeyring.MANAGED_NOTE_ID_KEY
 import one.gypsy.neatorganizer.note.view.widget.NoteWidgetKeyring.MANAGED_NOTE_INVALID_ID
 
-class NoteWidgetActivity : AppCompatActivity() {
+internal class NoteWidgetActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityNoteWidgetBinding
 

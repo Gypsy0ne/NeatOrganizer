@@ -10,7 +10,7 @@ data class RoutineTaskEntry(
     val createdAt: Long
 )
 
-fun RoutineTaskEntry.toRoutineTaskEntity() = RoutineTaskEntity(
+internal fun RoutineTaskEntry.toRoutineTaskEntity() = RoutineTaskEntity(
     name = this.name,
     done = this.done,
     routineId = this.routineId,

@@ -5,8 +5,8 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import one.gypsy.neatorganizer.core.widget.WidgetNotifier
-import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasks
-import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntry
+import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
+import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroups
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllTaskWidgetIds
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllTaskWidgets
@@ -43,7 +43,7 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
         return START_REDELIVER_INTENT
     }
 
-    private fun onGetAllSingleTaskGroupsSuccess(taskGroupsWithTasks: LiveData<List<SingleTaskGroupWithTasks>>) =
+    private fun onGetAllSingleTaskGroupsSuccess(taskGroupsWithTasks: LiveData<List<SingleTaskGroupWithTasksDto>>) =
         taskGroupsWithTasks.observe(
             this,
             {
@@ -57,7 +57,7 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
         widgetNotifier.sendUpdateWidgetBroadcast(taskWidgetIds)
     }
 
-    private fun onGetAllTaskWidgetsSuccess(taskWidgets: LiveData<List<TaskWidgetEntry>>) {
+    private fun onGetAllTaskWidgetsSuccess(taskWidgets: LiveData<List<TaskWidgetEntryDto>>) {
         taskWidgets.observe(this) {
             updateTaskWidgets(it.map { widget -> widget.appWidgetId }.toIntArray())
         }

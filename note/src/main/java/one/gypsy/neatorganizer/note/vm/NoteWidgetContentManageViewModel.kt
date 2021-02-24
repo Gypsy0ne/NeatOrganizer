@@ -5,13 +5,14 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import one.gypsy.neatorganizer.domain.dto.notes.Note
+import one.gypsy.neatorganizer.domain.dto.notes.NoteDto
 import one.gypsy.neatorganizer.domain.interactors.notes.GetNoteById
 import one.gypsy.neatorganizer.domain.interactors.notes.UpdateNote
 import one.gypsy.neatorganizer.note.model.NoteItem
-import one.gypsy.neatorganizer.note.model.toNote
+import one.gypsy.neatorganizer.note.model.toDto
+import one.gypsy.neatorganizer.note.model.toNoteItem
 
-class NoteWidgetContentManageViewModel(
+internal class NoteWidgetContentManageViewModel(
     noteId: Long,
     private val getNoteByIdUseCase: GetNoteById,
     private val updateNoteUseCase: UpdateNote
@@ -30,7 +31,7 @@ class NoteWidgetContentManageViewModel(
         loadNoteData(noteId)
     }
 
-    private fun onGetNoteByIdSuccess(noteObservable: LiveData<Note>) {
+    private fun onGetNoteByIdSuccess(noteObservable: LiveData<NoteDto>) {
         _note.addSource(noteObservable) {
             _note.postValue(it.toNoteItem())
         }
@@ -44,7 +45,7 @@ class NoteWidgetContentManageViewModel(
     fun onEditionFinish(title: String, content: String) = note.value?.let {
         updateNoteUseCase.invoke(
             viewModelScope,
-            UpdateNote.Params(it.copy(title = title, content = content).toNote())
+            UpdateNote.Params(it.copy(title = title, content = content).toDto())
         )
     }
 

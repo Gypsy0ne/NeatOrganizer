@@ -10,7 +10,7 @@ class Note(
     val color: Int
 )
 
-fun Note.toNoteEntity() = NoteEntity(
+internal fun Note.toNoteEntity() = NoteEntity(
     id = id,
     title = title,
     content = content,

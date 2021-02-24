@@ -4,11 +4,11 @@ import one.gypsy.neatorganizer.core.listing.Editable
 import one.gypsy.neatorganizer.core.listing.HeaderItem
 import one.gypsy.neatorganizer.core.listing.Listed
 import one.gypsy.neatorganizer.core.listing.SubItem
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
-import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineScheduleDto
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntryDto
+import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasksDto
 
-sealed class RoutineListItem(
+internal sealed class RoutineListItem(
     override val id: Long,
     override val title: String,
     override val edited: Boolean
@@ -33,16 +33,16 @@ sealed class RoutineListItem(
     ) : RoutineListItem(id = id, title = title, edited = edited), SubItem
 }
 
-fun RoutineListItem.RoutineListHeader.toRoutine(
-    schedule: RoutineSchedule = RoutineSchedule.EMPTY,
-    tasks: List<RoutineTaskEntry> = emptyList()
-) = RoutineWithTasks(this.id, this.title, schedule, tasks, createdAt = this.createdAt)
+internal fun RoutineListItem.RoutineListHeader.toRoutine(
+    schedule: RoutineScheduleDto = RoutineScheduleDto.EMPTY,
+    tasks: List<RoutineTaskEntryDto> = emptyList()
+) = RoutineWithTasksDto(this.id, this.title, schedule, tasks, createdAt = this.createdAt)
 
-fun RoutineListItem.RoutineListHeader.getRoutineSchedule() =
-    RoutineSchedule(routineId = this.id, scheduledDays = this.scheduleDays)
+internal fun RoutineListItem.RoutineListHeader.getRoutineSchedule() =
+    RoutineScheduleDto(routineId = this.id, scheduledDays = this.scheduleDays)
 
-fun RoutineListItem.RoutineListSubItem.toRoutineTask() =
-    RoutineTaskEntry(
+internal fun RoutineListItem.RoutineListSubItem.toRoutineTask() =
+    RoutineTaskEntryDto(
         id = this.id,
         routineId = this.groupId,
         name = this.title,

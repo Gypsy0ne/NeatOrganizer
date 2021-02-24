@@ -3,7 +3,7 @@ package one.gypsy.neatorganizer.core.listing
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.core.R
 
 interface AnimatableViewHolder {
     val itemView: View

@@ -30,7 +30,7 @@ import one.gypsy.neatorganizer.task.vm.TaskWidgetDataLoadingStatus
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class TaskGroupManageFragment : Fragment() {
+internal class TaskGroupManageFragment : Fragment() {
 
     private val tasksViewModel: TaskWidgetContentManageViewModel by viewModel {
         parametersOf(arguments?.getLong(MANAGED_GROUP_ID_KEY) ?: MANAGED_GROUP_INVALID_ID)

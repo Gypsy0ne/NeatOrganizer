@@ -6,7 +6,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import one.gypsy.neatorganizer.R
+import one.gypsy.neatorganizer.core.R
 import one.gypsy.neatorganizer.core.utils.extensions.getDimen
 
 class ScheduleDayPicker(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {

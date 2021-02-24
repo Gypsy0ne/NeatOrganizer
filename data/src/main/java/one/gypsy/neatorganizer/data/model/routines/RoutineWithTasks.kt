@@ -10,14 +10,14 @@ data class RoutineWithTasks(
     val createdAt: Long
 )
 
-fun RoutineWithTasks.toRoutineEntity() =
+internal fun RoutineWithTasks.toRoutineEntity() =
     one.gypsy.neatorganizer.database.entity.routines.RoutineEntity(
         name = this.name,
         id = this.id,
         createdAt = this.createdAt
     )
 
-fun RoutineWithTasks.toScheduledRoutineEntity() = ScheduledRoutineWithTasks(
+internal fun RoutineWithTasks.toScheduledRoutineEntity() = ScheduledRoutineWithTasks(
     routine = this.toRoutineEntity(),
     schedule = this.schedule.toRoutineScheduleEntity(),
     tasks = this.tasks.map { it.toRoutineTaskEntity() }

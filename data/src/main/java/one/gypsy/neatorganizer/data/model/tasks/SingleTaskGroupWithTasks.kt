@@ -7,7 +7,7 @@ data class SingleTaskGroupWithTasks(
     val tasks: List<SingleTaskEntry> = emptyList(),
 )
 
-fun SingleTaskGroupWithTasks.toSingleTaskGroupEntity() = SingleTaskGroupEntity(
+internal fun SingleTaskGroupWithTasks.toSingleTaskGroupEntity() = SingleTaskGroupEntity(
     name = this.taskGroup.name,
     id = this.taskGroup.id,
     createdAt = this.taskGroup.createdAt

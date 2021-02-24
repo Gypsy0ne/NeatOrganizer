@@ -11,7 +11,7 @@ import one.gypsy.neatorganizer.core.utils.extensions.shrink
 import one.gypsy.neatorganizer.task.databinding.ItemTaskHeaderBinding
 import one.gypsy.neatorganizer.task.model.TaskListItem
 
-class TaskHeaderViewHolder(
+internal class TaskHeaderViewHolder(
     private val itemBinding: ItemTaskHeaderBinding,
     private val clickListener: HeaderClickListener<TaskListItem.TaskListHeader>? = null
 ) : TaskViewHolder(itemBinding.root), ListedHeader<TaskListItem.TaskListHeader> {

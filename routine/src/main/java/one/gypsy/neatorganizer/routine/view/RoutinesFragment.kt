@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.routine.databinding.FragmentRoutinesBinding
 import one.gypsy.neatorganizer.routine.vm.RoutinesViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RoutinesFragment : one.gypsy.neatorganizer.core.SectionFragment() {
+internal class RoutinesFragment : one.gypsy.neatorganizer.core.SectionFragment() {
 
     private val routinesViewModel: RoutinesViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentRoutinesBinding

@@ -22,13 +22,13 @@ class RoutinesResetManager(context: Context) {
     private fun createResetWorkRequest(): PeriodicWorkRequest =
         PeriodicWorkRequest.Builder(RoutinesResetWorker::class.java, 7, TimeUnit.DAYS)
             .setInitialDelay(
-                getInitialDelayToNextGivenDay(Calendar.MONDAY), TimeUnit.MILLISECONDS
+                getInitialDelayToNextGivenDay(), TimeUnit.MILLISECONDS
             ).build()
 
-    private fun getInitialDelayToNextGivenDay(calendarDay: Int): Long {
+    private fun getInitialDelayToNextGivenDay(): Long {
         val initialDate: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.DAY_OF_WEEK, calendarDay)
+            set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
             set(Calendar.HOUR_OF_DAY, 1)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)

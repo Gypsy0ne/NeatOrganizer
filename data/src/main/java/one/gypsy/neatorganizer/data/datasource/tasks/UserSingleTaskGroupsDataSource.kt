@@ -11,7 +11,7 @@ import one.gypsy.neatorganizer.data.model.tasks.toSingleTaskGroupEntry
 import one.gypsy.neatorganizer.data.model.tasks.toSingleTaskGroupWithTasks
 import one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
 
-class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTaskGroupsDao) :
+internal class UserSingleTaskGroupsDataSource(private val singleTaskGroupsDao: SingleTaskGroupsDao) :
     SingleTaskGroupsDataSource {
 
     override suspend fun addSingleTaskGroupWithTasks(singleTaskGroupWithTasks: SingleTaskGroupWithTasks) =
