@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/tasks"
+        android:id="@+id/navigation_task_section"
         android:icon="@drawable/ic_tasks_white_24"
         android:title="@string/activity_home_bottom_navigation_menu_tasks"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/notes"
+        android:id="@+id/navigation_note_section"
         android:icon="@drawable/ic_note_24"
         android:title="@string/activity_home_bottom_navigation_menu_notes"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/routines"
+        android:id="@+id/navigation_routine_section"
         android:icon="@drawable/ic_routines_white_24"
         android:title="@string/activity_home_bottom_navigation_menu_routines"
         app:showAsAction="ifRoom" />

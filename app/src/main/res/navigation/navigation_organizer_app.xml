@@ -2,24 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/organizer_app_navigation"
-    app:startDestination="@id/navigation_task_widget">
+    app:startDestination="@id/navigation_task_section">
 
-
-    <action
-        android:id="@+id/tasksToRoutinesAction"
-        app:destination="@id/routines"
-        app:launchSingleTop="true"
-        app:popUpTo="@id/organizer_app_navigation"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/tasksToNotesAction"
-        app:destination="@id/notes"
-        app:launchSingleTop="true"
-        app:popUpTo="@id/organizer_app_navigation"
-        app:popUpToInclusive="true" />
-
-    <include app:graph="@navigation/navigation_task_widget" />
-    <include app:graph="@navigation/navigation_note_widget" />
-
+    <include app:graph="@navigation/navigation_routine_section" />
+    <include app:graph="@navigation/navigation_task_section" />
+    <include app:graph="@navigation/navigation_note_section" />
 
 </navigation>

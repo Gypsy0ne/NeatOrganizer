@@ -4,10 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import one.gypsy.neatorganizer.routine.alarm.RoutinesResetManager
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.android.ext.android.inject
 
-class LaunchActivity : AppCompatActivity(), KoinComponent {
+internal class LaunchActivity : AppCompatActivity() {
 
     private val routinesResetManager: RoutinesResetManager by inject()
 

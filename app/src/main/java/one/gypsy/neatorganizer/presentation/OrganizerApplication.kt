@@ -23,7 +23,7 @@ import one.gypsy.neatorganizer.task.taskViewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class OrganizerApplication : Application() {
+internal class OrganizerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
