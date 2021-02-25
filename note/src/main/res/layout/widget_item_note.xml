@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <import type="kotlin.Unit" />
+
+        <import type="one.gypsy.neatorganizer.note.model.NoteEntryItem" />
+
+        <variable
+            name="noteEntryItem"
+            type="one.gypsy.neatorganizer.note.model.NoteEntryItem" />
+
+        <variable
+            name="onItemSelect"
+            type="Function1&lt;NoteEntryItem, Unit>" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/noteItemContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/normal_50"
+        android:layout_marginVertical="@dimen/normal_75"
+        app:cardBackgroundColor="@{noteEntryItem.color}"
+        app:cardCornerRadius="@dimen/normal_100">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noteItemContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:onClick="@{() -> onItemSelect.invoke(noteEntryItem)}">
+
+            <TextView
+                android:id="@+id/createdOn"
+                creationTimestamp="@{noteEntryItem.createdAt}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/normal_100"
+                android:layout_marginStart="@dimen/normal_100"
+                android:textSize="@dimen/text_normal_50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Created on 12-12-2020" />
+
+            <TextView
+                android:id="@+id/noteTitle"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_0"
+                android:layout_marginHorizontal="@dimen/normal_200"
+                android:layout_marginVertical="@dimen/normal_300"
+                android:autoSizeMaxTextSize="@dimen/text_normal_100"
+                android:autoSizeMinTextSize="@dimen/text_normal_50"
+                android:autoSizeTextType="uniform"
+                android:gravity="center_horizontal"
+                android:text="@{noteEntryItem.title}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="2:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createdOn" />
+
+            <ImageView
+                android:id="@+id/selectionIndicator"
+                android:layout_width="@dimen/normal_400"
+                android:layout_height="@dimen/normal_400"
+                android:layout_margin="@dimen/normal_100"
+                android:src="@drawable/ic_check_white_24"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -8,12 +8,12 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import one.gypsy.neatorganizer.data.repositories.routines.RoutineTasksRepository
-import one.gypsy.neatorganizer.data.repositories.routines.RoutinesRepository
-import one.gypsy.neatorganizer.data.repositories.routines.reset.RoutineSnapshotsRepository
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineSchedule
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntry
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasks
+import one.gypsy.neatorganizer.domain.repositories.routines.RoutineTasksRepository
+import one.gypsy.neatorganizer.domain.repositories.routines.RoutinesRepository
+import one.gypsy.neatorganizer.domain.repositories.routines.reset.RoutineSnapshotsRepository
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -27,11 +27,12 @@ class RoutinesResetSnapshooterTest {
     private val routinesRepository = mockk<RoutinesRepository>(relaxed = true)
     private val routineSnapshotsRepository = mockk<RoutineSnapshotsRepository>(relaxed = true)
     private val routineTasksRepository = mockk<RoutineTasksRepository>(relaxed = true)
-    private val routinesResetSnapshooter = RoutinesResetSnapshooter(
-        routinesRepository,
-        routineSnapshotsRepository,
-        routineTasksRepository
-    )
+    private val routinesResetSnapshooter =
+        one.gypsy.neatorganizer.domain.routines.reset.RoutinesResetSnapshooter(
+            routinesRepository,
+            routineSnapshotsRepository,
+            routineTasksRepository
+        )
 
     private val testDispatcher = TestCoroutineDispatcher()
 

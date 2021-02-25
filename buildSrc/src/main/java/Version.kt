@@ -29,4 +29,6 @@ object Version {
     const val androidx_lifecycle_version = "2.2.0"
     const val room_version = "2.2.6"
     const val auto_fit_edit_text_version = "53238e2d29"
+    const val recycler_view_version = "1.1.0"
+    const val appcompat_version = "1.2.0"
 }

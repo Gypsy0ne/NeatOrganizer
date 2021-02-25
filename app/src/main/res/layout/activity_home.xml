@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/activity_home_app_bar_menu"
+            app:menu="@menu/section_app_bar_menu"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <fragment

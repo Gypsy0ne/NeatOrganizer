@@ -1,5 +1,15 @@
 apply from: Dependencies.common
 
 dependencies {
+    kapt Room.compiler
+    implementation Room.ktx
+    implementation Room.runtime
+    testImplementation Room.testing
 
+    implementation Lifecycle.livedata
+    implementation Lifecycle.ext
+    implementation Lifecycle.runtime
+
+    implementation Koin.core
+    implementation Koin.core_ext
 }

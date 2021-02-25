@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_note_widget"
+    app:startDestination="@id/widgetNoteManage">
+
+    <fragment
+        android:id="@+id/widgetNoteManage"
+        android:name="one.gypsy.neatorganizer.note.view.widget.management.NoteManageFragment"
+        android:label="NoteManageFragment">
+
+        <action
+            android:id="@+id/widgetNoteManageToNoteSelection"
+            app:destination="@id/widgetNoteSelection" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/widgetNoteSelection"
+        android:name="one.gypsy.neatorganizer.note.view.widget.management.NoteSelectionDialogFragment"
+        android:label="SelectNoteDialogFragment">
+
+        <argument
+            android:name="widgetId"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/noteAddition"
+        android:name="one.gypsy.neatorganizer.note.view.AddNoteDialogFragment"
+        android:label="AddNoteDialogFragment" />
+
+</navigation>
