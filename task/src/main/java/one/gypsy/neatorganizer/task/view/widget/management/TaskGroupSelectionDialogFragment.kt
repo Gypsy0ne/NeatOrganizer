@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.management
 
 import android.os.Bundle
 import android.view.LayoutInflater

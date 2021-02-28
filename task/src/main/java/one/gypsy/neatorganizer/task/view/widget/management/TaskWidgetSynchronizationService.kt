@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.management
 
 import android.content.Intent
 import androidx.lifecycle.LifecycleService

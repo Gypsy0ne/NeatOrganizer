@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.management
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -142,8 +142,7 @@ internal class TaskGroupManageFragment : Fragment() {
     private fun NavController.navigateToAddTaskDialog() =
         tasksViewModel.taskGroup.value?.id?.let {
             navigate(
-                TaskGroupManageFragmentDirections
-                    .widgetTaskGroupManageToSingleTaskAddition(it)
+                TaskGroupManageFragmentDirections.widgetTaskGroupManageToSingleTaskAddition(it)
             )
         }
 
@@ -171,8 +170,7 @@ internal class TaskGroupManageFragment : Fragment() {
             ?: MANAGED_WIDGET_INVALID_ID
         if (widgetId != MANAGED_WIDGET_INVALID_ID) {
             navigate(
-                TaskGroupManageFragmentDirections
-                    .widgetTaskGroupManageToTaskGroupSelection(widgetId)
+                TaskGroupManageFragmentDirections.widgetTaskGroupManageToTaskGroupSelection(widgetId)
             )
         }
     }

@@ -135,7 +135,7 @@
                 android:id="@+id/button_item_routine_header_add"
                 style="@style/HeaderMenuButton.Large"
                 android:background="@drawable/item_person_swipe_update_background"
-                android:backgroundTint="@color/dark_green"
+                android:backgroundTint="@color/green"
                 android:drawableTop="@drawable/ic_add_white_32"
                 android:layout_marginStart="@dimen/normal_100"
                 android:onClick="@{addClickListener}"

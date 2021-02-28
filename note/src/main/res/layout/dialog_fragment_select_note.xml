@@ -80,7 +80,7 @@
 
             <Button
                 android:id="@+id/selectionCancelation"
-                style="@style/DialogFormButton.Cancel"
+                style="@style/FormButton.Cancel"
                 android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/normal_300"
@@ -90,7 +90,7 @@
 
             <Button
                 android:id="@+id/selectionConfirmation"
-                style="@style/DialogFormButton.Submit"
+                style="@style/FormButton.Submit"
                 android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/normal_300"

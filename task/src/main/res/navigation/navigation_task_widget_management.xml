@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/widgetTaskGroupManage"
-        android:name="one.gypsy.neatorganizer.task.view.widget.TaskGroupManageFragment"
+        android:name="one.gypsy.neatorganizer.task.view.widget.management.TaskGroupManageFragment"
         android:label="TaskGroupManageFragment">
 
         <action
@@ -28,11 +28,15 @@
 
     <dialog
         android:id="@+id/widgetTaskGroupSelection"
-        android:name="one.gypsy.neatorganizer.task.view.widget.TaskGroupSelectionDialogFragment"
+        android:name="one.gypsy.neatorganizer.task.view.widget.management.TaskGroupSelectionDialogFragment"
         android:label="SelectTaskGroupDialogFragment">
         <argument
             android:name="widgetId"
             app:argType="integer" />
     </dialog>
 
+    <dialog
+        android:id="@+id/taskGroupAddition"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskGroupDialogFragment"
+        android:label="AddTaskGroupDialogFragment" />
 </navigation>

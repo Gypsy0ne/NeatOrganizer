@@ -1,21 +1,21 @@
-package one.gypsy.neatorganizer.note.view.widget.configuration
+package one.gypsy.neatorganizer.task.view.widget.configuration
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import one.gypsy.neatorganizer.core.widget.WidgetConfigurationActivity
 import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
-import one.gypsy.neatorganizer.note.R
+import one.gypsy.neatorganizer.task.R
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 
-internal class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
+internal class TaskWidgetConfigureActivity : WidgetConfigurationActivity() {
 
-    override val widgetViewManager: WidgetRemoteViewManager by inject(named("noteRemoteViewManager"))
+    override val widgetViewManager: WidgetRemoteViewManager by inject(named("taskRemoteViewManager"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_note_widget_configuration)
+        setContentView(R.layout.activity_task_widget_configuration)
         setNavigationGraphWithData()
     }
 
@@ -23,7 +23,7 @@ internal class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
         (supportFragmentManager.findFragmentById(R.id.configurationContainer) as? NavHostFragment)
             ?.navController
             ?.setGraph(
-                R.navigation.navigation_note_widget_configuration,
+                R.navigation.navigation_task_widget_configuration,
                 createStartDataBundle()
             )
 

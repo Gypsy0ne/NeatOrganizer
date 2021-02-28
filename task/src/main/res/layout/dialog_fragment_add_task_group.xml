@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
-                style="@style/DialogFormEditText"
+                style="@style/FormEditText"
                 android:id="@+id/edit_text_dialog_fragment_add_task_group_title"
                 android:layout_marginHorizontal="@dimen/normal_200"
                 android:layout_marginTop="@dimen/normal_200"
@@ -45,7 +45,7 @@
                 android:id="@+id/button_dialog_fragment_add_task_group_confirmation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/DialogFormButton.Submit"
+                style="@style/FormButton.Submit"
                 android:onClick="@{() -> viewModel.addTaskGroup()}"
                 android:layout_marginVertical="@dimen/normal_300"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -30,14 +30,37 @@
             layoutManager="@{layoutManager}"
             android:layout_width="@dimen/normal_0"
             android:layout_height="@dimen/normal_0"
-            android:background="@drawable/rounded_bottom_background"
             android:elevation="@dimen/normal_25"
             android:paddingHorizontal="@dimen/normal_25"
             android:paddingTop="@dimen/normal_100"
+            app:layout_constraintBottom_toBottomOf="@id/groupsBackground"
+            app:layout_constraintLeft_toLeftOf="@id/groupsBackground"
+            app:layout_constraintRight_toRightOf="@id/groupsBackground"
+            app:layout_constraintTop_toTopOf="@id/groupsBackground" />
+
+        <View
+            android:id="@+id/groupsBackground"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:background="@drawable/rounded_bottom_background"
             app:layout_constraintBottom_toTopOf="@+id/taskGroupsListGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/createNew"
+            style="@style/FormButton.Create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_100"
+            android:drawablePadding="@dimen/normal_100"
+            android:elevation="@dimen/normal_50"
+            android:gravity="center"
+            android:text="Create task group"
+            app:layout_constraintBottom_toBottomOf="@id/groupsBackground"
+            app:layout_constraintLeft_toLeftOf="@id/groupsBackground"
+            app:layout_constraintRight_toRightOf="@id/groupsBackground" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/taskGroupsListGuideline"
@@ -81,7 +104,7 @@
 
         <Button
             android:id="@+id/submitConfiguration"
-            style="@style/DialogFormButton.Submit"
+            style="@style/FormButton.Submit"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"
@@ -93,7 +116,7 @@
 
         <Button
             android:id="@+id/cancelConfiguration"
-            style="@style/DialogFormButton.Cancel"
+            style="@style/FormButton.Cancel"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"

@@ -30,7 +30,7 @@ internal class NoteWidgetActivity : AppCompatActivity() {
     }
 
     private fun setNavigationGraph() = findNavController(R.id.navigationFragmentsContainer)
-        .setGraph(R.navigation.navigation_note_widget, createStartDestinationBundle())
+        .setGraph(R.navigation.navigation_note_widget_management, createStartDestinationBundle())
 
     private fun createStartDestinationBundle() = Bundle().apply {
         putLong(

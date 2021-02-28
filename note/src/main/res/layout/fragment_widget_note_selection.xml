@@ -51,10 +51,20 @@
             layoutManager="@{layoutManager}"
             android:layout_width="@dimen/normal_0"
             android:layout_height="@dimen/normal_0"
-            app:layout_constraintBottom_toTopOf="@+id/bottomMenuGuideline"
+            app:layout_constraintBottom_toTopOf="@+id/createNote"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerGuideline" />
+
+        <Button
+            android:id="@+id/createNote"
+            style="@style/FormButton.Create"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_100"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenuGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/bottomMenuGuideline"
@@ -76,7 +86,7 @@
 
         <Button
             android:id="@+id/submitConfiguration"
-            style="@style/DialogFormButton.Submit"
+            style="@style/FormButton.Submit"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"
@@ -88,7 +98,7 @@
 
         <Button
             android:id="@+id/cancelConfiguration"
-            style="@style/DialogFormButton.Cancel"
+            style="@style/FormButton.Cancel"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"

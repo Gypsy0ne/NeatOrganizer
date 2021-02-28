@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.remote
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -19,6 +19,7 @@ import one.gypsy.neatorganizer.domain.interactors.tasks.LoadTitledTaskWidget
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.view.widget.TaskWidgetKeyring.MANAGED_GROUP_ID_KEY
 import one.gypsy.neatorganizer.task.view.widget.TaskWidgetKeyring.MANAGED_GROUP_INVALID_ID
+import one.gypsy.neatorganizer.task.view.widget.management.TaskWidgetActivity
 
 internal class TaskWidgetRemoteViewManager(
     private val context: Context,

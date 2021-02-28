@@ -36,7 +36,7 @@ abstract class WidgetConfigurationActivity : AppCompatActivity() {
         setResult(status, result)
     }
 
-    protected fun onWidgetCreationFinish() {
+    fun onWidgetCreationFinish() {
         widgetViewManager.updateWidget(appWidgetId)
         setActivityResult(RESULT_OK)
         finish()

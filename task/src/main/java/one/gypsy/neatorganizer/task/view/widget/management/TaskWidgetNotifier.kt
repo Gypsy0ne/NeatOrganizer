@@ -1,9 +1,10 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.management
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import one.gypsy.neatorganizer.core.widget.WidgetNotifier
+import one.gypsy.neatorganizer.task.view.widget.remote.TasksAppWidget
 
 internal class TaskWidgetNotifier(private val context: Context) : WidgetNotifier {
 
