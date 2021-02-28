@@ -48,16 +48,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/createNew"
             style="@style/FormButton.Create"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_100"
             android:drawablePadding="@dimen/normal_100"
-            android:elevation="@dimen/normal_50"
+            android:text="Create group"
             android:gravity="center"
-            android:text="Create task group"
+            app:elevation="@dimen/normal_50"
             app:layout_constraintBottom_toBottomOf="@id/groupsBackground"
             app:layout_constraintLeft_toLeftOf="@id/groupsBackground"
             app:layout_constraintRight_toRightOf="@id/groupsBackground" />
@@ -102,25 +102,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submitConfiguration"
             style="@style/FormButton.Submit"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"
-            android:elevation="@dimen/normal_50"
+            app:elevation="@dimen/normal_50"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cancelConfiguration"
             app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelConfiguration"
             style="@style/FormButton.Cancel"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"
-            android:elevation="@dimen/normal_50"
+            app:elevation="@dimen/normal_50"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toStartOf="@+id/submitConfiguration"
             app:layout_constraintStart_toStartOf="parent"

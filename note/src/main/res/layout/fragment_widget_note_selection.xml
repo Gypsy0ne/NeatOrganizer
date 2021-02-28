@@ -51,17 +51,20 @@
             layoutManager="@{layoutManager}"
             android:layout_width="@dimen/normal_0"
             android:layout_height="@dimen/normal_0"
-            app:layout_constraintBottom_toTopOf="@+id/createNote"
+            android:layout_marginBottom="@dimen/normal_100"
+            app:layout_constraintBottom_toBottomOf="@+id/createNote"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerGuideline" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/createNote"
             style="@style/FormButton.Create"
+            android:layout_marginHorizontal="@dimen/normal_100"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_100"
+            android:layout_marginBottom="@dimen/normal_100"
+            android:text="Create note"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenuGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -84,25 +87,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submitConfiguration"
             style="@style/FormButton.Submit"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"
-            android:elevation="@dimen/normal_50"
+            app:elevation="@dimen/normal_50"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cancelConfiguration"
             app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelConfiguration"
             style="@style/FormButton.Cancel"
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_300"
-            android:elevation="@dimen/normal_50"
+            app:elevation="@dimen/normal_50"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
             app:layout_constraintEnd_toStartOf="@+id/submitConfiguration"
             app:layout_constraintStart_toStartOf="parent"

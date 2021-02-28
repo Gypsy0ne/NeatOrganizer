@@ -44,7 +44,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/removeDialogSubmit"
                 style="@style/FormButton.Submit"
                 android:layout_width="wrap_content"

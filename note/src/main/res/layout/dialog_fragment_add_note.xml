@@ -68,7 +68,7 @@
                 app:spectrum_colors="@array/note_colors"
                 app:spectrum_columnCount="@integer/color_palette_columns" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/newNoteAdditionConfirmation"
                 style="@style/FormButton.Submit"
                 android:layout_width="wrap_content"
