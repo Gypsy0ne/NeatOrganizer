@@ -64,7 +64,7 @@
             android:layout_width="@dimen/normal_0"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/normal_100"
-            android:text="Create note"
+            android:text="@string/widget_selection_note_creation"
             app:layout_constraintBottom_toBottomOf="@+id/bottomMenuGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

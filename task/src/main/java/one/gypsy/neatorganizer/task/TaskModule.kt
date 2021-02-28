@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager
 import one.gypsy.neatorganizer.core.widget.WidgetNotifier
 import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
 import one.gypsy.neatorganizer.task.model.TaskListMapper
+import one.gypsy.neatorganizer.task.view.widget.configuration.TaskWidgetConfigureActivity.Companion.TASK_REMOTE_VIEW_MANAGER
 import one.gypsy.neatorganizer.task.view.widget.management.TaskWidgetNotifier
 import one.gypsy.neatorganizer.task.view.widget.remote.TaskWidgetRemoteViewManager
 import one.gypsy.neatorganizer.task.vm.AddTaskGroupViewModel
@@ -20,7 +21,7 @@ import org.koin.dsl.module
 
 val taskUtilsModule = module {
     factory { TaskListMapper() }
-    factory<WidgetRemoteViewManager>(named("taskRemoteViewManager")) {
+    factory<WidgetRemoteViewManager>(named(TASK_REMOTE_VIEW_MANAGER)) {
         TaskWidgetRemoteViewManager(
             context = get(),
             widgetManager = AppWidgetManager.getInstance(get()),

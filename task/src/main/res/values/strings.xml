@@ -9,5 +9,6 @@
     <string name="add_task_group_dialog_fragment_content_hint">Task group title</string>
     <string name="add_task_dialog_fragment_content_hint">Task title</string>
     <string name="task_widget_untitled_hint">Untitled task group</string>
+    <string name="selection_widget_group_create">Create group</string>
 
 </resources>

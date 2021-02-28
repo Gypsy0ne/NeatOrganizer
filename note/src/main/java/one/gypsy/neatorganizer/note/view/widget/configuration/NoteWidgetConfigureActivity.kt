@@ -11,7 +11,7 @@ import org.koin.core.qualifier.named
 
 internal class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
 
-    override val widgetViewManager: WidgetRemoteViewManager by inject(named("noteRemoteViewManager"))
+    override val widgetViewManager: WidgetRemoteViewManager by inject(named(NOTE_REMOTE_VIEW_MANAGER))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +31,6 @@ internal class NoteWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     companion object {
         const val CONFIGURED_WIDGET_ID = "configuredWidgetId"
+        const val NOTE_REMOTE_VIEW_MANAGER = "noteRemoteViewManager"
     }
 }

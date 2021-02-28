@@ -11,7 +11,7 @@ import org.koin.core.qualifier.named
 
 internal class TaskWidgetConfigureActivity : WidgetConfigurationActivity() {
 
-    override val widgetViewManager: WidgetRemoteViewManager by inject(named("taskRemoteViewManager"))
+    override val widgetViewManager: WidgetRemoteViewManager by inject(named(TASK_REMOTE_VIEW_MANAGER))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +31,6 @@ internal class TaskWidgetConfigureActivity : WidgetConfigurationActivity() {
 
     companion object {
         const val CONFIGURED_WIDGET_ID = "configuredWidgetId"
+        const val TASK_REMOTE_VIEW_MANAGER = "taskRemoteViewManager"
     }
 }

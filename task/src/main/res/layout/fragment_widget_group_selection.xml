@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_100"
             android:drawablePadding="@dimen/normal_100"
-            android:text="Create group"
+            android:text="@string/selection_widget_group_create"
             android:gravity="center"
             app:elevation="@dimen/normal_50"
             app:layout_constraintBottom_toBottomOf="@id/groupsBackground"
