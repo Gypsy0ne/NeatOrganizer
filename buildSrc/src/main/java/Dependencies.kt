@@ -14,7 +14,7 @@ object Module {
     const val note = ":note"
     const val core = ":core"
     const val database = ":database"
-    const val easySwipeMenu = ":easyswipemenulibrary"
+    const val swipeMenu = ":swipemenu"
     const val domain = ":domain"
     const val data = ":data"
 }

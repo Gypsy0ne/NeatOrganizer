@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.remote
 
 import android.content.Intent
 import android.widget.RemoteViewsService

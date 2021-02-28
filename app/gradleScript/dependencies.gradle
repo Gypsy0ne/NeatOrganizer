@@ -1,7 +1,7 @@
 apply from: Dependencies.common
 
 dependencies {
-    implementation project(Module.easySwipeMenu)
+    implementation project(Module.swipeMenu)
     implementation project(Module.routine)
     implementation project(Module.note)
     implementation project(Module.task)

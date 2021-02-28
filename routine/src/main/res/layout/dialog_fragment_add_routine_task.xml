@@ -32,7 +32,7 @@
 
             <EditText
                 android:id="@+id/edit_text_dialog_fragment_add_task_content"
-                style="@style/DialogFormEditText"
+                style="@style/FormEditText"
                 android:layout_marginStart="@dimen/normal_200"
                 android:layout_marginTop="@dimen/normal_200"
                 android:layout_marginEnd="@dimen/normal_200"
@@ -43,11 +43,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_dialog_fragment_add_task_submit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/DialogFormButton.Submit"
+                style="@style/FormButton.Submit"
                 android:layout_margin="@dimen/normal_300"
                 android:onClick="@{() -> viewModel.addRoutineTask()}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -55,12 +55,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_content" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_dialog_fragment_add_task_next"
                 android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/normal_300"
-                style="@style/DialogFormButton.Next"
+                style="@style/FormButton.Next"
                 android:onClick="@{() -> viewModel.addNextRoutineTask()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

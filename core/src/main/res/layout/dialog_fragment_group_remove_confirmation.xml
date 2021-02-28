@@ -66,11 +66,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_dialog_fragment_remove_confirmation_header" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_dialog_fragment_remove_confirmation_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/DialogFormButton.Submit"
+                style="@style/FormButton.Submit"
                 android:layout_marginVertical="@dimen/normal_300"
                 android:onClick="@{submitClickListener}"
                 app:layout_constraintBottom_toBottomOf="parent"

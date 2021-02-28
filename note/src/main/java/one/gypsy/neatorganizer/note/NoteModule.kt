@@ -3,6 +3,7 @@ package one.gypsy.neatorganizer.note
 import android.appwidget.AppWidgetManager
 import one.gypsy.neatorganizer.core.widget.WidgetNotifier
 import one.gypsy.neatorganizer.core.widget.WidgetRemoteViewManager
+import one.gypsy.neatorganizer.note.view.widget.configuration.NoteWidgetConfigureActivity
 import one.gypsy.neatorganizer.note.view.widget.management.NoteWidgetNotifier
 import one.gypsy.neatorganizer.note.view.widget.remote.NoteWidgetRemoteViewManager
 import one.gypsy.neatorganizer.note.vm.AddNoteViewModel
@@ -17,13 +18,8 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-// val noteModule = module {
-//    noteUtilsModule
-//    noteViewModelModule
-// }
-
 val noteUtilsModule = module {
-    factory<WidgetRemoteViewManager>(named("noteRemoteViewManager")) {
+    factory<WidgetRemoteViewManager>(named(NoteWidgetConfigureActivity.NOTE_REMOTE_VIEW_MANAGER)) {
         NoteWidgetRemoteViewManager(
             context = get(),
             widgetManager = AppWidgetManager.getInstance(get()),

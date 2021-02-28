@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
@@ -39,7 +39,7 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="DialogFormEditText">
+    <style name="FormEditText">
         <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:maxLines">1</item>
@@ -48,42 +48,53 @@
         <item name="android:drawablePadding">@dimen/normal_50</item>
         <item name="android:paddingStart">@dimen/normal_100</item>
         <item name="android:paddingEnd">@dimen/normal_100</item>
-        <item name="android:background">@drawable/dialog_add_person_edit_text_background</item>
+        <item name="android:background">@drawable/blue_edit_text_background</item>
         <item name="android:layout_width">@dimen/normal_0</item>
         <item name="android:layout_height">@dimen/normal_500</item>
     </style>
 
-    <style name="DialogFormButton">
+    <style name="FormButton">
         <item name="android:paddingHorizontal">@dimen/normal_200</item>
-        <item name="android:paddingVertical">@dimen/normal_100</item>
+        <item name="android:paddingVertical">@dimen/normal_150</item>
         <item name="android:maxLines">1</item>
         <item name="autoSizeTextType">uniform</item>
         <item name="autoSizeMaxTextSize">@dimen/text_normal_75</item>
         <item name="autoSizeMinTextSize">@dimen/text_normal_50</item>
-        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="cornerRadius">@dimen/normal_800</item>
+        <item name="iconGravity">textStart</item>
+        <item name="strokeWidth">@dimen/helper_50</item>
     </style>
 
-    <style name="DialogFormButton.Submit">
-        <item name="android:background">
-            @drawable/dialog_yellow_clickable_view_background
-        </item>
-        <item name="android:drawableStart">@drawable/ic_check_white_24</item>
-        <item name="drawableTint">@color/dark_yellow</item>
-        <item name="android:text">@string/submit_button_dialog_text</item>
+    <style name="FormButton.Submit">
+        <item name="backgroundTint">@color/yellow</item>
+        <item name="iconTint">@color/dark_yellow</item>
+        <item name="strokeColor">@color/light_yellow</item>
         <item name="android:textColor">@color/dark_yellow</item>
+        <item name="icon">@drawable/ic_check_white_24</item>
+        <item name="android:text">@string/submit_button_text</item>
     </style>
 
-    <style name="DialogFormButton.Next" parent="DialogFormButton.Submit">
+    <style name="FormButton.Next" parent="FormButton.Submit">
         <item name="android:drawableStart">@drawable/ic_add_dark_yellow_24dp</item>
-        <item name="android:text">@string/next_button_dialog_fragment_text</item>
+        <item name="android:text">@string/next_button_text</item>
     </style>
 
-    <style name="DialogFormButton.Cancel">
-        <item name="android:background">@drawable/dialog_red_clickable_view_background</item>
-        <item name="android:drawableStart">@drawable/ic_close_white_24dp</item>
-        <item name="drawableTint">@color/dark_red</item>
-        <item name="android:text">@string/cancel_button_dialog_text</item>
+    <style name="FormButton.Cancel">
+        <item name="backgroundTint">@color/red</item>
+        <item name="iconTint">@color/dark_red</item>
+        <item name="strokeColor">@color/light_red</item>
         <item name="android:textColor">@color/dark_red</item>
+        <item name="icon">@drawable/ic_close_white_24dp</item>
+        <item name="android:text">@string/cancel_button_text</item>
+    </style>
+
+    <style name="FormButton.Create">
+        <item name="iconTint">@color/dark_green</item>
+        <item name="strokeColor">@color/light_green</item>
+        <item name="backgroundTint">@color/green</item>
+        <item name="icon">@drawable/ic_add_white_24</item>
+        <item name="android:text">@string/create_button_text</item>
+        <item name="android:textColor">@color/dark_green</item>
     </style>
 
     <style name="FragmentRecyclerView">

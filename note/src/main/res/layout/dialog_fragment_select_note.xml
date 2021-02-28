@@ -78,9 +78,9 @@
                     android:paddingHorizontal="@dimen/normal_50" />
             </androidx.cardview.widget.CardView>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/selectionCancelation"
-                style="@style/DialogFormButton.Cancel"
+                style="@style/FormButton.Cancel"
                 android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/normal_300"
@@ -88,9 +88,9 @@
                 app:layout_constraintEnd_toStartOf="@+id/selectionConfirmation"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/selectionConfirmation"
-                style="@style/DialogFormButton.Submit"
+                style="@style/FormButton.Submit"
                 android:layout_width="@dimen/normal_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/normal_300"

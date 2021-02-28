@@ -26,6 +26,7 @@
     <!--Helper dimens-->
     <dimen name="helper_200">1dp</dimen>
     <dimen name="helper_100">0.5dp</dimen>
+    <dimen name="helper_50">0.25dp</dimen>
     <!--End of helper dimens-->
 
     <!--Text size universal dimens-->

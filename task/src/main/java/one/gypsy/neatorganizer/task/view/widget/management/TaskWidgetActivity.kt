@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.task.view.widget
+package one.gypsy.neatorganizer.task.view.widget.management
 
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +27,7 @@ internal class TaskWidgetActivity : AppCompatActivity() {
     }
 
     private fun setNavigationGraph() = findNavController(R.id.navigationFragmentsContainer)
-        .setGraph(R.navigation.navigation_task_widget, createStartDestinationBundle())
+        .setGraph(R.navigation.navigation_task_widget_management, createStartDestinationBundle())
 
     private fun createStartDestinationBundle() = Bundle().apply {
         putLong(
