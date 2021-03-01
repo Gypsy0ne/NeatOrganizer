@@ -54,7 +54,10 @@ internal class TaskRemoteViewsFactory(
 
     private fun onGetAllSingleTasksSuccess(singleTasks: List<SingleTaskEntryDto>) {
         widgetItems.clear()
-        widgetItems.addAll(singleTasks.map { it.toTaskEntryWidgetItem() })
+        widgetItems.addAll(
+            singleTasks.map { it.toTaskEntryWidgetItem() }
+                .sortedByDescending { it.createdAt }
+        )
     }
 
     override fun onDestroy() = widgetItems.clear()

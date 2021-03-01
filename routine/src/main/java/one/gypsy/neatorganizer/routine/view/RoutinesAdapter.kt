@@ -61,7 +61,7 @@ internal class RoutinesAdapter(
     class DiffCallback : DiffUtil.ItemCallback<RoutineListItem>() {
 
         override fun areItemsTheSame(oldItem: RoutineListItem, newItem: RoutineListItem): Boolean {
-            return oldItem.id == newItem.id && oldItem.equals(newItem)
+            return oldItem.getViewHolderType() == newItem.getViewHolderType() && oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(

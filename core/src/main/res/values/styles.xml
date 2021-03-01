@@ -148,6 +148,18 @@
         <item name="layout_constraintDimensionRatio">W,1:1</item>
     </style>
 
+    <style name="SubItemMenuButton.Edit">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/male_blue</item>
+        <item name="android:src">@drawable/ic_edit_white_24</item>
+    </style>
+
+    <style name="SubItemMenuButton.Delete">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:src">@drawable/ic_delete_white_24</item>
+    </style>
+
     <style name="HeaderItemContainer">
         <item name="android:background">@drawable/item_header_background</item>
         <item name="android:layout_marginTop">@dimen/normal_100</item>
@@ -176,17 +188,53 @@
         <item name="layout_constraintDimensionRatio">W,3:4</item>
     </style>
 
+    <style name="HeaderMenuButton.Large.Delete">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:src">@drawable/ic_delete_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Large.Add">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:src">@drawable/ic_add_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Large.Edit">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/male_blue</item>
+        <item name="android:src">@drawable/ic_edit_white_32</item>
+    </style>
+
     <style name="HeaderMenuButton.Small">
-        <item name="android:textColor">@android:color/white</item>
         <item name="android:paddingTop">@dimen/normal_100</item>
         <item name="android:paddingBottom">@dimen/normal_100</item>
         <item name="layout_constraintDimensionRatio">W,1:1</item>
     </style>
 
+    <style name="HeaderMenuButton.Small.Delete">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:src">@drawable/ic_delete_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small.Add">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:src">@drawable/ic_add_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small.Edit">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/male_blue</item>
+        <item name="android:src">@drawable/ic_edit_white_32</item>
+    </style>
+
     <style name="ItemEditionSubmitButton">
         <item name="android:layout_width">@dimen/normal_400</item>
         <item name="android:layout_height">@dimen/normal_400</item>
-        <item name="android:layout_margin">@dimen/normal_100</item>
+        <item name="android:layout_marginVertical">@dimen/normal_100</item>
+        <item name="android:layout_marginHorizontal">@dimen/normal_200</item>
         <item name="android:src">@drawable/ic_check_white_24</item>
         <item name="android:tint">@color/dark_yellow</item>
         <item name="android:background">@drawable/bg_edition_submit_button</item>

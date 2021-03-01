@@ -36,7 +36,7 @@ internal class TaskWidgetContentManageViewModel(
     val listedTasks: LiveData<List<TaskListItem.TaskListSubItem>> =
         _listedTasks.distinctUntilChanged().switchMap {
             liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-                emit(it.map { it.toTaskListSubItem() })
+                emit(it.map { it.toTaskListSubItem() }.sortedByDescending { it.createdAt })
             }
         }
 

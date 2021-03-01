@@ -112,15 +112,11 @@
             android:id="@+id/constraint_layout_item_routine_header_left_menu"
             style="@style/ListItemMenu">
 
-            <Button
+            <ImageButton
                 android:id="@+id/button_item_routine_header_remove"
-                style="@style/HeaderMenuButton.Large"
-                android:background="@drawable/item_person_swipe_update_background"
-                android:backgroundTint="@color/red"
+                style="@style/HeaderMenuButton.Large.Delete"
                 android:layout_marginStart="@dimen/normal_100"
-                android:drawableTop="@drawable/ic_delete_white_32"
                 android:onClick="@{removeClickListener}"
-                android:text="@string/list_item_menu_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -131,29 +127,21 @@
             android:id="@+id/constraint_layout_item_routine_header_right_menu"
             style="@style/ListItemMenu">
 
-            <Button
+            <ImageButton
                 android:id="@+id/button_item_routine_header_add"
-                style="@style/HeaderMenuButton.Large"
-                android:background="@drawable/item_person_swipe_update_background"
-                android:backgroundTint="@color/green"
-                android:drawableTop="@drawable/ic_add_white_32"
+                style="@style/HeaderMenuButton.Large.Add"
                 android:layout_marginStart="@dimen/normal_100"
                 android:onClick="@{addClickListener}"
-                android:text="@string/list_item_menu_add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_item_routine_header_edit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/button_item_routine_header_edit"
-                style="@style/HeaderMenuButton.Large"
-                android:background="@drawable/item_person_swipe_update_background"
-                android:backgroundTint="@color/male_blue"
+                style="@style/HeaderMenuButton.Large.Edit"
                 android:layout_marginStart="@dimen/normal_50"
-                android:drawableTop="@drawable/ic_edit_white_32"
                 android:onClick="@{editClickListener}"
-                android:text="@string/list_item_menu_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button_item_routine_header_add"

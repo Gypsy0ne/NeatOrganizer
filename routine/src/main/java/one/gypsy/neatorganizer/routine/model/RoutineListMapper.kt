@@ -41,7 +41,7 @@ internal class RoutineListMapper {
         routineTasks: List<RoutineTaskEntryDto>
     ) = List(routineTasks.size) {
         routineTasks[it].toRoutineListSubItem()
-    }
+    }.sortedByDescending { it.createdAt }
 
     fun getVisibleItems(items: List<RoutineListItem>): List<RoutineListItem> =
         items.partition { it is RoutineListItem.RoutineListHeader }.let { partedLists ->

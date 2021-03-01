@@ -39,7 +39,7 @@ internal class NotesListingViewModel(
         _listedNotes.addSource(noteEntriesObservable) {
             viewModelScope.launch {
                 val mappedEntries = viewModelScope.async {
-                    it.map { it.toNoteEntryItem() }
+                    it.map { it.toNoteEntryItem() }.sortedByDescending { it.createdAt }
                 }
                 delayItemsEmission(it.size)
                 mappedEntries.await().let {

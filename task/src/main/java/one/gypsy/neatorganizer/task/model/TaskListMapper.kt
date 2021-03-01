@@ -39,7 +39,7 @@ internal class TaskListMapper {
         tasks: List<SingleTaskEntryDto>
     ) = List(tasks.size) {
         tasks[it].toTaskListSubItem()
-    }
+    }.sortedByDescending { it.createdAt }
 
     fun getVisibleItems(items: List<TaskListItem>): List<TaskListItem> =
         items.partition { it is TaskListItem.TaskListHeader }

@@ -65,7 +65,7 @@ internal class GroupedTasksAdapter(
     class DiffCallback : DiffUtil.ItemCallback<TaskListItem>() {
 
         override fun areItemsTheSame(oldItem: TaskListItem, newItem: TaskListItem): Boolean {
-            return oldItem.id == newItem.id && oldItem.equals(newItem)
+            return oldItem.getViewHolderType() == newItem.getViewHolderType() && oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: TaskListItem, newItem: TaskListItem): Boolean {
