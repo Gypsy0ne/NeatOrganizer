@@ -9,10 +9,6 @@
             type="one.gypsy.neatorganizer.routine.model.RoutineListItem.RoutineListHeader" />
 
         <variable
-            name="animateChanges"
-            type="Boolean" />
-
-        <variable
             name="expanderClickListener"
             type="android.view.View.OnClickListener" />
 

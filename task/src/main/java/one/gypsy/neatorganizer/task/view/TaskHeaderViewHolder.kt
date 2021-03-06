@@ -36,7 +36,6 @@ internal class TaskHeaderViewHolder(
     private fun bindInitially() =
         itemBinding.apply {
             headerItem = viewData
-            animateChanges = false
             executePendingBindings()
         }
 

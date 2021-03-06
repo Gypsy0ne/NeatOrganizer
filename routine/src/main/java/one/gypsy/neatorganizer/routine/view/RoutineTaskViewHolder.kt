@@ -65,7 +65,7 @@ internal class RoutineTaskViewHolder(
         setEditionEnabled(
             view = itemBinding.editTextItemRoutineTaskName,
             editionEnabled = viewData.edited,
-            requestEdit = true
+            requestEdit = viewData.edited
         )
 
     private fun onEditionFinish() {

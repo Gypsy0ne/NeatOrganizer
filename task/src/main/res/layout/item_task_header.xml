@@ -9,10 +9,6 @@
             type="one.gypsy.neatorganizer.task.model.TaskListItem.TaskListHeader" />
 
         <variable
-            name="animateChanges"
-            type="Boolean" />
-
-        <variable
             name="expanderClickListener"
             type="android.view.View.OnClickListener" />
 

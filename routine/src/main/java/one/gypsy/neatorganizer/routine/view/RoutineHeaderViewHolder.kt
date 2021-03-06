@@ -60,7 +60,7 @@ internal class RoutineHeaderViewHolder(
         setEditionEnabled(
             view = itemBinding.editTextItemRoutineHeaderName,
             editionEnabled = viewData.edited,
-            requestEdit = true
+            requestEdit = viewData.edited
         )
 
     override fun setUpSwipeMenuBehavior() =
