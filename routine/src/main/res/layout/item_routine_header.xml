@@ -55,6 +55,8 @@
                 android:layout_width="@dimen/normal_0"
                 android:layout_height="@dimen/normal_0"
                 android:text="@{headerItem.title}"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 app:layout_constraintBottom_toTopOf="@+id/day_picker_item_routine_header_schedule"
                 app:layout_constraintEnd_toEndOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"

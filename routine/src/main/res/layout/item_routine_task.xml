@@ -46,6 +46,8 @@
                 android:layout_marginStart="@dimen/normal_100"
                 strokeThrough="@{routineTaskItem.done}"
                 android:text="@{routineTaskItem.title}"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="parent"

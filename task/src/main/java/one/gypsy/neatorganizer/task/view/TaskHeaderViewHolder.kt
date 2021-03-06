@@ -63,7 +63,7 @@ internal class TaskHeaderViewHolder(
         setEditionEnabled(
             view = itemBinding.editTextItemTaskHeaderName,
             editionEnabled = viewData.edited,
-            requestEdit = true
+            requestEdit = viewData.edited
         )
 
     override fun setUpSwipeMenuBehavior() =

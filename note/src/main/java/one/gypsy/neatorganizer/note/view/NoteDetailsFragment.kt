@@ -68,7 +68,7 @@ internal class NoteDetailsFragment :
     private fun initTitleViewBehavior() =
         titleView?.also { titleView ->
             detailsViewModel.edited.observe(viewLifecycleOwner) {
-                setEditionEnabled(titleView, it, false)
+                setEditionEnabled(titleView, it)
             }
             detailsViewModel.note.observe(viewLifecycleOwner) {
                 titleView.setText(it.title)
