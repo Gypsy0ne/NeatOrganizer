@@ -41,7 +41,7 @@
 
     <style name="FormEditText">
         <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dark_gray</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">@integer/regular_text_length</item>
         <item name="android:inputType">textLongMessage</item>
@@ -111,6 +111,7 @@
         <item name="android:focusable">true</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textColorHighlight">@color/transparent_yellow</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 

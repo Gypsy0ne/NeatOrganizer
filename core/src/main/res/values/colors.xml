@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#FEE187</color>
     <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">@color/dark_yellow</color>
 
     <color name="white">#ffffff</color>
     <color name="background_white">#F3F3F3</color>
@@ -19,6 +19,7 @@
     <color name="yellow">#FEE187</color>
     <color name="dark_yellow">#EBBB41</color>
     <color name="light_yellow">#FFEFC2</color>
+    <color name="transparent_yellow">#BFFEE187</color>
     <color name="light_pink">#FEBAD6</color>
     <color name="pink">#EC8299</color>
     <color name="light_green">#79CA79</color>
