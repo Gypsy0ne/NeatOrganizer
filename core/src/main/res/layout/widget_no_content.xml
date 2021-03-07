@@ -16,7 +16,6 @@
         android:layout_marginHorizontal="@dimen/normal_100"
         android:layout_marginVertical="@dimen/normal_50"
         android:layout_weight="2"
-
         android:src="@drawable/ic_widget_missing_content" />
 
     <TextView
