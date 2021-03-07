@@ -30,7 +30,7 @@
             style="@style/FragmentRecyclerView"
             adapter="@{tasksAdapter}"
             adapterData="@{viewModel.listedTasks}"
-            hasFixedSize="@{false}"
+            hasFixedSize="@{true}"
             layoutManager="@{linearLayoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

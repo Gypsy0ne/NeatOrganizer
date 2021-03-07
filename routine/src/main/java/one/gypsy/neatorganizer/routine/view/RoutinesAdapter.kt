@@ -18,8 +18,6 @@ internal class RoutinesAdapter(
 ) : ListAdapter<RoutineListItem, RoutineViewHolder>(DiffCallback()),
     BindableAdapter<RoutineListItem> {
 
-    private var animateChanges = true
-
     override fun bindData(dataCollection: List<RoutineListItem>) {
         submitList(dataCollection)
     }
@@ -35,27 +33,10 @@ internal class RoutinesAdapter(
 
     override fun onBindViewHolder(holder: RoutineViewHolder, position: Int) {
         holder.bind(getItem(position))
-        if (holder.itemViewType != RoutineViewType.HEADER.resId && animateChanges) {
-            holder.animate()
-        }
-        animateChanges = true
-    }
-
-    override fun onCurrentListChanged(
-        previousList: MutableList<RoutineListItem>,
-        currentList: MutableList<RoutineListItem>
-    ) {
-        super.onCurrentListChanged(previousList, currentList)
-        animateChanges = previousList.size != currentList.size
     }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).getViewHolderType()
-    }
-
-    override fun onViewDetachedFromWindow(holder: RoutineViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        holder.clearAnimation()
     }
 
     class DiffCallback : DiffUtil.ItemCallback<RoutineListItem>() {

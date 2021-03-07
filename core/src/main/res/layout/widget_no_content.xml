@@ -1,35 +1,31 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widgetContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:layout_margin="@dimen/normal_25"
+    android:descendantFocusability="blocksDescendants"
     android:background="@drawable/task_widget_background"
-    android:descendantFocusability="blocksDescendants">
+    android:orientation="vertical"
+    android:padding="@dimen/normal_100">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_0"
+        android:layout_gravity="center_horizontal|bottom"
         android:layout_marginHorizontal="@dimen/normal_100"
-        android:layout_marginBottom="@dimen/normal_300"
-        android:orientation="vertical">
+        android:layout_marginVertical="@dimen/normal_50"
+        android:layout_weight="2"
+        android:src="@drawable/ic_widget_missing_content" />
 
-        <ImageView
-            android:layout_width="@dimen/normal_1000"
-            android:layout_height="@dimen/normal_1000"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/normal_300"
-            android:src="@drawable/ic_widget_missing_content" />
-
-        <TextView
-            android:id="@+id/noContentMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/normal_600"
-            android:autoSizeMaxTextSize="@dimen/text_normal_100"
-            android:autoSizeMinTextSize="@dimen/text_normal_50"
-            android:autoSizeTextType="uniform"
-            android:gravity="center_horizontal"
-            android:maxLines="2" />
-    </LinearLayout>
-
-</FrameLayout>
+    <TextView
+        android:id="@+id/noContentMessage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_0"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_weight="1"
+        android:autoSizeMaxTextSize="@dimen/text_normal_100"
+        android:autoSizeMinTextSize="@dimen/text_normal_50"
+        android:autoSizeTextType="uniform"
+        android:maxLines="2" />
+</LinearLayout>

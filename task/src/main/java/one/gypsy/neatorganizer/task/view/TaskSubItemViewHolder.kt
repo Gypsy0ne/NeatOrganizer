@@ -65,7 +65,7 @@ internal class TaskSubItemViewHolder(
         setEditionEnabled(
             view = itemBinding.editTextItemTaskName,
             editionEnabled = viewData.edited,
-            requestEdit = true
+            requestEdit = viewData.edited
         )
 
     private fun onEditionFinish() {

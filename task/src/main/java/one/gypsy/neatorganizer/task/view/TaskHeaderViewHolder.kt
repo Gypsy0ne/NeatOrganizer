@@ -36,7 +36,6 @@ internal class TaskHeaderViewHolder(
     private fun bindInitially() =
         itemBinding.apply {
             headerItem = viewData
-            animateChanges = false
             executePendingBindings()
         }
 
@@ -63,7 +62,7 @@ internal class TaskHeaderViewHolder(
         setEditionEnabled(
             view = itemBinding.editTextItemTaskHeaderName,
             editionEnabled = viewData.edited,
-            requestEdit = true
+            requestEdit = viewData.edited
         )
 
     override fun setUpSwipeMenuBehavior() =

@@ -27,7 +27,7 @@
             style="@style/FragmentRecyclerView"
             adapter="@{tasksAdapter}"
             adapterData="@{viewModel.listedTasks}"
-            hasFixedSize="@{false}"
+            hasFixedSize="@{true}"
             layoutManager="@{linearLayoutManager}"
             android:focusable="false"
             android:focusableInTouchMode="false"
