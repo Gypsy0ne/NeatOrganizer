@@ -35,7 +35,6 @@ fun setEditionEnabled(view: EditText, editionEnabled: Boolean, requestEdit: Bool
     }
 }
 
-// start edition on doubleTap
 private fun EditText.setUneditableActionMode() = apply {
     customSelectionActionModeCallback = object : ActionMode.Callback2() {
         override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {

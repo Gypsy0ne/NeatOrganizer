@@ -113,6 +113,8 @@
 
     <style name="ListItemName.Header" parent="ListItemName">
         <item name="android:gravity">center</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
     </style>
 
     <style name="EditableListItemName.Header" parent="ListItemName">
