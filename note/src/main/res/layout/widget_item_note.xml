@@ -9,15 +9,15 @@
 
         <import type="kotlin.Unit" />
 
-        <import type="one.gypsy.neatorganizer.note.model.NoteEntryItem" />
+        <import type="one.gypsy.neatorganizer.note.model.WidgetNoteItem" />
 
         <variable
             name="noteEntryItem"
-            type="one.gypsy.neatorganizer.note.model.NoteEntryItem" />
+            type="one.gypsy.neatorganizer.note.model.WidgetNoteItem.EntryItem" />
 
         <variable
             name="onItemSelect"
-            type="Function1&lt;NoteEntryItem, Unit>" />
+            type="Function1&lt;WidgetNoteItem.EntryItem, Unit>" />
 
     </data>
 

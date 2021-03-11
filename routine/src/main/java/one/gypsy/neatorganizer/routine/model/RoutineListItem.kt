@@ -2,17 +2,16 @@ package one.gypsy.neatorganizer.routine.model
 
 import one.gypsy.neatorganizer.core.listing.Editable
 import one.gypsy.neatorganizer.core.listing.HeaderItem
-import one.gypsy.neatorganizer.core.listing.Listed
 import one.gypsy.neatorganizer.core.listing.SubItem
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineScheduleDto
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineTaskEntryDto
 import one.gypsy.neatorganizer.domain.dto.routines.RoutineWithTasksDto
 
 internal sealed class RoutineListItem(
-    override val id: Long,
-    override val title: String,
+    open val id: Long,
+    open val title: String,
     override val edited: Boolean
-) : Listed, Editable {
+) : Editable {
     data class RoutineListHeader(
         override val id: Long,
         override val title: String,

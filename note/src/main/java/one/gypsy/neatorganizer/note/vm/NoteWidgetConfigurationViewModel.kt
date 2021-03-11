@@ -10,8 +10,8 @@ import one.gypsy.neatorganizer.domain.dto.notes.NoteEntryDto
 import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.SaveNoteWidget
-import one.gypsy.neatorganizer.note.model.NoteEntryItem
-import one.gypsy.neatorganizer.note.model.toNoteEntryItem
+import one.gypsy.neatorganizer.note.model.WidgetNoteItem
+import one.gypsy.neatorganizer.note.model.toEntryItem
 
 internal class NoteWidgetConfigurationViewModel(
     getAllNoteEntriesUseCase: GetAllNoteEntries,
@@ -21,11 +21,11 @@ internal class NoteWidgetConfigurationViewModel(
     private val _widgetCreationStatus = MutableLiveData<NoteWidgetCreationStatus>()
     val widgetCreationStatus: LiveData<NoteWidgetCreationStatus> = _widgetCreationStatus
 
-    private val _listedNotes: MediatorLiveData<List<NoteEntryItem>> = MediatorLiveData()
-    val listedNotes: LiveData<List<NoteEntryItem>> = _listedNotes
+    private val _listedNotes: MediatorLiveData<List<WidgetNoteItem>> = MediatorLiveData()
+    val listedNotes: LiveData<List<WidgetNoteItem>> = _listedNotes
 
-    private val _selectedNote = MutableLiveData<NoteEntryItem>()
-    val selectedNote: LiveData<NoteEntryItem> = _selectedNote
+    private val _selectedNote = MutableLiveData<WidgetNoteItem>()
+    val selectedNote: LiveData<WidgetNoteItem> = _selectedNote
 
     init {
         getAllNoteEntriesUseCase.invoke(viewModelScope, Unit) {
@@ -39,19 +39,19 @@ internal class NoteWidgetConfigurationViewModel(
     private fun onGetAllNoteEntriesSuccess(noteEntriesObservable: LiveData<List<NoteEntryDto>>) {
         _listedNotes.addSource(noteEntriesObservable) {
             viewModelScope.launch {
-                _listedNotes.postValue(it.map { it.toNoteEntryItem() })
+                _listedNotes.postValue(it.map { it.toEntryItem() }.plus(WidgetNoteItem.FooterItem))
             }
         }
     }
 
-    fun onNoteSelected(note: NoteEntryItem) {
+    fun onNoteSelected(note: WidgetNoteItem) {
         if (note != selectedNote.value) {
             _selectedNote.postValue(note)
         }
     }
 
     fun saveNoteWidget(widgetId: Int) =
-        selectedNote.value?.let {
+        (selectedNote.value as? WidgetNoteItem.EntryItem)?.let {
             saveNoteWidgetUseCase.invoke(
                 viewModelScope,
                 SaveNoteWidget.Params(
@@ -68,6 +68,8 @@ internal class NoteWidgetConfigurationViewModel(
                 )
             }
         } ?: _widgetCreationStatus.postValue(NoteWidgetCreationStatus.NoteNotSelectedStatus)
+
+    companion object
 }
 
 sealed class NoteWidgetCreationStatus {

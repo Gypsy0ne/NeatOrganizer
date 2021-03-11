@@ -7,7 +7,7 @@ import one.gypsy.neatorganizer.core.R
 @BindingAdapter("adapterData")
 fun <T> setAdapterData(recyclerView: RecyclerView, dataCollection: List<T>?) {
     if (recyclerView.adapter is BindableAdapter<*> && dataCollection != null) {
-        (recyclerView.adapter as BindableAdapter<T>).bindData(dataCollection)
+        (recyclerView.adapter as? BindableAdapter<T>)?.bindData(dataCollection)
     }
 }
 

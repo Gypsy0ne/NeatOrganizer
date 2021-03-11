@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.core.listing
 
-interface ListedView<T : Listed> {
+interface ListedView<T> {
     var viewData: T
 
     fun setUpSwipeMenuBehavior()
