@@ -1,0 +1,103 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="one.gypsy.neatorganizer.note.vm.NoteWidgetSelectionViewModel" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.GridLayoutManager" />
+
+        <variable
+            name="notesAdapter"
+            type="one.gypsy.neatorganizer.note.view.widget.configuration.WidgetNoteEntriesAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animatedDialogIcon"
+            style="@style/LottieDialogHeader"
+            app:layout_constraintBottom_toTopOf="@+id/dialogContainer"
+            app:layout_constraintEnd_toEndOf="@+id/dialogContainer"
+            app:layout_constraintStart_toStartOf="@+id/dialogContainer"
+            app:layout_constraintTop_toTopOf="@+id/dialogContainer"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_add_note_dialog" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialogContainer"
+            style="@style/DialogContentWindow.Iconed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_600"
+                android:autoSizeMaxTextSize="@dimen/text_normal_125"
+                android:autoSizeMinTextSize="@dimen/text_normal_75"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:padding="@dimen/normal_50"
+                android:text="@string/note_selection_title"
+                android:textSize="@dimen/text_normal_125"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_4000"
+                android:layout_marginTop="@dimen/normal_200"
+                android:layout_marginBottom="@dimen/normal_300"
+                app:cardCornerRadius="@dimen/normal_200"
+                app:cardElevation="@dimen/normal_0"
+                app:layout_constraintBottom_toTopOf="@+id/selectionCancelation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/notesCollection"
+                    adapter="@{notesAdapter}"
+                    adapterData="@{viewModel.listedNotes}"
+                    hasFixedSize="@{false}"
+                    layoutManager="@{layoutManager}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="@dimen/normal_50" />
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionCancelation"
+                style="@style/FormButton.Cancel"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_300"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/selectionConfirmation"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionConfirmation"
+                style="@style/FormButton.Submit"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_300"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/selectionCancelation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

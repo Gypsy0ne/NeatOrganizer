@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_note_section"
+    app:startDestination="@id/notes">
+
+    <fragment
+        android:id="@+id/notes"
+        android:name="one.gypsy.neatorganizer.note.view.NotesFragment"
+        android:label="NotesFragment">
+
+        <action
+            android:id="@+id/notesToNoteDetails"
+            app:destination="@id/noteDetails" />
+
+        <action
+            android:id="@+id/notesToDeleteNoteConfirmation"
+            app:destination="@id/deleteNoteConfirmation" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteDetails"
+        android:name="one.gypsy.neatorganizer.note.view.NoteDetailsFragment"
+        android:label="NoteDetailsFragment">
+        <argument
+            android:name="noteId"
+            app:argType="long" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/noteAddition"
+        android:name="one.gypsy.neatorganizer.note.view.AddNoteDialogFragment"
+        android:label="AddNoteDialogFragment" />
+
+    <dialog
+        android:id="@+id/deleteNoteConfirmation"
+        android:name="one.gypsy.neatorganizer.note.view.DeleteNoteDialogFragment"
+        android:label="DeleteNoteSubmitDialogFragment">
+        <argument
+            android:name="noteId"
+            app:argType="long" />
+    </dialog>
+
+</navigation>

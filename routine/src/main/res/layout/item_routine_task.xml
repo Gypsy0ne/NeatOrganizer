@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="routineTaskItem"
+            type="one.gypsy.neatorganizer.routine.model.RoutineListItem.RoutineListSubItem" />
+
+        <variable
+            name="editClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="editionSubmitClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="removeClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="doneClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
+        android:id="@+id/swipe_layout_item_routine_task_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentView="@+id/constraint_layout_item_routine_task_container"
+        app:leftMenuView="@+id/constraint_layout_item_routine_task_left_menu"
+        app:rightMenuView="@+id/constraint_layout_item_routine_task_right_menu">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_task_container"
+            style="@style/SubItemContainer">
+
+            <com.autofit.et.lib.AutoFitEditText
+                android:id="@+id/edit_text_item_routine_task_name"
+                style="@style/EditableListItemName.Sub"
+                android:layout_width="@dimen/normal_0"
+                android:layout_height="@dimen/normal_0"
+                android:layout_marginStart="@dimen/normal_100"
+                strokeThrough="@{routineTaskItem.done}"
+                android:text="@{routineTaskItem.title}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_item_routine_task_submit"
+                style="@style/ItemEditionSubmitButton"
+                android:onClick="@{editionSubmitClickListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/check_box_item_routine_task_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{routineTaskItem.done}"
+                android:onClick="@{doneClickListener}"
+                android:buttonTint="@color/yellow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_task_left_menu"
+            style="@style/ListItemMenu">
+
+            <ImageButton
+                android:id="@+id/button_item_routine_task_remove"
+                style="@style/SubItemMenuButton.Delete"
+                android:layout_marginStart="@dimen/normal_50"
+                android:onClick="@{removeClickListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_item_routine_task_right_menu"
+            style="@style/ListItemMenu">
+
+            <ImageButton
+                android:id="@+id/button_item_routine_task_edit"
+                style="@style/SubItemMenuButton.Edit"
+                android:layout_marginEnd="@dimen/normal_50"
+                android:onClick="@{editClickListener}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
+</layout>

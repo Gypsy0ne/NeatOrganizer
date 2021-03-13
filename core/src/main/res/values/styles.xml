@@ -1,0 +1,278 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="cursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme.Transparent" parent="AppBottomSheetDialogTheme">
+        <item name="bottomSheetStyle">@style/AppModalStyle.Transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
+    </style>
+
+    <style name="AppModalStyle.Transparent" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="FormEditText">
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">@integer/regular_text_length</item>
+        <item name="android:inputType">textLongMessage</item>
+        <item name="android:drawablePadding">@dimen/normal_50</item>
+        <item name="android:paddingStart">@dimen/normal_100</item>
+        <item name="android:paddingEnd">@dimen/normal_100</item>
+        <item name="android:background">@drawable/blue_edit_text_background</item>
+        <item name="android:layout_width">@dimen/normal_0</item>
+        <item name="android:layout_height">@dimen/normal_500</item>
+    </style>
+
+    <style name="FormButton">
+        <item name="android:paddingHorizontal">@dimen/normal_200</item>
+        <item name="android:paddingVertical">@dimen/normal_150</item>
+        <item name="android:maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMaxTextSize">@dimen/text_normal_75</item>
+        <item name="autoSizeMinTextSize">@dimen/text_normal_50</item>
+        <item name="cornerRadius">@dimen/normal_800</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/normal_100</item>
+        <item name="strokeWidth">@dimen/helper_50</item>
+    </style>
+
+    <style name="FormButton.Submit">
+        <item name="backgroundTint">@color/yellow</item>
+        <item name="iconTint">@color/dark_yellow</item>
+        <item name="strokeColor">@color/light_yellow</item>
+        <item name="android:textColor">@color/dark_yellow</item>
+        <item name="icon">@drawable/ic_check_white_24</item>
+        <item name="android:text">@string/submit_button_text</item>
+    </style>
+
+    <style name="FormButton.Next" parent="FormButton.Submit">
+        <item name="android:drawableStart">@drawable/ic_add_dark_yellow_24dp</item>
+        <item name="android:text">@string/next_button_text</item>
+    </style>
+
+    <style name="FormButton.Cancel">
+        <item name="backgroundTint">@color/red</item>
+        <item name="iconTint">@color/dark_red</item>
+        <item name="strokeColor">@color/light_red</item>
+        <item name="android:textColor">@color/dark_red</item>
+        <item name="icon">@drawable/ic_close_white_24dp</item>
+        <item name="android:text">@string/cancel_button_text</item>
+    </style>
+
+    <style name="FormButton.Create">
+        <item name="backgroundTint">@color/green</item>
+        <item name="iconTint">@color/dark_green</item>
+        <item name="strokeColor">@color/light_green</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="icon">@drawable/ic_add_white_24</item>
+        <item name="android:text">@string/create_button_text</item>
+    </style>
+
+    <style name="FragmentRecyclerView">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginBottom">@dimen/normal_50</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+    <!--List view items-->
+    <style name="ListItemName">
+        <item name="android:maxLength">@integer/regular_text_length</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textColorHighlight">@color/transparent_yellow</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ListItemName.Header" parent="ListItemName">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EditableListItemName.Header" parent="ListItemName">
+        <item name="android:textSize">@dimen/text_normal_125</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EditableListItemName.Sub" parent="ListItemName">
+        <item name="android:textSize">@dimen/text_normal_100</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:padding">@dimen/normal_25</item>
+    </style>
+
+    <style name="ListItemMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="SubItemContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/normal_600</item>
+        <item name="android:background">@drawable/subitem_background</item>
+        <item name="android:elevation">@dimen/normal_25</item>
+        <item name="android:layout_marginStart">@dimen/normal_100</item>
+        <item name="android:layout_marginEnd">@dimen/normal_100</item>
+        <item name="android:layout_marginTop">@dimen/normal_25</item>
+        <item name="android:layout_marginBottom">@dimen/normal_25</item>
+    </style>
+
+    <style name="SubItemMenuButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_constraintDimensionRatio">W,1:1</item>
+    </style>
+
+    <style name="SubItemMenuButton.Edit">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/male_blue</item>
+        <item name="android:src">@drawable/ic_edit_white_24</item>
+    </style>
+
+    <style name="SubItemMenuButton.Delete">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:src">@drawable/ic_delete_white_24</item>
+    </style>
+
+    <style name="HeaderItemContainer">
+        <item name="android:background">@drawable/item_header_background</item>
+        <item name="android:layout_marginTop">@dimen/normal_100</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_marginBottom">@dimen/normal_25</item>
+    </style>
+
+    <style name="HeaderItemContainer.Selectable">
+        <item name="android:background">@drawable/selectable_item_header_background</item>
+    </style>
+
+    <style name="HeaderMenuButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="layout_constraintDimensionRatio">W,3:4</item>
+        <item name="android:layout_marginTop">@dimen/normal_100</item>
+        <item name="android:layout_marginBottom">@dimen/normal_25</item>
+    </style>
+
+    <style name="HeaderMenuButton.Large">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingTop">@dimen/normal_200</item>
+        <item name="android:paddingBottom">@dimen/normal_200</item>
+        <item name="layout_constraintDimensionRatio">W,3:4</item>
+    </style>
+
+    <style name="HeaderMenuButton.Large.Delete">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:src">@drawable/ic_delete_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Large.Add">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:src">@drawable/ic_add_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Large.Edit">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/male_blue</item>
+        <item name="android:src">@drawable/ic_edit_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small">
+        <item name="android:paddingTop">@dimen/normal_100</item>
+        <item name="android:paddingBottom">@dimen/normal_100</item>
+        <item name="layout_constraintDimensionRatio">W,1:1</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small.Delete">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:src">@drawable/ic_delete_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small.Add">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:src">@drawable/ic_add_white_32</item>
+    </style>
+
+    <style name="HeaderMenuButton.Small.Edit">
+        <item name="android:background">@drawable/gray_rounded_frame</item>
+        <item name="android:backgroundTint">@color/male_blue</item>
+        <item name="android:src">@drawable/ic_edit_white_32</item>
+    </style>
+
+    <style name="ItemEditionSubmitButton">
+        <item name="android:layout_width">@dimen/normal_400</item>
+        <item name="android:layout_height">@dimen/normal_400</item>
+        <item name="android:layout_marginVertical">@dimen/normal_100</item>
+        <item name="android:layout_marginHorizontal">@dimen/normal_200</item>
+        <item name="android:src">@drawable/ic_check_white_24</item>
+        <item name="android:tint">@color/dark_yellow</item>
+        <item name="android:background">@drawable/bg_edition_submit_button</item>
+    </style>
+
+    <style name="HeaderExpandButton">
+        <item name="android:layout_width">@dimen/normal_400</item>
+        <item name="android:layout_height">@dimen/normal_400</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="HeaderRootLayout">
+        <item name="android:paddingStart">@dimen/normal_100</item>
+        <item name="android:paddingEnd">@dimen/normal_100</item>
+    </style>
+    <!--End of List view items-->
+
+    <style name="LottieDialogHeader">
+        <item name="android:layout_width">@dimen/normal_1200</item>
+        <item name="android:layout_height">@dimen/normal_1200</item>
+        <item name="android:background">@drawable/oval_white_background</item>
+        <item name="android:elevation">@dimen/normal_100</item>
+        <item name="android:outlineProvider">none</item>
+        <item name="lottie_autoPlay">true</item>
+    </style>
+
+    <style name="DialogContentWindow">
+        <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
+    </style>
+
+    <style name="DialogContentWindow.Iconed">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/normal_600</item>
+    </style>
+</resources>

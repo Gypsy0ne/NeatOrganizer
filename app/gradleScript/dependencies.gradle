@@ -1,0 +1,34 @@
+apply from: Dependencies.common
+
+dependencies {
+    implementation project(Module.swipeMenu)
+    implementation project(Module.routine)
+    implementation project(Module.note)
+    implementation project(Module.task)
+    implementation project(Module.core)
+    implementation project(Module.data)
+    implementation project(Module.database)
+    implementation project(Module.domain)
+
+
+    implementation Glide.glide
+    annotationProcessor Glide.compiler
+
+    testImplementation Mockk.mockk
+
+    implementation View.autoFitEditText
+
+    implementation Lifecycle.runtime
+    implementation Lifecycle.viewmodel
+    implementation Lifecycle.ext
+    implementation Lifecycle.livedata
+
+    implementation Navigation.fragment
+    implementation Navigation.ui
+
+    implementation WorkManager.runtime
+
+    implementation View.constraintLayout
+
+    implementation View.material
+}

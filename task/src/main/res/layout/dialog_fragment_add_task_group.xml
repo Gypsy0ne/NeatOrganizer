@@ -1,0 +1,58 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="one.gypsy.neatorganizer.task.vm.AddTaskGroupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_view_dialog_fragment_add_confirmation_icon"
+            style="@style/LottieDialogHeader"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_layout_dialog_fragment_add_task_group_content"
+            app:layout_constraintEnd_toEndOf="@+id/constraint_layout_dialog_fragment_add_task_group_content"
+            app:layout_constraintStart_toStartOf="@+id/constraint_layout_dialog_fragment_add_task_group_content"
+            app:layout_constraintTop_toTopOf="@+id/constraint_layout_dialog_fragment_add_task_group_content"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_add_task_group_dialog" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_dialog_fragment_add_task_group_content"
+            style="@style/DialogContentWindow.Iconed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <EditText
+                style="@style/FormEditText"
+                android:id="@+id/edit_text_dialog_fragment_add_task_group_title"
+                android:layout_marginHorizontal="@dimen/normal_200"
+                android:layout_marginTop="@dimen/normal_200"
+                android:drawableStart="@drawable/ic_group_add_white_24"
+                android:hint="@string/add_task_group_dialog_fragment_content_hint"
+                android:text="@={viewModel.taskGroupTitle}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_dialog_fragment_add_task_group_confirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/FormButton.Submit"
+                android:onClick="@{() -> viewModel.addTaskGroup()}"
+                android:layout_marginVertical="@dimen/normal_300"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_dialog_fragment_add_task_group_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

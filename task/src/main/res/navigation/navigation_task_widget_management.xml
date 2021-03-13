@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_task_widget"
+    app:startDestination="@id/widgetTaskGroupManage">
+
+    <dialog
+        android:id="@+id/widgetSingleTaskAddition"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskDialogFragment"
+        android:label="AddSingleTaskDialog">
+        <argument
+            android:name="groupId"
+            app:argType="long" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/widgetTaskGroupManage"
+        android:name="one.gypsy.neatorganizer.task.view.widget.management.TaskGroupManageFragment"
+        android:label="TaskGroupManageFragment">
+
+        <action
+            android:id="@+id/widgetTaskGroupManageToSingleTaskAddition"
+            app:destination="@id/widgetSingleTaskAddition" />
+        <action
+            android:id="@+id/widgetTaskGroupManageToTaskGroupSelection"
+            app:destination="@id/widgetTaskGroupSelection" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/widgetTaskGroupSelection"
+        android:name="one.gypsy.neatorganizer.task.view.widget.management.TaskGroupSelectionDialogFragment"
+        android:label="SelectTaskGroupDialogFragment">
+        <argument
+            android:name="widgetId"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/taskGroupAddition"
+        android:name="one.gypsy.neatorganizer.task.view.AddSingleTaskGroupDialogFragment"
+        android:label="AddTaskGroupDialogFragment" />
+</navigation>

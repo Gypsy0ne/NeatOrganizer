@@ -1,0 +1,11 @@
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation Junit.junit
+    testImplementation AssertJ.core
+    testImplementation TestUtils.runner
+    testImplementation TestUtils.core
+
+    implementation Koin.core
+    implementation Koin.core_ext
+}

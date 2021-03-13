@@ -1,54 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.HomeActivity">
+    android:animateLayoutChanges="true">
 
-    <androidx.appcompat.widget.Toolbar
-android:layout_marginTop="8dp"
-        app:menu="@menu/activity_home_app_bar_menu"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:id="@+id/toolbar_activity_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:elevation="8dp"
-        android:background="@drawable/activity_home_action_bar_background"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:context=".presentation.HomeActivity">
 
-    <fragment
-        android:id="@+id/fragment_activity_home_nav_container"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view_activity_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_activity_home"
-        app:layout_constraintVertical_bias="0.0"
-        app:navGraph="@navigation/organizer_app_navigation" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/organizerToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/activity_action_bar_background"
+            android:elevation="@dimen/normal_100"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/section_app_bar_menu"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <fragment
+            android:id="@+id/fragment_activity_home_nav_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            app:defaultNavHost="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/organizerToolbar"
+            app:navGraph="@navigation/navigation_organizer_app" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view_activity_home"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/normal_700"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/normal_800"
+        android:layout_marginEnd="@dimen/normal_800"
+        android:layout_marginBottom="@dimen/normal_100"
         android:background="@drawable/activity_home_bottom_navigation_background"
-        android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="@dimen/normal_50"
+        app:itemIconTint="@drawable/activity_home_bottom_navigation_menu_icon_color"
+        app:itemTextColor="@drawable/activity_home_bottom_navigation_menu_text_color"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:menu="@menu/activity_home_bottom_navigation_menu" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

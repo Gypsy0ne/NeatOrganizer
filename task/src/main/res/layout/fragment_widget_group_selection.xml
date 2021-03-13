@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="configurationViewModel"
+            type="one.gypsy.neatorganizer.task.vm.TasksWidgetConfigurationViewModel" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <variable
+            name="tasksAdapter"
+            type="one.gypsy.neatorganizer.task.view.widget.configuration.TaskGroupEntriesAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_white">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasksGroups"
+            adapter="@{tasksAdapter}"
+            adapterData="@{configurationViewModel.listedTaskGroups}"
+            hasFixedSize="@{true}"
+            layoutManager="@{layoutManager}"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:elevation="@dimen/normal_25"
+            android:paddingHorizontal="@dimen/normal_25"
+            android:paddingTop="@dimen/normal_100"
+            app:layout_constraintBottom_toBottomOf="@id/groupsBackground"
+            app:layout_constraintLeft_toLeftOf="@id/groupsBackground"
+            app:layout_constraintRight_toRightOf="@id/groupsBackground"
+            app:layout_constraintTop_toTopOf="@id/groupsBackground" />
+
+        <View
+            android:id="@+id/groupsBackground"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:background="@drawable/rounded_bottom_background"
+            app:layout_constraintBottom_toTopOf="@+id/taskGroupsListGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/taskGroupsListGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomMenuGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.89" />
+
+        <com.thebluealliance.spectrum.SpectrumPalette
+            android:id="@+id/palette"
+            onColorChanged="@{(color)->configurationViewModel.onColorPicked(color)}"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/normal_0"
+            android:elevation="@dimen/normal_25"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/bottomMenuGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/taskGroupsListGuideline"
+            app:spectrum_autoPadding="true"
+            app:spectrum_colors="@array/widget_colors"
+            app:spectrum_columnCount="@integer/color_palette_columns" />
+
+        <View
+            android:id="@+id/bottomMenu"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:background="@drawable/rounded_top_background"
+            android:elevation="@dimen/normal_25"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenuGuideline" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitConfiguration"
+            style="@style/FormButton.Submit"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_300"
+            app:elevation="@dimen/normal_50"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cancelConfiguration"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelConfiguration"
+            style="@style/FormButton.Cancel"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_300"
+            app:elevation="@dimen/normal_50"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomMenu"
+            app:layout_constraintEnd_toStartOf="@+id/submitConfiguration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottomMenu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

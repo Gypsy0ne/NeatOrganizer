@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="widgetGroupEntry"
+            type="one.gypsy.neatorganizer.task.model.WidgetTaskGroupItem.Entry" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/entryContainer"
+        style="@style/HeaderItemContainer.Selectable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_800">
+
+        <TextView
+            android:id="@+id/itemName"
+            style="@style/ListItemName.Header"
+            android:layout_width="@dimen/normal_0"
+            android:layout_height="@dimen/normal_0"
+            android:layout_marginHorizontal="@dimen/normal_100"
+            android:autoSizeMaxTextSize="@dimen/text_normal_125"
+            android:autoSizeMinTextSize="@dimen/text_normal_50"
+            android:autoSizeTextType="uniform"
+            android:text="@{widgetGroupEntry.name}"
+            app:layout_constraintBottom_toTopOf="@+id/itemsCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_100"
+            android:text="@{@string/item_task_group_entry_tasks_ratio(widgetGroupEntry.tasksDone, widgetGroupEntry.tasksCount)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
