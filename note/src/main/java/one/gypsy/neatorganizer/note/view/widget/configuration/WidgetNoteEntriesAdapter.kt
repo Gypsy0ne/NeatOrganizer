@@ -13,7 +13,7 @@ import one.gypsy.neatorganizer.note.model.WidgetNoteItem
 
 internal class WidgetNoteEntriesAdapter(
     private val currentlySelectedItem: LiveData<WidgetNoteItem>,
-    private val onSelected: (WidgetNoteItem.EntryItem) -> Unit,
+    private val onSelected: (WidgetNoteItem) -> Unit,
     private val onCreate: () -> Unit = {}
 ) : ListAdapter<WidgetNoteItem, WidgetNoteItemViewHolder>(DiffCallback()),
     BindableAdapter<WidgetNoteItem> {
@@ -85,23 +85,16 @@ private fun WidgetItemViewType.getHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
     currentlySelectedItem: LiveData<WidgetNoteItem>,
-    onItemSelected: (WidgetNoteItem.EntryItem) -> Unit,
+    onItemSelected: (WidgetNoteItem) -> Unit,
     onCreateClicked: () -> Unit
 ): WidgetNoteItemViewHolder = when (this) {
     WidgetItemViewType.ENTRY -> WidgetNoteEntryViewHolder(
-        DataBindingUtil.inflate(
-            inflater, resId, parent, false
-        ),
+        DataBindingUtil.inflate(inflater, resId, parent, false),
         currentlySelectedItem,
         onItemSelected
     )
     WidgetItemViewType.FOOTER -> WidgetNoteFooterViewHolder(
-        DataBindingUtil.inflate(
-            inflater,
-            resId,
-            parent,
-            false
-        ),
+        DataBindingUtil.inflate(inflater, resId, parent, false),
         onCreateClicked
     )
 }

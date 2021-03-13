@@ -29,10 +29,7 @@ internal class NoteWidgetConfigurationViewModel(
 
     init {
         getAllNoteEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either(
-                {},
-                ::onGetAllNoteEntriesSuccess
-            )
+            it.either(onSuccess = ::onGetAllNoteEntriesSuccess)
         }
     }
 
@@ -63,13 +60,10 @@ internal class NoteWidgetConfigurationViewModel(
                 )
             ) { result ->
                 result.either(
-                    {},
-                    { _widgetCreationStatus.postValue(NoteWidgetCreationStatus.CreationSuccessStatus) }
+                    onSuccess = { _widgetCreationStatus.postValue(NoteWidgetCreationStatus.CreationSuccessStatus) }
                 )
             }
         } ?: _widgetCreationStatus.postValue(NoteWidgetCreationStatus.NoteNotSelectedStatus)
-
-    companion object
 }
 
 sealed class NoteWidgetCreationStatus {

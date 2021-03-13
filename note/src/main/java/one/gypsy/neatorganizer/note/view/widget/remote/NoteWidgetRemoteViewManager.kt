@@ -31,8 +31,8 @@ internal class NoteWidgetRemoteViewManager(
         CoroutineScope(Dispatchers.IO).launch {
             loadTitledNoteWidgetUseCase.invoke(this, LoadTitledNoteWidget.Params(appWidgetId)) {
                 it.either(
-                    { onLoadNoteWidgetFailure(appWidgetId) },
-                    ::onLoadNoteWidgetSuccess
+                    onFailure = { onLoadNoteWidgetFailure(appWidgetId) },
+                    onSuccess = ::onLoadNoteWidgetSuccess
                 )
             }
         }

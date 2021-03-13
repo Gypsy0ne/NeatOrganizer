@@ -22,10 +22,10 @@ sealed class Either<out L, out R> {
     fun <L> left(left: L) = Left(left)
     fun <R> right(right: R) = Right(right)
 
-    fun either(fnL: (L) -> Any, fnR: (R) -> Any): Any =
+    fun either(onFailure: (L) -> Any = {}, onSuccess: (R) -> Any = {}): Any =
         when (this) {
-            is Left -> fnL(left)
-            is Right -> fnR(right)
+            is Left -> onFailure(left)
+            is Right -> onSuccess(right)
         }
 }
 

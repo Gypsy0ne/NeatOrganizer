@@ -9,7 +9,6 @@ internal class WidgetNoteFooterViewHolder(
 ) : WidgetNoteItemViewHolder(itemBinding.root) {
 
     override fun bind(data: WidgetNoteItem) {
-        require(data is WidgetNoteItem.FooterItem)
         itemBinding.apply {
             lifecycleOwner = this@WidgetNoteFooterViewHolder
             createNote.setOnClickListener { onCreateClicked() }

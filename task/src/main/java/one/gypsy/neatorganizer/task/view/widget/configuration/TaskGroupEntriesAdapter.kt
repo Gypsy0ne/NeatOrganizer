@@ -48,9 +48,7 @@ internal class TaskGroupEntriesAdapter(
         holder.onRecycled()
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return currentList[position].getViewHolderType()
-    }
+    override fun getItemViewType(position: Int) = currentList[position].getViewHolderType()
 
     class DiffCallback : DiffUtil.ItemCallback<WidgetTaskGroupItem>() {
 
@@ -86,17 +84,10 @@ private fun WidgetItemViewType.getHolder(
     WidgetItemViewType.ENTRY -> WidgetTaskGroupEntryViewHolder(
         currentlySelectedItem,
         onItemSelected,
-        DataBindingUtil.inflate(
-            inflater, resId, parent, false
-        )
+        DataBindingUtil.inflate(inflater, resId, parent, false)
     )
     WidgetItemViewType.FOOTER -> WidgetFooterItemViewHolder(
         onCreateClicked,
-        DataBindingUtil.inflate(
-            inflater,
-            resId,
-            parent,
-            false
-        )
+        DataBindingUtil.inflate(inflater, resId, parent, false)
     )
 }

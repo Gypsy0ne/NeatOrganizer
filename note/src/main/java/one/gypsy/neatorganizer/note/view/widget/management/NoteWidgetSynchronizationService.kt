@@ -26,18 +26,14 @@ class NoteWidgetSynchronizationService : LifecycleService(), KoinComponent {
         super.onStartCommand(intent, flags, startId)
         getAllNoteEntriesUseCase.invoke(lifecycleScope, Unit) {
             it.either(
-                {
-                    stopSelf()
-                },
-                ::onGetAllNotesSuccess
+                onFailure = { stopSelf() },
+                onSuccess = ::onGetAllNotesSuccess
             )
         }
         getAllNoteWidgetsUseCase.invoke(lifecycleScope, Unit) {
             it.either(
-                {
-                    stopSelf()
-                },
-                ::onGetAllNoteWidgetsSuccess
+                onFailure = { stopSelf() },
+                onSuccess = ::onGetAllNoteWidgetsSuccess
             )
         }
         return START_STICKY
@@ -48,7 +44,7 @@ class NoteWidgetSynchronizationService : LifecycleService(), KoinComponent {
             this,
             {
                 getAllWidgetIdsUseCase.invoke(lifecycleScope, Unit) {
-                    it.either({}, ::updateNoteWidgets)
+                    it.either(onSuccess = ::updateNoteWidgets)
                 }
             }
         )

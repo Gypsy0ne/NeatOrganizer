@@ -46,8 +46,8 @@ internal class TasksViewModel(
     init {
         getAllSingleTaskGroupsUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                { _contentLoadingStatus.updateLoadingStatus(emptyList<SingleTaskGroupWithTasksDto>()) },
-                ::onGetAllGroupsWithSingleTasksSuccess
+                onFailure = { _contentLoadingStatus.updateLoadingStatus(emptyList<SingleTaskGroupWithTasksDto>()) },
+                onSuccess = ::onGetAllGroupsWithSingleTasksSuccess
             )
         }
     }

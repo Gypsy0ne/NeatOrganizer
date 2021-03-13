@@ -17,14 +17,11 @@ class AddTaskViewModel(
     private val _finishedAdding = MutableLiveData<Boolean>()
     val finishedAdding: LiveData<Boolean> = _finishedAdding
 
-    fun addTask() = add({}, { _finishedAdding.postValue(true) })
+    fun addTask() = add { _finishedAdding.postValue(true) }
 
-    fun addNextTask() = add({}, { taskTitle.postValue("") })
+    fun addNextTask() = add { taskTitle.postValue("") }
 
-    fun add(
-        onFailure: (one.gypsy.neatorganizer.domain.interactors.Failure) -> Any,
-        onSuccess: (Unit) -> Any
-    ) {
+    fun add(onSuccess: (Unit) -> Any) {
         addSingleTaskUseCase.invoke(
             viewModelScope,
             AddSingleTask.Params(
@@ -36,7 +33,7 @@ class AddTaskViewModel(
                 )
             )
         ) {
-            it.either(onFailure, onSuccess)
+            it.either(onSuccess = onSuccess)
         }
     }
 }

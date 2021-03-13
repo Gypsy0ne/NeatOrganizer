@@ -35,7 +35,7 @@ internal class AddRoutineViewModel(
                 )
             )
         ) {
-            it.either({}, ::onAddRoutineSuccess)
+            it.either(onSuccess = ::onAddRoutineSuccess)
         }
     }
 
@@ -49,7 +49,7 @@ internal class AddRoutineViewModel(
                 )
             )
         ) {
-            it.either({}, { _finishedAdding.postValue(true) })
+            it.either(onSuccess = { _finishedAdding.postValue(true) })
         }
     }
 

@@ -27,7 +27,7 @@ internal class TaskWidgetSelectionViewModel(
 
     init {
         getAllTaskGroupEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either({}, ::onGetAllSingleTaskGroupEntriesSuccess)
+            it.either(onSuccess = ::onGetAllSingleTaskGroupEntriesSuccess)
         }
     }
 
@@ -52,7 +52,7 @@ internal class TaskWidgetSelectionViewModel(
             widgetUpdateUseCase.invoke(
                 viewModelScope,
                 UpdateTaskWidgetLinkedGroup.Params(widgetId, groupId)
-            ) { it.either({}, ::onUpdateTaskWidgetSuccess) }
+            ) { it.either(onSuccess = ::onUpdateTaskWidgetSuccess) }
         }
 
     private fun onUpdateTaskWidgetSuccess(unit: Unit) =

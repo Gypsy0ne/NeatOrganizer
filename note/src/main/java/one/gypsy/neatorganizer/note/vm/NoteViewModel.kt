@@ -28,7 +28,7 @@ internal class NoteViewModel(
         getNoteByIdUseCase.invoke(
             viewModelScope,
             GetNoteById.Params(noteId)
-        ) { it.either({}, ::onGetNoteByIdSuccess) }
+        ) { it.either(onSuccess = ::onGetNoteByIdSuccess) }
     }
 
     private fun onGetNoteByIdSuccess(noteObservable: LiveData<NoteDto>) {

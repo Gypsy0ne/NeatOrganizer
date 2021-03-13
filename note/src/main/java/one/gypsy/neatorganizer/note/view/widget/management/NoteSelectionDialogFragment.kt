@@ -82,7 +82,7 @@ internal class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
     private fun DialogFragmentSelectNoteBinding.bindRecyclerView() {
         notesAdapter = WidgetNoteEntriesAdapter(
             selectionViewModel.selectedNote,
-            { selectionViewModel.onNoteSelected(it) }
+            { selectionViewModel.onItemSelected(it) }
         )
         layoutManager = GridLayoutManager(requireContext(), GRID_SPAN_COUNT)
     }

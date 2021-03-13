@@ -31,10 +31,7 @@ internal class NoteWidgetSelectionViewModel(
 
     init {
         getAllNoteEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either(
-                {},
-                ::onGetAllNoteEntriesSuccess
-            )
+            it.either(onSuccess = ::onGetAllNoteEntriesSuccess)
         }
     }
 
@@ -46,7 +43,7 @@ internal class NoteWidgetSelectionViewModel(
         }
     }
 
-    fun onNoteSelected(note: WidgetNoteItem.EntryItem) {
+    fun onItemSelected(note: WidgetNoteItem) {
         if (note != selectedNote.value) {
             _selectedNote.postValue(note)
         }
@@ -73,8 +70,7 @@ internal class NoteWidgetSelectionViewModel(
                 )
             ) {
                 it.either(
-                    {},
-                    { _widgetSelectionStatus.postValue(NoteWidgetSelectionStatus.SelectionSuccessStatus) }
+                    onSuccess = { _widgetSelectionStatus.postValue(NoteWidgetSelectionStatus.SelectionSuccessStatus) }
                 )
             }
         }

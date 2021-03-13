@@ -32,8 +32,8 @@ internal class TaskWidgetRemoteViewManager(
         CoroutineScope(Dispatchers.IO).launch {
             loadTitledTaskWidgetUseCase.invoke(this, LoadTitledTaskWidget.Params(appWidgetId)) {
                 it.either(
-                    { onLoadTaskWidgetFailure(appWidgetId) },
-                    ::onLoadTaskWidgetSuccess
+                    onFailure = { onLoadTaskWidgetFailure(appWidgetId) },
+                    onSuccess = ::onLoadTaskWidgetSuccess
                 )
             }
         }

@@ -33,7 +33,7 @@ internal class TaskRemoteViewsFactory(
 
     private fun loadTaskGroupId() = runBlocking {
         getTaskGroupIdByWidgetIdUseCase.invoke(this, GetTaskGroupIdByWidgetId.Params(appWidgetId)) {
-            it.either({}, ::loadTaskGroupIdSuccess)
+            it.either(onSuccess = ::loadTaskGroupIdSuccess)
         }
     }
 
@@ -46,7 +46,7 @@ internal class TaskRemoteViewsFactory(
         taskGroupId?.let {
             runBlocking {
                 getAllSingleTasksUseCase.invoke(this, GetAllSingleTasksByGroupId.Params(it)) {
-                    it.either({}, ::onGetAllSingleTasksSuccess)
+                    it.either(onSuccess = ::onGetAllSingleTasksSuccess)
                 }
             }
         }

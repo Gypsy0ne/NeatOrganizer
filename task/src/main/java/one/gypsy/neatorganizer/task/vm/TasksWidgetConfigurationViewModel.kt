@@ -30,7 +30,7 @@ internal class TasksWidgetConfigurationViewModel(
 
     init {
         getAllTaskGroupEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either({}, ::onGetAllSingleTaskGroupEntriesSuccess)
+            it.either(onSuccess = ::onGetAllSingleTaskGroupEntriesSuccess)
         }
     }
 
@@ -42,8 +42,11 @@ internal class TasksWidgetConfigurationViewModel(
             )
         }
 
-    fun onItemSelected(selectedItem: WidgetTaskGroupItem) =
-        _selectedTaskGroup.postValue(selectedItem)
+    fun onItemSelected(selectedItem: WidgetTaskGroupItem) {
+        if (selectedItem != selectedTaskGroup.value) {
+            _selectedTaskGroup.postValue(selectedItem)
+        }
+    }
 
     fun onColorPicked(color: Int) {
         pickedColor = color
@@ -63,7 +66,7 @@ internal class TasksWidgetConfigurationViewModel(
                 viewModelScope,
                 CreateTaskWidget.Params(widgetEntry)
             ) {
-                it.either({}, ::onCreateTaskWidgetSuccess)
+                it.either(onSuccess = ::onCreateTaskWidgetSuccess)
             }
         }
 

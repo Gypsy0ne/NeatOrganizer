@@ -26,18 +26,14 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
         super.onStartCommand(intent, flags, startId)
         getAllSingleTaskGroupsUseCase.invoke(lifecycleScope, Unit) {
             it.either(
-                {
-                    stopSelf()
-                },
-                ::onGetAllSingleTaskGroupsSuccess
+                onFailure = { stopSelf() },
+                onSuccess = ::onGetAllSingleTaskGroupsSuccess
             )
         }
         getAllTaskWidgetsUseCase.invoke(lifecycleScope, Unit) {
             it.either(
-                {
-                    stopSelf()
-                },
-                ::onGetAllTaskWidgetsSuccess
+                onFailure = { stopSelf() },
+                onSuccess = ::onGetAllTaskWidgetsSuccess
             )
         }
         return START_REDELIVER_INTENT
@@ -48,7 +44,7 @@ class TaskWidgetSynchronizationService : LifecycleService(), KoinComponent {
             this,
             {
                 getAllWidgetIdsUseCase.invoke(lifecycleScope, Unit) {
-                    it.either({}, ::updateTaskWidgets)
+                    it.either(onSuccess = ::updateTaskWidgets)
                 }
             }
         )

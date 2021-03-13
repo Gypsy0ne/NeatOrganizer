@@ -34,8 +34,7 @@ internal class AddNoteViewModel(private val insertNoteEntryUseCase: InsertNoteEn
                 )
             ) {
                 it.either(
-                    {},
-                    { _noteCreationStatus.postValue(NoteCreationStatus.CreationSuccessStatus) }
+                    onSuccess = { _noteCreationStatus.postValue(NoteCreationStatus.CreationSuccessStatus) }
                 )
             }
         }

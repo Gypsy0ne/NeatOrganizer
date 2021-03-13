@@ -11,16 +11,16 @@ import one.gypsy.neatorganizer.note.model.WidgetNoteItem
 internal class WidgetNoteEntryViewHolder(
     private val itemBinding: WidgetItemNoteBinding,
     private val currentlySelectedItem: LiveData<WidgetNoteItem>,
-    private val onSelected: (WidgetNoteItem.EntryItem) -> Unit
+    private val onSelected: (WidgetNoteItem) -> Unit
 ) : WidgetNoteItemViewHolder(itemBinding.root) {
 
     override fun bind(data: WidgetNoteItem) {
-        require(data is WidgetNoteItem.EntryItem)
-
-        itemBinding.apply {
-            noteEntryItem = data
-            onItemSelect = onSelected
-            lifecycleOwner = this@WidgetNoteEntryViewHolder
+        (data as? WidgetNoteItem.EntryItem)?.let {
+            itemBinding.apply {
+                noteEntryItem = it
+                onItemSelect = onSelected
+                lifecycleOwner = this@WidgetNoteEntryViewHolder
+            }
         }
     }
 
@@ -29,13 +29,12 @@ internal class WidgetNoteEntryViewHolder(
         currentlySelectedItem.observe(this) { animateItemSelection(it) }
     }
 
-    private fun animateItemSelection(
-        selectedItem: WidgetNoteItem,
-    ) = if (selectedItem == itemBinding.noteEntryItem) {
-        itemBinding.animateSelection()
-    } else {
-        itemBinding.selectionIndicator.hide()
-    }
+    private fun animateItemSelection(selectedItem: WidgetNoteItem) =
+        if (selectedItem == itemBinding.noteEntryItem) {
+            itemBinding.animateSelection()
+        } else {
+            itemBinding.selectionIndicator.hide()
+        }
 
     private fun WidgetItemNoteBinding.animateSelection() {
         selectionIndicator.fadeIn()

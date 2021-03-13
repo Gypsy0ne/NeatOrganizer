@@ -26,7 +26,6 @@ internal class WidgetTaskGroupEntryViewHolder(
         currentlySelectedItem.observe(this) { animateItemSelection(it) }
     }
 
-    // TODO zmienic animacje, uspojnic z notem
     private fun animateItemSelection(
         selectedItem: WidgetTaskGroupItem,
     ) = if (selectedItem == itemBinding.widgetGroupEntry) {
