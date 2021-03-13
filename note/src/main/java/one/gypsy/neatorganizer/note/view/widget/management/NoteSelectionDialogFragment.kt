@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.dialog_fragment_select_note.*
 import one.gypsy.neatorganizer.core.utils.extensions.showShortToast
 import one.gypsy.neatorganizer.note.R
 import one.gypsy.neatorganizer.note.databinding.DialogFragmentSelectNoteBinding
+import one.gypsy.neatorganizer.note.model.WidgetNoteItem
 import one.gypsy.neatorganizer.note.view.widget.NoteWidgetKeyring.SELECTED_WIDGET_NOTE_ID_KEY
 import one.gypsy.neatorganizer.note.view.widget.configuration.WidgetNoteEntriesAdapter
 import one.gypsy.neatorganizer.note.vm.NoteWidgetSelectionStatus
@@ -62,7 +63,7 @@ internal class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
                     resources.getString(R.string.note_widget_creation_task_warning)
                 )
                 NoteWidgetSelectionStatus.SelectionSuccessStatus -> finishSelection(
-                    selectionViewModel.selectedNote.value?.id
+                    (selectionViewModel.selectedNote.value as? WidgetNoteItem.EntryItem)?.id
                 )
             }
         }
@@ -79,9 +80,10 @@ internal class NoteSelectionDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun DialogFragmentSelectNoteBinding.bindRecyclerView() {
-        notesAdapter = WidgetNoteEntriesAdapter(selectionViewModel.selectedNote) {
-            selectionViewModel.onNoteSelected(it)
-        }
+        notesAdapter = WidgetNoteEntriesAdapter(
+            selectionViewModel.selectedNote,
+            { selectionViewModel.onItemSelected(it) }
+        )
         layoutManager = GridLayoutManager(requireContext(), GRID_SPAN_COUNT)
     }
 

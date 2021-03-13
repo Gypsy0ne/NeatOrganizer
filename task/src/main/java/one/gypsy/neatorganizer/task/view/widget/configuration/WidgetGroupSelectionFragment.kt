@@ -58,9 +58,6 @@ class WidgetGroupSelectionFragment : Fragment() {
         submitConfiguration.setOnClickListener {
             widgetConfigurationViewModel.onSubmitClicked(retrieveWidgetId())
         }
-        createNew.setOnClickListener {
-            findNavController().navigate(R.id.addSingleTaskGroupDialogFragment)
-        }
     }
 
     private fun retrieveWidgetId() =
@@ -68,9 +65,11 @@ class WidgetGroupSelectionFragment : Fragment() {
             ?: MANAGED_WIDGET_INVALID_ID
 
     private fun FragmentWidgetGroupSelectionBinding.bindRecyclerView() {
-        tasksAdapter = TaskGroupEntriesAdapter(widgetConfigurationViewModel.selectedTaskGroup) {
-            widgetConfigurationViewModel.onTaskGroupSelected(it)
-        }
+        tasksAdapter = TaskGroupEntriesAdapter(
+            widgetConfigurationViewModel.selectedTaskGroup,
+            { widgetConfigurationViewModel.onItemSelected(it) },
+            { findNavController().navigate(R.id.addSingleTaskGroupDialogFragment) }
+        )
         layoutManager = LinearLayoutManager(requireContext())
     }
 

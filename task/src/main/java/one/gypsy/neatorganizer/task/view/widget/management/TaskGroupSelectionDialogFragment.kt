@@ -75,9 +75,10 @@ internal class TaskGroupSelectionDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun DialogFragmentSelectTaskGroupBinding.bindRecyclerView() {
-        tasksAdapter = TaskGroupEntriesAdapter(selectionViewModel.selectedTaskGroup) {
-            selectionViewModel.onTaskGroupSelected(it)
-        }
+        tasksAdapter = TaskGroupEntriesAdapter(
+            selectionViewModel.selectedTaskGroup,
+            { selectionViewModel.onItemSelected(it) }
+        )
         layoutManager = LinearLayoutManager(context)
     }
 

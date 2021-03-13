@@ -5,16 +5,8 @@
     <data>
 
         <variable
-            name="name"
-            type="String" />
-
-        <variable
-            name="tasksCount"
-            type="int" />
-
-        <variable
-            name="tasksDone"
-            type="int" />
+            name="widgetGroupEntry"
+            type="one.gypsy.neatorganizer.task.model.WidgetTaskGroupItem.Entry" />
 
     </data>
 
@@ -33,7 +25,7 @@
             android:autoSizeMaxTextSize="@dimen/text_normal_125"
             android:autoSizeMinTextSize="@dimen/text_normal_50"
             android:autoSizeTextType="uniform"
-            android:text="@{name}"
+            android:text="@{widgetGroupEntry.name}"
             app:layout_constraintBottom_toTopOf="@+id/itemsCount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_100"
-            android:text="@{@string/item_task_group_entry_tasks_ratio(tasksDone, tasksCount)}"
+            android:text="@{@string/item_task_group_entry_tasks_ratio(widgetGroupEntry.tasksDone, widgetGroupEntry.tasksCount)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

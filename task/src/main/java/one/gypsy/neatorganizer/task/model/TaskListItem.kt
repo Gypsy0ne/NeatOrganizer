@@ -2,17 +2,16 @@ package one.gypsy.neatorganizer.task.model
 
 import one.gypsy.neatorganizer.core.listing.Editable
 import one.gypsy.neatorganizer.core.listing.HeaderItem
-import one.gypsy.neatorganizer.core.listing.Listed
 import one.gypsy.neatorganizer.core.listing.SubItem
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskEntryDto
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupDto
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupWithTasksDto
 
 internal sealed class TaskListItem(
-    override val id: Long,
-    override val title: String,
+    open val id: Long,
+    open val title: String,
     override val edited: Boolean
-) : Listed, Editable {
+) : Editable {
     data class TaskListHeader(
         override val id: Long,
         override val title: String,

@@ -18,7 +18,7 @@ internal class DeleteNoteViewModel(private val deleteNoteByIdUseCase: DeleteNote
             viewModelScope,
             DeleteNoteById.Params(removedItemId)
         ) {
-            it.either({}, ::onRemoveSuccess)
+            it.either(onSuccess = ::onRemoveSuccess)
         }
     }
 

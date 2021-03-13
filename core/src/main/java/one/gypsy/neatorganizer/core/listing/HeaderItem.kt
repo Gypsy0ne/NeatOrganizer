@@ -1,6 +1,6 @@
 package one.gypsy.neatorganizer.core.listing
 
-interface HeaderItem : Listed, Editable {
+interface HeaderItem : Editable {
     val subItemsCount: Int
     val expanded: Boolean
 }

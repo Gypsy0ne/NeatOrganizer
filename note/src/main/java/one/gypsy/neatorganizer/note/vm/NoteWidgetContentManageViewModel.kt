@@ -54,8 +54,8 @@ internal class NoteWidgetContentManageViewModel(
         GetNoteById.Params(noteId)
     ) {
         it.either(
-            { _dataLoadingStatus.postValue(NoteManageLoadingStatus.Error) },
-            ::onGetNoteByIdSuccess
+            onFailure = { _dataLoadingStatus.postValue(NoteManageLoadingStatus.Error) },
+            onSuccess = ::onGetNoteByIdSuccess
         )
     }
 }

@@ -20,7 +20,7 @@ internal class RemoveRoutineViewModel(
             viewModelScope,
             RemoveRoutineById.Params(removedItemId)
         ) {
-            it.either(::onRemoveFailure, ::onRemoveSuccess)
+            it.either(onFailure = ::onRemoveFailure, onSuccess = ::onRemoveSuccess)
         }
     }
 

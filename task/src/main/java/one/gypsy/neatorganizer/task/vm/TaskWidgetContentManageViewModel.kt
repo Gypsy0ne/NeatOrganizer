@@ -71,9 +71,7 @@ internal class TaskWidgetContentManageViewModel(
                         createdAt = taskGroup.createdAt
                     )
                 )
-            ) {
-                it.either({}, {})
-            }
+            )
         }
     }
 
@@ -96,10 +94,8 @@ internal class TaskWidgetContentManageViewModel(
         GetSingleTaskGroupWithTasksById.Params(taskGroupId)
     ) {
         it.either(
-            {
-                _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingError)
-            },
-            ::onGetAllSingleTasksSuccess
+            onFailure = { _widgetDataLoaded.postValue(TaskWidgetDataLoadingStatus.LoadingError) },
+            onSuccess = ::onGetAllSingleTasksSuccess
         )
     }
 }

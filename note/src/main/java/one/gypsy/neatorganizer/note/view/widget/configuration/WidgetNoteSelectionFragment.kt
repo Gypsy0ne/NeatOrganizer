@@ -58,9 +58,6 @@ class WidgetNoteSelectionFragment : Fragment() {
         submitConfiguration.setOnClickListener {
             viewModel.saveNoteWidget(retrieveWidgetId())
         }
-        createNote.setOnClickListener {
-            findNavController().navigate(R.id.noteAddition)
-        }
     }
 
     private fun retrieveWidgetId() =
@@ -68,10 +65,23 @@ class WidgetNoteSelectionFragment : Fragment() {
             ?: WidgetKeyring.MANAGED_WIDGET_INVALID_ID
 
     private fun FragmentWidgetNoteSelectionBinding.bindRecyclerView() {
-        notesAdapter = WidgetNoteEntriesAdapter(viewModel.selectedNote) {
-            viewModel.onNoteSelected(it)
+        notesAdapter = WidgetNoteEntriesAdapter(
+            viewModel.selectedNote,
+            { viewModel.onNoteSelected(it) },
+            { findNavController().navigate(R.id.noteAddition) }
+        )
+        layoutManager = GridLayoutManager(requireContext(), COLUMNS_COUNT).apply {
+            spanSizeLookup = createGridSpanLookupStrategy()
         }
-        layoutManager = GridLayoutManager(requireContext(), GRID_SPAN_COUNT)
+    }
+
+    private fun createGridSpanLookupStrategy() = object : GridLayoutManager.SpanSizeLookup() {
+        override fun getSpanSize(position: Int): Int =
+            if (position == viewModel.listedNotes.value?.lastIndex) {
+                UTIL_GRID_SPAN_COUNT
+            } else {
+                ENTRY_GRID_SPAN_COUNT
+            }
     }
 
     private fun observeCreationStatus() {
@@ -88,6 +98,8 @@ class WidgetNoteSelectionFragment : Fragment() {
     }
 
     companion object {
-        private const val GRID_SPAN_COUNT = 2
+        private const val COLUMNS_COUNT = 2
+        private const val ENTRY_GRID_SPAN_COUNT = 1
+        private const val UTIL_GRID_SPAN_COUNT = 2
     }
 }

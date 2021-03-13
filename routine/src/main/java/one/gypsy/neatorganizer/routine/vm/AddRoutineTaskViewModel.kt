@@ -17,12 +17,11 @@ internal class AddRoutineTaskViewModel(
     private val _finishedAdding = MutableLiveData<Boolean>()
     val finishedAdding: LiveData<Boolean> = _finishedAdding
 
-    fun addRoutineTask() = add({}, { _finishedAdding.postValue(true) })
+    fun addRoutineTask() = add { _finishedAdding.postValue(true) }
 
-    fun addNextRoutineTask() = add({}, { taskTitle.postValue("") })
+    fun addNextRoutineTask() = add { taskTitle.postValue("") }
 
     private fun add(
-        onFailure: (one.gypsy.neatorganizer.domain.interactors.Failure) -> Any,
         onSuccess: (Unit) -> Any
     ) {
         addRoutineTask.invoke(
@@ -36,7 +35,7 @@ internal class AddRoutineTaskViewModel(
                 )
             )
         ) {
-            it.either(onFailure, onSuccess)
+            it.either(onSuccess = onSuccess)
         }
     }
 }

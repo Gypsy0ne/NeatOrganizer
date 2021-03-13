@@ -19,7 +19,7 @@ class RemoveTaskGroupViewModel(private val removeTaskGroupByIdUseCase: RemoveTas
             viewModelScope,
             RemoveTaskGroupById.Params(removedItemId)
         ) {
-            it.either(::onRemoveFailure, ::onRemoveSuccess)
+            it.either(onFailure = ::onRemoveFailure, onSuccess = ::onRemoveSuccess)
         }
     }
 

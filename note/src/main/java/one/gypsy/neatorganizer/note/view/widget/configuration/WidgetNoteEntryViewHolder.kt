@@ -2,23 +2,26 @@ package one.gypsy.neatorganizer.note.view.widget.configuration
 
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.LiveData
-import one.gypsy.neatorganizer.core.listing.LifecycleViewHolder
 import one.gypsy.neatorganizer.core.utils.extensions.fadeIn
 import one.gypsy.neatorganizer.core.utils.extensions.hide
 import one.gypsy.neatorganizer.note.R
 import one.gypsy.neatorganizer.note.databinding.WidgetItemNoteBinding
-import one.gypsy.neatorganizer.note.model.NoteEntryItem
+import one.gypsy.neatorganizer.note.model.WidgetNoteItem
 
 internal class WidgetNoteEntryViewHolder(
     private val itemBinding: WidgetItemNoteBinding,
-    private val currentlySelectedItem: LiveData<NoteEntryItem>,
-    private val onSelected: (NoteEntryItem) -> Unit
-) : LifecycleViewHolder(itemBinding.root) {
+    private val currentlySelectedItem: LiveData<WidgetNoteItem>,
+    private val onSelected: (WidgetNoteItem) -> Unit
+) : WidgetNoteItemViewHolder(itemBinding.root) {
 
-    fun bind(data: NoteEntryItem) {
-        itemBinding.noteEntryItem = data
-        // TODO do the same on regular list with notes
-        itemBinding.onItemSelect = onSelected
+    override fun bind(data: WidgetNoteItem) {
+        (data as? WidgetNoteItem.EntryItem)?.let {
+            itemBinding.apply {
+                noteEntryItem = it
+                onItemSelect = onSelected
+                lifecycleOwner = this@WidgetNoteEntryViewHolder
+            }
+        }
     }
 
     override fun onAttached() {
@@ -26,13 +29,12 @@ internal class WidgetNoteEntryViewHolder(
         currentlySelectedItem.observe(this) { animateItemSelection(it) }
     }
 
-    private fun animateItemSelection(
-        selectedItem: NoteEntryItem,
-    ) = if (selectedItem == itemBinding.noteEntryItem) {
-        itemBinding.animateSelection()
-    } else {
-        itemBinding.selectionIndicator.hide()
-    }
+    private fun animateItemSelection(selectedItem: WidgetNoteItem) =
+        if (selectedItem == itemBinding.noteEntryItem) {
+            itemBinding.animateSelection()
+        } else {
+            itemBinding.selectionIndicator.hide()
+        }
 
     private fun WidgetItemNoteBinding.animateSelection() {
         selectionIndicator.fadeIn()

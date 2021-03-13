@@ -22,6 +22,6 @@ internal fun SingleTaskEntryDto.toTaskListSubItem() = TaskListItem.TaskListSubIt
 )
 
 internal fun SingleTaskGroupEntryDto.toTaskGroupEntryItem() =
-    TaskGroupEntryItem(id, name, tasksCount, tasksDone)
+    WidgetTaskGroupItem.Entry(id, name, tasksCount, tasksDone)
 
 internal fun SingleTaskEntryDto.toTaskEntryWidgetItem() = TaskEntryWidgetItem(name, done, createdAt)

@@ -29,8 +29,8 @@ internal class NotesListingViewModel(
     init {
         getAllNoteEntriesUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                { _contentLoadingStatus.updateLoadingStatus(emptyList<NoteEntryItem>()) },
-                ::onGetAllNoteEntriesSuccess
+                onFailure = { _contentLoadingStatus.updateLoadingStatus(emptyList<NoteEntryItem>()) },
+                onSuccess = ::onGetAllNoteEntriesSuccess
             )
         }
     }

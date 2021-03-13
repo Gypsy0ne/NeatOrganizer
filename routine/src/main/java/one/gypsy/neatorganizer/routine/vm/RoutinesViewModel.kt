@@ -50,8 +50,8 @@ internal class RoutinesViewModel(
     init {
         getAllRoutinesUseCase.invoke(viewModelScope, Unit) {
             it.either(
-                ::onGetAllRoutinesFailure,
-                ::onGetAllRoutinesSuccess
+                onFailure = ::onGetAllRoutinesFailure,
+                onSuccess = ::onGetAllRoutinesSuccess
             )
         }
     }
@@ -81,8 +81,7 @@ internal class RoutinesViewModel(
                 UpdateRoutine.Params(routine = routineHeaderItem.toRoutine())
             ) {
                 it.either(
-                    {},
-                    {
+                    onSuccess = {
                         updateRoutineSchedule.invoke(
                             this,
                             UpdateRoutineSchedule.Params(

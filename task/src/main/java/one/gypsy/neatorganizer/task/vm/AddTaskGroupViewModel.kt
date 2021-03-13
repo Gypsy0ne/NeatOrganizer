@@ -24,7 +24,7 @@ class AddTaskGroupViewModel(private val addTaskGroupUseCase: AddTaskGroup) : Vie
                 )
             )
         ) {
-            it.either({}, { _finishedAdding.postValue(true) })
+            it.either(onSuccess = { _finishedAdding.postValue(true) })
         }
     }
 }

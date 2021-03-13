@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
 import one.gypsy.neatorganizer.domain.interactors.tasks.UpdateTaskWidgetLinkedGroup
-import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
+import one.gypsy.neatorganizer.task.model.WidgetTaskGroupItem
 import one.gypsy.neatorganizer.task.model.toTaskGroupEntryItem
 
 internal class TaskWidgetSelectionViewModel(
@@ -16,18 +16,18 @@ internal class TaskWidgetSelectionViewModel(
     private val widgetUpdateUseCase: UpdateTaskWidgetLinkedGroup
 ) : ViewModel() {
 
-    private val _listedTaskGroups = MediatorLiveData<List<TaskGroupEntryItem>>()
-    val listedTaskGroups: LiveData<List<TaskGroupEntryItem>> = _listedTaskGroups
+    private val _listedTaskGroups = MediatorLiveData<List<WidgetTaskGroupItem>>()
+    val listedTaskGroups: LiveData<List<WidgetTaskGroupItem>> = _listedTaskGroups
 
-    private val _selectedTaskGroup = MutableLiveData<TaskGroupEntryItem>()
-    val selectedTaskGroup: LiveData<TaskGroupEntryItem> = _selectedTaskGroup
+    private val _selectedTaskGroup = MutableLiveData<WidgetTaskGroupItem>()
+    val selectedTaskGroup: LiveData<WidgetTaskGroupItem> = _selectedTaskGroup
 
     private val _widgetSelectionStatus = MutableLiveData<TaskWidgetSelectionStatus>()
     val widgetSelectionStatus: LiveData<TaskWidgetSelectionStatus> = _widgetSelectionStatus
 
     init {
         getAllTaskGroupEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either({}, ::onGetAllSingleTaskGroupEntriesSuccess)
+            it.either(onSuccess = ::onGetAllSingleTaskGroupEntriesSuccess)
         }
     }
 
@@ -36,7 +36,7 @@ internal class TaskWidgetSelectionViewModel(
             _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
         }
 
-    fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) =
+    fun onItemSelected(selectedItem: WidgetTaskGroupItem) =
         _selectedTaskGroup.postValue(selectedItem)
 
     fun onSubmitClicked(widgetId: Int) = if (selectedTaskGroup.value == null) {
@@ -52,7 +52,7 @@ internal class TaskWidgetSelectionViewModel(
             widgetUpdateUseCase.invoke(
                 viewModelScope,
                 UpdateTaskWidgetLinkedGroup.Params(widgetId, groupId)
-            ) { it.either({}, ::onUpdateTaskWidgetSuccess) }
+            ) { it.either(onSuccess = ::onUpdateTaskWidgetSuccess) }
         }
 
     private fun onUpdateTaskWidgetSuccess(unit: Unit) =

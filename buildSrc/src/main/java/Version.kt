@@ -16,7 +16,7 @@ object Version {
     const val arch_core_version = "2.1.0"
     const val espresso_version = "3.3.0-rc03"
     const val nav_version = "2.3.3"
-    const val material_version = "1.2.1"
+    const val material_version = "1.3.0"
     const val constraint_layout_version = "2.0.4"
     const val glide_version = "4.10.0"
     const val spectrum_version = "0.7.1"

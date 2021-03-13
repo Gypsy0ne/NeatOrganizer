@@ -11,6 +11,7 @@ import one.gypsy.neatorganizer.domain.dto.notes.NoteWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.notes.GetAllNoteEntries
 import one.gypsy.neatorganizer.domain.interactors.notes.widget.UpdateWidgetNote
 import one.gypsy.neatorganizer.note.model.NoteEntryItem
+import one.gypsy.neatorganizer.note.model.WidgetNoteItem
 import one.gypsy.neatorganizer.note.model.toNoteEntryItem
 
 internal class NoteWidgetSelectionViewModel(
@@ -19,8 +20,8 @@ internal class NoteWidgetSelectionViewModel(
     private val updateNoteWidgetUseCase: UpdateWidgetNote
 ) : ViewModel() {
 
-    private val _selectedNote = MutableLiveData<NoteEntryItem>()
-    val selectedNote: LiveData<NoteEntryItem> = _selectedNote
+    private val _selectedNote = MutableLiveData<WidgetNoteItem>()
+    val selectedNote: LiveData<WidgetNoteItem> = _selectedNote
 
     private val _listedNotes: MediatorLiveData<List<NoteEntryItem>> = MediatorLiveData()
     val listedNotes: LiveData<List<NoteEntryItem>> = _listedNotes
@@ -30,10 +31,7 @@ internal class NoteWidgetSelectionViewModel(
 
     init {
         getAllNoteEntriesUseCase.invoke(viewModelScope, Unit) {
-            it.either(
-                {},
-                ::onGetAllNoteEntriesSuccess
-            )
+            it.either(onSuccess = ::onGetAllNoteEntriesSuccess)
         }
     }
 
@@ -45,7 +43,7 @@ internal class NoteWidgetSelectionViewModel(
         }
     }
 
-    fun onNoteSelected(note: NoteEntryItem) {
+    fun onItemSelected(note: WidgetNoteItem) {
         if (note != selectedNote.value) {
             _selectedNote.postValue(note)
         }
@@ -60,7 +58,7 @@ internal class NoteWidgetSelectionViewModel(
     }
 
     private fun submitWidgetSelection() =
-        selectedNote.value?.let { noteEntry ->
+        (selectedNote.value as? WidgetNoteItem.EntryItem)?.let { noteEntry ->
             updateNoteWidgetUseCase.invoke(
                 viewModelScope,
                 UpdateWidgetNote.Params(
@@ -72,8 +70,7 @@ internal class NoteWidgetSelectionViewModel(
                 )
             ) {
                 it.either(
-                    {},
-                    { _widgetSelectionStatus.postValue(NoteWidgetSelectionStatus.SelectionSuccessStatus) }
+                    onSuccess = { _widgetSelectionStatus.postValue(NoteWidgetSelectionStatus.SelectionSuccessStatus) }
                 )
             }
         }
