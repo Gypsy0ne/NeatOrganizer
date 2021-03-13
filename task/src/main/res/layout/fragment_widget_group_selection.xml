@@ -48,20 +48,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/createNew"
-            style="@style/FormButton.Create"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_100"
-            android:drawablePadding="@dimen/normal_100"
-            android:text="@string/selection_widget_group_create"
-            android:gravity="center"
-            app:elevation="@dimen/normal_50"
-            app:layout_constraintBottom_toBottomOf="@id/groupsBackground"
-            app:layout_constraintLeft_toLeftOf="@id/groupsBackground"
-            app:layout_constraintRight_toRightOf="@id/groupsBackground" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/taskGroupsListGuideline"
             android:layout_width="wrap_content"

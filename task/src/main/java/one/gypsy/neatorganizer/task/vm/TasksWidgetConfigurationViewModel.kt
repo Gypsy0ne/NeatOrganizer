@@ -9,7 +9,7 @@ import one.gypsy.neatorganizer.domain.dto.tasks.SingleTaskGroupEntryDto
 import one.gypsy.neatorganizer.domain.dto.tasks.TaskWidgetEntryDto
 import one.gypsy.neatorganizer.domain.interactors.tasks.CreateTaskWidget
 import one.gypsy.neatorganizer.domain.interactors.tasks.GetAllSingleTaskGroupEntries
-import one.gypsy.neatorganizer.task.model.TaskGroupEntryItem
+import one.gypsy.neatorganizer.task.model.WidgetTaskGroupItem
 import one.gypsy.neatorganizer.task.model.toTaskGroupEntryItem
 
 internal class TasksWidgetConfigurationViewModel(
@@ -17,11 +17,11 @@ internal class TasksWidgetConfigurationViewModel(
     private val widgetCreationUseCase: CreateTaskWidget
 ) : ViewModel() {
 
-    private val _listedTaskGroups = MediatorLiveData<List<TaskGroupEntryItem>>()
-    val listedTaskGroups: LiveData<List<TaskGroupEntryItem>> = _listedTaskGroups
+    private val _listedTaskGroups = MediatorLiveData<List<WidgetTaskGroupItem>>()
+    val listedTaskGroups: LiveData<List<WidgetTaskGroupItem>> = _listedTaskGroups
 
-    private val _selectedTaskGroup = MutableLiveData<TaskGroupEntryItem>()
-    val selectedTaskGroup: LiveData<TaskGroupEntryItem> = _selectedTaskGroup
+    private val _selectedTaskGroup = MutableLiveData<WidgetTaskGroupItem>()
+    val selectedTaskGroup: LiveData<WidgetTaskGroupItem> = _selectedTaskGroup
 
     private val _widgetCreationStatus = MutableLiveData<TaskWidgetCreationStatus>()
     val widgetCreationStatus: LiveData<TaskWidgetCreationStatus> = _widgetCreationStatus
@@ -36,10 +36,13 @@ internal class TasksWidgetConfigurationViewModel(
 
     private fun onGetAllSingleTaskGroupEntriesSuccess(taskGroupEntriesObservable: LiveData<List<SingleTaskGroupEntryDto>>) =
         _listedTaskGroups.addSource(taskGroupEntriesObservable) { taskGroupEntries ->
-            _listedTaskGroups.postValue(taskGroupEntries.map { it.toTaskGroupEntryItem() })
+            _listedTaskGroups.postValue(
+                taskGroupEntries.map { it.toTaskGroupEntryItem() }
+                    .plus(WidgetTaskGroupItem.Footer)
+            )
         }
 
-    fun onTaskGroupSelected(selectedItem: TaskGroupEntryItem) =
+    fun onItemSelected(selectedItem: WidgetTaskGroupItem) =
         _selectedTaskGroup.postValue(selectedItem)
 
     fun onColorPicked(color: Int) {

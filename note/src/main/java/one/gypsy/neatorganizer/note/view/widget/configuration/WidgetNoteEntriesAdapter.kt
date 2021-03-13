@@ -58,8 +58,8 @@ internal class WidgetNoteEntriesAdapter(
         override fun areItemsTheSame(
             oldItem: WidgetNoteItem,
             newItem: WidgetNoteItem
-        ): Boolean { // popraw to
-            return oldItem.getViewHolderType() == newItem.getViewHolderType() && oldItem.id == newItem.id
+        ): Boolean {
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
