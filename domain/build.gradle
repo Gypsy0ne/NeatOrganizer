@@ -13,6 +13,11 @@ java {
 android {
     compileSdkVersion Version.compileSdkVersion
 
+    defaultConfig {
+        targetSdkVersion Version.targetSdkVersion
+        targetSdkVersion Version.targetSdkVersion
+    }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }

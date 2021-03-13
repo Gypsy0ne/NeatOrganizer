@@ -7,6 +7,10 @@ apply from: Dependencies.dependency
 
 android {
     compileSdkVersion Version.compileSdkVersion
+
+    defaultConfig {
+        targetSdkVersion Version.targetSdkVersion
+    }
 }
 
 java {
