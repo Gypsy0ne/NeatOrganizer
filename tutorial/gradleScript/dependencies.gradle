@@ -1,0 +1,21 @@
+apply from: Dependencies.common
+
+dependencies {
+    implementation Lifecycle.livedata
+    implementation Lifecycle.ext
+    implementation Lifecycle.runtime
+
+    implementation Koin.core
+    implementation Koin.core_ext
+
+    implementation View.recyclerView
+    implementation View.material
+    implementation View.constraintLayout
+    implementation View.lottie
+    implementation View.spectrum
+    implementation View.showcase
+
+    implementation AppCompat.appCompat
+    implementation Glide.glide
+    annotationProcessor Glide.compiler
+}

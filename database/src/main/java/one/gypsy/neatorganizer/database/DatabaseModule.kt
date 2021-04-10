@@ -9,7 +9,7 @@ val databaseModule = module {
             get(),
             OrganizerDatabase::class.java,
             "NeatOrganizer.db"
-        ).build()
+        ).addCallback(ShowcaseDataProvider()).build()
     }
 
     factory { get<OrganizerDatabase>().routineTasksDao() }

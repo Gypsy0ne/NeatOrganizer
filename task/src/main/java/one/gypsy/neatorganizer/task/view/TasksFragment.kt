@@ -63,7 +63,9 @@ internal class TasksFragment : SectionFragment() {
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
+        tasksAdapter =
+            GroupedTasksAdapter(headerClickListener, subItemClickListener) { firstHolderView ->
+            }
         recyclerViewFragmentTasks.itemAnimator = null
         executePendingBindings()
     }
