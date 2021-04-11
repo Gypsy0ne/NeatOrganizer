@@ -6,6 +6,9 @@ apply plugin: 'kotlin-kapt'
 apply from: Dependencies.dependency
 
 android {
+    buildFeatures {
+        viewBinding true
+    }
     compileSdkVersion Version.compileSdkVersion
 
     defaultConfig {

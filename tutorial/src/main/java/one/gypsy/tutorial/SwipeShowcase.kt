@@ -1,16 +1,37 @@
 package one.gypsy.tutorial
 
 import android.graphics.Color
-import android.graphics.Typeface
+import android.view.LayoutInflater
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.codertainment.materialintro.shape.Focus
 import com.codertainment.materialintro.shape.FocusGravity
 import com.codertainment.materialintro.shape.ShapeType
+import com.codertainment.materialintro.utils.materialIntro
+import com.codertainment.materialintro.view.MaterialIntroView
+import one.gypsy.tutorial.databinding.SwipeShowcaseBinding
 
-internal class SwipeShowcase {
+class SwipeShowcase : FeatureShowcase {
 
-    materialIntro(show = true /* if you want to show miv instantly */)
-    {
+    override fun show(
+        fragment: Fragment,
+        showcaseTargetView: View,
+        showOnce: Boolean,
+    ) {
+        fragment.materialIntro(
+            show = true,
+            func = getConfiguration(
+                showcaseTargetView = showcaseTargetView,
+                showOnce = showOnce
+            )
+        )
+    }
+
+    // create layout resource file with question mark icon tip and text button 
+    private fun getConfiguration(
+        showcaseTargetView: View,
+        showOnce: Boolean
+    ): (MaterialIntroView.() -> Unit) = {
         focusType = Focus.MINIMUM
         shapeType = ShapeType.RECTANGLE
 
@@ -19,38 +40,26 @@ internal class SwipeShowcase {
         fadeAnimationDurationMillis = 300
 
         focusGravity = FocusGravity.CENTER
-
-        padding = 16 // in px
-
         dismissOnTouch = false
 
-        isInfoEnabled = true
-        infoText = "Hello this is help message"
-        infoTextColor = Color.BLACK
-        infoTextSize = 18f
-        infoTextAlignment = View.TEXT_ALIGNMENT_CENTER
-        infoTextTypeface = Typeface.DEFAULT_BOLD
         infoCardBackgroundColor = Color.WHITE
 
-        isHelpIconEnabled = true
-//                    helpIconResource = R.drawable.your_icon
-//                    helpIconDrawable = yourDrawable
-//                helpIconColor = Color.RED
-
-//                    infoCustomView = yourViewHere
-//                    infoCustomViewRes = R.layout.your_custom_view_here
+        infoCustomView = inflateInfoView()
 
         isDotViewEnabled = false
-//                isDotAnimationEnabled = true
-//                dotIconColor = Color.WHITE
 
-//                    viewId = "unique_id" // or automatically picked from view's tag
-        targetView = firstHolderView
+        targetView = showcaseTargetView
 
         isPerformClick = false
 
-        showOnlyOnce = false
+        showOnlyOnce = showOnce
         userClickAsDisplayed = true
     }
 
+    private fun MaterialIntroView.inflateInfoView() =
+        SwipeShowcaseBinding.inflate(LayoutInflater.from(this.context), this, false).apply {
+            finishButton.setOnClickListener {
+                this@inflateInfoView.dismiss()
+            }
+        }.root
 }
