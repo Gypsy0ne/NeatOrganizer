@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="swipe_showcase_info_text">Swipe listed items to access context menu.</string>
+    <string name="swipe_showcase_finish_text">Got it!</string>
+</resources>

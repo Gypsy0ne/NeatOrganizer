@@ -1,6 +1,7 @@
 package one.gypsy.neatorganizer.task.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -14,7 +15,8 @@ import one.gypsy.neatorganizer.task.model.TaskListItem
 
 internal class GroupedTasksAdapter(
     private val headerClickListener: HeaderClickListener<TaskListItem.TaskListHeader>? = null,
-    private val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null
+    private val subItemClickListener: SubItemClickListener<TaskListItem.TaskListSubItem>? = null,
+    private var onFirstHolderLayout: ((View) -> Unit)? = null
 ) : ListAdapter<TaskListItem, TaskViewHolder>(DiffCallback()), BindableAdapter<TaskListItem> {
 
     override fun bindData(dataCollection: List<TaskListItem>) {
@@ -30,8 +32,13 @@ internal class GroupedTasksAdapter(
                 subItemClickListener
             )
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
+        onFirstHolderLayout?.let { onHolderLayout ->
+            onHolderLayout(holder.itemView)
+            onFirstHolderLayout = null
+        }
+    }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).getViewHolderType()
@@ -80,4 +87,8 @@ internal fun TaskViewType.getHolder(
         ),
         subItemClickListener
     )
+}
+
+interface HolderLayoutListener {
+    val onFirstChildLayout: (View) -> Unit
 }

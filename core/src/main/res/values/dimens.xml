@@ -31,6 +31,7 @@
 
     <!--Text size universal dimens-->
     <dimen name="text_normal_200">48sp</dimen>
+    <dimen name="text_normal_150">36sp</dimen>
     <dimen name="text_normal_125">30sp</dimen>
     <dimen name="text_normal_100">24sp</dimen>
     <dimen name="text_normal_75">18sp</dimen>

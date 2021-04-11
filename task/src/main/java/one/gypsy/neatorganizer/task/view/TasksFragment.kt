@@ -13,12 +13,15 @@ import one.gypsy.neatorganizer.core.SectionFragment
 import one.gypsy.neatorganizer.task.R
 import one.gypsy.neatorganizer.task.databinding.FragmentTasksBinding
 import one.gypsy.neatorganizer.task.vm.TasksViewModel
+import one.gypsy.tutorial.FeatureShowcase
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 internal class TasksFragment : SectionFragment() {
 
     private val tasksViewModel: TasksViewModel by viewModel()
     private lateinit var fragmentBinding: FragmentTasksBinding
+    private val swipeShowcaseView: FeatureShowcase by inject()
 
     private val headerClickListener = TaskHeaderClickListener(
         onExpanderClick = { tasksViewModel.onExpand(it) },
@@ -63,7 +66,14 @@ internal class TasksFragment : SectionFragment() {
 
     private fun setUpRecyclerView() = fragmentBinding.apply {
         linearLayoutManager = LinearLayoutManager(context)
-        tasksAdapter = GroupedTasksAdapter(headerClickListener, subItemClickListener)
+        tasksAdapter =
+            GroupedTasksAdapter(headerClickListener, subItemClickListener) { firstHolderView ->
+                swipeShowcaseView.show(
+                    this@TasksFragment,
+                    firstHolderView,
+                    true
+                )
+            }
         recyclerViewFragmentTasks.itemAnimator = null
         executePendingBindings()
     }

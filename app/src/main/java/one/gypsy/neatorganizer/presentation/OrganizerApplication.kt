@@ -23,6 +23,7 @@ import one.gypsy.neatorganizer.routine.routineUtilsModule
 import one.gypsy.neatorganizer.routine.routineViewModelModule
 import one.gypsy.neatorganizer.task.taskUtilsModule
 import one.gypsy.neatorganizer.task.taskViewModelModule
+import one.gypsy.neatorganizer.task.tasksUiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -36,6 +37,7 @@ internal class OrganizerApplication : Application() {
                 // task
                 taskUtilsModule,
                 taskViewModelModule,
+                tasksUiModule,
                 // routine
                 routineViewModelModule,
                 routineUtilsModule,

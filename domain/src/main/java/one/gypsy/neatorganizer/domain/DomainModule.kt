@@ -56,17 +56,6 @@ import one.gypsy.neatorganizer.domain.repositories.tasks.SingleTasksRepository
 import one.gypsy.neatorganizer.domain.repositories.tasks.TaskWidgetsRepository
 import org.koin.dsl.module
 
-// val domainModule = module {
-//    notesRepositoryModule
-//    notesUseCaseModule
-//    routinesUseCaseModule
-//    routinesRepositoryModule
-//    tasksUseCaseModule
-//    tasksRepositoryModule
-//    routinesResetRepositoryModule
-//    routinesResetUtilsModule
-// }
-
 val routinesResetRepositoryModule = module {
     factory { RoutineSnapshotsRepository(get()) }
 }
