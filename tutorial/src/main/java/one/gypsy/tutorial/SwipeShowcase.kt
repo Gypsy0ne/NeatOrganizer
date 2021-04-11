@@ -27,31 +27,21 @@ class SwipeShowcase : FeatureShowcase {
         )
     }
 
-    // create layout resource file with question mark icon tip and text button 
     private fun getConfiguration(
         showcaseTargetView: View,
         showOnce: Boolean
     ): (MaterialIntroView.() -> Unit) = {
         focusType = Focus.MINIMUM
         shapeType = ShapeType.RECTANGLE
-
         isFadeInAnimationEnabled = true
         isFadeOutAnimationEnabled = true
         fadeAnimationDurationMillis = 300
-
         focusGravity = FocusGravity.CENTER
         dismissOnTouch = false
-
         infoCardBackgroundColor = Color.WHITE
-
         infoCustomView = inflateInfoView()
-
         isDotViewEnabled = false
-
         targetView = showcaseTargetView
-
-        isPerformClick = false
-
         showOnlyOnce = showOnce
         userClickAsDisplayed = true
     }
