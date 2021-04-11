@@ -34,8 +34,8 @@ internal class GroupedTasksAdapter(
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
-        onFirstHolderLayout?.let {
-            it(holder.itemView)
+        onFirstHolderLayout?.let { onHolderLayout ->
+            onHolderLayout(holder.itemView)
             onFirstHolderLayout = null
         }
     }

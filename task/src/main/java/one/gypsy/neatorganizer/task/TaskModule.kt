@@ -7,7 +7,13 @@ import one.gypsy.neatorganizer.task.model.TaskListMapper
 import one.gypsy.neatorganizer.task.view.widget.configuration.TaskWidgetConfigureActivity.Companion.TASK_REMOTE_VIEW_MANAGER
 import one.gypsy.neatorganizer.task.view.widget.management.TaskWidgetNotifier
 import one.gypsy.neatorganizer.task.view.widget.remote.TaskWidgetRemoteViewManager
-import one.gypsy.neatorganizer.task.vm.*
+import one.gypsy.neatorganizer.task.vm.AddTaskGroupViewModel
+import one.gypsy.neatorganizer.task.vm.AddTaskViewModel
+import one.gypsy.neatorganizer.task.vm.RemoveTaskGroupViewModel
+import one.gypsy.neatorganizer.task.vm.TaskWidgetContentManageViewModel
+import one.gypsy.neatorganizer.task.vm.TaskWidgetSelectionViewModel
+import one.gypsy.neatorganizer.task.vm.TasksViewModel
+import one.gypsy.neatorganizer.task.vm.TasksWidgetConfigurationViewModel
 import one.gypsy.tutorial.FeatureShowcase
 import one.gypsy.tutorial.SwipeShowcase
 import org.koin.android.ext.koin.androidContext
