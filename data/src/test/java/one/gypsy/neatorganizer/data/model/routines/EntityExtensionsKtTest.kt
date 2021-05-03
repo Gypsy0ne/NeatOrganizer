@@ -67,7 +67,7 @@ class EntityExtensionsKtTest {
     }
 
     @Test
-    fun shouldMapToEmptySchedule() {
+    fun shouldMapScheduledRoutineWithTasksToDataModelWithEmptySchedule() {
         // given
         val scheduledRoutineId = 1L
         val scheduledRoutine = RoutineEntity(
@@ -108,7 +108,7 @@ class EntityExtensionsKtTest {
     }
 
     @Test
-    fun shouldMapTodataModel() {
+    fun shouldMapScheduledRoutineWithTasksToDataModel() {
         // given
         val scheduledRoutineId = 1L
         val scheduledRoutine = RoutineEntity(

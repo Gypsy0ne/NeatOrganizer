@@ -17,24 +17,6 @@ internal class RoutineSnapshotEntityTest : DatabaseTest() {
     }
 
     @Test
-    fun shouldSelectLastResetEntry() {
-        // given
-        val resetEntries = arrayOf(
-            RoutineSnapshotEntity(routineSnapshotId = 1, routinesResetDate = Date(200)),
-            RoutineSnapshotEntity(routineSnapshotId = 2, routinesResetDate = Date(500)),
-            RoutineSnapshotEntity(routineSnapshotId = 3, routinesResetDate = Date(800)),
-        )
-
-        // when
-        routineSnapshotDao.insert(*resetEntries)
-        val lastEntry = routineSnapshotDao.getLastResetEntry()
-
-        // then
-        assertThat(lastEntry?.routineSnapshotId).isEqualTo(3)
-        assertThat(lastEntry?.routinesResetDate?.time).isEqualTo(800)
-    }
-
-    @Test
     fun shouldGetLastResetEntry() {
         // given
         val resetEntries = arrayOf(

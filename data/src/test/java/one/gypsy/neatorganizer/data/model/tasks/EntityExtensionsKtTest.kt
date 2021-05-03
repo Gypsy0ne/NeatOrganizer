@@ -10,7 +10,7 @@ import org.junit.Test
 class EntityExtensionsKtTest {
 
     @Test
-    fun shouldProperlyMapToGroupWithTasksDataModel() {
+    fun shouldProperlyMapGroupWithTasksEntityToDataModel() {
         // given
         val taskGroupId = 1L
         val tasks = listOf(
@@ -61,7 +61,7 @@ class EntityExtensionsKtTest {
     }
 
     @Test
-    fun shouldProperlyMapToTaskGroupDataModel() {
+    fun shouldProperlyMapEntityToTaskGroupDataModel() {
         // given
         val taskGroupId = 1L
         val tasks = listOf(
@@ -110,7 +110,7 @@ class EntityExtensionsKtTest {
     }
 
     @Test
-    fun shouldProperlyMapToDataModel() {
+    fun shouldProperlyMapSingleTaskEntityToDataModel() {
         // given
         val singleTaskEntity = SingleTaskEntity(
             groupId = 1L,

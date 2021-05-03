@@ -13,10 +13,10 @@ internal class LaunchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resetRoutinesIfNeeded()
+        navigateHomeWithRoutineTasksReset()
     }
 
-    private fun resetRoutinesIfNeeded() {
+    private fun navigateHomeWithRoutineTasksReset() {
         routinesResetManager.resetRoutineTasks(lifecycleScope) {
             redirectToHomeActivity()
         }
