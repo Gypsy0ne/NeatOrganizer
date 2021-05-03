@@ -1,14 +1,14 @@
-package one.gypsy.neatorganizer.domain.database.entity.tasks
+package one.gypsy.neatorganizer.database.entity.tasks
 
-import one.gypsy.neatorganizer.database.entity.tasks.toSingleTaskGroup
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
+import one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class SingleTaskGroupEntityTest : DatabaseTest() {
+internal class SingleTaskGroupEntityTest : DatabaseTest() {
 
-    private lateinit var taskGroupsDao: one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
+    private lateinit var taskGroupsDao: SingleTaskGroupsDao
 
     @Before
     override fun setup() {
@@ -19,7 +19,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldInsertSingleTaskGroup() {
         // given
-        val taskGroup = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+        val taskGroup = SingleTaskGroupEntity(
             name = "foobar",
             id = 1L,
             createdAt = 123124
@@ -36,7 +36,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldRemoveSingleTaskGroup() {
         // given
-        val taskGroup = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+        val taskGroup = SingleTaskGroupEntity(
             name = "foobar",
             id = 1L,
             createdAt = 123124
@@ -54,7 +54,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldUpdateSingleTaskGroup() {
         // given
-        val taskGroup = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+        val taskGroup = SingleTaskGroupEntity(
             name = "foobar",
             id = 1L,
             createdAt = 123124
@@ -74,17 +74,17 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     fun shouldGetAllSingleTaskGroups() {
         // given
         val taskGroups = arrayOf(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 id = 1L,
                 name = "foobar",
                 createdAt = 123124
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 id = 2L,
                 name = "foobar2",
                 createdAt = 123124
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 id = 3L,
                 name = "foobar3",
                 createdAt = 123124
@@ -104,7 +104,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldGetSingleTaskGroupByIdObservable() {
         // given
-        val taskGroup = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+        val taskGroup = SingleTaskGroupEntity(
             id = 1L,
             name = "foobar",
             createdAt = 123124
@@ -123,7 +123,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldGetSingleTaskGroupById() {
         // given
-        val taskGroup = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+        val taskGroup = SingleTaskGroupEntity(
             id = 1L,
             name = "foobar",
             createdAt = 123124
@@ -140,7 +140,7 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
     @Test
     fun shouldDeleteTaskGroupById() {
         // given
-        val taskGroup = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+        val taskGroup = SingleTaskGroupEntity(
             id = 1L,
             name = "foobar",
             createdAt = 123124
@@ -153,25 +153,5 @@ class SingleTaskGroupEntityTest : DatabaseTest() {
 
         // then
         assertThat(fetchedTaskGroup).isNull()
-    }
-
-    @Test
-    fun shouldMapToDomainModel() {
-        // given
-        val taskGroupEntity = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
-            id = 1L,
-            name = "foobar",
-            createdAt = 123124
-        )
-
-        // when
-        val domainTaskGroup = taskGroupEntity.toSingleTaskGroup()
-
-        // then
-        with(domainTaskGroup) {
-            assertThat(taskGroupEntity.id).isEqualTo(id)
-            assertThat(taskGroupEntity.name).isEqualTo(name)
-            assertThat(taskGroupEntity.createdAt).isEqualTo(createdAt)
-        }
     }
 }

@@ -16,5 +16,17 @@ internal class UserRoutineTasksDataSource(private val routineTasksDao: RoutineTa
     override suspend fun remove(routineTask: RoutineTaskEntry) =
         routineTasksDao.delete(routineTask.toRoutineTaskEntity())
 
-    override suspend fun resetTasksStatus() = routineTasksDao.resetTasksStatus()
+    override suspend fun resetMondayTasks() = routineTasksDao.resetMondayTasksProgress()
+
+    override suspend fun resetTuesdayTasks() = routineTasksDao.resetTuesdayTasksProgress()
+
+    override suspend fun resetWednesdayTasks() = routineTasksDao.resetWednesdayTasksProgress()
+
+    override suspend fun resetThursdayTasks() = routineTasksDao.resetThursdayTasksProgress()
+
+    override suspend fun resetFridayTasks() = routineTasksDao.resetFridayTasksProgress()
+
+    override suspend fun resetSaturdayTasks() = routineTasksDao.resetSaturdayTasksProgress()
+
+    override suspend fun resetSundayTasks() = routineTasksDao.resetSundayTasksProgress()
 }

@@ -16,7 +16,13 @@ import org.koin.dsl.module
 
 val routineUtilsModule = module {
     factory { RoutineListMapper() }
-    factory { RoutinesResetManager(get()) }
+    factory {
+        RoutinesResetManager(
+            resetRoutineDaysUseCase = get(),
+            addSnapshotUseCase = get(),
+            getLastSnapshotUseCase = get()
+        )
+    }
 }
 
 val routineViewModelModule = module {

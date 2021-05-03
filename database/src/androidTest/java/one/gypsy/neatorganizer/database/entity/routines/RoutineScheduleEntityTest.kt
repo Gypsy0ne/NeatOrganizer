@@ -1,11 +1,11 @@
 package one.gypsy.neatorganizer.database.entity.routines
 
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class RoutineScheduleEntityTest : DatabaseTest() {
+internal class RoutineScheduleEntityTest : DatabaseTest() {
     private lateinit var routineSchedulesDao: one.gypsy.neatorganizer.database.dao.routines.RoutineSchedulesDao
     private lateinit var routinesDao: one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
 
@@ -256,40 +256,5 @@ class RoutineScheduleEntityTest : DatabaseTest() {
         // then
         val selectedSchedules = routineSchedulesDao.getAllRoutineSchedules()
         assertThat(selectedSchedules).isEmpty()
-    }
-
-    @Test
-    fun shouldProperlyMapEntityToDomainRepresentation() {
-        // given
-        val routineSchedule =
-            RoutineScheduleEntity(
-                monday = true,
-                tuesday = false,
-                wednesday = true,
-                thursday = false,
-                friday = true,
-                saturday = false,
-                sunday = true,
-                routineId = 1
-            )
-
-        // when
-        val domainRoutineSchedule = routineSchedule.toRoutineSchedule()
-
-        // then
-        assertThat(routineSchedule.routineId).isEqualTo(domainRoutineSchedule.routineId)
-        assertThat(
-            routineSchedule.let {
-                listOf(
-                    it.monday,
-                    it.tuesday,
-                    it.wednesday,
-                    it.thursday,
-                    it.friday,
-                    it.saturday,
-                    it.sunday
-                )
-            }
-        ).isEqualTo(domainRoutineSchedule.scheduledDays)
     }
 }
