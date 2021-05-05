@@ -18,11 +18,12 @@ import one.gypsy.neatorganizer.domain.interactors.routines.GetAllRoutines
 import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutine
 import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineById
 import one.gypsy.neatorganizer.domain.interactors.routines.RemoveRoutineTask
-import one.gypsy.neatorganizer.domain.interactors.routines.RunAllRoutinesSnapshotReset
 import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutine
 import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutineSchedule
 import one.gypsy.neatorganizer.domain.interactors.routines.UpdateRoutineTask
-import one.gypsy.neatorganizer.domain.interactors.routines.reset.RoutinesResetSnapshooter
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.AddRoutineSnapshot
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.GetLastRoutineSnapshot
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.ResetRoutineDays
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddSingleTask
 import one.gypsy.neatorganizer.domain.interactors.tasks.AddTaskGroup
 import one.gypsy.neatorganizer.domain.interactors.tasks.CreateTaskWidget
@@ -61,13 +62,7 @@ val routinesResetRepositoryModule = module {
 }
 
 val routinesResetUtilsModule = module {
-    factory {
-        RoutinesResetSnapshooter(
-            routinesRepository = get(),
-            routineSnapshotsRepository = get(),
-            routineTasksRepository = get()
-        )
-    }
+    factory { ResetRoutineDays(get()) }
 }
 
 val tasksRepositoryModule = module {
@@ -115,10 +110,11 @@ val routinesUseCaseModule = module {
     factory { RemoveRoutine(get()) }
     factory { RemoveRoutineById(get()) }
     factory { RemoveRoutineTask(get()) }
-    factory { RunAllRoutinesSnapshotReset(get()) }
     factory { UpdateRoutine(get()) }
     factory { UpdateRoutineSchedule(get()) }
     factory { UpdateRoutineTask(get()) }
+    factory { GetLastRoutineSnapshot(get()) }
+    factory { AddRoutineSnapshot(get()) }
 }
 
 val notesRepositoryModule = module {

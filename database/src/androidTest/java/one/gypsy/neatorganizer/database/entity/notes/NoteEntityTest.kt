@@ -1,13 +1,14 @@
 package one.gypsy.neatorganizer.database.entity.notes
 
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
+import one.gypsy.neatorganizer.database.dao.notes.NotesDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class NoteEntityTest : DatabaseTest() {
+internal class NoteEntityTest : DatabaseTest() {
 
-    private lateinit var notesDao: one.gypsy.neatorganizer.database.dao.notes.NotesDao
+    private lateinit var notesDao: NotesDao
 
     @Before
     override fun setup() {
@@ -21,7 +22,7 @@ class NoteEntityTest : DatabaseTest() {
         val noteId = 1L
         val note = NoteEntity(
             id = noteId,
-            title = "elo",
+            title = "test",
             content = "really short content",
             createdAt = System.currentTimeMillis(),
             color = 123123
@@ -41,7 +42,7 @@ class NoteEntityTest : DatabaseTest() {
         val noteId = 1L
         val note = NoteEntity(
             id = noteId,
-            title = "elo",
+            title = "test",
             content = "really short content",
             createdAt = System.currentTimeMillis(),
             color = 123123
@@ -63,7 +64,7 @@ class NoteEntityTest : DatabaseTest() {
         val noteId = 1L
         val note = NoteEntity(
             id = noteId,
-            title = "elo",
+            title = "test",
             content = "really short content",
             createdAt = System.currentTimeMillis(),
             color = 123123
@@ -84,7 +85,7 @@ class NoteEntityTest : DatabaseTest() {
         val noteId = 1L
         val note = NoteEntity(
             id = noteId,
-            title = "elo",
+            title = "test",
             content = "really short content",
             createdAt = System.currentTimeMillis(),
             color = 123123
@@ -106,21 +107,21 @@ class NoteEntityTest : DatabaseTest() {
         val notes = arrayOf(
             NoteEntity(
                 id = 1,
-                title = "elo1",
+                title = "test1",
                 content = "really short content1",
                 createdAt = System.currentTimeMillis(),
                 color = 123123
             ),
             NoteEntity(
                 id = 2,
-                title = "elo2",
+                title = "test2",
                 content = "really short content2",
                 createdAt = System.currentTimeMillis(),
                 color = 123123
             ),
             NoteEntity(
                 id = 3,
-                title = "elo3",
+                title = "test3",
                 content = "really short content3",
                 createdAt = System.currentTimeMillis(),
                 color = 123123
@@ -143,21 +144,21 @@ class NoteEntityTest : DatabaseTest() {
         val notes = arrayOf(
             NoteEntity(
                 id = 1,
-                title = "elo1",
+                title = "test1",
                 content = "really short content1",
                 createdAt = System.currentTimeMillis(),
                 color = 123122
             ),
             NoteEntity(
                 id = 2,
-                title = "elo2",
+                title = "test2",
                 content = "really short content2",
                 createdAt = System.currentTimeMillis(),
                 color = 123111
             ),
             NoteEntity(
                 id = 3,
-                title = "elo3",
+                title = "test3",
                 content = "really short content3",
                 createdAt = System.currentTimeMillis(),
                 color = 1266654
@@ -170,52 +171,5 @@ class NoteEntityTest : DatabaseTest() {
 
         // then
         assertThat(fetchedNotes).containsExactlyInAnyOrderElementsOf(notes.toList())
-    }
-
-    @Test
-    fun shouldMapToNoteEntry() {
-        //  given
-        val noteEntity = NoteEntity(
-            id = 1,
-            title = "elo1",
-            content = "really short content1",
-            createdAt = System.currentTimeMillis(),
-            color = 123123
-        )
-
-        // when
-        val noteEntry = noteEntity.toNoteEntry()
-
-        // then
-        with(noteEntry) {
-            assertThat(id).isEqualTo(noteEntity.id)
-            assertThat(title).isEqualTo(noteEntity.title)
-            assertThat(createdAt).isEqualTo(noteEntity.createdAt)
-            assertThat(color).isEqualTo(noteEntity.color)
-        }
-    }
-
-    @Test
-    fun shouldMapToNote() {
-        //  given
-        val noteEntity = NoteEntity(
-            id = 1,
-            title = "elo1",
-            content = "really short content1",
-            createdAt = System.currentTimeMillis(),
-            color = 123123
-        )
-
-        // when
-        val note = noteEntity.toNote()
-
-        // then
-        with(note) {
-            assertThat(id).isEqualTo(noteEntity.id)
-            assertThat(content).isEqualTo(noteEntity.content)
-            assertThat(title).isEqualTo(noteEntity.title)
-            assertThat(createdAt).isEqualTo(noteEntity.createdAt)
-            assertThat(color).isEqualTo(note.color)
-        }
     }
 }

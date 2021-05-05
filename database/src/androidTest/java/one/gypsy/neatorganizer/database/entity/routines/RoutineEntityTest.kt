@@ -1,13 +1,14 @@
 package one.gypsy.neatorganizer.database.entity.routines
 
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
+import one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class RoutineEntityTest : DatabaseTest() {
+internal class RoutineEntityTest : DatabaseTest() {
 
-    private lateinit var routineEntityDao: one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
+    private lateinit var routineEntityDao: RoutinesDao
 
     @Before
     override fun setup() {

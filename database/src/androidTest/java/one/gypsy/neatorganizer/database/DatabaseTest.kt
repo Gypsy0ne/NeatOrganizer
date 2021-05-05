@@ -1,4 +1,4 @@
-package one.gypsy.neatorganizer.domain.database
+package one.gypsy.neatorganizer.database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
@@ -8,9 +8,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestRule
 
-abstract class DatabaseTest {
+internal abstract class DatabaseTest {
 
-    protected lateinit var database: one.gypsy.neatorganizer.database.OrganizerDatabase
+    protected lateinit var database: OrganizerDatabase
 
     @Rule
     @JvmField
@@ -20,7 +20,7 @@ abstract class DatabaseTest {
     open fun setup() {
         database = Room.inMemoryDatabaseBuilder(
             InstrumentationRegistry.getInstrumentation().targetContext,
-            one.gypsy.neatorganizer.database.OrganizerDatabase::class.java
+            OrganizerDatabase::class.java
         ).build()
     }
 

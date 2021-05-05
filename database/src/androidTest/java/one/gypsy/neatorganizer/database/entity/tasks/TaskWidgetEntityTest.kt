@@ -1,15 +1,16 @@
-package one.gypsy.neatorganizer.domain.database.entity.tasks
+package one.gypsy.neatorganizer.database.entity.tasks
 
-import one.gypsy.neatorganizer.database.entity.tasks.toTaskWidgetEntry
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
+import one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
+import one.gypsy.neatorganizer.database.dao.tasks.TaskWidgetsDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class TaskWidgetEntityTest : DatabaseTest() {
+internal class TaskWidgetEntityTest : DatabaseTest() {
 
-    private lateinit var taskWidgetsDao: one.gypsy.neatorganizer.database.dao.tasks.TaskWidgetsDao
-    private lateinit var taskGroupDao: one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
+    private lateinit var taskWidgetsDao: TaskWidgetsDao
+    private lateinit var taskGroupDao: SingleTaskGroupsDao
 
     @Before
     override fun setup() {
@@ -23,7 +24,7 @@ class TaskWidgetEntityTest : DatabaseTest() {
         // given
         val updatedTaskGroupId = 423L
         val updatedWidgetId = 312
-        val taskWidget = one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+        val taskWidget = TaskWidgetEntity(
             widgetId = updatedWidgetId,
             taskGroupId = 12,
             color = 312221
@@ -41,7 +42,7 @@ class TaskWidgetEntityTest : DatabaseTest() {
     @Test
     fun shouldRemoveTaskWidget() {
         // given
-        val taskWidget = one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+        val taskWidget = TaskWidgetEntity(
             widgetId = 312,
             taskGroupId = 12,
             color = 312221
@@ -59,7 +60,7 @@ class TaskWidgetEntityTest : DatabaseTest() {
     @Test
     fun shouldInsertTaskWidget() {
         // given
-        val taskWidget = one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+        val taskWidget = TaskWidgetEntity(
             widgetId = 312,
             taskGroupId = 12,
             color = 312221
@@ -78,7 +79,7 @@ class TaskWidgetEntityTest : DatabaseTest() {
     fun shouldGetWidgetById() {
         // given
         val fetchedWidgetId = 312
-        val taskWidget = one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+        val taskWidget = TaskWidgetEntity(
             widgetId = fetchedWidgetId,
             taskGroupId = 12,
             color = 312221
@@ -96,22 +97,22 @@ class TaskWidgetEntityTest : DatabaseTest() {
     fun shouldGetAllWidgetIds() {
         // given
         val widgets = arrayOf(
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 12,
                 color = 123123,
                 taskGroupId = 66L
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 13,
                 color = 123132,
                 taskGroupId = 62L
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 14,
                 color = 123634,
                 taskGroupId = 64L
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 15,
                 color = 123634,
                 taskGroupId = 56L
@@ -133,7 +134,7 @@ class TaskWidgetEntityTest : DatabaseTest() {
     fun shouldDeleteWidgetById() {
         // given
         val deletedWidgetId = 1231
-        val widget = one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+        val widget = TaskWidgetEntity(
             widgetId = deletedWidgetId,
             taskGroupId = 99L,
             color = 768876
@@ -152,22 +153,22 @@ class TaskWidgetEntityTest : DatabaseTest() {
     fun shouldGetAllTaskWidgetsObservable() {
         // given
         val taskWidgets = arrayOf(
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 12,
                 color = 3456786,
                 taskGroupId = 35L
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 22,
                 color = 3456786,
                 taskGroupId = 38L
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 52,
                 color = 3456786,
                 taskGroupId = 32L
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = 2,
                 color = 3456786,
                 taskGroupId = 31L
@@ -192,14 +193,14 @@ class TaskWidgetEntityTest : DatabaseTest() {
 
         // when
         taskWidgetsDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
+            TaskWidgetEntity(
                 widgetId = taskWidgetId,
                 taskGroupId = widgetTaskGroupId,
                 color = 112233
             )
         )
         taskGroupDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 name = "foobar",
                 id = widgetTaskGroupId,
                 createdAt = 12344122
@@ -209,25 +210,5 @@ class TaskWidgetEntityTest : DatabaseTest() {
 
         // then
         assertThat(taskGroupIdLinkedToWidget).isEqualTo(widgetTaskGroupId)
-    }
-
-    @Test
-    fun shouldMapToDomainModel() {
-        // given
-        val taskWidget = one.gypsy.neatorganizer.database.entity.tasks.TaskWidgetEntity(
-            widgetId = 13,
-            taskGroupId = 12L,
-            color = 121233
-        )
-
-        // when
-        val domainTaskWidget = taskWidget.toTaskWidgetEntry()
-
-        // then
-        with(domainTaskWidget) {
-            assertThat(appWidgetId).isEqualTo(taskWidget.widgetId)
-            assertThat(widgetColor).isEqualTo(taskWidget.color)
-            assertThat(taskGroupId).isEqualTo(taskWidget.taskGroupId)
-        }
     }
 }

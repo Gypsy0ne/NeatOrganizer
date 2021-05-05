@@ -8,6 +8,13 @@ dependencies {
     implementation Room.runtime
     testImplementation Room.testing
 
+    testImplementation TestUtils.core
+    testImplementation Junit.junit
+    androidTestImplementation TestUtils.core
+    androidTestImplementation TestUtils.runner
+    testImplementation AssertJ.core
+    androidTestImplementation AssertJ.core
+
     implementation Lifecycle.livedata
     implementation Lifecycle.ext
     implementation Lifecycle.runtime

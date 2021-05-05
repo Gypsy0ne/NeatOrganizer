@@ -1,15 +1,16 @@
-package one.gypsy.neatorganizer.domain.database.entity.tasks
+package one.gypsy.neatorganizer.database.entity.tasks
 
-import one.gypsy.neatorganizer.database.entity.tasks.toSingleTaskEntry
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
+import one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
+import one.gypsy.neatorganizer.database.dao.tasks.SingleTasksDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class SingleTaskEntityTest : DatabaseTest() {
+internal class SingleTaskEntityTest : DatabaseTest() {
 
-    private lateinit var tasksDao: one.gypsy.neatorganizer.database.dao.tasks.SingleTasksDao
-    private lateinit var taskGroupsDao: one.gypsy.neatorganizer.database.dao.tasks.SingleTaskGroupsDao
+    private lateinit var tasksDao: SingleTasksDao
+    private lateinit var taskGroupsDao: SingleTaskGroupsDao
 
     @Before
     override fun setup() {
@@ -22,7 +23,7 @@ class SingleTaskEntityTest : DatabaseTest() {
     fun shouldInsertSingleTask() {
         // given
         val taskGroupId = 12L
-        val singleTask = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+        val singleTask = SingleTaskEntity(
             id = 10L,
             groupId = taskGroupId,
             name = "foobar",
@@ -32,7 +33,7 @@ class SingleTaskEntityTest : DatabaseTest() {
 
         // when
         taskGroupsDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 "bar",
                 id = taskGroupId,
                 createdAt = 12344122
@@ -50,7 +51,7 @@ class SingleTaskEntityTest : DatabaseTest() {
     fun shouldDeleteSingleTask() {
         // given
         val taskGroupId = 12L
-        val singleTask = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+        val singleTask = SingleTaskEntity(
             id = 10L,
             groupId = taskGroupId,
             name = "foobar",
@@ -60,7 +61,7 @@ class SingleTaskEntityTest : DatabaseTest() {
 
         // when
         taskGroupsDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 "bar",
                 id = taskGroupId,
                 createdAt = 12344122
@@ -79,7 +80,7 @@ class SingleTaskEntityTest : DatabaseTest() {
         // given
         val taskGroupId = 12L
         val updatedTaskName = "updated"
-        val singleTask = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+        val singleTask = SingleTaskEntity(
             id = 10L,
             groupId = taskGroupId,
             name = "foobar",
@@ -89,7 +90,7 @@ class SingleTaskEntityTest : DatabaseTest() {
 
         // when
         taskGroupsDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 "bar",
                 id = taskGroupId,
                 createdAt = 12344122
@@ -110,35 +111,35 @@ class SingleTaskEntityTest : DatabaseTest() {
         // given
         val taskGroupId = 12L
         val tasks = arrayOf(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 11L,
                 name = "foobar1",
                 done = true,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 12L,
                 name = "foobar2",
                 done = false,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 33L,
                 name = "foobar3",
                 done = false,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 24L,
                 name = "foobar4",
                 done = true,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 55L,
                 name = "foobar5",
@@ -149,7 +150,7 @@ class SingleTaskEntityTest : DatabaseTest() {
 
         // when
         taskGroupsDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 "bar",
                 id = taskGroupId,
                 createdAt = 12344122
@@ -167,35 +168,35 @@ class SingleTaskEntityTest : DatabaseTest() {
         // given
         val taskGroupId = 12L
         val tasks = arrayOf(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 11L,
                 name = "foobar1",
                 done = true,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 12L,
                 name = "foobar2",
                 done = false,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 33L,
                 name = "foobar3",
                 done = false,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 24L,
                 name = "foobar4",
                 done = true,
                 createdAt = 12344122
             ),
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
+            SingleTaskEntity(
                 groupId = taskGroupId,
                 id = 55L,
                 name = "foobar5",
@@ -206,7 +207,7 @@ class SingleTaskEntityTest : DatabaseTest() {
 
         // when
         taskGroupsDao.insert(
-            one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity(
+            SingleTaskGroupEntity(
                 "bar",
                 id = taskGroupId,
                 createdAt = 12344122
@@ -218,30 +219,6 @@ class SingleTaskEntityTest : DatabaseTest() {
         // then
         fetchedTasksObservable.observeForever {
             assertThat(it).containsExactlyInAnyOrderElementsOf(tasks.toList())
-        }
-    }
-
-    @Test
-    fun shouldProperlyMapToDomainModel() {
-        // given
-        val singleTaskEntity = one.gypsy.neatorganizer.database.entity.tasks.SingleTaskEntity(
-            groupId = 1L,
-            id = 11L,
-            name = "foobar1",
-            done = true,
-            createdAt = 12344122
-        )
-
-        // when
-        val domainSingleTask = singleTaskEntity.toSingleTaskEntry()
-
-        // then
-        with(domainSingleTask) {
-            assertThat(singleTaskEntity.done).isEqualTo(done)
-            assertThat(singleTaskEntity.groupId).isEqualTo(groupId)
-            assertThat(singleTaskEntity.id).isEqualTo(id)
-            assertThat(singleTaskEntity.name).isEqualTo(name)
-            assertThat(singleTaskEntity.createdAt).isEqualTo(createdAt)
         }
     }
 }
