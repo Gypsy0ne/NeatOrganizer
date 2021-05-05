@@ -12,7 +12,7 @@ import one.gypsy.neatorganizer.database.entity.tasks.SingleTaskGroupEntity
 interface SingleTaskGroupsDao : BaseDao<SingleTaskGroupEntity> {
 
     @Transaction
-    @Query("SELECT * FROM single_task_group")
+    @Query("SELECT * FROM single_task_group ORDER BY createdAt DESC")
     fun getAllGroupsWithSingleTasks(): LiveData<List<GroupWithSingleTasks>>
 
     @Query("SELECT * FROM single_task_group")

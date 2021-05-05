@@ -86,7 +86,7 @@ internal class TasksWidgetConfigurationViewModel(
         _widgetCreationStatus.postValue(TaskWidgetCreationStatus.CreationSuccessStatus)
 }
 
-sealed class TaskWidgetCreationStatus {
+internal sealed class TaskWidgetCreationStatus {
     object TaskNotSelectedStatus : TaskWidgetCreationStatus()
     object ColorNotPickedStatus : TaskWidgetCreationStatus()
     object CreationSuccessStatus : TaskWidgetCreationStatus()
