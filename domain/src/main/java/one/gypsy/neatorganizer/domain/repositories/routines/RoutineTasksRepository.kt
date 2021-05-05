@@ -15,5 +15,17 @@ class RoutineTasksRepository(private val dataSource: RoutineTasksDataSource) {
     suspend fun removeRoutineTask(routineTaskEntry: RoutineTaskEntryDto) =
         dataSource.remove(routineTaskEntry.toRoutineTaskEntry())
 
-    suspend fun resetAllRoutineTasks() = dataSource.resetTasksStatus()
+    suspend fun resetMondayTasks() = dataSource.resetMondayTasks()
+
+    suspend fun resetTuesdayTasks() = dataSource.resetTuesdayTasks()
+
+    suspend fun resetWednesdayTasks() = dataSource.resetWednesdayTasks()
+
+    suspend fun resetThursdayTasks() = dataSource.resetThursdayTasks()
+
+    suspend fun resetFridayTasks() = dataSource.resetFridayTasks()
+
+    suspend fun resetSaturdayTasks() = dataSource.resetSaturdayTasks()
+
+    suspend fun resetSundayTasks() = dataSource.resetSundayTasks()
 }

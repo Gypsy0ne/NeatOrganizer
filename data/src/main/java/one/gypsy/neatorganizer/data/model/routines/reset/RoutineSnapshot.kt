@@ -4,14 +4,10 @@ import one.gypsy.neatorganizer.database.entity.routines.reset.RoutineSnapshotEnt
 import java.util.Date
 
 data class RoutineSnapshot(
-    val tasksOverall: Int,
-    val tasksDone: Int,
     val resetDate: Date,
     val id: Long = 0
 )
 
 internal fun RoutineSnapshot.toRoutineSnapshotEntity() = RoutineSnapshotEntity(
-    tasksOverall,
-    tasksDone,
     resetDate
 )

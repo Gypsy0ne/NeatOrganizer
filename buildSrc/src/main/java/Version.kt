@@ -20,6 +20,7 @@ object Version {
     const val constraint_layout_version = "2.0.4"
     const val glide_version = "4.10.0"
     const val spectrum_version = "0.7.1"
+    const val showcase_version = "2.2.0"
     const val lottie_version = "3.4.0"
     const val junit_version = "4.13.1"
     const val assertj_version = "3.16.1"

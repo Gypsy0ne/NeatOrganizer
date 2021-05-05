@@ -1,48 +1,82 @@
 package one.gypsy.neatorganizer.routine.alarm
 
-import android.content.Context
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
+import kotlinx.coroutines.CoroutineScope
+import one.gypsy.neatorganizer.domain.dto.routines.reset.RoutineSnapshotDto
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.AddRoutineSnapshot
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.DayOfWeek
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.GetLastRoutineSnapshot
+import one.gypsy.neatorganizer.domain.interactors.routines.reset.ResetRoutineDays
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
+import java.util.Date
+import kotlin.math.floor
 
-class RoutinesResetManager(context: Context) {
+class RoutinesResetManager(
+    private val resetRoutineDaysUseCase: ResetRoutineDays,
+    private val getLastSnapshotUseCase: GetLastRoutineSnapshot,
+    private val addSnapshotUseCase: AddRoutineSnapshot
+) {
+    private lateinit var onComplete: () -> Unit
 
-    private val workManager = WorkManager.getInstance(context)
-
-    fun scheduleRoutinesResetWork() {
-        workManager.enqueueUniquePeriodicWork(
-            RoutinesResetWorker.ROUTINES_RESET_KEY,
-            ExistingPeriodicWorkPolicy.KEEP,
-            createResetWorkRequest()
-        )
+    fun resetRoutineTasks(coroutineScope: CoroutineScope, onCompleteListener: () -> Unit) {
+        onComplete = onCompleteListener
+        getLastSnapshotUseCase.invoke(coroutineScope, Unit) { result ->
+            result.either(
+                { onComplete() },
+                { routineSnapshotDto ->
+                    routineSnapshotDto?.let {
+                        coroutineScope.resetTasksBasedOnLastReset(it)
+                    } ?: coroutineScope.invokeAddSnapshot()
+                }
+            )
+        }
     }
 
-    private fun createResetWorkRequest(): PeriodicWorkRequest =
-        PeriodicWorkRequest.Builder(RoutinesResetWorker::class.java, 7, TimeUnit.DAYS)
-            .setInitialDelay(
-                getInitialDelayToNextGivenDay(), TimeUnit.MILLISECONDS
-            ).build()
+    private fun CoroutineScope.resetTasksBasedOnLastReset(routineSnapshot: RoutineSnapshotDto) =
+        routineSnapshot.getDaysSinceLastReset()
+            .takeIf { it.isNotEmpty() }
+            ?.let { daysSinceLastReset ->
+                resetRoutineDaysUseCase.invoke(
+                    this,
+                    ResetRoutineDays.Params(days = daysSinceLastReset)
+                ) {
+                    it.either({}, { invokeAddSnapshot() })
+                }
+            } ?: onComplete()
 
-    private fun getInitialDelayToNextGivenDay(): Long {
-        val initialDate: Calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-            set(Calendar.HOUR_OF_DAY, 1)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
+    private fun RoutineSnapshotDto.getDaysSinceLastReset(): List<DayOfWeek> {
+        val todaysReset = getTodayResetTime()
+
+        val noDaysBetweenLastResetAndNow = floor(
+            (todaysReset.timeInMillis - this.resetDate.time + todaysReset.timeZone.rawOffset).toFloat() / MILLIS_IN_DAY
+        ).toInt()
+
+        return if (noDaysBetweenLastResetAndNow > 7) {
+            List(7) { DayOfWeek(it) }
+        } else {
+            List(noDaysBetweenLastResetAndNow) {
+                todaysReset.add(Calendar.DAY_OF_WEEK, -1)
+                DayOfWeek(todaysReset[Calendar.DAY_OF_WEEK])
+            }
         }
+    }
 
-        val now = Calendar.getInstance()
-        now.set(Calendar.SECOND, 0)
-        now.set(Calendar.MILLISECOND, 0)
+    private fun getTodayResetTime() = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 23)
+        set(Calendar.MINUTE, 59)
+        set(Calendar.SECOND, 59)
+        set(Calendar.MILLISECOND, 99)
+    }
 
-        if (initialDate.before(now)) {
-            initialDate.add(Calendar.DATE, 7)
-        }
+    private fun CoroutineScope.invokeAddSnapshot() = addSnapshotUseCase.invoke(
+        this,
+        AddRoutineSnapshot.Params(createResetSnapshot())
+    ) {
+        it.either({}, { onComplete() })
+    }
 
-        return initialDate.timeInMillis - now.timeInMillis
+    private fun createResetSnapshot() = RoutineSnapshotDto(resetDate = Date())
+
+    companion object {
+        private const val MILLIS_IN_DAY = 86400000
     }
 }

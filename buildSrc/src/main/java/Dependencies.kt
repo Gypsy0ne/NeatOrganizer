@@ -17,6 +17,7 @@ object Module {
     const val swipeMenu = ":swipemenu"
     const val domain = ":domain"
     const val data = ":data"
+    const val tutorial = ":tutorial"
 }
 
 object Koin {
@@ -92,6 +93,7 @@ object View {
     const val material = "com.google.android.material:material:${Version.material_version}"
     const val lottie = "com.airbnb.android:lottie:${Version.lottie_version}"
     const val spectrum = "com.thebluealliance:spectrum:${Version.spectrum_version}"
+    const val showcase = "com.github.shripal17:MaterialIntroView-v2:${Version.showcase_version}"
 }
 
 object AppCompat {

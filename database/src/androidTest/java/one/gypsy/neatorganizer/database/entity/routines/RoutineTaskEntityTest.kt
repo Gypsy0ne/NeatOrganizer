@@ -1,19 +1,24 @@
 package one.gypsy.neatorganizer.database.entity.routines
 
-import one.gypsy.neatorganizer.domain.database.DatabaseTest
+import one.gypsy.neatorganizer.database.DatabaseTest
+import one.gypsy.neatorganizer.database.dao.routines.RoutineSchedulesDao
+import one.gypsy.neatorganizer.database.dao.routines.RoutineTasksDao
+import one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class RoutineTaskEntityTest : DatabaseTest() {
-    private lateinit var routineTasksDao: one.gypsy.neatorganizer.database.dao.routines.RoutineTasksDao
-    private lateinit var routinesDao: one.gypsy.neatorganizer.database.dao.routines.RoutinesDao
+internal class RoutineTaskEntityTest : DatabaseTest() {
+    private lateinit var routineTasksDao: RoutineTasksDao
+    private lateinit var routinesDao: RoutinesDao
+    private lateinit var routineSchedulesDao: RoutineSchedulesDao
 
     @Before
     override fun setup() {
         super.setup()
         routinesDao = database.routinesDao()
         routineTasksDao = database.routineTasksDao()
+        routineSchedulesDao = database.routinesSchedulesDao()
     }
 
     @Test
@@ -207,27 +212,6 @@ class RoutineTaskEntityTest : DatabaseTest() {
                 routineId,
                 id = 2,
                 createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskThree",
-                true,
-                routineId,
-                id = 3,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskFour",
-                true,
-                routineId,
-                id = 4,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskFive",
-                false,
-                routineId,
-                id = 5,
-                createdAt = 12344122
             )
         )
         routinesDao.insert(routine)
@@ -238,63 +222,6 @@ class RoutineTaskEntityTest : DatabaseTest() {
         // then
         val selectedTasks = routineTasksDao.getAllRoutineTasks()
         assertThat(selectedTasks).containsExactlyInAnyOrderElementsOf(routineTasks)
-    }
-
-    @Test
-    fun shouldResetTasksStatus() {
-        // given
-        val routineId = 1L
-        val routine = RoutineEntity(
-            "foobar",
-            id = routineId,
-            createdAt = 12344122
-        )
-        val routineTasks = listOf(
-            RoutineTaskEntity(
-                "taskOne",
-                true,
-                routineId,
-                id = 1,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskTwo",
-                true,
-                routineId,
-                id = 2,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskThree",
-                true,
-                routineId,
-                id = 3,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskFour",
-                true,
-                routineId,
-                id = 4,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskFive",
-                true,
-                routineId,
-                id = 5,
-                createdAt = 12344122
-            )
-        )
-        routinesDao.insert(routine)
-        routineTasksDao.insert(*routineTasks.toTypedArray())
-
-        // when
-        routineTasksDao.resetTasksStatus()
-
-        // then
-        val selectedTasks = routineTasksDao.getAllRoutineTasks()
-        assertThat(selectedTasks.map { it.done }).containsOnly(false)
     }
 
     @Test
@@ -320,27 +247,6 @@ class RoutineTaskEntityTest : DatabaseTest() {
                 routineId,
                 id = 2,
                 createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskThree",
-                true,
-                routineId,
-                id = 3,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskFour",
-                true,
-                routineId,
-                id = 4,
-                createdAt = 12344122
-            ),
-            RoutineTaskEntity(
-                "taskFive",
-                true,
-                routineId,
-                id = 5,
-                createdAt = 12344122
             )
         )
         routinesDao.insert(routine)
@@ -355,24 +261,161 @@ class RoutineTaskEntityTest : DatabaseTest() {
     }
 
     @Test
-    fun shouldMapEntityToDomainModel() {
+    fun shouldResetMondayTasksStatus() {
         // given
-        val routineTaskEntity = RoutineTaskEntity(
-            "foobar",
-            true,
-            routineId = 1,
-            id = 1,
-            createdAt = 12344122
-        )
+        createCompleteRoutine(1L, createScheduleEntity(1L, monday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, tuesday = true)).insertToDatabase()
 
         // when
-        val domainRoutineTask = routineTaskEntity.toRoutineTaskEntry()
+        routineTasksDao.resetMondayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
 
         // then
-        assertThat(routineTaskEntity.name).isEqualTo(domainRoutineTask.name)
-        assertThat(routineTaskEntity.done).isEqualTo(domainRoutineTask.done)
-        assertThat(routineTaskEntity.id).isEqualTo(domainRoutineTask.id)
-        assertThat(routineTaskEntity.routineId).isEqualTo(domainRoutineTask.routineId)
-        assertThat(routineTaskEntity.createdAt).isEqualTo(domainRoutineTask.createdAt)
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
     }
+
+    @Test
+    fun shouldResetTuesdayTasksStatus() {
+        // given
+        createCompleteRoutine(1L, createScheduleEntity(1L, tuesday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, monday = true)).insertToDatabase()
+
+        // when
+        routineTasksDao.resetTuesdayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
+
+        // then
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
+    }
+
+    @Test
+    fun shouldResetWednesdayTasksStatus() {
+        // given
+        createCompleteRoutine(1L, createScheduleEntity(1L, wednesday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, monday = true)).insertToDatabase()
+
+        // when
+        routineTasksDao.resetWednesdayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
+
+        // then
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
+    }
+
+    @Test
+    fun shouldResetThursdayTasksStatus() {
+        // given
+        createCompleteRoutine(1L, createScheduleEntity(1L, thursday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, monday = true)).insertToDatabase()
+
+        // when
+        routineTasksDao.resetThursdayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
+
+        // then
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
+    }
+
+    @Test
+    fun shouldResetFridayTasksStatus() {
+        // given
+        createCompleteRoutine(1L, createScheduleEntity(1L, friday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, monday = true)).insertToDatabase()
+
+        // when
+        routineTasksDao.resetFridayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
+
+        // then
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
+    }
+
+    @Test
+    fun shouldResetSaturdayTasksStatus() {
+        // given
+        createCompleteRoutine(1L, createScheduleEntity(1L, saturday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, monday = true)).insertToDatabase()
+
+        // when
+        routineTasksDao.resetSaturdayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
+
+        // then
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
+    }
+
+    @Test
+    fun shouldResetSundayTasksStatus() {
+        // given
+        createCompleteRoutine(1L, createScheduleEntity(1L, sunday = true)).insertToDatabase()
+        createCompleteRoutine(2L, createScheduleEntity(2L, monday = true)).insertToDatabase()
+
+        // when
+        routineTasksDao.resetSundayTasksProgress()
+        val selectedTasks = routineTasksDao.getAllRoutineTasks().groupBy { it.routineId }
+
+        // then
+        assertThat(selectedTasks[1]?.map { it.done }).containsOnly(false)
+        assertThat(selectedTasks[2]?.map { it.done }).containsOnly(true)
+    }
+
+    private fun ScheduledRoutineWithTasks.insertToDatabase() {
+        routinesDao.insert(routine)
+        routineTasksDao.insert(*tasks.toTypedArray())
+        schedule?.let { routineSchedulesDao.insert(it) }
+    }
+
+    private fun createCompleteRoutine(
+        routineId: Long,
+        schedule: RoutineScheduleEntity
+    ): ScheduledRoutineWithTasks {
+        val routine = RoutineEntity(
+            "foobar",
+            id = routineId,
+            createdAt = 12344122
+        )
+        val routineTasks = listOf(
+            RoutineTaskEntity(
+                "taskOne",
+                true,
+                routineId,
+                id = 0,
+                createdAt = 12344122
+            ),
+            RoutineTaskEntity(
+                "taskTwo",
+                true,
+                routineId,
+                id = 0,
+                createdAt = 12344122
+            )
+        )
+        return ScheduledRoutineWithTasks(routine, routineTasks, schedule)
+    }
+
+    private fun createScheduleEntity(
+        routineId: Long,
+        monday: Boolean = false,
+        tuesday: Boolean = false,
+        wednesday: Boolean = false,
+        thursday: Boolean = false,
+        friday: Boolean = false,
+        saturday: Boolean = false,
+        sunday: Boolean = false
+    ) = RoutineScheduleEntity(
+        routineId = routineId,
+        monday = monday,
+        tuesday = tuesday,
+        wednesday = wednesday,
+        thursday = thursday,
+        friday = friday,
+        saturday = saturday,
+        sunday = sunday
+    )
 }

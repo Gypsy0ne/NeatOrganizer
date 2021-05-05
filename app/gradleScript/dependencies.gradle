@@ -9,6 +9,7 @@ dependencies {
     implementation project(Module.data)
     implementation project(Module.database)
     implementation project(Module.domain)
+    implementation project(Module.tutorial)
 
 
     implementation Glide.glide

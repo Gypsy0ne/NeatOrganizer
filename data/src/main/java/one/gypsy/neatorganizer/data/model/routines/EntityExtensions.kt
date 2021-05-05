@@ -1,8 +1,10 @@
 package one.gypsy.neatorganizer.data.model.routines
 
+import one.gypsy.neatorganizer.data.model.routines.reset.RoutineSnapshot
 import one.gypsy.neatorganizer.database.entity.routines.RoutineScheduleEntity
 import one.gypsy.neatorganizer.database.entity.routines.RoutineTaskEntity
 import one.gypsy.neatorganizer.database.entity.routines.ScheduledRoutineWithTasks
+import one.gypsy.neatorganizer.database.entity.routines.reset.RoutineSnapshotEntity
 
 internal fun RoutineScheduleEntity.toRoutineSchedule() = RoutineSchedule(
     routineId = this.routineId,
@@ -37,3 +39,8 @@ internal fun ScheduledRoutineWithTasks.toRoutineWithTasks() =
         },
         createdAt = routine.createdAt
     )
+
+internal fun RoutineSnapshotEntity.toRoutineSnapshot() = RoutineSnapshot(
+    resetDate = routinesResetDate,
+    id = routineSnapshotId
+)

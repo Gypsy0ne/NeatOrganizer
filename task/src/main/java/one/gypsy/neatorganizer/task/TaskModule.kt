@@ -14,6 +14,8 @@ import one.gypsy.neatorganizer.task.vm.TaskWidgetContentManageViewModel
 import one.gypsy.neatorganizer.task.vm.TaskWidgetSelectionViewModel
 import one.gypsy.neatorganizer.task.vm.TasksViewModel
 import one.gypsy.neatorganizer.task.vm.TasksWidgetConfigurationViewModel
+import one.gypsy.tutorial.FeatureShowcase
+import one.gypsy.tutorial.SwipeShowcase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -30,6 +32,10 @@ val taskUtilsModule = module {
         )
     }
     factory<WidgetNotifier>(named("taskWidgetNotifier")) { TaskWidgetNotifier(androidContext()) }
+}
+
+val tasksUiModule = module {
+    single<FeatureShowcase> { SwipeShowcase() }
 }
 
 val taskViewModelModule = module {

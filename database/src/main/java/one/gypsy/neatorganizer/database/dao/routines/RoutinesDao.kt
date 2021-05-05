@@ -12,7 +12,7 @@ import one.gypsy.neatorganizer.database.entity.routines.ScheduledRoutineWithTask
 interface RoutinesDao : BaseDao<RoutineEntity> {
 
     @Transaction
-    @Query("SELECT * FROM routines")
+    @Query("SELECT * FROM routines ORDER BY createdAt DESC")
     fun getAllScheduledRoutinesWithTasksObservable(): LiveData<List<ScheduledRoutineWithTasks>>
 
     @Transaction

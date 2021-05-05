@@ -11,4 +11,7 @@ interface RoutineSnapshotsDao : BaseDao<RoutineSnapshotEntity> {
     @Transaction
     @Query("SELECT * FROM routine_snapshots")
     fun getAllRoutineSnapshots(): List<RoutineSnapshotEntity>
+
+    @Query("SELECT * FROM routine_snapshots ORDER BY routineSnapshotId DESC LIMIT 1")
+    fun getLastResetEntry(): RoutineSnapshotEntity?
 }

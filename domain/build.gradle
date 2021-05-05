@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         targetSdkVersion Version.targetSdkVersion
-        targetSdkVersion Version.targetSdkVersion
+        minSdkVersion Version.minSdkVersion
     }
 
     kotlinOptions {
